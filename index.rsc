@@ -29,7 +29,64 @@ f:["$","section",null,{"className":"wisdom","children":["$","img",null,{"classNa
 14:["$","section",null,{"className":"outcomes section","children":[["$","div",null,{"className":"sectionIntro centered","children":[["$","p",null,{"className":"eyebrow","children":"THE CHANGE WE WORK TOWARD"}],["$","h2",null,{"children":"What 24 weeks of committed practice can build"}],["$","p",null,{"children":"These are the practical qualities the programme is designed to develop through committed study, daily exercises and thoughtful application."}]]}],["$","div",null,{"className":"outcomeGrid","children":[["$","div","A calmer, more directed mind",{"children":[["$","span",null,{"children":["0",1]}],["$","p",null,{"children":"A calmer, more directed mind"}]]}],["$","div","Clearer personal and professional goals",{"children":[["$","span",null,{"children":["0",2]}],["$","p",null,{"children":"Clearer personal and professional goals"}]]}],["$","div","A consistent daily mental practice",{"children":[["$","span",null,{"children":["0",3]}],["$","p",null,{"children":"A consistent daily mental practice"}]]}],["$","div","Stronger focus in a distracted world",{"children":[["$","span",null,{"children":["0",4]}],["$","p",null,{"children":"Stronger focus in a distracted world"}]]}],["$","div","Greater confidence in your decisions",{"children":[["$","span",null,{"children":["0",5]}],["$","p",null,{"children":"Greater confidence in your decisions"}]]}],["$","div","Visualisation linked to practical action",{"children":[["$","span",null,{"children":["0",6]}],["$","p",null,{"children":"Visualisation linked to practical action"}]]}],["$","div","Accountability without judgement",{"children":[["$","span",null,{"children":["0",7]}],["$","p",null,{"children":"Accountability without judgement"}]]}],["$","div","A framework you can keep for life",{"children":[["$","span",null,{"children":["0",8]}],["$","p",null,{"children":"A framework you can keep for life"}]]}]]}]]}]
 15:["$","section",null,{"className":"testimonials section","id":"testimonials","children":[["$","div",null,{"className":"sectionIntro centered","children":[["$","p",null,{"className":"eyebrow","children":"STUDENT EXPERIENCES"}],["$","h2",null,{"children":"What students say about the journey"}],["$","p",null,{"children":"Real reflections from students engaging with The Master Key System through Tariq’s structured study and coaching."}]]}],["$","div",null,{"className":"testimonialGrid","children":[["$","figure","Mark Smith",{"className":"testimonialCard","children":[["$","span",null,{"className":"quoteMark","aria-hidden":"true","children":"“"}],["$","blockquote",null,{"children":"When I discovered that Tariq was offering a course on The Master Key System, I was immediately interested. He is the only person I have heard describe it correctly—as a course of study, rather than simply a self-help book."}],["$","figcaption",null,{"children":[["$","strong",null,{"children":"Mark Smith"}],["$","span",null,{"children":"UK"}]]}]]}],["$","figure","Andy White",{"className":"testimonialCard","children":[["$","span",null,{"className":"quoteMark","aria-hidden":"true","children":"“"}],["$","blockquote",null,{"children":"The Master Key System is one of the most powerful journeys you will ever experience, and Tariq’s coaching complements it beautifully. His notes provide invaluable support throughout the journey. Tariq is also a genuinely great person with incredible energy and a deep passion to help others excel. I can see the future being very bright for him."}],["$","figcaption",null,{"children":[["$","strong",null,{"children":"Andy White"}],["$","span",null,{"children":"United Kingdom"}]]}]]}],["$","figure","David White",{"className":"testimonialCard","children":[["$","span",null,{"className":"quoteMark","aria-hidden":"true","children":"“"}],["$","blockquote",null,{"children":"I’ve been following the study guide for ten weeks, and it is helping me tremendously. I had read The Master Key System before, but with Tariq’s guidance, I am staying committed and consistently practising the exercises. I’m already noticing positive changes."}],["$","figcaption",null,{"children":[["$","strong",null,{"children":"David White"}],["$","span",null,{"children":"UK"}]]}]]}]]}]]}]
 16:["$","section",null,{"className":"leadCapture section","id":"free-guide","children":[["$","div",null,{"className":"leadMagnet","children":[["$","p",null,{"className":"eyebrow","children":"FREE PERSONAL CLARITY CHECK"}],["$","h2",null,{"children":"Find the thought pattern holding you back."}],["$","p",null,{"children":"Complete four short prompts before your discovery call. Tariq will use your answers to identify the most useful starting point—Foundation, Visualisation, Concentration, or Contemplation."}],["$","div",null,{"className":"miniStages","children":[["$","span",null,{"children":"01 Your Goal"}],["$","span",null,{"children":"02 What’s Blocking You"}],["$","span",null,{"children":"03 Your New Direction"}],["$","span",null,{"children":"04 Your Next Action"}]]}]]}],["$","$L40",null,{"compact":true,"title":"Request your free clarity check"}]]}]
-17:["$","section",null,{"className":"programme section","id":"programme","children":[["$","div",null,{"className":"programmeCopy","children":[["$","p",null,{"className":"eyebrow","children":"FOUNDING COHORT"}],["$","h2",null,{"children":"Unleash Your Power"}],["$","p",null,{"children":"A six-month guided experience for English-speaking professionals, entrepreneurs and purposeful people anywhere in the world."}],["$","ul",null,{"children":[["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," 24 weekly live group coaching sessions on Zoom"]}],["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," Structured exercises and reflection prompts"]}],["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," Weekly accountability and progress check-ins"]}],["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," Private email support between sessions"]}],["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," Maximum 10 founding members"]}]]}]]}],["$","aside",null,{"className":"priceCard","children":[["$","div",null,{"className":"priceLogo","children":["$","img",null,{"src":"/images/the-secret-logo.png","alt":"The Secret"}]}],["$","p",null,{"className":"investmentLabel","children":"FOUNDING MEMBER INVESTMENT"}],["$","div",null,{"className":"price","children":[["$","sup",null,{"children":"£"}],"997"]}],["$","small",null,{"children":"or 6 monthly payments of £179 (£1,074 total)"}],["$","a",null,{"className":"primary full","href":"mailto:toslondon9@gmail.com?subject=Master%20Key%20Discovery%20Call&body=Hello%20Tariq%2C%0A%0AI%27d%20like%20to%20book%20a%20free%2020-minute%20discovery%20call.%0A%0AMy%20main%20goal%20is%3A%20","children":"Apply for a place →"}],["$","p",null,{"className":"pay","children":"Secure payment by PayPal invoice after your discovery call."}],["$","hr",null,{}],["$","p",null,{"className":"guarantee","children":"Start with a free 20-minute conversation. No pressure—just clarity on whether the programme is right for you."}]]}]]}]
+<div class="paypal-checkout">
+  <style>
+    .pp-T8BMVP6PQ4LDC {
+      text-align: center;
+      border: none;
+      border-radius: 0.25rem;
+      min-width: 11.625rem;
+      padding: 0 2rem;
+      height: 2.625rem;
+      font-weight: bold;
+      background-color: #ffd140;
+      color: #000000;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.25rem;
+      cursor: pointer;
+    }
+
+    .paypal-checkout {
+      display: flex;
+      justify-content: center;
+      margin: 24px 0;
+    }
+  </style>
+
+  <form
+    action="https://www.paypal.com/ncp/payment/T8BMVP6PQ4LDC"
+    method="post"
+    target="_blank"
+    style="
+      display: inline-grid;
+      justify-items: center;
+      align-content: start;
+      gap: 0.5rem;
+    "
+  >
+    <input
+      class="pp-T8BMVP6PQ4LDC"
+      type="submit"
+      value="Buy Now"
+      aria-label="Buy Unleash Your Power through PayPal"
+    />
+
+    <img
+      src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg"
+      alt="Accepted debit and credit cards"
+    />
+
+    <section style="font-size: 0.75rem;">
+      Powered by
+      <img
+        src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg"
+        alt="PayPal"
+        style="height: 0.875rem; vertical-align: middle;"
+      />
+    </section>
+  </form>
+</div>17:["$","section",null,{"className":"programme section","id":"programme","children":[["$","div",null,{"className":"programmeCopy","children":[["$","p",null,{"className":"eyebrow","children":"FOUNDING COHORT"}],["$","h2",null,{"children":"Unleash Your Power"}],["$","p",null,{"children":"A six-month guided experience for English-speaking professionals, entrepreneurs and purposeful people anywhere in the world."}],["$","ul",null,{"children":[["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," 24 weekly live group coaching sessions on Zoom"]}],["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," Structured exercises and reflection prompts"]}],["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," Weekly accountability and progress check-ins"]}],["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," Private email support between sessions"]}],["$","li",null,{"children":[["$","span",null,{"children":"✓"}]," Maximum 10 founding members"]}]]}]]}],["$","aside",null,{"className":"priceCard","children":[["$","div",null,{"className":"priceLogo","children":["$","img",null,{"src":"/images/the-secret-logo.png","alt":"The Secret"}]}],["$","p",null,{"className":"investmentLabel","children":"FOUNDING MEMBER INVESTMENT"}],["$","div",null,{"className":"price","children":[["$","sup",null,{"children":"£"}],"997"]}],["$","small",null,{"children":"or 6 monthly payments of £179 (£1,074 total)"}],["$","a",null,{"className":"primary full","href":"mailto:toslondon9@gmail.com?subject=Master%20Key%20Discovery%20Call&body=Hello%20Tariq%2C%0A%0AI%27d%20like%20to%20book%20a%20free%2020-minute%20discovery%20call.%0A%0AMy%20main%20goal%20is%3A%20","children":"Apply for a place →"}],["$","p",null,{"className":"pay","children":"Secure payment by PayPal invoice after your discovery call."}],["$","hr",null,{}],["$","p",null,{"className":"guarantee","children":"Start with a free 20-minute conversation. No pressure—just clarity on whether the programme is right for you."}]]}]]}]
 18:["$","section",null,{"className":"cta","children":[["$","p",null,{"className":"eyebrow","children":"YOUR NEXT CHAPTER STARTS WITH ONE DECISION"}],["$","h2",null,{"children":["Ready to direct your mind",["$","br",null,{}],"with purpose?"]}],["$","p",null,{"children":"Tell me the outcome you want to create. We’ll explore whether this journey is the right next step."}],["$","div",null,{"className":"actions centeredActions","children":[["$","a",null,{"className":"primary light","href":"mailto:toslondon9@gmail.com?subject=Master%20Key%20Discovery%20Call&body=Hello%20Tariq%2C%0A%0AI%27d%20like%20to%20book%20a%20free%2020-minute%20discovery%20call.%0A%0AMy%20main%20goal%20is%3A%20","children":"Email Tariq →"}],["$","a",null,{"className":"secondary lightOutline","href":"/coaching/","children":"Explore coaching options"}]]}],["$","div",null,{"className":"contact","children":["$","a",null,{"href":"mailto:toslondon9@gmail.com","children":"toslondon9@gmail.com"}]}]]}]
 19:["$","section",null,{"className":"referralBanner","children":[["$","div",null,{"children":[["$","p",null,{"className":"eyebrow","children":"PARTNER CIRCLE"}],["$","h2",null,{"children":"Know someone ready to change?"}],["$","p",null,{"children":"Introduce the right people, identify your referrals and earn an agreed launch reward when they enrol."}]]}],["$","a",null,{"className":"primary","href":"/referral/","children":"Explore the referral programme →"}]]}]
 1a:["$","footer",null,{"children":[["$","a",null,{"className":"brand","href":"#top","children":[["$","img",null,{"src":"/images/the-secret-logo.png","alt":"The Secret"}],"UNLEASH YOUR POWER"]}],["$","p",null,{"children":["Independent coaching inspired by ",["$","em",null,{"children":"The Master Key System"}],". Educational and developmental—not medical, psychological or financial advice. Individual results vary. ",["$","a",null,{"className":"footerLink","href":"/privacy/","children":"Privacy & important information"}]]}],["$","p",null,{"children":"© 2026 Tariq Saddique"}]]}]
