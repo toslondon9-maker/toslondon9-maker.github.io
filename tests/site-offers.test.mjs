@@ -33,8 +33,39 @@ test("the programme shows four progressively priced founding stages", () => {
   }
 
   assert.match(programme, /Available to the first 10 founding members/);
-  assert.doesNotMatch(programme, /<sup>£<\/sup>997/);
   assert.ok(existsSync(path.join(root, "images", "unleash-your-power-programme.jpeg")));
+});
+
+test("the four stages use the approved week ranges and complete-programme value", () => {
+  const programme = html.match(/<section class="programme section" id="programme">([\s\S]*?)<section class="cta">/)?.[1] ?? "";
+
+  for (const [stage, weeks] of [
+    ["foundation", "Weeks 1–4"],
+    ["visualisation", "Weeks 5–11"],
+    ["concentration", "Weeks 12–18"],
+    ["mastery", "Weeks 19–24"],
+  ]) {
+    const card = programme.match(new RegExp(`<article class="stagePriceCard" data-stage="${stage}">([\\s\\S]*?)<\\/article>`))?.[1] ?? "";
+    assert.match(card, new RegExp(weeks));
+  }
+
+  assert.match(programme, /Complete 24-Week Programme/);
+  assert.match(programme, /<strong>£997<\/strong>/);
+  assert.match(programme, /Four stages separately: <b>£1,188<\/b>/);
+  assert.match(programme, /Save £191/);
+  assert.match(programme, /Full combined MSRP: <b>£1,788<\/b>/);
+  assert.match(programme, /Save £791/);
+  assert.match(programme, /44% off full MSRP/);
+  assert.doesNotMatch(programme, /6\s*[×x]\s*£169/);
+  assert.doesNotMatch(programme, /£1,014/);
+});
+
+test("client navigation contains the same approved programme value", () => {
+  for (const value of ["Weeks 1–4", "Weeks 5–11", "Weeks 12–18", "Weeks 19–24", "£1,188", "£997", "£191", "£1,788", "£791", "44% off full MSRP"]) {
+    assert.match(rsc, new RegExp(value));
+  }
+  assert.doesNotMatch(rsc, /6\s*[×x]\s*£169/);
+  assert.doesNotMatch(rsc, /£1,014/);
 });
 
 test("client navigation receives the same taster and stage pricing content", () => {
