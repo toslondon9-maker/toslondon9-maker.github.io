@@ -92,6 +92,19 @@ test("the homepage opens with Haanel and Tariq as complementary authorities", ()
   assert.ok(existsSync(path.join(root, "images", "haanel-tariq-portraits.jpeg")));
 });
 
+test("the homepage frames the portraits with cream and navy transformation messages", () => {
+  const hero = html.match(/<section class="hero haanelHero" id="top">([\s\S]*?)<section class="principle">/)?.[1] ?? "";
+  const creamMessage = hero.indexOf('class="journeyPrelude"');
+  const portraits = hero.indexOf('class="journeyPortraitGrid"');
+  const navyMessage = hero.indexOf('class="journeyMessage"');
+
+  assert.ok(creamMessage >= 0, "cream transformation message should be present");
+  assert.ok(creamMessage < portraits, "cream message should appear above the portraits");
+  assert.ok(portraits < navyMessage, "navy message should appear below the portraits");
+  assert.match(hero, /Where timeless wisdom meets modern <em>transformation\.<\/em>/);
+  assert.match(hero, /<strong>clarity, focus, discipline and aligned action\.<\/strong>/);
+});
+
 test("the weekly progression explains the transformation before introducing coaching", () => {
   const progressionIndex = html.indexOf('id="weekly-progression"');
   const coachIndex = html.indexOf('id="meet-tariq"');
