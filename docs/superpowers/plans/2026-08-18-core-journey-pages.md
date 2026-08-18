@@ -90,7 +90,7 @@ git commit -m "Build concise transformation homepage"
 - [ ] **Step 1: Write failing data and markup tests**
 
 ```js
-const titles = ["See What’s Running Your Life", "Take Back Your Attention", "Recognize What Keeps Repeating", "Give Your Mind a Direction", "Become Someone You Can Rely On", "Turn Understanding into Action", "Decide What Happens Next"];
+const titles = ["See What’s Running Your Life", "Take Back Your Attention", "Recognize What Keeps Repeating", "Give Your Mind a Direction", "Become Someone You Can Rely On", "Strengthen the New Pattern", "Choose What Happens Next"];
 for (let day = 1; day <= 7; day++) test(`taster day ${day} is complete`, () => {
   const item = JSON.parse(readFileSync(new URL(`../content/taster/day-${String(day).padStart(2, "0")}.json`, import.meta.url)));
   assert.equal(item.title, titles[day - 1]);
@@ -203,7 +203,7 @@ Expected: FAIL because the renderer does not exist.
 
 - [ ] **Step 3: Implement education sections and FAQ**
 
-Explain weekly study, exercise, reflection, application, repetition and progression simply. Render 24 `<details>` cards with title, lesson, exercise, principles and questions; only titles are visible by default. Include the seven specified FAQs and conservative result expectations.
+Explain weekly study, exercise, reflection, application, repetition and progression simply. Group the 24 weeks as Foundation (1–4), Awareness & Control (5–11), Application (12–18), and Integration & Mastery (19–24). These education labels do not replace the commercial stage names. Render 24 `<details>` cards with title, lesson, exercise, principles and questions; only titles are visible by default. Include the seven specialist FAQs and conservative result expectations.
 
 - [ ] **Step 4: Run tests and inspect long-content behavior**
 
@@ -266,21 +266,23 @@ git add src/pages/coaching.mjs content/pages/coaching.mjs assets/tabs.mjs assets
 git commit -m "Build canonical coaching and pricing page"
 ```
 
-### Task 6: Build About Tariq, Resources and Book / Contact
+### Task 6: Build About Tariq, Resources, FAQ and Book / Contact
 
 **Files:**
 - Create: `src/pages/about-tariq.mjs`
 - Create: `src/pages/resources.mjs`
 - Create: `src/pages/contact.mjs`
+- Create: `src/pages/faq.mjs`
 - Create: `content/pages/about-tariq.mjs`
 - Create: `content/pages/contact.mjs`
+- Create: `content/pages/faq.mjs`
 - Create: `content/resources.json`
 - Create: `tests/supporting-pages.test.mjs`
 - Modify: `src/routes.mjs`
 - Modify: `assets/platform.css`
 
 **Interfaces:**
-- Produces: `renderAboutTariq`, `renderResources`, `renderContact`.
+- Produces: `renderAboutTariq`, `renderResources`, `renderFaq`, `renderContact`.
 
 - [ ] **Step 1: Write failing page and asset tests**
 
@@ -302,6 +304,12 @@ test("resources use five accessible category tabs", () => {
   for (const label of ["Workbooks", "Audio", "Exercises", "Downloads", "AI Tools"]) assert.ok(html.includes(label));
   assert.equal((html.match(/role="tab"/g) ?? []).length, 5);
 });
+
+test("FAQ answers the complete visitor decision journey", () => {
+  const html = renderFaq({ language: "en" });
+  for (const question of ["What is the Master Key System?", "Is this therapy?", "Are the AI mentors real people?", "Can I study in Spanish?", "How does payment work?"]) assert.ok(html.includes(question));
+  assert.equal((html.match(/<details/g) ?? []).length, 12);
+});
 ```
 
 - [ ] **Step 2: Run and confirm missing-renderer/data failures**
@@ -321,13 +329,17 @@ Correct `/audio/my-story-theme.m4a` to `/audio/my-story-theme.mp3`. Categorise w
 
 Separate Book a Session, WhatsApp, Email, Zoom and Payment. Use `https://wa.me/34611223345` and the approved mail address. State that session time and private Zoom access are coordinated after confirmation and payment is arranged through the existing approved process.
 
-- [ ] **Step 6: Run tests, click every action and commit**
+- [ ] **Step 6: Build the concise global FAQ**
+
+Render the twelve approved decision questions as accessible `<details>` accordions. Keep global answers canonical and short; Master Key and Coaching retain only specialist questions that are not repeated word-for-word.
+
+- [ ] **Step 7: Run tests, click every action and commit**
 
 Run: `node --test --test-isolation=none tests/supporting-pages.test.mjs tests/i18n.test.mjs`
 Expected: PASS.
 
 ```bash
-git add src/pages/about-tariq.mjs src/pages/resources.mjs src/pages/contact.mjs content/pages/about-tariq.mjs content/pages/contact.mjs content/resources.json assets/platform.css src/routes.mjs tests/supporting-pages.test.mjs
+git add src/pages/about-tariq.mjs src/pages/resources.mjs src/pages/faq.mjs src/pages/contact.mjs content/pages/about-tariq.mjs content/pages/faq.mjs content/pages/contact.mjs content/resources.json assets/platform.css src/routes.mjs tests/supporting-pages.test.mjs
 git commit -m "Build founder resources and contact pages"
 ```
 

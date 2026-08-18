@@ -197,7 +197,7 @@ git commit -m "Add safe browser-local progress storage"
 test("mentor page presents three transparent guides", () => {
   const html = renderAiMentors({ language: "en", mentors });
   for (const name of ["Ask Charles Haanel", "Ask Helmar Rudolph", "Ask Tariq"]) assert.ok(html.includes(name));
-  assert.match(html, /automated guidance/i);
+  assert.match(html, /AI educational simulation|automated educational guidance/i);
   assert.match(html, /role="dialog"/);
   assert.match(html, /aria-modal="true"/);
   assert.doesNotMatch(html, /live AI|Charles Haanel is answering/i);
@@ -211,7 +211,7 @@ Expected: FAIL.
 
 - [ ] **Step 3: Render three cards and one reusable dialog**
 
-Each card explains its source boundary and opens the shared dialog. The dialog has a labelled heading, progress indicator, controlled select/radio inputs, short optional text inputs, inline errors and one primary action at a time.
+Each card explains its source boundary, identifies the experience as an AI educational simulation using automated deterministic guidance, and opens the shared dialog. The dialog has a labelled heading, progress indicator, controlled select/radio inputs, short optional text inputs, inline errors and one primary action at a time.
 
 - [ ] **Step 4: Implement safe progressive interaction**
 
