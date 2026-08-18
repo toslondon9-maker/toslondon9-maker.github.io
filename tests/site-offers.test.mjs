@@ -48,10 +48,17 @@ test("the homepage opens with Haanel and Tariq as complementary authorities", ()
   const hero = html.match(/<section class="hero haanelHero" id="top">([\s\S]*?)<section class="principle">/)?.[1] ?? "";
   assert.match(hero, /Charles F\. Haanel revealed the Master Key/);
   assert.match(hero, /Tariq helps you use it/);
-  assert.match(hero, /src="\/images\/master-key-wisdom\.png"/);
-  assert.match(hero, /src="\/images\/tariq-happiness-harmony\.png"/);
+  assert.match(hero, /class="heroJourneyStory"/);
+  assert.equal((hero.match(/src="\/images\/haanel-tariq-portraits\.jpeg"/g) ?? []).length, 2);
+  assert.match(hero, /<h3 class="journeyName">Charles F\. Haanel<\/h3>/);
+  assert.match(hero, /<h3 class="journeyName">Tariq Saddique<\/h3>/);
+  assert.match(hero, /From inner mastery to <em>purposeful action\.<\/em>/);
+  assert.doesNotMatch(hero, /homepage-master-key-journey\.png/);
+  assert.doesNotMatch(hero, /class="authorityPortrait/);
+  assert.doesNotMatch(hero, /class="heroVisual dualPortraits"/);
   assert.match(hero, /href="#free-taster"/);
   assert.match(hero, /href="#meet-tariq"/);
+  assert.ok(existsSync(path.join(root, "images", "haanel-tariq-portraits.jpeg")));
 });
 
 test("the weekly progression explains the transformation before introducing coaching", () => {
