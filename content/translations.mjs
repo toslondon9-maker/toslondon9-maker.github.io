@@ -117,7 +117,7 @@ const translations = deepFreeze({
     en: "Choose a clearly labelled educational guide inspired by Haanel, Helmar or Tariq and turn reflection into a useful next step.",
     es: "Elige una guía educativa claramente identificada e inspirada en Haanel, Helmar o Tariq para convertir tu reflexión en un siguiente paso útil.",
   },
-  "route.aiMentors.action": { en: "Choose a mentor", es: "Elige un mentor" },
+  "route.aiMentors.action": { en: "Ask about AI-guided mentors", es: "Pregunta por los mentores guiados por IA" },
   "route.contact.metaTitle": { en: "Contact and Book | Unleash Your Power", es: "Contacto y reservas | Unleash Your Power" },
   "route.contact.metaDescription": {
     en: "Contact Tariq Saddique to ask a question or discuss a coaching session.",

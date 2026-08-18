@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
-import { access, mkdtemp, readFile, rm } from "node:fs/promises";
+import { access, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { renderPage } from "../src/page-shell.mjs";
 import { routeRenderers } from "../src/routes.mjs";
@@ -139,5 +140,49 @@ test("standalone previews include every local dependency referenced by route she
     }
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("the AI mentor action resolves to a generated destination", () => {
+  const page = routeRenderers[siteData.routes.aiMentors](siteData);
+  const actionHref = page.body.match(/class="button--primary routeShell__action" href="([^"]+)"/)?.[1];
+
+  assert.equal(actionHref, siteData.routes.contact);
+  assert.ok(routeRenderers[actionHref]);
+});
+
+test("contact actions derive their email address from shared site data", () => {
+  const data = {
+    ...siteData,
+    contact: { ...siteData.contact, email: "shared-data@example.test" },
+  };
+  const page = routeRenderers[siteData.routes.contact](data);
+
+  assert.match(page.body, /href="mailto:shared-data@example\.test"/);
+  assert.doesNotMatch(page.body, /mailto:toslondon9@gmail\.com/);
+});
+
+test("default preview builds remove stale output without cleaning custom destinations", async () => {
+  const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const previewRoot = path.join(repositoryRoot, ".build-preview");
+  const previewMarker = path.join(previewRoot, ".gitkeep");
+  const stalePreviewFile = path.join(previewRoot, "stale", "old-page.html");
+  const customRoot = await mkdtemp(path.join(os.tmpdir(), "unleash-custom-output-"));
+  const customSentinel = path.join(customRoot, "keep-me.txt");
+
+  try {
+    await mkdir(path.dirname(stalePreviewFile), { recursive: true });
+    await writeFile(previewMarker, "", "utf8");
+    await writeFile(stalePreviewFile, "obsolete", "utf8");
+    await writeFile(customSentinel, "caller-owned", "utf8");
+
+    await buildSite();
+    await assert.rejects(access(stalePreviewFile), { code: "ENOENT" });
+    await access(previewMarker);
+
+    await buildSite({ outputRoot: customRoot });
+    assert.equal(await readFile(customSentinel, "utf8"), "caller-owned");
+  } finally {
+    await rm(customRoot, { recursive: true, force: true });
   }
 });

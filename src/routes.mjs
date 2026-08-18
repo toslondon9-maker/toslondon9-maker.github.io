@@ -8,8 +8,8 @@ const routeShells = Object.freeze({
   coaching: { actionRoute: "contact", detail: "price" },
   aboutTariq: { actionRoute: "contact" },
   resources: { actionRoute: "startFree" },
-  aiMentors: { actionRoute: "aiMentors", actionHash: "#choose-a-mentor" },
-  contact: { actionHref: "mailto:toslondon9@gmail.com" },
+  aiMentors: { actionRoute: "contact" },
+  contact: { actionEmail: true },
   faq: { actionRoute: "contact" },
   referral: { actionRoute: "contact" },
   privacy: { actionRoute: "contact" },
@@ -25,8 +25,9 @@ function renderDetail(routeId, detail, data) {
 
 function renderRouteShell(routeId, definition, data) {
   const key = `route.${routeId}`;
-  const actionHref = definition.actionHref
-    ?? `${data.routes[definition.actionRoute]}${definition.actionHash ?? ""}`;
+  const actionHref = definition.actionEmail
+    ? `mailto:${data.contact.email}`
+    : definition.actionHref ?? `${data.routes[definition.actionRoute]}${definition.actionHash ?? ""}`;
 
   return {
     route: data.routes[routeId],

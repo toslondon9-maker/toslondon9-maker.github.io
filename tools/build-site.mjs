@@ -48,6 +48,16 @@ async function copyBuildDependencies(outputRoot) {
   return files;
 }
 
+async function cleanPreviewOutput() {
+  await mkdir(previewRoot, { recursive: true });
+  for (const entry of await readdir(previewRoot)) {
+    if (entry === ".gitkeep") continue;
+    const target = path.resolve(previewRoot, entry);
+    if (path.dirname(target) !== previewRoot) throw new Error("Refusing to clean outside the preview directory");
+    await rm(target, { recursive: true, force: true });
+  }
+}
+
 async function writeBuild(outputRoot) {
   const files = [];
   const hash = createHash("sha256");
@@ -98,6 +108,7 @@ export async function buildSite({ outputRoot, check = false } = {}) {
   const checkedBuild = check ? await verifyDeterminism() : null;
   if (outputRoot === undefined && check) return { files: checkedBuild.files };
 
+  if (outputRoot === undefined) await cleanPreviewOutput();
   const build = await writeBuild(outputRoot ?? previewRoot);
   return { files: build.files };
 }
