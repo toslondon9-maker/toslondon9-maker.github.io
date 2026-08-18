@@ -16,6 +16,22 @@ test("commercial and identity values are locked", () => {
   assert.equal(JSON.stringify(siteData).includes("1,014"), false);
 });
 
+test("canonical route definitions are locked", () => {
+  assert.deepEqual(siteData.routes, {
+    home: "/",
+    masterKeySystem: "/master-key-system/",
+    startFree: "/start-free/",
+    coaching: "/coaching/",
+    aboutTariq: "/about-tariq/",
+    resources: "/resources/",
+    aiMentors: "/ai-mentors/",
+    contact: "/contact/",
+    referral: "/referral/",
+    privacy: "/privacy/",
+    liveCoaching: "/live-coaching/"
+  });
+});
+
 test("every mapped section has one canonical destination", () => {
   const map = JSON.parse(readFileSync(new URL("../content/content-map.json", import.meta.url)));
   assert.ok(map.length >= 20);
@@ -24,4 +40,29 @@ test("every mapped section has one canonical destination", () => {
     assert.match(item.destination, /^\//);
     assert.ok(["move", "shorten", "retain", "replace"].includes(item.disposition));
   }
+  assert.equal(new Set(map.map(({ source }) => source)).size, map.length);
+
+  const mapBySource = new Map(map.map((item) => [item.source, item]));
+  assert.equal(mapBySource.get("/#master-key").destination, siteData.routes.masterKeySystem);
+  assert.equal(mapBySource.get("/#seven-day").destination, siteData.routes.startFree);
+  assert.equal(mapBySource.get("/#pricing").destination, siteData.routes.coaching);
+  assert.equal(mapBySource.get("/#story").destination, siteData.routes.aboutTariq);
+  assert.equal(mapBySource.get("/coaching/#soundtrack").destination, siteData.routes.resources);
+  assert.equal(mapBySource.get("/#word-check").destination, siteData.routes.aiMentors);
+  assert.equal(mapBySource.get("/coaching/#contact").destination, siteData.routes.contact);
+});
+
+test("shared site data is deeply immutable", () => {
+  assert.throws(() => {
+    siteData.founder.firstName = "Changed";
+  }, TypeError);
+  assert.throws(() => {
+    siteData.stages.push({ id: "changed" });
+  }, TypeError);
+  assert.throws(() => {
+    siteData.offer.completePrice = 0;
+  }, TypeError);
+  assert.throws(() => {
+    siteData.routes.home = "/changed/";
+  }, TypeError);
 });
