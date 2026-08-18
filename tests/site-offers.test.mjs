@@ -77,3 +77,20 @@ test("homepage metadata leads with Charles F. Haanel", () => {
   assert.match(html, /<title>Charles F\. Haanel’s Master Key System \| Coaching with Tariq Saddique<\/title>/);
   assert.match(html, /<meta name="description" content="Discover Charles F\. Haanel’s progressive 24-part Master Key System with practical coaching, weekly guidance and accountability from Tariq Saddique\."\/>/);
 });
+
+test("the embedded streamed page data contains valid JSON records so hydration cannot blank the page", () => {
+  const embeddedRsc = [...html.matchAll(/__VINEXT_RSC_CHUNKS__\.push\(("(?:\\.|[^"\\])*")\)/g)]
+    .map((match) => JSON.parse(match[1]))
+    .join("");
+
+  assert.ok(embeddedRsc.length > 0, "the homepage must include its streamed page data");
+  for (const line of embeddedRsc.split("\n")) {
+    const record = line.match(/^([0-9a-f]+):(.*)$/);
+    if (!record || !/^[\[{\"]/.test(record[2])) continue;
+
+    assert.doesNotThrow(
+      () => JSON.parse(record[2]),
+      `RSC record ${record[1]} must contain valid JSON`,
+    );
+  }
+});
