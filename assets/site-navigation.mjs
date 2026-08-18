@@ -6,6 +6,8 @@ export function mountNavigation(document) {
 
   if (!root || !button || !panel || !body) return () => {};
 
+  const desktopQuery = document.defaultView?.matchMedia?.("(min-width: 1081px)");
+
   const setOpen = (open, restoreFocus = false) => {
     button.setAttribute("aria-expanded", String(open));
     button.setAttribute("aria-label", open ? "Close menu" : "Open menu");
@@ -28,18 +30,27 @@ export function mountNavigation(document) {
   const onPanelClick = (event) => {
     if (event.target.closest?.("a[href]")) setOpen(false, true);
   };
+  const onBreakpointChange = (event) => {
+    if (event.matches) setOpen(false);
+  };
 
+  root.classList.add("navigationEnhanced");
+  setOpen(false);
   button.addEventListener("click", onToggle);
   panel.addEventListener("click", onPanelClick);
   document.addEventListener("keydown", onKeydown);
   document.addEventListener("click", onDocumentClick);
+  desktopQuery?.addEventListener?.("change", onBreakpointChange);
 
   return () => {
     button.removeEventListener("click", onToggle);
     panel.removeEventListener("click", onPanelClick);
     document.removeEventListener("keydown", onKeydown);
     document.removeEventListener("click", onDocumentClick);
+    desktopQuery?.removeEventListener?.("change", onBreakpointChange);
     setOpen(false);
+    root.classList.remove("navigationEnhanced");
+    panel.hidden = false;
   };
 }
 
