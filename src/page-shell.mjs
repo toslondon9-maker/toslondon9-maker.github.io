@@ -18,5 +18,5 @@ export function renderPage({ route, language, title, description, body, scripts 
     `<script type="module" src="${escapeHtml(script)}" defer></script>`
   )).join("");
 
-  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${safeTitle}</title><meta name="description" content="${safeDescription}"><link rel="preload" href="/images/the-secret-logo.png" as="image"><link rel="stylesheet" href="/assets/platform.css"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ language })}${scriptTags}</body></html>`;
+  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${safeTitle}</title><meta name="description" content="${safeDescription}"><script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/the-secret-logo.png" as="image"><link rel="stylesheet" href="/assets/platform.css"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ language })}${scriptTags}</body></html>`;
 }

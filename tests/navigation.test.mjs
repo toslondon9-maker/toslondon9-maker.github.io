@@ -57,6 +57,24 @@ test("page shell mounts shared chrome and the navigation module once", () => {
   assert.equal((html.match(/src="\/assets\/app\.mjs"/g) ?? []).length, 1);
 });
 
+test("page shell establishes enhancement state before styles can paint mobile chrome", () => {
+  const html = renderPage({
+    route: "/",
+    language: "en",
+    title: "Home",
+    description: "Home.",
+    body: '<main id="main-content"><h1>Home</h1></main>',
+    scripts: [],
+  });
+  const stateScript = html.indexOf('document.documentElement.classList.add("has-js")');
+  const stylesheet = html.indexOf('rel="stylesheet" href="/assets/platform.css"');
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+
+  assert.ok(stateScript > 0, "enhancement state must be set by an early inline script");
+  assert.ok(stateScript < stylesheet, "enhancement state must be set before the stylesheet loads");
+  assert.match(css, /\.has-js\s+\.siteHeader:not\(\.navigationEnhanced\)[^{]*\.mobileNav__panel\s*\{[^}]*display:\s*none/s);
+});
+
 test("mobile destinations remain usable before JavaScript enhancement", () => {
   const html = renderHeader({ route: "/", language: "en" });
   const panel = html.match(/<div class="mobileNav__panel"[\s\S]*?<\/div><\/div><\/div><\/header>/)?.[0] ?? "";
@@ -72,7 +90,7 @@ test("mobile destinations remain usable before JavaScript enhancement", () => {
   assert.match(css, /\.siteHeader:not\(\.navigationEnhanced\)[^{]*\.mobileNav__panel/);
 });
 
-function createNavigationFixture() {
+function createNavigationFixture({ legacyMediaQuery = false } = {}) {
   const listeners = new Map();
   const buttonListeners = new Map();
   const panelListeners = new Map();
@@ -112,17 +130,25 @@ function createNavigationFixture() {
     defaultView: {
       matchMedia(query) {
         assert.equal(query, "(min-width: 1081px)");
-        return {
+        const mediaQuery = {
           matches: false,
-          addEventListener(type, listener) {
+        };
+        if (legacyMediaQuery) {
+          mediaQuery.addListener = (listener) => { breakpointListener = listener; };
+          mediaQuery.removeListener = (listener) => {
+            if (breakpointListener === listener) breakpointListener = undefined;
+          };
+        } else {
+          mediaQuery.addEventListener = (type, listener) => {
             assert.equal(type, "change");
             breakpointListener = listener;
-          },
-          removeEventListener(type, listener) {
+          };
+          mediaQuery.removeEventListener = (type, listener) => {
             assert.equal(type, "change");
             if (breakpointListener === listener) breakpointListener = undefined;
-          },
-        };
+          };
+        }
+        return mediaQuery;
       },
     },
     body: {
@@ -198,6 +224,26 @@ test("crossing to the desktop breakpoint resets an open mobile menu", () => {
   assert.equal(fixture.button.getAttribute("aria-expanded"), "false");
   assert.equal(fixture.panel.hidden, true);
   assert.equal(fixture.classes.has("navigationOpen"), false);
+});
+
+test("legacy MediaQueryList listeners also reset and clean up the mobile menu", () => {
+  const fixture = createNavigationFixture({ legacyMediaQuery: true });
+  const unmount = mountNavigation(fixture.document);
+
+  fixture.clickButton();
+  fixture.crossToDesktop();
+  assert.equal(fixture.button.getAttribute("aria-expanded"), "false");
+  assert.equal(fixture.panel.hidden, true);
+  assert.equal(fixture.classes.has("navigationOpen"), false);
+
+  unmount();
+  fixture.button.setAttribute("aria-expanded", "true");
+  fixture.panel.hidden = false;
+  fixture.classes.add("navigationOpen");
+  fixture.crossToDesktop();
+  assert.equal(fixture.button.getAttribute("aria-expanded"), "true");
+  assert.equal(fixture.panel.hidden, false);
+  assert.ok(fixture.classes.has("navigationOpen"));
 });
 
 test("mountNavigation is a safe no-op when chrome is absent", () => {

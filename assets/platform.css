@@ -524,6 +524,10 @@ main > article {
     display: none;
   }
 
+  .has-js .siteHeader:not(.navigationEnhanced) .mobileNav__panel {
+    display: none;
+  }
+
   .siteHeader:not(.navigationEnhanced) {
     flex-wrap: wrap;
   }

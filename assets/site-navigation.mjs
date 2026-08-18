@@ -40,14 +40,22 @@ export function mountNavigation(document) {
   panel.addEventListener("click", onPanelClick);
   document.addEventListener("keydown", onKeydown);
   document.addEventListener("click", onDocumentClick);
-  desktopQuery?.addEventListener?.("change", onBreakpointChange);
+  if (typeof desktopQuery?.addEventListener === "function") {
+    desktopQuery.addEventListener("change", onBreakpointChange);
+  } else {
+    desktopQuery?.addListener?.(onBreakpointChange);
+  }
 
   return () => {
     button.removeEventListener("click", onToggle);
     panel.removeEventListener("click", onPanelClick);
     document.removeEventListener("keydown", onKeydown);
     document.removeEventListener("click", onDocumentClick);
-    desktopQuery?.removeEventListener?.("change", onBreakpointChange);
+    if (typeof desktopQuery?.removeEventListener === "function") {
+      desktopQuery.removeEventListener("change", onBreakpointChange);
+    } else {
+      desktopQuery?.removeListener?.(onBreakpointChange);
+    }
     setOpen(false);
     root.classList.remove("navigationEnhanced");
     panel.hidden = false;
