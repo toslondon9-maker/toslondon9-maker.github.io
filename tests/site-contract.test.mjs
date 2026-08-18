@@ -26,8 +26,10 @@ test("canonical route definitions are locked", () => {
     resources: "/resources/",
     aiMentors: "/ai-mentors/",
     contact: "/contact/",
+    faq: "/faq/",
     referral: "/referral/",
     privacy: "/privacy/",
+    terms: "/terms/",
     liveCoaching: "/live-coaching/"
   });
 });

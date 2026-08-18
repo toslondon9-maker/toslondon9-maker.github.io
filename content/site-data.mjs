@@ -19,8 +19,10 @@ export const siteData = deepFreeze({
     resources: "/resources/",
     aiMentors: "/ai-mentors/",
     contact: "/contact/",
+    faq: "/faq/",
     referral: "/referral/",
     privacy: "/privacy/",
+    terms: "/terms/",
     liveCoaching: "/live-coaching/"
   },
   stages: [
