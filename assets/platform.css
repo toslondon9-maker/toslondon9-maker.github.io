@@ -5,6 +5,7 @@
   --night-soft: #0d2942;
   --gold: #b58a3b;
   --gold-bright: #d4aa57;
+  --focus-ring: #9a6200;
   --cream: #f7f1e5;
   --cream-deep: #ede2cf;
   --paper: #fffdf8;
@@ -109,7 +110,7 @@ button,
 }
 
 :focus-visible {
-  outline: 3px solid var(--gold-bright);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
 }
 
@@ -361,12 +362,11 @@ main > article {
 @media (max-width: 1080px) {
   .siteNav,
   .site-header nav {
-    gap: 0.7rem;
+    display: none;
   }
 
-  .siteNav a,
-  .site-header nav a {
-    font-size: 0.85rem;
+  .mobileNav {
+    display: block;
   }
 }
 
@@ -374,15 +374,6 @@ main > article {
   .siteHeader,
   .site-header {
     min-height: 4.75rem;
-  }
-
-  .siteNav,
-  .site-header nav {
-    display: none;
-  }
-
-  .mobileNav {
-    display: block;
   }
 
   .siteFooter,
