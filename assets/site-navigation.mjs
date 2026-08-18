@@ -1,3 +1,5 @@
+import { t } from "../content/translations.mjs";
+
 export function mountNavigation(document) {
   const root = document?.querySelector?.("[data-site-navigation]");
   const button = root?.querySelector?.("[data-navigation-toggle]");
@@ -9,8 +11,11 @@ export function mountNavigation(document) {
   const desktopQuery = document.defaultView?.matchMedia?.("(min-width: 1081px)");
 
   const setOpen = (open, restoreFocus = false) => {
+    const labelKey = open ? "menu.close" : "menu.open";
+    const language = document.documentElement?.lang === "es" ? "es" : "en";
     button.setAttribute("aria-expanded", String(open));
-    button.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (button.dataset) button.dataset.i18nAriaLabel = labelKey;
+    button.setAttribute("aria-label", t(labelKey, language));
     panel.hidden = !open;
     body.classList.toggle("navigationOpen", open);
     if (!open && restoreFocus) button.focus();
