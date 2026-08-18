@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { copyFile, mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -9,9 +9,43 @@ import { routeRenderers } from "../src/routes.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const previewRoot = path.join(repositoryRoot, ".build-preview");
+const runtimeFiles = Object.freeze([
+  "assets/platform.css",
+  "assets/site-language.mjs",
+  "assets/site-navigation.mjs",
+  "content/translations.mjs",
+]);
 
 function outputPathForRoute(route) {
   return route === "/" ? "index.html" : `${route.slice(1)}index.html`;
+}
+
+async function collectFiles(directory, relativeDirectory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries.sort((left, right) => left.name.localeCompare(right.name))) {
+    const source = path.join(directory, entry.name);
+    const relativeFile = path.posix.join(relativeDirectory, entry.name);
+    if (entry.isDirectory()) files.push(...await collectFiles(source, relativeFile));
+    else if (entry.isFile()) files.push(relativeFile);
+  }
+
+  return files;
+}
+
+async function copyBuildDependencies(outputRoot) {
+  const files = [...runtimeFiles, ...await collectFiles(path.join(repositoryRoot, "images"), "images")];
+
+  for (const relativeFile of files) {
+    const source = path.join(repositoryRoot, ...relativeFile.split("/"));
+    const destination = path.join(outputRoot, ...relativeFile.split("/"));
+    if (path.resolve(source) === path.resolve(destination)) continue;
+    await mkdir(path.dirname(destination), { recursive: true });
+    await copyFile(source, destination);
+  }
+
+  return files;
 }
 
 async function writeBuild(outputRoot) {
@@ -29,6 +63,8 @@ async function writeBuild(outputRoot) {
     await writeFile(outputFile, html, "utf8");
     files.push(relativeFile);
   }
+
+  files.push(...await copyBuildDependencies(outputRoot));
 
   for (const relativeFile of files) {
     hash.update(relativeFile);
@@ -76,7 +112,7 @@ async function main() {
   const outputRoot = arguments_.has("--write-public") ? repositoryRoot : undefined;
   const result = await buildSite({ outputRoot, check });
   if (check) console.log("Build is deterministic");
-  else console.log(`Built ${result.files.length} static pages`);
+  else console.log(`Built ${result.files.filter((file) => file.endsWith("index.html")).length} static pages`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
