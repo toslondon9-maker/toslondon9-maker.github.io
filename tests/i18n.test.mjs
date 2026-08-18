@@ -31,6 +31,11 @@ function translatable(key, initial = "") {
 test("localizeDocument updates copy, placeholders, metadata and switch state in place", () => {
   const heading = translatable("home.hero.title", "English");
   const input = { dataset: { i18nPlaceholder: "form.emailPlaceholder" }, placeholder: "Email" };
+  const image = {
+    dataset: { i18nAlt: "home.origins.alt" },
+    attributes: new Map([["alt", "English alt"]]),
+    setAttribute(name, value) { this.attributes.set(name, value); },
+  };
   const title = { dataset: { i18n: "meta.home.title" }, textContent: "English title" };
   const description = { dataset: { i18n: "meta.home.description" }, content: "English description" };
   const en = { dataset: { language: "en" }, attributes: new Map(), setAttribute(name, value) { this.attributes.set(name, value); } };
@@ -40,6 +45,7 @@ test("localizeDocument updates copy, placeholders, metadata and switch state in 
     querySelectorAll(selector) {
       if (selector === "[data-i18n]") return [heading];
       if (selector === "[data-i18n-placeholder]") return [input];
+      if (selector === "[data-i18n-alt]") return [image];
       if (selector === "[data-language]") return [en, es];
       return [];
     },
@@ -55,6 +61,7 @@ test("localizeDocument updates copy, placeholders, metadata and switch state in 
   assert.equal(document.documentElement.lang, "es");
   assert.equal(heading.textContent, t("home.hero.title", "es"));
   assert.equal(input.placeholder, t("form.emailPlaceholder", "es"));
+  assert.equal(image.attributes.get("alt"), t("home.origins.alt", "es"));
   assert.equal(title.textContent, t("meta.home.title", "es"));
   assert.equal(description.content, t("meta.home.description", "es"));
   assert.equal(en.attributes.get("aria-pressed"), "false");

@@ -1,5 +1,6 @@
 import { t } from "../content/translations.mjs";
 import { siteData } from "../content/site-data.mjs";
+import { homePage } from "./pages/home.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -41,9 +42,12 @@ function renderRouteShell(routeId, definition, data) {
   };
 }
 
-export const routeRenderers = Object.freeze(Object.fromEntries(
-  Object.entries(routeShells).map(([routeId, definition]) => [
-    siteData.routes[routeId],
-    (data) => renderRouteShell(routeId, definition, data),
-  ]),
-));
+export const routeRenderers = Object.freeze({
+  ...Object.fromEntries(
+    Object.entries(routeShells).map(([routeId, definition]) => [
+      siteData.routes[routeId],
+      (data) => renderRouteShell(routeId, definition, data),
+    ]),
+  ),
+  [siteData.routes.home]: (data) => homePage(data),
+});
