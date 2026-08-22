@@ -1,147 +1,59 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import path from "node:path";
+import { siteData } from "../content/site-data.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const html = await readFile(path.join(root, "index.html"), "utf8");
-const rsc = await readFile(path.join(root, "index.rsc"), "utf8");
+const home = await readFile(path.join(root, "index.html"), "utf8");
+const coaching = await readFile(path.join(root, "coaching", "index.html"), "utf8");
 
-test("the free seven-day taster is offered with its flyer and enquiry action", () => {
-  assert.match(html, /<section class="taster section" id="free-taster">/);
-  assert.match(html, /src="\/images\/free-7-day-taster\.jpeg"/);
-  assert.match(html, /mailto:toslondon9@gmail\.com\?subject=Free%207-Day%20Taster/);
-  assert.ok(existsSync(path.join(root, "images", "free-7-day-taster.jpeg")));
+test("deployed homepage uses the approved static premium experience", () => {
+  assert.match(home, /^<!doctype html>/i);
+  assert.match(home, /<main class="home">/);
+  assert.match(home, /Start Free for 7 Days/);
+  assert.match(home, /Explore the 24-Week Journey/);
+  assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__|data-rsc|_rsc=/);
 });
 
-test("the programme shows four progressively priced founding stages", () => {
-  const programme = html.match(/<section class="programme section" id="programme">([\s\S]*?)<section class="cta">/)?.[1] ?? "";
-  const expected = [
-    ["foundation", "147", "97"],
-    ["visualisation", "297", "197"],
-    ["concentration", "597", "397"],
-    ["mastery", "747", "497"],
-  ];
-
-  for (const [stage, standardPrice, launchPrice] of expected) {
-    const card = programme.match(new RegExp(`<article class="stagePriceCard" data-stage="${stage}">([\\s\\S]*?)<\\/article>`))?.[1] ?? "";
-    assert.match(card, new RegExp(`<s>£${standardPrice}<\\/s>`));
-    assert.match(card, new RegExp(`<strong>£${launchPrice}<\\/strong>`));
-    assert.match(card, new RegExp(`subject=Master%20Key%20${stage === "mastery" ? "Contemplation%20%26%20Mastery" : stage[0].toUpperCase() + stage.slice(1)}%20Stage`));
-  }
-
-  assert.match(programme, /Available to the first 10 founding members/);
-  assert.ok(existsSync(path.join(root, "images", "unleash-your-power-programme.jpeg")));
-});
-
-test("the four stages use the approved week ranges and complete-programme value", () => {
-  const programme = html.match(/<section class="programme section" id="programme">([\s\S]*?)<section class="cta">/)?.[1] ?? "";
-
-  for (const [stage, weeks] of [
-    ["foundation", "Weeks 1–4"],
-    ["visualisation", "Weeks 5–11"],
-    ["concentration", "Weeks 12–18"],
-    ["mastery", "Weeks 19–24"],
-  ]) {
-    const card = programme.match(new RegExp(`<article class="stagePriceCard" data-stage="${stage}">([\\s\\S]*?)<\\/article>`))?.[1] ?? "";
-    assert.match(card, new RegExp(weeks));
-  }
-
-  assert.match(programme, /Complete 24-Week Programme/);
-  assert.match(programme, /<strong>£997<\/strong>/);
-  assert.match(programme, /Four stages separately: <b>£1,188<\/b>/);
-  assert.match(programme, /Save £191/);
-  assert.match(programme, /Full combined MSRP: <b>£1,788<\/b>/);
-  assert.match(programme, /Save £791/);
-  assert.match(programme, /44% off full MSRP/);
-  assert.doesNotMatch(programme, /6\s*[×x]\s*£169/);
-  assert.doesNotMatch(programme, /£1,014/);
-});
-
-test("client navigation contains the same approved programme value", () => {
-  for (const value of ["Weeks 1–4", "Weeks 5–11", "Weeks 12–18", "Weeks 19–24", "£1,188", "£997", "£191", "£1,788", "£791", "44% off full MSRP"]) {
-    assert.match(rsc, new RegExp(value));
-  }
-  assert.doesNotMatch(rsc, /6\s*[×x]\s*£169/);
-  assert.doesNotMatch(rsc, /£1,014/);
-});
-
-test("client navigation receives the same taster and stage pricing content", () => {
-  assert.match(rsc, /FREE 7-DAY TASTER/);
-  for (const price of ["£97", "£197", "£397", "£497"]) {
-    assert.match(rsc, new RegExp(price));
-  }
-});
-
-test("the homepage opens with Haanel and Tariq as complementary authorities", () => {
-  const hero = html.match(/<section class="hero haanelHero" id="top">([\s\S]*?)<section class="principle">/)?.[1] ?? "";
-  assert.match(hero, /Charles F\. Haanel revealed the Master Key/);
-  assert.match(hero, /Tariq helps you use it/);
-  assert.match(hero, /class="heroJourneyStory"/);
-  assert.equal((hero.match(/src="\/images\/haanel-tariq-portraits\.jpeg"/g) ?? []).length, 2);
-  assert.match(hero, /<h3 class="journeyName">Charles F\. Haanel<\/h3>/);
-  assert.match(hero, /<h3 class="journeyName">Tariq Saddique<\/h3>/);
-  assert.match(hero, /From inner mastery to <em>purposeful action\.<\/em>/);
-  assert.doesNotMatch(hero, /homepage-master-key-journey\.png/);
-  assert.doesNotMatch(hero, /class="authorityPortrait/);
-  assert.doesNotMatch(hero, /class="heroVisual dualPortraits"/);
-  assert.match(hero, /href="#free-taster"/);
-  assert.match(hero, /href="#meet-tariq"/);
+test("deployed homepage preserves the approved origins sequence and assets", () => {
+  const origins = home.match(/<section class="homeOrigins"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const cream = origins.indexOf("homeOrigins__prelude");
+  const portraits = origins.indexOf("homeOrigins__portrait");
+  const navy = origins.indexOf("homeOrigins__statement");
+  assert.ok(cream >= 0 && cream < portraits && portraits < navy);
+  assert.equal((home.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
+  assert.match(origins, /Where timeless wisdom meets modern transformation\./);
+  assert.match(origins, /From inner mastery to purposeful action\./);
   assert.ok(existsSync(path.join(root, "images", "haanel-tariq-portraits.jpeg")));
+  assert.ok(existsSync(path.join(root, "images", "tariq-happiness-harmony.png")));
 });
 
-test("the homepage frames the portraits with cream and navy transformation messages", () => {
-  const hero = html.match(/<section class="hero haanelHero" id="top">([\s\S]*?)<section class="principle">/)?.[1] ?? "";
-  const creamMessage = hero.indexOf('class="journeyPrelude"');
-  const portraits = hero.indexOf('class="journeyPortraitGrid"');
-  const navyMessage = hero.indexOf('class="journeyMessage"');
-
-  assert.ok(creamMessage >= 0, "cream transformation message should be present");
-  assert.ok(creamMessage < portraits, "cream message should appear above the portraits");
-  assert.ok(portraits < navyMessage, "navy message should appear below the portraits");
-  assert.match(hero, /Where timeless wisdom meets modern <em>transformation\.<\/em>/);
-  assert.match(hero, /<strong>clarity, focus, discipline and aligned action\.<\/strong>/);
+test("canonical coaching page owns every locked commercial fact", () => {
+  for (const value of [
+    "Weeks 1–4", "Weeks 5–11", "Weeks 12–18", "Weeks 19–24",
+    "£97", "£197", "£397", "£497", "£1,188", "£997",
+    "Save £191", "£1,788", "Save £791", "44% off full MSRP",
+  ]) assert.ok(coaching.includes(value), value);
+  assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
+  assert.doesNotMatch(home, /£97|£197|£397|£497|£1,188|£1,788/);
 });
 
-test("the weekly progression explains the transformation before introducing coaching", () => {
-  const progressionIndex = html.indexOf('id="weekly-progression"');
-  const coachIndex = html.indexOf('id="meet-tariq"');
-  const tasterIndex = html.indexOf('id="free-taster"');
-
-  assert.ok(progressionIndex > 0);
-  assert.ok(coachIndex > progressionIndex);
-  assert.ok(tasterIndex > coachIndex);
-  assert.match(html, /Each weekly lesson builds upon the last/);
-  assert.match(html, /an almost magical process can begin to unfold/);
-  assert.match(html, /Haanel created the system\. Tariq helps you live it\./);
+test("canonical coaching page is static, bilingual and uses a real contact fallback", () => {
+  assert.match(coaching, /<title data-i18n="route\.coaching\.metaTitle">24-Week Coaching/);
+  assert.match(coaching, /src="\/assets\/tabs\.mjs"/);
+  assert.match(coaching, /href="\/contact\/"/);
+  assert.match(coaching, /data-i18n="route\.coaching\.action"/);
+  assert.match(coaching, />EN<.*>ES</s);
+  assert.doesNotMatch(coaching, /paypal|__VINEXT_RSC_CHUNKS__|hydrate/i);
 });
 
-test("client navigation preserves the Haanel-first coaching story", () => {
-  assert.match(rsc, /Charles F\. Haanel revealed the Master Key/);
-  assert.match(rsc, /an almost magical process can begin to unfold/);
-  assert.match(rsc, /Haanel created the system\. Tariq helps you live it\./);
-});
-
-test("homepage metadata leads with Charles F. Haanel", () => {
-  assert.match(html, /<title>Charles F\. Haanel’s Master Key System \| Coaching with Tariq Saddique<\/title>/);
-  assert.match(html, /<meta name="description" content="Discover Charles F\. Haanel’s progressive 24-part Master Key System with practical coaching, weekly guidance and accountability from Tariq Saddique\."\/>/);
-});
-
-test("the embedded streamed page data contains valid JSON records so hydration cannot blank the page", () => {
-  const embeddedRsc = [...html.matchAll(/__VINEXT_RSC_CHUNKS__\.push\(("(?:\\.|[^"\\])*")\)/g)]
-    .map((match) => JSON.parse(match[1]))
-    .join("");
-
-  assert.ok(embeddedRsc.length > 0, "the homepage must include its streamed page data");
-  for (const line of embeddedRsc.split("\n")) {
-    const record = line.match(/^([0-9a-f]+):(.*)$/);
-    if (!record || !/^[\[{\"]/.test(record[2])) continue;
-
-    assert.doesNotThrow(
-      () => JSON.parse(record[2]),
-      `RSC record ${record[1]} must contain valid JSON`,
-    );
-  }
+test("all commercial comparisons are derived from the canonical offer data", () => {
+  assert.equal(siteData.stages.reduce((sum, stage) => sum + stage.price, 0), siteData.offer.separateTotal);
+  assert.equal(siteData.offer.separateTotal - siteData.offer.completePrice, siteData.offer.foundingSaving);
+  assert.equal(siteData.stages.reduce((sum, stage) => sum + stage.msrp, 0), siteData.offer.msrpTotal);
+  assert.equal(siteData.offer.msrpTotal - siteData.offer.completePrice, siteData.offer.msrpSaving);
+  assert.equal(Math.round((1 - siteData.offer.completePrice / siteData.offer.msrpTotal) * 100), siteData.offer.msrpDiscount);
 });

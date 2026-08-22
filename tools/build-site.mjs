@@ -13,6 +13,7 @@ const runtimeFiles = Object.freeze([
   "assets/platform.css",
   "assets/site-language.mjs",
   "assets/site-navigation.mjs",
+  "assets/tabs.mjs",
   "content/translations.mjs",
 ]);
 

@@ -1,6 +1,7 @@
 import { t } from "../content/translations.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { homePage } from "./pages/home.mjs";
+import { coachingPage } from "./pages/coaching.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -50,4 +51,5 @@ export const routeRenderers = Object.freeze({
     ]),
   ),
   [siteData.routes.home]: (data) => homePage(data),
+  [siteData.routes.coaching]: (data) => coachingPage(data),
 });

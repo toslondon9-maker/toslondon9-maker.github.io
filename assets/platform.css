@@ -856,6 +856,162 @@ main > article {
   justify-content: center;
 }
 
+.coachingHero {
+  max-width: 58rem;
+  text-align: center;
+}
+
+.coachingHero .routeShell__purpose {
+  max-width: 46rem;
+  margin-inline: auto;
+  color: var(--muted);
+  font-size: clamp(1.08rem, 2vw, 1.3rem);
+}
+
+.coachingExperience {
+  padding-block: var(--space-section);
+}
+
+.coachingExperience__inner {
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+}
+
+.coachingTabs {
+  margin-bottom: 1.5rem;
+}
+
+.coachingTabs [role="tab"] {
+  border-color: rgba(212, 170, 87, 0.55);
+  background: rgba(255, 253, 248, 0.08);
+  color: var(--cream);
+  cursor: pointer;
+}
+
+.coachingTabs [role="tab"][aria-selected="true"] {
+  background: var(--gold);
+  color: var(--night);
+}
+
+.coachingPanels {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.coachingPanel {
+  min-width: 0;
+  padding: clamp(1.35rem, 4vw, 3rem);
+  border: 1px solid rgba(212, 170, 87, 0.45);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-card);
+}
+
+.coachingPanel[hidden] {
+  display: none;
+}
+
+.coachingPanel__lead {
+  max-width: 50rem;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.coachingStageGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.coachingStage {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  box-shadow: none;
+}
+
+.coachingStage__weeks {
+  color: #85611f;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.coachingStage__price {
+  margin-top: auto;
+}
+
+.coachingStage__price span,
+.coachingStage__price strong {
+  display: block;
+}
+
+.coachingStage__price strong,
+.coachingPanel__price strong,
+.coachingValue__price strong {
+  color: #85611f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.coachingInclusions {
+  max-width: 46rem;
+  margin-block: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.coachingInclusions li::marker {
+  color: var(--gold);
+}
+
+.coachingPanel__price span {
+  color: var(--muted);
+}
+
+.coachingValue {
+  max-width: 44rem;
+  margin-block: 2rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--cream);
+}
+
+.coachingValue p {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+
+.coachingValue__price {
+  font-size: 1.1rem;
+}
+
+.coachingValue__discount strong {
+  color: #85611f;
+  font-size: 1.6rem;
+}
+
+.coachingFaq {
+  margin-bottom: 2rem;
+}
+
+.coachingTrust {
+  max-width: 56rem;
+  text-align: center;
+}
+
+.coachingTrust p {
+  color: var(--muted);
+}
+
 .siteFooter,
 .site-footer {
   display: grid;
@@ -987,6 +1143,10 @@ main > article {
   .homeMentors__grid {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .coachingStageGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 480px) {
@@ -1021,6 +1181,12 @@ main > article {
   }
 
   .homeCoaching li {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .coachingValue p {
     align-items: flex-start;
     flex-direction: column;
     gap: 0.25rem;
