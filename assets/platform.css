@@ -1529,3 +1529,137 @@ main > article {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.sevenDayLesson {
+  background: var(--cream);
+}
+
+.sevenDayLesson__article {
+  max-width: 68rem;
+}
+
+.sevenDayLesson__header {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-card);
+  background: radial-gradient(circle at 82% 14%, rgba(212, 170, 87, 0.26), transparent 30%), var(--night);
+  color: var(--white);
+}
+
+.sevenDayLesson__header .eyebrow {
+  color: var(--cream-deep);
+}
+
+.sevenDayLesson__header h1 {
+  max-width: 15ch;
+  margin-bottom: 0;
+}
+
+.sevenDayLesson__day {
+  margin-bottom: 0.5rem;
+  color: var(--gold-bright);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sevenDayLesson__practiceList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.sevenDayLesson__practice,
+.sevenDayLesson__completion {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.sevenDayLesson__practice h2,
+.sevenDayLesson__completion h2 {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+}
+
+.sevenDayLesson__practice p,
+.sevenDayLesson__completion p {
+  overflow-wrap: anywhere;
+}
+
+.sevenDayLesson__practice p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.sevenDayLesson__completion {
+  display: grid;
+  justify-items: start;
+  gap: 0.85rem;
+  margin-top: 1rem;
+  border-inline-start: 0.35rem solid var(--gold);
+}
+
+.sevenDayLesson__completion h2,
+.sevenDayLesson__completion p {
+  margin: 0;
+}
+
+.sevenDayLesson__completion p {
+  color: var(--muted);
+}
+
+.sevenDayLesson__completion .button--primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
+.sevenDayLesson__completion .button--primary:disabled:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  translate: 0;
+}
+
+.sevenDayLesson__contact:empty {
+  display: none;
+}
+
+.sevenDayLesson__navigation {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.sevenDayLesson__dashboard,
+.sevenDayLesson__coaching {
+  width: fit-content;
+  color: #7f5c1c;
+  font-weight: 750;
+}
+
+.sevenDayLesson__navigationActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.sevenDayLesson__navigationActions > * {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .sevenDayLesson__practiceList,
+  .sevenDayLesson__navigationActions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sevenDayLesson__navigationActions > * {
+    width: 100%;
+  }
+}

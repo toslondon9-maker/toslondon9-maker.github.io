@@ -54,3 +54,10 @@ test("experience lesson routes build without joining shared navigation routes", 
     await rm(outputRoot, { recursive: true, force: true });
   }
 });
+
+test("every experience route resolves to a page rather than the temporary lesson shell", () => {
+  for (const lesson of sevenDayExperience.lessons) {
+    const page = routeRenderers[lesson.route](siteData);
+    assert.doesNotMatch(page.body, /This lesson will be available here shortly\./);
+  }
+});
