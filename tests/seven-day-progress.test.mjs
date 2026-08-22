@@ -70,6 +70,16 @@ test("storage reads fail closed without throwing or inventing saved progress", (
   });
 });
 
+test("storage reads distinguish usable absence from malformed and unsupported data", () => {
+  const empty = createProgressState();
+
+  assert.deepEqual(readProgress({ getItem: () => null }), { state: empty, persistent: true });
+  assert.deepEqual(readProgress({ getItem: () => "not json" }), { state: empty, persistent: false });
+  assert.deepEqual(readProgress({
+    getItem: () => '{"version":2,"completed":{"day-1":true}}',
+  }), { state: empty, persistent: false });
+});
+
 test("storage writes use one namespaced key and exclude personal or reflection content", () => {
   const writes = [];
   const storage = { setItem: (...arguments_) => writes.push(arguments_) };
@@ -148,6 +158,26 @@ test("blocked storage keeps controls and lesson access usable with an honest sta
   assert.doesNotThrow(() => button.click());
   assert.equal(button.attributes.get("aria-pressed"), "true");
   assert.equal(status.textContent, "Lessons available; progress cannot be saved.");
+});
+
+test("malformed and unsupported stored data render the non-persistent warning", () => {
+  for (const storedValue of [
+    "not json",
+    '{"version":2,"completed":{"day-1":true}}',
+  ]) {
+    const button = fakeElement({ progressComplete: "day-1", i18n: "sevenDay.lessons.day1.completion" });
+    const status = fakeElement({ i18n: "sevenDay.progress.empty" });
+    const document = fakeDocument({ buttons: [button], status });
+
+    mountSevenDayProgress(document, {
+      storage: { getItem: () => storedValue },
+      translate: translateForTest,
+    });
+
+    assert.equal(button.disabled, false);
+    assert.equal(button.attributes.get("aria-pressed"), "false");
+    assert.equal(status.textContent, "Lessons available; progress cannot be saved.");
+  }
 });
 
 test("a blocked localStorage property cannot interrupt lesson access", () => {

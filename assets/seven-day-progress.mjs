@@ -36,11 +36,24 @@ export function createProgressState(value) {
 }
 
 export function parseProgress(serialized) {
-  if (typeof serialized !== "string") return createProgressState();
+  return decodeProgress(serialized).state;
+}
+
+function decodeProgress(serialized) {
+  if (serialized === null) return { state: createProgressState(), valid: true };
+  if (typeof serialized !== "string") return { state: createProgressState(), valid: false };
   try {
-    return createProgressState(JSON.parse(serialized));
+    const value = JSON.parse(serialized);
+    const supported = value !== null
+      && typeof value === "object"
+      && !Array.isArray(value)
+      && value.version === PROGRESS_VERSION
+      && value.completed !== null
+      && typeof value.completed === "object"
+      && !Array.isArray(value.completed);
+    return { state: createProgressState(value), valid: supported };
   } catch {
-    return createProgressState();
+    return { state: createProgressState(), valid: false };
   }
 }
 
@@ -68,7 +81,8 @@ export function countCompleted(state) {
 export function readProgress(storage = getDefaultStorage()) {
   try {
     if (typeof storage?.getItem !== "function") throw new TypeError("Progress storage is unavailable");
-    return { state: parseProgress(storage.getItem(PROGRESS_STORAGE_KEY)), persistent: true };
+    const decoded = decodeProgress(storage.getItem(PROGRESS_STORAGE_KEY));
+    return { state: decoded.state, persistent: decoded.valid };
   } catch {
     return { state: createProgressState(), persistent: false };
   }
