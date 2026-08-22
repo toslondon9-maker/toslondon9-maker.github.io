@@ -67,6 +67,22 @@ test("page shell mounts shared chrome and the navigation module once", () => {
   assert.equal((html.match(/src="\/assets\/app\.mjs"/g) ?? []).length, 1);
 });
 
+test("page shell cache-busts the release assets that control visible copy and layout", () => {
+  const html = renderPage({
+    route: "/",
+    language: "en",
+    title: "Home",
+    description: "Home.",
+    body: '<main id="main-content"><h1>Home</h1></main>',
+    scripts: [],
+  });
+  const languageModule = readFileSync(new URL("../assets/site-language.mjs", import.meta.url), "utf8");
+
+  assert.match(html, /href="\/assets\/platform\.css\?v=20260822-phase1"/);
+  assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260822-phase1"/);
+  assert.match(languageModule, /translations\.mjs\?v=20260822-phase1/);
+});
+
 test("page shell establishes enhancement state before styles can paint mobile chrome", () => {
   const html = renderPage({
     route: "/",
@@ -77,7 +93,7 @@ test("page shell establishes enhancement state before styles can paint mobile ch
     scripts: [],
   });
   const stateScript = html.indexOf('document.documentElement.classList.add("has-js")');
-  const stylesheet = html.indexOf('rel="stylesheet" href="/assets/platform.css"');
+  const stylesheet = html.indexOf('rel="stylesheet" href="/assets/platform.css');
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
 
   assert.ok(stateScript > 0, "enhancement state must be set by an early inline script");

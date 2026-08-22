@@ -37,7 +37,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
-  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css">/);
+  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260822-phase1">/);
   assert.match(html, /<link rel="preload" href="\/images\/the-secret-logo\.png" as="image">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
