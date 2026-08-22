@@ -1352,3 +1352,180 @@ main > article {
     animation-iteration-count: 1 !important;
   }
 }
+
+.sevenDayDashboard {
+  background: var(--cream);
+}
+
+.sevenDayDashboard__hero {
+  background: radial-gradient(circle at 78% 12%, rgba(212, 170, 87, 0.26), transparent 28%), var(--night);
+  color: var(--white);
+  padding: var(--space-section) var(--space-gutter);
+}
+
+.sevenDayDashboard__inner {
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+}
+
+.sevenDayDashboard__hero .eyebrow,
+.sevenDayDashboard__hero .routeShell__purpose {
+  color: var(--cream-deep);
+}
+
+.sevenDayDashboard__hero h1 {
+  max-width: 14ch;
+}
+
+.sevenDayDashboard__body {
+  padding: var(--space-section) var(--space-gutter);
+}
+
+.sevenDayDashboard__progressive {
+  max-width: 58rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  color: var(--muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+  line-height: 1.5;
+}
+
+.sevenDayDashboard__sectionTitle {
+  font-size: clamp(1.65rem, 3.5vw, 2.45rem);
+}
+
+.sevenDayDashboard__progress,
+.sevenDayDashboard__workbook,
+.sevenDayDashboard__privacy {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.sevenDayDashboard__progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.sevenDayDashboard__progress .sevenDayDashboard__sectionTitle {
+  flex-basis: 100%;
+}
+
+.sevenDayDashboard__progressStatus {
+  margin: 0;
+  color: var(--muted);
+}
+
+.sevenDayDashboard__reset {
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: transparent;
+  padding: 0.55rem 0.85rem;
+}
+
+.sevenDayDashboard__reset:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.sevenDayDashboard__lessons {
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+}
+
+.sevenDayDashboard__lessonList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sevenDayDashboard__lesson a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 100%;
+  padding: 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.sevenDayDashboard__lesson a:hover,
+.sevenDayDashboard__lesson a:focus-visible {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-2px);
+}
+
+.sevenDayDashboard__number {
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+}
+
+.sevenDayDashboard__lessonCopy {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.sevenDayDashboard__lessonCopy strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.sevenDayDashboard__status {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sevenDayDashboard__arrow {
+  color: var(--gold);
+  font-size: 1.3rem;
+}
+
+.sevenDayDashboard__workbookActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.sevenDayDashboard__workbookActions a {
+  text-align: center;
+}
+
+.sevenDayDashboard__privacy {
+  border-inline-start: 0.35rem solid var(--gold);
+}
+
+.sevenDayDashboard__privacy p {
+  max-width: 70rem;
+  color: var(--muted);
+}
+
+.sevenDayDashboard__independence {
+  margin-bottom: 0;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 760px) {
+  .sevenDayDashboard__lessonList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

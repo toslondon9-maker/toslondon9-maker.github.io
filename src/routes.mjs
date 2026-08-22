@@ -3,11 +3,11 @@ import { sevenDayExperience } from "../content/seven-day-experience.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { homePage } from "./pages/home.mjs";
 import { coachingPage } from "./pages/coaching.mjs";
+import { startFreePage } from "./pages/start-free.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
   masterKeySystem: { actionRoute: "coaching" },
-  startFree: { actionRoute: "masterKeySystem" },
   coaching: { actionRoute: "contact", detail: "price" },
   aboutTariq: { actionRoute: "contact" },
   resources: { actionRoute: "startFree" },
@@ -63,6 +63,7 @@ export const routeRenderers = Object.freeze({
     ]),
   ),
   [siteData.routes.home]: (data) => homePage(data),
+  [siteData.routes.startFree]: (data) => startFreePage(data),
   [siteData.routes.coaching]: (data) => coachingPage(data),
   ...Object.fromEntries(
     sevenDayExperience.lessons.map((lesson) => [

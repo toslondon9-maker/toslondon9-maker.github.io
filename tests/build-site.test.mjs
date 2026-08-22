@@ -116,12 +116,21 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
     assert.equal(new Set(titles).size, pages.length);
     assert.equal(new Set(descriptions).size, pages.length);
 
-    for (const page of pages) {
+    for (const [index, page] of pages.entries()) {
       assert.equal((page.match(/<h1[ >]/g) ?? []).length, 1);
-      assert.equal((page.match(/class="routeShell__purpose"/g) ?? []).length, 1);
-      assert.equal((page.match(/class="button--primary routeShell__action"/g) ?? []).length, 1);
       assert.match(page, /<title data-i18n="route\.[^"]+\.metaTitle">/);
       assert.match(page, /<meta name="description"[^>]+data-i18n="route\.[^"]+\.metaDescription">/);
+
+      if (globalPageFiles[index] === "start-free/index.html") {
+        assert.match(page, /<main class="sevenDayDashboard"/);
+        assert.match(page, /<h1 data-i18n="sevenDay\.dashboard\.title">/);
+        assert.match(page, /class="routeShell__purpose" data-i18n="sevenDay\.dashboard\.intro">/);
+        assert.match(page, /class="button--primary routeShell__action" href="\/start-free\/day-1-see-whats-running-your-life\/" data-i18n="sevenDay\.dashboard\.start">/);
+        continue;
+      }
+
+      assert.equal((page.match(/class="routeShell__purpose"/g) ?? []).length, 1);
+      assert.equal((page.match(/class="button--primary routeShell__action"/g) ?? []).length, 1);
       assert.match(page, /<h1 data-i18n="route\.[^"]+\.heading">/);
       assert.match(page, /class="routeShell__purpose" data-i18n="route\.[^"]+\.purpose">/);
       assert.match(page, /class="button--primary routeShell__action"[^>]+data-i18n="route\.[^"]+\.action">/);

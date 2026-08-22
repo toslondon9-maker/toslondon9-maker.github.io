@@ -5,6 +5,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { siteData } from "../content/site-data.mjs";
+import { routeRenderers } from "../src/routes.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const home = await readFile(path.join(root, "index.html"), "utf8");
@@ -56,4 +57,11 @@ test("all commercial comparisons are derived from the canonical offer data", () 
   assert.equal(siteData.stages.reduce((sum, stage) => sum + stage.msrp, 0), siteData.offer.msrpTotal);
   assert.equal(siteData.offer.msrpTotal - siteData.offer.completePrice, siteData.offer.msrpSaving);
   assert.equal(Math.round((1 - siteData.offer.completePrice / siteData.offer.msrpTotal) * 100), siteData.offer.msrpDiscount);
+});
+
+test("the free dashboard remains free and does not add a registration or payment flow", () => {
+  const html = routeRenderers[siteData.routes.startFree](siteData).body;
+
+  assert.doesNotMatch(html, /<form\b|<input\b|paypal|stripe|payment|checkout|register|sign up|account (?:created|creation)/i);
+  assert.match(html, /href="\/start-free\/day-1-see-whats-running-your-life\/"/);
 });

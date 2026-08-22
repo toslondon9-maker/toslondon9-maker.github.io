@@ -1,0 +1,73 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { sevenDayExperience } from "../content/seven-day-experience.mjs";
+import { siteData } from "../content/site-data.mjs";
+import { routeRenderers } from "../src/routes.mjs";
+
+const dashboard = () => routeRenderers[siteData.routes.startFree](siteData);
+
+test("the free dashboard starts Day 1 immediately and makes all seven ordered lessons available", () => {
+  const page = dashboard();
+  const html = page.body;
+
+  assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
+  assert.match(html, new RegExp(`href="${sevenDayExperience.lessons[0].route}"`));
+  assert.match(html, /data-i18n="sevenDay\.dashboard\.start"/);
+  assert.equal((html.match(/class="sevenDayDashboard__lesson"/g) ?? []).length, 7);
+
+  for (const lesson of sevenDayExperience.lessons) {
+    assert.match(html, new RegExp(`href="${lesson.route}"`));
+    assert.match(html, new RegExp(`data-i18n="${lesson.translationKey}\\.title"`));
+    assert.match(html, new RegExp(`data-i18n="${lesson.translationKey}\\.status"`));
+  }
+});
+
+test("the free dashboard provides an honest progressive, private no-JavaScript baseline", () => {
+  const page = dashboard();
+  const html = page.body;
+
+  assert.match(html, /data-i18n="sevenDay\.dashboard\.progressive"/);
+  assert.match(html, /role="status"[^>]+data-progress-status/);
+  assert.match(html, /data-i18n="sevenDay\.progress\.empty"/);
+  assert.match(html, /type="button"[^>]+data-progress-reset/);
+  assert.match(html, /data-i18n="sevenDay\.reset\.label"/);
+  assert.match(html, /data-i18n="sevenDay\.privacy\.body"/);
+  assert.match(html, /Nothing is sent to or stored by Tariq/);
+  assert.match(html, /clearing browser data or changing devices may remove your progress/);
+  assert.match(html, /aria-labelledby="seven-day-progress-heading"[\s\S]*?<h2 id="seven-day-progress-heading"/);
+  assert.match(html, /aria-labelledby="seven-day-lessons-heading"[\s\S]*?<h2 id="seven-day-lessons-heading"/);
+  assert.match(html, /aria-labelledby="seven-day-workbook-heading"[\s\S]*?<h2 id="seven-day-workbook-heading"/);
+  assert.match(html, /aria-labelledby="seven-day-privacy-heading"[\s\S]*?<h2 id="seven-day-privacy-heading"/);
+  assert.doesNotMatch(html, /<form\b|<input\b|account (?:created|creation)|register|sign up|saved to (?:our|Tariq)/i);
+});
+
+test("the free dashboard exposes both future workbook destinations with localized labels", () => {
+  const page = dashboard();
+  const html = page.body;
+
+  assert.match(html, /href="\/downloads\/seven-day-experience-workbook-en\.pdf"[^>]+data-i18n="sevenDay\.workbook\.english"/);
+  assert.match(html, /href="\/downloads\/experiencia-siete-dias-cuaderno-es\.pdf"[^>]+data-i18n="sevenDay\.workbook\.spanish"/);
+  assert.match(html, /data-i18n="sevenDay\.workbook\.heading"/);
+  assert.match(html, /data-i18n="sevenDay\.workbook\.intro"/);
+});
+
+test("the free dashboard connects every changeable dashboard value to the bilingual registry", () => {
+  const html = dashboard().body;
+  const { sharedKeys } = sevenDayExperience;
+  const keys = [
+    sharedKeys.independence,
+    ...Object.values(sharedKeys.dashboard),
+    sharedKeys.progress.heading,
+    sharedKeys.progress.empty,
+    sharedKeys.privacy.heading,
+    sharedKeys.privacy.body,
+    sharedKeys.reset.label,
+    ...Object.values(sharedKeys.workbook),
+    ...sevenDayExperience.lessons.flatMap((lesson) => [
+      lesson.contentKeys.title,
+      lesson.contentKeys.status,
+    ]),
+  ];
+
+  for (const key of keys) assert.match(html, new RegExp(`data-i18n="${key}"`));
+});
