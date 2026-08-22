@@ -412,14 +412,16 @@ const translations = deepFreeze({
   "sevenDay.progress.empty": { en: "No days completed yet", es: "Aún no has completado ningún día" },
   "sevenDay.progress.count": { en: "{completed} of 7 days complete", es: "Has completado {completed} de 7 días" },
   "sevenDay.progress.complete": { en: "All seven days complete", es: "Has completado los siete días" },
+  "sevenDay.progress.lessonComplete": { en: "Complete", es: "Completado" },
+  "sevenDay.progress.markIncomplete": { en: "Mark this day incomplete", es: "Marcar este día como no completado" },
   "sevenDay.progress.unavailable": {
     en: "Your lessons remain available, but this browser cannot save progress.",
     es: "Tus lecciones siguen disponibles, pero este navegador no puede guardar el progreso.",
   },
   "sevenDay.privacy.heading": { en: "Private on this device", es: "Privado en este dispositivo" },
   "sevenDay.privacy.body": {
-    en: "When progress saving becomes available, only completion flags will be kept in this browser on this device. Nothing will be sent to or stored by Tariq. If you later clear browser data or change devices, that local progress may disappear.",
-    es: "Cuando esté disponible el guardado del progreso, solo se guardarán las marcas de las lecciones completadas en este navegador y dispositivo. No se enviará nada a Tariq ni se almacenará nada con Tariq. Si más adelante borras los datos del navegador o cambias de dispositivo, ese progreso local podría desaparecer.",
+    en: "Only lesson-completion flags are saved in this browser on this device. Progress is not transmitted to or stored by Tariq. Clearing browser data or changing devices may remove this local progress.",
+    es: "Solo las marcas de las lecciones completadas se guardan en este navegador y dispositivo. No se transmiten a Tariq ni se almacenan con él. Borrar los datos del navegador o cambiar de dispositivo puede eliminar este progreso local.",
   },
   "sevenDay.reset.label": { en: "Reset progress", es: "Restablecer el progreso" },
   "sevenDay.reset.confirm": {

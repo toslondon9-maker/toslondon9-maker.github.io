@@ -33,8 +33,9 @@ test("the free dashboard provides an honest progressive, private no-JavaScript b
   assert.match(html, /type="button"[^>]+data-progress-reset/);
   assert.match(html, /data-i18n="sevenDay\.reset\.label"/);
   assert.match(html, /data-i18n="sevenDay\.privacy\.body"/);
-  assert.match(html, /When progress saving becomes available/);
-  assert.doesNotMatch(html, /completion flags are saved|progress is saved/i);
+  assert.match(html, /Only lesson-completion flags are saved in this browser on this device/);
+  assert.match(html, /Progress is not transmitted to or stored by Tariq/);
+  assert.match(html, /Clearing browser data or changing devices may remove/);
   assert.match(html, /aria-labelledby="seven-day-progress-heading"[\s\S]*?<h2 id="seven-day-progress-heading"/);
   assert.match(html, /aria-labelledby="seven-day-lessons-heading"[\s\S]*?<h2 id="seven-day-lessons-heading"/);
   assert.match(html, /aria-labelledby="seven-day-workbook-heading"[\s\S]*?<h2 id="seven-day-workbook-heading"/);
@@ -42,13 +43,25 @@ test("the free dashboard provides an honest progressive, private no-JavaScript b
   assert.doesNotMatch(html, /<form\b|<input\b|account (?:created|creation)|register|sign up|saved to (?:our|Tariq)/i);
 });
 
-test("the inert dashboard describes local progress saving as forthcoming in both languages", () => {
+test("the dashboard describes active local-only progress saving in both languages", () => {
   const privacyKey = sevenDayExperience.sharedKeys.privacy.body;
 
-  assert.match(t(privacyKey, "en"), /^When progress saving becomes available,/);
-  assert.doesNotMatch(t(privacyKey, "en"), /are saved|is saved/i);
-  assert.match(t(privacyKey, "es"), /^Cuando esté disponible el guardado del progreso,/);
-  assert.doesNotMatch(t(privacyKey, "es"), /se guardan|están guardadas/i);
+  assert.match(t(privacyKey, "en"), /saved in this browser on this device/);
+  assert.match(t(privacyKey, "en"), /not transmitted to or stored by Tariq/i);
+  assert.match(t(privacyKey, "en"), /Clearing browser data or changing devices may remove/i);
+  assert.match(t(privacyKey, "es"), /se guardan en este navegador y dispositivo/);
+  assert.match(t(privacyKey, "es"), /no se transmiten a Tariq ni se almacenan con él/i);
+  assert.match(t(privacyKey, "es"), /Borrar los datos del navegador o cambiar de dispositivo puede eliminar/i);
+});
+
+test("the dashboard loads one progress enhancement while preserving disabled no-JavaScript controls", () => {
+  const page = dashboard();
+
+  assert.deepEqual(page.scripts, ["/assets/seven-day-progress.mjs"]);
+  assert.match(page.body, /data-progress-reset disabled/);
+  for (const lesson of sevenDayExperience.lessons) {
+    assert.match(page.body, new RegExp(`data-progress-lesson="${lesson.id}"`));
+  }
 });
 
 test("the free dashboard exposes both future workbook destinations with localized labels", () => {

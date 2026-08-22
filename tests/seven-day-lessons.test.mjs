@@ -92,6 +92,16 @@ test("lesson pages expose every changeable value to the runtime language switche
   }
 });
 
+test("lesson pages load one reversible progress enhancement and stay fully available without it", () => {
+  for (const lesson of sevenDayExperience.lessons) {
+    const page = lessonPage(lesson);
+
+    assert.deepEqual(page.scripts, ["/assets/seven-day-progress.mjs"]);
+    assert.match(page.body, new RegExp(`data-progress-complete="${lesson.id}"[^>]+disabled`));
+    assert.match(page.body, new RegExp(`href="${siteData.routes.startFree}"`));
+  }
+});
+
 test("lesson styles preserve the shared design system and collapse navigation safely on mobile", () => {
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
 

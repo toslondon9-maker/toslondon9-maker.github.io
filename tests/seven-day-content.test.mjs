@@ -88,6 +88,8 @@ test("shared experience copy covers the complete dashboard and lesson interface"
       empty: "sevenDay.progress.empty",
       count: "sevenDay.progress.count",
       complete: "sevenDay.progress.complete",
+      lessonComplete: "sevenDay.progress.lessonComplete",
+      markIncomplete: "sevenDay.progress.markIncomplete",
       unavailable: "sevenDay.progress.unavailable",
     },
     privacy: {

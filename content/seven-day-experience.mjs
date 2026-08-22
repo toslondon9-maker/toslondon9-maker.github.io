@@ -45,6 +45,8 @@ export const sevenDayExperience = deepFreeze({
       empty: "sevenDay.progress.empty",
       count: "sevenDay.progress.count",
       complete: "sevenDay.progress.complete",
+      lessonComplete: "sevenDay.progress.lessonComplete",
+      markIncomplete: "sevenDay.progress.markIncomplete",
       unavailable: "sevenDay.progress.unavailable",
     },
     privacy: {

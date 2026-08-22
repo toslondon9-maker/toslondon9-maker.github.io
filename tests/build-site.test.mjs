@@ -147,6 +147,7 @@ test("standalone previews include every local dependency referenced by route she
     const result = await buildSite({ outputRoot });
     const requiredFiles = [
       "assets/platform.css",
+      "assets/seven-day-progress.mjs",
       "assets/site-language.mjs",
       "assets/site-navigation.mjs",
       "content/translations.mjs",
@@ -157,6 +158,25 @@ test("standalone previews include every local dependency referenced by route she
     for (const file of requiredFiles) {
       assert.ok(result.files.includes(file), `${file} should be reported in the build manifest`);
       await access(path.join(outputRoot, file));
+    }
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seven-day routes load the progress module exactly once", async () => {
+  const outputRoot = await mkdtemp(path.join(os.tmpdir(), "unleash-progress-assets-"));
+
+  try {
+    await buildSite({ outputRoot });
+    const sevenDayFiles = [
+      "start-free/index.html",
+      ...siteData.experienceRoutes.map((route) => `${route.slice(1)}index.html`),
+    ];
+
+    for (const file of sevenDayFiles) {
+      const html = await readFile(path.join(outputRoot, file), "utf8");
+      assert.equal((html.match(/src="\/assets\/seven-day-progress\.mjs"/g) ?? []).length, 1, file);
     }
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
