@@ -36,7 +36,10 @@ test("experience lesson routes build without joining shared navigation routes", 
 
   try {
     assert.deepEqual(siteData.experienceRoutes, lessonRoutes);
-    assert.equal(Object.values(siteData.routes).includes(siteData.experienceRoutes[0]), false);
+    assert.deepEqual(
+      siteData.experienceRoutes.filter((route) => Object.values(siteData.routes).includes(route)),
+      [],
+    );
 
     for (const route of [siteData.routes.startFree, ...siteData.experienceRoutes]) {
       assert.ok(routeRenderers[route], `${route} should have a renderer`);
