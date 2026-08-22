@@ -38,7 +38,6 @@ test("the free dashboard provides an honest progressive, private no-JavaScript b
   assert.match(html, /Clearing browser data or changing devices may remove/);
   assert.match(html, /aria-labelledby="seven-day-progress-heading"[\s\S]*?<h2 id="seven-day-progress-heading"/);
   assert.match(html, /aria-labelledby="seven-day-lessons-heading"[\s\S]*?<h2 id="seven-day-lessons-heading"/);
-  assert.match(html, /aria-labelledby="seven-day-workbook-heading"[\s\S]*?<h2 id="seven-day-workbook-heading"/);
   assert.match(html, /aria-labelledby="seven-day-privacy-heading"[\s\S]*?<h2 id="seven-day-privacy-heading"/);
   assert.doesNotMatch(html, /<form\b|<input\b|account (?:created|creation)|register|sign up|saved to (?:our|Tariq)/i);
 });
@@ -64,14 +63,11 @@ test("the dashboard loads one progress enhancement while preserving disabled no-
   }
 });
 
-test("the free dashboard exposes both future workbook destinations with localized labels", () => {
+test("the free dashboard hides workbook actions until their files exist", () => {
   const page = dashboard();
   const html = page.body;
 
-  assert.match(html, /href="\/downloads\/seven-day-experience-workbook-en\.pdf"[^>]+data-i18n="sevenDay\.workbook\.english"/);
-  assert.match(html, /href="\/downloads\/experiencia-siete-dias-cuaderno-es\.pdf"[^>]+data-i18n="sevenDay\.workbook\.spanish"/);
-  assert.match(html, /data-i18n="sevenDay\.workbook\.heading"/);
-  assert.match(html, /data-i18n="sevenDay\.workbook\.intro"/);
+  assert.doesNotMatch(html, /\/downloads\/|\.pdf|sevenDay\.workbook|\bdownload\b/i);
 });
 
 test("the free dashboard connects every changeable dashboard value to the bilingual registry", () => {
@@ -85,7 +81,6 @@ test("the free dashboard connects every changeable dashboard value to the biling
     sharedKeys.privacy.heading,
     sharedKeys.privacy.body,
     sharedKeys.reset.label,
-    ...Object.values(sharedKeys.workbook),
     ...sevenDayExperience.lessons.flatMap((lesson) => [
       lesson.contentKeys.title,
       lesson.contentKeys.status,
