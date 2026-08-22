@@ -41,6 +41,18 @@ test("homepage presents the approved origins sequence once and in order", () => 
   assert.doesNotMatch(html, /endors(?:e|ed|ement)|affiliat(?:e|ed|ion)/i);
 });
 
+test("homepage origins statement uses the premium key and gold-emphasis treatment", () => {
+  const html = renderHome({ language: "en" });
+  const origins = html.match(/<section[^>]+data-home-section="origins"[\s\S]*?<\/section>/)?.[0] ?? "";
+
+  assert.match(origins, /class="homeOrigins__ornament"[^>]+aria-hidden="true"/);
+  assert.match(origins, /class="homeOrigins__key"/);
+  assert.match(origins, /<h2 class="homeOrigins__statementTitle"[^>]+data-i18n-aria-label="home\.origins\.statementTitle"/);
+  assert.match(origins, /class="homeOrigins__statementLead"[^>]+data-i18n="home\.origins\.statementLead"/);
+  assert.match(origins, /class="homeOrigins__statementEmphasis"[^>]+data-i18n="home\.origins\.statementEmphasis"/);
+  assert.match(origins, /class="homeOrigins__statementDivider"[^>]+aria-hidden="true"/);
+});
+
 test("homepage Spanish render is complete, natural and conversion focused", () => {
   const html = renderHome({ language: "es" });
 

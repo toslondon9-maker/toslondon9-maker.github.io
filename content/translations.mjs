@@ -101,6 +101,8 @@ const translations = deepFreeze({
     es: "Charles F. Haanel y Tariq Saddique — recorrido de coaching inspirado en el Master Key System",
   },
   "home.origins.statementTitle": { en: "From inner mastery to purposeful action.", es: "Del dominio interior a la acción con propósito." },
+  "home.origins.statementLead": { en: "From inner mastery to", es: "Del dominio interior a la" },
+  "home.origins.statementEmphasis": { en: "purposeful action.", es: "acción con propósito." },
   "home.origins.statementBody": {
     en: "Timeless wisdom. Focused practice. Modern coaching. Step into a journey that helps you think clearly, act deliberately and live with purpose.",
     es: "Sabiduría atemporal. Práctica enfocada. Coaching actual. Entra en un recorrido que te ayuda a pensar con claridad, actuar de forma deliberada y vivir con propósito.",
