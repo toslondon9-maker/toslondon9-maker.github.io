@@ -418,8 +418,8 @@ const translations = deepFreeze({
   },
   "sevenDay.privacy.heading": { en: "Private on this device", es: "Privado en este dispositivo" },
   "sevenDay.privacy.body": {
-    en: "Only completion flags are saved in this browser on this device. Nothing is sent to or stored by Tariq, and clearing browser data or changing devices may remove your progress.",
-    es: "En este navegador y dispositivo solo se guardan las marcas de lecciones completadas. No se envía ni se guarda nada con Tariq; si borras los datos del navegador o cambias de dispositivo, puedes perder tu progreso.",
+    en: "When progress saving becomes available, only completion flags will be kept in this browser on this device. Nothing will be sent to or stored by Tariq. If you later clear browser data or change devices, that local progress may disappear.",
+    es: "Cuando esté disponible el guardado del progreso, solo se guardarán las marcas de las lecciones completadas en este navegador y dispositivo. No se enviará nada a Tariq ni se almacenará nada con Tariq. Si más adelante borras los datos del navegador o cambias de dispositivo, ese progreso local podría desaparecer.",
   },
   "sevenDay.reset.label": { en: "Reset progress", es: "Restablecer el progreso" },
   "sevenDay.reset.confirm": {

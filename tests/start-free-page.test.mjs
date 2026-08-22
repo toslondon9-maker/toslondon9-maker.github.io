@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { sevenDayExperience } from "../content/seven-day-experience.mjs";
 import { siteData } from "../content/site-data.mjs";
+import { t } from "../content/translations.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 
 const dashboard = () => routeRenderers[siteData.routes.startFree](siteData);
@@ -32,13 +33,22 @@ test("the free dashboard provides an honest progressive, private no-JavaScript b
   assert.match(html, /type="button"[^>]+data-progress-reset/);
   assert.match(html, /data-i18n="sevenDay\.reset\.label"/);
   assert.match(html, /data-i18n="sevenDay\.privacy\.body"/);
-  assert.match(html, /Nothing is sent to or stored by Tariq/);
-  assert.match(html, /clearing browser data or changing devices may remove your progress/);
+  assert.match(html, /When progress saving becomes available/);
+  assert.doesNotMatch(html, /completion flags are saved|progress is saved/i);
   assert.match(html, /aria-labelledby="seven-day-progress-heading"[\s\S]*?<h2 id="seven-day-progress-heading"/);
   assert.match(html, /aria-labelledby="seven-day-lessons-heading"[\s\S]*?<h2 id="seven-day-lessons-heading"/);
   assert.match(html, /aria-labelledby="seven-day-workbook-heading"[\s\S]*?<h2 id="seven-day-workbook-heading"/);
   assert.match(html, /aria-labelledby="seven-day-privacy-heading"[\s\S]*?<h2 id="seven-day-privacy-heading"/);
   assert.doesNotMatch(html, /<form\b|<input\b|account (?:created|creation)|register|sign up|saved to (?:our|Tariq)/i);
+});
+
+test("the inert dashboard describes local progress saving as forthcoming in both languages", () => {
+  const privacyKey = sevenDayExperience.sharedKeys.privacy.body;
+
+  assert.match(t(privacyKey, "en"), /^When progress saving becomes available,/);
+  assert.doesNotMatch(t(privacyKey, "en"), /are saved|is saved/i);
+  assert.match(t(privacyKey, "es"), /^Cuando esté disponible el guardado del progreso,/);
+  assert.doesNotMatch(t(privacyKey, "es"), /se guardan|están guardadas/i);
 });
 
 test("the free dashboard exposes both future workbook destinations with localized labels", () => {
