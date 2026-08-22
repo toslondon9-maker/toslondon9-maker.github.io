@@ -385,6 +385,201 @@ const translations = deepFreeze({
   "coaching.faq.6.answer": { en: "Contact Tariq to discuss the right option. Availability, confirmation and payment are then arranged through the existing approved process.", es: "Habla con Tariq para valorar la opción adecuada. Después, la disponibilidad, la confirmación y el pago se gestionan mediante el proceso acordado." },
   "coaching.trust.title": { en: "Ancient principles. Modern guidance. Real transformation.", es: "Principios atemporales. Guía actual. Transformación real." },
   "coaching.trust.body": { en: "An independent coaching experience inspired by the Master Key System. Results vary and depend on your own engagement and consistent practice.", es: "Una experiencia de coaching independiente inspirada en el Master Key System. Los resultados varían y dependen de tu implicación y de una práctica constante." },
+  "sevenDay.independence": {
+    en: "An independent coaching experience inspired by the Master Key System.",
+    es: "Una experiencia de coaching independiente inspirada en el Master Key System.",
+  },
+  "sevenDay.dashboard.eyebrow": { en: "YOUR FREE SEVEN-DAY EXPERIENCE", es: "TU EXPERIENCIA GRATUITA DE SIETE DÍAS" },
+  "sevenDay.dashboard.title": { en: "Seven days to use your mind more deliberately", es: "Siete días para usar tu mente de forma más deliberada" },
+  "sevenDay.dashboard.intro": {
+    en: "Work through seven short lessons at your own pace. Each day offers one idea to understand, one pattern to observe, one question to consider and one action to practise.",
+    es: "Avanza por siete lecciones breves a tu ritmo. Cada día encontrarás una idea que comprender, un patrón que observar, una pregunta que plantearte y una acción que practicar.",
+  },
+  "sevenDay.dashboard.start": { en: "Start with Day 1", es: "Empieza por el día 1" },
+  "sevenDay.dashboard.progressive": {
+    en: "As each lesson builds on the last, an almost magical process begins to unfold—grounded in cumulative learning, consistent personal practice and the choices you make.",
+    es: "Cuando cada lección se apoya en la anterior, empieza a desplegarse un proceso casi mágico, basado en el aprendizaje acumulativo, tu práctica personal constante y las decisiones que tomas.",
+  },
+  "sevenDay.dashboard.lessonsHeading": { en: "Your seven lessons", es: "Tus siete lecciones" },
+  "sevenDay.lesson.teachingHeading": { en: "Today's teaching", es: "La enseñanza de hoy" },
+  "sevenDay.lesson.observationHeading": { en: "What to observe today", es: "Qué observar hoy" },
+  "sevenDay.lesson.reflectionHeading": { en: "Your reflection", es: "Tu reflexión" },
+  "sevenDay.lesson.actionHeading": { en: "One practical action", es: "Una acción práctica" },
+  "sevenDay.navigation.dashboard": { en: "Back to the seven days", es: "Volver a los siete días" },
+  "sevenDay.navigation.previous": { en: "Previous lesson", es: "Lección anterior" },
+  "sevenDay.navigation.next": { en: "Next lesson", es: "Siguiente lección" },
+  "sevenDay.progress.heading": { en: "Your progress", es: "Tu progreso" },
+  "sevenDay.progress.empty": { en: "No days completed yet", es: "Aún no has completado ningún día" },
+  "sevenDay.progress.count": { en: "{completed} of 7 days complete", es: "Has completado {completed} de 7 días" },
+  "sevenDay.progress.complete": { en: "All seven days complete", es: "Has completado los siete días" },
+  "sevenDay.progress.unavailable": {
+    en: "Your lessons remain available, but this browser cannot save progress.",
+    es: "Tus lecciones siguen disponibles, pero este navegador no puede guardar el progreso.",
+  },
+  "sevenDay.privacy.heading": { en: "Private on this device", es: "Privado en este dispositivo" },
+  "sevenDay.privacy.body": {
+    en: "Only completion flags are saved in this browser on this device. Nothing is sent to or stored by Tariq, and clearing browser data or changing devices may remove your progress.",
+    es: "En este navegador y dispositivo solo se guardan las marcas de lecciones completadas. No se envía ni se guarda nada con Tariq; si borras los datos del navegador o cambias de dispositivo, puedes perder tu progreso.",
+  },
+  "sevenDay.reset.label": { en: "Reset progress", es: "Restablecer el progreso" },
+  "sevenDay.reset.confirm": {
+    en: "Reset all seven-day progress saved in this browser?",
+    es: "¿Quieres restablecer todo el progreso de los siete días guardado en este navegador?",
+  },
+  "sevenDay.reset.success": { en: "Your saved progress has been reset.", es: "Se ha restablecido tu progreso guardado." },
+  "sevenDay.contact.start": { en: "Tell Tariq I'm starting", es: "Decirle a Tariq que voy a empezar" },
+  "sevenDay.contact.ask": { en: "Ask Tariq a question", es: "Hazle una pregunta a Tariq" },
+  "sevenDay.contact.consent": {
+    en: "This opens your chosen contact app with a draft. You decide whether to send it.",
+    es: "Se abrirá la aplicación de contacto que elijas con un borrador. Tú decides si quieres enviarlo.",
+  },
+  "sevenDay.workbook.heading": { en: "Your seven-day workbook", es: "Tu cuaderno de trabajo de siete días" },
+  "sevenDay.workbook.intro": {
+    en: "Use the printable workbook to note what you observe, reflect in your own words and record each practical action for yourself.",
+    es: "Utiliza el cuaderno imprimible para anotar lo que observas, reflexionar con tus propias palabras y registrar cada acción práctica para ti.",
+  },
+  "sevenDay.workbook.english": { en: "Download the English workbook", es: "Descargar el cuaderno en inglés" },
+  "sevenDay.workbook.spanish": { en: "Download the Spanish workbook", es: "Descargar el cuaderno en español" },
+  "sevenDay.lessons.day1.title": { en: "See What's Running Your Life", es: "Observa qué dirige tu vida" },
+  "sevenDay.lessons.day1.teaching": {
+    en: "Much of a day can be shaped by thoughts and reactions that happen before you consciously choose them. Awareness creates a pause: not to judge what appears, but to see it clearly enough to choose your response.",
+    es: "Gran parte de tu día puede estar guiada por pensamientos y reacciones que surgen antes de que elijas de forma consciente. Tomar conciencia abre una pausa: no para juzgar lo que aparece, sino para verlo con claridad y elegir cómo responder.",
+  },
+  "sevenDay.lessons.day1.observation": {
+    en: "Notice one moment when a thought, feeling or habit seems to take over. Name what happened, what you told yourself and what you did next.",
+    es: "Observa un momento en el que un pensamiento, una emoción o un hábito parezca tomar el control. Pon nombre a lo que ha ocurrido, a lo que te has dicho y a lo que has hecho después.",
+  },
+  "sevenDay.lessons.day1.reflection": {
+    en: "Which automatic reaction most often pulls you away from the way you want to act?",
+    es: "¿Qué reacción automática te aleja con más frecuencia de la forma en que quieres actuar?",
+  },
+  "sevenDay.lessons.day1.action": {
+    en: "Pause once today before reacting. Take one slow breath and choose your next response deliberately.",
+    es: "Haz una pausa hoy antes de reaccionar. Respira lentamente una vez y elige tu siguiente respuesta de forma deliberada.",
+  },
+  "sevenDay.lessons.day1.completion": { en: "Mark Day 1 complete", es: "Marcar el día 1 como completado" },
+  "sevenDay.lessons.day1.navigation": { en: "Continue to Day 2: Take Back Your Attention", es: "Continúa con el día 2: Recupera tu atención" },
+  "sevenDay.lessons.day1.status": { en: "Day 1 of 7", es: "Día 1 de 7" },
+  "sevenDay.lessons.day2.title": { en: "Take Back Your Attention", es: "Recupera tu atención" },
+  "sevenDay.lessons.day2.teaching": {
+    en: "Attention is not something you either have or lack; it is something you can practise directing. Each time you notice distraction and return to your chosen focus, you make a deliberate choice.",
+    es: "La atención no es algo que simplemente tengas o te falte: puedes practicar cómo dirigirla. Cada vez que notas una distracción y vuelves al foco que has elegido, tomas una decisión deliberada.",
+  },
+  "sevenDay.lessons.day2.observation": {
+    en: "Notice what most often captures your attention without permission. Observe the trigger and how long it takes you to realise your focus has moved.",
+    es: "Fíjate en qué capta tu atención con más frecuencia sin que lo decidas. Observa qué lo desencadena y cuánto tardas en darte cuenta de que tu foco se ha desplazado.",
+  },
+  "sevenDay.lessons.day2.reflection": {
+    en: "What deserves more of your attention than it currently receives?",
+    es: "¿Qué merece más de tu atención de la que le dedicas ahora?",
+  },
+  "sevenDay.lessons.day2.action": {
+    en: "Choose one ordinary activity and give it your full attention for five minutes. When your mind wanders, return without criticising yourself.",
+    es: "Elige una actividad cotidiana y préstale toda tu atención durante cinco minutos. Cuando tu mente se distraiga, vuelve sin criticarte.",
+  },
+  "sevenDay.lessons.day2.completion": { en: "Mark Day 2 complete", es: "Marcar el día 2 como completado" },
+  "sevenDay.lessons.day2.navigation": { en: "Continue to Day 3: Recognise What Keeps Repeating", es: "Continúa con el día 3: Reconoce lo que se repite" },
+  "sevenDay.lessons.day2.status": { en: "Day 2 of 7", es: "Día 2 de 7" },
+  "sevenDay.lessons.day3.title": { en: "Recognise What Keeps Repeating", es: "Reconoce lo que se repite" },
+  "sevenDay.lessons.day3.teaching": {
+    en: "Repeated outcomes often have a repeated mental pattern behind them: an assumption, interpretation or familiar response. Recognising the pattern gives you useful information; it does not require you to blame yourself.",
+    es: "Detrás de los resultados que se repiten suele haber un patrón mental recurrente: una suposición, una interpretación o una respuesta conocida. Reconocer ese patrón te aporta información útil; no exige que te culpes.",
+  },
+  "sevenDay.lessons.day3.observation": {
+    en: "When a familiar situation appears today, look for the first thought that follows it and the behaviour that usually comes next.",
+    es: "Cuando hoy aparezca una situación conocida, observa el primer pensamiento que surge y la conducta que suele venir después.",
+  },
+  "sevenDay.lessons.day3.reflection": {
+    en: "Which repeated thought seems to lead towards a response you would like to change?",
+    es: "¿Qué pensamiento recurrente parece conducirte a una respuesta que te gustaría cambiar?",
+  },
+  "sevenDay.lessons.day3.action": {
+    en: "Write one pattern as a simple sequence: trigger, thought, response. Add one alternative response you could try next time.",
+    es: "Escribe un patrón como una secuencia sencilla: desencadenante, pensamiento y respuesta. Añade una respuesta alternativa que puedas probar la próxima vez.",
+  },
+  "sevenDay.lessons.day3.completion": { en: "Mark Day 3 complete", es: "Marcar el día 3 como completado" },
+  "sevenDay.lessons.day3.navigation": { en: "Continue to Day 4: Give Your Mind a Direction", es: "Continúa con el día 4: Dale una dirección a tu mente" },
+  "sevenDay.lessons.day3.status": { en: "Day 3 of 7", es: "Día 3 de 7" },
+  "sevenDay.lessons.day4.title": { en: "Give Your Mind a Direction", es: "Dale una dirección a tu mente" },
+  "sevenDay.lessons.day4.teaching": {
+    en: "A vague wish is difficult to hold in mind or act upon. A clear intention names a direction you can return to and helps you recognise choices that support it.",
+    es: "Es difícil mantener en mente un deseo impreciso y actuar a partir de él. Una intención clara señala una dirección a la que puedes volver y te ayuda a reconocer las decisiones que la apoyan.",
+  },
+  "sevenDay.lessons.day4.observation": {
+    en: "Notice where you use broad words such as better, more or different. Ask what that would look like in one real part of your day.",
+    es: "Observa cuándo utilizas palabras generales como mejor, más o diferente. Pregúntate cómo se vería eso en una parte concreta de tu día.",
+  },
+  "sevenDay.lessons.day4.reflection": {
+    en: "If you could give your attention one clear direction for the next week, what would it be?",
+    es: "Si pudieras dar una dirección clara a tu atención durante la próxima semana, ¿cuál sería?",
+  },
+  "sevenDay.lessons.day4.action": {
+    en: "Write one intention in a single sentence beginning, ‘I choose to…’. Keep it specific enough to guide one decision today.",
+    es: "Escribe una intención en una sola frase que empiece por «Elijo…». Hazla lo bastante concreta como para orientar una decisión de hoy.",
+  },
+  "sevenDay.lessons.day4.completion": { en: "Mark Day 4 complete", es: "Marcar el día 4 como completado" },
+  "sevenDay.lessons.day4.navigation": { en: "Continue to Day 5: Become Someone You Can Rely On", es: "Continúa con el día 5: Conviértete en alguien en quien puedas confiar" },
+  "sevenDay.lessons.day4.status": { en: "Day 4 of 7", es: "Día 4 de 7" },
+  "sevenDay.lessons.day5.title": { en: "Become Someone You Can Rely On", es: "Conviértete en alguien en quien puedas confiar" },
+  "sevenDay.lessons.day5.teaching": {
+    en: "Self-trust grows when your actions match a commitment you have chosen carefully. Begin small: a specific promise you can keep matters more than an ambitious promise you abandon.",
+    es: "La confianza en ti crece cuando tus acciones coinciden con un compromiso que has elegido con cuidado. Empieza por algo pequeño: una promesa concreta que puedes cumplir importa más que una promesa ambiciosa que abandonas.",
+  },
+  "sevenDay.lessons.day5.observation": {
+    en: "Notice how you speak to yourself before and after a commitment. Look for excuses, unrealistic standards and evidence that you followed through.",
+    es: "Observa cómo te hablas antes y después de asumir un compromiso. Detecta las excusas, las expectativas poco realistas y las pruebas de que has cumplido.",
+  },
+  "sevenDay.lessons.day5.reflection": {
+    en: "What small commitment would help you trust your own word a little more?",
+    es: "¿Qué pequeño compromiso te ayudaría a confiar un poco más en tu propia palabra?",
+  },
+  "sevenDay.lessons.day5.action": {
+    en: "Choose one action that takes no more than ten minutes, decide when you will do it and keep that appointment with yourself.",
+    es: "Elige una acción que no te lleve más de diez minutos, decide cuándo la harás y cumple esa cita contigo.",
+  },
+  "sevenDay.lessons.day5.completion": { en: "Mark Day 5 complete", es: "Marcar el día 5 como completado" },
+  "sevenDay.lessons.day5.navigation": { en: "Continue to Day 6: Change From the Inside Out", es: "Continúa con el día 6: Cambia de dentro hacia fuera" },
+  "sevenDay.lessons.day5.status": { en: "Day 5 of 7", es: "Día 5 de 7" },
+  "sevenDay.lessons.day6.title": { en: "Change From the Inside Out", es: "Cambia de dentro hacia fuera" },
+  "sevenDay.lessons.day6.teaching": {
+    en: "Outward behaviour is influenced by the inner meaning you give to a situation. Working from the inside out means noticing that meaning, choosing a more useful direction and then expressing it through action.",
+    es: "Tu conducta exterior está influida por el significado interior que das a una situación. Cambiar de dentro hacia fuera consiste en observar ese significado, elegir una dirección más útil y expresarla después mediante tus acciones.",
+  },
+  "sevenDay.lessons.day6.observation": {
+    en: "In one challenging moment, notice the assumption beneath your first response. Ask whether it is a fact, an interpretation or an old expectation.",
+    es: "En un momento difícil, observa la suposición que hay debajo de tu primera respuesta. Pregúntate si es un hecho, una interpretación o una expectativa antigua.",
+  },
+  "sevenDay.lessons.day6.reflection": {
+    en: "What inner assumption would you like to meet with a more deliberate response?",
+    es: "¿A qué suposición interior te gustaría responder de una forma más deliberada?",
+  },
+  "sevenDay.lessons.day6.action": {
+    en: "Choose one useful sentence that supports your intention from Day 4. Recall it before one relevant action today, then act in line with it.",
+    es: "Elige una frase útil que apoye la intención del día 4. Recuérdala antes de una acción relacionada de hoy y actúa de acuerdo con ella.",
+  },
+  "sevenDay.lessons.day6.completion": { en: "Mark Day 6 complete", es: "Marcar el día 6 como completado" },
+  "sevenDay.lessons.day6.navigation": { en: "Continue to Day 7: Make It Part of How You Live", es: "Continúa con el día 7: Haz que forme parte de tu vida" },
+  "sevenDay.lessons.day6.status": { en: "Day 6 of 7", es: "Día 6 de 7" },
+  "sevenDay.lessons.day7.title": { en: "Make It Part of How You Live", es: "Haz que forme parte de tu vida" },
+  "sevenDay.lessons.day7.teaching": {
+    en: "A sustainable practice is small enough to repeat and flexible enough to return to after a missed day. You can keep practising independently and consider the 24-week programme only if structured support feels appropriate.",
+    es: "Una práctica sostenible es lo bastante pequeña como para repetirla y lo bastante flexible como para retomarla si un día no la haces. Puedes seguir practicando por tu cuenta y plantearte el programa de 24 semanas solo si sientes que un apoyo estructurado encaja contigo.",
+  },
+  "sevenDay.lessons.day7.observation": {
+    en: "Look back across the week and notice which exercise fitted naturally into your life, which required effort and which you would willingly repeat.",
+    es: "Repasa la semana y observa qué ejercicio ha encajado de forma natural en tu vida, cuál te ha exigido esfuerzo y cuál repetirías de buen grado.",
+  },
+  "sevenDay.lessons.day7.reflection": {
+    en: "Which simple daily practice would help you keep choosing your attention and actions deliberately?",
+    es: "¿Qué práctica diaria sencilla te ayudaría a seguir eligiendo tu atención y tus acciones de forma deliberada?",
+  },
+  "sevenDay.lessons.day7.action": {
+    en: "Choose one practice from these seven days, set a realistic time for it tomorrow and decide when you will review whether it still serves you.",
+    es: "Elige una práctica de estos siete días, reserva un momento realista para hacerla mañana y decide cuándo revisarás si te sigue resultando útil.",
+  },
+  "sevenDay.lessons.day7.completion": { en: "Mark Day 7 complete", es: "Marcar el día 7 como completado" },
+  "sevenDay.lessons.day7.navigation": { en: "Return to your seven-day dashboard", es: "Vuelve al panel de tus siete días" },
+  "sevenDay.lessons.day7.status": { en: "Day 7 of 7", es: "Día 7 de 7" },
 });
 
 const warnedKeys = new Set();

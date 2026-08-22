@@ -15,6 +15,12 @@ test("core conversion copy has natural Spanish", () => {
   assert.equal(hasTranslation("missing.key"), false);
   assert.throws(() => t("missing.key", "es"), /Missing translation/);
   assert.throws(() => t("cta.startFree", "fr"), /Unsupported language/);
+  assert.equal(t("sevenDay.dashboard.start", "es"), "Empieza por el día 1");
+  assert.equal(t("sevenDay.navigation.dashboard", "es"), "Volver a los siete días");
+  assert.equal(
+    t("sevenDay.independence", "en"),
+    "An independent coaching experience inspired by the Master Key System.",
+  );
 });
 
 test("language storage defaults safely and accepts only supported languages", () => {
