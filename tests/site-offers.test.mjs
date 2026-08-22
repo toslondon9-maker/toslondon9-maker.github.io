@@ -14,7 +14,7 @@ test("deployed homepage uses the approved static premium experience", () => {
   assert.match(home, /^<!doctype html>/i);
   assert.match(home, /<main class="home">/);
   assert.match(home, /Start Free for 7 Days/);
-  assert.match(home, /Explore the 24-Week Journey/);
+  assert.match(home, /Discover the Journey/);
   assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__|data-rsc|_rsc=/);
 });
 
@@ -38,7 +38,7 @@ test("canonical coaching page owns every locked commercial fact", () => {
     "Save £191", "£1,788", "Save £791", "44% off full MSRP",
   ]) assert.ok(coaching.includes(value), value);
   assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
-  assert.doesNotMatch(home, /£97|£197|£397|£497|£1,188|£1,788/);
+  assert.doesNotMatch(home, /£97|£197|£397|£497|£997|£1,188|£1,788/);
 });
 
 test("canonical coaching page is static, bilingual and uses a real contact fallback", () => {
