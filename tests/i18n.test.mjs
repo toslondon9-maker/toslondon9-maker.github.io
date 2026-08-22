@@ -95,7 +95,7 @@ test("shared chrome renders complete localized labels and runtime hooks", () => 
     "nav.resources", "nav.aboutTariq", "nav.faq", "nav.contact", "footer.mission",
     "footer.privacy", "footer.terms", "language.label", "menu.open",
   ]) assert.match(html, new RegExp(`data-i18n(?:-aria-label)?="${key}"`));
-  assert.match(header, />Reto gratuito de 7 días</);
+  assert.match(header, />Empieza gratis</);
   assert.match(footer, /Una experiencia de coaching independiente inspirada en el Master Key System\./);
   assert.match(html, /aria-label="Idioma"/);
 });

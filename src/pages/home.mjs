@@ -29,6 +29,18 @@ function renderJourney(language) {
   return `<section class="homeSection homeJourney" data-home-section="journey"><div class="homeSection__inner">${copy("home.journey.eyebrow", language, "p", "eyebrow")}${copy("home.journey.title", language, "h2")}${copy("home.journey.intro", language, "p", "homeSection__intro")}<ol class="homeJourney__list">${items}</ol></div></section>`;
 }
 
+function renderLineage(language) {
+  const people = homeContent.lineageIds.map((person) => (
+    `<li class="homeLineage__card">${copy(`home.lineage.${person}.name`, language, "h3")}${copy(`home.lineage.${person}.role`, language, "p", "homeLineage__role")}${copy(`home.lineage.${person}.body`, language)}</li>`
+  )).join("");
+
+  return `<section class="homeSection homeLineage" data-home-section="lineage"><div class="homeSection__inner">${copy("home.lineage.eyebrow", language, "p", "eyebrow")}${copy("home.lineage.title", language, "h2")}${copy("home.lineage.intro", language, "p", "homeSection__intro")}<ol class="homeLineage__grid">${people}</ol>${copy("home.lineage.disclaimer", language, "p", "homeLineage__disclaimer")}</div></section>`;
+}
+
+function renderWhy(language) {
+  return `<section class="homeSection homeWhy" data-home-section="why"><div class="homeSection__inner homeWhy__inner">${copy("home.why.eyebrow", language, "p", "eyebrow")}${copy("home.why.title", language, "h2")}${copy("home.why.body", language, "p", "homeSection__intro")}${cta(siteData.routes.masterKeySystem, "home.why.cta", language, "text")}</div></section>`;
+}
+
 function renderTaster(language) {
   const days = homeContent.tasterDays.map((day) => (
     `<li><span>${day}</span><span data-i18n="home.taster.day${day}">${escapeHtml(t(`home.taster.day${day}`, language))}</span></li>`
@@ -44,11 +56,13 @@ function renderOrigins(language) {
 }
 
 function renderCoaching(language) {
-  const stages = siteData.stages.map((stage) => (
-    `<li><span data-i18n="home.coaching.${stage.id}">${escapeHtml(t(`home.coaching.${stage.id}`, language))}</span><strong><span data-i18n="home.coaching.weeks">${escapeHtml(t("home.coaching.weeks", language))}</span> ${stage.weeks}</strong></li>`
-  )).join("");
+  return `<section class="homeSection homeCoaching" data-home-section="coaching"><div class="homeSection__inner homeCoaching__teaser">${copy("home.coaching.eyebrow", language, "p", "eyebrow")}${copy("home.coaching.title", language, "h2")}${copy("home.coaching.intro", language, "p", "homeSection__intro")}${cta(siteData.routes.coaching, "home.coaching.cta", language, "secondary")}</div></section>`;
+}
 
-  return `<section class="homeSection homeCoaching" data-home-section="coaching"><div class="homeSection__inner">${copy("home.coaching.eyebrow", language, "p", "eyebrow")}${copy("home.coaching.title", language, "h2")}<div class="homeCoaching__layout"><div>${copy("home.coaching.intro", language, "p", "homeSection__intro")}<p class="homeCoaching__price"><span data-i18n="home.coaching.complete">${escapeHtml(t("home.coaching.complete", language))}</span> <strong>£${siteData.offer.completePrice}</strong></p>${cta(siteData.routes.coaching, "home.coaching.cta", language, "secondary")}</div><ul>${stages}</ul></div></div></section>`;
+function renderEducationPhases(language) {
+  return homeContent.educationPhases.map((phase) => (
+    `<li><strong><span data-i18n="home.masterKey.weeks">${escapeHtml(t("home.masterKey.weeks", language))}</span> ${phase.weeks}</strong>${copy(`home.masterKey.phase.${phase.id}`, language, "span")}</li>`
+  )).join("");
 }
 
 function renderMentors(language) {
@@ -61,7 +75,7 @@ function renderMentors(language) {
 
 export function renderHome({ language = "en" } = {}) {
   const heroImage = homeContent.heroImage;
-  return `<main class="home"><section class="homeHero" data-home-section="hero"><div class="homeHero__copy">${copy("home.hero.eyebrow", language, "p", "eyebrow")}${copy("route.home.heading", language, "h1")}${copy("route.home.purpose", language, "p", "routeShell__purpose")}${copy("home.hero.change", language, "p", "homeHero__change")}<div class="homeActions">${cta(siteData.routes.startFree, "route.home.action", language, "primary", "routeShell__action")}${cta(siteData.routes.masterKeySystem, "home.cta.exploreJourney", language, "secondary")}</div></div><div class="homeHero__visual"><img src="${heroImage}" width="1088" height="1445" alt="${escapeHtml(t("home.hero.alt", language))}" data-i18n-alt="home.hero.alt"></div></section>${renderJourney(language)}${renderTaster(language)}<section class="homeSection homeMasterKey" data-home-section="master-key"><div class="homeSection__inner homeMasterKey__inner">${copy("home.masterKey.eyebrow", language, "p", "eyebrow")}${copy("home.masterKey.title", language, "h2")}${copy("home.masterKey.body", language, "p", "homeSection__intro")}${copy("home.masterKey.progressive", language, "p", "homeMasterKey__progressive")}${cta(siteData.routes.masterKeySystem, "home.masterKey.cta", language, "text")}</div></section>${renderOrigins(language)}${renderCoaching(language)}${renderMentors(language)}<section class="homeSection homeNext section--night" data-home-section="next-step"><div class="homeSection__inner">${copy("home.next.eyebrow", language, "p", "eyebrow")}${copy("home.next.title", language, "h2")}${copy("home.next.body", language, "p", "homeSection__intro")}<div class="homeActions">${cta(siteData.routes.startFree, "home.cta.startFree", language)}${cta(siteData.routes.contact, "home.cta.book", language, "secondary")}</div></div></section></main>`;
+  return `<main class="home"><section class="homeHero" data-home-section="hero"><div class="homeHero__copy">${copy("home.hero.eyebrow", language, "p", "eyebrow")}${copy("route.home.heading", language, "h1")}${copy("route.home.purpose", language, "p", "routeShell__purpose")}${copy("home.hero.change", language, "p", "homeHero__change")}<div class="homeActions">${cta(siteData.routes.startFree, "route.home.action", language, "primary", "routeShell__action")}${cta(siteData.routes.masterKeySystem, "home.cta.exploreJourney", language, "secondary")}</div>${copy("home.hero.microcopy", language, "p", "homeHero__microcopy")}</div><div class="homeHero__visual"><img src="${heroImage}" width="1088" height="1445" alt="${escapeHtml(t("home.hero.alt", language))}" data-i18n-alt="home.hero.alt"></div></section>${renderLineage(language)}${renderWhy(language)}${renderJourney(language)}${renderTaster(language)}<section class="homeSection homeMasterKey" data-home-section="master-key"><div class="homeSection__inner homeMasterKey__inner">${copy("home.masterKey.eyebrow", language, "p", "eyebrow")}${copy("home.masterKey.title", language, "h2")}${copy("home.masterKey.body", language, "p", "homeSection__intro")}<ol class="homeMasterKey__phases">${renderEducationPhases(language)}</ol>${copy("home.masterKey.progressive", language, "p", "homeMasterKey__progressive")}${cta(siteData.routes.masterKeySystem, "home.masterKey.cta", language, "text")}</div></section>${renderOrigins(language)}${renderCoaching(language)}${renderMentors(language)}<section class="homeSection homeNext section--night" data-home-section="next-step"><div class="homeSection__inner">${copy("home.next.eyebrow", language, "p", "eyebrow")}${copy("home.next.title", language, "h2")}${copy("home.next.body", language, "p", "homeSection__intro")}<div class="homeActions">${cta(siteData.routes.startFree, "home.cta.startFree", language)}${cta(siteData.routes.contact, "home.cta.book", language, "secondary")}</div></div></section></main>`;
 }
 
 export function homePage(data = siteData, language = "en") {

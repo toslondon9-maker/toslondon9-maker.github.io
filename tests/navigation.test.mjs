@@ -5,7 +5,7 @@ import { renderPage } from "../src/page-shell.mjs";
 import { renderFooter, renderHeader } from "../src/shared-chrome.mjs";
 import { mountNavigation } from "../assets/site-navigation.mjs";
 
-const requiredDestinations = [
+const headerDestinations = [
   "/",
   "/start-free/",
   "/master-key-system/",
@@ -13,15 +13,25 @@ const requiredDestinations = [
   "/coaching/",
   "/resources/",
   "/about-tariq/",
+];
+
+const footerDestinations = [
+  ...headerDestinations,
   "/faq/",
   "/contact/",
 ];
 
-test("global navigation exposes every required destination", () => {
+test("header presents the simplified seven-destination conversion path", () => {
   const html = renderHeader({ route: "/", language: "en" });
-  for (const href of requiredDestinations) {
+  for (const href of headerDestinations) {
     assert.match(html, new RegExp(`href="${href}"`));
   }
+  assert.doesNotMatch(html, /href="\/faq\/"|href="\/contact\/"/);
+  assert.match(html, /class="navStartFree" href="\/start-free\/"/);
+  assert.match(html, />The Journey<\/a>/);
+  assert.match(html, />AI Learning<\/a>/);
+  assert.match(html, />About<\/a>/);
+  assert.match(html, />Start Free<\/a>/);
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />EN<.*>ES</s);
   assert.equal((html.match(/class="siteNav"/g) ?? []).length, 1);
@@ -32,7 +42,7 @@ test("global navigation exposes every required destination", () => {
 test("footer includes mission, primary routes, policies, language and copyright", () => {
   const html = renderFooter({ language: "en" });
   assert.match(html, /independent coaching experience inspired by the Master Key System/i);
-  for (const href of requiredDestinations) {
+  for (const href of footerDestinations) {
     assert.match(html, new RegExp(`href="${href}"`));
   }
   assert.match(html, /href="\/privacy\/"/);
@@ -82,7 +92,7 @@ test("mobile destinations remain usable before JavaScript enhancement", () => {
 
   assert.ok(panel, "mobile navigation panel should be present in the response HTML");
   assert.doesNotMatch(panel, /data-navigation-panel hidden/);
-  for (const href of requiredDestinations) {
+  for (const href of headerDestinations) {
     assert.match(panel, new RegExp(`href="${href}"`));
   }
   assert.match(css, /\.mobileNav__toggle\s*\{[^}]*display:\s*none/s);
