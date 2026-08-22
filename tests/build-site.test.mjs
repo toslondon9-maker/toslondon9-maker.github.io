@@ -46,7 +46,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 });
 
 test("route renderers cover every canonical route with essential response copy", () => {
-  const routes = Object.values(siteData.routes);
+  const routes = [...Object.values(siteData.routes), ...siteData.experienceRoutes];
   assert.deepEqual(Object.keys(routeRenderers).sort(), [...routes].sort());
 
   for (const route of routes) {
@@ -78,6 +78,13 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "privacy/index.html",
       "terms/index.html",
       "live-coaching/index.html",
+      "start-free/day-1-see-whats-running-your-life/index.html",
+      "start-free/day-2-take-back-your-attention/index.html",
+      "start-free/day-3-recognise-what-keeps-repeating/index.html",
+      "start-free/day-4-give-your-mind-a-direction/index.html",
+      "start-free/day-5-become-someone-you-can-rely-on/index.html",
+      "start-free/day-6-change-from-the-inside-out/index.html",
+      "start-free/day-7-make-it-part-of-how-you-live/index.html",
     ];
 
     assert.deepEqual(first.files.filter((file) => file.endsWith("index.html")), expected);
@@ -97,9 +104,13 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 13);
+    assert.equal(pageFiles.length, 20);
 
-    const pages = await Promise.all(pageFiles.map((file) => readFile(path.join(outputRoot, file), "utf8")));
+    const globalPageFiles = pageFiles.filter((file) => [
+      "index.html",
+      ...Object.values(siteData.routes).filter((route) => route !== "/").map((route) => `${route.slice(1)}index.html`),
+    ].includes(file));
+    const pages = await Promise.all(globalPageFiles.map((file) => readFile(path.join(outputRoot, file), "utf8")));
     const titles = pages.map((page) => page.match(/<title[^>]*>(.*?)<\/title>/)?.[1]);
     const descriptions = pages.map((page) => page.match(/<meta name="description" content="([^"]+)"/)?.[1]);
     assert.equal(new Set(titles).size, pages.length);

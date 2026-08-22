@@ -1,3 +1,5 @@
+import { sevenDayExperience } from "./seven-day-experience.mjs";
+
 function deepFreeze(value) {
   for (const nestedValue of Object.values(value)) {
     if (nestedValue && typeof nestedValue === "object") {
@@ -25,6 +27,7 @@ export const siteData = deepFreeze({
     terms: "/terms/",
     liveCoaching: "/live-coaching/"
   },
+  experienceRoutes: sevenDayExperience.lessons.map(({ route }) => route),
   stages: [
     { id: "foundation", name: "Foundation", weeks: "1–4", price: 97, msrp: 147 },
     { id: "visualisation", name: "Visualisation", weeks: "5–11", price: 197, msrp: 297 },

@@ -1,4 +1,5 @@
 import { t } from "../content/translations.mjs";
+import { sevenDayExperience } from "../content/seven-day-experience.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { homePage } from "./pages/home.mjs";
 import { coachingPage } from "./pages/coaching.mjs";
@@ -43,6 +44,17 @@ function renderRouteShell(routeId, definition, data) {
   };
 }
 
+function renderExperienceLesson(lesson) {
+  return {
+    route: lesson.route,
+    language: "en",
+    title: `Day ${lesson.sequence}: ${lesson.title} | Unleash Your Power`,
+    description: `Day ${lesson.sequence} of the free seven-day experience.`,
+    body: `<main><article class="sevenDayLesson"><p class="eyebrow">FREE SEVEN-DAY EXPERIENCE</p><p>Day ${lesson.sequence}</p><h1>${lesson.title}</h1><p>This lesson will be available here shortly.</p></article></main>`,
+    scripts: [],
+  };
+}
+
 export const routeRenderers = Object.freeze({
   ...Object.fromEntries(
     Object.entries(routeShells).map(([routeId, definition]) => [
@@ -52,4 +64,10 @@ export const routeRenderers = Object.freeze({
   ),
   [siteData.routes.home]: (data) => homePage(data),
   [siteData.routes.coaching]: (data) => coachingPage(data),
+  ...Object.fromEntries(
+    sevenDayExperience.lessons.map((lesson) => [
+      lesson.route,
+      () => renderExperienceLesson(lesson),
+    ]),
+  ),
 });

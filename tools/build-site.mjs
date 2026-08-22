@@ -16,6 +16,7 @@ const runtimeFiles = Object.freeze([
   "assets/tabs.mjs",
   "content/translations.mjs",
 ]);
+const buildRoutes = Object.freeze([...Object.values(siteData.routes), ...siteData.experienceRoutes]);
 
 function outputPathForRoute(route) {
   return route === "/" ? "index.html" : `${route.slice(1)}index.html`;
@@ -63,7 +64,7 @@ async function writeBuild(outputRoot) {
   const files = [];
   const hash = createHash("sha256");
 
-  for (const route of Object.values(siteData.routes)) {
+  for (const route of buildRoutes) {
     const render = routeRenderers[route];
     if (!render) throw new Error(`No renderer is registered for ${route}`);
 
