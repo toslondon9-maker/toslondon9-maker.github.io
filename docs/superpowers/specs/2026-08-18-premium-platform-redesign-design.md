@@ -66,6 +66,7 @@ Public navigation:
 - About Tariq
 - Resources
 - Book / Contact
+- FAQ
 - EN | ES
 
 The desktop navigation uses compact typography and measured spacing. At widths where all items no longer fit comfortably, it changes to the same accessible menu pattern used on phones rather than wrapping or shrinking text excessively. The mobile menu uses a real button, exposes its state with `aria-expanded`, closes on Escape and after navigation, and restores focus.
@@ -79,6 +80,7 @@ Existing routes remain valid or redirect safely:
 - `/ai-mentors/`
 - `/about-tariq/`
 - `/resources/`
+- `/faq/`
 - `/contact/`
 - `/live-coaching/` — enrolled-student session hub, retained
 - `/referral/` — retained and linked contextually
@@ -111,8 +113,8 @@ The page presents **7 Days to Change the Way You Use Your Mind** as a guided, tr
 3. Recognize What Keeps Repeating
 4. Give Your Mind a Direction
 5. Become Someone You Can Rely On
-6. Turn Understanding into Action
-7. Decide What Happens Next
+6. Strengthen the New Pattern
+7. Choose What Happens Next
 
 Existing approved workbook meaning is retained. Day 7 leads naturally to “Ready to Go Deeper?” and the 24-week journey without aggressive repeated selling.
 
@@ -126,6 +128,8 @@ This is the canonical education page. It contains:
 - all 24 weeks as accessible expandable cards;
 - complete approved weekly exercises;
 - a practical FAQ.
+
+The 24 weeks are grouped for education as Foundation (1–4), Awareness & Control (5–11), Application (12–18), and Integration & Mastery (19–24). These educational phase labels do not replace the separately approved commercial stage names on the Coaching page.
 
 Spiritual, metaphysical, health and scientific statements are clearly attributed to their source or presented as historical ideas, not established facts. The page states that Unleash Your Power is an independent coaching experience inspired by the system.
 
@@ -162,7 +166,11 @@ The page contains three premium guided experiences:
 - **Ask Helmar Rudolph:** paraphrased educational guidance based on owner-approved public material from `https://en.mrmasterkey.com/`. It focuses on systematic study, practical application, disciplined repetition and clear explanation. It does not copy source passages, repeat strong health/scientific claims as fact, or imply Helmar’s endorsement or participation.
 - **Ask Tariq:** action-oriented coaching around responsibility, attention, discipline, consistency, reflection, implementation and positive transformation. It asks useful follow-up questions and never claims Tariq is personally responding in real time.
 
-The £0 release is deterministic browser-based guidance. It uses controlled choices, short optional visitor inputs and curated response templates. It must say that responses are automated guidance, not live human or generative-AI conversations. Visitor text stays on the device and is escaped at render time.
+The £0 release is a deterministic browser-based educational simulation. It uses controlled choices, short optional visitor inputs and curated response templates. It must say that responses are automated educational guidance, not live human or generative-AI conversations. Visitor text stays on the device and is escaped at render time.
+
+## FAQ
+
+The dedicated FAQ page uses concise accessible accordions and covers the Master Key System, intended participants, previous experience, daily commitment, the free challenge, the next step, coaching inclusions, educational scope versus therapy, mentor identity, Spanish study, arranging sessions and payment workflow. Page-specific FAQs may remain on Master Key and Coaching only when they answer a specialist question without duplicating the complete global answer.
 
 ## About Tariq
 
@@ -250,7 +258,7 @@ The approved cream, navy and gold palette remains. A compact token layer defines
 - Escape-to-close menus/dialogs and focus restoration.
 - Live regions for validation/status messages.
 - No important content hidden only by colour or hover.
-- No horizontal overflow at 320, 375, 390, 768, 1024 and 1440 pixels.
+- No horizontal overflow at 320, 360, 375, 390, 412, 768, 1024 and 1440 pixels.
 
 ## SEO and performance
 

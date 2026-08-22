@@ -215,7 +215,7 @@ git commit -m "Add premium responsive design system"
 ```js
 test("global navigation exposes every required destination", () => {
   const html = renderHeader({ route: "/", language: "en" });
-  for (const href of ["/", "/start-free/", "/master-key-system/", "/coaching/", "/ai-mentors/", "/about-tariq/", "/resources/", "/contact/"]) assert.match(html, new RegExp(`href="${href}"`));
+  for (const href of ["/", "/start-free/", "/master-key-system/", "/ai-mentors/", "/coaching/", "/resources/", "/about-tariq/", "/faq/", "/contact/"]) assert.match(html, new RegExp(`href="${href}"`));
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />EN<.*>ES</s);
 });
@@ -309,7 +309,7 @@ git commit -m "Add persistent English and Spanish foundation"
 ```js
 test("every public route builds with unique metadata and one H1", async () => {
   const result = await buildSite({ outputRoot: tempRoot });
-  assert.equal(result.files.filter(file => file.endsWith("index.html")).length, 12);
+  assert.equal(result.files.filter(file => file.endsWith("index.html")).length, 13);
   const pages = result.files.filter(file => file.endsWith("index.html")).map(file => readFileSync(file, "utf8"));
   assert.equal(new Set(pages.map(page => page.match(/<title>(.*?)<\/title>/)?.[1])).size, pages.length);
   for (const page of pages) assert.equal((page.match(/<h1[ >]/g) ?? []).length, 1);

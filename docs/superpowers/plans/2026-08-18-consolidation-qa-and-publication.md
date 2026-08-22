@@ -95,6 +95,12 @@ test("approved contact workflows are preserved", () => {
   assert.ok(links.some(link => link.startsWith("https://wa.me/34611223345")));
   assert.equal(links.some(link => /zoom\.us\/j\//.test(link)), false);
 });
+
+test("payment actions are valid or use the approved enrolment fallback", () => {
+  const paymentActions = collectPaymentActions(previewRoot);
+  assert.ok(paymentActions.length >= 1);
+  for (const action of paymentActions) assert.ok(action.validPayPal || action.approvedContactFallback, action.href);
+});
 ```
 
 - [ ] **Step 2: Run and observe known audio failure first**
@@ -104,7 +110,7 @@ Expected: FAIL if any legacy `.m4a` reference or missing route remains.
 
 - [ ] **Step 3: Implement the static auditor**
 
-Resolve root-relative paths against preview output, strip query/hash for file checks, validate fragment targets, enumerate duplicate IDs and compare mail/WhatsApp destinations to `siteData`. Treat external HTTP links as syntax-valid here; browser QA checks important live destinations.
+Resolve root-relative paths against preview output, strip query/hash for file checks, validate fragment targets, enumerate duplicate IDs and compare mail/WhatsApp destinations to `siteData`. Audit any PayPal action for target, amount/currency metadata and return path when present; when those cannot be proven, require the approved contact/enrolment fallback instead of a payment button. Treat other external HTTP links as syntax-valid here; browser QA checks important live destinations.
 
 - [ ] **Step 4: Repair every reported local issue**
 
@@ -270,7 +276,7 @@ git commit -m "Resolve full release audit findings"
 
 Run: `python -m http.server 8765 --directory .build-preview`.
 
-- [ ] **Step 2: Verify global behavior at 320, 375, 390, 768, 1024 and 1440 pixels**
+- [ ] **Step 2: Verify global behavior at 320, 360, 375, 390, 412, 768, 1024 and 1440 pixels**
 
 For every width, record header/menu, footer, horizontal overflow, text clipping, image proportions, CTA spacing and focus visibility. Test both English and Spanish on Home, Start Free, Master Key System, Coaching, AI Mentors and Contact.
 
