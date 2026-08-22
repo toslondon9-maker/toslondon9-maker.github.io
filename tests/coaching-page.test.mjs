@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { localizeDocument } from "../assets/site-language.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { renderCoaching } from "../src/pages/coaching.mjs";
 import { mountTabs } from "../assets/tabs.mjs";
@@ -45,6 +46,32 @@ test("every coaching detail has an in-place language-switch hook", () => {
   }
 });
 
+test("language switching updates the coaching tablist accessible name", () => {
+  const html = renderCoaching({ language: "en", siteData });
+  const tablist = html.match(/<div class="tabs coachingTabs"[^>]+>/)?.[0] ?? "";
+  assert.match(tablist, /aria-label="Coaching programme sections"/);
+  assert.match(tablist, /data-i18n-aria-label="coaching\.tabsLabel"/);
+
+  const element = {
+    dataset: { i18nAriaLabel: "coaching.tabsLabel" },
+    attributes: new Map([["aria-label", "Coaching programme sections"]]),
+    setAttribute(name, value) { this.attributes.set(name, value); },
+  };
+  localizeDocument({
+    documentElement: { lang: "en" },
+    querySelectorAll(selector) { return selector === "[data-i18n-aria-label]" ? [element] : []; },
+    querySelector: () => null,
+  }, "es");
+  assert.equal(element.attributes.get("aria-label"), "Secciones del programa de coaching");
+});
+
+test("server-rendered coaching panels remain stacked and visible without JavaScript", () => {
+  const html = renderCoaching({ language: "en", siteData });
+  const panels = [...html.matchAll(/<section[^>]+role="tabpanel"[^>]*>/g)].map((match) => match[0]);
+  assert.equal(panels.length, 7);
+  for (const panel of panels) assert.doesNotMatch(panel, /\shidden(?:[\s=>]|$)/);
+});
+
 function tabFixture() {
   const listeners = new Map();
   const tabs = Array.from({ length: 3 }, (_, index) => ({
@@ -87,6 +114,13 @@ test("enhanced tabs support arrows, Home, End, click and one visible panel", () 
   fixture.listeners.get("2:click")({ preventDefault() {} });
   assert.equal(fixture.tabs[2].getAttribute("aria-selected"), "true");
   assert.deepEqual(fixture.panels.map((panel) => panel.hidden), [true, true, false]);
+
+  fixture.listeners.get("1:keydown")({ key: "Enter", preventDefault() {} });
+  assert.equal(fixture.focused, 1);
+  assert.deepEqual(fixture.panels.map((panel) => panel.hidden), [true, false, true]);
+  fixture.listeners.get("0:keydown")({ key: " ", preventDefault() {} });
+  assert.equal(fixture.focused, 0);
+  assert.deepEqual(fixture.panels.map((panel) => panel.hidden), [false, true, true]);
   assert.equal(typeof unmount, "function");
 });
 
