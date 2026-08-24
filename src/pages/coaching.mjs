@@ -24,6 +24,22 @@ function faqPanel(language) {
   return `<h2>${copy("coaching.faq.title", language)}</h2><div class="accordion coachingFaq">${faqs}</div><a class="button--primary" href="${canonicalSiteData.routes.contact}">${copy("route.coaching.action", language)}</a>`;
 }
 
+function flagshipCoaching(language, route) {
+  if (language !== "en") return "";
+  return `<section class="coachingFlagship section" data-coaching-section="flagship"><div class="coachingFlagship__intro"><p class="eyebrow">FLAGSHIP OFFER</p><h2>Master Key System / Personal-Development Coaching</h2><p>For people who want to understand the principles more deeply and turn each lesson into a deliberate part of everyday life.</p><p><strong>How sessions work:</strong> focused conversations with Tariq connect the lesson you are studying to reflection, practical application and your next clear action.</p></div><ul class="coachingFlagship__benefits"><li><strong>Implementation</strong><span>Translate insight into practical steps.</span></li><li><strong>Accountability</strong><span>Stay engaged with the commitments you choose.</span></li><li><strong>Reflection</strong><span>Examine what you are learning and noticing.</span></li><li><strong>Practical application</strong><span>Apply the principles to real decisions and daily life.</span></li></ul><a class="button--primary" href="${route}">Enquire About Coaching</a></section>`;
+}
+
+function professionalServices(language, route) {
+  if (language !== "en") return "";
+  const services = [
+    ["Sales & Partnership Growth", "Practical support for stronger conversations, partner engagement, clearer value and healthier pipelines."],
+    ["Leadership Workshops", "Interactive sessions focused on ownership, communication, confidence and purposeful action under pressure."],
+    ["AI-Enabled Performance", "Straightforward guidance for using AI to research, prepare, communicate and work effectively without losing human judgement."],
+  ];
+  const cards = services.map(([title, description]) => `<article class="coachingProfessionalService card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(description)}</p><a class="button--text" href="${route}">Discuss this service</a></article>`).join("");
+  return `<section class="coachingProfessionalServices section" data-coaching-section="professional-services"><div class="coachingProfessionalServices__intro"><p class="eyebrow">SECONDARY SUPPORT</p><h2>Other Professional Services</h2><p>Business and performance support remains available where it fits your objective.</p></div><div class="coachingProfessionalServices__grid">${cards}</div></section>`;
+}
+
 export function renderCoaching({ language = "en", siteData = canonicalSiteData } = {}) {
   const summaries = siteData.stages.map((stage) => stageSummary(stage, language)).join("");
   const labels = coachingContent.tabs.map((id) => t(`coaching.tab.${id}`, language));
@@ -35,7 +51,7 @@ export function renderCoaching({ language = "en", siteData = canonicalSiteData }
   ];
   const tabs = labels.map((label, index) => `<button type="button" id="tab-${coachingContent.tabs[index]}" role="tab" aria-selected="${index === 0}" aria-controls="panel-${coachingContent.tabs[index]}" tabindex="${index === 0 ? 0 : -1}" data-i18n="coaching.tab.${coachingContent.tabs[index]}">${escapeHtml(label)}</button>`).join("");
   const tabPanels = panels.map((panel, index) => `<section id="panel-${coachingContent.tabs[index]}" class="coachingPanel" role="tabpanel" aria-labelledby="tab-${coachingContent.tabs[index]}">${panel}</section>`).join("");
-  return `<main class="coachingPage" id="main-content"><header class="coachingHero section"><p class="eyebrow">${copy("coaching.eyebrow", language)}</p><h1 data-i18n="route.coaching.heading">${escapeHtml(t("route.coaching.heading", language))}</h1><p class="routeShell__purpose" data-i18n="route.coaching.purpose">${escapeHtml(t("route.coaching.purpose", language))}</p><a class="button--primary routeShell__action" href="${siteData.routes.contact}" data-i18n="route.coaching.action">${escapeHtml(t("route.coaching.action", language))}</a></header><section class="coachingExperience section--night"><div class="coachingExperience__inner" data-tabs><div class="tabs coachingTabs" role="tablist" aria-label="${escapeHtml(t("coaching.tabsLabel", language))}" data-i18n-aria-label="coaching.tabsLabel">${tabs}</div><div class="coachingPanels">${tabPanels}</div></div></section><section class="coachingTrust section"><h2>${copy("coaching.trust.title", language)}</h2><p>${copy("coaching.trust.body", language)}</p></section></main>`;
+  return `<main class="coachingPage" id="main-content"><header class="coachingHero section"><p class="eyebrow">${copy("coaching.eyebrow", language)}</p><h1 data-i18n="route.coaching.heading">${escapeHtml(t("route.coaching.heading", language))}</h1><p class="routeShell__purpose" data-i18n="route.coaching.purpose">${escapeHtml(t("route.coaching.purpose", language))}</p><a class="button--primary routeShell__action" href="${siteData.routes.contact}" data-i18n="route.coaching.action">${escapeHtml(t("route.coaching.action", language))}</a></header>${flagshipCoaching(language, siteData.routes.contact)}<section class="coachingExperience section--night"><div class="coachingExperience__inner" data-tabs><div class="tabs coachingTabs" role="tablist" aria-label="${escapeHtml(t("coaching.tabsLabel", language))}" data-i18n-aria-label="coaching.tabsLabel">${tabs}</div><div class="coachingPanels">${tabPanels}</div></div></section>${professionalServices(language, siteData.routes.contact)}<section class="coachingTrust section"><h2>${copy("coaching.trust.title", language)}</h2><p>${copy("coaching.trust.body", language)}</p></section></main>`;
 }
 
 export function coachingPage(data = canonicalSiteData, language = "en") {

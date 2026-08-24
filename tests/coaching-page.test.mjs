@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { localizeDocument } from "../assets/site-language.mjs";
 import { siteData } from "../content/site-data.mjs";
@@ -17,6 +18,41 @@ test("coaching is the accurate canonical offer", () => {
   assert.equal((html.match(/role="tabpanel"/g) ?? []).length, 7);
   assert.match(html, /href="\/contact\/"/);
   assert.doesNotMatch(html, /paypal/i);
+});
+
+test("English coaching page leads with Master Key coaching and keeps professional services secondary", async () => {
+  const html = renderCoaching({ language: "en", siteData });
+  const css = await readFile("assets/platform.css", "utf8");
+  const flagshipIndex = html.indexOf('data-coaching-section="flagship"');
+  const investmentIndex = html.indexOf('class="coachingExperience section--night"');
+  const servicesIndex = html.indexOf('data-coaching-section="professional-services"');
+
+  assert.match(html, /^<main class="coachingPage"/);
+  assert.match(html, /<h1[^>]*>Personal Coaching with Tariq<\/h1>/);
+  assert.ok(flagshipIndex > 0 && flagshipIndex < investmentIndex && investmentIndex < servicesIndex);
+  for (const text of [
+    "Master Key System / Personal-Development Coaching",
+    "accountability",
+    "reflection",
+    "practical application",
+    "How sessions work",
+    "Other Professional Services",
+    "Sales &amp; Partnership Growth",
+    "Leadership Workshops",
+    "AI-Enabled Performance",
+  ]) assert.ok(html.includes(text), text);
+  for (const price of ["£97", "£197", "£397", "£497", "£1,188", "£997", "Save £191", "£1,788", "Save £791", "44% off full MSRP"]) {
+    assert.ok(html.includes(price), price);
+  }
+  assert.doesNotMatch(html, /6\s*[×x]\s*£169|£1,014/);
+  assert.match(html, /href="\/contact\/"[^>]*>Enquire About Coaching<\/a>/);
+  assert.equal((html.match(/class="coachingProfessionalService card"/g) ?? []).length, 3);
+  assert.match(css, /\.coachingProfessionalServices__grid[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(css, /@media[^}]*max-width:\s*768px[\s\S]*?\.coachingProfessionalServices__grid[^{]*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+
+  const spanish = renderCoaching({ language: "es", siteData });
+  assert.match(spanish, /Coaching para un dominio interior práctico/);
+  assert.doesNotMatch(spanish, /Personal Coaching with Tariq|Other Professional Services/);
 });
 
 test("Spanish coaching copy is complete and natural", () => {
