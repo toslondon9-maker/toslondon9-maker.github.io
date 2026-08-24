@@ -38,6 +38,7 @@ test("the free dashboard provides an honest progressive, private no-JavaScript b
   assert.match(html, /Clearing browser data or changing devices may remove/);
   assert.match(html, /aria-labelledby="seven-day-progress-heading"[\s\S]*?<h2 id="seven-day-progress-heading"/);
   assert.match(html, /aria-labelledby="seven-day-lessons-heading"[\s\S]*?<h2 id="seven-day-lessons-heading"/);
+  assert.match(html, /aria-labelledby="seven-day-workbook-heading"[\s\S]*?<h2 id="seven-day-workbook-heading"/);
   assert.match(html, /aria-labelledby="seven-day-privacy-heading"[\s\S]*?<h2 id="seven-day-privacy-heading"/);
   assert.doesNotMatch(html, /<form\b|<input\b|account (?:created|creation)|register|sign up|saved to (?:our|Tariq)/i);
 });
@@ -63,11 +64,13 @@ test("the dashboard loads one progress enhancement while preserving disabled no-
   }
 });
 
-test("the free dashboard hides workbook actions until their files exist", () => {
+test("the free dashboard exposes only the available English workbook", () => {
   const page = dashboard();
   const html = page.body;
 
-  assert.doesNotMatch(html, /\/downloads\/|\.pdf|sevenDay\.workbook|\bdownload\b/i);
+  assert.match(html, /href="\/downloads\/seven-day-experience-workbook-en\.pdf"[^>]+download/);
+  assert.match(html, /data-i18n="sevenDay\.workbook\.english"/);
+  assert.doesNotMatch(html, /experiencia-siete-dias-cuaderno-es\.pdf/);
 });
 
 test("the free dashboard connects every changeable dashboard value to the bilingual registry", () => {
@@ -81,6 +84,9 @@ test("the free dashboard connects every changeable dashboard value to the biling
     sharedKeys.privacy.heading,
     sharedKeys.privacy.body,
     sharedKeys.reset.label,
+    sharedKeys.workbook.heading,
+    sharedKeys.workbook.intro,
+    sharedKeys.workbook.english,
     ...sevenDayExperience.lessons.flatMap((lesson) => [
       lesson.contentKeys.title,
       lesson.contentKeys.status,

@@ -38,7 +38,11 @@ async function collectFiles(directory, relativeDirectory) {
 }
 
 async function copyBuildDependencies(outputRoot) {
-  const files = [...runtimeFiles, ...await collectFiles(path.join(repositoryRoot, "images"), "images")];
+  const files = [
+    ...runtimeFiles,
+    ...await collectFiles(path.join(repositoryRoot, "images"), "images"),
+    ...await collectFiles(path.join(repositoryRoot, "downloads"), "downloads"),
+  ];
 
   for (const relativeFile of files) {
     const source = path.join(repositoryRoot, ...relativeFile.split("/"));
