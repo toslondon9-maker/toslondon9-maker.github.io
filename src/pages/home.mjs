@@ -61,7 +61,7 @@ function renderCoaching(language) {
 
 function renderEducationPhases(language) {
   return homeContent.educationPhases.map((phase) => (
-    `<li><strong><span data-i18n="home.masterKey.weeks">${escapeHtml(t("home.masterKey.weeks", language))}</span> ${phase.weeks}</strong>${copy(`home.masterKey.phase.${phase.id}`, language, "span")}</li>`
+    `<li><strong><span data-i18n="home.masterKey.weeks">${escapeHtml(t("home.masterKey.weeks", language))}</span> ${phase.weeks}</strong>${copy(`home.masterKey.phase.${phase.id}`, language, "span", "homeMasterKey__phaseName")}${copy(`coaching.stage.${phase.outcome}.outcome`, language, "p", "homeMasterKey__phaseDescription")}</li>`
   )).join("");
 }
 

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { renderHome } from "../src/pages/home.mjs";
@@ -55,10 +56,14 @@ test("homepage presents a simple three-step journey", () => {
   assert.match(journey, />Go Deeper<\/h3>/);
 });
 
-test("homepage education pathway uses the approved four progressive phases", () => {
+test("homepage loads with the concise four-phase journey and safe responsive actions", async () => {
   const html = renderHome({ language: "en" });
+  const css = await readFile("assets/platform.css", "utf8");
   const pathway = html.match(/<section[^>]+data-home-section="master-key"[\s\S]*?<\/section>/)?.[0] ?? "";
   const visibleText = pathway.replace(/<[^>]+>/g, "");
+
+  assert.match(html, /^<main class="home">/);
+  assert.match(html, /href="\/start-free\/"[^>]*>Start Free for 7 Days<\/a>/);
 
   for (const expected of [
     "Weeks 1–4", "Foundation",
@@ -66,6 +71,19 @@ test("homepage education pathway uses the approved four progressive phases", () 
     "Weeks 12–18", "Application",
     "Weeks 19–24", "Integration &amp; Mastery",
   ]) assert.match(visibleText, new RegExp(expected));
+
+  for (const description of [
+    "Build stillness, self-awareness and a dependable mental foundation.",
+    "Direct your imagination and form a clearer inner blueprint.",
+    "Strengthen focus, discipline and sustained attention.",
+    "Integrate the work and act from your highest understanding.",
+  ]) assert.match(visibleText, new RegExp(description));
+
+  assert.equal((pathway.match(/class="homeMasterKey__phaseDescription"/g) ?? []).length, 4);
+  assert.match(pathway, /href="\/master-key-system\/"[^>]*>Explore the 24-Week Journey<\/a>/);
+  assert.doesNotMatch(pathway, /questions?\s*(?:&amp;|and)\s*answers?|mastery prompt|guided exercise/i);
+  assert.match(css, /\.homeMasterKey__phases li\s*\{[^}]*min-width:\s*0/s);
+  assert.match(css, /@media[^}]*max-width:\s*480px[\s\S]*?\.homeMasterKey__phases[^{]*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
 });
 
 test("homepage presents the approved origins sequence once and in order", () => {
