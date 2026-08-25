@@ -477,6 +477,10 @@ main > article {
   margin-inline: auto;
 }
 
+.home {
+  overflow-x: clip;
+}
+
 .homeHero {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
@@ -496,6 +500,15 @@ main > article {
 .homeHero h1 {
   max-width: 12ch;
   color: var(--night);
+}
+
+.homeHero__subheading {
+  max-width: 28ch;
+  margin: 0.8rem 0 1rem;
+  color: #85611f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.2;
 }
 
 @media (min-width: 769px) {
@@ -589,6 +602,20 @@ main > article {
 
 .homeLineage {
   background: var(--paper);
+}
+
+.homeLineage__portrait {
+  max-width: 67.5rem;
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.homeLineage__portrait img {
+  width: 100%;
+  height: auto;
 }
 
 .homeLineage__grid {
