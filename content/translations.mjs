@@ -8,7 +8,7 @@ function deepFreeze(value) {
 const translations = deepFreeze({
   "nav.home": { en: "Home", es: "Inicio" },
   "nav.startFree": { en: "Start Free", es: "Empieza gratis" },
-  "nav.masterKeySystem": { en: "The Journey", es: "El recorrido" },
+  "nav.masterKeySystem": { en: "Curriculum", es: "El recorrido" },
   "nav.aiMentors": { en: "AI Learning", es: "Aprendizaje con IA" },
   "nav.coaching": { en: "Coaching", es: "Coaching" },
   "nav.resources": { en: "Resources", es: "Recursos" },
@@ -116,7 +116,7 @@ const translations = deepFreeze({
   "home.masterKey.phase.awareness": { en: "Awareness & Control", es: "Conciencia y control" },
   "home.masterKey.phase.application": { en: "Application", es: "Aplicación" },
   "home.masterKey.phase.integration": { en: "Integration & Mastery", es: "Integración y dominio" },
-  "home.masterKey.cta": { en: "Explore the 24-Week Journey", es: "Descubre cómo funciona el sistema" },
+  "home.masterKey.cta": { en: "Explore the 24-Week Curriculum", es: "Descubre cómo funciona el sistema" },
   "home.origins.eyebrow": { en: "TIMELESS WISDOM, MODERN GUIDANCE", es: "SABIDURÍA ATEMPORAL, GUÍA ACTUAL" },
   "home.origins.preludeTitle": { en: "Where timeless wisdom meets modern transformation.", es: "Donde la sabiduría atemporal se une a la transformación moderna." },
   "home.origins.preludeBody": {

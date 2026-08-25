@@ -3,6 +3,7 @@ import { sevenDayExperience } from "../content/seven-day-experience.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { homePage } from "./pages/home.mjs";
 import { coachingPage } from "./pages/coaching.mjs";
+import { masterKeyCurriculumPage } from "./pages/master-key-curriculum.mjs";
 import { startFreePage } from "./pages/start-free.mjs";
 import { sevenDayLessonPage } from "./pages/seven-day-lesson.mjs";
 
@@ -55,6 +56,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.home]: (data) => homePage(data),
   [siteData.routes.startFree]: (data) => startFreePage(data),
   [siteData.routes.coaching]: (data) => coachingPage(data),
+  [siteData.routes.masterKeySystem]: (data) => masterKeyCurriculumPage(data),
   ...Object.fromEntries(
     sevenDayExperience.lessons.map((lesson) => [
       lesson.route,
