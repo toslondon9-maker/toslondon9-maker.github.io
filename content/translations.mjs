@@ -12,6 +12,8 @@ const translations = deepFreeze({
   "nav.aiMentors": { en: "AI Learning", es: "Aprendizaje con IA" },
   "nav.coaching": { en: "Coaching", es: "Coaching" },
   "nav.resources": { en: "Resources", es: "Recursos" },
+  "nav.liveCoaching": { en: "Session Hub", es: "Centro de sesiones" },
+  "nav.referral": { en: "Refer & Earn", es: "Recomienda y gana" },
   "nav.aboutTariq": { en: "About Tariq", es: "Quién soy" },
   "nav.faq": { en: "FAQ", es: "Preguntas frecuentes" },
   "nav.contact": { en: "Contact / Book", es: "Contacto / Reserva" },

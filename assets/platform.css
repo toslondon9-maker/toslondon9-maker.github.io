@@ -477,6 +477,17 @@ main > article {
   margin-inline: auto;
 }
 
+.resourcesPage { max-width: 1080px; margin: 0 auto; padding: 4rem 1.25rem 5rem; }
+.resourcesPage__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.resourcesPage__group { border: 1px solid rgba(190,148,73,.45); border-radius: 16px; padding: 1.5rem; background: rgba(255,255,255,.55); }
+.resourcesPage__group h2 { color: var(--navy, #10243b); letter-spacing: .12em; font-size: 1rem; margin: 0 0 .5rem; }
+.resourcesPage__group p { margin: 0 0 1rem; }
+.resourcesPage__links { display: flex; flex-wrap: wrap; gap: .75rem 1rem; }
+.resourcesPage__links a { color: var(--navy, #10243b); text-decoration: underline; text-underline-offset: .2em; }
+.resourcesPage__optional { margin-top: 1.5rem; border-top: 1px solid rgba(190,148,73,.45); padding-top: 1rem; }
+.resourcesPage__optional summary { cursor: pointer; font-weight: 600; color: var(--navy, #10243b); }
+@media (max-width: 700px) { .resourcesPage { padding: 3rem 1rem 4rem; } .resourcesPage__grid { grid-template-columns: 1fr; } .resourcesPage__links { flex-direction: column; } }
+
 .home {
   overflow-x: clip;
 }
