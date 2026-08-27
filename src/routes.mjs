@@ -34,6 +34,10 @@ function renderRouteShell(routeId, definition, data) {
     ? `mailto:${data.contact.email}`
     : definition.actionHref ?? `${data.routes[definition.actionRoute]}${definition.actionHash ?? ""}`;
 
+  const contactActions = routeId === "contact"
+    ? `<div class="routeShell__actions"><a class="button--primary routeShell__action" href="mailto:${data.contact.email}?subject=Coaching%20enquiry" data-i18n="route.contact.action">${t("route.contact.action", "en")}</a><a class="button--secondary" href="mailto:${data.contact.email}?subject=Question%20for%20Tariq" data-i18n="route.contact.question">${t("route.contact.question", "en")}</a></div>`
+    : `<a class="button--primary routeShell__action" href="${actionHref}" data-i18n="${key}.action">${t(`${key}.action`, "en")}</a>`;
+
   return {
     route: data.routes[routeId],
     language: "en",
@@ -41,7 +45,7 @@ function renderRouteShell(routeId, definition, data) {
     description: t(`${key}.metaDescription`, "en"),
     titleKey: `${key}.metaTitle`,
     descriptionKey: `${key}.metaDescription`,
-    body: `<main><article class="routeShell"><p class="eyebrow">UNLEASH YOUR POWER</p><h1 data-i18n="${key}.heading">${t(`${key}.heading`, "en")}</h1><p class="routeShell__purpose" data-i18n="${key}.purpose">${t(`${key}.purpose`, "en")}</p>${renderDetail(routeId, definition.detail, data)}<a class="button--primary routeShell__action" href="${actionHref}" data-i18n="${key}.action">${t(`${key}.action`, "en")}</a></article></main>`,
+    body: `<main><article class="routeShell"><p class="eyebrow">UNLEASH YOUR POWER</p><h1 data-i18n="${key}.heading">${t(`${key}.heading`, "en")}</h1><p class="routeShell__purpose" data-i18n="${key}.purpose">${t(`${key}.purpose`, "en")}</p>${renderDetail(routeId, definition.detail, data)}${contactActions}</article></main>`,
     scripts: [],
   };
 }

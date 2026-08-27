@@ -258,12 +258,13 @@ const translations = deepFreeze({
     en: "Contact Tariq Saddique to ask a question or discuss a coaching session.",
     es: "Contacta con Tariq Saddique para hacer una pregunta o hablar sobre una sesión de coaching.",
   },
-  "route.contact.heading": { en: "Start a conversation", es: "Empieza una conversación" },
+  "route.contact.heading": { en: "Talk to Tariq", es: "Empieza una conversación" },
   "route.contact.purpose": {
     en: "Ask a question, discuss the programme or arrange a clear, no-pressure conversation with Tariq.",
     es: "Haz una pregunta, habla sobre el programa o concierta una conversación clara y sin presión con Tariq.",
   },
-  "route.contact.action": { en: "Email Tariq", es: "Escribe a Tariq" },
+  "route.contact.action": { en: "ENQUIRE ABOUT COACHING", es: "Escribe a Tariq" },
+  "route.contact.question": { en: "ASK A QUESTION", es: "Haz una pregunta" },
   "route.faq.metaTitle": { en: "Frequently Asked Questions | Unleash Your Power", es: "Preguntas frecuentes | Unleash Your Power" },
   "route.faq.metaDescription": {
     en: "Get clear answers about the free challenge, 24-week journey and coaching.",
