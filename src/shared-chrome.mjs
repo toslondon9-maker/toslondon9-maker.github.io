@@ -4,11 +4,10 @@ import { t } from "../content/translations.mjs";
 const headerNavigationItems = Object.freeze([
   { route: siteData.routes.home, key: "nav.home" },
   { route: siteData.routes.masterKeySystem, key: "nav.masterKeySystem" },
-  { route: siteData.routes.aiMentors, key: "nav.aiMentors" },
+  { route: siteData.routes.startFree, key: "nav.startFree", className: "navStartFree" },
   { route: siteData.routes.coaching, key: "nav.coaching" },
   { route: siteData.routes.aboutTariq, key: "nav.aboutTariq" },
   { route: siteData.routes.resources, key: "nav.resources" },
-  { route: siteData.routes.startFree, key: "nav.startFree", className: "navStartFree" },
 ]);
 
 const footerNavigationItems = Object.freeze([

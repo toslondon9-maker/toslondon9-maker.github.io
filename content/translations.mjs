@@ -8,11 +8,11 @@ function deepFreeze(value) {
 const translations = deepFreeze({
   "nav.home": { en: "Home", es: "Inicio" },
   "nav.startFree": { en: "Start Free", es: "Empieza gratis" },
-  "nav.masterKeySystem": { en: "Curriculum", es: "El recorrido" },
+  "nav.masterKeySystem": { en: "Master Key System", es: "El recorrido" },
   "nav.aiMentors": { en: "AI Learning", es: "Aprendizaje con IA" },
   "nav.coaching": { en: "Coaching", es: "Coaching" },
   "nav.resources": { en: "Resources", es: "Recursos" },
-  "nav.aboutTariq": { en: "About", es: "Quién soy" },
+  "nav.aboutTariq": { en: "About Tariq", es: "Quién soy" },
   "nav.faq": { en: "FAQ", es: "Preguntas frecuentes" },
   "nav.contact": { en: "Contact / Book", es: "Contacto / Reserva" },
   "footer.mission": {

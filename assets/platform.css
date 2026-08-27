@@ -784,6 +784,47 @@ main > article {
   font-size: 1.15rem;
 }
 
+.homeTestimonials {
+  background: var(--paper);
+}
+
+.homeTestimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.homeTestimonials__card {
+  min-width: 0;
+  margin: 0;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius-card);
+  background: var(--cream);
+  box-shadow: var(--shadow-card);
+}
+
+.homeTestimonials__card blockquote {
+  margin: 0;
+  color: var(--night);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.55;
+}
+
+.homeTestimonials__card figcaption {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 1.25rem;
+  color: #85611f;
+}
+
+.homeTestimonials__card figcaption span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .homeMasterKey__phaseDescription {
   margin: 0;
   color: var(--muted);
@@ -1361,6 +1402,7 @@ main > article {
   }
 
   .homeLineage__grid,
+  .homeTestimonials__grid,
   .homeMasterKey__phases {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1404,8 +1446,13 @@ main > article {
 
   .homeJourney__list,
   .homeLineage__grid,
+  .homeTestimonials__grid,
   .homeMasterKey__phases,
   .homeTaster__days {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .homeTestimonials__grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
