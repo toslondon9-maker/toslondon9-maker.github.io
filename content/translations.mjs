@@ -215,7 +215,7 @@ const translations = deepFreeze({
   },
   "route.coaching.heading": { en: "Personal Coaching with Tariq", es: "Coaching para un dominio interior práctico" },
   "route.coaching.purpose": {
-    en: "Understand, apply and stay accountable to the principles you are learning through the Master Key System and the Unleash Your Power journey.",
+    en: "For people who want personal guidance, accountability and practical support as they study and apply the Master Key System principles in real life.",
     es: "Avanza por cuatro etapas estructuradas con una guía que convierte cada aprendizaje semanal en una práctica constante.",
   },
   "route.coaching.priceLead": { en: "Complete 24-Week Programme:", es: "Programa completo de 24 semanas:" },
@@ -319,7 +319,7 @@ const translations = deepFreeze({
     es: "Prepárate para practicar, plantear preguntas útiles y aplicar con Tariq el principio de la semana.",
   },
   "route.liveCoaching.action": { en: "Arrange a live session", es: "Organiza una sesión en directo" },
-  "coaching.eyebrow": { en: "MASTER KEY SYSTEM & PERSONAL DEVELOPMENT COACHING", es: "EL RECORRIDO DE COACHING DE 24 SEMANAS" },
+  "coaching.eyebrow": { en: "PERSONAL MASTER KEY COACHING", es: "EL RECORRIDO DE COACHING DE 24 SEMANAS" },
   "coaching.tabsLabel": { en: "Coaching programme sections", es: "Secciones del programa de coaching" },
   "coaching.tab.overview": { en: "Overview", es: "Resumen" },
   "coaching.tab.foundation": { en: "Foundation", es: "Fundamentos" },
