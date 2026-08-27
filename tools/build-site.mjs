@@ -11,6 +11,7 @@ const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url))
 const previewRoot = path.join(repositoryRoot, ".build-preview");
 const runtimeFiles = Object.freeze([
   "assets/index-Bgwsdhov.css",
+  "assets/curriculum.mjs",
   "assets/platform.css",
   "assets/seven-day-progress.mjs",
   "assets/site-language.mjs",
