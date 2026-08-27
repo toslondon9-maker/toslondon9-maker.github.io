@@ -14,8 +14,8 @@ const footerNavigationItems = Object.freeze([
   ...headerNavigationItems,
   { route: siteData.routes.faq, key: "nav.faq" },
   { route: siteData.routes.contact, key: "nav.contact" },
-  { route: siteData.routes.liveCoaching, key: "nav.liveCoaching" },
-  { route: siteData.routes.referral, key: "nav.referral" },
+  { route: siteData.routes.liveCoaching, key: "nav.liveCoaching", className: "studentUtilityLink" },
+  { route: siteData.routes.referral, key: "nav.referral", className: "studentUtilityLink" },
 ]);
 
 function escapeHtml(value) {
