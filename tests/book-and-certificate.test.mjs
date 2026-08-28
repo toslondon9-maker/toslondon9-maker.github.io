@@ -32,7 +32,7 @@ test("About Tariq accurately presents the Study Service certificate", () => {
   assert.match(page.body, /MY MASTER KEY SYSTEM FOUNDATION/);
   assert.match(page.body, /A journey of study, practice and application\./);
   assert.match(page.body, /Master Key System Study completed with Helmar Rudolph · <strong>2014<\/strong>/);
-  assert.match(page.body, /href="\/images\/tariq-master-key-study-service-certificate-2014\.jpeg"/);
+  assert.match(page.body, /href="\/images\/tariq-master-key-certificate-restored\.png"/);
   assert.match(page.body, /Framed certificate confirming Tariq Saddique’s completion of Helmar Rudolph’s Master Key System Study Service in August 2014\./);
   assert.doesNotMatch(page.body, /qualification|accreditation|endorsement/i);
 });
