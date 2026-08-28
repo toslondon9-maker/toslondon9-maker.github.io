@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { siteData as canonicalSiteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
 
-const curriculum = readFileSync(new URL("../../content/master-key-curriculum.html", import.meta.url), "utf8").trim();
+const curriculum = readFileSync(new URL("../../content/master-key-curriculum.html", import.meta.url), "utf8").replace(/\r\n/g, "\n").trim();
 const chapterGridOpening = '<div class="chapterGrid">';
 const chapterGridStart = curriculum.indexOf(chapterGridOpening);
 const chapterGridEnd = curriculum.indexOf('</div><p class="sourceNote">', chapterGridStart);
