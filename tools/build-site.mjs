@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { siteData } from "../content/site-data.mjs";
 import { renderPage } from "../src/page-shell.mjs";
 import { routeRenderers } from "../src/routes.mjs";
+import { renderSitemap } from "../src/sitemap.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const previewRoot = path.join(repositoryRoot, ".build-preview");
@@ -19,6 +20,7 @@ const runtimeFiles = Object.freeze([
   "assets/tabs.mjs",
   "content/translations.mjs",
 ]);
+const siteMetadataFiles = Object.freeze(["robots.txt"]);
 const buildRoutes = Object.freeze([...Object.values(siteData.routes), ...siteData.experienceRoutes]);
 
 function outputPathForRoute(route) {
@@ -57,6 +59,17 @@ async function copyBuildDependencies(outputRoot) {
   return files;
 }
 
+async function copySiteMetadata(outputRoot) {
+  for (const relativeFile of siteMetadataFiles) {
+    const source = path.join(repositoryRoot, relativeFile);
+    const destination = path.join(outputRoot, relativeFile);
+    if (path.resolve(source) === path.resolve(destination)) continue;
+    await copyFile(source, destination);
+  }
+
+  return siteMetadataFiles;
+}
+
 async function cleanPreviewOutput() {
   await mkdir(previewRoot, { recursive: true });
   for (const entry of await readdir(previewRoot)) {
@@ -83,7 +96,11 @@ async function writeBuild(outputRoot) {
     files.push(relativeFile);
   }
 
+  const sitemapFile = "sitemap.xml";
+  await writeFile(path.join(outputRoot, sitemapFile), renderSitemap(siteData), "utf8");
+  files.push(sitemapFile);
   files.push(...await copyBuildDependencies(outputRoot));
+  files.push(...await copySiteMetadata(outputRoot));
 
   for (const relativeFile of files) {
     hash.update(relativeFile);

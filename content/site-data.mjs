@@ -12,6 +12,10 @@ function deepFreeze(value) {
 export const siteData = deepFreeze({
   founder: { firstName: "Tariq", fullName: "Tariq Saddique" },
   contact: { email: "toslondon9@gmail.com", whatsapp: "+34 611 223 345" },
+  sitemap: {
+    baseUrl: "https://toslondon9-maker.github.io/",
+    lastModified: "2026-08-28"
+  },
   routes: {
     home: "/",
     masterKeySystem: "/master-key-system/",
