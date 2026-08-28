@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { routeRenderers } from "../src/routes.mjs";
@@ -18,6 +20,19 @@ test("book route exposes only verified direct purchase destinations safely", () 
   assert.match(page.body, /WHICH ONE SHOULD I CHOOSE\?/);
   assert.match(page.body, /A MESSAGE FROM TARIQ/);
   assert.doesNotMatch(page.body, /\.pdf/i);
+});
+
+test("book route uses dedicated edition cover images instead of the design mock-up crop", () => {
+  const page = routeRenderers[siteData.routes.getTheBook](siteData);
+  const originalCover = "/images/master-key-system-complete-original-edition.jpg";
+  const centenaryCover = "/images/master-key-system-centenary-edition.jpg";
+
+  assert.equal(existsSync(path.join(process.cwd(), originalCover)), true);
+  assert.equal(existsSync(path.join(process.cwd(), centenaryCover)), true);
+  assert.match(page.body, /<img[^>]+src="\/images\/master-key-system-complete-original-edition\.jpg"[^>]+width="360"[^>]+height="540"[^>]+alt="The Master Key System: The Complete Original Edition by Charles F\. Haanel"[^>]*>/);
+  assert.match(page.body, /<img[^>]+src="\/images\/master-key-system-centenary-edition\.jpg"[^>]+width="364"[^>]+height="582"[^>]+alt="The Master Key System: Centenary Edition by Charles F\. Haanel, with Helmar Rudolph"[^>]*>/);
+  assert.doesNotMatch(page.body, /bookCover--|master-key-book-design-reference/i);
+  assert.doesNotMatch(readFileSync(path.join(process.cwd(), "assets", "platform.css"), "utf8"), /\.bookCover\s*\{[^}]*master-key-book-design-reference/i);
 });
 
 test("book page is discoverable from navigation, supporting pages and footer", () => {
