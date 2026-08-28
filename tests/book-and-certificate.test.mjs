@@ -4,17 +4,17 @@ import { siteData } from "../content/site-data.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 import { renderFooter, renderHeader } from "../src/shared-chrome.mjs";
 
-test("book route presents verified and pending purchase destinations honestly", () => {
+test("book route exposes only verified direct purchase destinations safely", () => {
   const page = routeRenderers[siteData.routes.getTheBook](siteData);
   assert.equal(page.route, "/get-the-book/");
   assert.match(page.body, /GET YOUR\s+<em>MASTER KEY SYSTEM BOOK<\/em>/);
   assert.match(page.body, /THE COMPLETE ORIGINAL EDITION/);
   assert.match(page.body, /TARIQ'S RECOMMENDED EDITION/);
   assert.match(page.body, /HELMAR RUDOLPH'S CENTENARY EDITION/);
-  assert.match(page.body, /https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Complete-Chemistry\/dp\/1250874483/);
-  assert.match(page.body, /Availability being confirmed/);
-  assert.match(page.body, /https:\/\/www\.amazon\.es\/Master-Key-System-Centenary-Higher\/dp\/1456336045/);
-  assert.match(page.body, />AMAZON SPAIN<\/a>/);
+  assert.match(page.body, /href="https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Complete-Chemistry\/dp\/1250874483" target="_blank" rel="noopener noreferrer">AMAZON UK<\/a>/);
+  assert.match(page.body, /href="https:\/\/www\.amazon\.es\/-\/en\/Master-Key-System-Complete-Original\/dp\/1250874483" target="_blank" rel="noopener noreferrer">AMAZON SPAIN<\/a>/);
+  assert.match(page.body, /href="https:\/\/www\.amazon\.es\/Master-Key-System-Centenary-Higher\/dp\/1456336045" target="_blank" rel="noopener noreferrer">AMAZON SPAIN<\/a>/);
+  assert.doesNotMatch(page.body, /bookOption__pending|Availability being confirmed|href="(?:#|\s*)"/i);
   assert.match(page.body, /WHICH ONE SHOULD I CHOOSE\?/);
   assert.match(page.body, /A MESSAGE FROM TARIQ/);
   assert.doesNotMatch(page.body, /\.pdf/i);
