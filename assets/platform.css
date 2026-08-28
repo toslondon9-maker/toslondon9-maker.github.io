@@ -195,6 +195,10 @@ button,
   list-style: none;
 }
 
+.siteNav ul {
+  flex-wrap: nowrap;
+}
+
 .siteNav a,
 .site-header nav a {
   min-height: 44px;
@@ -203,6 +207,7 @@ button,
   font-size: 0.94rem;
   font-weight: 650;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .siteNav a[aria-current="page"],
@@ -1479,7 +1484,7 @@ main > article {
   color: var(--cream);
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1360px) {
   .siteNav,
   .site-header nav {
     display: none;
