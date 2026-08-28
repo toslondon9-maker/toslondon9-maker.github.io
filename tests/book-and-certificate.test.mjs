@@ -13,7 +13,8 @@ test("book route presents verified and pending purchase destinations honestly", 
   assert.match(page.body, /HELMAR RUDOLPH'S CENTENARY EDITION/);
   assert.match(page.body, /https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Complete-Chemistry\/dp\/1250874483/);
   assert.match(page.body, /Availability being confirmed/);
-  assert.match(page.body, /Purchase link being updated/);
+  assert.match(page.body, /https:\/\/www\.amazon\.es\/Master-Key-System-Centenary-Higher\/dp\/1456336045/);
+  assert.match(page.body, />AMAZON SPAIN<\/a>/);
   assert.match(page.body, /WHICH ONE SHOULD I CHOOSE\?/);
   assert.match(page.body, /A MESSAGE FROM TARIQ/);
   assert.doesNotMatch(page.body, /\.pdf/i);
