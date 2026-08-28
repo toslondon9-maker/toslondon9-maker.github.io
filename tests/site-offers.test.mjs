@@ -11,23 +11,23 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const home = await readFile(path.join(root, "index.html"), "utf8");
 const coaching = await readFile(path.join(root, "coaching", "index.html"), "utf8");
 
-test("deployed homepage uses the approved static premium experience", () => {
+test("deployed homepage uses the approved static Master Key experience", () => {
   assert.match(home, /^<!doctype html>/i);
   assert.match(home, /<main class="home">/);
-  assert.match(home, /Start Free for 7 Days/);
-  assert.match(home, /Discover the Journey/);
+  assert.match(home, /Master the world within\./);
+  assert.match(home, /START FREE FOR 7 DAYS/);
+  assert.match(home, /EXPLORE THE MASTER KEY SYSTEM/);
   assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__|data-rsc|_rsc=/);
 });
 
-test("deployed homepage preserves the approved origins sequence and assets", () => {
-  const origins = home.match(/<section class="homeOrigins"[\s\S]*?<\/section>/)?.[0] ?? "";
-  const cream = origins.indexOf("homeOrigins__prelude");
-  const portraits = origins.indexOf("homeOrigins__portrait");
-  const navy = origins.indexOf("homeOrigins__statement");
-  assert.ok(cream >= 0 && cream < portraits && portraits < navy);
+test("deployed homepage preserves the approved lineage sequence and assets", () => {
+  const lineage = home.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]);
+  assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
   assert.equal((home.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
-  assert.match(origins, /Where timeless wisdom meets modern transformation\./);
-  assert.match(origins, /From inner mastery to purposeful action\./);
+  assert.match(lineage, /Modern Study &amp; Application/);
+  assert.match(lineage, /Your Guide &amp; Coach/);
+  assert.match(lineage, /not affiliated with or endorsed by/i);
   assert.ok(existsSync(path.join(root, "images", "haanel-tariq-portraits.jpeg")));
   assert.ok(existsSync(path.join(root, "images", "tariq-happiness-harmony.png")));
 });

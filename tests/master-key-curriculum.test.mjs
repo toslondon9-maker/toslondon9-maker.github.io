@@ -22,12 +22,12 @@ test("the complete historic 24-week curriculum is visitor-accessible from home a
   assert.match(curriculum, /One Consciousness - One Power/);
   assert.match(curriculum, /The Truth shall set you free/);
   assert.match(curriculum, /class="weekVideo"[^>]+href="https:\/\/photos\.google\.com\/share\//);
-  assert.equal(createHash("sha256").update(curriculum).digest("hex"), "1b587e76e32f9d9da796fdc6519ab94e05a7bdeb927159cbf9bdd4b4c6c9341c");
+  assert.equal(createHash("sha256").update(curriculum).digest("hex"), "30076ab416e90b65d015c0bdf83bcd1e3da27ffedb3dd8c35db6f619e6563709");
   assert.ok(page.styles?.includes("/assets/index-Bgwsdhov.css"));
 
   const home = renderHome({ language: "en" });
-  assert.match(home, /href="\/master-key-system\/"[^>]*>Explore the 24-Week Curriculum<\/a>/);
+  assert.match(home, /href="\/master-key-system\/"[^>]*>EXPLORE ALL 24 WEEKS<\/a>/);
 
   const navigation = renderHeader({ route: "/", language: "en" });
-  assert.equal((navigation.match(/href="\/master-key-system\/"[^>]*>Curriculum<\/a>/g) ?? []).length, 2);
+  assert.equal((navigation.match(/href="\/master-key-system\/"[^>]*>Master Key System<\/a>/g) ?? []).length, 2);
 });

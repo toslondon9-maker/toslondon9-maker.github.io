@@ -4,56 +4,35 @@ import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = [
-  "hero",
-  "lineage",
-  "why",
-  "journey",
-  "start-free",
-  "master-key",
-  "origins",
-  "coaching",
-  "mentors",
-  "next-step",
-];
+const approvedSections = ["hero", "lineage", "start-free", "master-key", "testimonials", "coaching", "next-step"];
 
-test("homepage follows the approved concise journey", () => {
+test("homepage follows the approved concise customer journey", () => {
   const html = renderHome({ language: "en" });
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
-
   assert.deepEqual(sections, approvedSections);
-  assert.equal((html.match(/haanel-tariq-portraits\.jpeg/g) ?? []).length, 2);
   assert.equal((html.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
-  assert.match(html, /<h1[^>]*>Master Your Mind\. Change Your Direction\.<\/h1>/);
-  assert.match(html, /Charles F\. Haanel(?:&#39;|')s Master Key System/);
-  assert.match(html, /Start Free for 7 Days/);
-  assert.match(html, /Discover the Journey/);
+  assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
+  assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
+  assert.match(html, /START FREE FOR 7 DAYS/);
+  assert.match(html, /EXPLORE THE MASTER KEY SYSTEM/);
   assert.match(html, /Free 7-Day Experience • No Previous Experience Required/);
 });
 
 test("homepage explains the independent three-person learning lineage near the top", () => {
   const html = renderHome({ language: "en" });
   const lineage = html.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";
-
-  assert.match(lineage, /Charles F\. Haanel/);
-  assert.match(lineage, /The System/);
-  assert.match(lineage, /Helmar Rudolph/);
-  assert.match(lineage, /Interpretation &amp; Application/);
-  assert.match(lineage, /Tariq Saddique/);
-  assert.match(lineage, /Guidance &amp; Coaching/);
+  for (const text of ["Charles F. Haanel", "The System", "Helmar Rudolph", "Modern Study &amp; Application", "Tariq Saddique", "Your Guide &amp; Coach"]) assert.match(lineage, new RegExp(text));
   assert.match(lineage, /independent coaching/i);
   assert.match(lineage, /not affiliated with or endorsed by/i);
 });
 
-test("homepage presents a simple three-step journey", () => {
+test("homepage presents the complete seven-day taster", () => {
   const html = renderHome({ language: "en" });
-  const journey = html.match(/<section[^>]+data-home-section="journey"[\s\S]*?<\/section>/)?.[0] ?? "";
-  const steps = [...journey.matchAll(/<li class="homeJourney__step"/g)];
-
-  assert.equal(steps.length, 3);
-  assert.match(journey, />Experience<\/h3>/);
-  assert.match(journey, />Learn &amp; Apply<\/h3>/);
-  assert.match(journey, />Go Deeper<\/h3>/);
+  const taster = html.match(/<section[^>]+data-home-section="start-free"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.equal((taster.match(/data-i18n="home\.taster\.day\d"/g) ?? []).length, 7);
+  assert.match(taster, /See What’s Running Your Life/);
+  assert.match(taster, /Choose What Happens Next/);
+  assert.match(taster, /href="\/start-free\/"[^>]*>START MY FREE 7 DAYS<\/a>/);
 });
 
 test("homepage loads with the concise four-phase journey and safe responsive actions", async () => {
@@ -61,81 +40,52 @@ test("homepage loads with the concise four-phase journey and safe responsive act
   const css = await readFile("assets/platform.css", "utf8");
   const pathway = html.match(/<section[^>]+data-home-section="master-key"[\s\S]*?<\/section>/)?.[0] ?? "";
   const visibleText = pathway.replace(/<[^>]+>/g, "");
-
   assert.match(html, /^<main class="home">/);
-  assert.match(html, /href="\/start-free\/"[^>]*>Start Free for 7 Days<\/a>/);
-
-  for (const expected of [
-    "Weeks 1–4", "Foundation",
-    "Weeks 5–11", "Awareness &amp; Control",
-    "Weeks 12–18", "Application",
-    "Weeks 19–24", "Integration &amp; Mastery",
-  ]) assert.match(visibleText, new RegExp(expected));
-
-  for (const description of [
-    "Build stillness, self-awareness and a dependable mental foundation.",
-    "Direct your imagination and form a clearer inner blueprint.",
-    "Strengthen focus, discipline and sustained attention.",
-    "Integrate the work and act from your highest understanding.",
-  ]) assert.match(visibleText, new RegExp(description));
-
+  assert.match(html, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
+  for (const expected of ["Weeks 1–4", "Foundation", "Weeks 5–11", "Awareness &amp; Control", "Weeks 12–18", "Application", "Weeks 19–24", "Integration &amp; Mastery"]) assert.match(visibleText, new RegExp(expected));
   assert.equal((pathway.match(/class="homeMasterKey__phaseDescription"/g) ?? []).length, 4);
-  assert.match(pathway, /href="\/master-key-system\/"[^>]*>Explore the 24-Week Journey<\/a>/);
+  assert.match(pathway, /href="\/master-key-system\/"[^>]*>EXPLORE ALL 24 WEEKS<\/a>/);
   assert.doesNotMatch(pathway, /questions?\s*(?:&amp;|and)\s*answers?|mastery prompt|guided exercise/i);
   assert.match(css, /\.homeMasterKey__phases li\s*\{[^}]*min-width:\s*0/s);
   assert.match(css, /@media[^}]*max-width:\s*480px[\s\S]*?\.homeMasterKey__phases[^{]*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
 });
 
-test("homepage presents the approved origins sequence once and in order", () => {
+test("homepage presents the approved lineage image and people in order", () => {
   const html = renderHome({ language: "en" });
-  const origins = html.match(/<section[^>]+data-home-section="origins"[\s\S]*?<\/section>/)?.[0] ?? "";
-  const cream = origins.indexOf("homeOrigins__prelude");
-  const portraits = origins.indexOf("homeOrigins__portrait");
-  const navy = origins.indexOf("homeOrigins__statement");
-
-  assert.ok(cream >= 0 && cream < portraits && portraits < navy);
-  assert.equal((html.match(/Where timeless wisdom meets modern transformation\./g) ?? []).length, 1);
-  assert.equal((html.match(/From inner mastery to purposeful action\./g) ?? []).length, 1);
-  assert.equal((html.match(/independent coaching experience inspired by the Master Key System/gi) ?? []).length, 1);
-  assert.match(origins, /Charles F\. Haanel and Tariq Saddique — Master Key System inspired coaching journey/);
-  assert.match(html, /not affiliated with or endorsed by/i);
+  const lineage = html.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]);
+  assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
+  assert.match(lineage, /Charles F\. Haanel and Tariq Saddique — Master Key System inspired coaching journey/);
+  assert.equal((html.match(/haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
 });
 
-test("homepage origins statement uses the premium key and gold-emphasis treatment", () => {
+test("homepage lineage section retains the premium portrait, cards and independence disclosure", () => {
   const html = renderHome({ language: "en" });
-  const origins = html.match(/<section[^>]+data-home-section="origins"[\s\S]*?<\/section>/)?.[0] ?? "";
-
-  assert.match(origins, /class="homeOrigins__ornament"[^>]+aria-hidden="true"/);
-  assert.match(origins, /class="homeOrigins__key"/);
-  assert.match(origins, /<h2 class="homeOrigins__statementTitle"[^>]+data-i18n-aria-label="home\.origins\.statementTitle"/);
-  assert.match(origins, /class="homeOrigins__statementLead"[^>]+data-i18n="home\.origins\.statementLead"/);
-  assert.match(origins, /class="homeOrigins__statementEmphasis"[^>]+data-i18n="home\.origins\.statementEmphasis"/);
-  assert.match(origins, /class="homeOrigins__statementDivider"[^>]+aria-hidden="true"/);
+  const lineage = html.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.match(lineage, /class="homeLineage__portrait"/);
+  assert.match(lineage, /class="homeLineage__grid"/);
+  assert.equal((lineage.match(/class="homeLineage__card"/g) ?? []).length, 3);
+  assert.match(lineage, /class="homeLineage__disclaimer"/);
 });
 
 test("homepage Spanish render is complete, natural and conversion focused", () => {
   const html = renderHome({ language: "es" });
-
   assert.match(html, /Domina tu mente\. Cambia tu rumbo\./);
   assert.match(html, /Desarrolla claridad, enfoque y una acción con propósito/);
   assert.match(html, /Empieza gratis durante 7 días/);
   assert.match(html, /Descubre el recorrido/);
-  assert.match(html, /Una experiencia de coaching independiente inspirada en el Master Key System\./);
-  assert.doesNotMatch(html, /Start Free for 7 Days|Explore the 24-Week Journey|Book a Session/);
+  assert.match(html, /Este programa de coaching independiente está inspirado en el Master Key System/);
+  assert.doesNotMatch(html, /START FREE FOR 7 DAYS|EXPLORE ALL 24 WEEKS|Book a Session/);
 });
 
 test("homepage CTA destinations are generated routes", () => {
   const html = renderHome({ language: "en" });
   const routeSet = new Set(Object.values(siteData.routes));
-  const ctaRoutes = [...html.matchAll(/<a class="button--(?:primary|secondary|text)[^"]*" href="([^"]+)"/g)]
-    .map((match) => match[1]);
-
-  assert.ok(ctaRoutes.length >= 8);
+  const ctaRoutes = [...html.matchAll(/<a class="button--(?:primary|secondary|text)[^"]*" href="([^"]+)"/g)].map((match) => match[1]);
+  assert.ok(ctaRoutes.length >= 7);
   for (const route of ctaRoutes) assert.ok(routeSet.has(route), `missing generated destination: ${route}`);
 });
 
 test("homepage keeps detailed pricing off the teaser and never restores the payment plan", () => {
-  const html = renderHome({ language: "en" });
-
-  assert.doesNotMatch(html, /£97|£197|£397|£497|£997|£1,188|£1,788|6\s*[×x]\s*£169|£1,014/);
+  assert.doesNotMatch(renderHome({ language: "en" }), /£97|£197|£397|£497|£997|£1,188|£1,788|6\s*[×x]\s*£169|£1,014/);
 });

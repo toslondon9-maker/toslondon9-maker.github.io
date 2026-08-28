@@ -9,10 +9,10 @@ const headerDestinations = [
   "/",
   "/start-free/",
   "/master-key-system/",
-  "/ai-mentors/",
   "/coaching/",
   "/resources/",
   "/about-tariq/",
+  "/get-the-book/",
 ];
 
 const footerDestinations = [
@@ -28,9 +28,9 @@ test("header presents the simplified seven-destination conversion path", () => {
   }
   assert.doesNotMatch(html, /href="\/faq\/"|href="\/contact\/"/);
   assert.match(html, /class="navStartFree" href="\/start-free\/"/);
-  assert.match(html, />The Journey<\/a>/);
-  assert.match(html, />AI Learning<\/a>/);
-  assert.match(html, />About<\/a>/);
+  assert.match(html, />Master Key System<\/a>/);
+  assert.match(html, />About Tariq<\/a>/);
+  assert.match(html, />BUY THE MKS BOOK<\/a>/);
   assert.match(html, />Start Free<\/a>/);
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />EN<.*>ES</s);

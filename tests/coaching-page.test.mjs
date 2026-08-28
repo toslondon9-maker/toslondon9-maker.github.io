@@ -31,12 +31,12 @@ test("English coaching page leads with Master Key coaching and keeps professiona
   assert.match(html, /<h1[^>]*>Personal Coaching with Tariq<\/h1>/);
   assert.ok(flagshipIndex > 0 && flagshipIndex < investmentIndex && investmentIndex < servicesIndex);
   for (const text of [
-    "Master Key System / Personal-Development Coaching",
+    "Personal Master Key Coaching",
     "accountability",
     "reflection",
     "practical application",
-    "How sessions work",
-    "Other Professional Services",
+    "How coaching works:",
+    "OTHER PROFESSIONAL SERVICES",
     "Sales &amp; Partnership Growth",
     "Leadership Workshops",
     "AI-Enabled Performance",

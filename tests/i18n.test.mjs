@@ -97,7 +97,7 @@ test("shared chrome renders complete localized labels and runtime hooks", () => 
   const html = `${header}${footer}`;
 
   for (const key of [
-    "nav.home", "nav.startFree", "nav.masterKeySystem", "nav.aiMentors", "nav.coaching",
+    "nav.home", "nav.startFree", "nav.masterKeySystem", "nav.getTheBook", "nav.coaching",
     "nav.resources", "nav.aboutTariq", "nav.faq", "nav.contact", "footer.mission",
     "footer.privacy", "footer.terms", "language.label", "menu.open",
   ]) assert.match(html, new RegExp(`data-i18n(?:-aria-label)?="${key}"`));

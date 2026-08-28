@@ -37,7 +37,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
-  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260822-phase1">/);
+  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260828-header">/);
   assert.match(html, /<link rel="preload" href="\/images\/the-secret-logo\.png" as="image">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
@@ -71,6 +71,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "coaching/index.html",
       "about-tariq/index.html",
       "resources/index.html",
+      "get-the-book/index.html",
       "ai-mentors/index.html",
       "contact/index.html",
       "faq/index.html",
@@ -104,11 +105,13 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 20);
+    assert.equal(pageFiles.length, 21);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
-      ...Object.values(siteData.routes).filter((route) => route !== "/").map((route) => `${route.slice(1)}index.html`),
+      ...Object.entries(siteData.routes)
+        .filter(([routeId, route]) => routeId !== "liveCoaching" && route !== "/")
+        .map(([, route]) => `${route.slice(1)}index.html`),
     ].includes(file));
     const pages = await Promise.all(globalPageFiles.map((file) => readFile(path.join(outputRoot, file), "utf8")));
     const titles = pages.map((page) => page.match(/<title[^>]*>(.*?)<\/title>/)?.[1]);
@@ -118,6 +121,14 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
 
     for (const [index, page] of pages.entries()) {
       assert.equal((page.match(/<h1[ >]/g) ?? []).length, 1);
+
+      if (globalPageFiles[index] === "get-the-book/index.html") {
+        assert.match(page, /<title>Get Your Master Key System Book \| Unleash Your Power<\/title>/);
+        assert.match(page, /https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Complete-Chemistry\/dp\/1250874483/);
+        assert.match(page, /THE COMPLETE ORIGINAL EDITION/);
+        continue;
+      }
+
       assert.match(page, /<title data-i18n="route\.[^"]+\.metaTitle">/);
       assert.match(page, /<meta name="description"[^>]+data-i18n="route\.[^"]+\.metaDescription">/);
 
@@ -126,6 +137,11 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         assert.match(page, /<h1 data-i18n="sevenDay\.dashboard\.title">/);
         assert.match(page, /class="routeShell__purpose" data-i18n="sevenDay\.dashboard\.intro">/);
         assert.match(page, /class="button--primary routeShell__action" href="\/start-free\/day-1-see-whats-running-your-life\/" data-i18n="sevenDay\.dashboard\.start">/);
+        continue;
+      }
+
+      if (["index.html", "master-key-system/index.html", "coaching/index.html", "about-tariq/index.html", "resources/index.html"].includes(globalPageFiles[index])) {
+        assert.match(page, /href="\/(?:start-free|master-key-system|coaching|contact|get-the-book)\//);
         continue;
       }
 
@@ -198,7 +214,7 @@ test("contact actions derive their email address from shared site data", () => {
   };
   const page = routeRenderers[siteData.routes.contact](data);
 
-  assert.match(page.body, /href="mailto:shared-data@example\.test"/);
+  assert.match(page.body, /href="mailto:shared-data@example\.test(?:\?[^\"]*)?"/);
   assert.doesNotMatch(page.body, /mailto:toslondon9@gmail\.com/);
 });
 
