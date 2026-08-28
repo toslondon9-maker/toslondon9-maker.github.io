@@ -7,6 +7,8 @@ import { masterKeyCurriculumPage } from "./pages/master-key-curriculum.mjs";
 import { startFreePage } from "./pages/start-free.mjs";
 import { sevenDayLessonPage } from "./pages/seven-day-lesson.mjs";
 import { resourcesPage } from "./pages/resources.mjs";
+import { getTheBookPage } from "./pages/get-the-book.mjs";
+import { aboutTariqPage } from "./pages/about-tariq.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -63,6 +65,8 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.coaching]: (data) => coachingPage(data),
   [siteData.routes.masterKeySystem]: (data) => masterKeyCurriculumPage(data),
   [siteData.routes.resources]: (data) => resourcesPage(data),
+  [siteData.routes.getTheBook]: (data) => getTheBookPage(data),
+  [siteData.routes.aboutTariq]: (data) => aboutTariqPage(data),
   ...Object.fromEntries(
     sevenDayExperience.lessons.map((lesson) => [
       lesson.route,

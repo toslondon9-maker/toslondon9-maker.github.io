@@ -1828,6 +1828,51 @@ main > article {
   }
 }
 
+.navBook { white-space: nowrap; }
+.bookPage { color: var(--ink); background: var(--cream); }
+.bookHero { background: var(--night); color: var(--cream); }
+.bookHero__inner, .bookOptions, .bookChoose, .bookMessage, .certificateSection, .aboutTariqIntro { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
+.bookHero__inner { min-height: 24rem; padding: 4rem 0; display: grid; grid-template-columns: 1.25fr .75fr; gap: 3rem; align-items: center; }
+.bookHero h1 { max-width: 12ch; font-size: clamp(2.5rem, 5vw, 4.8rem); line-height: .95; margin: .5rem 0 1.25rem; }
+.bookHero h1 em { color: var(--gold-bright); font-style: normal; }
+.bookHero p { max-width: 38rem; font-size: 1.08rem; line-height: 1.65; }
+.bookCover { background-image: url("/images/master-key-book-design-reference.jpeg"); background-repeat: no-repeat; border-radius: .35rem; box-shadow: 0 1rem 2rem rgba(0,0,0,.25); }
+.bookCover--original { background-size: 555% auto; background-position: 15% 46%; aspect-ratio: 2 / 3; }
+.bookCover--centenary { background-size: 555% auto; background-position: 64% 46%; aspect-ratio: 2 / 3; }
+.bookHero__cover { width: min(15rem, 100%); justify-self: center; }
+.bookOptions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; padding: 4rem 0 2rem; }
+.bookOption { position: relative; background: var(--paper); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.75rem; box-shadow: var(--shadow-card); }
+.bookOption__number { display: inline-block; margin: 0 0 1rem; padding: .45rem .8rem; background: var(--night); color: var(--cream); border-radius: .35rem; font-weight: 700; letter-spacing: .08em; }
+.bookOption__recommended { position: absolute; top: 0; right: 1.5rem; width: 7.5rem; padding: .8rem .6rem 1.1rem; background: var(--gold-bright); color: var(--night); font-size: .72rem; font-weight: 800; text-align: center; }
+.bookOption h2 { font-size: clamp(1.35rem, 2.5vw, 2rem); margin: .25rem 0 .75rem; }
+.bookOption__subtitle { color: var(--gold); font-weight: 600; min-height: 3.2em; }
+.bookOption__content { display: grid; grid-template-columns: 10rem 1fr; gap: 1.25rem; align-items: start; margin: 1.5rem 0; }
+.bookOption li { margin: .45rem 0; }
+.bookOption li::marker { color: var(--gold); }
+.bookOption__isbn, .bookOption__pending { display: block; border: 1px solid var(--border); border-radius: .5rem; padding: .9rem; margin: 1rem 0; }
+.bookOption__pending { color: var(--muted); font-weight: 600; }
+.bookChoose { display: grid; grid-template-columns: 1.5fr .75fr; gap: 1.5rem; padding: 2rem 0; }
+.bookChoose > div, .bookChoose aside, .bookMessage { border-radius: var(--radius-card); padding: 1.75rem; border: 1px solid var(--border); }
+.bookChoose > div, .bookMessage { background: var(--paper); }
+.bookChoose aside { background: var(--night); color: var(--cream); }
+.bookChoose__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.bookMessage { margin-bottom: 4rem; font-size: 1.05rem; line-height: 1.65; }
+.aboutTariqPage { background: var(--cream); color: var(--ink); }
+.aboutTariqIntro { padding: 4rem 0 2rem; }
+.aboutTariqIntro h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin: .5rem 0 1rem; }
+.aboutTariqIntro > p:not(.eyebrow) { max-width: 48rem; font-size: 1.12rem; line-height: 1.6; }
+.certificateSection { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; padding: 2rem 0 5rem; }
+.certificateSection__image { overflow: hidden; border: 2px solid var(--gold); border-radius: .75rem; background: var(--night); }
+.certificateSection__image a { display: block; }
+.certificateSection__image img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: left center; }
+.certificateSection h2 { font-size: clamp(2rem, 4vw, 3.7rem); line-height: 1.05; margin: .5rem 0 1.5rem; }
+.certificateSection__copy > p:not(.eyebrow):not(.certificateSection__trust) { font-size: 1.12rem; line-height: 1.7; }
+.certificateSection__trust { margin-top: 1.5rem; font-weight: 600; }
+.coachingHero__preparation { margin: 1.25rem auto 0; max-width: 42rem; }
+.coachingHero__preparation a { color: inherit; font-weight: 800; }
+@media (max-width: 800px) { .bookHero__inner, .bookOptions, .bookChoose, .certificateSection { grid-template-columns: 1fr; } .bookHero__inner { padding: 3rem 0; } .bookHero__cover { width: 11rem; } .bookOption__content { grid-template-columns: 8rem 1fr; } .certificateSection { padding-bottom: 4rem; } }
+@media (max-width: 520px) { .bookHero__inner, .bookOptions, .bookChoose, .bookMessage, .certificateSection, .aboutTariqIntro { width: min(100% - 1.25rem, 1120px); } .bookOption { padding: 1.25rem; } .bookOption__recommended { position: static; margin: 0 0 1rem; } .bookOption__content, .bookChoose__grid { grid-template-columns: 1fr; } .bookOption__content .bookCover { width: 9rem; } }
+
 .sevenDayLesson {
   background: var(--cream);
 }

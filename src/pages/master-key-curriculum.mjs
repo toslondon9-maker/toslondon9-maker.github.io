@@ -44,7 +44,7 @@ function renderCurriculum() {
   )).join("");
 
   const notes = curriculum.slice(chapterGridEnd + "</div>".length, -"</section>".length);
-  return `<section class="curriculum section" id="curriculum"><header class="curriculumPage__intro"><p class="eyebrow">THE MASTER KEY SYSTEM</p><h1>24 Weeks. One Progressive Journey.</h1><p>Explore Charles F. Haanel's Master Key System week by week. Each chapter builds on the previous one through study, practical exercises, reflection and application.</p></header><nav class="curriculumJump" aria-label="Jump to a week"><span>Jump to a week</span><div>${jumpLinks}</div></nav>${groupedChapters}${notes}</section>`;
+  return `<section class="curriculum section" id="curriculum"><header class="curriculumPage__intro"><p class="eyebrow">THE MASTER KEY SYSTEM</p><h1>24 Weeks. One Progressive Journey.</h1><p>Explore Charles F. Haanel's Master Key System week by week. Each chapter builds on the previous one through study, practical exercises, reflection and application.</p><a class="button--secondary" href="${canonicalSiteData.routes.getTheBook}">BUY THE MKS BOOK</a></header><nav class="curriculumJump" aria-label="Jump to a week"><span>Jump to a week</span><div>${jumpLinks}</div></nav>${groupedChapters}${notes}</section>`;
 }
 
 export function masterKeyCurriculumPage(data = canonicalSiteData, language = "en") {
