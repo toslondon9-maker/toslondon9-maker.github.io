@@ -5,7 +5,7 @@ const esc = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&
 
 export function resourcesPage(data = siteData, language = "en") {
   const groups = [
-    ["STUDY", "Master Key supporting material.", `<a href="${data.routes.masterKeySystem}">Explore the 24-week Master Key curriculum</a>`],
+    ["STUDY", "Master Key supporting material.", `<a href="${data.routes.masterKeySystem}">Explore the 24-week Master Key curriculum</a><a href="${data.routes.getTheBook}">Get your Master Key System book</a>`],
     ["PRACTISE", "Exercises and workbooks.", `<a href="${data.routes.startFree}">Start the free 7-day experience</a><a href="/downloads/seven-day-experience-workbook-en.pdf" download>Download the English workbook</a>`],
     ["LISTEN", "Audio, meditation and focus material.", `<a href="${data.routes.startFree}">Use the guided daily practice</a>`],
     ["REFLECT", "Reflection tools.", `<a href="${data.routes.masterKeySystem}">Reflect with the weekly questions</a>`],
