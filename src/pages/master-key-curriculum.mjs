@@ -27,6 +27,12 @@ function wrapPractice(chapter) {
   return chapter.replace(/<h3>Exercise<\/h3><p>([\s\S]*?)<\/p>(?=<div class="aiMastery">)/, `<section class="curriculumPractice" aria-label="This week's practice"><p class="curriculumPractice__eyebrow">🔑 THIS WEEK'S PRACTICE</p><div><h3>Exercise</h3><p>$1</p><p class="curriculumPractice__message">“The reading gives you the knowledge. The daily exercise creates the transformation.”</p></div></section>`);
 }
 
+function enhanceAiPrompt(chapter, number) {
+  return chapter
+    .replace(/<details class="promptPreview"><summary>Preview the engineered prompt <b>＋<\/b><\/summary><pre>([\s\S]*?)<\/pre><\/details>/, `<section class="aiMasteryPrompt" aria-label="Week ${number} guided prompt"><p class="aiMasteryPrompt__label">WEEK ${number} GUIDED PROMPT</p><pre>$1</pre></section>`)
+    .replace(/(<button type="button" aria-label="Copy the Week \d+ AI mastery prompt">Copy prompt<\/button>)(<\/div>)/, `$1<span class="aiCopyFeedback" data-ai-copy-feedback role="status" aria-live="polite"></span>$2`);
+}
+
 function renderChapters() {
   if (chapterGridStart < 0 || chapterGridEnd < 0) throw new Error("Master Key curriculum chapters could not be located.");
   const source = curriculum.slice(chapterGridStart + chapterGridOpening.length, chapterGridEnd);
@@ -44,7 +50,7 @@ function renderChapters() {
       .replace('<div class="chapterBody">', '<article class="curriculumReadingCard"><div class="chapterBody">')
       .replace("AI MASTERY COACH", "AI MASTERY PROMPT")
       .replace("Paste this into ChatGPT. Your AI coach will test, challenge and guide you one step at a time—without giving away the answers too early.", "Copy this guided prompt into ChatGPT to explore this week's Master Key lesson more deeply.");
-    return wrapPractice(chapter).replace("</div></details>", `</div>${chapterNavigation(index)}</article></details>`);
+    return enhanceAiPrompt(wrapPractice(chapter), number).replace("</div></details>", `</div>${chapterNavigation(index)}</article></details>`);
   });
 }
 

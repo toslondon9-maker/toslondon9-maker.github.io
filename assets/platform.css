@@ -685,11 +685,15 @@ main > article {
 .curriculumStudyNav__group header { display: grid; gap: .2rem; margin-bottom: .55rem; }
 .curriculumStudyNav__group strong { color: var(--night); font-size: .72rem; letter-spacing: .08em; }
 .curriculumStudyNav__group span { color: #76531a; font-size: .72rem; font-weight: 700; }
-.curriculumStudyNav__links { display: flex; gap: .38rem; overflow-x: auto; padding-bottom: .15rem; scrollbar-width: thin; }
+.curriculumStudyNav__links {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: .28rem;
+  overflow: visible;
+}
 .curriculumStudyNav__links a {
   display: grid;
-  flex: 0 0 2.35rem;
-  min-height: 2.35rem;
+  min-height: 2rem;
   place-items: center;
   border: 1px solid var(--border);
   border-radius: .45rem;
@@ -783,6 +787,36 @@ main > article {
 .curriculumPractice p { margin-bottom: .75rem; }
 .curriculumPractice__message { color: #5e4215 !important; font-family: Georgia, serif !important; font-size: 1.05rem !important; font-style: italic; }
 
+.curriculumPage .aiMastery {
+  margin-top: 1.5rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border-color: #567089;
+  border-top-color: var(--gold);
+  background: linear-gradient(135deg, #10273c, #071729);
+}
+.curriculumPage .aiMasteryTop { align-items: center; gap: .75rem 1rem; }
+.curriculumPage .aiMasteryTop h3 { color: var(--cream) !important; margin: .25rem 0 0 !important; font-size: clamp(1.25rem, 2.5vw, 1.65rem) !important; }
+.curriculumPage .aiLabel,
+.curriculumPage .aiMasteryPrompt__label { color: var(--gold-bright); font-weight: 850; }
+.curriculumPage .aiMastery > p { max-width: 44rem; margin: .75rem 0 0 !important; color: #e8edf0 !important; font-size: .98rem !important; line-height: 1.65; }
+.curriculumPage .aiMasteryTop button { min-height: 2.75rem; }
+.aiCopyFeedback { min-width: 7.5rem; color: var(--cream); font-size: .82rem; font-weight: 750; }
+.aiMasteryPrompt { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #54708a; }
+.aiMasteryPrompt__label { margin: 0 0 .65rem; font-size: .74rem; letter-spacing: .1em; }
+.aiMasteryPrompt pre {
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: clamp(.9rem, 3vw, 1.25rem);
+  border: 1px solid #4c6981;
+  border-radius: .45rem;
+  background: #061321;
+  color: #f7f1e5;
+  font: .875rem/1.7 ui-monospace, SFMono-Regular, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .curriculumPage .weeklyQA { margin-top: 2rem; border-left-color: var(--gold); background: #f8f2e7; }
 .curriculumPage .weeklyQA dt,
 .curriculumPage .weekVideo,
@@ -831,7 +865,11 @@ main > article {
 @media (max-width: 640px) {
   .curriculumPage .curriculum { width: min(100% - 2rem, 1120px); }
   .curriculumStudyNav { top: .4rem; grid-template-columns: 1fr; gap: .7rem; padding: .8rem; }
-  .curriculumStudyNav__links { overflow-x: auto; }
+  .curriculumStudyNav__links { grid-template-columns: repeat(6, minmax(0, 1fr)); overflow: visible; }
+  .curriculumStudyNav__links a { min-height: 2.6rem; }
+  .curriculumPage .aiMasteryTop { align-items: stretch; }
+  .aiCopyFeedback { min-width: 0; }
+  .aiMasteryPrompt pre { font-size: .79rem; line-height: 1.6; }
   .curriculumPage .chapterGrid summary { grid-template-columns: 1fr auto; }
   .curriculumChapterSummary__number { grid-column: 1; }
   .curriculumChapterSummary__stage { grid-column: 1; justify-self: start; text-align: left; }

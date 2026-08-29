@@ -19,6 +19,12 @@ test("Master Key page provides the premium 24-chapter study shell around the pre
   assert.equal((html.match(/class="curriculumPractice"/g) ?? []).length, 24);
   assert.equal((html.match(/THIS WEEK'S PRACTICE/g) ?? []).length, 24);
   assert.equal((html.match(/The reading gives you the knowledge\. The daily exercise creates the transformation\./g) ?? []).length, 24);
+  assert.equal((html.match(/class="aiMasteryPrompt"/g) ?? []).length, 24);
+  assert.equal((html.match(/WEEK \d+ GUIDED PROMPT/g) ?? []).length, 24);
+  assert.doesNotMatch(html, /Preview the engineered prompt/);
+  assert.match(html, /Act as my personal Master Key System tutor, Socratic coach and accountability partner for Week 1/);
+  assert.match(html, /Act as my personal Master Key System tutor, Socratic coach and accountability partner for Week 24/);
+  assert.equal((html.match(/data-ai-copy-feedback/g) ?? []).length, 24);
   assert.equal((html.match(/data-curriculum-complete/g) ?? []).length, 24);
   assert.equal((html.match(/Want Tariq to guide you through all 24 weeks\?/g) ?? []).length, 24);
   assert.equal((html.match(/href="\/coaching\/"/g) ?? []).length >= 24, true);
@@ -38,6 +44,9 @@ test("Master Key page keeps the curriculum source file intact while exposing sel
   assert.match(client, /data-curriculum-complete/);
   assert.match(client, /setAttribute\("aria-current", "true"\)/);
   assert.match(client, /removeAttribute\("aria-current"\)/);
+  assert.match(client, /\.aiMasteryPrompt pre/);
+  assert.match(client, /Prompt copied\./);
+  assert.match(client, /Copy failed\./);
 });
 
 test("premium curriculum styles protect reading contrast, sticky navigation and mobile chapter controls", () => {
@@ -48,5 +57,8 @@ test("premium curriculum styles protect reading contrast, sticky navigation and 
   assert.match(css, /\.curriculumReadingCard \.chapterBody p\s*\{[^}]*font-size:\s*clamp\(1\.0625rem/s);
   assert.match(css, /\.curriculumPage__intro > p:not\(\.curriculumPage__status\)\s*\{[^}]*color:\s*#334558/s);
   assert.match(css, /\.curriculumPractice\s*\{[^}]*background:\s*var\(--cream\)/s);
-  assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.curriculumStudyNav__links\s*\{[^}]*overflow-x:\s*auto/s);
+  assert.match(css, /\.curriculumStudyNav__links\s*\{[^}]*grid-template-columns:\s*repeat\(7, minmax\(0, 1fr\)\)[^}]*overflow:\s*visible/s);
+  assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.curriculumStudyNav__links\s*\{[^}]*grid-template-columns:\s*repeat\(6, minmax\(0, 1fr\)\)[^}]*overflow:\s*visible/s);
+  assert.match(css, /\.curriculumPage \.aiMastery > p\s*\{[^}]*color:\s*#e8edf0/s);
+  assert.match(css, /\.curriculumPage \.aiMasteryTop h3\s*\{[^}]*color:\s*var\(--cream\) !important/s);
 });

@@ -14,11 +14,23 @@ function copyText(value) {
 
 for (const button of document.querySelectorAll(".aiMasteryTop button")) {
   button.addEventListener("click", async () => {
-    const prompt = button.closest(".aiMastery")?.querySelector("pre")?.textContent?.trim();
+    const panel = button.closest(".aiMastery");
+    const prompt = panel?.querySelector(".aiMasteryPrompt pre")?.textContent?.trim();
+    const feedback = panel?.querySelector("[data-ai-copy-feedback]");
     if (!prompt) return;
     const originalLabel = button.textContent;
-    try { await copyText(prompt); button.textContent = "Copied"; } catch { button.textContent = "Copy failed"; }
-    window.setTimeout(() => { button.textContent = originalLabel; }, 1800);
+    try {
+      await copyText(prompt);
+      button.textContent = "Copied";
+      if (feedback) feedback.textContent = "Prompt copied.";
+    } catch {
+      button.textContent = "Copy failed";
+      if (feedback) feedback.textContent = "Copy failed.";
+    }
+    window.setTimeout(() => {
+      button.textContent = originalLabel;
+      if (feedback) feedback.textContent = "";
+    }, 1800);
   });
 }
 
