@@ -618,6 +618,230 @@ main > article {
   margin-left: auto;
 }
 
+/* Premium Master Key study experience. These rules remain tightly scoped so
+   shared pages and the protected curriculum source retain their behaviour. */
+.curriculumPage {
+  background: var(--cream-deep);
+  color: var(--ink);
+}
+
+.curriculumPage .curriculum {
+  width: min(100% - (2 * var(--space-gutter)), 1120px);
+  padding-block: clamp(2.5rem, 6vw, 5.5rem);
+  background: transparent;
+}
+
+.curriculumPage__intro {
+  max-width: 54rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.curriculumPage__intro h1 {
+  max-width: 18ch;
+  margin-inline: auto;
+  color: var(--night);
+  font-size: clamp(2.6rem, 6vw, 5rem);
+}
+
+.curriculumPage__status {
+  display: inline-block;
+  margin: .4rem auto 1rem;
+  padding: .45rem .75rem;
+  border: 1px solid var(--border);
+  background: var(--paper);
+  color: #76531a;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.curriculumPage__intro > p:not(.curriculumPage__status) {
+  max-width: 44rem;
+  margin-inline: auto;
+  color: #334558;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.curriculumStudyNav {
+  position: sticky;
+  z-index: 10;
+  top: .75rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .8rem;
+  margin: clamp(2rem, 5vw, 3.5rem) auto;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  box-shadow: 0 12px 28px rgba(6, 23, 41, .12);
+  backdrop-filter: blur(12px);
+}
+
+.curriculumStudyNav__group { min-width: 0; }
+.curriculumStudyNav__group header { display: grid; gap: .2rem; margin-bottom: .55rem; }
+.curriculumStudyNav__group strong { color: var(--night); font-size: .72rem; letter-spacing: .08em; }
+.curriculumStudyNav__group span { color: #76531a; font-size: .72rem; font-weight: 700; }
+.curriculumStudyNav__links { display: flex; gap: .38rem; overflow-x: auto; padding-bottom: .15rem; scrollbar-width: thin; }
+.curriculumStudyNav__links a {
+  display: grid;
+  flex: 0 0 2.35rem;
+  min-height: 2.35rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: .45rem;
+  background: var(--cream);
+  color: var(--night);
+  font-size: .78rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.curriculumStudyNav__links a:hover,
+.curriculumStudyNav__links a:focus-visible,
+.curriculumStudyNav__links a[aria-current="true"] {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--night);
+  outline: none;
+}
+
+.curriculumPhase { max-width: 900px; margin-inline: auto; }
+.curriculumPhase > header { margin-top: clamp(3.5rem, 8vw, 6rem); border-bottom-color: rgba(16, 34, 55, .24); }
+.curriculumPhase > header p { color: #76531a; }
+.curriculumPhase > header h2 { color: var(--night); }
+.curriculumPage .chapterGrid { gap: 1.25rem; margin-top: 1.25rem; }
+.curriculumPage .chapterGrid details {
+  overflow: clip;
+  border: 1px solid rgba(16, 34, 55, .2);
+  border-radius: .9rem;
+  background: var(--paper);
+  box-shadow: 0 14px 32px rgba(6, 23, 41, .08);
+}
+
+.curriculumPage .chapterGrid summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .5rem 1rem;
+  align-items: center;
+  min-height: 5.25rem;
+  padding: 1rem clamp(1rem, 3vw, 1.75rem);
+  color: var(--night);
+}
+
+.curriculumPage .chapterGrid summary .week { display: none; }
+.curriculumChapterSummary__number,
+.curriculumChapterSummary__stage {
+  color: #76531a;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+}
+.curriculumChapterSummary__stage { justify-self: end; text-align: right; }
+.curriculumPage .chapterGrid summary strong { color: var(--night); font-size: clamp(1.25rem, 3vw, 1.7rem); }
+.curriculumPage .chapterGrid summary b { color: #76531a; }
+
+.curriculumReadingCard {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(1.15rem, 4vw, 2.5rem);
+  border-top: 1px solid rgba(16, 34, 55, .16);
+  background: var(--paper);
+}
+.curriculumPage .chapterBody { padding: 0; border: 0; }
+.curriculumReadingCard .chapterBody h3 { margin-top: 2.25rem; color: var(--night); font-size: clamp(1.45rem, 3vw, 2rem); }
+.curriculumReadingCard .chapterBody h3:first-child { margin-top: 0; }
+.curriculumReadingCard .chapterBody p {
+  max-width: 42rem;
+  color: #27394c;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.0625rem, 1.2vw, 1.1875rem);
+  line-height: 1.78;
+}
+.curriculumPage .sourceNote,
+.curriculumPage .weeklyQA dd,
+.curriculumPage .weekVideo em,
+.curriculumPage .weekVideo small { color: #405267; }
+
+.curriculumPractice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: clamp(1rem, 3vw, 1.6rem);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: .7rem;
+  background: var(--cream);
+}
+.curriculumPractice__eyebrow { margin: 0; color: #76531a; font-size: .75rem; font-weight: 850; letter-spacing: .08em; }
+.curriculumPractice h3 { margin: 0 0 .75rem !important; }
+.curriculumPractice p { margin-bottom: .75rem; }
+.curriculumPractice__message { color: #5e4215 !important; font-family: Georgia, serif !important; font-size: 1.05rem !important; font-style: italic; }
+
+.curriculumPage .weeklyQA { margin-top: 2rem; border-left-color: var(--gold); background: #f8f2e7; }
+.curriculumPage .weeklyQA dt,
+.curriculumPage .weekVideo,
+.curriculumPage .weekVideo strong { color: var(--night); }
+.curriculumPage .weekVideo { background: #f7f1e5; border-color: var(--border); border-left-color: var(--gold); }
+
+.curriculumCoachingCta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem 1.5rem;
+  margin-top: 2.5rem;
+  padding: 1.1rem 0;
+  border-block: 1px solid var(--border);
+}
+.curriculumCoachingCta p { margin: 0; color: var(--night); font-family: Georgia, serif; font-size: 1.1rem; }
+.curriculumCoachingCta a { color: #76531a; font-weight: 850; text-decoration-thickness: 2px; }
+
+.curriculumWeekNav { align-items: stretch; margin-top: 1.25rem; }
+.curriculumWeekNav a,
+.curriculumWeekNav button {
+  display: inline-flex;
+  flex: 1 1 11rem;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  border: 1px solid var(--border);
+  border-radius: .5rem;
+  background: var(--cream);
+  color: var(--night);
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.curriculumWeekNav button { border-color: var(--gold); background: var(--night); color: var(--cream); }
+.curriculumWeekNav button[aria-pressed="true"] { background: var(--gold); color: var(--night); }
+.curriculumWeekNav a:hover,
+.curriculumWeekNav a:focus-visible { border-color: var(--gold); outline: none; }
+
+@media (max-width: 860px) {
+  .curriculumStudyNav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .curriculumPage .curriculum { width: min(100% - 2rem, 1120px); }
+  .curriculumStudyNav { top: .4rem; grid-template-columns: 1fr; gap: .7rem; padding: .8rem; }
+  .curriculumStudyNav__links { overflow-x: auto; }
+  .curriculumPage .chapterGrid summary { grid-template-columns: 1fr auto; }
+  .curriculumChapterSummary__number { grid-column: 1; }
+  .curriculumChapterSummary__stage { grid-column: 1; justify-self: start; text-align: left; }
+  .curriculumPage .chapterGrid summary strong { grid-column: 1; grid-row: 2; }
+  .curriculumPage .chapterGrid summary b { grid-column: 2; grid-row: 1 / span 2; }
+  .curriculumReadingCard { padding: 1.15rem; }
+  .curriculumPractice { grid-template-columns: 1fr; }
+  .curriculumWeekNav > * { flex-basis: 100%; }
+}
+
 @media (max-width: 768px) {
   .curriculumJump > div {
     grid-template-columns: repeat(4, minmax(0, 1fr));

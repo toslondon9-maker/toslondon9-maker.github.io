@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { renderHome } from "../src/pages/home.mjs";
@@ -22,7 +23,8 @@ test("the complete historic 24-week curriculum is visitor-accessible from home a
   assert.match(curriculum, /One Consciousness - One Power/);
   assert.match(curriculum, /The Truth shall set you free/);
   assert.match(curriculum, /class="weekVideo"[^>]+href="https:\/\/photos\.google\.com\/share\//);
-  assert.equal(createHash("sha256").update(curriculum).digest("hex"), "30076ab416e90b65d015c0bdf83bcd1e3da27ffedb3dd8c35db6f619e6563709");
+  const source = readFileSync(new URL("../content/master-key-curriculum.html", import.meta.url));
+  assert.equal(createHash("sha256").update(source).digest("hex"), "f5e6831b7ba0f62991df8352b714544571dedaf8ae2132171270b7e232b97063");
   assert.ok(page.styles?.includes("/assets/index-Bgwsdhov.css"));
 
   const home = renderHome({ language: "en" });
