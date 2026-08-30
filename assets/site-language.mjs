@@ -1,4 +1,4 @@
-import { t } from "../content/translations.mjs?v=20260830-premium-upgrade";
+import { t } from "../content/translations.mjs?v=20260830-phase2-conversion";
 
 export const languageStorageKey = "uyp.language";
 

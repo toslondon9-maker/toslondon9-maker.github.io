@@ -10,6 +10,8 @@ import { resourcesPage } from "./pages/resources.mjs";
 import { getTheBookPage } from "./pages/get-the-book.mjs";
 import { aboutTariqPage } from "./pages/about-tariq.mjs";
 import { aiMentorsPage } from "./pages/ai-mentors.mjs";
+import { contactPage } from "./pages/contact.mjs";
+import { sessionHubPage } from "./pages/session-hub.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -68,6 +70,8 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.aiMentors]: (data) => aiMentorsPage(data),
   [siteData.routes.getTheBook]: (data) => getTheBookPage(data),
   [siteData.routes.aboutTariq]: (data) => aboutTariqPage(data),
+  [siteData.routes.contact]: (data) => contactPage(data),
+  [siteData.routes.liveCoaching]: (data) => sessionHubPage(data),
   ...Object.fromEntries(
     sevenDayExperience.lessons.map((lesson) => [
       lesson.route,

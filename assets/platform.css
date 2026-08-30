@@ -3536,3 +3536,486 @@ body {
     width: 100%;
   }
 }
+
+/* Phase 2: conversion journey, contact and Session Hub */
+.sevenDayDashboard__heroActions,
+.coachingNextSteps__actions,
+.sessionHub__heroActions,
+.sessionHub__prepareActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.35rem;
+}
+
+.sevenDayDashboard__after {
+  margin-top: clamp(2.5rem, 6vw, 5rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: linear-gradient(145deg, rgba(255, 253, 248, 0.96), rgba(237, 226, 207, 0.62));
+  box-shadow: var(--shadow-card);
+}
+
+.sevenDayDashboard__afterIntro {
+  max-width: 48rem;
+}
+
+.sevenDayDashboard__afterGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.sevenDayDashboard__afterGrid article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 1.35rem;
+  border: 1px solid rgba(181, 138, 59, 0.28);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.sevenDayDashboard__afterGrid article > strong {
+  margin-bottom: 0.75rem;
+  color: var(--gold);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+}
+
+.sevenDayDashboard__afterGrid article p {
+  flex: 1;
+  color: var(--muted);
+}
+
+.sevenDayLesson__bridge {
+  margin-top: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgba(212, 170, 87, 0.48);
+  border-radius: var(--radius-card);
+  background: linear-gradient(145deg, var(--night), var(--night-soft));
+  color: var(--cream);
+  box-shadow: var(--shadow-card);
+}
+
+.sevenDayLesson__bridge .eyebrow {
+  color: var(--gold-bright);
+}
+
+.sevenDayLesson__bridge > p:not(.eyebrow) {
+  max-width: 48rem;
+  color: rgba(247, 241, 229, 0.82);
+}
+
+.sevenDayLesson__bridgeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.sevenDayLesson__bridgeGrid a {
+  display: grid;
+  gap: 0.35rem;
+  min-height: 7.5rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(212, 170, 87, 0.4);
+  border-radius: 0.9rem;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.sevenDayLesson__bridgeGrid a:hover,
+.sevenDayLesson__bridgeGrid a:focus-visible {
+  border-color: var(--gold-bright);
+  background: rgba(212, 170, 87, 0.08);
+}
+
+.sevenDayLesson__bridgeGrid strong {
+  color: var(--gold-bright);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+}
+
+.sevenDayLesson__bridgePrimary {
+  background: rgba(212, 170, 87, 0.12);
+}
+
+.coachingDecision {
+  padding-top: clamp(2.5rem, 6vw, 5rem);
+}
+
+.coachingDecision__intro,
+.coachingNextSteps__intro {
+  max-width: 52rem;
+}
+
+.coachingDecision__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.coachingDecision__grid article {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.coachingDecision__grid article > span {
+  display: inline-flex;
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.coachingDecision__grid ul {
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+.coachingNextSteps {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.coachingNextSteps__steps {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.coachingNextSteps__steps li {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.coachingNextSteps__steps li:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.coachingNextSteps__steps strong {
+  color: var(--gold);
+  letter-spacing: 0.12em;
+}
+
+.coachingNextSteps__steps h3 {
+  margin-bottom: 0.35rem;
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+}
+
+.coachingNextSteps__steps p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.coachingNextSteps__actions {
+  grid-column: 1 / -1;
+  margin-top: -1rem;
+}
+
+.sessionHub {
+  background: var(--cream);
+}
+
+.sessionHub__hero {
+  padding: clamp(4rem, 9vw, 8rem) var(--space-gutter);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(212, 170, 87, 0.18), transparent 24rem),
+    linear-gradient(145deg, var(--night), var(--night-soft));
+  color: var(--cream);
+}
+
+.sessionHub__heroInner,
+.sessionHub__rhythmInner,
+.sessionHub__note {
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+}
+
+.sessionHub__heroInner {
+  max-width: 58rem;
+  margin-left: max(var(--space-gutter), calc((100% - var(--content-max)) / 2));
+}
+
+.sessionHub__hero .eyebrow {
+  color: var(--gold-bright);
+}
+
+.sessionHub__hero .routeShell__purpose {
+  max-width: 48rem;
+  color: rgba(247, 241, 229, 0.82);
+}
+
+.sessionHub__lead {
+  max-width: 48rem;
+  color: var(--muted);
+}
+
+.sessionHub__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.sessionHub__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.sessionHub__card p:not(.eyebrow) {
+  flex: 1;
+  color: var(--muted);
+}
+
+.sessionHub__rhythm {
+  padding: var(--space-section) var(--space-gutter);
+}
+
+.sessionHub__rhythmInner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.sessionHub__steps {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sessionHub__steps li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0.85rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(247, 241, 229, 0.18);
+}
+
+.sessionHub__steps strong {
+  color: var(--gold-bright);
+  letter-spacing: 0.12em;
+}
+
+.sessionHub__prepareGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.sessionHub__prepareGrid > div {
+  max-width: 44rem;
+}
+
+.sessionHub__prepareGrid ul {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sessionHub__prepareGrid li {
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--gold);
+  background: rgba(255, 253, 248, 0.72);
+  box-shadow: 0 5px 16px rgba(6, 23, 41, 0.06);
+}
+
+.sessionHub__note {
+  margin-bottom: var(--space-section);
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: rgba(255, 253, 248, 0.7);
+  color: var(--muted);
+}
+
+.contactPage__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: end;
+  padding: clamp(4rem, 9vw, 7rem) max(var(--space-gutter), calc((100% - var(--content-max)) / 2));
+  background: linear-gradient(180deg, var(--paper), var(--cream));
+}
+
+.contactPage__hero > div {
+  max-width: 52rem;
+}
+
+.contactPage__promise {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--night);
+  color: var(--cream);
+  box-shadow: var(--shadow-card);
+}
+
+.contactPage__promise strong,
+.contactPage__promise span {
+  display: block;
+}
+
+.contactPage__promise strong {
+  margin-bottom: 0.5rem;
+  color: var(--gold-bright);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+}
+
+.contactPage__promise span {
+  color: rgba(247, 241, 229, 0.82);
+}
+
+.contactPage__options > h2 {
+  max-width: 52rem;
+}
+
+.contactPage__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.contactPage__option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.contactPage__option > span {
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.contactPage__option p {
+  flex: 1;
+  color: var(--muted);
+}
+
+.contactPage__option--primary {
+  border-color: rgba(181, 138, 59, 0.7);
+  background: linear-gradient(155deg, var(--paper), rgba(237, 226, 207, 0.7));
+}
+
+.contactPage__prepare {
+  padding: var(--space-section) var(--space-gutter);
+}
+
+.contactPage__prepareInner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+}
+
+.contactPage__prepare ol {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contactPage__prepare li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0.85rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(247, 241, 229, 0.18);
+}
+
+.contactPage__prepare li strong {
+  color: var(--gold-bright);
+}
+
+.contactPage__free {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.contactPage__free > div {
+  max-width: 50rem;
+}
+
+@media (max-width: 900px) {
+  .sevenDayDashboard__afterGrid,
+  .sevenDayLesson__bridgeGrid,
+  .coachingDecision__grid,
+  .sessionHub__grid,
+  .contactPage__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .coachingNextSteps,
+  .sessionHub__rhythmInner,
+  .sessionHub__prepareGrid,
+  .contactPage__hero,
+  .contactPage__prepareInner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contactPage__promise {
+    max-width: 36rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contactPage__free {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .sevenDayDashboard__heroActions > *,
+  .coachingNextSteps__actions > *,
+  .sessionHub__heroActions > *,
+  .sessionHub__prepareActions > *,
+  .contactPage__option > a,
+  .contactPage__free > a {
+    width: 100%;
+  }
+
+  .sessionHub__heroInner {
+    margin-left: 0;
+  }
+}

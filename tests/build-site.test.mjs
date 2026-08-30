@@ -37,7 +37,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
-  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260830-premium-upgrade">/);
+  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260830-phase2-conversion">/);
   assert.match(html, /<link rel="preload" href="\/images\/the-secret-logo\.png" as="image">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
@@ -146,7 +146,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
-      if (["index.html", "master-key-system/index.html", "coaching/index.html", "about-tariq/index.html", "resources/index.html"].includes(globalPageFiles[index])) {
+      if (["index.html", "master-key-system/index.html", "coaching/index.html", "about-tariq/index.html", "resources/index.html", "contact/index.html"].includes(globalPageFiles[index])) {
         assert.match(page, /href="\/(?:start-free|master-key-system|coaching|contact|get-the-book)\//);
         continue;
       }
