@@ -681,6 +681,35 @@ main > article {
   backdrop-filter: blur(12px);
 }
 
+/* Master Key premium visual banners */
+.curriculumPage__heroVisual,
+.curriculumPhase__visual {
+  margin: 0 0 1.5rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #061425;
+  box-shadow: 0 24px 60px rgba(4, 14, 28, 0.18);
+}
+
+.curriculumPage__heroVisual img,
+.curriculumPhase__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.curriculumPhase__visual {
+  margin-bottom: 1.1rem;
+}
+
+@media (max-width: 640px) {
+  .curriculumPage__heroVisual,
+  .curriculumPhase__visual {
+    border-radius: 0.9rem;
+    margin-bottom: 1rem;
+  }
+}
+
 .curriculumStudyNav__toggle {
   display: none;
 }

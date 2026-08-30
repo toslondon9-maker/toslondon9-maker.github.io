@@ -51,6 +51,24 @@ test("Master Key page keeps the curriculum source file intact while exposing sel
   assert.ok(page.scripts?.includes("/assets/curriculum.mjs?v=20260830-prompt-nav-3"));
 });
 
+test("Master Key page uses the approved premium visual banners without changing chapter content", () => {
+  const html = curriculumPage();
+  const visualAssets = [
+    "master-key-24-week-hero.png",
+    "foundation-chapters-1-4.png",
+    "visualisation-chapters-5-11.png",
+    "concentration-chapters-12-18.png",
+    "contemplation-mastery-chapters-19-24.png",
+  ];
+
+  for (const asset of visualAssets) {
+    assert.doesNotThrow(() => readFileSync(new URL(`../images/master-key-visuals/${asset}`, import.meta.url)));
+    assert.match(html, new RegExp(`/images/master-key-visuals/${asset}`));
+  }
+  assert.equal((html.match(/class="curriculumPhase__visual"/g) ?? []).length, 4);
+  assert.match(html, /class="curriculumPage__heroVisual"/);
+});
+
 test("premium curriculum styles protect reading contrast, sticky navigation and mobile chapter controls", () => {
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
 
