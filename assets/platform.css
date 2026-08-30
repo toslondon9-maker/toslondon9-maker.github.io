@@ -2095,6 +2095,260 @@ main > article {
   }
 }
 
+/* Free AI Mentor prompt builder */
+.aiMentorPage {
+  padding: clamp(2rem, 6vw, 5rem) max(1rem, calc((100vw - 1180px) / 2));
+  background: var(--cream-deep);
+  color: var(--ink);
+}
+
+.aiMentorHero,
+.aiMentorBuilder {
+  max-width: 1040px;
+  margin-inline: auto;
+}
+
+.aiMentorHero {
+  max-width: 780px;
+  padding-block: clamp(1rem, 4vw, 3rem) clamp(2rem, 5vw, 4.5rem);
+}
+
+.aiMentorHero h1,
+.aiMentorBuilder h2 {
+  color: var(--night);
+}
+
+.aiMentorHero > p:not(.eyebrow) {
+  max-width: 62ch;
+  margin-bottom: 0;
+  color: var(--ink);
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.aiMentorBuilder {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.25rem, 4vw, 3rem);
+  border: 1px solid color-mix(in srgb, var(--gold) 52%, var(--border));
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.aiMentorBuilder__heading h2,
+.aiMentorControl h3,
+.aiMentorPrompt h2 {
+  margin-bottom: 0;
+}
+
+.aiMentorControl {
+  display: grid;
+  gap: 0.85rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.aiMentorControl h3 {
+  color: var(--night);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+.aiMentorOptionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.aiMentorChoice,
+.aiMentorPurpose,
+.aiMentorChapters button {
+  min-width: 0;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--night);
+  font: inherit;
+  text-align: start;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+.aiMentorChoice:hover,
+.aiMentorPurpose:hover,
+.aiMentorChapters button:hover {
+  border-color: var(--gold);
+}
+
+.aiMentorChoice:focus-visible,
+.aiMentorPurpose:focus-visible,
+.aiMentorChapters button:focus-visible,
+.aiMentorPrompt__actions a:focus-visible,
+.aiMentorPrompt__actions button:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+.aiMentorChoice {
+  display: grid;
+  gap: 0.4rem;
+  min-height: 7rem;
+  padding: 1rem;
+  border-radius: 0.7rem;
+}
+
+.aiMentorChoice strong {
+  color: var(--night);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.aiMentorChoice span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.aiMentorChoice[aria-pressed="true"],
+.aiMentorPurpose[aria-pressed="true"],
+.aiMentorChapters button[aria-pressed="true"] {
+  border-color: var(--gold-deep);
+  background: var(--night);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 45%, transparent);
+  color: var(--cream);
+}
+
+.aiMentorChoice[aria-pressed="true"] strong,
+.aiMentorChoice[aria-pressed="true"] span {
+  color: var(--cream);
+}
+
+.aiMentorSelectedChapter {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.aiMentorChapters {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.aiMentorChapters button {
+  display: grid;
+  min-height: 2.9rem;
+  place-items: center;
+  padding: 0.45rem;
+  border-radius: 0.45rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.aiMentorPurposeGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.aiMentorPurpose {
+  flex: 1 1 14rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.45rem;
+  font-weight: 750;
+}
+
+.aiMentorPrompt {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 1px solid color-mix(in srgb, var(--gold) 70%, var(--night));
+  border-radius: var(--radius-card);
+  background: var(--night);
+  color: var(--cream);
+}
+
+.aiMentorPrompt .eyebrow {
+  color: var(--gold-bright);
+}
+
+.aiMentorPrompt h2 {
+  color: var(--white);
+}
+
+.aiMentorPrompt pre {
+  max-width: 100%;
+  max-height: 32rem;
+  margin: 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--gold) 38%, var(--night));
+  border-radius: 0.6rem;
+  background: #07101d;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.aiMentorPrompt__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.aiMentorPrompt__actions .button--secondary {
+  border-color: var(--gold);
+  color: var(--cream);
+}
+
+.aiMentorCopyFeedback {
+  min-height: 1.5em;
+  color: var(--gold-bright);
+  font-weight: 750;
+}
+
+.aiMentorPrompt__notice {
+  margin: 0;
+  color: var(--cream);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.curriculumPage__introActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 760px) {
+  .aiMentorOptionGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .aiMentorPage {
+    padding-inline: 1rem;
+  }
+
+  .aiMentorBuilder {
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .aiMentorChapters {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .aiMentorPrompt__actions > * {
+    width: 100%;
+  }
+}
+
 .navBook { white-space: nowrap; }
 .bookPage { color: var(--ink); background: var(--cream); }
 .bookHero { background: var(--night); color: var(--cream); }

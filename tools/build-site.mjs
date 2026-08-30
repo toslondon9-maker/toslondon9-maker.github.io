@@ -13,6 +13,7 @@ const previewRoot = path.join(repositoryRoot, ".build-preview");
 const runtimeFiles = Object.freeze([
   "assets/index-Bgwsdhov.css",
   "assets/curriculum.mjs",
+  "assets/ai-mentors.mjs",
   "assets/platform.css",
   "assets/seven-day-progress.mjs",
   "assets/site-language.mjs",

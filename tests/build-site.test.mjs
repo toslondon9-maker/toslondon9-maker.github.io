@@ -37,7 +37,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
-  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260829-master-key-prompt">/);
+  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260829-ai-mentor">/);
   assert.match(html, /<link rel="preload" href="\/images\/the-secret-logo\.png" as="image">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
@@ -129,6 +129,12 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
+      if (globalPageFiles[index] === "ai-mentors/index.html") {
+        assert.match(page, /data-ai-mentor-prompt/);
+        assert.match(page, /src="\/assets\/ai-mentors\.mjs"/);
+        continue;
+      }
+
       assert.match(page, /<title data-i18n="route\.[^"]+\.metaTitle">/);
       assert.match(page, /<meta name="description"[^>]+data-i18n="route\.[^"]+\.metaDescription">/);
 
@@ -163,6 +169,7 @@ test("standalone previews include every local dependency referenced by route she
     const result = await buildSite({ outputRoot });
     const requiredFiles = [
       "assets/platform.css",
+      "assets/ai-mentors.mjs",
       "assets/seven-day-progress.mjs",
       "assets/site-language.mjs",
       "assets/site-navigation.mjs",
@@ -199,12 +206,11 @@ test("seven-day routes load the progress module exactly once", async () => {
   }
 });
 
-test("the AI mentor action resolves to a generated destination", () => {
+test("the AI mentor experience resolves to a generated destination", () => {
   const page = routeRenderers[siteData.routes.aiMentors](siteData);
-  const actionHref = page.body.match(/class="button--primary routeShell__action" href="([^"]+)"/)?.[1];
 
-  assert.equal(actionHref, siteData.routes.contact);
-  assert.ok(routeRenderers[actionHref]);
+  assert.match(page.body, /data-ai-mentor-prompt/);
+  assert.match(page.body, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
 });
 
 test("contact actions derive their email address from shared site data", () => {

@@ -9,6 +9,7 @@ import { sevenDayLessonPage } from "./pages/seven-day-lesson.mjs";
 import { resourcesPage } from "./pages/resources.mjs";
 import { getTheBookPage } from "./pages/get-the-book.mjs";
 import { aboutTariqPage } from "./pages/about-tariq.mjs";
+import { aiMentorsPage } from "./pages/ai-mentors.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -16,7 +17,6 @@ const routeShells = Object.freeze({
   coaching: { actionRoute: "contact", detail: "price" },
   aboutTariq: { actionRoute: "contact" },
   resources: { actionRoute: "startFree" },
-  aiMentors: { actionRoute: "contact" },
   contact: { actionEmail: true },
   faq: { actionRoute: "contact" },
   referral: { actionRoute: "contact" },
@@ -65,6 +65,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.coaching]: (data) => coachingPage(data),
   [siteData.routes.masterKeySystem]: (data) => masterKeyCurriculumPage(data),
   [siteData.routes.resources]: (data) => resourcesPage(data),
+  [siteData.routes.aiMentors]: (data) => aiMentorsPage(data),
   [siteData.routes.getTheBook]: (data) => getTheBookPage(data),
   [siteData.routes.aboutTariq]: (data) => aboutTariqPage(data),
   ...Object.fromEntries(
