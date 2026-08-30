@@ -5,6 +5,7 @@ const headerNavigationItems = Object.freeze([
   { route: siteData.routes.home, key: "nav.home" },
   { route: siteData.routes.masterKeySystem, key: "nav.masterKeySystem" },
   { route: siteData.routes.startFree, key: "nav.startFree", className: "navStartFree" },
+  { route: siteData.routes.aiMentors, key: "nav.aiMentors" },
   { route: siteData.routes.coaching, key: "nav.coaching" },
   { route: siteData.routes.aboutTariq, key: "nav.aboutTariq" },
   { route: siteData.routes.resources, key: "nav.resources" },
@@ -50,5 +51,5 @@ export function renderHeader({ route, language = "en" }) {
 export function renderFooter({ language = "en", route = "" } = {}) {
   const links = renderRouteLinks(footerNavigationItems, route, language);
 
-  return `<footer class="siteFooter"><div class="siteFooter__mission"><a class="siteFooter__brand" href="${siteData.routes.home}">Unleash Your Power</a><p data-i18n="footer.mission">${escapeHtml(t("footer.mission", language))}</p></div><nav class="siteFooter__nav" aria-label="${escapeHtml(t("nav.footerLabel", language))}" data-i18n-aria-label="nav.footerLabel"><ul>${links}</ul></nav><div class="siteFooter__meta">${renderLanguageControls(language, "footer")}<nav aria-label="${escapeHtml(t("nav.legalLabel", language))}" data-i18n-aria-label="nav.legalLabel"><a href="${siteData.routes.privacy}" data-i18n="footer.privacy">${escapeHtml(t("footer.privacy", language))}</a><a href="${siteData.routes.terms}" data-i18n="footer.terms">${escapeHtml(t("footer.terms", language))}</a></nav><p data-i18n="footer.copyright">${escapeHtml(t("footer.copyright", language))}</p></div></footer>`;
+  return `<footer class="siteFooter"><div class="siteFooter__mission"><a class="siteFooter__brand" href="${siteData.routes.home}">Unleash Your Power</a><p data-i18n="footer.mission">${escapeHtml(t("footer.mission", language))}</p><a class="siteFooter__start" href="${siteData.routes.startFree}" data-i18n="cta.startFree">${escapeHtml(t("cta.startFree", language))} →</a></div><nav class="siteFooter__nav" aria-label="${escapeHtml(t("nav.footerLabel", language))}" data-i18n-aria-label="nav.footerLabel"><ul>${links}</ul></nav><div class="siteFooter__meta">${renderLanguageControls(language, "footer")}<nav aria-label="${escapeHtml(t("nav.legalLabel", language))}" data-i18n-aria-label="nav.legalLabel"><a href="${siteData.routes.privacy}" data-i18n="footer.privacy">${escapeHtml(t("footer.privacy", language))}</a><a href="${siteData.routes.terms}" data-i18n="footer.terms">${escapeHtml(t("footer.terms", language))}</a></nav><p data-i18n="footer.copyright">${escapeHtml(t("footer.copyright", language))}</p></div></footer>`;
 }

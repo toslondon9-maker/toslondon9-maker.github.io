@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
-import { renderHome } from "../src/pages/home.mjs";
+import { t } from "../content/translations.mjs";
+import { homePage, renderHome } from "../src/pages/home.mjs";
 
 const approvedSections = ["hero", "lineage", "start-free", "master-key", "testimonials", "coaching", "next-step"];
 
@@ -33,6 +34,22 @@ test("homepage presents the complete seven-day taster", () => {
   assert.match(taster, /See What’s Running Your Life/);
   assert.match(taster, /Choose What Happens Next/);
   assert.match(taster, /href="\/start-free\/"[^>]*>START MY FREE 7 DAYS<\/a>/);
+  assert.match(taster, /No pressure\. No purchase required\./);
+  assert.match(taster, /class="[^"]*homeTaster__layout[^"]*"/);
+});
+
+test("homepage presents the approved premium conversion upgrades", () => {
+  const html = renderHome({ language: "en" });
+
+  assert.match(html, /class="homeHero__proof"/);
+  assert.match(html, /class="homeHero__caption"/);
+  assert.match(html, /class="homeCoaching__visual"><img src="\/images\/unleash-your-power-programme\.jpeg"/);
+  assert.match(html, /class="homeNext__actionPanel"/);
+});
+
+test("homepage keeps its premium SEO title when language enhancements run", () => {
+  assert.equal(homePage(siteData, "en").title, "Unleash Your Power | Master Key System Coaching with Tariq");
+  assert.equal(t("meta.home.title", "en"), "Unleash Your Power | Master Key System Coaching with Tariq");
 });
 
 test("homepage loads with the concise four-phase journey and safe responsive actions", async () => {
