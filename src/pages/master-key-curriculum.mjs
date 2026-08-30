@@ -29,7 +29,7 @@ function wrapPractice(chapter) {
 
 function enhanceAiPrompt(chapter, number) {
   return chapter
-    .replace(/<details class="promptPreview"><summary>Preview the engineered prompt <b>＋<\/b><\/summary><pre>([\s\S]*?)<\/pre><\/details>/, `<section class="aiMasteryPrompt" aria-label="Week ${number} guided prompt"><p class="aiMasteryPrompt__label">WEEK ${number} GUIDED PROMPT</p><pre>$1</pre></section>`)
+    .replace(/<details class="promptPreview"><summary>Preview the engineered prompt <b>＋<\/b><\/summary><pre>([\s\S]*?)<\/pre><\/details>/, `<details class="aiMasteryPrompt" aria-label="Week ${number} guided prompt"><summary>View guided prompt <b aria-hidden="true">＋</b></summary><div class="aiMasteryPrompt__content"><p class="aiMasteryPrompt__label">WEEK ${number} GUIDED PROMPT</p><pre>$1</pre></div></details>`)
     .replace(/(<button type="button" aria-label="Copy the Week \d+ AI mastery prompt">Copy prompt<\/button>)(<\/div>)/, `$1<span class="aiCopyFeedback" data-ai-copy-feedback role="status" aria-live="polite"></span>$2`);
 }
 
@@ -63,7 +63,7 @@ function renderStudyNavigator() {
     }).join("");
     return `<section class="curriculumStudyNav__group"><header><strong>${phase.title}</strong><span>${phase.range}</span></header><div class="curriculumStudyNav__links">${links}</div></section>`;
   }).join("");
-  return `<nav class="curriculumStudyNav" aria-label="24 chapter navigator">${groups}</nav>`;
+  return `<button class="curriculumStudyNav__toggle" type="button" data-curriculum-navigator-toggle aria-expanded="false" aria-controls="curriculum-study-navigator">Show all 24 chapters <span aria-hidden="true">⌄</span></button><nav class="curriculumStudyNav" id="curriculum-study-navigator" data-curriculum-navigator aria-label="24 chapter navigator">${groups}</nav>`;
 }
 
 function renderCurriculum() {
@@ -85,6 +85,6 @@ export function masterKeyCurriculumPage(data = canonicalSiteData, language = "en
     descriptionKey: "route.masterKeySystem.metaDescription",
     body: `<main class="curriculumPage" id="main-content">${renderCurriculum()}</main>`,
     styles: ["/assets/index-Bgwsdhov.css"],
-    scripts: ["/assets/curriculum.mjs"],
+    scripts: ["/assets/curriculum.mjs?v=20260830-prompt-nav-3"],
   };
 }

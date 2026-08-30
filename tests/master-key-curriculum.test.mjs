@@ -33,3 +33,20 @@ test("the complete historic 24-week curriculum is visitor-accessible from home a
   const navigation = renderHeader({ route: "/", language: "en" });
   assert.equal((navigation.match(/href="\/master-key-system\/"[^>]*>Master Key System<\/a>/g) ?? []).length, 2);
 });
+
+test("Master Key prompts begin minimised with native disclosure controls without changing their original prompt content", () => {
+  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+
+  assert.equal((html.match(/<details class="aiMasteryPrompt" aria-label="Week \d+ guided prompt">/g) ?? []).length, 24);
+  assert.equal((html.match(/<summary>View guided prompt <b aria-hidden="true">＋<\/b><\/summary>/g) ?? []).length, 24);
+  assert.match(html, /Act as my personal Master Key System tutor, Socratic coach and accountability partner for Week 1/);
+});
+
+test("Master Key page exposes a mobile navigator control alongside all 24 chapter links", () => {
+  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+
+  assert.match(html, /data-curriculum-navigator-toggle aria-expanded="false" aria-controls="curriculum-study-navigator"/);
+  assert.match(html, /Show all 24 chapters/);
+  assert.match(html, /<nav class="curriculumStudyNav" id="curriculum-study-navigator" data-curriculum-navigator/);
+  assert.equal((html.match(/data-curriculum-chapter-link/g) ?? []).length, 70);
+});

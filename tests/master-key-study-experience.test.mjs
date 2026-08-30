@@ -36,6 +36,7 @@ test("Master Key page provides the premium 24-chapter study shell around the pre
 test("Master Key page keeps the curriculum source file intact while exposing selected chapter controls", () => {
   const source = readFileSync(new URL("../content/master-key-curriculum.html", import.meta.url), "utf8");
   const client = readFileSync(new URL("../assets/curriculum.mjs", import.meta.url), "utf8");
+  const page = routeRenderers[siteData.routes.masterKeySystem](siteData);
 
   assert.match(source, /One Consciousness - One Power/);
   assert.match(source, /The Truth shall set you free/);
@@ -47,6 +48,7 @@ test("Master Key page keeps the curriculum source file intact while exposing sel
   assert.match(client, /\.aiMasteryPrompt pre/);
   assert.match(client, /Prompt copied\./);
   assert.match(client, /Copy failed\./);
+  assert.ok(page.scripts?.includes("/assets/curriculum.mjs?v=20260830-prompt-nav-3"));
 });
 
 test("premium curriculum styles protect reading contrast, sticky navigation and mobile chapter controls", () => {

@@ -37,6 +37,20 @@ for (const button of document.querySelectorAll(".aiMasteryTop button")) {
 const chapters = [...document.querySelectorAll("[data-curriculum-chapter]")];
 const chapterLinks = [...document.querySelectorAll("[data-curriculum-chapter-link]")];
 const status = document.querySelector("[data-curriculum-status]");
+const navigatorToggle = document.querySelector("[data-curriculum-navigator-toggle]");
+const studyNavigator = document.querySelector("[data-curriculum-navigator]");
+const mobileNavigator = window.matchMedia("(max-width: 640px)");
+
+function setNavigatorCollapsed(collapsed) {
+  if (!navigatorToggle || !studyNavigator) return;
+  studyNavigator.dataset.collapsed = String(collapsed);
+  navigatorToggle.setAttribute("aria-expanded", String(!collapsed));
+  navigatorToggle.firstChild.textContent = collapsed ? "Show all 24 chapters " : "Hide chapter navigator ";
+}
+
+function syncNavigatorForViewport() {
+  setNavigatorCollapsed(mobileNavigator.matches);
+}
 
 function selectChapter(number, { focus = false, scroll = false } = {}) {
   const chapter = chapters.find((item) => Number(item.dataset.curriculumChapter) === Number(number));
@@ -52,8 +66,11 @@ function selectChapter(number, { focus = false, scroll = false } = {}) {
 }
 
 for (const chapter of chapters) chapter.addEventListener("toggle", () => { if (chapter.open) selectChapter(chapter.dataset.curriculumChapter); });
-for (const link of chapterLinks) link.addEventListener("click", (event) => { event.preventDefault(); const number = link.dataset.curriculumChapterLink; history.replaceState(null, "", `#week-${number}`); selectChapter(number, { focus: true, scroll: true }); });
+for (const link of chapterLinks) link.addEventListener("click", (event) => { event.preventDefault(); const number = link.dataset.curriculumChapterLink; history.replaceState(null, "", `#week-${number}`); selectChapter(number, { focus: true, scroll: true }); if (mobileNavigator.matches) setNavigatorCollapsed(true); });
 for (const button of document.querySelectorAll("[data-curriculum-complete]")) button.addEventListener("click", () => { const complete = button.getAttribute("aria-pressed") !== "true"; button.setAttribute("aria-pressed", String(complete)); button.firstChild.textContent = complete ? "Completed Chapter " : "Complete Chapter "; });
+navigatorToggle?.addEventListener("click", () => setNavigatorCollapsed(studyNavigator?.dataset.collapsed !== "true"));
+mobileNavigator.addEventListener?.("change", syncNavigatorForViewport);
 
 const fragment = window.location.hash.match(/^#week-(\d{1,2})$/)?.[1];
 selectChapter(fragment ?? 1);
+syncNavigatorForViewport();

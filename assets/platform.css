@@ -681,6 +681,10 @@ main > article {
   backdrop-filter: blur(12px);
 }
 
+.curriculumStudyNav__toggle {
+  display: none;
+}
+
 .curriculumStudyNav__group { min-width: 0; }
 .curriculumStudyNav__group header { display: grid; gap: .2rem; margin-bottom: .55rem; }
 .curriculumStudyNav__group strong { color: var(--night); font-size: .72rem; letter-spacing: .08em; }
@@ -801,7 +805,25 @@ main > article {
 .curriculumPage .aiMastery > p { max-width: 44rem; margin: .75rem 0 0 !important; color: #e8edf0 !important; font-size: .98rem !important; line-height: 1.65; }
 .curriculumPage .aiMasteryTop button { min-height: 2.75rem; }
 .aiCopyFeedback { min-width: 7.5rem; color: var(--cream); font-size: .82rem; font-weight: 750; }
-.aiMasteryPrompt { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #54708a; }
+.aiMasteryPrompt { margin-top: 1rem; border-top: 1px solid #54708a; }
+.curriculumPage .chapterGrid .aiMasteryPrompt summary {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 0;
+  padding-top: 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+.aiMasteryPrompt summary b { color: var(--gold-bright); font-size: 1.25rem; transition: transform 160ms ease; }
+.aiMasteryPrompt[open] summary b { transform: rotate(45deg); }
+.aiMasteryPrompt__content { padding-top: 1rem; }
 .aiMasteryPrompt__label { margin: 0 0 .65rem; font-size: .74rem; letter-spacing: .1em; }
 .aiMasteryPrompt pre {
   max-width: none;
@@ -864,7 +886,24 @@ main > article {
 
 @media (max-width: 640px) {
   .curriculumPage .curriculum { width: min(100% - 2rem, 1120px); }
+  .curriculumStudyNav__toggle {
+    display: inline-flex;
+    width: 100%;
+    min-height: 2.9rem;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1.25rem auto 0;
+    padding: .7rem .9rem;
+    border: 1px solid var(--gold);
+    border-radius: .65rem;
+    background: var(--night);
+    color: var(--cream);
+    font: inherit;
+    font-weight: 800;
+  }
+  .curriculumStudyNav__toggle span { color: var(--gold-bright); font-size: 1.2rem; }
   .curriculumStudyNav { top: .4rem; grid-template-columns: 1fr; gap: .7rem; padding: .8rem; }
+  .has-js .curriculumStudyNav[data-collapsed="true"] { display: none; }
   .curriculumStudyNav__links { grid-template-columns: repeat(6, minmax(0, 1fr)); overflow: visible; }
   .curriculumStudyNav__links a { min-height: 2.6rem; }
   .curriculumPage .aiMasteryTop { align-items: stretch; }
