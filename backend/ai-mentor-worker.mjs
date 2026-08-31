@@ -68,10 +68,13 @@ function validMessages(messages) {
   return Array.isArray(messages)
     && messages.length > 0
     && messages.length <= MAX_MESSAGES
-    && messages.every(({ role, content }) => (role === "user" || role === "assistant")
-      && typeof content === "string"
-      && content.trim().length > 0
-      && content.length <= MAX_MESSAGE_CHARACTERS);
+    && messages.every((message) => message
+      && typeof message === "object"
+      && !Array.isArray(message)
+      && (message.role === "user" || message.role === "assistant")
+      && typeof message.content === "string"
+      && message.content.trim().length > 0
+      && message.content.length <= MAX_MESSAGE_CHARACTERS);
 }
 
 function validPayload(payload) {
