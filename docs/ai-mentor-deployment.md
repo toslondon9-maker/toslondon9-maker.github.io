@@ -1,24 +1,18 @@
 # AI Mentor Worker deployment
 
-The AI Mentor page is static; this Cloudflare Worker is the optional server-side proxy for mentor questions. It is deliberately separate so the OpenAI key never appears in the site, browser JavaScript, generated files, or Git history.
+The AI Mentor page is static; this Cloudflare Worker is the optional server-side proxy for mentor questions. It uses a Cloudflare Workers AI binding, so no provider API key appears in the site, browser JavaScript, generated files, or Git history.
 
 ## Deploy
 
 1. Install and authenticate Wrangler in an environment with access to the intended Cloudflare account.
 2. From `backend/`, update `wrangler.toml` with the exact public GitHub Pages origin in `ALLOWED_ORIGIN`. For a preview environment, use its own Worker and preview origin. Multiple origins may be comma-separated.
-3. Set the secret interactively; do not put it in `wrangler.toml`, `.env.example`, commits, CI logs, or static-site settings:
+3. Deploy with `npx wrangler deploy` from `backend/`. The `AI` binding in `wrangler.toml` connects the Worker to Workers AI. Set the public Worker URL as the non-secret `ai-mentor-endpoint` meta value emitted for `/ai-mentors/` during the static-site integration. The checked-in fallback is `/api/mentor`.
 
-   ```sh
-   npx wrangler secret put OPENAI_API_KEY
-   ```
-
-4. Deploy with `npx wrangler deploy` from `backend/`. Set the public Worker URL as the non-secret `ai-mentor-endpoint` meta value emitted for `/ai-mentors/` during the static-site integration. The checked-in fallback is `/api/mentor`.
-
-`OPENAI_MODEL` is retained as a deployment setting, but the Worker only accepts `gpt-5.6-luna`; a client cannot choose a model or submit a system prompt.
+The Worker uses the fixed `@cf/meta/llama-3.2-3b-instruct` model; a client cannot choose a model or submit a system prompt.
 
 ## Operational limits
 
-Apply Cloudflare rate limiting/WAF rules to `POST /mentor` before public launch (per-IP and per-origin limits), and use an OpenAI project with a restricted key, a monthly spend limit, and usage alerts. The Worker allows only configured browser origins, three fixed mentor IDs, 24 fixed chapters, and at most 12 short conversation messages. It uses `store: false` for Responses API requests.
+Apply Cloudflare rate limiting/WAF rules to `POST /mentor` before public launch (per-IP and per-origin limits). Workers AI usage is subject to the account's current allocation and pricing. The Worker allows only configured browser origins, three fixed mentor IDs, 24 fixed chapters, and at most 12 short conversation messages.
 
 ## Test
 
@@ -28,7 +22,7 @@ Run the focused contract test from the repository root:
 node --test tests/ai-mentor-backend.test.mjs
 ```
 
-For a local smoke test, set `OPENAI_API_KEY` as a local Wrangler secret and supply the exact local origin through `ALLOWED_ORIGIN`; never add a real value to `.env.example`.
+For a local smoke test, use a remote Workers AI binding and supply the exact local origin through `ALLOWED_ORIGIN`.
 
 ## Rollback
 
