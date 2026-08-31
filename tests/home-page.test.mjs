@@ -43,7 +43,12 @@ test("homepage presents the approved premium conversion upgrades", () => {
 
   assert.match(html, /class="homeHero__proof"/);
   assert.match(html, /class="homeHero__caption"/);
-  assert.match(html, /class="homeCoaching__visual"><img src="\/images\/unleash-your-power-programme\.jpeg"/);
+  assert.match(html, /class="homeCoaching__visual"[^>]*><div class="homeCoaching__visualInner">/);
+  assert.match(html, /THE 24-WEEK JOURNEY/);
+  assert.match(html, /THE MASTER KEY SYSTEM/);
+  const coaching = html.match(/<section[^>]+data-home-section="coaching"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.equal((coaching.match(/<article>/g) ?? []).length, 4);
+  assert.doesNotMatch(html, /unleash-your-power-programme\.jpeg/);
   assert.match(html, /class="homeNext__actionPanel"/);
 });
 
