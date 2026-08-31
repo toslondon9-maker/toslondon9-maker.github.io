@@ -113,7 +113,7 @@ test("AI Mentor client sends only selected study context and offers a safe on-pa
 
   assert.match(client, /const HISTORY_LIMIT = 12/);
   assert.match(client, /data\.endpoint \|\| "\/api\/mentor"/);
-  assert.match(client, /mentorId: current\.mentor\.id/);
+  assert.match(client, /mentorId: backendMentorId\(current\.mentor\.id\)/);
   assert.match(client, /chapter: current\.chapter\.week/);
   assert.match(client, /messages: state\.history\.slice\(-HISTORY_LIMIT\)/);
   assert.match(client, /Content-Type": "application\/json/);
@@ -126,6 +126,20 @@ test("AI Mentor client sends only selected study context and offers a safe on-pa
   assert.match(css, /\.aiMentorChat\s*\{/);
   assert.match(css, /\.aiMentorMessage p\s*\{[^}]*overflow-wrap:\s*anywhere/s);
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.aiMentorQuestion\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
+});
+
+test("AI Mentor client maps the established Helmar ID and discards replies after a context reset", async () => {
+  const clientModule = await import("../assets/ai-mentors.mjs");
+  const client = readFileSync(new URL("../assets/ai-mentors.mjs", import.meta.url), "utf8");
+
+  assert.equal(typeof clientModule.backendMentorId, "function");
+  assert.equal(clientModule.backendMentorId("helmar"), "rudolph");
+  assert.equal(clientModule.backendMentorId("haanel"), "haanel");
+  assert.match(client, /requestVersion/);
+  assert.match(client, /const requestVersion = state\.requestVersion/);
+  assert.match(client, /if \(requestVersion !== state\.requestVersion\) return/);
+  assert.match(client, /state\.requestVersion \+= 1/);
+  assert.match(client, /data-ai-mentor-purpose[^\n]+render\(\{ reset: true \}\)/);
 });
 
 test("AI Mentor prompt generator supports every mentor, chapter and purpose", () => {

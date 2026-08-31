@@ -1,5 +1,10 @@
 const HISTORY_LIMIT = 12;
 const UNAVAILABLE_MESSAGE = "AI mentor is unavailable right now. You can still copy the complete prompt or open ChatGPT.";
+const BACKEND_MENTOR_IDS = Object.freeze({ helmar: "rudolph" });
+
+export function backendMentorId(mentorId) {
+  return BACKEND_MENTOR_IDS[mentorId] ?? mentorId;
+}
 
 export function buildAiMentorPrompt({ mentor, purpose, chapter }) {
   return `You are a study guide, not Charles F. Haanel, Helmar Rudolph or Tariq Saddique. Do not impersonate Charles F. Haanel, Helmar Rudolph or Tariq Saddique, and do not claim endorsement or affiliation.\n\nSTUDY GUIDE\n${mentor.name}\n${mentor.instruction}\n\nPURPOSE\n${purpose.label}\n${purpose.instruction}\n\nAPPROVED STUDY MATERIAL\nWeek ${chapter.week}: ${chapter.title}\nProgramme stage: ${chapter.phase}\n\nIntroduction: ${chapter.introduction}\n\nCore teaching: ${chapter.teaching}\n\nWeekly exercise: ${chapter.exercise}\n\nGUIDANCE\nUse only the supplied material. Help me think, reflect and apply it responsibly; do not promise outcomes, invent facts or replace professional advice. Begin by asking me one thoughtful question.`;
@@ -54,7 +59,7 @@ function initialiseAiMentors() {
   const question = document.querySelector("[data-ai-mentor-question]");
   const sendButton = document.querySelector("[data-ai-mentor-send]");
   const newConversation = document.querySelector("[data-ai-mentor-new-conversation]");
-  const state = { mentor: "haanel", chapter: 1, purpose: "understand", history: [], loading: false };
+  const state = { mentor: "haanel", chapter: 1, purpose: "understand", history: [], loading: false, requestVersion: 0 };
 
   const selection = () => ({
     mentor: data.mentors.find((mentor) => mentor.id === state.mentor),
@@ -74,10 +79,12 @@ function initialiseAiMentors() {
     form.setAttribute("aria-busy", String(loading));
   };
   const resetConversation = (message) => {
+    state.requestVersion += 1;
     state.history = [];
     messages.replaceChildren(welcome);
     setError();
     setStatus(message ?? labels().ready);
+    setLoading(false);
     question.value = "";
     question.focus();
   };
@@ -95,6 +102,7 @@ function initialiseAiMentors() {
     const content = value.trim();
     if (!content || state.loading) return;
     const current = selection();
+    const requestVersion = state.requestVersion;
     setError();
     appendMessage(messages, "user", content);
     state.history.push({ role: "user", content });
@@ -107,12 +115,13 @@ function initialiseAiMentors() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          mentorId: current.mentor.id,
+          mentorId: backendMentorId(current.mentor.id),
           chapter: current.chapter.week,
           messages: state.history.slice(-HISTORY_LIMIT),
         }),
       });
       const payload = await response.json();
+      if (requestVersion !== state.requestVersion) return;
       if (!response.ok || typeof payload.reply !== "string" || !payload.reply.trim()) throw new Error("Mentor request failed");
       const reply = payload.reply.trim();
       state.history.push({ role: "assistant", content: reply });
@@ -120,16 +129,18 @@ function initialiseAiMentors() {
       appendMessage(messages, "assistant", reply);
       setStatus(labels().sent);
     } catch {
-      setError(UNAVAILABLE_MESSAGE);
-      setStatus("");
+      if (requestVersion === state.requestVersion) {
+        setError(UNAVAILABLE_MESSAGE);
+        setStatus("");
+      }
     } finally {
-      setLoading(false);
+      if (requestVersion === state.requestVersion) setLoading(false);
     }
   };
 
   document.querySelectorAll("[data-ai-mentor-id]").forEach((button) => button.addEventListener("click", () => { state.mentor = button.dataset.aiMentorId; render({ reset: true }); }));
   document.querySelectorAll("[data-ai-mentor-chapter]").forEach((button) => button.addEventListener("click", () => { state.chapter = Number(button.dataset.aiMentorChapter); render({ reset: true }); }));
-  document.querySelectorAll("[data-ai-mentor-purpose]").forEach((button) => button.addEventListener("click", () => { state.purpose = button.dataset.aiMentorPurpose; render(); }));
+  document.querySelectorAll("[data-ai-mentor-purpose]").forEach((button) => button.addEventListener("click", () => { state.purpose = button.dataset.aiMentorPurpose; render({ reset: true }); }));
   document.querySelectorAll("[data-ai-mentor-starter]").forEach((button) => button.addEventListener("click", () => sendQuestion(button.dataset.aiMentorStarter ?? "")));
   newConversation.addEventListener("click", () => resetConversation(labels().reset));
   form.addEventListener("submit", (event) => {
