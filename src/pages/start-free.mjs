@@ -37,6 +37,18 @@ function renderAfterSevenDays(data, language) {
   return `<section class="sevenDayDashboard__after" id="after-seven-days" aria-labelledby="after-seven-days-title"><div class="sevenDayDashboard__afterIntro"><p class="eyebrow">${copy("phase2.after.eyebrow", language, "span")}</p><h2 id="after-seven-days-title">${copy("phase2.after.title", language, "span")}</h2>${copy("phase2.after.body", language)}</div><div class="sevenDayDashboard__afterGrid"><article><strong>01</strong><h3>${copy("phase2.after.studyTitle", language, "span")}</h3>${copy("phase2.after.studyBody", language)}<a class="button--text" href="${data.routes.masterKeySystem}">${copy("phase2.after.studyAction", language, "span")}</a></article><article><strong>02</strong><h3>${copy("phase2.after.aiTitle", language, "span")}</h3>${copy("phase2.after.aiBody", language)}<a class="button--text" href="${data.routes.aiMentors}">${copy("phase2.after.aiAction", language, "span")}</a></article><article><strong>03</strong><h3>${copy("phase2.after.coachingTitle", language, "span")}</h3>${copy("phase2.after.coachingBody", language)}<a class="button--primary" href="${data.routes.coaching}">${copy("phase2.after.coachingAction", language, "span")}</a></article></div></section>`;
 }
 
+function renderFlyer(language) {
+  const desktopLabel = language === "es" ? "Haz clic para ampliar" : "Click to enlarge";
+  const mobileLabel = language === "es" ? "Toca para ampliar" : "Tap to enlarge";
+  const alt = t("sevenDay.dashboard.imageAlt", language);
+  return `<div class="sevenDayDashboard__flyer"><button type="button" class="sevenDayDashboard__flyerTrigger" data-flyer-trigger aria-haspopup="dialog" aria-controls="seven-day-flyer-dialog"><span class="sevenDayDashboard__flyerIcon" aria-hidden="true">↗</span><img src="/images/free-7-day-taster.jpeg" width="1122" height="1402" loading="eager" fetchpriority="high" decoding="async" alt="${escapeHtml(alt)}" data-i18n-alt="sevenDay.dashboard.imageAlt"><span class="sevenDayDashboard__flyerHint sevenDayDashboard__flyerHint--desktop">${desktopLabel}</span><span class="sevenDayDashboard__flyerHint sevenDayDashboard__flyerHint--mobile">${mobileLabel}</span></button><p class="sevenDayDashboard__flyerNote">${desktopLabel} · ${mobileLabel}</p></div><div class="sevenDayDashboard__flyerDialog" id="seven-day-flyer-dialog" data-flyer-dialog hidden role="dialog" aria-modal="true" aria-labelledby="seven-day-flyer-title"><div class="sevenDayDashboard__flyerBackdrop" data-flyer-close></div><div class="sevenDayDashboard__flyerPanel" role="document"><div class="sevenDayDashboard__flyerToolbar"><h2 id="seven-day-flyer-title">${language === "es" ? "Experiencia gratuita de 7 días" : "Free 7-Day Experience"}</h2><button type="button" class="sevenDayDashboard__flyerClose" data-flyer-close aria-label="${language === "es" ? "Cerrar" : "Close"}">×</button></div><div class="sevenDayDashboard__flyerViewport"><img src="/images/free-7-day-taster.jpeg" width="1122" height="1402" loading="eager" decoding="async" alt="${escapeHtml(alt)}" data-flyer-image></div></div></div>`;
+}
+
+function withFlyerLightbox(html, language) {
+  const image = /<div class="sevenDayDashboard__heroVisual"><img src="\/images\/free-7-day-taster\.jpeg"[^>]*><\/div>/;
+  return html.replace(image, `<div class="sevenDayDashboard__heroVisual">${renderFlyer(language)}</div>`);
+}
+
 export function renderStartFree({ language = "en" } = {}) {
   const { dashboard, progress, privacy, reset, independence } = sevenDayExperience.sharedKeys;
   const dayOne = sevenDayExperience.lessons[0];
@@ -52,8 +64,8 @@ export function startFreePage(data = siteData, language = "en") {
     description: t("route.startFree.metaDescription", language),
     titleKey: "route.startFree.metaTitle",
     descriptionKey: "route.startFree.metaDescription",
-    body: renderStartFree({ language }),
-    scripts: ["/assets/seven-day-progress.mjs"],
+    body: withFlyerLightbox(renderStartFree({ language }), language),
+    scripts: ["/assets/seven-day-progress.mjs", "/assets/flyer-lightbox.mjs"],
     socialImage: "/images/free-7-day-taster.jpeg",
     socialImageAlt: "Unleash Your Power free 7-day Master Your Mind experience",
   };

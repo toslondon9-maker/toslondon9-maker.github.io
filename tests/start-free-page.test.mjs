@@ -57,7 +57,7 @@ test("the dashboard describes active local-only progress saving in both language
 test("the dashboard loads one progress enhancement while preserving disabled no-JavaScript controls", () => {
   const page = dashboard();
 
-  assert.deepEqual(page.scripts, ["/assets/seven-day-progress.mjs"]);
+  assert.deepEqual(page.scripts, ["/assets/seven-day-progress.mjs", "/assets/flyer-lightbox.mjs"]);
   assert.match(page.body, /data-progress-reset disabled/);
   for (const lesson of sevenDayExperience.lessons) {
     assert.match(page.body, new RegExp(`data-progress-lesson="${lesson.id}"`));
@@ -94,4 +94,21 @@ test("the free dashboard connects every changeable dashboard value to the biling
   ];
 
   for (const key of keys) assert.match(html, new RegExp(`data-i18n="${key}"`));
+});
+
+test("the seven-day flyer has an accessible enlarge control and lightbox", () => {
+  const page = dashboard();
+  const html = page.body;
+
+  assert.match(html, /data-flyer-trigger/);
+  assert.match(html, /aria-haspopup="dialog"/);
+  assert.match(html, /Click to enlarge/);
+  assert.match(html, /Tap to enlarge/);
+  assert.match(html, /data-flyer-dialog/);
+  assert.match(html, /role="dialog"/);
+  assert.match(html, /aria-modal="true"/);
+  assert.match(html, /data-flyer-close/);
+  assert.match(html, /free-7-day-taster\.jpeg/);
+  assert.match(html, /data-flyer-image/);
+  assert.ok(page.scripts.includes("/assets/flyer-lightbox.mjs"));
 });
