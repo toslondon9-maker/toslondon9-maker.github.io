@@ -33,6 +33,10 @@ function enhanceAiPrompt(chapter, number) {
     .replace(/(<button type="button" aria-label="Copy the Week \d+ AI mastery prompt">Copy prompt<\/button>)(<\/div>)/, `$1<span class="aiCopyFeedback" data-ai-copy-feedback role="status" aria-live="polite"></span>$2`);
 }
 
+function chapterSectionLinks(number) {
+  return `<nav class="curriculumSectionLinks" aria-label="Chapter ${number} study sections"><a href="#week-${number}-introduction" data-curriculum-section-link="introduction">Introduction</a><a href="#week-${number}-content" data-curriculum-section-link="content">Core lesson</a><a href="#week-${number}-exercise" data-curriculum-section-link="exercise">Weekly exercise</a></nav>`;
+}
+
 function renderChapters() {
   if (chapterGridStart < 0 || chapterGridEnd < 0) throw new Error("Master Key curriculum chapters could not be located.");
   const source = curriculum.slice(chapterGridStart + chapterGridOpening.length, chapterGridEnd);
@@ -51,7 +55,12 @@ function renderChapters() {
       .replace("AI MASTERY COACH", "AI MASTERY PROMPT")
       .replace("Paste this into ChatGPT. Your AI coach will test, challenge and guide you one step at a time—without giving away the answers too early.", "Copy this guided prompt into ChatGPT to explore this week's Master Key lesson more deeply.")
       .replace('<div class="aiMastery">', '<aside class="curriculumReflectionBridge"><h3>TURN KNOWLEDGE INTO APPLICATION</h3><p>Understanding a principle intellectually is only the beginning. Take a moment to reflect on what this week\'s lesson means in your own life and how you can apply it today.</p></aside><div class="aiMastery">');
-    return enhanceAiPrompt(wrapPractice(chapter), number).replace("</div></details>", `</div>${chapterNavigation(index)}</article></details>`);
+    return enhanceAiPrompt(wrapPractice(chapter), number)
+      .replace('<article class="curriculumReadingCard">', `${chapterSectionLinks(number)}<article class="curriculumReadingCard">`)
+      .replace("<h3>Introduction</h3>", `<h3 id="week-${number}-introduction">Introduction</h3>`)
+      .replace("<h3>Content</h3>", `<h3 id="week-${number}-content">Content</h3>`)
+      .replace("<h3>Exercise</h3>", `<h3 id="week-${number}-exercise">Exercise</h3>`)
+      .replace("</div></details>", `</div>${chapterNavigation(index)}</article></details>`);
   });
 }
 
@@ -90,7 +99,7 @@ export function masterKeyCurriculumPage(data = canonicalSiteData, language = "en
     descriptionKey: "route.masterKeySystem.metaDescription",
     body: `<main class="curriculumPage" id="main-content">${renderCurriculum()}</main>`,
     styles: ["/assets/index-Bgwsdhov.css"],
-    scripts: ["/assets/curriculum.mjs?v=20260830-prompt-nav-3"],
+    scripts: ["/assets/curriculum.mjs?v=20260831-section-links-1"],
     socialImage: "/images/master-key-visuals/master-key-24-week-hero.png",
     socialImageAlt: "The Master Key System — 24 Weeks to Master the Way You Use Your Mind",
   };

@@ -14,9 +14,9 @@ test("the complete historic 24-week curriculum is visitor-accessible from home a
   const weeks = [...curriculum.matchAll(/<span class="week">WEEK <!-- -->(\d+)<\/span>/g)].map((match) => Number(match[1]));
 
   assert.deepEqual(weeks, Array.from({ length: 24 }, (_, index) => index + 1));
-  assert.equal((curriculum.match(/<h3>Introduction<\/h3>/g) ?? []).length, 24);
-  assert.equal((curriculum.match(/<h3>Content<\/h3>/g) ?? []).length, 24);
-  assert.equal((curriculum.match(/<h3>Exercise<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<h3 id="week-\d+-introduction">Introduction<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<h3 id="week-\d+-content">Content<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<h3 id="week-\d+-exercise">Exercise<\/h3>/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="weeklyQA"/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="aiMastery"/g) ?? []).length, 24);
   assert.equal((curriculum.match(/Copy prompt/g) ?? []).length, 24);

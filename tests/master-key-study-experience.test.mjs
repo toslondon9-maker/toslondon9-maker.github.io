@@ -26,6 +26,15 @@ test("Master Key page provides the premium 24-chapter study shell around the pre
   assert.match(html, /Act as my personal Master Key System tutor, Socratic coach and accountability partner for Week 24/);
   assert.equal((html.match(/data-ai-copy-feedback/g) ?? []).length, 24);
   assert.equal((html.match(/data-curriculum-complete/g) ?? []).length, 24);
+  assert.equal((html.match(/data-curriculum-section-link/g) ?? []).length, 72);
+  for (const week of [1, 12, 24]) {
+    assert.match(html, new RegExp(`href="#week-${week}-introduction"[^>]*data-curriculum-section-link="introduction"`));
+    assert.match(html, new RegExp(`href="#week-${week}-content"[^>]*data-curriculum-section-link="content"`));
+    assert.match(html, new RegExp(`href="#week-${week}-exercise"[^>]*data-curriculum-section-link="exercise"`));
+    assert.match(html, new RegExp(`id="week-${week}-introduction"`));
+    assert.match(html, new RegExp(`id="week-${week}-content"`));
+    assert.match(html, new RegExp(`id="week-${week}-exercise"`));
+  }
   assert.equal((html.match(/READY TO GO DEEPER\?/g) ?? []).length, 24);
   assert.equal((html.match(/EXPLORE THE 24-WEEK PROGRAMME/g) ?? []).length, 24);
   assert.equal((html.match(/href="\/coaching\/"/g) ?? []).length >= 24, true);
@@ -44,12 +53,14 @@ test("Master Key page keeps the curriculum source file intact while exposing sel
   assert.match(client, /data-curriculum-chapter-link/);
   assert.match(client, /data-curriculum-status/);
   assert.match(client, /data-curriculum-complete/);
+  assert.match(client, /data-curriculum-section-link/);
+  assert.match(client, /scrollIntoView\(\{ behavior: "smooth", block: "start" \}\)/);
   assert.match(client, /setAttribute\("aria-current", "true"\)/);
   assert.match(client, /removeAttribute\("aria-current"\)/);
   assert.match(client, /\.aiMasteryPrompt pre/);
   assert.match(client, /Prompt copied\./);
   assert.match(client, /Copy failed\./);
-  assert.ok(page.scripts?.includes("/assets/curriculum.mjs?v=20260830-prompt-nav-3"));
+  assert.ok(page.scripts?.includes("/assets/curriculum.mjs?v=20260831-section-links-1"));
 });
 
 test("Master Key page uses the approved premium visual banners without changing chapter content", () => {
