@@ -72,6 +72,15 @@ test("homepage loads with the concise four-phase journey and safe responsive act
   assert.match(css, /@media[^}]*max-width:\s*480px[\s\S]*?\.homeMasterKey__phases[^{]*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
 });
 
+test("homepage hero collapses to a readable single column on mobile", async () => {
+  const css = await readFile("assets/platform.css", "utf8");
+  const finalMobileBlock = css.slice(css.lastIndexOf("@media (max-width: 768px)"));
+  assert.match(finalMobileBlock, /\.homeHero\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+  assert.match(finalMobileBlock, /\.homeHero__copy\s*,\s*\.homeHero__visual\s*\{[\s\S]*?width:\s*100%/);
+  assert.match(finalMobileBlock, /\.homeHero h1\s*\{[\s\S]*?font-size:\s*clamp\(3rem,\s*12vw,\s*4\.5rem\)/);
+  assert.match(finalMobileBlock, /\.homeHero__subheading\s*\{[\s\S]*?font-size:\s*clamp\(1\.5rem,\s*6vw,\s*2rem\)/);
+});
+
 test("homepage presents the approved lineage image and people in order", () => {
   const html = renderHome({ language: "en" });
   const lineage = html.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";

@@ -617,18 +617,6 @@ main > article {
   }
 }
 
-/* Final mobile safeguard: keep the homepage hero copy and visual in one readable column. */
-@media (max-width: 768px) {
-  .homeHero {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .homeHero__copy,
-  .homeHero__visual {
-    width: 100%;
-  }
-}
-
 .home {
   overflow-x: clip;
 }
@@ -2296,18 +2284,6 @@ main > article {
 @media (max-width: 760px) {
   .sevenDayDashboard__lessonList {
     grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* Keep the homepage hero readable at phone widths even when legacy desktop rules load later. */
-@media (max-width: 768px) {
-  .homeHero {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .homeHero__copy,
-  .homeHero__visual {
-    width: 100%;
   }
 }
 
@@ -4539,5 +4515,30 @@ body {
 
   .sessionHub__heroInner {
     margin-left: 0;
+  }
+}
+
+/* Keep the homepage hero readable at phone widths after all desktop rules. */
+@media (max-width: 768px) {
+  .homeHero {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100% - 2rem, var(--content-max));
+  }
+
+  .homeHero__copy,
+  .homeHero__visual {
+    width: 100%;
+    max-width: none;
+  }
+
+  .homeHero h1 {
+    max-width: 12ch;
+    font-size: clamp(3rem, 12vw, 4.5rem);
+    line-height: 1.02;
+  }
+
+  .homeHero__subheading {
+    max-width: 25ch;
+    font-size: clamp(1.5rem, 6vw, 2rem);
   }
 }
