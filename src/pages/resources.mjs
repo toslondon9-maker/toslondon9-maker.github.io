@@ -8,7 +8,7 @@ export function resourcesPage(data = siteData, language = "en") {
     ["STUDY", "Master Key supporting material.", `<a href="${data.routes.masterKeySystem}">Explore the 24-week Master Key curriculum</a><a href="${data.routes.getTheBook}">Get your Master Key System book</a>`],
     ["PRACTISE", "Exercises and workbooks.", `<a href="${data.routes.startFree}">Start the free 7-day experience</a><a href="/downloads/seven-day-experience-workbook-en.pdf" download>Download the English workbook</a>`],
     ["LISTEN", "Audio, meditation and focus material.", `<a href="${data.routes.startFree}">Use the guided daily practice</a>`],
-    ["REFLECT", "Reflection tools.", `<a href="${data.routes.masterKeySystem}">Reflect with the weekly questions</a>`],
+    ["REFLECT", "Reflection tools.", `<a href="${data.routes.masterKeySystem}">Reflect with the weekly questions</a><a href="/downloads/mks-end-result.pdf" download>Download the 24-Week End Result</a><p class="resourcesPage__quote">“All life and all power is from within.” <span>— Charles F. Haanel, <em>The Master Key System</em>, Part Five</span></p>`],
     ["EXPLORE", "Supporting external resources.", `<a href="${data.routes.aiMentors}">Open the free AI Mentor prompt builder</a>`],
   ];
   const cards = groups.map(([title, intro, links]) => `<section class="resourcesPage__group"><h2>${title}</h2><p>${intro}</p><div class="resourcesPage__links">${links}</div></section>`).join("");
