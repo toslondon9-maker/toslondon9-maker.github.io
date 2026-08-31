@@ -26,7 +26,8 @@ test("Master Key page provides the premium 24-chapter study shell around the pre
   assert.match(html, /Act as my personal Master Key System tutor, Socratic coach and accountability partner for Week 24/);
   assert.equal((html.match(/data-ai-copy-feedback/g) ?? []).length, 24);
   assert.equal((html.match(/data-curriculum-complete/g) ?? []).length, 24);
-  assert.equal((html.match(/Want Tariq to guide you through all 24 weeks\?/g) ?? []).length, 24);
+  assert.equal((html.match(/READY TO GO DEEPER\?/g) ?? []).length, 24);
+  assert.equal((html.match(/EXPLORE THE 24-WEEK PROGRAMME/g) ?? []).length, 24);
   assert.equal((html.match(/href="\/coaching\/"/g) ?? []).length >= 24, true);
   for (const [title, range] of [["FOUNDATION", "Chapters 1–4"], ["VISUALISATION", "Chapters 5–11"], ["CONCENTRATION", "Chapters 12–18"], ["CONTEMPLATION & MASTERY", "Chapters 19–24"]]) {
     assert.match(html, new RegExp(`${title}[\\s\\S]*?${range}`));

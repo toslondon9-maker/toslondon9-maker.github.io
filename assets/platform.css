@@ -493,6 +493,142 @@ main > article {
 .resourcesPage__optional summary { cursor: pointer; font-weight: 600; color: var(--navy, #10243b); }
 @media (max-width: 700px) { .resourcesPage { padding: 3rem 1rem 4rem; } .resourcesPage__grid { grid-template-columns: 1fr; } .resourcesPage__links { flex-direction: column; } }
 
+.homeOutcome,
+.coachingOutcome {
+  background: var(--paper);
+}
+
+.homeOutcome__inner,
+.coachingOutcome__inner {
+  max-width: 54rem;
+  text-align: center;
+}
+
+.homeOutcome__inner p,
+.coachingOutcome__inner p {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.homeOutcome__quote,
+.coachingOutcome__quote {
+  margin-top: 2rem;
+  color: #7f5c1c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-style: italic;
+}
+
+.homeOutcome__note,
+.coachingOutcome__note {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.curriculumPage__lead {
+  font-size: clamp(1.08rem, 2vw, 1.25rem);
+}
+
+.curriculumJourneyNote,
+.curriculumPracticeBridge,
+.curriculumReflectionBridge {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.curriculumJourneyNote {
+  display: grid;
+  gap: .35rem;
+  width: min(100% - (2 * var(--space-gutter)), 54rem);
+  margin: 1.5rem auto 2rem;
+  padding: 1rem 1.25rem;
+  text-align: center;
+}
+
+.curriculumJourneyNote strong,
+.curriculumPracticeBridge strong {
+  color: #7f5c1c;
+}
+
+.curriculumPractice__support {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.curriculumPracticeBridge {
+  display: grid;
+  gap: .25rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1.25rem;
+}
+
+.curriculumCoachingCta {
+  display: grid;
+  gap: .45rem;
+  margin-bottom: 1rem;
+  padding: 1.25rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.curriculumCoachingCta h3 {
+  margin: 0;
+  color: var(--night);
+  font-size: 1.15rem;
+  letter-spacing: .08em;
+}
+
+.curriculumCoachingCta p {
+  margin: 0;
+}
+
+.curriculumCoachingCta a {
+  color: #7f5c1c;
+  font-weight: 800;
+}
+
+.curriculumCoachingCta small {
+  color: var(--muted);
+}
+
+.curriculumReflectionBridge {
+  margin: 1.25rem 0;
+  padding: 1rem 1.25rem;
+}
+
+.curriculumReflectionBridge h3 {
+  margin-bottom: .4rem;
+  color: var(--night);
+  font-size: 1.05rem;
+  letter-spacing: .08em;
+}
+
+@media (max-width: 700px) {
+  .homeOutcome,
+  .coachingOutcome {
+    text-align: left;
+  }
+
+  .homeOutcome__inner,
+  .coachingOutcome__inner {
+    text-align: left;
+  }
+}
+
+/* Final mobile safeguard: keep the homepage hero copy and visual in one readable column. */
+@media (max-width: 768px) {
+  .homeHero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .homeHero__copy,
+  .homeHero__visual {
+    width: 100%;
+  }
+}
+
 .home {
   overflow-x: clip;
 }
@@ -2160,6 +2296,18 @@ main > article {
 @media (max-width: 760px) {
   .sevenDayDashboard__lessonList {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Keep the homepage hero readable at phone widths even when legacy desktop rules load later. */
+@media (max-width: 768px) {
+  .homeHero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .homeHero__copy,
+  .homeHero__visual {
+    width: 100%;
   }
 }
 

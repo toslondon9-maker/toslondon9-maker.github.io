@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "lineage", "start-free", "master-key", "testimonials", "coaching", "next-step"];
+const approvedSections = ["hero", "lineage", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
 
 test("homepage follows the approved concise customer journey", () => {
   const html = renderHome({ language: "en" });
