@@ -49,3 +49,19 @@ test("contact page offers coaching, WhatsApp, questions and a free fallback", ()
   assert.match(html, /ASK A QUESTION/);
   assert.match(html, /START FREE FOR 7 DAYS/);
 });
+
+test("Phase 2 conversion sections remain complete when visitors switch to Spanish", () => {
+  const pages = [
+    renderStartFree({ language: "es" }),
+    renderCoaching({ language: "es", siteData }),
+    renderContact({ data: siteData, language: "es" }),
+    renderSessionHub({ data: siteData, language: "es" }),
+  ];
+  const html = pages.join("\n");
+
+  assert.match(html, /DESPUÉS DEL DÍA 7/);
+  assert.match(html, /Sin presión\./);
+  assert.match(html, /RECORRIDO COMPLETO/);
+  assert.match(html, /TU CENTRO DE SESIONES/);
+  assert.ok((html.match(/data-i18n="phase2\./g) ?? []).length >= 70);
+});

@@ -7,10 +7,10 @@ const chapterGridOpening = '<div class="chapterGrid">';
 const chapterGridStart = curriculum.indexOf(chapterGridOpening);
 const chapterGridEnd = curriculum.indexOf('</div><p class="sourceNote">', chapterGridStart);
 const phases = Object.freeze([
-  { title: "FOUNDATION", range: "Chapters 1–4", start: 0, end: 4, image: "/images/master-key-visuals/foundation-chapters-1-4.png", alt: "Foundation — Master Key System Chapters 1 to 4" },
-  { title: "VISUALISATION", range: "Chapters 5–11", start: 4, end: 11, image: "/images/master-key-visuals/visualisation-chapters-5-11.png", alt: "Visualisation — Master Key System Chapters 5 to 11" },
-  { title: "CONCENTRATION", range: "Chapters 12–18", start: 11, end: 18, image: "/images/master-key-visuals/concentration-chapters-12-18.png", alt: "Concentration — Master Key System Chapters 12 to 18" },
-  { title: "CONTEMPLATION & MASTERY", range: "Chapters 19–24", start: 18, end: 24, image: "/images/master-key-visuals/contemplation-mastery-chapters-19-24.png", alt: "Contemplation and Mastery — Master Key System Chapters 19 to 24" },
+  { title: "FOUNDATION", range: "Chapters 1–4", start: 0, end: 4, image: "/images/master-key-visuals/foundation-chapters-1-4.webp", alt: "Foundation — Master Key System Chapters 1 to 4" },
+  { title: "VISUALISATION", range: "Chapters 5–11", start: 4, end: 11, image: "/images/master-key-visuals/visualisation-chapters-5-11.webp", alt: "Visualisation — Master Key System Chapters 5 to 11" },
+  { title: "CONCENTRATION", range: "Chapters 12–18", start: 11, end: 18, image: "/images/master-key-visuals/concentration-chapters-12-18.webp", alt: "Concentration — Master Key System Chapters 12 to 18" },
+  { title: "CONTEMPLATION & MASTERY", range: "Chapters 19–24", start: 18, end: 24, image: "/images/master-key-visuals/contemplation-mastery-chapters-19-24.webp", alt: "Contemplation and Mastery — Master Key System Chapters 19 to 24" },
 ]);
 
 function phaseFor(index) {
@@ -69,10 +69,10 @@ function renderStudyNavigator() {
 function renderCurriculum() {
   const chapters = renderChapters();
   const groupedChapters = phases.map((phase) => (
-    `<section class="curriculumPhase" aria-labelledby="${phase.title.toLowerCase().replaceAll(/[^a-z]+/g, "-")}"><figure class="curriculumPhase__visual"><img src="${phase.image}" alt="${phase.alt}" loading="lazy" decoding="async"></figure><header><p>${phase.range}</p><h2 id="${phase.title.toLowerCase().replaceAll(/[^a-z]+/g, "-")}">${phase.title}</h2></header><div class="chapterGrid">${chapters.slice(phase.start, phase.end).join("")}</div></section>`
+    `<section class="curriculumPhase" aria-labelledby="${phase.title.toLowerCase().replaceAll(/[^a-z]+/g, "-")}"><figure class="curriculumPhase__visual"><img src="${phase.image}" alt="${phase.alt}" width="1440" height="810" loading="lazy" decoding="async"></figure><header><p>${phase.range}</p><h2 id="${phase.title.toLowerCase().replaceAll(/[^a-z]+/g, "-")}">${phase.title}</h2></header><div class="chapterGrid">${chapters.slice(phase.start, phase.end).join("")}</div></section>`
   )).join("");
   const notes = curriculum.slice(chapterGridEnd + "</div>".length, -"</section>".length);
-  return `<section class="curriculum section" id="curriculum"><header class="curriculumPage__intro"><figure class="curriculumPage__heroVisual"><img src="/images/master-key-visuals/master-key-24-week-hero.png" alt="The Master Key System — 24 Weeks to Master the Way You Use Your Mind" fetchpriority="high" decoding="async"></figure><p class="eyebrow">THE MASTER KEY SYSTEM</p><h1>24 Weeks to Master the Way You Use Your Mind</h1><p class="curriculumPage__status" data-curriculum-status aria-live="polite">Chapter 1 of 24 · FOUNDATION</p><p>Explore Charles F. Haanel's Master Key System week by week. Each chapter builds on the previous one through study, practical exercises, reflection and application.</p><div class="curriculumPage__introActions"><a class="button--secondary" href="${canonicalSiteData.routes.getTheBook}">GET THE MKS BOOK</a><a class="button--text" href="${canonicalSiteData.routes.aiMentors}">USE THE FREE AI MENTOR</a></div></header>${renderStudyNavigator()}${groupedChapters}${notes}</section>`;
+  return `<section class="curriculum section" id="curriculum"><header class="curriculumPage__intro"><figure class="curriculumPage__heroVisual"><img src="/images/master-key-visuals/master-key-24-week-hero.webp" alt="The Master Key System — 24 Weeks to Master the Way You Use Your Mind" width="1440" height="810" fetchpriority="high" decoding="async"></figure><p class="eyebrow">THE MASTER KEY SYSTEM</p><h1>24 Weeks to Master the Way You Use Your Mind</h1><p class="curriculumPage__status" data-curriculum-status aria-live="polite">Chapter 1 of 24 · FOUNDATION</p><p>Explore Charles F. Haanel's Master Key System week by week. Each chapter builds on the previous one through study, practical exercises, reflection and application.</p><div class="curriculumPage__introActions"><a class="button--secondary" href="${canonicalSiteData.routes.getTheBook}">GET THE MKS BOOK</a><a class="button--text" href="${canonicalSiteData.routes.aiMentors}">USE THE FREE AI MENTOR</a></div></header>${renderStudyNavigator()}${groupedChapters}${notes}</section>`;
 }
 
 export function masterKeyCurriculumPage(data = canonicalSiteData, language = "en") {
@@ -86,5 +86,7 @@ export function masterKeyCurriculumPage(data = canonicalSiteData, language = "en
     body: `<main class="curriculumPage" id="main-content">${renderCurriculum()}</main>`,
     styles: ["/assets/index-Bgwsdhov.css"],
     scripts: ["/assets/curriculum.mjs?v=20260830-prompt-nav-3"],
+    socialImage: "/images/master-key-visuals/master-key-24-week-hero.png",
+    socialImageAlt: "The Master Key System — 24 Weeks to Master the Way You Use Your Mind",
   };
 }

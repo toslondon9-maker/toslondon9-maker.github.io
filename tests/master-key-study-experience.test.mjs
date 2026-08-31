@@ -53,17 +53,18 @@ test("Master Key page keeps the curriculum source file intact while exposing sel
 
 test("Master Key page uses the approved premium visual banners without changing chapter content", () => {
   const html = curriculumPage();
-  const visualAssets = [
-    "master-key-24-week-hero.png",
-    "foundation-chapters-1-4.png",
-    "visualisation-chapters-5-11.png",
-    "concentration-chapters-12-18.png",
-    "contemplation-mastery-chapters-19-24.png",
+  const visualNames = [
+    "master-key-24-week-hero",
+    "foundation-chapters-1-4",
+    "visualisation-chapters-5-11",
+    "concentration-chapters-12-18",
+    "contemplation-mastery-chapters-19-24",
   ];
 
-  for (const asset of visualAssets) {
-    assert.doesNotThrow(() => readFileSync(new URL(`../images/master-key-visuals/${asset}`, import.meta.url)));
-    assert.match(html, new RegExp(`/images/master-key-visuals/${asset}`));
+  for (const name of visualNames) {
+    assert.doesNotThrow(() => readFileSync(new URL(`../images/master-key-visuals/${name}.png`, import.meta.url)));
+    assert.doesNotThrow(() => readFileSync(new URL(`../images/master-key-visuals/${name}.webp`, import.meta.url)));
+    assert.match(html, new RegExp(`/images/master-key-visuals/${name}\\.webp`));
   }
   assert.equal((html.match(/class="curriculumPhase__visual"/g) ?? []).length, 4);
   assert.match(html, /class="curriculumPage__heroVisual"/);

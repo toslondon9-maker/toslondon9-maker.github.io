@@ -20,13 +20,30 @@ test("every public page has canonical, Open Graph and Twitter metadata for its l
     assert.match(html, /<meta property="og:site_name" content="Unleash Your Power">/);
     assert.match(html, /<meta property="og:title" content="[^"]+">/);
     assert.match(html, /<meta property="og:description" content="[^"]+">/);
-    assert.match(html, /<meta property="og:image" content="https:\/\/toslondon9-maker\.github\.io\/images\/haanel-tariq-portraits\.jpeg">/);
+    const socialImage = page.socialImage ? `${baseUrl}${page.socialImage}` : `${baseUrl}/images/haanel-tariq-portraits.jpeg`;
+    assert.match(html, new RegExp(`<meta property="og:image" content="${socialImage.replaceAll("/", "\\/")}">`));
     assert.match(html, /<meta property="og:image:alt" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
     assert.match(html, /<meta name="twitter:title" content="[^"]+">/);
     assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
-    assert.match(html, /<meta name="twitter:image" content="https:\/\/toslondon9-maker\.github\.io\/images\/haanel-tariq-portraits\.jpeg">/);
+    assert.match(html, new RegExp(`<meta name="twitter:image" content="${socialImage.replaceAll("/", "\\/")}">`));
     assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
+  }
+});
+
+
+test("key conversion pages use relevant social preview artwork", () => {
+  const expected = new Map([
+    [siteData.routes.masterKeySystem, "/images/master-key-visuals/master-key-24-week-hero.png"],
+    [siteData.routes.startFree, "/images/free-7-day-taster.jpeg"],
+    [siteData.routes.coaching, "/images/unleash-your-power-programme.jpeg"],
+    [siteData.routes.aboutTariq, "/images/tariq-happiness-harmony.png"],
+  ]);
+
+  for (const [route, image] of expected) {
+    const page = routeRenderers[route](siteData);
+    assert.equal(page.socialImage, image, route);
+    assert.ok(page.socialImageAlt?.length > 10, route);
   }
 });
 

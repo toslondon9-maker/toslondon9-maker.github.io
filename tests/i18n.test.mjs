@@ -150,7 +150,7 @@ test("page shell loads language enhancement once", () => {
     body: '<main><h1 data-i18n="home.hero.title">Home</h1></main>',
     scripts: ["/assets/site-language.mjs"],
   });
-  assert.equal((html.match(/src="\/assets\/site-language\.mjs\?v=20260830-phase2-conversion"/g) ?? []).length, 1);
+  assert.equal((html.match(/src="\/assets\/site-language\.mjs\?v=20260830-final-polish"/g) ?? []).length, 1);
   assert.match(html, /<title data-i18n="meta\.home\.title">/);
   assert.match(html, /<meta name="description"[^>]+data-i18n="meta\.home\.description">/);
 });
