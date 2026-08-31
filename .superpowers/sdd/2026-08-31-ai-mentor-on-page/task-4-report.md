@@ -22,3 +22,10 @@
 ## Environment note
 
 The normal `node --test` runner cannot spawn child processes in this sandbox (`EPERM`). Running each test module directly executes the same Node test definitions and completed successfully.
+
+## Round 1 fix — explicit public endpoint hook
+
+- Root cause: the initial static integration used only the JSON/client fallback, so the generated page did not expose an explicit non-secret endpoint configuration boundary.
+- Added a route-scoped `<meta name="ai-mentor-endpoint" content="/api/mentor">` to the static AI Mentor page.
+- Updated the browser client to read that meta value first and retain `/api/mentor` as its safe fallback.
+- Extended focused build/client tests to require the emitted hook and the client lookup, then regenerated the committed route. No secret or credential was added.

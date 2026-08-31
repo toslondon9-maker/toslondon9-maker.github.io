@@ -112,7 +112,8 @@ test("AI Mentor client sends only selected study context and offers a safe on-pa
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
 
   assert.match(client, /const HISTORY_LIMIT = 12/);
-  assert.match(client, /data\.endpoint \|\| "\/api\/mentor"/);
+  assert.match(client, /meta\[name="ai-mentor-endpoint"\]/);
+  assert.match(client, /endpointElement\?\.content \|\| "\/api\/mentor"/);
   assert.match(client, /mentorId: backendMentorId\(current\.mentor\.id\)/);
   assert.match(client, /chapter: current\.chapter\.week/);
   assert.match(client, /messages: state\.history\.slice\(-HISTORY_LIMIT\)/);

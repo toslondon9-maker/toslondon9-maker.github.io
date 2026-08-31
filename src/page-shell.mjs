@@ -7,6 +7,8 @@ const siteUrl = "https://toslondon9-maker.github.io";
 const defaultSocialImage = `${siteUrl}/images/haanel-tariq-portraits.jpeg`;
 const defaultSocialImageAlt = "Tariq Saddique and the Master Key System learning journey";
 const privateRoute = "/live-coaching/";
+const aiMentorRoute = "/ai-mentors/";
+const aiMentorEndpoint = "/api/mentor";
 
 function versionReleaseScript(script) {
   return script === languageScript ? `${script}?v=${releaseAssetVersion}` : script;
@@ -39,9 +41,12 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const publicMetadata = route !== privateRoute;
   const pageSocialImage = socialImage ? `${siteUrl}${socialImage}` : defaultSocialImage;
   const pageSocialImageAlt = escapeHtml(socialImageAlt ?? defaultSocialImageAlt);
+  const aiMentorEndpointTag = route === aiMentorRoute
+    ? `<meta name="ai-mentor-endpoint" content="${aiMentorEndpoint}">`
+    : "";
   const sharingTags = publicMetadata
     ? `<link rel="canonical" href="${absoluteUrl}"><meta property="og:type" content="website"><meta property="og:site_name" content="Unleash Your Power"><meta property="og:title" content="${safeTitle}"><meta property="og:description" content="${safeDescription}"><meta property="og:url" content="${absoluteUrl}"><meta property="og:image" content="${pageSocialImage}"><meta property="og:image:alt" content="${pageSocialImageAlt}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${safeTitle}"><meta name="twitter:description" content="${safeDescription}"><meta name="twitter:image" content="${pageSocialImage}"><meta name="twitter:image:alt" content="${pageSocialImageAlt}">`
     : `<meta name="robots" content="noindex, nofollow">`;
 
-  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/the-secret-logo.png" as="image">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${platformStyleVersion}"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ route, language })}${scriptTags}</body></html>`;
+  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/the-secret-logo.png" as="image">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${platformStyleVersion}"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ route, language })}${scriptTags}</body></html>`;
 }

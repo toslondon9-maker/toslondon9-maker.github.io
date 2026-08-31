@@ -12,7 +12,7 @@ The AI Mentor page is static; this Cloudflare Worker is the optional server-side
    npx wrangler secret put OPENAI_API_KEY
    ```
 
-4. Deploy with `npx wrangler deploy` from `backend/`. Configure the public Worker URL as the non-secret `AI_MENTOR_ENDPOINT` during the static-site integration.
+4. Deploy with `npx wrangler deploy` from `backend/`. Set the public Worker URL as the non-secret `ai-mentor-endpoint` meta value emitted for `/ai-mentors/` during the static-site integration. The checked-in fallback is `/api/mentor`.
 
 `OPENAI_MODEL` is retained as a deployment setting, but the Worker only accepts `gpt-5.6-luna`; a client cannot choose a model or submit a system prompt.
 

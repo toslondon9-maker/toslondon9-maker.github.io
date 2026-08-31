@@ -46,7 +46,8 @@ function initialiseAiMentors() {
   const dataElement = document.querySelector("#ai-mentor-data");
   if (!dataElement) return;
   const data = JSON.parse(dataElement.textContent);
-  const endpoint = data.endpoint || "/api/mentor";
+  const endpointElement = document.querySelector('meta[name="ai-mentor-endpoint"]');
+  const endpoint = endpointElement?.content || "/api/mentor";
   const promptElement = document.querySelector("[data-ai-mentor-prompt]");
   const selectedChapter = document.querySelector("[data-ai-mentor-selected-chapter]");
   const copyButton = document.querySelector("[data-ai-mentor-copy]");

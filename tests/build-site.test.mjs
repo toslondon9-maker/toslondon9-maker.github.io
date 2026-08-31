@@ -239,8 +239,7 @@ test("the public AI mentor build uses a non-secret fallback endpoint", async () 
     const build = await buildSite({ outputRoot });
     const mentorPage = await readFile(path.join(outputRoot, "ai-mentors", "index.html"), "utf8");
     const mentorClient = await readFile(path.join(outputRoot, "assets", "ai-mentors.mjs"), "utf8");
-    const clientData = mentorPage.match(/<script type="application\/json" id="ai-mentor-data">([\s\S]*?)<\/script>/)?.[1];
-    const endpoint = JSON.parse(clientData).endpoint ?? "/api/mentor";
+    const endpoint = mentorPage.match(/<meta name="ai-mentor-endpoint" content="([^"]+)">/)?.[1];
     const publicSource = await Promise.all(publicSourceFiles.map((file) => readFile(path.join(repositoryRoot, file), "utf8")));
     const generatedOutput = await Promise.all(build.files.map((file) => readFile(path.join(outputRoot, file), "utf8")));
 
