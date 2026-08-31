@@ -24,6 +24,32 @@ test("AI Mentor page offers three independent study guides, 24 chapters and thre
   assert.match(html, /not created, approved or endorsed by Charles F\. Haanel, Helmar Rudolph or Tariq Saddique/);
 });
 
+test("AI Mentor page renders an accessible on-page conversation shell with the prompt fallback intact", () => {
+  const html = mentorPage();
+
+  assert.match(html, /CHOOSE YOUR PERSPECTIVE/);
+  assert.match(html, /Haanel Perspective/);
+  assert.match(html, /Helmar Perspective/);
+  assert.match(html, /Tariq Coaching Perspective/);
+  assert.match(html, /CHOOSE YOUR CHAPTER/);
+  assert.match(html, /data-ai-mentor-selected-chapter/);
+  assert.match(html, /data-ai-mentor-messages/);
+  assert.match(html, /data-ai-mentor-welcome/);
+  assert.match(html, /data-ai-mentor-status[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(html, /data-ai-mentor-error[^>]*role="alert"/);
+  assert.match(html, /data-ai-mentor-form/);
+  assert.match(html, /data-ai-mentor-question/);
+  assert.match(html, /data-ai-mentor-send/);
+  assert.match(html, /data-ai-mentor-new-conversation/);
+  assert.equal((html.match(/data-ai-mentor-starter/g) ?? []).length, 6);
+  assert.match(html, /AI-generated study guidance based on the selected perspective\. It is not the person themselves\./);
+  assert.match(html, /data-i18n="aiMentor\.chat\.send"/);
+  assert.match(html, /data-i18n="aiMentor\.chat\.disclosure"/);
+  assert.match(html, /<details class="aiMentorFallback"/);
+  assert.match(html, /data-ai-mentor-copy/);
+  assert.match(html, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
+});
+
 test("AI Mentor page uses approved Week 1 and Week 24 study content without impersonation", () => {
   const html = mentorPage();
 
