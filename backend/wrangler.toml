@@ -1,0 +1,8 @@
+name = "unleash-your-power-ai-mentor"
+main = "ai-mentor-worker.mjs"
+compatibility_date = "2026-08-31"
+
+# Public, comma-separated browser origins. Set this for each deployed environment.
+[vars]
+ALLOWED_ORIGIN = "https://YOUR-GITHUB-PAGES-DOMAIN"
+OPENAI_MODEL = "gpt-5.6-luna"

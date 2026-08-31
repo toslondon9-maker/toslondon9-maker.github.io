@@ -2,3 +2,6 @@
 .superpowers/
 .build-preview/
 .build-preview-final/
+.env
+.env.*
+!.env.example
