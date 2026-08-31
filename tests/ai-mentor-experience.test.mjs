@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
+import { hasTranslation, t } from "../content/translations.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 import { aiMentorChapters, mentorProfiles, purposes } from "../src/pages/ai-mentors.mjs";
 import { buildAiMentorPrompt } from "../assets/ai-mentors.mjs";
@@ -48,6 +49,43 @@ test("AI Mentor page renders an accessible on-page conversation shell with the p
   assert.match(html, /<details class="aiMentorFallback"/);
   assert.match(html, /data-ai-mentor-copy/);
   assert.match(html, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
+});
+
+test("AI Mentor chat shell supplies complete English and Spanish UI translations", () => {
+  const keys = [
+    "aiMentor.hero.title",
+    "aiMentor.hero.intro",
+    "aiMentor.chat.eyebrow",
+    "aiMentor.chat.title",
+    "aiMentor.perspective.heading",
+    "aiMentor.chapter.heading",
+    "aiMentor.chapter.label",
+    "aiMentor.chat.newConversation",
+    "aiMentor.chat.welcome",
+    "aiMentor.chat.ready",
+    "aiMentor.chat.starters",
+    "aiMentor.chat.starter.explain",
+    "aiMentor.chat.starter.centralIdea",
+    "aiMentor.chat.starter.apply",
+    "aiMentor.chat.starter.reflection",
+    "aiMentor.chat.starter.exercise",
+    "aiMentor.chat.starter.focus",
+    "aiMentor.chat.questionLabel",
+    "aiMentor.chat.questionPlaceholder",
+    "aiMentor.chat.send",
+    "aiMentor.chat.disclosure",
+    "aiMentor.fallback.summary",
+    "aiMentor.fallback.purpose",
+    "aiMentor.fallback.title",
+  ];
+
+  for (const key of keys) {
+    assert.equal(hasTranslation(key), true, `${key} needs both language values`);
+    assert.notEqual(t(key, "en"), key);
+    assert.notEqual(t(key, "es"), key);
+  }
+  assert.equal(t("aiMentor.chat.send", "es"), "ENVIAR");
+  assert.equal(t("aiMentor.chat.disclosure", "es"), "Orientación de estudio generada por IA basada en la perspectiva seleccionada. No es la persona en sí.");
 });
 
 test("AI Mentor page uses approved Week 1 and Week 24 study content without impersonation", () => {
