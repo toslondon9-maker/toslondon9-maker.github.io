@@ -213,6 +213,50 @@ test("the AI mentor experience resolves to a generated destination", () => {
   assert.match(page.body, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
 });
 
+test("the committed AI mentor page contains the current client and safe fallback", async () => {
+  const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const html = await readFile(path.join(repositoryRoot, "ai-mentors", "index.html"), "utf8");
+
+  assert.match(html, /data-ai-mentor-messages/);
+  assert.match(html, /data-ai-mentor-new-conversation/);
+  assert.match(html, /data-ai-mentor-prompt/);
+  assert.match(html, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
+  assert.match(html, /src="\/assets\/ai-mentors\.mjs"/);
+});
+
+test("the public AI mentor build uses a non-secret fallback endpoint", async () => {
+  const outputRoot = await mkdtemp(path.join(os.tmpdir(), "unleash-ai-mentor-security-"));
+  const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const secretName = ["OPENAI", "API", "KEY"].join("_");
+  const publicSourceFiles = [
+    "src/page-shell.mjs",
+    "src/pages/ai-mentors.mjs",
+    "assets/ai-mentors.mjs",
+    "tools/build-site.mjs",
+  ];
+
+  try {
+    const build = await buildSite({ outputRoot });
+    const mentorPage = await readFile(path.join(outputRoot, "ai-mentors", "index.html"), "utf8");
+    const mentorClient = await readFile(path.join(outputRoot, "assets", "ai-mentors.mjs"), "utf8");
+    const clientData = mentorPage.match(/<script type="application\/json" id="ai-mentor-data">([\s\S]*?)<\/script>/)?.[1];
+    const endpoint = JSON.parse(clientData).endpoint ?? "/api/mentor";
+    const publicSource = await Promise.all(publicSourceFiles.map((file) => readFile(path.join(repositoryRoot, file), "utf8")));
+    const generatedOutput = await Promise.all(build.files.map((file) => readFile(path.join(outputRoot, file), "utf8")));
+
+    assert.equal(endpoint, "/api/mentor");
+    assert.doesNotMatch(endpoint, /(?:key|token|secret|bearer|password)/i);
+    assert.doesNotMatch(publicSource.join("\n"), new RegExp(secretName));
+    assert.doesNotMatch(generatedOutput.join("\n"), new RegExp(secretName));
+    assert.doesNotMatch(mentorPage, new RegExp(secretName));
+    assert.doesNotMatch(mentorClient, new RegExp(secretName));
+    assert.match(mentorPage, /data-ai-mentor-prompt/);
+    assert.match(mentorPage, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
 test("contact actions derive their email address from shared site data", () => {
   const data = {
     ...siteData,
