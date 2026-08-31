@@ -107,6 +107,27 @@ test("AI Mentor client code produces selected prompts, copy feedback and safe Ch
   assert.match(client, /buildAiMentorPrompt/);
 });
 
+test("AI Mentor client sends only selected study context and offers a safe on-page fallback", () => {
+  const client = readFileSync(new URL("../assets/ai-mentors.mjs", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+
+  assert.match(client, /const HISTORY_LIMIT = 12/);
+  assert.match(client, /data\.endpoint \|\| "\/api\/mentor"/);
+  assert.match(client, /mentorId: current\.mentor\.id/);
+  assert.match(client, /chapter: current\.chapter\.week/);
+  assert.match(client, /messages: state\.history\.slice\(-HISTORY_LIMIT\)/);
+  assert.match(client, /Content-Type": "application\/json/);
+  assert.match(client, /data-ai-mentor-starter/);
+  assert.match(client, /data-ai-mentor-new-conversation/);
+  assert.match(client, /event\.key === "Enter" && !event\.shiftKey/);
+  assert.match(client, /text\.textContent = content/);
+  assert.match(client, /AI mentor is unavailable right now\. You can still copy the complete prompt or open ChatGPT\./);
+  assert.doesNotMatch(client, /(?:model|system(?:Prompt)?)\s*:/);
+  assert.match(css, /\.aiMentorChat\s*\{/);
+  assert.match(css, /\.aiMentorMessage p\s*\{[^}]*overflow-wrap:\s*anywhere/s);
+  assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.aiMentorQuestion\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
+});
+
 test("AI Mentor prompt generator supports every mentor, chapter and purpose", () => {
   for (const mentor of mentorProfiles) {
     for (const purpose of purposes) {

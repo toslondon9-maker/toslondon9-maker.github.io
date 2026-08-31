@@ -2412,6 +2412,159 @@ main > article {
   line-height: 1.55;
 }
 
+.aiMentorChat {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid color-mix(in srgb, var(--gold) 48%, var(--border));
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--paper) 68%);
+}
+
+.aiMentorChat__heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.aiMentorChat__heading h3,
+.aiMentorChat__heading .eyebrow {
+  margin: 0;
+}
+
+.aiMentorChat__heading .button--text,
+.aiMentorStarters button,
+.aiMentorQuestion textarea,
+.aiMentorQuestion button {
+  min-height: 2.75rem;
+}
+
+.aiMentorMessages {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  max-height: 28rem;
+  padding: 0.75rem;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--paper);
+}
+
+.aiMentorMessage {
+  width: fit-content;
+  max-width: min(100%, 52rem);
+  padding: 0.8rem 1rem;
+  border-radius: 0.7rem;
+  background: var(--cream-deep);
+  color: var(--night);
+}
+
+.aiMentorMessage p {
+  margin: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.55;
+}
+
+.aiMentorMessage--user {
+  justify-self: end;
+  background: var(--night);
+  color: var(--cream);
+}
+
+.aiMentorMessage--assistant {
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--border));
+}
+
+.aiMentorChat__status,
+.aiMentorChat__error,
+.aiMentorChat__disclosure {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.aiMentorChat__status {
+  min-height: 1.5em;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.aiMentorChat__error {
+  padding: 0.8rem 1rem;
+  border-left: 4px solid #9d342d;
+  background: #fff0ed;
+  color: #64221d;
+  font-weight: 700;
+}
+
+.aiMentorStarters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.aiMentorStarters button {
+  flex: 1 1 15rem;
+  min-width: 0;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--cream);
+  color: var(--night);
+  font: inherit;
+  font-weight: 700;
+  text-align: start;
+}
+
+.aiMentorQuestion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.65rem;
+}
+
+.aiMentorQuestion label {
+  grid-column: 1 / -1;
+  color: var(--night);
+  font-weight: 800;
+}
+
+.aiMentorQuestion textarea {
+  min-width: 0;
+  width: 100%;
+  resize: vertical;
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--paper);
+  color: var(--night);
+  font: inherit;
+  line-height: 1.45;
+}
+
+.aiMentorQuestion button {
+  align-self: end;
+  white-space: nowrap;
+}
+
+.aiMentorChat__disclosure {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.aiMentorChat :is(button, textarea):focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+.aiMentorChat button:disabled,
+.aiMentorChat textarea:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 .curriculumPage__introActions {
   display: flex;
   flex-wrap: wrap;
@@ -2440,6 +2593,23 @@ main > article {
   }
 
   .aiMentorPrompt__actions > * {
+    width: 100%;
+  }
+
+  .aiMentorChat__heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .aiMentorChat__heading .button--text {
+    align-self: start;
+  }
+
+  .aiMentorQuestion {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aiMentorQuestion button {
     width: 100%;
   }
 }
