@@ -32,4 +32,4 @@ For a local smoke test, set `OPENAI_API_KEY` as a local Wrangler secret and supp
 
 ## Rollback
 
-If the API needs to be disabled, remove the `AI_MENTOR_ENDPOINT` from the static configuration or roll the Worker back using Cloudflare's deployment history. The page's Copy Prompt and Open ChatGPT actions remain its safe no-backend fallback. Rotate the OpenAI key immediately if it is ever exposed.
+If the API needs to be disabled, remove or replace the `ai-mentor-endpoint` meta value in the static AI Mentor page, or roll the Worker back using Cloudflare's deployment history. The page's Copy Prompt and Open ChatGPT actions remain its safe no-backend fallback. Rotate the OpenAI key immediately if it is ever exposed.

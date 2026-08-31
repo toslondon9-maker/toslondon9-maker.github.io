@@ -29,3 +29,7 @@ The normal `node --test` runner cannot spawn child processes in this sandbox (`E
 - Added a route-scoped `<meta name="ai-mentor-endpoint" content="/api/mentor">` to the static AI Mentor page.
 - Updated the browser client to read that meta value first and retain `/api/mentor` as its safe fallback.
 - Extended focused build/client tests to require the emitted hook and the client lookup, then regenerated the committed route. No secret or credential was added.
+
+## Round 2 fix — rollback documentation
+
+- Updated the rollback guidance to reference the actual `ai-mentor-endpoint` meta hook and removed the obsolete static configuration name.
