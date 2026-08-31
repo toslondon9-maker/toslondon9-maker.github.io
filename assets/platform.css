@@ -2163,6 +2163,53 @@ main > article {
   }
 }
 
+/* Final readability safeguards for the Master Key study page. Keep the
+   curriculum content intact while guaranteeing clear, high-contrast reading
+   surfaces and controls at every viewport size. */
+.curriculumPage,
+.curriculumPage .curriculum {
+  background: #f3eadc;
+  color: #172b40;
+}
+.curriculumPage__intro h1,
+.curriculumPage__intro > p,
+.curriculumPage__intro .eyebrow,
+.curriculumPage__status,
+.curriculumPhase > header h2,
+.curriculumPhase > header p,
+.curriculumPage .chapterGrid summary,
+.curriculumPage .chapterGrid summary strong,
+.curriculumReadingCard .chapterBody h3,
+.curriculumReadingCard .chapterBody p,
+.curriculumCoachingCta p {
+  opacity: 1;
+}
+.curriculumPage__intro h1 { color: #10243b; }
+.curriculumPage__intro > p:not(.curriculumPage__status) { color: #24394e; }
+.curriculumPage .chapterGrid details { background: #fffdf8; }
+.curriculumReadingCard { background: #fffdf8; }
+.curriculumReadingCard .chapterBody p { color: #1f3449; }
+.curriculumPage .aiMastery {
+  background: #102a42;
+  border-color: #b88732;
+  color: #fff8ea;
+}
+.curriculumPage .aiMasteryTop h3,
+.curriculumPage .aiMastery > p,
+.curriculumPage .aiMasteryPrompt summary,
+.curriculumPage .aiMasteryPrompt pre { color: #fff8ea !important; }
+.curriculumPage .aiMasteryPrompt pre {
+  background: #071a2b;
+  border-color: #b88732;
+}
+.curriculumStudyNav__links a { min-width: 2.1rem; }
+@media (max-width: 640px) {
+  .curriculumStudyNav__links { grid-template-columns: repeat(4, minmax(2.6rem, 1fr)); }
+  .curriculumStudyNav__links a { min-height: 2.75rem; }
+  .curriculumPage__intro h1 { font-size: clamp(2.15rem, 11vw, 3.4rem); }
+  .curriculumReadingCard .chapterBody p { font-size: 1.0625rem; line-height: 1.75; }
+}
+
 /* Accessible full-size flyer viewer */
 .sevenDayDashboard__flyer { position: relative; width: 100%; }
 .sevenDayDashboard__flyerTrigger { position: relative; display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
