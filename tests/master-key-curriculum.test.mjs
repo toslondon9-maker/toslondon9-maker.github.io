@@ -24,7 +24,7 @@ test("the complete historic 24-week curriculum is visitor-accessible from home a
   assert.match(curriculum, /The Truth shall set you free/);
   assert.match(curriculum, /class="weekVideo"[^>]+href="https:\/\/photos\.google\.com\/share\//);
   const source = readFileSync(new URL("../content/master-key-curriculum.html", import.meta.url));
-  assert.equal(createHash("sha256").update(source).digest("hex"), "8892a540c2ca42d8904819d5fce20675d621aa24697e05eedcfd8d4e99fada5e");
+  assert.equal(createHash("sha256").update(source).digest("hex"), "0aa7a56e605c934f40ec8fbf57602813cf96b504882bf9199ce9688e6bc454fd");
   assert.ok(page.styles?.includes("/assets/index-Bgwsdhov.css"));
 
   const home = renderHome({ language: "en" });
