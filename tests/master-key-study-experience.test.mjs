@@ -18,6 +18,11 @@ test("Master Key page provides the premium 24-chapter study shell around the pre
   assert.equal((html.match(/data-curriculum-chapter=/g) ?? []).length, 24);
   assert.equal((html.match(/class="curriculumPractice"/g) ?? []).length, 24);
   assert.equal((html.match(/THIS WEEK'S PRACTICE/g) ?? []).length, 24);
+  assert.equal((html.match(/class="curriculumPracticeGuide"/g) ?? []).length, 24);
+  assert.equal((html.match(/HOW TO PRACTISE IT/g) ?? []).length, 24);
+  assert.equal((html.match(/What you're training:/g) ?? []).length, 24);
+  assert.match(html, /Physical stillness[\s\S]*?For 15-30 minutes/);
+  assert.match(html, /Integrate the whole 24-week practice[\s\S]*?next 90 days/);
   assert.equal((html.match(/The reading gives you the knowledge\. The daily exercise creates the transformation\./g) ?? []).length, 24);
   assert.equal((html.match(/class="aiMasteryPrompt"/g) ?? []).length, 24);
   assert.equal((html.match(/WEEK \d+ GUIDED PROMPT/g) ?? []).length, 24);

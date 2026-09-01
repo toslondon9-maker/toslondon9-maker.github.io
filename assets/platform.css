@@ -498,6 +498,142 @@ main > article {
   background: var(--paper);
 }
 
+/* Focused desktop header polish + clearer weekly exercise guides. */
+@media (min-width: 1361px) {
+  .siteHeader {
+    gap: clamp(1rem, 1.5vw, 1.5rem);
+    padding-inline: clamp(1rem, 2vw, 1.75rem);
+  }
+
+  .brand {
+    flex: 0 0 auto;
+    min-width: max-content;
+    gap: 0.7rem;
+  }
+
+  .brand__wordmark {
+    display: grid;
+    flex: 0 0 auto;
+    gap: 0.08rem;
+    width: max-content;
+    color: var(--night);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(0.78rem, 0.82vw, 0.94rem);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1.12;
+    white-space: nowrap;
+  }
+
+  .brand img {
+    flex: 0 0 auto;
+    width: clamp(3.4rem, 3.8vw, 4.15rem);
+  }
+
+  .siteHeader__actions,
+  .siteNav {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .siteHeader__actions {
+    gap: clamp(0.45rem, 0.75vw, 0.75rem);
+  }
+
+  .siteNav ul {
+    width: 100%;
+    justify-content: flex-end;
+    gap: clamp(0.38rem, 0.62vw, 0.78rem);
+  }
+
+  .siteNav a {
+    padding-inline: 0.08rem;
+    font-size: clamp(0.78rem, 0.71vw, 0.9rem);
+    letter-spacing: -0.005em;
+  }
+
+  .siteNav .navStartFree {
+    padding-inline: clamp(0.75rem, 0.85vw, 0.95rem);
+  }
+
+  .languageSwitch--header {
+    gap: 0.05rem;
+  }
+
+  .languageSwitch--header button {
+    min-width: 40px;
+    padding-inline: 0.25rem;
+    font-size: 0.86rem;
+  }
+}
+
+.brand__wordmark {
+  display: grid;
+  gap: 0.08rem;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.brand__wordmark > span {
+  display: block;
+}
+
+.curriculumPracticeGuide {
+  margin: 1.35rem 0 1.25rem;
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+  border: 1px solid rgba(184, 140, 59, 0.42);
+  border-left: 4px solid var(--gold);
+  border-radius: 1rem;
+  background: rgba(255, 253, 248, 0.82);
+  color: var(--ink);
+}
+
+.curriculumPracticeGuide__label {
+  margin: 0 0 0.35rem;
+  color: #7f5c1c;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+}
+
+.curriculumPracticeGuide h4 {
+  margin: 0 0 0.75rem;
+  color: var(--night);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+.curriculumPracticeGuide ol {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.curriculumPracticeGuide li {
+  padding-left: 0.2rem;
+  line-height: 1.55;
+}
+
+.curriculumPracticeGuide__purpose {
+  margin: 0.9rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(184, 140, 59, 0.28);
+  color: #334558;
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .curriculumPracticeGuide {
+    margin-block: 1.1rem;
+    padding: 1rem;
+  }
+
+  .curriculumPracticeGuide ol {
+    padding-left: 1.25rem;
+  }
+}
+
 .homeOutcome__inner,
 .coachingOutcome__inner {
   max-width: 54rem;

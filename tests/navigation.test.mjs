@@ -32,6 +32,7 @@ test("header presents the simplified seven-destination conversion path", () => {
   assert.match(html, />About Tariq<\/a>/);
   assert.match(html, />BUY THE MKS BOOK<\/a>/);
   assert.match(html, />Start Free<\/a>/);
+  assert.match(html, /<span class="brand__wordmark"><span>UNLEASH YOUR<\/span><span>POWER<\/span><\/span>/);
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />EN<.*>ES</s);
   assert.equal((html.match(/class="siteNav"/g) ?? []).length, 1);
@@ -78,7 +79,7 @@ test("page shell cache-busts the release assets that control visible copy and la
   });
   const languageModule = readFileSync(new URL("../assets/site-language.mjs", import.meta.url), "utf8");
 
-  assert.match(html, /href="\/assets\/platform\.css\?v=20260831-section-links-1"/);
+  assert.match(html, /href="\/assets\/platform\.css\?v=20260901-header-exercises-1"/);
   assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260830-final-polish"/);
   assert.match(languageModule, /translations\.mjs\?v=20260830-final-polish/);
 });
