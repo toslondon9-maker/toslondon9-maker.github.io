@@ -2604,6 +2604,21 @@ main > article {
   line-height: 1.8;
 }
 
+/* Keep the Lineage hero readable on its light premium canvas. */
+.mksLineageHero {
+  background: #f7f1e5;
+  color: #102237;
+}
+
+.mksLineageHero h1,
+.mksLineageHero p:not(.eyebrow) {
+  color: #102237;
+}
+
+.mksLineageHero .eyebrow {
+  color: #8a6220;
+}
+
 .curriculumPage .curriculumPractice {
   margin-block: 2.25rem;
   border-color: #d5b77f;
