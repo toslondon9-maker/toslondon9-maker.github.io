@@ -13,6 +13,7 @@ import { aiMentorsPage } from "./pages/ai-mentors.mjs";
 import { contactPage } from "./pages/contact.mjs";
 import { sessionHubPage } from "./pages/session-hub.mjs";
 import { legalPage } from "./pages/legal.mjs";
+import { mksLineagePage } from "./pages/mks-lineage.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -67,6 +68,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.startFree]: (data) => startFreePage(data),
   [siteData.routes.coaching]: (data) => coachingPage(data),
   [siteData.routes.masterKeySystem]: (data) => masterKeyCurriculumPage(data),
+  [siteData.routes.mksLineage]: (data) => mksLineagePage(data),
   [siteData.routes.resources]: (data) => resourcesPage(data),
   [siteData.routes.aiMentors]: (data) => aiMentorsPage(data),
   [siteData.routes.getTheBook]: (data) => getTheBookPage(data),

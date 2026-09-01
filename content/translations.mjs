@@ -204,6 +204,10 @@ const translations = deepFreeze({
   },
   "route.home.action": { en: "START FREE FOR 7 DAYS", es: "Empieza gratis durante 7 días" },
   "route.masterKeySystem.metaTitle": { en: "The Master Key System | Unleash Your Power", es: "El Master Key System | Unleash Your Power" },
+  "route.mksLineage.metaTitle": { en: "MKS Lineage: A Timeless Tradition of Study | Unleash Your Power", es: "Linaje del MKS: Una tradición atemporal de estudio | Unleash Your Power" },
+  "route.mksLineage.metaDescription": { en: "Explore the independent study tradition connecting Charles F. Haanel's Master Key System with modern reflection and practical application.", es: "Explora la tradición de estudio independiente que conecta el Master Key System de Charles F. Haanel con la reflexión y la aplicación práctica actuales." },
+  "route.mksLineage.heading": { en: "From Original Wisdom to Practical Application", es: "De la sabiduría original a la aplicación práctica" },
+  "route.mksLineage.purpose": { en: "A respectful, independent study journey through the ideas, exercises and practical application of The Master Key System.", es: "Un recorrido de estudio independiente y respetuoso por las ideas, ejercicios y aplicación práctica de The Master Key System." },
   "route.masterKeySystem.metaDescription": {
     en: "Explore the progressive 24-week Master Key practice and its four phases.",
     es: "Descubre la práctica progresiva de 24 semanas del Master Key System y sus cuatro fases.",

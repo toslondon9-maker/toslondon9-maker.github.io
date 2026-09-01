@@ -19,6 +19,7 @@ export const siteData = deepFreeze({
   routes: {
     home: "/",
     masterKeySystem: "/master-key-system/",
+    mksLineage: "/mks-lineage/",
     startFree: "/start-free/",
     coaching: "/coaching/",
     aboutTariq: "/about-tariq/",

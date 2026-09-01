@@ -753,6 +753,39 @@ main > article {
   }
 }
 
+/* MKS Lineage page */
+.mksLineagePage{background:var(--cream);color:var(--navy)}
+.mksLineageHero{background:var(--navy);color:var(--cream);padding:clamp(4rem,9vw,8rem) 1.5rem clamp(3.5rem,7vw,6rem);position:relative;overflow:hidden}
+.mksLineageHero::after{content:"";position:absolute;inset:auto -10% -55% 42%;height:28rem;border:1px solid rgba(211,163,76,.35);border-radius:50%;transform:rotate(-14deg);pointer-events:none}
+.mksLineageHero__inner,.mksLineage__content{margin-inline:auto;max-width:70rem;position:relative;z-index:1}
+.mksLineageHero__inner{max-width:58rem}
+.mksLineageHero h1{color:var(--cream);font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5.3rem);line-height:1.02;margin:.7rem 0 1.5rem;max-width:15ch}
+.mksLineageHero p:not(.eyebrow){color:#f7f2e8;font-size:clamp(1.05rem,1.8vw,1.3rem);line-height:1.75;max-width:62ch;margin:0 0 1rem}
+.mksLineageHero__lead{font-size:clamp(1.2rem,2.2vw,1.55rem)!important}
+.mksLineage__content{padding:clamp(3rem,7vw,6rem) 1.5rem}
+.mksLineage__section{border-top:1px solid rgba(15,35,54,.2);display:grid;gap:1rem;grid-template-columns:minmax(10rem,.7fr) minmax(0,1.7fr);padding:clamp(2.5rem,5vw,4.5rem) 0}
+.mksLineage__section:first-child{border-top:0;padding-top:0}
+.mksLineage__section h2,.mksLineage__cta h2{color:var(--navy);font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.1;margin:0;max-width:20ch}
+.mksLineage__section .eyebrow,.mksLineage__cta .eyebrow{color:var(--gold);margin:0;padding-top:.35rem}
+.mksLineage__copy{max-width:52rem}
+.mksLineage__copy p,.mksLineage__cta p{color:var(--navy);font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.75;margin:0}
+.mksLineage__cta{background:#f5efe4;border:1px solid rgba(182,133,44,.45);border-radius:1rem;box-shadow:0 1rem 2.5rem rgba(15,35,54,.08);margin-top:clamp(2rem,5vw,4rem);padding:clamp(2rem,5vw,4rem)}
+.mksLineage__cta h2{margin:.5rem 0 1rem;max-width:none}
+.mksLineage__actions{align-items:center;display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.mksLineage__actions a{white-space:nowrap}
+.curriculumLineageLink{align-items:center;border-top:1px solid rgba(15,35,54,.2);display:flex;gap:1rem;justify-content:space-between;margin:3rem auto 0;max-width:70rem;padding-top:1.5rem}
+.curriculumLineageLink span{color:var(--navy);font-size:1rem}
+@media (max-width:700px){
+  .mksLineageHero{padding-inline:1.25rem}
+  .mksLineageHero h1{font-size:clamp(2.35rem,12vw,3.5rem)}
+  .mksLineage__content{padding-inline:1.25rem}
+  .mksLineage__section{display:block}
+  .mksLineage__section h2{margin:.6rem 0 1rem;max-width:16ch}
+  .mksLineage__actions{align-items:stretch;flex-direction:column}
+  .mksLineage__actions a{justify-content:center;text-align:center;width:100%}
+  .curriculumLineageLink{align-items:flex-start;flex-direction:column}
+}
+
 .home {
   overflow-x: clip;
 }
