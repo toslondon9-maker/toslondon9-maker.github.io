@@ -2619,6 +2619,72 @@ main > article {
   color: #8a6220;
 }
 
+.mksLineage__sectionText {
+  min-width: 0;
+}
+
+.mksLineage__section--portrait {
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, .85fr);
+  align-items: center;
+  column-gap: clamp(2rem, 5vw, 4rem);
+}
+
+.mksLineage__section--portrait .mksLineage__portrait--left {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.mksLineage__section--portrait .mksLineage__sectionText {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.mksLineage__section--portrait .mksLineage__portrait--right {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.mksLineage__section--portrait-left .mksLineage__sectionText {
+  grid-column: 2;
+}
+
+.mksLineage__portrait {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #c79a4d;
+  border-radius: 12px;
+  background: #fffdf8;
+  box-shadow: 0 12px 28px rgba(15, 35, 54, .12);
+}
+
+.mksLineage__portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / .88;
+  object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .mksLineage__section--portrait {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .mksLineage__section--portrait .mksLineage__sectionText,
+  .mksLineage__section--portrait .mksLineage__portrait--left,
+  .mksLineage__section--portrait .mksLineage__portrait--right {
+    order: initial;
+  }
+
+  .mksLineage__portrait {
+    width: min(100%, 26rem);
+    align-self: center;
+  }
+}
+
 .curriculumPage .curriculumPractice {
   margin-block: 2.25rem;
   border-color: #d5b77f;
