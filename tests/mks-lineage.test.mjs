@@ -13,6 +13,8 @@ test("MKS Lineage page presents the approved independent study positioning", asy
   assert.match(page.body, /A Tradition of Study, Reflection and Practice/);
   assert.match(page.body, /Helmar Rudolph — A Modern Student and Teacher of the System/);
   assert.match(page.body, /Tariq Saddique — Your Guide Through the 24-Week Journey/);
+  assert.match(page.body, /src="\/images\/lineage\/tariq-lineage-guide\.jpg" alt="Tariq Saddique guiding students through the 24-week Master Key journey"/);
+  assert.doesNotMatch(page.body, /src="\/images\/lineage\/tariq-saddique\.png"/);
   assert.match(page.body, /Study It\. Practise It\. Live It\./);
   assert.match(page.body, /href="\/master-key-system\/"/);
   assert.match(page.body, /href="\/coaching\/"/);
