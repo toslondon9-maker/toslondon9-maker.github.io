@@ -224,7 +224,7 @@ test("the committed AI mentor page contains the current client and safe fallback
   assert.match(html, /src="\/assets\/ai-mentors\.mjs"/);
 });
 
-test("the public AI mentor build uses a non-secret fallback endpoint", async () => {
+test("the public AI mentor build uses the deployed non-secret Worker endpoint", async () => {
   const outputRoot = await mkdtemp(path.join(os.tmpdir(), "unleash-ai-mentor-security-"));
   const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   const secretName = ["OPENAI", "API", "KEY"].join("_");
@@ -243,7 +243,7 @@ test("the public AI mentor build uses a non-secret fallback endpoint", async () 
     const publicSource = await Promise.all(publicSourceFiles.map((file) => readFile(path.join(repositoryRoot, file), "utf8")));
     const generatedOutput = await Promise.all(build.files.map((file) => readFile(path.join(outputRoot, file), "utf8")));
 
-    assert.equal(endpoint, "/api/mentor");
+    assert.equal(endpoint, "https://unleash-your-power-ai-mentor.toslondon9.workers.dev/mentor");
     assert.doesNotMatch(endpoint, /(?:key|token|secret|bearer|password)/i);
     assert.doesNotMatch(publicSource.join("\n"), new RegExp(secretName));
     assert.doesNotMatch(generatedOutput.join("\n"), new RegExp(secretName));

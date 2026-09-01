@@ -14,33 +14,34 @@ const ALLOWED_MENTORS = Object.freeze({
 });
 
 const CHAPTERS = Object.freeze([
-  "The Master Key",
-  "A Universal Law",
-  "The Power of Thought",
-  "The Secret of All Power",
-  "The Law of Attraction",
-  "The Law of Success",
-  "The Law of Substitution",
-  "The Law of Growth",
-  "The Law of Love",
-  "The Law of Thinking",
-  "The Law of Supply",
-  "The Law of Concentration",
-  "The Law of Habit",
+  "One Consciousness - One Power",
+  "One Method of Finding the Truth",
+  "Thoughts become Things",
+  "The true “Self”",
+  "The Brain of Man",
+  "From Awareness to Success",
+  "The Power of your Imagination",
+  "The Value of Truthful Thinking",
+  "Action as the Pinnacle of Thought",
+  "Life in Harmony with Natural Law",
+  "Inductive Reasoning",
+  "Understanding the Spiritual Nature of Thought",
   "The Law of Cause and Effect",
-  "The Law of Compensation",
-  "The Law of Spirituality",
-  "The Law of Self-Reliance",
-  "The Law of Success",
-  "The Law of Abundance",
-  "The Law of Forgiveness",
-  "The Law of Non-Resistance",
-  "The Law of Vibration",
-  "The Law of Service",
+  "The Discipline of Thinking",
+  "Conscious Cooperation with the Omnipotent",
+  "Creating Scientifically True Ideals",
+  "Intuitive Perception through Concentration",
+  "The Law of Attraction",
+  "Raising your Life Force",
+  "Thinking as the True Business in Life",
+  "Thinking Big Thoughts as the Secret of Success",
+  "New Thinking, New Man",
+  "A Money Consciousness in Service of Mankind",
   "The Truth shall set you free",
 ]);
 
 export const MAX_MESSAGES = 12;
+export const MAX_REQUEST_BYTES = 80 * 1024;
 const MAX_MESSAGE_CHARACTERS = 1500;
 const FIXED_MODEL = "@cf/meta/llama-3.2-3b-instruct";
 
@@ -87,6 +88,34 @@ function validPayload(payload) {
     && validMessages(payload.messages);
 }
 
+async function readJsonWithinLimit(request) {
+  const declaredLength = Number(request.headers.get("Content-Length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_REQUEST_BYTES) return { tooLarge: true };
+  if (!request.body) return { invalid: true };
+
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let bytesRead = 0;
+  let text = "";
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      bytesRead += value.byteLength;
+      if (bytesRead > MAX_REQUEST_BYTES) {
+        await reader.cancel();
+        return { tooLarge: true };
+      }
+      text += decoder.decode(value, { stream: true });
+    }
+    text += decoder.decode();
+    return { value: JSON.parse(text) };
+  } catch {
+    return { invalid: true };
+  }
+}
+
 function systemPrompt({ mentorId, chapter }) {
   const mentor = ALLOWED_MENTORS[mentorId];
   const chapterTitle = CHAPTERS[chapter - 1];
@@ -124,12 +153,10 @@ export function createWorker({ fetchImpl = fetch } = {}) {
       if (request.method !== "POST") return json({ error: "Method not allowed." }, 405, requestOrigin);
       if (!request.headers.get("Content-Type")?.toLowerCase().includes("application/json")) return json({ error: "Invalid mentor request." }, 400, requestOrigin);
 
-      let payload;
-      try {
-        payload = await request.json();
-      } catch {
-        return json({ error: "Invalid mentor request." }, 400, requestOrigin);
-      }
+      const parsed = await readJsonWithinLimit(request);
+      if (parsed.tooLarge) return json({ error: "Request too large." }, 413, requestOrigin);
+      if (parsed.invalid) return json({ error: "Invalid mentor request." }, 400, requestOrigin);
+      const payload = parsed.value;
       if (!validPayload(payload)) return json({ error: "Invalid mentor request." }, 400, requestOrigin);
       if (!env?.AI || typeof env.AI.run !== "function") return json({ error: "Unable to process mentor request." }, 500, requestOrigin);
 

@@ -8,7 +8,7 @@ const defaultSocialImage = `${siteUrl}/images/haanel-tariq-portraits.jpeg`;
 const defaultSocialImageAlt = "Tariq Saddique and the Master Key System learning journey";
 const privateRoute = "/live-coaching/";
 const aiMentorRoute = "/ai-mentors/";
-const aiMentorEndpoint = "/api/mentor";
+const aiMentorEndpoint = "https://unleash-your-power-ai-mentor.toslondon9.workers.dev/mentor";
 
 function versionReleaseScript(script) {
   return script === languageScript ? `${script}?v=${releaseAssetVersion}` : script;
