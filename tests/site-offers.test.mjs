@@ -60,9 +60,11 @@ test("all commercial comparisons are derived from the canonical offer data", () 
   assert.equal(Math.round((1 - siteData.offer.completePrice / siteData.offer.msrpTotal) * 100), siteData.offer.msrpDiscount);
 });
 
-test("the free dashboard remains free and does not add a registration or payment flow", () => {
+test("the free dashboard remains free while registration is required before the dashboard is revealed", () => {
   const html = routeRenderers[siteData.routes.startFree](siteData).body;
 
-  assert.doesNotMatch(html, /<form\b|<input\b|paypal|stripe|payment|checkout|register|sign up|account (?:created|creation)/i);
+  assert.match(html, /data-lead-capture-form/);
+  assert.doesNotMatch(html, /paypal|stripe|payment|checkout/i);
+  assert.match(html, /data-lead-capture-dashboard hidden/);
   assert.match(html, /href="\/start-free\/day-1-see-whats-running-your-life\/"/);
 });

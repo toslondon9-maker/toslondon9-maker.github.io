@@ -7,13 +7,18 @@ import { routeRenderers } from "../src/routes.mjs";
 
 const dashboard = () => routeRenderers[siteData.routes.startFree](siteData);
 
-test("the free dashboard starts Day 1 immediately and makes all seven ordered lessons available", () => {
+test("the Start Free page requires registration before its main dashboard while public lesson URLs remain present", () => {
   const page = dashboard();
   const html = page.body;
 
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
-  assert.match(html, new RegExp(`href="${sevenDayExperience.lessons[0].route}"`));
-  assert.match(html, /data-i18n="sevenDay\.dashboard\.start"/);
+  assert.match(html, /data-lead-capture-form/);
+  assert.match(html, /name="firstName"[^>]+required/);
+  assert.match(html, /name="surname"[^>]+required/);
+  assert.match(html, /name="whatsapp"[^>]+required/);
+  assert.match(html, /name="consent"[^>]+required/);
+  assert.match(html, /name="emailMarketing"/);
+  assert.match(html, /data-lead-capture-dashboard hidden/);
   assert.equal((html.match(/class="sevenDayDashboard__lesson"/g) ?? []).length, 7);
 
   for (const lesson of sevenDayExperience.lessons) {
@@ -34,13 +39,11 @@ test("the free dashboard provides an honest progressive, private no-JavaScript b
   assert.match(html, /data-i18n="sevenDay\.reset\.label"/);
   assert.match(html, /data-i18n="sevenDay\.privacy\.body"/);
   assert.match(html, /Only lesson-completion flags are saved in this browser on this device/);
-  assert.match(html, /Progress is not transmitted to or stored by Tariq/);
   assert.match(html, /Clearing browser data or changing devices may remove/);
   assert.match(html, /aria-labelledby="seven-day-progress-heading"[\s\S]*?<h2 id="seven-day-progress-heading"/);
   assert.match(html, /aria-labelledby="seven-day-lessons-heading"[\s\S]*?<h2 id="seven-day-lessons-heading"/);
   assert.match(html, /aria-labelledby="seven-day-workbook-heading"[\s\S]*?<h2 id="seven-day-workbook-heading"/);
   assert.match(html, /aria-labelledby="seven-day-privacy-heading"[\s\S]*?<h2 id="seven-day-privacy-heading"/);
-  assert.doesNotMatch(html, /<form\b|<input\b|account (?:created|creation)|register|sign up|saved to (?:our|Tariq)/i);
 });
 
 test("the dashboard describes active local-only progress saving in both languages", () => {
@@ -54,10 +57,10 @@ test("the dashboard describes active local-only progress saving in both language
   assert.match(t(privacyKey, "es"), /Borrar los datos del navegador o cambiar de dispositivo puede eliminar/i);
 });
 
-test("the dashboard loads one progress enhancement while preserving disabled no-JavaScript controls", () => {
+test("the dashboard loads form and progress enhancements while preserving disabled no-JavaScript controls", () => {
   const page = dashboard();
 
-  assert.deepEqual(page.scripts, ["/assets/seven-day-progress.mjs", "/assets/flyer-lightbox.mjs"]);
+  assert.deepEqual(page.scripts, ["/assets/lead-capture-form.mjs", "/assets/seven-day-progress.mjs", "/assets/flyer-lightbox.mjs"]);
   assert.match(page.body, /data-progress-reset disabled/);
   for (const lesson of sevenDayExperience.lessons) {
     assert.match(page.body, new RegExp(`data-progress-lesson="${lesson.id}"`));
