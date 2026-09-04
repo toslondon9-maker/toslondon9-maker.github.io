@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 import { sevenDayExperience } from "../content/seven-day-experience.mjs";
 import { siteData } from "../content/site-data.mjs";
@@ -31,6 +32,16 @@ test("the Start Free page requires registration before its main dashboard while 
     assert.match(html, new RegExp(`data-i18n="${lesson.translationKey}\\.title"`));
     assert.match(html, new RegExp(`data-i18n="${lesson.translationKey}\\.status"`));
   }
+});
+
+test("the registration honeypot is hidden without changing the status message element", () => {
+  const html = dashboard().body;
+  const css = fs.readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+
+  assert.match(html, /<input name="website" class="visually-hidden"[^>]*>/);
+  assert.match(css, /\.sevenDayRegistration input\.visually-hidden\s*\{[^}]*position:\s*absolute[^}]*width:\s*1px[^}]*height:\s*1px[^}]*clip:\s*rect\(/s);
+  assert.match(html, /<p data-lead-capture-status role="status"[^>]*><\/p>/);
+  assert.doesNotMatch(html, /<input[^>]+data-lead-capture-status/);
 });
 
 test("the free dashboard provides an honest progressive, private no-JavaScript baseline", () => {
