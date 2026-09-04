@@ -51,6 +51,14 @@ test("the registration form cannot fall back to a GET query-string submission", 
   assert.doesNotMatch(html, /<form data-lead-capture-form[^>]*\bnovalidate\b/);
 });
 
+test("the registration page provides a no-JavaScript WhatsApp fallback without exposing the form", () => {
+  const html = dashboard().body;
+  const css = fs.readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+
+  assert.match(html, /<noscript>[\s\S]*sevenDayRegistration__noScript[\s\S]*wa\.me\/34611223345[\s\S]*<\/noscript>/);
+  assert.match(css, /html:not\(\.has-js\) \.sevenDayRegistration form\s*\{[^}]*display:\s*none/s);
+});
+
 test("the free dashboard provides an honest progressive, private no-JavaScript baseline", () => {
   const page = dashboard();
   const html = page.body;

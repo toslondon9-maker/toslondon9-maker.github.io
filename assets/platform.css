@@ -24,6 +24,8 @@
 
 .sevenDayRegistration { background: var(--cream, #f7f1e6); padding: clamp(2rem, 5vw, 4rem) 1rem; }
 .sevenDayRegistration .sevenDayDashboard__inner { max-width: 52rem; margin: 0 auto; }
+html:not(.has-js) .sevenDayRegistration form { display: none; }
+.sevenDayRegistration__noScript { padding: 1rem; border: 1px solid var(--gold, #b78a3c); border-radius: .35rem; background: var(--paper, #fffdf8); color: var(--navy, #0b2038); }
 .sevenDayRegistration form { display: grid; gap: 1rem; }
 .sevenDayRegistration label { display: grid; gap: .4rem; color: var(--navy, #0b2038); font-weight: 600; line-height: 1.45; }
 .sevenDayRegistration input:not([type="checkbox"]), .sevenDayRegistration textarea { width: 100%; min-height: 2.75rem; box-sizing: border-box; border: 1px solid #b78a3c; border-radius: .35rem; padding: .7rem; font: inherit; background: #fffdf8; color: #0b2038; }
