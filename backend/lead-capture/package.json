@@ -1,0 +1,6 @@
+{
+  "name": "unleash-your-power-leads",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test ../../tests/lead-capture-worker.test.mjs" }
+}
