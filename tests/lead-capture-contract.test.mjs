@@ -49,9 +49,9 @@ test("lead contract retains the explicit optional email-marketing choice", () =>
   assert.equal(declined.emailMarketing, false);
 });
 
-test("unconfigured endpoint fails closed and is never emitted as a fake URL", () => {
-  assert.equal(leadCaptureConfig.endpoint, null);
-  assert.equal(resolveLeadEndpoint(leadCaptureConfig), null);
+test("configured endpoint passes strict HTTPS validation", () => {
+  assert.equal(leadCaptureConfig.endpoint, "https://unleash-your-power-leads.toslondon9.workers.dev/lead");
+  assert.equal(resolveLeadEndpoint(leadCaptureConfig), leadCaptureConfig.endpoint);
   assert.equal(resolveLeadEndpoint({ endpoint: "http://example.test/lead" }), null);
   assert.equal(resolveLeadEndpoint({ endpoint: "https://leads.example.test/lead" }), "https://leads.example.test/lead");
 });

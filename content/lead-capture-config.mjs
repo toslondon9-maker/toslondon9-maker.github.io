@@ -1,2 +1,2 @@
-// The production Worker endpoint is deliberately unset until owner-managed setup is complete.
-export const leadCaptureConfig = Object.freeze({ endpoint: null });
+// Public Worker endpoint configured after owner-managed Cloudflare setup.
+export const leadCaptureConfig = Object.freeze({ endpoint: "https://unleash-your-power-leads.toslondon9.workers.dev/lead" });
