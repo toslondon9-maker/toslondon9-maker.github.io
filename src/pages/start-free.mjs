@@ -1,6 +1,7 @@
 import { sevenDayExperience } from "../../content/seven-day-experience.mjs";
 import { siteData } from "../../content/site-data.mjs";
-import { t } from "../../content/translations.mjs";`nimport { leadCaptureConfig } from "../../content/lead-capture-config.mjs";
+import { t } from "../../content/translations.mjs";
+import { leadCaptureConfig } from "../../content/lead-capture-config.mjs";
 
 function escapeHtml(value) {
   return String(value)
