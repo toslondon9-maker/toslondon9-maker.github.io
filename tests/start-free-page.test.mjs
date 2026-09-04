@@ -49,6 +49,7 @@ test("the registration form cannot fall back to a GET query-string submission", 
 
   assert.match(html, /<form data-lead-capture-form[^>]*method="post"/);
   assert.doesNotMatch(html, /<form data-lead-capture-form[^>]*\bnovalidate\b/);
+  assert.match(html, /<button type="button"[^>]+data-lead-submit[^>]+disabled/);
 });
 
 test("the registration page provides a no-JavaScript WhatsApp fallback without exposing the form", () => {

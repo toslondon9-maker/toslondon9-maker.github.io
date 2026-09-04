@@ -19,7 +19,7 @@ export function localizeForm(form, language, documentRef = globalThis.document) 
   for (const node of form.querySelectorAll("[data-lead-label]")) node.textContent = copy[node.dataset.leadLabel];
   for (const input of form.querySelectorAll("[data-lead-placeholder]")) input.placeholder = copy.placeholders[input.dataset.leadPlaceholder];
   setText(form, "[data-lead-heading]", copy.heading); setText(form, "[data-lead-helper]", copy.helper); setText(form, "[data-lead-privacy-link]", copy.privacy);
-  const button = form.querySelector("button[type=submit]"); if (button) button.textContent = form.dataset.leadState === "loading" ? copy.loading : copy.submit;
+  const button = form.querySelector("[data-lead-submit]"); if (button) button.textContent = form.dataset.leadState === "loading" ? copy.loading : copy.submit;
   renderState(form, copy);
   setText(documentRef, "[data-lead-capture-success] [data-lead-success]", copy.success);
   setText(documentRef, "[data-lead-capture-success] [data-lead-success-action]", copy.successAction);
@@ -41,16 +41,18 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   const applyLanguage = (language) => localizeForm(form, language, document);
   const endpoint = form.dataset.leadEndpoint;
   document.addEventListener("uyp:language-change", (event) => applyLanguage(event.detail?.language));
-  if (!canSubmitLeadForm(endpoint)) { setState(form, "unavailable"); form.querySelector("button[type=submit]").disabled = true; applyLanguage(document.documentElement.lang); return; }
+  const submitButton = form.querySelector("[data-lead-submit]");
+  if (!canSubmitLeadForm(endpoint)) { setState(form, "unavailable"); submitButton.disabled = true; applyLanguage(document.documentElement.lang); return; }
+  submitButton.type = "submit"; submitButton.disabled = false;
   setState(form, "ready"); applyLanguage(document.documentElement.lang);
   form.addEventListener("submit", async (event) => {
     event.preventDefault(); const copy = languageCopy(document.documentElement.lang); const values = validateForm(form, copy); if (!values || !canSubmitLeadForm(endpoint)) return;
-    form.dataset.submissionId ||= crypto.randomUUID(); setState(form, "loading"); form.querySelector("button[type=submit]").disabled = true; localizeForm(form, document.documentElement.lang, document);
+    form.dataset.submissionId ||= crypto.randomUUID(); setState(form, "loading"); submitButton.disabled = true; localizeForm(form, document.documentElement.lang, document);
     const payload = { ...values, consent: values.consent === "on", emailMarketing: values.emailMarketing === "on", submissionId: form.dataset.submissionId, submittedAtMs: Date.now() - 3_000, sourcePage: "/start-free/", language: document.documentElement.lang === "es" ? "es" : "en", website: "" };
     try {
       const response = await fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); const result = await response.json();
       if (!result.ok || !result.stored) throw new Error("unavailable");
       form.hidden = true; document.querySelector("[data-lead-capture-success]").hidden = false; document.querySelector("[data-lead-capture-dashboard]").hidden = false;
-    } catch { setState(form, "error", "failure"); form.querySelector("button[type=submit]").disabled = false; localizeForm(form, document.documentElement.lang, document); form.querySelector("[data-lead-capture-status]").focus(); }
+    } catch { setState(form, "error", "failure"); submitButton.disabled = false; localizeForm(form, document.documentElement.lang, document); form.querySelector("[data-lead-capture-status]").focus(); }
   });
 });
