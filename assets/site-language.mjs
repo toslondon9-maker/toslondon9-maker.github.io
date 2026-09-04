@@ -46,6 +46,7 @@ export function localizeDocument(document, language) {
   for (const control of document.querySelectorAll?.("[data-language]") ?? []) {
     control.setAttribute("aria-pressed", String(control.dataset.language === language));
   }
+  document.dispatchEvent?.(new CustomEvent("uyp:language-change", { detail: { language } }));
   return language;
 }
 
