@@ -1,6 +1,6 @@
-export async function forwardLead(payload, env, fetchImpl = fetch) {
+export async function forwardLead(payload, env, fetchImpl = fetch, timeoutMs = 8_000) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8_000);
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetchImpl(env.GOOGLE_APPS_SCRIPT_EXEC_URL, {
       method: "POST", headers: { "content-type": "application/json" },

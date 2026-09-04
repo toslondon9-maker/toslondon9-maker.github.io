@@ -20,6 +20,7 @@ export function normaliseLeadPayload(payload = {}) {
     goal: text(payload.goal),
     difficulty: text(payload.difficulty),
     consent: payload.consent === true,
+    emailMarketing: payload.emailMarketing === true,
     sourcePage: text(payload.sourcePage),
     language: text(payload.language),
     website: text(payload.website),
@@ -42,7 +43,7 @@ export function validateLeadPayload(payload, nowMs = Date.now()) {
   if (!emailPattern.test(lead.email) || lead.email.length > LIMITS.email) return { ok: false, code: "invalid-email" };
   if (!isValidInternationalWhatsApp(lead.whatsapp) || lead.whatsapp.length > LIMITS.whatsapp) return { ok: false, code: "invalid-whatsapp" };
   if (!lead.goal || !lead.difficulty || lead.goal.length > LIMITS.message || lead.difficulty.length > LIMITS.message) return { ok: false, code: "invalid-message" };
-  if (!lead.consent) return { ok: false, code: "consent-required" };
+  if (!lead.consent || typeof payload.emailMarketing !== "boolean") return { ok: false, code: "consent-required" };
   if (!Number.isFinite(lead.submittedAtMs) || lead.submittedAtMs > nowMs || nowMs - lead.submittedAtMs < 3_000) return { ok: false, code: "invalid-request" };
   return { ok: true };
 }

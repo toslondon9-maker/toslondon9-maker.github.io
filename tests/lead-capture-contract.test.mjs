@@ -20,6 +20,7 @@ const validLead = Object.freeze({
   goal: "Build a calmer daily practice.",
   difficulty: "I lose focus when I am busy.",
   consent: true,
+  emailMarketing: false,
   sourcePage: "/start-free/",
   language: "en",
   website: "",
@@ -39,6 +40,13 @@ test("normalisation trims user fields without changing the request contract", ()
   assert.equal(result.firstName, "Ada");
   assert.equal(result.email, "ada@example.test");
   assert.equal(result.submissionId, validLead.submissionId);
+});
+
+test("lead contract retains the explicit optional email-marketing choice", () => {
+  const accepted = normaliseLeadPayload({ ...validLead, emailMarketing: true });
+  const declined = normaliseLeadPayload({ ...validLead, emailMarketing: false });
+  assert.equal(accepted.emailMarketing, true);
+  assert.equal(declined.emailMarketing, false);
 });
 
 test("unconfigured endpoint fails closed and is never emitted as a fake URL", () => {

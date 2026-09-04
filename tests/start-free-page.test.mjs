@@ -18,6 +18,11 @@ test("the Start Free page requires registration before its main dashboard while 
   assert.match(html, /name="whatsapp"[^>]+required/);
   assert.match(html, /name="consent"[^>]+required/);
   assert.match(html, /name="emailMarketing"/);
+  assert.match(html, /data-lead-heading/);
+  assert.match(html, /data-lead-placeholder="first"/);
+  assert.match(html, /<input type="checkbox" name="consent" required><span data-lead-label="consent"/);
+  assert.match(html, /data-lead-privacy-link/);
+  assert.match(html, /data-lead-success-action/);
   assert.match(html, /data-lead-capture-dashboard hidden/);
   assert.equal((html.match(/class="sevenDayDashboard__lesson"/g) ?? []).length, 7);
 

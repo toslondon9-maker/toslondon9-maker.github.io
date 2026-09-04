@@ -16,6 +16,7 @@ test("Privacy page gives visitors the dated, practical privacy information they 
   assert.match(page.body, /first name, surname, email address, WhatsApp number/i);
   assert.match(page.body, /private Google Sheet/i);
   assert.match(page.body, /email marketing/i);
+  assert.match(page.body, /yes-or-no choice about optional email marketing/i);
   assert.match(page.body, /access, correction or deletion/i);
   assert.doesNotMatch(page.body, /100% GDPR compliant/i);
 });
