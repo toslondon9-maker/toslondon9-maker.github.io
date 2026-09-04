@@ -21,6 +21,20 @@ test("visible registration labels and states change when the language runtime sw
   assert.equal(first.textContent, "Nombre"); assert.match(consent.textContent, /Acepto/); assert.equal(placeholder.placeholder, "Tu nombre"); assert.match(status.textContent, /WhatsApp/); assert.equal(button.textContent, "COMENZAR MIS 7 DÍAS GRATIS"); assert.equal(success.textContent, "Tu registro se ha completado.");
 });
 
+test("ready registration state clears the unavailable fallback message", () => {
+  const status = { textContent: "" }; const button = { textContent: "" };
+  const form = {
+    dataset: { leadState: "ready", leadMessage: "" },
+    querySelectorAll: () => [],
+    querySelector: (selector) => selector.includes("status") ? status : selector.includes("submit") ? button : null,
+  };
+
+  localizeForm(form, "en", { querySelector: () => null });
+
+  assert.equal(status.textContent, "");
+  assert.equal(button.textContent, formCopy.en.submit);
+});
+
 test("only an HTTPS Worker lead endpoint enables registration", () => {
   assert.equal(canSubmitLeadForm("https://unleash-your-power-leads.example.workers.dev/lead"), true);
   assert.equal(canSubmitLeadForm("http://worker.example/lead"), false);

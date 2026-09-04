@@ -11,7 +11,7 @@ function setText(root, selector, value) { const node = root?.querySelector?.(sel
 function setState(form, state, message = "") { form.dataset.leadState = state; form.dataset.leadMessage = message; }
 function renderState(form, copy) {
   const status = form.querySelector("[data-lead-capture-status]"); const state = form.dataset.leadState;
-  if (status) status.textContent = state === "loading" ? copy.loading : state === "error" || state === "validation" ? copy[form.dataset.leadMessage] : copy.unavailable;
+  if (status) status.textContent = state === "ready" ? "" : state === "loading" ? copy.loading : state === "error" || state === "validation" ? copy[form.dataset.leadMessage] : copy.unavailable;
 }
 
 export function localizeForm(form, language, documentRef = globalThis.document) {
