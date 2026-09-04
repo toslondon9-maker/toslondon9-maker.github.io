@@ -79,3 +79,13 @@ test("responsive rules protect the desktop navigation from wrapping before space
   assert.match(css, /\.siteNav a[\s\S]*?\{[^}]*white-space:\s*nowrap/s);
   assert.doesNotMatch(css, /(?:html|body|\*)[^{}]*\{[^{}]*overflow-x:\s*hidden/s);
 });
+
+test("desktop header uses a spacious two-level brand and navigation layout", () => {
+  const css = readFileSync(cssUrl, "utf8");
+  const desktop = css.slice(css.lastIndexOf("@media (min-width: 1361px)"));
+  assert.match(desktop, /\.siteHeader[\s\S]*?\{[^}]*flex-direction:\s*column/s);
+  assert.match(desktop, /\.siteHeader__actions\s*\{[^}]*display:\s*grid/s);
+  assert.match(desktop, /\.siteHeader__actions\s*>\s*\.siteNav\s*\{[^}]*justify-content:\s*center/s);
+  assert.match(desktop, /\.siteHeader \.brand img[\s\S]*?\{[^}]*width:\s*(?:9[0-9]|100)px/s);
+  assert.match(desktop, /\.siteHeader \.brand__wordmark[\s\S]*?\{[^}]*font-size:\s*1\.55rem/s);
+});

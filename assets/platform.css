@@ -5074,3 +5074,67 @@ body {
     text-align: center;
   }
 }
+
+/* Spacious two-level desktop header: brand first, navigation second. */
+@media (min-width: 1361px) {
+  .siteHeader,
+  .site-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+    min-height: 11rem;
+    padding-block: 1.15rem 1rem;
+  }
+
+  .siteHeader > .brand,
+  .site-header > .brand {
+    align-self: flex-start;
+    gap: 1rem;
+  }
+
+  .siteHeader .brand img,
+  .site-header .brand img {
+    width: 96px;
+    max-width: none;
+    border-radius: 0.9rem;
+  }
+
+  .siteHeader .brand__wordmark,
+  .site-header .brand__wordmark {
+    font-size: 1.55rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    line-height: 1.08;
+  }
+
+  .siteHeader__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "navigation language";
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .siteHeader__actions > .siteNav {
+    grid-area: navigation;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .siteHeader__actions > .siteNav ul {
+    justify-content: center;
+    gap: clamp(0.65rem, 1.05vw, 1.25rem);
+  }
+
+  .siteHeader__actions > .languageSwitch--header {
+    grid-area: language;
+    border-left: 1px solid var(--border);
+    padding-left: 0.75rem;
+  }
+
+  .siteHeader .siteNav a,
+  .site-header .siteNav a {
+    font-size: clamp(0.88rem, 0.9vw, 1rem);
+  }
+}

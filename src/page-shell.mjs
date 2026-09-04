@@ -1,7 +1,7 @@
 import { renderFooter, renderHeader } from "./shared-chrome.mjs";
 
 const releaseAssetVersion = "20260830-final-polish";
-const platformStyleVersion = "20260901-header-exercises-1";
+const platformStyleVersion = "20260904-header-branding-1";
 const languageScript = "/assets/site-language.mjs";
 const siteUrl = "https://toslondon9-maker.github.io";
 const defaultSocialImage = `${siteUrl}/images/haanel-tariq-portraits.jpeg`;
