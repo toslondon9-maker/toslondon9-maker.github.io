@@ -16,8 +16,18 @@ test("coaching is the accurate canonical offer", () => {
   assert.doesNotMatch(html, /6\s*[×x]\s*£169|£1,014/);
   assert.equal((html.match(/role="tab"/g) ?? []).length, 7);
   assert.equal((html.match(/role="tabpanel"/g) ?? []).length, 7);
-  assert.match(html, /href="\/contact\/"/);
-  assert.doesNotMatch(html, /paypal/i);
+  const payments = {
+    foundation: "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2",
+    visualisation: "https://www.paypal.com/ncp/payment/NWD3VU5VUTKCL",
+    concentration: "https://www.paypal.com/ncp/payment/A7KJBWNCJARJC",
+    mastery: "https://www.paypal.com/ncp/payment/N45ETXRZ9E3LQ",
+    complete: "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6",
+  };
+  for (const url of Object.values(payments)) {
+    assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.complete ? 1 : 2);
+    assert.match(html, new RegExp(`href="${url.replaceAll("/", "\\/")}" target="_blank" rel="noopener noreferrer"`));
+  }
+  assert.match(html, /Complete 24-Week Programme/);
 });
 
 test("English coaching page leads with Master Key coaching and keeps professional services secondary", async () => {

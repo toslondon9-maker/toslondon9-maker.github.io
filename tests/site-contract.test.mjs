@@ -10,7 +10,8 @@ test("commercial and identity values are locked", () => {
   ]);
   assert.deepEqual(siteData.offer, {
     separateTotal: 1188, completePrice: 997, foundingSaving: 191,
-    msrpTotal: 1788, msrpSaving: 791, msrpDiscount: 44
+    msrpTotal: 1788, msrpSaving: 791, msrpDiscount: 44,
+    paymentUrl: "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6"
   });
   assert.equal(JSON.stringify(siteData).includes("169"), false);
   assert.equal(JSON.stringify(siteData).includes("1,014"), false);

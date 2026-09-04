@@ -35,10 +35,10 @@ export const siteData = deepFreeze({
   },
   experienceRoutes: sevenDayExperience.lessons.map(({ route }) => route),
   stages: [
-    { id: "foundation", name: "Foundation", weeks: "1–4", price: 97, msrp: 147 },
-    { id: "visualisation", name: "Visualisation", weeks: "5–11", price: 197, msrp: 297 },
-    { id: "concentration", name: "Concentration", weeks: "12–18", price: 397, msrp: 597 },
-    { id: "mastery", name: "Contemplation & Mastery", weeks: "19–24", price: 497, msrp: 747 }
+    { id: "foundation", name: "Foundation", weeks: "1–4", price: 97, msrp: 147, paymentUrl: "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2" },
+    { id: "visualisation", name: "Visualisation", weeks: "5–11", price: 197, msrp: 297, paymentUrl: "https://www.paypal.com/ncp/payment/NWD3VU5VUTKCL" },
+    { id: "concentration", name: "Concentration", weeks: "12–18", price: 397, msrp: 597, paymentUrl: "https://www.paypal.com/ncp/payment/A7KJBWNCJARJC" },
+    { id: "mastery", name: "Contemplation & Mastery", weeks: "19–24", price: 497, msrp: 747, paymentUrl: "https://www.paypal.com/ncp/payment/N45ETXRZ9E3LQ" }
   ],
   offer: {
     separateTotal: 1188,
@@ -46,6 +46,7 @@ export const siteData = deepFreeze({
     foundingSaving: 191,
     msrpTotal: 1788,
     msrpSaving: 791,
-    msrpDiscount: 44
+    msrpDiscount: 44,
+    paymentUrl: "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6"
   }
 });

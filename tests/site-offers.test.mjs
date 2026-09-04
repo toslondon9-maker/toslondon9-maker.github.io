@@ -45,10 +45,11 @@ test("canonical coaching page owns every locked commercial fact", () => {
 test("canonical coaching page is static, bilingual and uses a real contact fallback", () => {
   assert.match(coaching, /<title data-i18n="route\.coaching\.metaTitle">24-Week Coaching/);
   assert.match(coaching, /src="\/assets\/tabs\.mjs"/);
-  assert.match(coaching, /href="\/contact\/"/);
+  assert.match(coaching, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/V5QYXZZS6KQE2" target="_blank" rel="noopener noreferrer"/);
   assert.match(coaching, /data-i18n="route\.coaching\.action"/);
   assert.match(coaching, />EN<.*>ES</s);
-  assert.doesNotMatch(coaching, /paypal|__VINEXT_RSC_CHUNKS__|hydrate/i);
+  assert.match(coaching, /https:\/\/www\.paypal\.com\/ncp\/payment\/JW7JRY5GTRTA6/);
+  assert.doesNotMatch(coaching, /__VINEXT_RSC_CHUNKS__|hydrate/i);
 });
 
 test("all commercial comparisons are derived from the canonical offer data", () => {
