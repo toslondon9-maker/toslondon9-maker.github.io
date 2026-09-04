@@ -177,6 +177,7 @@ test("standalone previews include every local dependency referenced by route she
     const requiredFiles = [
       "assets/platform.css",
       "assets/ai-mentors.mjs",
+      "assets/lead-capture-contract.mjs",
       "assets/seven-day-progress.mjs",
       "assets/site-language.mjs",
       "assets/site-navigation.mjs",
