@@ -22,6 +22,18 @@
   --transition: 180ms ease;
 }
 
+.sevenDayRegistration { background: var(--cream, #f7f1e6); padding: clamp(2rem, 5vw, 4rem) 1rem; }
+.sevenDayRegistration .sevenDayDashboard__inner { max-width: 52rem; margin: 0 auto; }
+.sevenDayRegistration form { display: grid; gap: 1rem; }
+.sevenDayRegistration label { display: grid; gap: .4rem; color: var(--navy, #0b2038); font-weight: 600; line-height: 1.45; }
+.sevenDayRegistration input:not([type="checkbox"]), .sevenDayRegistration textarea { width: 100%; min-height: 2.75rem; box-sizing: border-box; border: 1px solid #b78a3c; border-radius: .35rem; padding: .7rem; font: inherit; background: #fffdf8; color: #0b2038; }
+.sevenDayRegistration textarea { min-height: 7rem; resize: vertical; }
+.sevenDayRegistration input[type="checkbox"] { width: 1.2rem; height: 1.2rem; accent-color: #b78a3c; margin: 0 .5rem 0 0; }
+.sevenDayRegistration label:has(input[type="checkbox"]) { display: flex; align-items: flex-start; font-weight: 400; }
+.sevenDayRegistration button { min-height: 2.75rem; }
+.sevenDayRegistration [role="status"] { color: #0b2038; }
+@media (max-width: 430px) { .sevenDayRegistration { padding: 1.5rem .75rem; } .sevenDayRegistration h2 { font-size: clamp(1.6rem, 8vw, 2.2rem); } .sevenDayRegistration label { font-size: .98rem; } }
+
 *,
 *::before,
 *::after {
