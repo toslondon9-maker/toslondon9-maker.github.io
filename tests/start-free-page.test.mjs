@@ -47,7 +47,8 @@ test("the registration honeypot is hidden without changing the status message el
 test("the registration form cannot fall back to a GET query-string submission", () => {
   const html = dashboard().body;
 
-  assert.match(html, /<form data-lead-capture-form[^>]*method="post"[^>]*novalidate/);
+  assert.match(html, /<form data-lead-capture-form[^>]*method="post"/);
+  assert.doesNotMatch(html, /<form data-lead-capture-form[^>]*\bnovalidate\b/);
 });
 
 test("the free dashboard provides an honest progressive, private no-JavaScript baseline", () => {
