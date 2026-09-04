@@ -11,9 +11,9 @@ test("coaching is the accurate canonical offer", () => {
   for (const text of [
     "Weeks 1–4", "Weeks 5–11", "Weeks 12–18", "Weeks 19–24",
     "£97", "£197", "£397", "£497", "£1,188", "£997",
-    "Save £191", "£1,788", "Save £791", "44% off full MSRP",
+    "Save £191", "£1,788", "Save £791", "44% off full RRP",
   ]) assert.ok(html.includes(text), text);
-  assert.doesNotMatch(html, /6\s*[×x]\s*£169|£1,014/);
+  assert.doesNotMatch(html, /6\s*[×x]\s*£169|£1,014|MSRP/);
   assert.equal((html.match(/role="tab"/g) ?? []).length, 7);
   assert.equal((html.match(/role="tabpanel"/g) ?? []).length, 7);
   const payments = {
@@ -27,6 +27,7 @@ test("coaching is the accurate canonical offer", () => {
     assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.complete ? 1 : 2);
     assert.match(html, new RegExp(`href="${url.replaceAll("/", "\\/")}" target="_blank" rel="noopener noreferrer"`));
   }
+  assert.equal((html.match(/data-i18n="coaching\.payNow">Pay Now<\/span>/g) ?? []).length, 9);
   assert.match(html, /Complete 24-Week Programme/);
 });
 
@@ -51,7 +52,7 @@ test("English coaching page leads with Master Key coaching and keeps professiona
     "Leadership Workshops",
     "AI-Enabled Performance",
   ]) assert.ok(html.includes(text), text);
-  for (const price of ["£97", "£197", "£397", "£497", "£1,188", "£997", "Save £191", "£1,788", "Save £791", "44% off full MSRP"]) {
+  for (const price of ["£97", "£197", "£397", "£497", "£1,188", "£997", "Save £191", "£1,788", "Save £791", "44% off full RRP"]) {
     assert.ok(html.includes(price), price);
   }
   assert.doesNotMatch(html, /6\s*[×x]\s*£169|£1,014/);

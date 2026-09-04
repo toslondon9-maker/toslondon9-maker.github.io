@@ -36,7 +36,7 @@ test("canonical coaching page owns every locked commercial fact", () => {
   for (const value of [
     "Weeks 1–4", "Weeks 5–11", "Weeks 12–18", "Weeks 19–24",
     "£97", "£197", "£397", "£497", "£1,188", "£997",
-    "Save £191", "£1,788", "Save £791", "44% off full MSRP",
+    "Save £191", "£1,788", "Save £791", "44% off full RRP",
   ]) assert.ok(coaching.includes(value), value);
   assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
   assert.doesNotMatch(home, /£97|£197|£397|£497|£997|£1,188|£1,788/);
