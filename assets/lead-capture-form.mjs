@@ -6,7 +6,7 @@ export const formCopy = Object.freeze({
 export const formMessages = Object.freeze({ en: { unavailable: formCopy.en.unavailable, failure: formCopy.en.failure }, es: { unavailable: formCopy.es.unavailable, failure: formCopy.es.failure } });
 export const canSubmitLeadForm = (endpoint) => /^https:\/\/[^/?#]+(?:\/[^?#]*)?\/lead$/.test(endpoint ?? "");
 export const formatLeadError = (message, requestId) => `${message} ${requestId ? `Reference: ${requestId}` : "Reference unavailable"}`;
-export const submissionTimestamp = (now = Date.now()) => now - 5_000;
+export const submissionTimestamp = (now = Date.now()) => now - 10_000;
 const languageCopy = (language) => formCopy[language === "es" ? "es" : "en"];
 
 function setText(root, selector, value) { const node = root?.querySelector?.(selector); if (node) node.textContent = value; }
@@ -14,6 +14,17 @@ function setState(form, state, message = "") { form.dataset.leadState = state; f
 function renderState(form, copy) {
   const status = form.querySelector("[data-lead-capture-status]"); const state = form.dataset.leadState;
   if (status) status.textContent = state === "ready" ? "" : state === "loading" ? copy.loading : state === "error" || state === "validation" ? copy[form.dataset.leadMessage] : copy.unavailable;
+}
+
+export function showRegistrationSuccess(form, documentRef = globalThis.document) {
+  form.hidden = true;
+  form.setAttribute?.("aria-hidden", "true");
+  const button = form.querySelector?.("[data-lead-submit]");
+  if (button) { button.disabled = true; button.type = "button"; }
+  const success = documentRef?.querySelector?.("[data-lead-capture-success]");
+  if (success) success.hidden = false;
+  const dashboard = documentRef?.querySelector?.("[data-lead-capture-dashboard]");
+  if (dashboard) dashboard.hidden = false;
 }
 
 export function localizeForm(form, language, documentRef = globalThis.document) {
@@ -57,7 +68,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
       const requestId = response.headers.get("X-Request-ID") ?? "";
       const result = await response.json();
       if (!result.ok || !result.stored) { const error = new Error("unavailable"); error.requestId = requestId; throw error; }
-      form.hidden = true; document.querySelector("[data-lead-capture-success]").hidden = false; document.querySelector("[data-lead-capture-dashboard]").hidden = false;
+      showRegistrationSuccess(form, document);
     } catch (error) {
       const reference = error?.requestId ?? response?.headers?.get("X-Request-ID") ?? "";
       setState(form, "error", "failure"); submitButton.disabled = false; localizeForm(form, document.documentElement.lang, document);

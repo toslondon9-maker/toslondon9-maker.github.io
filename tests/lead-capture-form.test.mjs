@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { canSubmitLeadForm, formMessages, localizeForm, formCopy, formatLeadError } from "../assets/lead-capture-form.mjs";
+import { canSubmitLeadForm, formMessages, localizeForm, formCopy, formatLeadError, showRegistrationSuccess, submissionTimestamp } from "../assets/lead-capture-form.mjs";
+
+test("browser submission timestamp keeps a seven-second safety margin", () => {
+  const now = 1_770_000_000_000;
+  assert.equal(now - submissionTimestamp(now), 10_000);
+});
 
 test("the unconfigured form fails closed with a visible WhatsApp fallback", () => {
   assert.equal(canSubmitLeadForm(null), false);
@@ -54,4 +59,16 @@ test("English and Spanish copy includes all interactive registration states", ()
       assert.ok(formCopy[language][key].length > 3, `${language}.${key}`);
     }
   }
+});
+
+test("success state hides and disables the original registration form", () => {
+  const button = { disabled: false, type: "submit" };
+  const form = { hidden: false, setAttribute() {}, querySelector: () => button };
+  const success = { hidden: true };
+  const dashboard = { hidden: true };
+  showRegistrationSuccess(form, { querySelector: (selector) => selector.includes("success") ? success : dashboard });
+  assert.equal(form.hidden, true);
+  assert.equal(button.disabled, true);
+  assert.equal(success.hidden, false);
+  assert.equal(dashboard.hidden, false);
 });
