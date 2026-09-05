@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { canSubmitLeadForm, formMessages, localizeForm, formCopy } from "../assets/lead-capture-form.mjs";
+import { canSubmitLeadForm, formMessages, localizeForm, formCopy, formatLeadError } from "../assets/lead-capture-form.mjs";
 
 test("the unconfigured form fails closed with a visible WhatsApp fallback", () => {
   assert.equal(canSubmitLeadForm(null), false);
@@ -11,6 +11,11 @@ test("the unconfigured form fails closed with a visible WhatsApp fallback", () =
 test("form messages provide English and Spanish safe generic failures", () => {
   assert.match(formMessages.en.failure, /couldn't register/i);
   assert.match(formMessages.es.failure, /No hemos podido registrar/i);
+});
+
+test("browser error copy appends the Worker reference ID", () => {
+  assert.equal(formatLeadError(formCopy.en.failure, "abc-123"), `${formCopy.en.failure} Reference: abc-123`);
+  assert.equal(formatLeadError(formCopy.en.failure, ""), `${formCopy.en.failure} Reference unavailable`);
 });
 
 test("visible registration labels and states change when the language runtime switches", () => {

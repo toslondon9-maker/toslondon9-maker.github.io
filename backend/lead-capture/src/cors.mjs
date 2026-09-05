@@ -8,6 +8,7 @@ export function corsHeaders(origin) {
     "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "content-type",
+    "Access-Control-Expose-Headers": "X-Request-ID",
     "Access-Control-Max-Age": "600",
     Vary: "Origin",
   } : {};

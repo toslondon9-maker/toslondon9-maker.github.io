@@ -5,6 +5,7 @@ export const formCopy = Object.freeze({
 
 export const formMessages = Object.freeze({ en: { unavailable: formCopy.en.unavailable, failure: formCopy.en.failure }, es: { unavailable: formCopy.es.unavailable, failure: formCopy.es.failure } });
 export const canSubmitLeadForm = (endpoint) => /^https:\/\/[^/?#]+(?:\/[^?#]*)?\/lead$/.test(endpoint ?? "");
+export const formatLeadError = (message, requestId) => `${message} ${requestId ? `Reference: ${requestId}` : "Reference unavailable"}`;
 const languageCopy = (language) => formCopy[language === "es" ? "es" : "en"];
 
 function setText(root, selector, value) { const node = root?.querySelector?.(selector); if (node) node.textContent = value; }
@@ -49,10 +50,17 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     event.preventDefault(); const copy = languageCopy(document.documentElement.lang); const values = validateForm(form, copy); if (!values || !canSubmitLeadForm(endpoint)) return;
     form.dataset.submissionId ||= crypto.randomUUID(); setState(form, "loading"); submitButton.disabled = true; localizeForm(form, document.documentElement.lang, document);
     const payload = { ...values, consent: values.consent === "on", emailMarketing: values.emailMarketing === "on", submissionId: form.dataset.submissionId, submittedAtMs: Date.now() - 3_000, sourcePage: "/start-free/", language: document.documentElement.lang === "es" ? "es" : "en", website: "" };
+    let response;
     try {
-      const response = await fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); const result = await response.json();
-      if (!result.ok || !result.stored) throw new Error("unavailable");
+      response = await fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
+      const requestId = response.headers.get("X-Request-ID") ?? "";
+      const result = await response.json();
+      if (!result.ok || !result.stored) { const error = new Error("unavailable"); error.requestId = requestId; throw error; }
       form.hidden = true; document.querySelector("[data-lead-capture-success]").hidden = false; document.querySelector("[data-lead-capture-dashboard]").hidden = false;
-    } catch { setState(form, "error", "failure"); submitButton.disabled = false; localizeForm(form, document.documentElement.lang, document); form.querySelector("[data-lead-capture-status]").focus(); }
+    } catch (error) {
+      const reference = error?.requestId ?? response?.headers?.get("X-Request-ID") ?? "";
+      setState(form, "error", "failure"); submitButton.disabled = false; localizeForm(form, document.documentElement.lang, document);
+      const status = form.querySelector("[data-lead-capture-status]"); if (status) { status.textContent = formatLeadError(copy.failure, reference); status.focus(); }
+    }
   });
 });
