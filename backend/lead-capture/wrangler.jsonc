@@ -3,6 +3,14 @@
   "main": "src/index.mjs",
   "compatibility_date": "2026-09-04",
   "vars": { "ALLOWED_ORIGINS": "https://toslondon9-maker.github.io" },
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    }
+  },
   // Intentionally no `ratelimits` binding: add the owner-created binding only during manual Cloudflare setup.
   // The Worker fails closed while LEAD_RATE_LIMITER is absent.
   "env": {
