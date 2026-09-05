@@ -120,8 +120,11 @@ test("Worker rejects a rate-limited request before forwarding", async () => {
   assert.deepEqual(await response.json(), { ok: false, code: "unavailable" });
 });
 
-test("the local Worker configuration has no invented deployable rate-limit namespace", () => {
+test("production Worker configuration preserves the required rate-limit binding", () => {
   const config = readFileSync(new URL("../backend/lead-capture/wrangler.jsonc", import.meta.url), "utf8");
-  assert.doesNotMatch(config, /namespace_id\s*[:=]\s*["']?1001/);
-  assert.match(config, /fails closed/i);
+  assert.match(config, /"ratelimits"\s*:\s*\[/);
+  assert.match(config, /"name"\s*:\s*"LEAD_RATE_LIMITER"/);
+  assert.match(config, /"namespace_id"\s*:\s*"1001"/);
+  assert.match(config, /"limit"\s*:\s*5/);
+  assert.match(config, /"period"\s*:\s*60/);
 });

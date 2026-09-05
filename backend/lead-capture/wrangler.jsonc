@@ -11,8 +11,16 @@
       "persist": true
     }
   },
-  // Intentionally no `ratelimits` binding: add the owner-created binding only during manual Cloudflare setup.
-  // The Worker fails closed while LEAD_RATE_LIMITER is absent.
+  "ratelimits": [
+    {
+      "name": "LEAD_RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": {
+        "limit": 5,
+        "period": 60
+      }
+    }
+  ],
   "env": {
     "development": { "vars": { "ALLOWED_ORIGINS": "http://localhost:8787,http://127.0.0.1:8787" } }
   }
