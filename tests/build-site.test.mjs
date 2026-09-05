@@ -158,6 +158,12 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
+      if (globalPageFiles[index] === "referral/index.html") {
+        assert.match(page, /class="referralPage"/);
+        assert.match(page, /href="#personal-invite"/);
+        continue;
+      }
+
       assert.equal((page.match(/class="routeShell__purpose"/g) ?? []).length, 1);
       assert.equal((page.match(/class="button--primary routeShell__action"/g) ?? []).length, 1);
       assert.match(page, /<h1 data-i18n="route\.[^"]+\.heading">/);
