@@ -214,6 +214,23 @@ test("seven-day routes load the progress module exactly once", async () => {
   }
 });
 
+test("seven-day lesson pages ship the private workbook module exactly once", async () => {
+  const outputRoot = await mkdtemp(path.join(os.tmpdir(), "unleash-workbook-assets-"));
+
+  try {
+    const result = await buildSite({ outputRoot });
+    assert.ok(result.files.includes("assets/seven-day-workbook.mjs"));
+
+    for (const route of siteData.experienceRoutes) {
+      const html = await readFile(path.join(outputRoot, `${route.slice(1)}index.html`), "utf8");
+      assert.equal((html.match(/src="\/assets\/seven-day-workbook\.mjs"/g) ?? []).length, 1, route);
+      assert.match(html, /data-workbook-answer/);
+    }
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
 test("the AI mentor experience resolves to a generated destination", () => {
   const page = routeRenderers[siteData.routes.aiMentors](siteData);
 

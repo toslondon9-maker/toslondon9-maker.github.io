@@ -20,6 +20,14 @@ function renderPracticeSection(lesson, section, headingKey, language) {
   return `<section class="sevenDayLesson__practice" aria-labelledby="${id}"><h2 id="${id}" data-i18n="${headingKey}">${localized(headingKey, language)}</h2><p data-i18n="${contentKey}">${localized(contentKey, language)}</p></section>`;
 }
 
+function renderWorkbook(lesson, language) {
+  const workbook = sevenDayExperience.sharedKeys.workbook;
+  const textareaId = `${lesson.id}-workbook-answer`;
+  const hintId = `${lesson.id}-workbook-hint`;
+  const statusId = `${lesson.id}-workbook-status`;
+  return `<section class="sevenDayLesson__workbook" aria-labelledby="${lesson.id}-workbook-heading"><h2 id="${lesson.id}-workbook-heading" data-i18n="${workbook.answerLabel}">${localized(workbook.answerLabel, language)}</h2><p id="${hintId}" class="sevenDayLesson__workbookHint" data-i18n="${workbook.answerHint}">${localized(workbook.answerHint, language)}</p><p class="sevenDayLesson__workbookPrivacy" data-i18n="${workbook.privacy}">${localized(workbook.privacy, language)}</p><label for="${textareaId}" data-i18n="${workbook.answerLabel}">${localized(workbook.answerLabel, language)}</label><textarea id="${textareaId}" data-workbook-answer data-workbook-lesson="${lesson.id}" maxlength="4000" aria-describedby="${hintId} ${statusId}"></textarea><p id="${statusId}" class="sevenDayLesson__workbookStatus" role="status" aria-live="polite" tabindex="-1" data-workbook-status></p><button class="button--text" type="button" data-workbook-clear data-workbook-lesson="${lesson.id}" data-i18n="${workbook.clear}">${localized(workbook.clear, language)}</button></section>`;
+}
+
 function renderNavigation(lesson, lessonIndex, data, language) {
   const previous = sevenDayExperience.lessons[lessonIndex - 1];
   const next = sevenDayExperience.lessons[lessonIndex + 1];
@@ -50,7 +58,7 @@ export function renderSevenDayLesson({ lesson, data, language = "en" }) {
   const { lesson: headings, progress } = sevenDayExperience.sharedKeys;
   const progressStatusId = `${lesson.id}-progress-status`;
 
-  return `<main class="sevenDayLesson" id="main-content"><article class="sevenDayLesson__article"><header class="sevenDayLesson__header"><p class="eyebrow" data-i18n="sevenDay.dashboard.eyebrow">${localized("sevenDay.dashboard.eyebrow", language)}</p><p class="sevenDayLesson__day" data-i18n="${lesson.contentKeys.status}">${localized(lesson.contentKeys.status, language)}</p><h1 data-i18n="${lesson.contentKeys.title}">${localized(lesson.contentKeys.title, language)}</h1></header><div class="sevenDayLesson__practiceList">${renderPracticeSection(lesson, "teaching", headings.teachingHeading, language)}${renderPracticeSection(lesson, "observation", headings.observationHeading, language)}${renderPracticeSection(lesson, "reflection", headings.reflectionHeading, language)}${renderPracticeSection(lesson, "action", headings.actionHeading, language)}</div><section class="sevenDayLesson__completion" aria-labelledby="${lesson.id}-progress-heading"><h2 id="${lesson.id}-progress-heading" data-i18n="${progress.heading}">${localized(progress.heading, language)}</h2><p id="${progressStatusId}" role="status" aria-live="polite" tabindex="-1" data-progress-status data-i18n="${progress.empty}">${localized(progress.empty, language)}</p><button class="button--primary" type="button" data-progress-complete="${lesson.id}" data-progress-complete-key="${lesson.contentKeys.completion}" disabled aria-describedby="${progressStatusId}" aria-pressed="false" data-i18n="${lesson.contentKeys.completion}">${localized(lesson.contentKeys.completion, language)}</button></section><aside class="sevenDayLesson__contact" data-contact-action></aside>${renderDaySevenBridge(lesson, data, language)}${renderNavigation(lesson, lessonIndex, data, language)}</article></main>`;
+  return `<main class="sevenDayLesson" id="main-content"><article class="sevenDayLesson__article"><header class="sevenDayLesson__header"><p class="eyebrow" data-i18n="sevenDay.dashboard.eyebrow">${localized("sevenDay.dashboard.eyebrow", language)}</p><p class="sevenDayLesson__day" data-i18n="${lesson.contentKeys.status}">${localized(lesson.contentKeys.status, language)}</p><h1 data-i18n="${lesson.contentKeys.title}">${localized(lesson.contentKeys.title, language)}</h1></header><div class="sevenDayLesson__practiceList">${renderPracticeSection(lesson, "teaching", headings.teachingHeading, language)}${renderPracticeSection(lesson, "observation", headings.observationHeading, language)}${renderPracticeSection(lesson, "reflection", headings.reflectionHeading, language)}${renderWorkbook(lesson, language)}${renderPracticeSection(lesson, "action", headings.actionHeading, language)}</div><section class="sevenDayLesson__completion" aria-labelledby="${lesson.id}-progress-heading"><h2 id="${lesson.id}-progress-heading" data-i18n="${progress.heading}">${localized(progress.heading, language)}</h2><p id="${progressStatusId}" role="status" aria-live="polite" tabindex="-1" data-progress-status data-i18n="${progress.empty}">${localized(progress.empty, language)}</p><button class="button--primary" type="button" data-progress-complete="${lesson.id}" data-progress-complete-key="${lesson.contentKeys.completion}" disabled aria-describedby="${progressStatusId}" aria-pressed="false" data-i18n="${lesson.contentKeys.completion}">${localized(lesson.contentKeys.completion, language)}</button></section><aside class="sevenDayLesson__contact" data-contact-action></aside>${renderDaySevenBridge(lesson, data, language)}${renderNavigation(lesson, lessonIndex, data, language)}</article></main>`;
 }
 
 export function sevenDayLessonPage(lesson, data, language = "en") {
@@ -62,6 +70,6 @@ export function sevenDayLessonPage(lesson, data, language = "en") {
     titleKey: lesson.contentKeys.title,
     descriptionKey: lesson.contentKeys.teaching,
     body: renderSevenDayLesson({ lesson, data, language }),
-    scripts: ["/assets/seven-day-progress.mjs"],
+    scripts: ["/assets/seven-day-progress.mjs", "/assets/seven-day-workbook.mjs"],
   };
 }

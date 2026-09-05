@@ -111,6 +111,14 @@ test("shared experience copy covers the complete dashboard and lesson interface"
       intro: "sevenDay.workbook.intro",
       english: "sevenDay.workbook.english",
       spanish: "sevenDay.workbook.spanish",
+      answerLabel: "sevenDay.workbook.answerLabel",
+      answerHint: "sevenDay.workbook.answerHint",
+      privacy: "sevenDay.workbook.privacy",
+      saved: "sevenDay.workbook.saved",
+      unavailable: "sevenDay.workbook.unavailable",
+      clear: "sevenDay.workbook.clear",
+      clearConfirm: "sevenDay.workbook.clearConfirm",
+      cleared: "sevenDay.workbook.cleared",
     },
   };
 

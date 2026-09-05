@@ -60,6 +60,53 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.sevenDayLesson__workbook {
+  display: grid;
+  gap: 0.9rem;
+  padding: clamp(1.2rem, 3vw, 1.75rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--cream);
+}
+
+.sevenDayLesson__workbook h2,
+.sevenDayLesson__workbook p {
+  margin: 0;
+}
+
+.sevenDayLesson__workbook label {
+  font-weight: 750;
+}
+
+.sevenDayLesson__workbook textarea {
+  width: 100%;
+  min-height: 11rem;
+  padding: 0.9rem;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-control);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.sevenDayLesson__workbookHint,
+.sevenDayLesson__workbookPrivacy,
+.sevenDayLesson__workbookStatus {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.sevenDayLesson__workbookPrivacy {
+  padding: 0.75rem;
+  border-inline-start: 3px solid var(--gold);
+  background: rgba(255, 253, 248, 0.72);
+}
+
+.sevenDayLesson__workbook .button--text {
+  justify-self: start;
+}
+
 body,
 button,
 input,

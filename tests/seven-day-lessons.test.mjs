@@ -30,7 +30,7 @@ test("every seven-day lesson renders its complete teaching and practice flow wit
     assert.match(html, new RegExp(`<button[^>]+type="button"[^>]+data-progress-complete="${lesson.id}"[^>]+disabled[^>]*data-i18n="${lesson.contentKeys.completion}"`));
     assert.match(html, new RegExp(`role="status"[^>]+data-progress-status[^>]+data-i18n="${progress.empty}"`));
     assert.match(html, new RegExp(`data-i18n="${lesson.contentKeys.status}"`));
-    assert.doesNotMatch(html, /saved|completion flags are saved|progress is saved/i);
+    assert.doesNotMatch(html, /data-lead-capture|lead sheet|Google Sheet/i);
 
     assert.match(html, new RegExp(`href="${siteData.routes.startFree}"[^>]+data-i18n="${navigation.dashboard}"`));
     assert.match(html, /data-contact-action/);
@@ -96,9 +96,25 @@ test("lesson pages load one reversible progress enhancement and stay fully avail
   for (const lesson of sevenDayExperience.lessons) {
     const page = lessonPage(lesson);
 
-    assert.deepEqual(page.scripts, ["/assets/seven-day-progress.mjs"]);
+    assert.deepEqual(page.scripts, ["/assets/seven-day-progress.mjs", "/assets/seven-day-workbook.mjs"]);
     assert.match(page.body, new RegExp(`data-progress-complete="${lesson.id}"[^>]+disabled`));
     assert.match(page.body, new RegExp(`href="${siteData.routes.startFree}"`));
+  }
+});
+
+test("every lesson includes a private online workbook that remains on the visitor device", () => {
+  const workbook = sevenDayExperience.sharedKeys.workbook;
+
+  for (const lesson of sevenDayExperience.lessons) {
+    const page = lessonPage(lesson);
+    const html = page.body;
+
+    assert.match(html, new RegExp(`<textarea[^>]+data-workbook-answer[^>]+data-workbook-lesson="${lesson.id}"[^>]+maxlength="4000"`));
+    assert.match(html, /data-workbook-status/);
+    assert.match(html, new RegExp(`data-workbook-clear[^>]+data-workbook-lesson="${lesson.id}"`));
+    assert.match(html, new RegExp(`data-i18n="${workbook.privacy}"`));
+    assert.match(html, /Nothing you write here is sent to Tariq/);
+    assert.ok(page.scripts.includes("/assets/seven-day-workbook.mjs"));
   }
 });
 
@@ -109,6 +125,7 @@ test("lesson styles preserve the shared design system and collapse navigation sa
     ".sevenDayLesson__header",
     ".sevenDayLesson__practice",
     ".sevenDayLesson__completion",
+    ".sevenDayLesson__workbook",
     ".sevenDayLesson__navigation",
   ]) assert.match(css, new RegExp(escapeRegExp(selector)));
   assert.match(css, /\.sevenDayLesson__header[\s\S]*?var\(--night\)/);
