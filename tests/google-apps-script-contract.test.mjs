@@ -10,9 +10,10 @@ const lead = (overrides = {}) => ({
   firstName: "Ada", surname: "Lovelace", email: "ADA@example.test", whatsapp: "+34 611 223 345", goal: "Build a calmer daily practice.", difficulty: "I lose focus when busy.", consent: true, emailMarketing: false, sourcePage: "/start-free/", language: "en", website: "", ...overrides,
 });
 
-function receiver({ now = new Date("2026-09-04T10:00:00Z"), emailFailure = false } = {}) {
+function receiver({ now = new Date("2026-09-04T10:00:00Z"), emailFailure = false, failAfter = null } = {}) {
   const rows = []; const properties = new Map(Object.entries({ LEAD_CAPTURE_SHARED_SECRET: "shared-secret", LEAD_SHEET_ID: "sheet", LEAD_SHEET_NAME: "Leads", LEAD_NOTIFICATION_EMAIL: "toslondon9@gmail.com", LEAD_DUPLICATE_WINDOW_MINUTES: "60" }));
   const sentEmails = [];
+  const mailState = { emailFailure, failAfter };
   const sheet = {
     getLastRow: () => rows.length,
     appendRow: (row) => rows.push(row),
@@ -25,12 +26,12 @@ function receiver({ now = new Date("2026-09-04T10:00:00Z"), emailFailure = false
     PropertiesService: { getScriptProperties: () => ({ getProperty: (key) => properties.get(key) }) },
     LockService: { getScriptLock: () => ({ tryLock: () => true, releaseLock() {} }) },
     SpreadsheetApp: { openById: () => ({ getSheetByName: () => sheet }) },
-    MailApp: { getRemainingDailyQuota: () => 5, sendEmail(...args) { if (emailFailure) throw new Error("provider failure"); sentEmails.push(args); } },
-    Utilities: { DigestAlgorithm: { SHA_256: "sha256" }, computeDigest: (_algorithm, value) => [...Buffer.from(value)] },
+    MailApp: { getRemainingDailyQuota: () => 5, sendEmail(...args) { if (mailState.emailFailure || (mailState.failAfter !== null && sentEmails.length >= mailState.failAfter)) throw new Error("provider failure"); sentEmails.push(args); } },
+    Utilities: { DigestAlgorithm: { SHA_256: "sha256" }, computeDigest: (_algorithm, value) => [...Buffer.from(value)], formatDate: (date) => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Madrid" }).format(date) },
     Buffer,
   };
   vm.runInNewContext(source, context);
-  return { submit: (payload) => JSON.parse(context.doPost({ postData: { contents: JSON.stringify(payload) } }).text), rows, sentEmails };
+  return { submit: (payload) => JSON.parse(context.doPost({ postData: { contents: JSON.stringify(payload) } }).text), runSequence: (date) => context.sendDueSequenceEmails(date), rows, sentEmails, mailState };
 }
 
 test("Apps Script receiver rejects direct malformed input after secret validation", () => {
@@ -93,4 +94,48 @@ test("welcome email failure keeps the saved row and records a safe failure", () 
   assert.equal(app.rows[1][17], "failed");
   assert.equal(app.rows[1][18], "");
   assert.equal(app.rows[1][19], "Email delivery failed");
+});
+
+test("Day 2 becomes due on the calendar day after registration", () => {
+  const app = receiver();
+  app.submit(lead());
+  app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
+  assert.equal(app.sentEmails.length, 3);
+  assert.equal(app.sentEmails[2][1], "Day 2 of 7: Take Back Your Attention");
+  assert.equal(app.rows[1][20], 2);
+});
+
+test("repeated scheduler runs do not send the same sequence day twice", () => {
+  const app = receiver();
+  app.submit(lead());
+  const nextDay = new Date("2026-09-05T09:00:00+02:00");
+  app.runSequence(nextDay);
+  app.runSequence(nextDay);
+  assert.equal(app.sentEmails.length, 3);
+  assert.equal(app.rows[1][20], 2);
+});
+
+test("sequence does not send before the Day 1 welcome is marked sent", () => {
+  const app = receiver({ emailFailure: true });
+  app.submit(lead());
+  app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
+  assert.equal(app.sentEmails.length, 0);
+  assert.equal(app.rows[1][20], "0");
+});
+
+test("failed sequence email records failure and retries the same day later", () => {
+  const app = receiver({ failAfter: 2 });
+  app.submit(lead());
+  app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
+  assert.equal(app.rows[1][20], 1);
+  assert.equal(app.rows[1][22], "failed");
+  app.mailState.failAfter = null;
+  app.runSequence(new Date("2026-09-05T10:00:00+02:00"));
+  assert.equal(app.sentEmails.length, 3);
+  assert.equal(app.rows[1][20], 2);
+  assert.equal(app.rows[1][22], "sent");
+});
+
+test("scheduler source contains no logging of lead data", () => {
+  assert.doesNotMatch(source, /Logger\.|console\.(log|error)/);
 });
