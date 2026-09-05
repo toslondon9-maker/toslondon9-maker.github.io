@@ -10,8 +10,9 @@ const lead = (overrides = {}) => ({
   firstName: "Ada", surname: "Lovelace", email: "ADA@example.test", whatsapp: "+34 611 223 345", goal: "Build a calmer daily practice.", difficulty: "I lose focus when busy.", consent: true, emailMarketing: false, sourcePage: "/start-free/", language: "en", website: "", ...overrides,
 });
 
-function receiver({ now = new Date("2026-09-04T10:00:00Z") } = {}) {
+function receiver({ now = new Date("2026-09-04T10:00:00Z"), emailFailure = false } = {}) {
   const rows = []; const properties = new Map(Object.entries({ LEAD_CAPTURE_SHARED_SECRET: "shared-secret", LEAD_SHEET_ID: "sheet", LEAD_SHEET_NAME: "Leads", LEAD_NOTIFICATION_EMAIL: "toslondon9@gmail.com", LEAD_DUPLICATE_WINDOW_MINUTES: "60" }));
+  const sentEmails = [];
   const sheet = {
     getLastRow: () => rows.length,
     appendRow: (row) => rows.push(row),
@@ -24,12 +25,12 @@ function receiver({ now = new Date("2026-09-04T10:00:00Z") } = {}) {
     PropertiesService: { getScriptProperties: () => ({ getProperty: (key) => properties.get(key) }) },
     LockService: { getScriptLock: () => ({ tryLock: () => true, releaseLock() {} }) },
     SpreadsheetApp: { openById: () => ({ getSheetByName: () => sheet }) },
-    MailApp: { getRemainingDailyQuota: () => 5, sendEmail() {} },
+    MailApp: { getRemainingDailyQuota: () => 5, sendEmail(...args) { if (emailFailure) throw new Error("provider failure"); sentEmails.push(args); } },
     Utilities: { DigestAlgorithm: { SHA_256: "sha256" }, computeDigest: (_algorithm, value) => [...Buffer.from(value)] },
     Buffer,
   };
   vm.runInNewContext(source, context);
-  return { submit: (payload) => JSON.parse(context.doPost({ postData: { contents: JSON.stringify(payload) } }).text), rows };
+  return { submit: (payload) => JSON.parse(context.doPost({ postData: { contents: JSON.stringify(payload) } }).text), rows, sentEmails };
 }
 
 test("Apps Script receiver rejects direct malformed input after secret validation", () => {
@@ -62,4 +63,34 @@ test("Apps Script receiver stores user-supplied spreadsheet formulas as literal 
   const app = receiver();
   app.submit(lead({ firstName: "=SUM(A1:A2)" }));
   assert.equal(app.rows[1][2], "'=SUM(A1:A2)");
+});
+
+test("new lead is saved before one personalised welcome email is sent", () => {
+  const app = receiver();
+  assert.deepEqual(app.submit(lead()), { ok: true, stored: true, notification: "sent" });
+  assert.equal(app.rows.length, 2);
+  assert.equal(app.sentEmails.length, 2);
+  const welcome = app.sentEmails[1];
+  assert.equal(welcome[0], "ADA@example.test".toLowerCase());
+  assert.equal(welcome[1], "Welcome to your Free 7-Day Experience");
+  assert.match(welcome[2], /Hi Ada/);
+  assert.match(welcome[2], /day-1-see-whats-running-your-life/);
+  assert.equal(app.rows[1][17], "sent");
+  assert.ok(app.rows[1][18]);
+});
+
+test("duplicate submission does not send a second welcome email", () => {
+  const app = receiver();
+  app.submit(lead());
+  app.submit(lead({ submissionId: "4d5e99a1-8280-4e41-89ac-4e2e051569d2" }));
+  assert.equal(app.sentEmails.length, 2);
+});
+
+test("welcome email failure keeps the saved row and records a safe failure", () => {
+  const app = receiver({ emailFailure: true });
+  assert.deepEqual(app.submit(lead()), { ok: true, stored: true, notification: "pending" });
+  assert.equal(app.rows.length, 2);
+  assert.equal(app.rows[1][17], "failed");
+  assert.equal(app.rows[1][18], "");
+  assert.equal(app.rows[1][19], "Email delivery failed");
 });
