@@ -61,6 +61,9 @@ function sequenceEmail(firstName, lesson) {
 }
 function sendDueSequenceEmails(now) {
   const properties = PropertiesService.getScriptProperties();
+  const liveMode = properties.getProperty("LEAD_SEQUENCE_MODE") === "live";
+  const testRecipient = text(properties.getProperty("LEAD_SEQUENCE_TEST_EMAIL"));
+  if (!liveMode && !testRecipient) return;
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(5000)) return;
   try {
@@ -77,7 +80,7 @@ function sendDueSequenceEmails(now) {
       const rowNumber = offset + 2;
       try {
         const email = sequenceEmail(row[2], next);
-        MailApp.sendEmail(row[LEAD_COLUMN_INDEX.email], "Day " + next.day + " of 7: " + next.title, email.body, { htmlBody: email.html });
+        MailApp.sendEmail(liveMode ? row[LEAD_COLUMN_INDEX.email] : testRecipient, "Day " + next.day + " of 7: " + next.title, email.body, { htmlBody: email.html });
         sheet.getRange(rowNumber, LEAD_COLUMN_INDEX.sequenceDay + 1, 1, 4).setValues([[next.day, new Date().toISOString(), "sent", ""]]);
       } catch (_) {
         sheet.getRange(rowNumber, LEAD_COLUMN_INDEX.sequenceDay + 1, 1, 4).setValues([[sentDay, "", "failed", "Email delivery failed"]]);

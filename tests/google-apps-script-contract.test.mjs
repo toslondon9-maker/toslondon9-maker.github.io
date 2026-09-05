@@ -10,8 +10,11 @@ const lead = (overrides = {}) => ({
   firstName: "Ada", surname: "Lovelace", email: "ADA@example.test", whatsapp: "+34 611 223 345", goal: "Build a calmer daily practice.", difficulty: "I lose focus when busy.", consent: true, emailMarketing: false, sourcePage: "/start-free/", language: "en", website: "", ...overrides,
 });
 
-function receiver({ now = new Date("2026-09-04T10:00:00Z"), emailFailure = false, failAfter = null } = {}) {
-  const rows = []; const properties = new Map(Object.entries({ LEAD_CAPTURE_SHARED_SECRET: "shared-secret", LEAD_SHEET_ID: "sheet", LEAD_SHEET_NAME: "Leads", LEAD_NOTIFICATION_EMAIL: "toslondon9@gmail.com", LEAD_DUPLICATE_WINDOW_MINUTES: "60" }));
+function receiver({ now = new Date("2026-09-04T10:00:00Z"), emailFailure = false, failAfter = null, sequenceMode, sequenceTestEmail } = {}) {
+  const rows = []; const propertyValues = { LEAD_CAPTURE_SHARED_SECRET: "shared-secret", LEAD_SHEET_ID: "sheet", LEAD_SHEET_NAME: "Leads", LEAD_NOTIFICATION_EMAIL: "toslondon9@gmail.com", LEAD_DUPLICATE_WINDOW_MINUTES: "60" };
+  if (sequenceMode !== undefined) propertyValues.LEAD_SEQUENCE_MODE = sequenceMode;
+  if (sequenceTestEmail !== undefined) propertyValues.LEAD_SEQUENCE_TEST_EMAIL = sequenceTestEmail;
+  const properties = new Map(Object.entries(propertyValues));
   const sentEmails = [];
   const mailState = { emailFailure, failAfter };
   const sheet = {
@@ -35,7 +38,7 @@ function receiver({ now = new Date("2026-09-04T10:00:00Z"), emailFailure = false
 }
 
 test("Apps Script receiver rejects direct malformed input after secret validation", () => {
-  const app = receiver();
+  const app = receiver({ sequenceMode: "live" });
   assert.deepEqual(app.submit(lead({ goal: "", consent: false })), { ok: false, code: "invalid" });
   assert.deepEqual(app.submit(lead({ email: "not-an-email" })), { ok: false, code: "invalid" });
   assert.deepEqual(app.submit(lead({ whatsapp: "611223345" })), { ok: false, code: "invalid" });
@@ -45,7 +48,7 @@ test("Apps Script receiver rejects direct malformed input after secret validatio
 });
 
 test("Apps Script receiver stores explicit marketing choice and idempotently deduplicates same contact within the configured window", () => {
-  const app = receiver();
+  const app = receiver({ sequenceMode: "live" });
   assert.deepEqual(app.submit(lead()), { ok: true, stored: true, notification: "sent" });
   assert.equal(app.rows.length, 2);
   assert.equal(app.rows[1].includes("false"), true);
@@ -97,7 +100,7 @@ test("welcome email failure keeps the saved row and records a safe failure", () 
 });
 
 test("Day 2 becomes due on the calendar day after registration", () => {
-  const app = receiver();
+  const app = receiver({ sequenceMode: "live" });
   app.submit(lead());
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.sentEmails.length, 3);
@@ -106,7 +109,7 @@ test("Day 2 becomes due on the calendar day after registration", () => {
 });
 
 test("repeated scheduler runs do not send the same sequence day twice", () => {
-  const app = receiver();
+  const app = receiver({ sequenceMode: "live" });
   app.submit(lead());
   const nextDay = new Date("2026-09-05T09:00:00+02:00");
   app.runSequence(nextDay);
@@ -124,7 +127,7 @@ test("sequence does not send before the Day 1 welcome is marked sent", () => {
 });
 
 test("failed sequence email records failure and retries the same day later", () => {
-  const app = receiver({ failAfter: 2 });
+  const app = receiver({ sequenceMode: "live", failAfter: 2 });
   app.submit(lead());
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.rows[1][20], 1);
@@ -138,4 +141,35 @@ test("failed sequence email records failure and retries the same day later", () 
 
 test("scheduler source contains no logging of lead data", () => {
   assert.doesNotMatch(source, /Logger\.|console\.(log|error)/);
+});
+
+test("missing sequence mode is safely test-only", () => {
+  const app = receiver({ sequenceTestEmail: "test-recipient@example.test" });
+  app.submit(lead());
+  app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
+  assert.equal(app.sentEmails[2][0], "test-recipient@example.test");
+});
+
+test("test mode never sends to a lead address", () => {
+  const app = receiver({ sequenceMode: "test", sequenceTestEmail: "test-recipient@example.test" });
+  app.submit(lead());
+  app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
+  assert.equal(app.sentEmails[2][0], "test-recipient@example.test");
+  assert.equal(app.sentEmails.some((email) => email[0] === "ada@example.test" && email[1].startsWith("Day ")), false);
+});
+
+test("test mode without a recipient sends no sequence email", () => {
+  const app = receiver({ sequenceMode: "test" });
+  app.submit(lead());
+  app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
+  assert.equal(app.sentEmails.length, 2);
+  assert.equal(app.rows[1][20], 1);
+});
+
+test("live mode retains normal sequence delivery", () => {
+  const app = receiver({ sequenceMode: "live" });
+  app.submit(lead());
+  app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
+  assert.equal(app.sentEmails[2][0], "ada@example.test");
+  assert.equal(app.rows[1][20], 2);
 });
