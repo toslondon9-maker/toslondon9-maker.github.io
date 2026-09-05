@@ -7,6 +7,7 @@ import {
   sanitizeSpreadsheetValue,
   validateLeadPayload,
 } from "../assets/lead-capture-contract.mjs";
+import { submissionTimestamp } from "../assets/lead-capture-form.mjs";
 import { leadCaptureConfig } from "../content/lead-capture-config.mjs";
 
 const now = 1_770_000_000_000;
@@ -47,6 +48,12 @@ test("lead contract retains the explicit optional email-marketing choice", () =>
   const declined = normaliseLeadPayload({ ...validLead, emailMarketing: false });
   assert.equal(accepted.emailMarketing, true);
   assert.equal(declined.emailMarketing, false);
+});
+
+test("browser submission timestamp clears the server completion-time threshold", () => {
+  const submittedAtMs = submissionTimestamp(now);
+  assert.equal(validateLeadPayload({ ...validLead, submittedAtMs }, now).ok, true);
+  assert.ok(now - submittedAtMs > 3_000);
 });
 
 test("configured endpoint passes strict HTTPS validation", () => {

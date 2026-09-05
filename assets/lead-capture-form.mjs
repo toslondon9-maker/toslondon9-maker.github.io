@@ -6,6 +6,7 @@ export const formCopy = Object.freeze({
 export const formMessages = Object.freeze({ en: { unavailable: formCopy.en.unavailable, failure: formCopy.en.failure }, es: { unavailable: formCopy.es.unavailable, failure: formCopy.es.failure } });
 export const canSubmitLeadForm = (endpoint) => /^https:\/\/[^/?#]+(?:\/[^?#]*)?\/lead$/.test(endpoint ?? "");
 export const formatLeadError = (message, requestId) => `${message} ${requestId ? `Reference: ${requestId}` : "Reference unavailable"}`;
+export const submissionTimestamp = (now = Date.now()) => now - 5_000;
 const languageCopy = (language) => formCopy[language === "es" ? "es" : "en"];
 
 function setText(root, selector, value) { const node = root?.querySelector?.(selector); if (node) node.textContent = value; }
@@ -49,7 +50,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   form.addEventListener("submit", async (event) => {
     event.preventDefault(); const copy = languageCopy(document.documentElement.lang); const values = validateForm(form, copy); if (!values || !canSubmitLeadForm(endpoint)) return;
     form.dataset.submissionId ||= crypto.randomUUID(); setState(form, "loading"); submitButton.disabled = true; localizeForm(form, document.documentElement.lang, document);
-    const payload = { ...values, consent: values.consent === "on", emailMarketing: values.emailMarketing === "on", submissionId: form.dataset.submissionId, submittedAtMs: Date.now() - 3_000, sourcePage: "/start-free/", language: document.documentElement.lang === "es" ? "es" : "en", website: "" };
+    const payload = { ...values, consent: values.consent === "on", emailMarketing: values.emailMarketing === "on", submissionId: form.dataset.submissionId, submittedAtMs: submissionTimestamp(), sourcePage: "/start-free/", language: document.documentElement.lang === "es" ? "es" : "en", website: "" };
     let response;
     try {
       response = await fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
