@@ -18,7 +18,17 @@ test("referral page contains the approved share journey sections", () => {
   assert.match(page.body, /Affiliate Toolkit/);
   assert.match(page.body, /Website \/ Social Media \/ Community URL/);
   assert.match(page.body, /affiliate terms/);
+  assert.match(page.body, /href="#personal-invite"|share-personally/);
   assert.deepEqual(page.scripts, ["/assets/referral.mjs"]);
+});
+
+test("referral runtime provides stable personal and affiliate anchors with a bridge", async () => {
+  const source = await import("../assets/referral.mjs");
+  const script = await (await import("node:fs/promises")).readFile(new URL("../assets/referral.mjs", import.meta.url), "utf8");
+  assert.match(script, /setAttribute\("id", "share-personally"\)/);
+  assert.match(script, /setAttribute\("id", "affiliate-link"\)/);
+  assert.match(script, /Create your affiliate link/);
+  assert.equal(typeof source.buildAffiliateLink, "function");
 });
 
 test("navigation labels identify the affiliate area", () => {

@@ -17,6 +17,14 @@ export async function copyReferralMessage(affiliateUrl, navigatorObject = global
 }
 
 function initReferral() {
+  const personalSection = document.querySelector(".referralInvite");
+  const affiliateSection = document.querySelector(".affiliateLinkSection");
+  if (personalSection && !document.getElementById("personal-invite")) { const alias = document.createElement("span"); alias.id = "personal-invite"; alias.className = "anchor-alias"; alias.setAttribute("aria-hidden", "true"); personalSection.prepend(alias); }
+  personalSection?.setAttribute("id", "share-personally");
+  affiliateSection?.setAttribute("id", "affiliate-link");
+  if (personalSection && !personalSection.querySelector(".referralAffiliateBridge")) {
+    const bridge = document.createElement("p"); bridge.className = "referralAffiliateBridge"; bridge.innerHTML = 'Want to promote Unleash Your Power to a wider audience? <a href="#affiliate-link">Create your affiliate link</a> below.'; personalSection.append(bridge);
+  }
   const copyButton = document.querySelector("[data-referral-copy-button]");
   const status = document.querySelector("[data-referral-status]");
   const whatsapp = document.querySelector("[data-referral-whatsapp]");
