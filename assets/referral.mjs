@@ -1,7 +1,8 @@
 export const invitation = "I’ve been exploring a 24-week Master Key System programme called Unleash Your Power. There’s a free 7-Day Experience if you want to try it for yourself. No pressure — I just thought you might find it interesting.";
 export const startFreeUrl = "https://toslondon9-maker.github.io/start-free/";
-export function sanitiseAffiliateCode(value) { return String(value ?? "").trim().replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 40); }
-export function buildAffiliateLink(code) { return `${startFreeUrl}?ref=${encodeURIComponent(sanitiseAffiliateCode(code) || "yourname")}`; }
+export function sanitiseAffiliateCode(value) { return String(value ?? "").trim().replace(/\s+/g, "-").replace(/[^a-zA-Z0-9_-]/g, "").toLowerCase().slice(0, 40); }
+export function buildAffiliateLink(code) { const safe = sanitiseAffiliateCode(code); return safe ? `${startFreeUrl}?ref=${encodeURIComponent(safe)}` : startFreeUrl; }
+export async function copyAffiliateLink(url, navigatorObject = globalThis.navigator) { if (!navigatorObject?.clipboard?.writeText) return false; try { await navigatorObject.clipboard.writeText(url); return true; } catch { return false; } }
 
 export function buildReferralShareUrl() {
   return `https://wa.me/?text=${encodeURIComponent(`${invitation} ${startFreeUrl}`)}`;
@@ -29,6 +30,9 @@ function initReferral() {
   const build = document.querySelector("[data-affiliate-build]");
   const refresh = () => { const url = buildAffiliateLink(codeInput?.value); if (link) { link.href = url; link.textContent = url; } };
   build?.addEventListener("click", refresh); codeInput?.addEventListener("input", refresh); refresh();
+  const copyLink = document.querySelector("[data-affiliate-copy-link]"); const openLink = document.querySelector("[data-affiliate-open-link]"); const linkStatus = document.querySelector("[data-affiliate-link-status]");
+  copyLink?.addEventListener("click", async () => { const copied = await copyAffiliateLink(link?.href || startFreeUrl); if (linkStatus) linkStatus.textContent = copied ? "Copied!" : "Copy unavailable — select the link to copy it."; });
+  openLink?.addEventListener("click", () => { if (link) window.open(link.href, "_blank", "noopener,noreferrer"); });
   const application = document.querySelector("[data-affiliate-application]");
   application?.addEventListener("submit", (event) => {
     event.preventDefault();

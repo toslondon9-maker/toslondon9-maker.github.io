@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { referralPage } from "../src/pages/referral.mjs";
 import { siteData } from "../content/site-data.mjs";
+import { translations } from "../content/translations.mjs";
 
 test("referral page contains the approved share journey sections", () => {
   const page = referralPage(siteData);
@@ -18,6 +19,10 @@ test("referral page contains the approved share journey sections", () => {
   assert.match(page.body, /Website \/ Social Media \/ Community URL/);
   assert.match(page.body, /affiliate terms/);
   assert.deepEqual(page.scripts, ["/assets/referral.mjs"]);
+});
+
+test("navigation labels identify the affiliate area", () => {
+  assert.equal(translations["nav.referral"].en, "Affiliate / Refer & Earn");
 });
 
 test("referral share script builds an encoded WhatsApp invitation and copy fallback", async () => {
@@ -38,5 +43,12 @@ test("referral page keeps existing header and footer shell", () => {
 
 test("affiliate links use the Start Free route and sanitised ref code", async () => {
   const source = await import("../assets/referral.mjs");
-  assert.equal(source.buildAffiliateLink("maria<script>"), "https://toslondon9-maker.github.io/start-free/?ref=mariascript");
+  assert.equal(source.sanitiseAffiliateCode("Tariq"), "tariq");
+  assert.equal(source.sanitiseAffiliateCode("John Smith"), "john-smith");
+  assert.equal(source.sanitiseAffiliateCode("Book_Club01"), "book_club01");
+  assert.equal(source.buildAffiliateLink("Tariq"), "https://toslondon9-maker.github.io/start-free/?ref=tariq");
+  assert.equal(source.buildAffiliateLink("!!!"), "https://toslondon9-maker.github.io/start-free/");
+  let copied = "";
+  assert.equal(await source.copyAffiliateLink("https://toslondon9-maker.github.io/start-free/?ref=tariq", { clipboard: { writeText: async (value) => { copied = value; } } }), true);
+  assert.equal(copied, "https://toslondon9-maker.github.io/start-free/?ref=tariq");
 });
