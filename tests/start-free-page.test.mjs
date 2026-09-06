@@ -64,6 +64,9 @@ test("success panel offers online and PDF continuation choices", () => {
   const html = dashboard().body;
   assert.match(html, /data-lead-capture-success hidden/);
   assert.match(html, /data-lead-success-prompt/);
+  assert.match(html, /data-lead-success-prompt>Choose how you’d like to continue\.<\/p>/);
+  assert.match(html, /data-lead-success-action[^>]*>COMPLETE ONLINE<\/a>/);
+  assert.match(html, /data-lead-success-download[^>]*>DOWNLOAD WORKBOOK \(PDF\)<\/a>/);
   assert.match(html, /data-lead-success-action[^>]+href="\/start-free\/day-1-see-whats-running-your-life\/"/);
   assert.match(html, /data-lead-success-download[^>]+href="\/downloads\/seven-day-experience-workbook-en\.pdf"[^>]+download/);
   assert.match(html, /data-lead-success-note/);
