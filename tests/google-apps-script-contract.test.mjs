@@ -47,6 +47,11 @@ test("Apps Script receiver rejects direct malformed input after secret validatio
   assert.equal(app.rows.length, 0);
 });
 
+test("Apps Script receiver accepts omitted optional questions", () => {
+  const app = receiver();
+  assert.deepEqual(app.submit(lead({ goal: "", difficulty: "" })), { ok: true, stored: true, notification: "sent" });
+});
+
 test("Apps Script receiver stores explicit marketing choice and idempotently deduplicates same contact within the configured window", () => {
   const app = receiver({ sequenceMode: "live" });
   assert.deepEqual(app.submit(lead()), { ok: true, stored: true, notification: "sent" });

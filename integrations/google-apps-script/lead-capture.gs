@@ -22,7 +22,7 @@ function validLead(request, nowMs) {
   if (!lead.firstName || !lead.surname || lead.firstName.length > LEAD_LIMITS.name || lead.surname.length > LEAD_LIMITS.name) return null;
   if (!LEAD_EMAIL.test(lead.email) || lead.email.length > LEAD_LIMITS.email) return null;
   if (!LEAD_WHATSAPP.test(lead.whatsapp) || lead.whatsapp.length > LEAD_LIMITS.whatsapp) return null;
-  if (!lead.goal || !lead.difficulty || lead.goal.length > LEAD_LIMITS.message || lead.difficulty.length > LEAD_LIMITS.message) return null;
+  if (lead.goal.length > LEAD_LIMITS.message || lead.difficulty.length > LEAD_LIMITS.message) return null;
   if (!lead.consent || typeof request.emailMarketing !== "boolean") return null;
   if (lead.affiliate_code && !/^[a-zA-Z0-9_-]{1,40}$/.test(lead.affiliate_code)) return null;
   if (!isFinite(lead.submittedAtMs) || lead.submittedAtMs > nowMs || nowMs - lead.submittedAtMs < 3000) return null;

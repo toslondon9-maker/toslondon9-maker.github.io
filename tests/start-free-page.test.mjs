@@ -18,6 +18,10 @@ test("the Start Free page requires registration before its main dashboard while 
   assert.match(html, /name="surname"[^>]+required/);
   assert.match(html, /name="whatsapp"[^>]+required/);
   assert.match(html, /name="consent"[^>]+required/);
+  assert.doesNotMatch(html, /name="goal"[^>]+required/);
+  assert.doesNotMatch(html, /name="difficulty"[^>]+required/);
+  assert.match(html, /What would you most like to change or improve right now\? \(optional\)/);
+  assert.match(html, /What is currently holding you back most\? \(optional\)/);
   assert.match(html, /name="emailMarketing"/);
   assert.match(html, /data-lead-heading/);
   assert.match(html, /data-lead-placeholder="first"/);
