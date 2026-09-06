@@ -27,11 +27,13 @@ test("navigation labels identify the affiliate area", () => {
 
 test("referral share script builds an encoded WhatsApp invitation and copy fallback", async () => {
   const source = await import("../assets/referral.mjs");
-  const share = source.buildReferralShareUrl();
+  const share = source.buildReferralShareUrl(source.buildAffiliateLink("Tariq"));
   assert.match(share, /^https:\/\/wa\.me\/\?text=/);
   assert.match(decodeURIComponent(share), /I’ve been exploring a 24-week Master Key System programme/);
-  assert.match(decodeURIComponent(share), /https:\/\/toslondon9-maker\.github\.io\/start-free\//);
+  assert.match(decodeURIComponent(share), /https:\/\/toslondon9-maker\.github\.io\/start-free\/\?ref=tariq/);
   assert.equal(typeof source.copyReferralMessage, "function");
+  assert.equal(source.buildReferralShareUrl(), "");
+  assert.equal(await source.copyReferralMessage(""), false);
 });
 
 test("referral page keeps existing header and footer shell", () => {
@@ -51,4 +53,7 @@ test("affiliate links use the Start Free route and sanitised ref code", async ()
   let copied = "";
   assert.equal(await source.copyAffiliateLink("https://toslondon9-maker.github.io/start-free/?ref=tariq", { clipboard: { writeText: async (value) => { copied = value; } } }), true);
   assert.equal(copied, "https://toslondon9-maker.github.io/start-free/?ref=tariq");
+  let message = "";
+  assert.equal(await source.copyReferralMessage(source.buildAffiliateLink("John Smith"), { clipboard: { writeText: async (value) => { message = value; } } }), true);
+  assert.match(message, /start-free\/\?ref=john-smith/);
 });

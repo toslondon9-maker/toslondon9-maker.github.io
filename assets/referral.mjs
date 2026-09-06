@@ -4,12 +4,14 @@ export function sanitiseAffiliateCode(value) { return String(value ?? "").trim()
 export function buildAffiliateLink(code) { const safe = sanitiseAffiliateCode(code); return safe ? `${startFreeUrl}?ref=${encodeURIComponent(safe)}` : startFreeUrl; }
 export async function copyAffiliateLink(url, navigatorObject = globalThis.navigator) { if (!navigatorObject?.clipboard?.writeText) return false; try { await navigatorObject.clipboard.writeText(url); return true; } catch { return false; } }
 
-export function buildReferralShareUrl() {
-  return `https://wa.me/?text=${encodeURIComponent(`${invitation} ${startFreeUrl}`)}`;
+export function buildReferralShareUrl(affiliateUrl = "") {
+  if (!sanitiseAffiliateCode(new URL(affiliateUrl || startFreeUrl).searchParams.get("ref"))) return "";
+  return `https://wa.me/?text=${encodeURIComponent(`${invitation} ${affiliateUrl}`)}`;
 }
 
-export async function copyReferralMessage(navigatorObject = globalThis.navigator) {
-  const text = `${invitation} ${startFreeUrl}`;
+export async function copyReferralMessage(affiliateUrl, navigatorObject = globalThis.navigator) {
+  if (!affiliateUrl || !sanitiseAffiliateCode(new URL(affiliateUrl).searchParams.get("ref"))) return false;
+  const text = `${invitation} ${affiliateUrl}`;
   if (!navigatorObject?.clipboard?.writeText) return false;
   try { await navigatorObject.clipboard.writeText(text); return true; } catch { return false; }
 }
@@ -19,16 +21,23 @@ function initReferral() {
   const status = document.querySelector("[data-referral-status]");
   const whatsapp = document.querySelector("[data-referral-whatsapp]");
   if (!copyButton || !status) return;
-  whatsapp?.setAttribute("href", buildReferralShareUrl());
-  copyButton.addEventListener("click", async () => {
-    const copied = await copyReferralMessage();
-    status.textContent = copied ? "Copied!" : "Copy unavailable — select the invitation text to copy it.";
-    if (copied) window.setTimeout(() => { status.textContent = ""; }, 3500);
-  });
   const codeInput = document.querySelector("[data-affiliate-code]");
   const link = document.querySelector("[data-affiliate-link]");
   const build = document.querySelector("[data-affiliate-build]");
-  const refresh = () => { const url = buildAffiliateLink(codeInput?.value); if (link) { link.href = url; link.textContent = url; } };
+  const setShareState = () => {
+    const url = buildAffiliateLink(codeInput?.value);
+    const hasCode = Boolean(sanitiseAffiliateCode(codeInput?.value));
+    if (link) { link.href = url; link.textContent = url; }
+    if (whatsapp) { const shareUrl = buildReferralShareUrl(url); if (shareUrl) whatsapp.href = shareUrl; else whatsapp.removeAttribute("href"); whatsapp.toggleAttribute("aria-disabled", !hasCode); }
+    copyButton.disabled = !hasCode;
+    return url;
+  };
+  copyButton.addEventListener("click", async () => {
+    const copied = await copyReferralMessage(setShareState());
+    status.textContent = copied ? "Copied!" : "Copy unavailable — select the invitation text to copy it.";
+    if (copied) window.setTimeout(() => { status.textContent = ""; }, 3500);
+  });
+  const refresh = () => setShareState();
   build?.addEventListener("click", refresh); codeInput?.addEventListener("input", refresh); refresh();
   const copyLink = document.querySelector("[data-affiliate-copy-link]"); const openLink = document.querySelector("[data-affiliate-open-link]"); const linkStatus = document.querySelector("[data-affiliate-link-status]");
   copyLink?.addEventListener("click", async () => { const copied = await copyAffiliateLink(link?.href || startFreeUrl); if (linkStatus) linkStatus.textContent = copied ? "Copied!" : "Copy unavailable — select the link to copy it."; });
