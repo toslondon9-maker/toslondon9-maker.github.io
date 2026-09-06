@@ -27,7 +27,7 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const safeTitle = escapeHtml(title);
   const safeDescription = escapeHtml(description);
   const safeLanguage = escapeHtml(language);
-  const pageScripts = [...new Set(["/assets/site-navigation.mjs", languageScript, ...scripts].map(versionReleaseScript))];
+  const pageScripts = [...new Set(["/assets/site-navigation.mjs", languageScript, "/assets/affiliate-tracking.mjs", ...scripts].map(versionReleaseScript))];
   const stylesheetTags = [...new Set(styles)].map((stylesheet) => (
     `<link rel="stylesheet" href="${escapeHtml(stylesheet)}">`
   )).join("");

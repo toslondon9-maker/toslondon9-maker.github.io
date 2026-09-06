@@ -57,6 +57,14 @@ test("Apps Script receiver stores explicit marketing choice and idempotently ded
   assert.equal(app.rows.length, 2);
 });
 
+test("Apps Script receiver preserves an optional affiliate code in the lead row", () => {
+  const app = receiver();
+  app.submit(lead({ affiliate_code: "englishbookshop" }));
+  assert.equal(app.rows[1][24], "englishbookshop");
+  assert.deepEqual(app.submit(lead({ submissionId: "4d5e99a1-8280-4e41-89ac-4e2e051569d2", affiliate_code: "bad code!" })), { ok: false, code: "invalid" });
+  assert.equal(app.rows.length, 2);
+});
+
 test("Apps Script receiver keeps submission-ID retries idempotent without another row", () => {
   const app = receiver(); app.submit(lead());
   assert.deepEqual(app.submit(lead()), { ok: true, stored: true, notification: "sent" });

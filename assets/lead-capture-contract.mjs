@@ -4,6 +4,7 @@ const LIMITS = Object.freeze({ name: 80, email: 254, whatsapp: 32, message: 1_00
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const whatsappPattern = /^\+[1-9]\d{7,30}$/;
+const affiliatePattern = /^[a-zA-Z0-9_-]{1,40}$/;
 
 function text(value) {
   return typeof value === "string" ? value.trim() : "";
@@ -24,6 +25,7 @@ export function normaliseLeadPayload(payload = {}) {
     sourcePage: text(payload.sourcePage),
     language: text(payload.language),
     website: text(payload.website),
+    affiliate_code: text(payload.affiliate_code),
   };
 }
 
@@ -44,6 +46,7 @@ export function validateLeadPayload(payload, nowMs = Date.now()) {
   if (!isValidInternationalWhatsApp(lead.whatsapp) || lead.whatsapp.length > LIMITS.whatsapp) return { ok: false, code: "invalid-whatsapp" };
   if (!lead.goal || !lead.difficulty || lead.goal.length > LIMITS.message || lead.difficulty.length > LIMITS.message) return { ok: false, code: "invalid-message" };
   if (!lead.consent || typeof payload.emailMarketing !== "boolean") return { ok: false, code: "consent-required" };
+  if (lead.affiliate_code && !affiliatePattern.test(lead.affiliate_code)) return { ok: false, code: "invalid-request" };
   if (!Number.isFinite(lead.submittedAtMs) || lead.submittedAtMs > nowMs || nowMs - lead.submittedAtMs < 3_000) return { ok: false, code: "invalid-request" };
   return { ok: true };
 }

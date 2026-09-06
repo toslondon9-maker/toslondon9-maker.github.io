@@ -1,4 +1,4 @@
-const LEAD_COLUMNS = ["Submission date/time", "Submission ID", "First name", "Surname", "Email", "WhatsApp", "Main goal", "Current difficulty", "WhatsApp consent", "Email marketing consent", "Source page", "Language", "Lead status", "Notes", "Notification status", "Remaining email quota", "Dedupe key", "Welcome email status", "Welcome email sent at", "Welcome email error", "Sequence day sent", "Sequence email sent at", "Sequence email status", "Sequence email error"];
+const LEAD_COLUMNS = ["Submission date/time", "Submission ID", "First name", "Surname", "Email", "WhatsApp", "Main goal", "Current difficulty", "WhatsApp consent", "Email marketing consent", "Source page", "Language", "Lead status", "Notes", "Notification status", "Remaining email quota", "Dedupe key", "Welcome email status", "Welcome email sent at", "Welcome email error", "Sequence day sent", "Sequence email sent at", "Sequence email status", "Sequence email error", "Affiliate code"];
 const LEAD_COLUMN_INDEX = { submissionId: 1, email: 4, whatsapp: 5, notification: 14, dedupe: 16, welcomeStatus: 17, welcomeSentAt: 18, welcomeError: 19, sequenceDay: 20, sequenceSentAt: 21, sequenceStatus: 22, sequenceError: 23 };
 const SEQUENCE_LESSONS = [
   { day: 2, title: "Take Back Your Attention", route: "/start-free/day-2-take-back-your-attention/" },
@@ -15,7 +15,7 @@ const LEAD_WHATSAPP = /^\+[1-9]\d{7,30}$/;
 function json(body) { return ContentService.createTextOutput(JSON.stringify(body)).setMimeType(ContentService.MimeType.JSON); }
 function text(value) { return typeof value === "string" ? value.trim() : ""; }
 function sanitizeSpreadsheetValue(value) { const safe = String(value === undefined || value === null ? "" : value).trim(); return /^[=+\-@]/.test(safe) ? "'" + safe : safe; }
-function normaliseLead(request) { return { submissionId: text(request.submissionId), submittedAtMs: Number(request.submittedAtMs), firstName: text(request.firstName), surname: text(request.surname), email: text(request.email).toLowerCase(), whatsapp: text(request.whatsapp).replace(/[\s()-]/g, ""), goal: text(request.goal), difficulty: text(request.difficulty), consent: request.consent === true, emailMarketing: request.emailMarketing === true, sourcePage: text(request.sourcePage), language: text(request.language), website: text(request.website) }; }
+function normaliseLead(request) { return { submissionId: text(request.submissionId), submittedAtMs: Number(request.submittedAtMs), firstName: text(request.firstName), surname: text(request.surname), email: text(request.email).toLowerCase(), whatsapp: text(request.whatsapp).replace(/[\s()-]/g, ""), goal: text(request.goal), difficulty: text(request.difficulty), consent: request.consent === true, emailMarketing: request.emailMarketing === true, sourcePage: text(request.sourcePage), language: text(request.language), website: text(request.website), affiliate_code: text(request.affiliate_code) }; }
 function validLead(request, nowMs) {
   const lead = normaliseLead(request);
   if (!LEAD_UUID.test(lead.submissionId) || lead.website || lead.sourcePage !== "/start-free/" || ["en", "es"].indexOf(lead.language) === -1) return null;
@@ -24,6 +24,7 @@ function validLead(request, nowMs) {
   if (!LEAD_WHATSAPP.test(lead.whatsapp) || lead.whatsapp.length > LEAD_LIMITS.whatsapp) return null;
   if (!lead.goal || !lead.difficulty || lead.goal.length > LEAD_LIMITS.message || lead.difficulty.length > LEAD_LIMITS.message) return null;
   if (!lead.consent || typeof request.emailMarketing !== "boolean") return null;
+  if (lead.affiliate_code && !/^[a-zA-Z0-9_-]{1,40}$/.test(lead.affiliate_code)) return null;
   if (!isFinite(lead.submittedAtMs) || lead.submittedAtMs > nowMs || nowMs - lead.submittedAtMs < 3000) return null;
   return lead;
 }
@@ -104,7 +105,7 @@ function doPost(e) {
     const minutes = Number(properties.getProperty("LEAD_DUPLICATE_WINDOW_MINUTES")); const key = dedupeKey(lead); const since = Date.now() - (minutes * 60 * 1000);
     const duplicate = isFinite(minutes) && minutes > 0 && values.slice(1).find(function(row) { return row[LEAD_COLUMN_INDEX.dedupe] === key && new Date(row[0]).getTime() >= since; });
     if (duplicate) return json({ ok: true, stored: true, notification: priorNotification(duplicate) });
-    const row = [new Date(), lead.submissionId, lead.firstName, lead.surname, lead.email, lead.whatsapp, lead.goal, lead.difficulty, lead.consent, lead.emailMarketing, lead.sourcePage, lead.language, "New", "", "Pending", "", key, "Pending", "", "", 0, "", "pending", ""].map(sanitizeSpreadsheetValue);
+    const row = [new Date(), lead.submissionId, lead.firstName, lead.surname, lead.email, lead.whatsapp, lead.goal, lead.difficulty, lead.consent, lead.emailMarketing, lead.sourcePage, lead.language, "New", "", "Pending", "", key, "Pending", "", "", 0, "", "pending", "", lead.affiliate_code].map(sanitizeSpreadsheetValue);
     sheet.appendRow(row); const rowNumber = sheet.getLastRow(); let status = "Pending"; let quota = "";
     try { quota = MailApp.getRemainingDailyQuota(); if (quota >= 1) { MailApp.sendEmail(properties.getProperty("LEAD_NOTIFICATION_EMAIL"), "New Unleash Your Power registration", "A new registration was stored."); status = "Sent"; } } catch (_) { status = "Failed"; }
     sheet.getRange(rowNumber, 15, 1, 2).setValues([[status, quota]]);

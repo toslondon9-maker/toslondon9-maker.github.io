@@ -12,6 +12,11 @@ test("referral page contains the approved share journey sections", () => {
   assert.match(page.body, /SHARE ON WHATSAPP/);
   assert.match(page.body, /COPY MESSAGE/);
   assert.match(page.body, /Ready to share the gift of growth\?/);
+  assert.match(page.body, /Become an Unleash Your Power Affiliate/);
+  assert.match(page.body, /YOUR PERSONAL AFFILIATE LINK/);
+  assert.match(page.body, /Affiliate Toolkit/);
+  assert.match(page.body, /Website \/ Social Media \/ Community URL/);
+  assert.match(page.body, /affiliate terms/);
   assert.deepEqual(page.scripts, ["/assets/referral.mjs"]);
 });
 
@@ -29,4 +34,9 @@ test("referral page keeps existing header and footer shell", () => {
   assert.match(page.body, /class="referralPage"/);
   assert.match(page.body, /data-referral-copy/);
   assert.match(page.body, /https:\/\/toslondon9-maker\.github\.io\/start-free\//);
+});
+
+test("affiliate links use the Start Free route and sanitised ref code", async () => {
+  const source = await import("../assets/referral.mjs");
+  assert.equal(source.buildAffiliateLink("maria<script>"), "https://toslondon9-maker.github.io/start-free/?ref=mariascript");
 });

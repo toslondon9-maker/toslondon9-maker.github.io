@@ -62,3 +62,8 @@ test("configured endpoint passes strict HTTPS validation", () => {
   assert.equal(resolveLeadEndpoint({ endpoint: "http://example.test/lead" }), null);
   assert.equal(resolveLeadEndpoint({ endpoint: "https://leads.example.test/lead" }), "https://leads.example.test/lead");
 });
+
+test("affiliate attribution is optional and preserved in the lead contract", () => {
+  assert.equal(normaliseLeadPayload({ ...validLead, affiliate_code: "englishbookshop" }).affiliate_code, "englishbookshop");
+  assert.equal(validateLeadPayload({ ...validLead, affiliate_code: "bad code!" }, now).ok, false);
+});
