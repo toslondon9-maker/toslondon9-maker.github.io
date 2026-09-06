@@ -35,6 +35,9 @@
 html:not(.has-js) .sevenDayRegistration form { display: none; }
 .sevenDayRegistration__noScript { padding: 1rem; border: 1px solid var(--gold, #b78a3c); border-radius: .35rem; background: var(--paper, #fffdf8); color: var(--navy, #0b2038); }
 .sevenDayRegistration form { display: grid; gap: 1rem; }
+.sevenDayRegistration form[hidden] { display: none !important; }
+.sevenDayRegistration__successActions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.sevenDayRegistration__successActions > a { flex: 1 1 14rem; text-align: center; }
 .sevenDayRegistration label { display: grid; gap: .4rem; color: var(--navy, #0b2038); font-weight: 600; line-height: 1.45; }
 .sevenDayRegistration input:not([type="checkbox"]), .sevenDayRegistration textarea { width: 100%; min-height: 2.75rem; box-sizing: border-box; border: 1px solid #b78a3c; border-radius: .35rem; padding: .7rem; font: inherit; background: #fffdf8; color: #0b2038; }
 .sevenDayRegistration input.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
@@ -46,6 +49,7 @@ html:not(.has-js) .sevenDayRegistration form { display: none; }
 .sevenDayRegistration [role="status"] { color: #0b2038; min-height: 1.5em; overflow-wrap: anywhere; }
 .sevenDayRegistration input[aria-invalid="true"], .sevenDayRegistration textarea[aria-invalid="true"] { border-color: #9f2222; box-shadow: 0 0 0 2px rgba(159, 34, 34, .15); }
 @media (max-width: 430px) { .sevenDayRegistration { padding: 1.5rem .75rem; overflow-x: clip; } .sevenDayRegistration h2 { font-size: clamp(1.6rem, 8vw, 2.2rem); } .sevenDayRegistration label { font-size: .98rem; } .sevenDayRegistration input:not([type="checkbox"]), .sevenDayRegistration textarea, .sevenDayRegistration button { min-height: 2.75rem; } }
+@media (max-width: 520px) { .sevenDayRegistration__successActions { display: grid; grid-template-columns: minmax(0, 1fr); } .sevenDayRegistration__successActions > a { width: 100%; box-sizing: border-box; } }
 
 *,
 *::before,

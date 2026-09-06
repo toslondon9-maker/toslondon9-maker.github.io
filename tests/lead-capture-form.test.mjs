@@ -25,10 +25,11 @@ test("browser error copy appends the Worker reference ID", () => {
 
 test("visible registration labels and states change when the language runtime switches", () => {
   const first = { dataset: { leadLabel: "first" }, textContent: "" }; const consent = { dataset: { leadLabel: "consent" }, textContent: "" };
-  const placeholder = { dataset: { leadPlaceholder: "first" }, placeholder: "" }; const status = { textContent: "" }; const button = { textContent: "" }; const success = { textContent: "" }; const successAction = { textContent: "" };
+  const placeholder = { dataset: { leadPlaceholder: "first" }, placeholder: "" }; const status = { textContent: "" }; const button = { textContent: "" }; const success = { textContent: "" }; const successPrompt = { textContent: "" }; const successAction = { textContent: "" }; const successDownload = { textContent: "" }; const successNote = { textContent: "" };
   const form = { dataset: { leadState: "unavailable", leadMessage: "" }, querySelectorAll: (selector) => selector.includes("placeholder") ? [placeholder] : [first, consent], querySelector: (selector) => selector.includes("status") ? status : selector.includes("submit") ? button : null };
-  localizeForm(form, "es", { querySelector: (selector) => selector.includes("success-action") ? successAction : success });
+  localizeForm(form, "es", { querySelector: (selector) => selector.includes("success-prompt") ? successPrompt : selector.includes("success-action") ? successAction : selector.includes("success-download") ? successDownload : selector.includes("success-note") ? successNote : success });
   assert.equal(first.textContent, "Nombre"); assert.match(consent.textContent, /Acepto/); assert.equal(placeholder.placeholder, "Tu nombre"); assert.match(status.textContent, /WhatsApp/); assert.equal(button.textContent, "COMENZAR MIS 7 DÍAS GRATIS"); assert.equal(success.textContent, "Tu registro se ha completado.");
+  assert.equal(successPrompt.textContent, "Elige cómo te gustaría continuar."); assert.equal(successAction.textContent, "COMPLETAR ONLINE"); assert.equal(successDownload.textContent, "DESCARGAR EL CUADERNO (PDF)"); assert.equal(successNote.textContent, "Puedes usar una opción, o ambas.");
 });
 
 test("ready registration state clears the unavailable fallback message", () => {
@@ -54,7 +55,7 @@ test("only an HTTPS Worker lead endpoint enables registration", () => {
 
 test("English and Spanish copy includes all interactive registration states", () => {
   for (const language of ["en", "es"]) {
-    for (const key of ["heading", "helper", "consent", "marketing", "privacy", "submit", "loading", "success", "successAction", "required", "invalidEmail", "invalidWhatsapp", "failure", "unavailable"]) {
+    for (const key of ["heading", "helper", "consent", "marketing", "privacy", "submit", "loading", "success", "successPrompt", "successAction", "successDownload", "successNote", "required", "invalidEmail", "invalidWhatsapp", "failure", "unavailable"]) {
       assert.equal(typeof formCopy[language][key], "string", `${language}.${key}`);
       assert.ok(formCopy[language][key].length > 3, `${language}.${key}`);
     }
@@ -71,4 +72,11 @@ test("success state hides and disables the original registration form", () => {
   assert.equal(button.disabled, true);
   assert.equal(success.hidden, false);
   assert.equal(dashboard.hidden, false);
+});
+
+test("success choices use the online Day 1 and downloadable workbook actions", () => {
+  assert.equal(formCopy.en.successAction, "COMPLETE ONLINE");
+  assert.equal(formCopy.en.successDownload, "DOWNLOAD WORKBOOK (PDF)");
+  assert.equal(formCopy.es.successAction, "COMPLETAR ONLINE");
+  assert.equal(formCopy.es.successDownload, "DESCARGAR EL CUADERNO (PDF)");
 });

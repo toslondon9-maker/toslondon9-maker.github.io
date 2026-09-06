@@ -60,6 +60,20 @@ test("the registration page provides a no-JavaScript WhatsApp fallback without e
   assert.match(css, /html:not\(\.has-js\) \.sevenDayRegistration form\s*\{[^}]*display:\s*none/s);
 });
 
+test("success panel offers online and PDF continuation choices", () => {
+  const html = dashboard().body;
+  assert.match(html, /data-lead-capture-success hidden/);
+  assert.match(html, /data-lead-success-prompt/);
+  assert.match(html, /data-lead-success-action[^>]+href="\/start-free\/day-1-see-whats-running-your-life\/"/);
+  assert.match(html, /data-lead-success-download[^>]+href="\/downloads\/seven-day-experience-workbook-en\.pdf"[^>]+download/);
+  assert.match(html, /data-lead-success-note/);
+});
+
+test("hidden registration form stays out of layout despite generic form display", () => {
+  const css = fs.readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.sevenDayRegistration form\[hidden\]\s*\{[\s\S]*display:\s*none\s*!important/);
+});
+
 test("the free dashboard provides an honest progressive, private no-JavaScript baseline", () => {
   const page = dashboard();
   const html = page.body;
