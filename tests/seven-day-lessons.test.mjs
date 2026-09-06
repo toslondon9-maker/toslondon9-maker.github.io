@@ -118,6 +118,15 @@ test("every lesson includes a private online workbook that remains on the visito
   }
 });
 
+test("the workbook follows all four daily practice cards", () => {
+  const html = lessonPage(sevenDayExperience.lessons[0]).body;
+  const action = html.indexOf('data-i18n="sevenDay.lesson.actionHeading"');
+  const workbook = html.indexOf('class="sevenDayLesson__workbook"');
+
+  assert.ok(action >= 0);
+  assert.ok(workbook > action);
+});
+
 test("lesson styles preserve the shared design system and collapse navigation safely on mobile", () => {
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
 
@@ -130,6 +139,9 @@ test("lesson styles preserve the shared design system and collapse navigation sa
   ]) assert.match(css, new RegExp(escapeRegExp(selector)));
   assert.match(css, /\.sevenDayLesson__header[\s\S]*?var\(--night\)/);
   assert.match(css, /\.sevenDayLesson__practice[\s\S]*?var\(--paper\)/);
+  assert.match(css, /\.sevenDayLesson__workbook\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*-1/);
+  assert.match(css, /\.sevenDayLesson__workbook h2\s*\{[\s\S]*?font-size:\s*clamp\(1\.5rem,\s*3vw,\s*2\.1rem\)/);
+  assert.match(css, /\.sevenDayLesson__workbook textarea\s*\{[\s\S]*?border-radius:\s*0\.75rem/);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*?\.sevenDayLesson__navigationActions[\s\S]*?grid-template-columns: minmax\(0, 1fr\)/);
 });
 

@@ -1,3 +1,5 @@
+import { t } from "../content/translations.mjs?v=20260830-final-polish";
+
 export const WORKBOOK_STORAGE_KEY = "uyp.sevenDayWorkbook.v1";
 
 const WORKBOOK_VERSION = 1;
@@ -87,7 +89,7 @@ export function mountSevenDayWorkbook(document = globalThis.document, options = 
   if (!document?.querySelectorAll) return () => {};
 
   const storage = Object.hasOwn(options, "storage") ? options.storage : defaultStorage();
-  const translate = options.translate ?? ((key) => key);
+  const translate = options.translate ?? t;
   const confirmClear = options.confirmClear ?? ((message) => globalThis.confirm?.(message) === true);
   const textareas = [...document.querySelectorAll("[data-workbook-answer]")];
   const clearButtons = [...document.querySelectorAll("[data-workbook-clear]")];

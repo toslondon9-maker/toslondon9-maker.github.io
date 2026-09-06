@@ -83,6 +83,20 @@ test("workbook enhancement restores, saves and clears an answer on the current d
   assert.equal(status.focused, true);
 });
 
+test("default workbook translator renders real English saved copy", () => {
+  const textarea = fakeElement({ workbookLesson: "day-1" });
+  const status = fakeElement({});
+  const document = fakeDocument({ textarea, status, clear: fakeElement({ workbookLesson: "day-1" }) });
+
+  mountSevenDayWorkbook(document, {
+    storage: { getItem: () => null, setItem: () => {} },
+  });
+  textarea.input("A clear reflection");
+
+  assert.equal(status.textContent, "Saved on this device only.");
+  assert.notEqual(status.textContent, "sevenDay.workbook.saved");
+});
+
 test("blocked browser storage leaves the writing area usable with an honest status", () => {
   const textarea = fakeElement({ workbookLesson: "day-2" });
   const status = fakeElement({});

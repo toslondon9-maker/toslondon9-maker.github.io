@@ -69,6 +69,7 @@ body {
 }
 
 .sevenDayLesson__workbook {
+  grid-column: 1 / -1;
   display: grid;
   gap: 0.9rem;
   padding: clamp(1.2rem, 3vw, 1.75rem);
@@ -82,6 +83,11 @@ body {
   margin: 0;
 }
 
+.sevenDayLesson__workbook h2 {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.15;
+}
+
 .sevenDayLesson__workbook label {
   font-weight: 750;
 }
@@ -91,7 +97,7 @@ body {
   min-height: 11rem;
   padding: 0.9rem;
   border: 1px solid var(--gold);
-  border-radius: var(--radius-control);
+  border-radius: 0.75rem;
   background: var(--paper);
   color: var(--ink);
   line-height: 1.6;
