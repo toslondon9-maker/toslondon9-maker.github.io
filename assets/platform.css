@@ -851,6 +851,15 @@ main > article {
 .mksLineage__section .eyebrow,.mksLineage__cta .eyebrow{color:var(--gold);margin:0;padding-top:.35rem}
 .mksLineage__copy{max-width:52rem}
 .mksLineage__copy p,.mksLineage__cta p{color:var(--navy);font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.75;margin:0}
+.mksLineageWorks,.mksLineageResource{background:#f5efe4;border:1px solid rgba(182,133,44,.45);border-radius:.8rem;box-shadow:0 .65rem 1.8rem rgba(15,35,54,.07);margin-top:1.5rem;padding:clamp(1.1rem,2.5vw,1.5rem)}
+.mksLineageWorks h3{color:var(--navy);font-family:var(--font-display);font-size:clamp(1.25rem,2vw,1.55rem);line-height:1.2;margin:0 0 .9rem}
+.mksLineageWorks ol{display:grid;gap:.4rem;margin:0;padding-left:1.35rem}
+.mksLineageWorks li{color:var(--navy);line-height:1.45;padding-left:.2rem}
+.mksLineageWorks>p{border-top:1px solid rgba(182,133,44,.32);color:var(--muted);font-size:.9rem;line-height:1.5;margin:1rem 0 0;padding-top:.8rem}
+.mksLineageResource{align-items:center;display:flex;gap:1rem;justify-content:space-between}
+.mksLineageResource p{font-size:1rem;font-weight:700;line-height:1.4;margin:0}
+.mksLineageResource span{color:var(--muted);display:block;font-size:.78rem;letter-spacing:.08em;margin-top:.25rem;text-transform:uppercase}
+.mksLineageResource a{color:#765214;font-weight:800;line-height:1.35;text-decoration-thickness:1px;text-underline-offset:.25em;white-space:nowrap}
 .mksLineage__cta{background:#f5efe4;border:1px solid rgba(182,133,44,.45);border-radius:1rem;box-shadow:0 1rem 2.5rem rgba(15,35,54,.08);margin-top:clamp(2rem,5vw,4rem);padding:clamp(2rem,5vw,4rem)}
 .mksLineage__cta h2{margin:.5rem 0 1rem;max-width:none}
 .mksLineage__actions{align-items:center;display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
@@ -863,6 +872,8 @@ main > article {
   .mksLineage__content{padding-inline:1.25rem}
   .mksLineage__section{display:block}
   .mksLineage__section h2{margin:.6rem 0 1rem;max-width:16ch}
+  .mksLineageResource{align-items:flex-start;flex-direction:column}
+  .mksLineageResource a{white-space:normal}
   .mksLineage__actions{align-items:stretch;flex-direction:column}
   .mksLineage__actions a{justify-content:center;text-align:center;width:100%}
   .curriculumLineageLink{align-items:flex-start;flex-direction:column}

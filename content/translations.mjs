@@ -219,6 +219,11 @@ const translations = deepFreeze({
   "route.mksLineage.metaDescription": { en: "Explore the independent study tradition connecting Charles F. Haanel's Master Key System with modern reflection and practical application.", es: "Explora la tradición de estudio independiente que conecta el Master Key System de Charles F. Haanel con la reflexión y la aplicación práctica actuales." },
   "route.mksLineage.heading": { en: "From Original Wisdom to Practical Application", es: "De la sabiduría original a la aplicación práctica" },
   "route.mksLineage.purpose": { en: "A respectful, independent study journey through the ideas, exercises and practical application of The Master Key System.", es: "Un recorrido de estudio independiente y respetuoso por las ideas, ejercicios y aplicación práctica de The Master Key System." },
+  "route.mksLineage.works.heading": { en: "Selected works by Charles F. Haanel", es: "Obras seleccionadas de Charles F. Haanel" },
+  "route.mksLineage.works.note": { en: "These are the five known books attributed to Charles F. Haanel.", es: "Estos son los cinco libros conocidos atribuidos a Charles F. Haanel." },
+  "route.mksLineage.helmarResource.label": { en: "Continue exploring Helmar Rudolph’s work", es: "Continúa explorando la obra de Helmar Rudolph" },
+  "route.mksLineage.helmarResource.meta": { en: "External website", es: "Sitio web externo" },
+  "route.mksLineage.helmarResource.cta": { en: "Visit Mr Master Key →", es: "Visitar Mr Master Key →" },
   "route.masterKeySystem.metaDescription": {
     en: "Explore the Master Key System 24 Week Course: a progressive 24-week practice journey through four phases.",
     es: "Descubre la práctica progresiva de 24 semanas del Master Key System y sus cuatro fases.",

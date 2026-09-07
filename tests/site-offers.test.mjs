@@ -24,7 +24,7 @@ test("deployed homepage preserves the approved lineage sequence and assets", () 
   const lineage = home.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";
   const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]);
   assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
-  assert.equal((home.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
+  assert.equal((lineage.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
   assert.match(lineage, /Modern Study &amp; Application/);
   assert.match(lineage, /Your Guide &amp; Coach/);
   assert.match(lineage, /not affiliated with or endorsed by/i);

@@ -8,6 +8,24 @@ const section = (eyebrow, heading, body, extra = "", portrait = null) => {
 };
 
 export function mksLineagePage(data = siteData, language = "en") {
+  const selectedWorks = `<aside class="mksLineageWorks" aria-labelledby="mks-lineage-works-heading">
+    <h3 id="mks-lineage-works-heading" data-i18n="route.mksLineage.works.heading">${t("route.mksLineage.works.heading", language)}</h3>
+    <ol>
+      <li>The Master Key System</li>
+      <li>The New Psychology</li>
+      <li>Mental Chemistry</li>
+      <li>A Book About You</li>
+      <li>The Amazing Secrets of the Yogi</li>
+    </ol>
+    <p data-i18n="route.mksLineage.works.note">${t("route.mksLineage.works.note", language)}</p>
+  </aside>`;
+  const helmarResource = `<aside class="mksLineageResource" aria-label="${t("route.mksLineage.helmarResource.label", language)}">
+    <div>
+      <p data-i18n="route.mksLineage.helmarResource.label">${t("route.mksLineage.helmarResource.label", language)}</p>
+      <span data-i18n="route.mksLineage.helmarResource.meta">${t("route.mksLineage.helmarResource.meta", language)}</span>
+    </div>
+    <a href="https://en.mrmasterkey.com/" target="_blank" rel="noopener noreferrer" data-i18n="route.mksLineage.helmarResource.cta">${t("route.mksLineage.helmarResource.cta", language)}</a>
+  </aside>`;
   const body = `<main class="mksLineagePage" id="main-content">
     <header class="mksLineageHero">
       <div class="mksLineageHero__inner">
@@ -18,9 +36,9 @@ export function mksLineagePage(data = siteData, language = "en") {
       </div>
     </header>
     <div class="mksLineage__content">
-      ${section("THE ORIGINAL SOURCE", "Charles F. Haanel — The Original Author", "Charles F. Haanel wrote The Master Key System. The Unleash Your Power programme studies his original ideas and exercises as a structured 24-week journey, with respect for their historical source and meaning.", "", { src: "/images/lineage/charles-f-haanel.png", alt: "Charles F. Haanel", side: "right" })}
+      ${section("THE ORIGINAL SOURCE", "Charles F. Haanel — The Original Author", "Charles F. Haanel wrote The Master Key System. The Unleash Your Power programme studies his original ideas and exercises as a structured 24-week journey, with respect for their historical source and meaning.", selectedWorks, { src: "/images/lineage/charles-f-haanel.png", alt: "Charles F. Haanel", side: "right" })}
       ${section("THE STUDY TRADITION", "A Tradition of Study, Reflection and Practice", "Students have approached The Master Key System through careful reading, reflection, concentration, mental imagery, weekly exercises and practical application. This page describes a tradition of study without claiming an undocumented lineage or affiliation.")}
-      ${section("MODERN STUDY & APPLICATION", "Helmar Rudolph — A Modern Student and Teacher of the System", "Helmar Rudolph is associated with modern study and teaching of The Master Key System. His work may provide context for students exploring the original material; it does not imply that he endorses, partners with or is formally affiliated with Unleash Your Power.", "", { src: "/images/lineage/helmar-rudolph.png", alt: "Helmar Rudolph", side: "left" })}
+      ${section("MODERN STUDY & APPLICATION", "Helmar Rudolph — A Modern Student and Teacher of the System", "Helmar Rudolph is associated with modern study and teaching of The Master Key System. His work may provide context for students exploring the original material; it does not imply that he endorses, partners with or is formally affiliated with Unleash Your Power.", helmarResource, { src: "/images/lineage/helmar-rudolph.png", alt: "Helmar Rudolph", side: "left" })}
       ${section("YOUR GUIDE", "Tariq Saddique — Your Guide Through the 24-Week Journey", "Tariq guides students through the weekly lessons, exercises, reflection, practical application and accountability that support consistent study. He is not presenting himself as Charles F. Haanel or Helmar Rudolph; he offers his own independent Unleash Your Power study and coaching programme.", "", { src: "/images/lineage/tariq-lineage-guide.jpg", alt: "Tariq Saddique guiding students through the 24-week Master Key journey", side: "right" })}
       ${section("THE CORE MESSAGE", "Study It. Practise It. Live It.", "Reading creates understanding. The exercises develop ability. Consistent practice builds habits. Application brings the lessons into everyday life.")}
       <section class="mksLineage__cta" aria-labelledby="mks-lineage-continue">
