@@ -6,6 +6,24 @@ import { siteData } from "../content/site-data.mjs";
 import { renderCoaching } from "../src/pages/coaching.mjs";
 import { mountTabs } from "../assets/tabs.mjs";
 
+test("coaching places one shared What Happens Next journey before its investment section", () => {
+  const html = renderCoaching({ language: "en", siteData });
+  const journeyIndex = html.indexOf('class="conversionJourney"');
+  const investmentIndex = html.indexOf('class="coachingExperience section--night"');
+
+  assert.equal((html.match(/class="conversionJourney"/g) ?? []).length, 1);
+  assert.ok(journeyIndex >= 0 && journeyIndex < investmentIndex);
+  assert.match(html.slice(journeyIndex, investmentIndex), /href="\/start-free\/"[^>]*data-i18n="conversion\.next\.cta"/);
+});
+
+test("coaching keeps shared journey translation hooks stable in English and Spanish", () => {
+  for (const language of ["en", "es"]) {
+    const html = renderCoaching({ language, siteData });
+    const journey = html.match(/<section class="conversionJourney"[\s\S]*?<\/section>/)?.[0] ?? "";
+    for (const key of ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"]) assert.match(journey, new RegExp(`data-i18n="${key}"`));
+  }
+});
+
 test("coaching is the accurate canonical offer", () => {
   const html = renderCoaching({ language: "en", siteData });
   for (const text of [

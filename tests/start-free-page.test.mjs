@@ -9,6 +9,25 @@ import { renderStartFree } from "../src/pages/start-free.mjs";
 
 const dashboard = () => routeRenderers[siteData.routes.startFree](siteData);
 
+test("Start Free places the shared journey immediately before the anchored registration gate", () => {
+  const html = dashboard().body;
+  const journeyIndex = html.indexOf('class="conversionJourney"');
+  const registrationIndex = html.indexOf('id="start-free-registration"');
+
+  assert.equal((html.match(/class="conversionJourney"/g) ?? []).length, 1);
+  assert.ok(journeyIndex >= 0 && journeyIndex < registrationIndex);
+  assert.match(html.slice(journeyIndex, registrationIndex), /href="#start-free-registration"[^>]*data-i18n="conversion\.next\.cta"/);
+  assert.match(html, /<section class="sevenDayRegistration" id="start-free-registration">/);
+});
+
+test("Start Free keeps shared journey translation hooks stable in English and Spanish", () => {
+  for (const language of ["en", "es"]) {
+    const html = renderStartFree({ language });
+    const journey = html.match(/<section class="conversionJourney"[\s\S]*?<\/section>/)?.[0] ?? "";
+    for (const key of ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"]) assert.match(journey, new RegExp(`data-i18n="${key}"`));
+  }
+});
+
 test("the Start Free page requires registration before its main dashboard while public lesson URLs remain present", () => {
   const page = dashboard();
   const html = page.body;

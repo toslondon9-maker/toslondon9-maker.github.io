@@ -6,6 +6,35 @@ import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
 const approvedSections = ["hero", "lineage", "origins", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
+const conversionJourneyHooks = [
+  "conversion.next.heading",
+  "conversion.next.step1Title",
+  "conversion.next.step1Body",
+  "conversion.next.step2Title",
+  "conversion.next.step2Body",
+  "conversion.next.step3Title",
+  "conversion.next.step3Body",
+  "conversion.next.cta",
+];
+
+test("homepage places one shared What Happens Next journey after its hero", () => {
+  const html = renderHome({ language: "en" });
+  const heroEnd = html.indexOf("</section>");
+  const journeyIndex = html.indexOf('class="conversionJourney"');
+  const lineageIndex = html.indexOf('data-home-section="lineage"');
+
+  assert.equal((html.match(/class="conversionJourney"/g) ?? []).length, 1);
+  assert.ok(heroEnd < journeyIndex && journeyIndex < lineageIndex);
+  assert.match(html.slice(journeyIndex, lineageIndex), /href="\/start-free\/"[^>]*data-i18n="conversion\.next\.cta"/);
+});
+
+test("homepage renders the shared journey with stable English and Spanish translation hooks", () => {
+  for (const language of ["en", "es"]) {
+    const html = renderHome({ language });
+    const journey = html.match(/<section class="conversionJourney"[\s\S]*?<\/section>/)?.[0] ?? "";
+    for (const key of conversionJourneyHooks) assert.match(journey, new RegExp(`data-i18n="${key}"`));
+  }
+});
 
 test("homepage follows the approved concise customer journey", () => {
   const html = renderHome({ language: "en" });
@@ -136,5 +165,7 @@ test("homepage CTA destinations are generated routes", () => {
 });
 
 test("homepage keeps detailed pricing off the teaser and never restores the payment plan", () => {
-  assert.doesNotMatch(renderHome({ language: "en" }), /£97|£197|£397|£497|£997|£1,188|£1,788|6\s*[×x]\s*£169|£1,014/);
+  const html = renderHome({ language: "en" });
+  const teaser = html.match(/<section[^>]+data-home-section="start-free"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.doesNotMatch(teaser, /£97|£197|£397|£497|£997|£1,188|£1,788|6\s*[×x]\s*£169|£1,014/);
 });

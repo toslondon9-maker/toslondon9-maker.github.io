@@ -62,6 +62,14 @@ test("conversion renderers expose each visible Spanish string through its transl
   }
 });
 
+test("renderWhatHappensNext exposes the same hook contract in both supported languages", () => {
+  const keys = ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"];
+  for (const language of ["en", "es"]) {
+    const html = renderWhatHappensNext({ language });
+    for (const key of keys) assert.match(html, new RegExp(`data-i18n="${key}"`));
+  }
+});
+
 test("conversion presentation keeps cards safe and responsive", async () => {
   const css = await readFile(new URL("../assets/platform.css", import.meta.url), "utf8");
   assert.match(css, /\.conversionJourney,\s*\.foundationNextStep\s*\{[^}]*scroll-margin-top:/s);

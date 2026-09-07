@@ -1,6 +1,7 @@
 import { coachingContent } from "../../content/pages/coaching.mjs";
 import { siteData as canonicalSiteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
+import { renderWhatHappensNext } from "../conversion-components.mjs";
 import { bookingCallHref } from "../whatsapp.mjs";
 
 const escapeHtml = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
@@ -53,7 +54,7 @@ function coachingNextSteps(language, route, startFreeRoute) {
   return `<section class="coachingNextSteps section" aria-labelledby="coaching-next-step-title"><div class="coachingNextSteps__intro"><p class="eyebrow">${copy("phase2.coaching.nextEyebrow", language)}</p><h2 id="coaching-next-step-title">${copy("phase2.coaching.nextTitle", language)}</h2><p>${copy("phase2.coaching.nextBody", language)}</p></div><ol class="coachingNextSteps__steps"><li><strong>01</strong><div><h3>${copy("phase2.coaching.next1Title", language)}</h3><p>${copy("phase2.coaching.next1Body", language)}</p></div></li><li><strong>02</strong><div><h3>${copy("phase2.coaching.next2Title", language)}</h3><p>${copy("phase2.coaching.next2Body", language)}</p></div></li><li><strong>03</strong><div><h3>${copy("phase2.coaching.next3Title", language)}</h3><p>${copy("phase2.coaching.next3Body", language)}</p></div></li></ol><div class="coachingNextSteps__actions"><a class="button--primary" href="${route}">${copy("phase2.coaching.enquire", language)}</a><a class="button--secondary" href="${startFreeRoute}">${copy("phase2.coaching.startFree", language)}</a></div></section>`;
 }
 
-export function renderCoaching({ language = "en", siteData = canonicalSiteData } = {}) {
+function renderCoachingBody({ language = "en", siteData = canonicalSiteData } = {}) {
   const summaries = siteData.stages.map((stage) => stageSummary(stage, language)).join("");
   const labels = coachingContent.tabs.map((id) => t(`coaching.tab.${id}`, language));
   const panels = [
@@ -65,6 +66,13 @@ export function renderCoaching({ language = "en", siteData = canonicalSiteData }
   const tabs = labels.map((label, index) => `<button type="button" id="tab-${coachingContent.tabs[index]}" role="tab" aria-selected="${index === 0}" aria-controls="panel-${coachingContent.tabs[index]}" tabindex="${index === 0 ? 0 : -1}" data-i18n="coaching.tab.${coachingContent.tabs[index]}">${escapeHtml(label)}</button>`).join("");
   const tabPanels = panels.map((panel, index) => `<section id="panel-${coachingContent.tabs[index]}" class="coachingPanel" role="tabpanel" aria-labelledby="tab-${coachingContent.tabs[index]}">${panel}</section>`).join("");
   return `<main class="coachingPage" id="main-content"><header class="coachingHero section"><div class="coachingHero__copy"><p class="eyebrow">${copy("coaching.eyebrow", language)}</p><h1 data-i18n="route.coaching.heading">${escapeHtml(t("route.coaching.heading", language))}</h1><p class="routeShell__purpose" data-i18n="route.coaching.purpose">${escapeHtml(t("route.coaching.purpose", language))}</p><div class="coachingHero__actions"><a class="button--primary routeShell__action" href="${siteData.routes.contact}" data-i18n="route.coaching.action">${escapeHtml(t("route.coaching.action", language))}</a><a class="button--secondary" href="${siteData.routes.startFree}">${language === "es" ? "Empieza gratis durante 7 días" : "START FREE FOR 7 DAYS"}</a></div><p class="coachingHero__preparation">${copy("coaching.hero.preparation", language)} <a href="${siteData.routes.getTheBook}">${copy("nav.getTheBook", language)}</a></p></div><aside class="coachingHero__offer"><span>${copy("coaching.completeJourney", language)}</span><strong>24</strong><em>${copy("coaching.weeks", language)}</em><div><b>4</b><small>${copy("coaching.progressiveStages", language)}</small></div><div><b>£997</b><small>${copy("coaching.completeProgramme", language)}</small></div></aside></header>${flagshipCoaching(language, siteData.routes.contact)}${coachingOutcome()}${coachingDecision(language)}<section class="coachingExperience section--night"><div class="coachingExperience__inner" data-tabs><header class="coachingExperience__header"><p class="eyebrow">${copy("phase2.coaching.investmentEyebrow", language)}</p><h2>${copy("phase2.coaching.investmentTitle", language)}</h2><p>${copy("phase2.coaching.investmentBody", language)}</p></header><div class="tabs coachingTabs" role="tablist" aria-label="${escapeHtml(t("coaching.tabsLabel", language))}" data-i18n-aria-label="coaching.tabsLabel">${tabs}</div><div class="coachingPanels">${tabPanels}</div></div></section>${coachingNextSteps(language, siteData.routes.contact, siteData.routes.startFree)}${professionalServices(language, siteData.routes.contact)}<section class="coachingTrust section"><div><p class="eyebrow">${copy("phase2.coaching.nextStepEyebrow", language)}</p><h2>${copy("phase2.coaching.trustTitle", language)}</h2><p>${copy("coaching.trust.body", language)}</p></div><div class="coachingTrust__actions"><a class="button--primary" href="${siteData.routes.contact}">${copy("phase2.coaching.enquire", language)}</a>${bookingCta(language)}</div></section></main>`;
+}
+
+export function renderCoaching({ language = "en", siteData = canonicalSiteData } = {}) {
+  return renderCoachingBody({ language, siteData }).replace(
+    '<section class="coachingExperience section--night">',
+    `${renderWhatHappensNext({ language, data: siteData, startHref: siteData.routes.startFree })}<section class="coachingExperience section--night">`,
+  );
 }
 
 export function coachingPage(data = canonicalSiteData, language = "en") {
