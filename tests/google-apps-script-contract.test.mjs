@@ -47,9 +47,32 @@ test("Apps Script receiver rejects direct malformed input after secret validatio
   assert.equal(app.rows.length, 0);
 });
 
-test("Apps Script receiver accepts omitted optional questions", () => {
+test("Apps Script receiver rejects a blank goal after secret validation", () => {
   const app = receiver();
-  assert.deepEqual(app.submit(lead({ goal: "", difficulty: "" })), { ok: true, stored: true, notification: "sent" });
+  assert.deepEqual(app.submit(lead({ goal: "" })), { ok: false, code: "invalid" });
+  assert.equal(app.rows.length, 0);
+  assert.equal(app.sentEmails.length, 0);
+});
+
+test("Apps Script receiver rejects a whitespace-only goal after secret validation", () => {
+  const app = receiver();
+  assert.deepEqual(app.submit(lead({ goal: "   " })), { ok: false, code: "invalid" });
+  assert.equal(app.rows.length, 0);
+  assert.equal(app.sentEmails.length, 0);
+});
+
+test("Apps Script receiver rejects a blank difficulty after secret validation", () => {
+  const app = receiver();
+  assert.deepEqual(app.submit(lead({ difficulty: "" })), { ok: false, code: "invalid" });
+  assert.equal(app.rows.length, 0);
+  assert.equal(app.sentEmails.length, 0);
+});
+
+test("Apps Script receiver rejects a whitespace-only difficulty after secret validation", () => {
+  const app = receiver();
+  assert.deepEqual(app.submit(lead({ difficulty: "\t  " })), { ok: false, code: "invalid" });
+  assert.equal(app.rows.length, 0);
+  assert.equal(app.sentEmails.length, 0);
 });
 
 test("Apps Script receiver stores explicit marketing choice and idempotently deduplicates same contact within the configured window", () => {
