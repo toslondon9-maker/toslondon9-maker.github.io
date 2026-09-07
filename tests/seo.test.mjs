@@ -1,7 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { siteData } from "../content/site-data.mjs";
 import { routeRenderers } from "../src/routes.mjs";
+import { masterKeySystemOnlineCoursePage } from "../src/pages/master-key-system-online-course.mjs";
 import { renderPage } from "../src/page-shell.mjs";
 import { renderSitemap } from "../src/sitemap.mjs";
 
@@ -57,6 +59,30 @@ test("online course page links the requested next steps", () => {
   assert.match(html, /Master Key System online course/i);
   assert.match(html, /24-week/i);
   assert.match(html, /practical exercises/i);
+});
+
+test("online course page uses the premium journey layout with responsive bilingual hooks", () => {
+  const html = page(siteData.routes.masterKeySystemOnlineCourse);
+
+  assert.match(html, /class="onlineCoursePage__hero"/);
+  assert.match(html, /START FREE FOR 7 DAYS|route\.masterKeySystemOnlineCourse\.action/);
+  assert.match(html, /EXPLORE MASTER KEY COACHING|route\.masterKeySystemOnlineCourse\.coaching/);
+  assert.equal((html.match(/class="onlineCoursePage__stage"/g) ?? []).length, 4);
+  assert.equal((html.match(/class="onlineCoursePage__studyCard"/g) ?? []).length, 3);
+  assert.match(html, /class="onlineCoursePage__nextSteps"/);
+  assert.match(html, /data-i18n="route\.masterKeySystemOnlineCourse\.journeyHeading"/);
+  assert.match(html, /data-i18n="route\.masterKeySystemOnlineCourse\.stages\.foundation"/);
+
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.onlineCoursePage__hero\s*\{/);
+  assert.match(css, /\.onlineCoursePage__grid\s*\{/);
+  assert.match(css, /@media \(max-width: 700px\)[\s\S]*?\.onlineCoursePage__hero/);
+  assert.match(css, /\.onlineCoursePage__links\s*>\s*\*\s*\{[^}]*width:\s*100%/);
+
+  const spanish = renderPage(masterKeySystemOnlineCoursePage(siteData, "es"));
+  assert.match(spanish, /Curso online del Master Key System/);
+  assert.match(spanish, /Fundamentos/);
+  assert.match(spanish, /data-i18n="route\.masterKeySystemOnlineCourse\.heroStart"/);
 });
 
 test("sitemap includes the online course route and preserves private-route exclusion", () => {

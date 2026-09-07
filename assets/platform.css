@@ -4017,6 +4017,132 @@ body {
   max-width: 48rem;
 }
 
+/* Master Key System online course — premium, page-scoped presentation. */
+.onlineCoursePage {
+  width: min(100% - 2rem, 1180px);
+  margin: 0 auto;
+  padding-block: clamp(2rem, 5vw, 5rem) clamp(3rem, 7vw, 7rem);
+  color: var(--night);
+}
+
+.onlineCoursePage__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .85fr);
+  gap: clamp(2rem, 6vw, 5.5rem);
+  align-items: center;
+  min-height: 28rem;
+  padding: clamp(2rem, 5vw, 5rem);
+  border: 1px solid rgba(184, 140, 59, .34);
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #fffdf8 0%, #f4e8d6 100%);
+  box-shadow: var(--shadow-card);
+}
+
+.onlineCoursePage h1,
+.onlineCoursePage h2,
+.onlineCoursePage h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.onlineCoursePage h1 {
+  max-width: 12ch;
+  margin: .45rem 0 1.25rem;
+  color: var(--night);
+  font-size: clamp(2.8rem, 6vw, 5.4rem);
+  line-height: .98;
+}
+
+.onlineCoursePage__lead {
+  max-width: 40rem;
+  color: #30445c;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.7;
+}
+
+.onlineCoursePage__heroActions,
+.onlineCoursePage__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .85rem;
+  align-items: center;
+  margin-top: 1.75rem;
+}
+
+.onlineCoursePage__journeyPanel {
+  position: relative;
+  min-height: 19rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .65rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  overflow: hidden;
+  border: 1px solid #b88c3b;
+  border-radius: 1.25rem;
+  background: var(--night);
+  color: var(--cream);
+  box-shadow: var(--shadow-raised);
+}
+
+.onlineCoursePage__journeyPanel::before {
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid rgba(224, 183, 101, .38);
+  border-radius: .9rem;
+  content: "";
+  pointer-events: none;
+}
+
+.onlineCoursePage__journeyPanel > * { position: relative; }
+.onlineCoursePage__panelLabel { color: var(--gold-bright); font-size: .78rem; font-weight: 800; letter-spacing: .16em; }
+.onlineCoursePage__journeyPanel strong { font-family: Georgia, "Times New Roman", serif; font-size: clamp(3rem, 7vw, 5rem); line-height: 1; }
+.onlineCoursePage__journeyPanel span { color: #f4dfb2; font-weight: 800; letter-spacing: .08em; }
+.onlineCoursePage__journeyPanel p:last-of-type { color: #dce5ed; font-size: 1.08rem; }
+.onlineCoursePage__journeyLine { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; margin-top: 1rem; }
+.onlineCoursePage__journeyLine i { display: block; height: .35rem; border-radius: 999px; background: var(--gold); }
+
+.onlineCoursePage__section { padding-block: clamp(3.5rem, 8vw, 7rem); }
+.onlineCoursePage__section > .eyebrow { margin-bottom: .55rem; }
+.onlineCoursePage__section h2 { margin: 0; color: var(--night); font-size: clamp(2rem, 4vw, 3.5rem); }
+.onlineCoursePage__sectionIntro { max-width: 48rem; color: #4e6070; font-size: 1.08rem; line-height: 1.7; }
+.onlineCoursePage__stageGrid,
+.onlineCoursePage__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.onlineCoursePage__stage { position: relative; min-height: 12rem; padding: 1.5rem; border: 1px solid rgba(184, 140, 59, .42); border-radius: 1rem; background: #fffdf8; box-shadow: 0 12px 30px rgba(7, 24, 40, .07); }
+.onlineCoursePage__stage::after { position: absolute; right: 1.2rem; bottom: 1rem; color: rgba(184, 140, 59, .28); content: "✦"; font-size: 2rem; }
+.onlineCoursePage__stageWeeks { margin: 0; color: #7f5c1c; font-size: .78rem; font-weight: 800; letter-spacing: .12em; }
+.onlineCoursePage__stage h3 { margin: 2.5rem 0 0; color: var(--night); font-size: 1.45rem; }
+.onlineCoursePage__stage > span { position: absolute; top: 1.2rem; right: 1.3rem; color: var(--gold); font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; }
+.onlineCoursePage__study { padding-inline: clamp(1.5rem, 4vw, 4rem); border-radius: 1.5rem; background: var(--night); color: var(--cream); }
+.onlineCoursePage__study h2 { color: var(--cream); }
+.onlineCoursePage__study .eyebrow { color: var(--gold-bright); }
+.onlineCoursePage__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.onlineCoursePage__studyCard { padding: 1.5rem; border: 1px solid rgba(224, 183, 101, .35); border-radius: 1rem; background: rgba(255, 253, 248, .08); }
+.onlineCoursePage__studyIcon { display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 1px solid var(--gold-bright); border-radius: 50%; color: var(--gold-bright); font-size: .8rem; font-weight: 800; }
+.onlineCoursePage__studyCard h3 { margin: 1rem 0 .5rem; color: var(--cream); font-size: 1.35rem; }
+.onlineCoursePage__studyCard p { margin: 0; color: #dce5ed; line-height: 1.65; }
+.onlineCoursePage__nextSteps { display: flex; justify-content: space-between; gap: 2rem; align-items: center; padding: clamp(1.5rem, 4vw, 3rem) 0 0; }
+.onlineCoursePage__nextSteps h2 { margin: .4rem 0 0; color: var(--night); font-size: clamp(1.8rem, 3.5vw, 3rem); }
+.onlineCoursePage__nextSteps .onlineCoursePage__links { justify-content: flex-end; margin-top: 0; }
+
+@media (max-width: 900px) {
+  .onlineCoursePage__hero { grid-template-columns: 1fr; }
+  .onlineCoursePage__stageGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .onlineCoursePage__nextSteps { align-items: flex-start; flex-direction: column; }
+  .onlineCoursePage__nextSteps .onlineCoursePage__links { justify-content: flex-start; }
+}
+
+@media (max-width: 700px) {
+  .onlineCoursePage__hero { padding: 1.5rem; }
+  .onlineCoursePage__hero h1 { max-width: 14ch; }
+  .onlineCoursePage__stageGrid,
+  .onlineCoursePage__grid { grid-template-columns: minmax(0, 1fr); }
+  .onlineCoursePage__heroActions,
+  .onlineCoursePage__links { align-items: stretch; flex-direction: column; width: 100%; }
+  .onlineCoursePage__heroActions > *,
+  .onlineCoursePage__links > * { width: 100%; }
+  .onlineCoursePage__nextSteps { padding-top: 2.5rem; }
+}
+
 .coachingTrust__actions {
   display: flex;
   flex-wrap: wrap;

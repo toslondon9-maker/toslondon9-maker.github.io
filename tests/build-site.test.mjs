@@ -159,6 +159,12 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
+      if (globalPageFiles[index] === "master-key-system-online-course/index.html") {
+        assert.match(page, /class="onlineCoursePage__hero"/);
+        assert.match(page, /data-i18n="route\.masterKeySystemOnlineCourse\.heroStart"/);
+        continue;
+      }
+
       if (globalPageFiles[index] === "referral/index.html") {
         assert.match(page, /class="referralPage"/);
         assert.match(page, /href="#personal-invite"/);
