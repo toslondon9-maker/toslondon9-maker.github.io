@@ -26,7 +26,9 @@ export function renderSitemap(siteData) {
 
   const entries = indexableRoutes(siteData).map((route) => {
     const location = new URL(route, baseUrl).href;
-    return `  <url>\n    <loc>${xmlEscape(location)}</loc>\n    <lastmod>${lastModified}</lastmod>\n  </url>`;
+    const routeLastModified = siteData.sitemap.lastModifiedByRoute?.[route] ?? lastModified;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(routeLastModified)) throw new Error(`Invalid sitemap lastmod for ${route}`);
+    return `  <url>\n    <loc>${xmlEscape(location)}</loc>\n    <lastmod>${routeLastModified}</lastmod>\n  </url>`;
   });
 
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join("\n")}\n</urlset>\n`;

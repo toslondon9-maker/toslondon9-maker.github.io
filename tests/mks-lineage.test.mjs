@@ -6,7 +6,7 @@ import { routeRenderers } from "../src/routes.mjs";
 test("MKS Lineage page presents the approved independent study positioning", async () => {
   const page = routeRenderers[siteData.routes.mksLineage](siteData);
   assert.equal(page.route, "/mks-lineage/");
-  assert.match(page.title, /MKS Lineage: A Timeless Tradition of Study/);
+  assert.match(page.title, /Charles Haanel Master Key System/);
   assert.match(page.body, /A TIMELESS LINEAGE OF STUDY/);
   assert.match(page.body, /From Original Wisdom to Practical Application/);
   assert.match(page.body, /Charles F\. Haanel — The Original Author/);

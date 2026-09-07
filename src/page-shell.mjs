@@ -1,4 +1,5 @@
 import { renderFooter, renderHeader } from "./shared-chrome.mjs";
+import { renderStructuredData } from "./structured-data.mjs";
 
 const releaseAssetVersion = "20260830-final-polish";
 const platformStyleVersion = "20260904-header-branding-1";
@@ -23,7 +24,7 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
-export function renderPage({ route, language, title, description, titleKey, descriptionKey, body, styles = [], scripts = [], socialImage, socialImageAlt }) {
+export function renderPage({ route, language, title, description, titleKey, descriptionKey, body, styles = [], scripts = [], socialImage, socialImageAlt, structuredData = [] }) {
   const safeTitle = escapeHtml(title);
   const safeDescription = escapeHtml(description);
   const safeLanguage = escapeHtml(language);
@@ -48,5 +49,6 @@ export function renderPage({ route, language, title, description, titleKey, desc
     ? `<link rel="canonical" href="${absoluteUrl}"><meta property="og:type" content="website"><meta property="og:site_name" content="Unleash Your Power"><meta property="og:title" content="${safeTitle}"><meta property="og:description" content="${safeDescription}"><meta property="og:url" content="${absoluteUrl}"><meta property="og:image" content="${pageSocialImage}"><meta property="og:image:alt" content="${pageSocialImageAlt}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${safeTitle}"><meta name="twitter:description" content="${safeDescription}"><meta name="twitter:image" content="${pageSocialImage}"><meta name="twitter:image:alt" content="${pageSocialImageAlt}">`
     : `<meta name="robots" content="noindex, nofollow">`;
 
-  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/the-secret-logo.png" as="image">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${platformStyleVersion}"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ route, language })}${scriptTags}</body></html>`;
+  const structuredDataTag = publicMetadata ? renderStructuredData({ route, title, structuredData }) : "";
+  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/the-secret-logo.png" as="image">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${platformStyleVersion}"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ route, language })}${scriptTags}</body></html>`;
 }

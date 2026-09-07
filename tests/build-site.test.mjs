@@ -67,6 +67,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
     const expected = [
       "index.html",
       "master-key-system/index.html",
+      "master-key-system-online-course/index.html",
       "mks-lineage/index.html",
       "start-free/index.html",
       "coaching/index.html",
@@ -106,7 +107,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 22);
+    assert.equal(pageFiles.length, 23);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",

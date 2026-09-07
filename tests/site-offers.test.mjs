@@ -43,7 +43,7 @@ test("canonical coaching page owns every locked commercial fact", () => {
 });
 
 test("canonical coaching page is static, bilingual and uses a real contact fallback", () => {
-  assert.match(coaching, /<title data-i18n="route\.coaching\.metaTitle">24-Week Coaching/);
+  assert.match(coaching, /<title data-i18n="route\.coaching\.metaTitle">Master Key System Coaching \| 24-Week Course/);
   assert.match(coaching, /src="\/assets\/tabs\.mjs"/);
   assert.match(coaching, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/V5QYXZZS6KQE2" target="_blank" rel="noopener noreferrer"/);
   assert.match(coaching, /data-i18n="route\.coaching\.action"/);

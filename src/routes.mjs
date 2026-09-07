@@ -15,6 +15,8 @@ import { sessionHubPage } from "./pages/session-hub.mjs";
 import { legalPage } from "./pages/legal.mjs";
 import { mksLineagePage } from "./pages/mks-lineage.mjs";
 import { referralPage } from "./pages/referral.mjs";
+import { faqPage } from "./pages/faq.mjs";
+import { masterKeySystemOnlineCoursePage } from "./pages/master-key-system-online-course.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -77,6 +79,8 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.contact]: (data) => contactPage(data),
   [siteData.routes.liveCoaching]: (data) => sessionHubPage(data),
   [siteData.routes.referral]: (data) => referralPage(data),
+  [siteData.routes.faq]: (data) => faqPage(data),
+  [siteData.routes.masterKeySystemOnlineCourse]: (data) => masterKeySystemOnlineCoursePage(data),
   [siteData.routes.privacy]: (data) => legalPage("privacy", data),
   [siteData.routes.terms]: (data) => legalPage("terms", data),
   ...Object.fromEntries(

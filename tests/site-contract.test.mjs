@@ -21,6 +21,7 @@ test("canonical route definitions are locked", () => {
   assert.deepEqual(siteData.routes, {
     home: "/",
     masterKeySystem: "/master-key-system/",
+    masterKeySystemOnlineCourse: "/master-key-system-online-course/",
     mksLineage: "/mks-lineage/",
     startFree: "/start-free/",
     coaching: "/coaching/",

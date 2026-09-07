@@ -14,11 +14,22 @@ export const siteData = deepFreeze({
   contact: { email: "toslondon9@gmail.com", whatsapp: "+34 611 223 345" },
   sitemap: {
     baseUrl: "https://toslondon9-maker.github.io/",
-    lastModified: "2026-08-30"
+    lastModified: "2026-08-30",
+    lastModifiedByRoute: {
+      "/": "2026-09-07",
+      "/master-key-system/": "2026-09-07",
+      "/mks-lineage/": "2026-09-07",
+      "/coaching/": "2026-09-07",
+      "/about-tariq/": "2026-09-07",
+      "/resources/": "2026-09-07",
+      "/faq/": "2026-09-07",
+      "/master-key-system-online-course/": "2026-09-07",
+    }
   },
   routes: {
     home: "/",
     masterKeySystem: "/master-key-system/",
+    masterKeySystemOnlineCourse: "/master-key-system-online-course/",
     mksLineage: "/mks-lineage/",
     startFree: "/start-free/",
     coaching: "/coaching/",
