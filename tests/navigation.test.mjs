@@ -81,7 +81,7 @@ test("page shell cache-busts the release assets that control visible copy and la
 
   assert.match(html, /href="\/assets\/platform\.css\?v=20260904-header-branding-1"/);
   assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260830-final-polish"/);
-  assert.match(languageModule, /translations\.mjs\?v=20260830-final-polish/);
+  assert.match(languageModule, /translations\.mjs\?v=20260907-online-course/);
 });
 
 test("page shell establishes enhancement state before styles can paint mobile chrome", () => {

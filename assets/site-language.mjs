@@ -1,4 +1,4 @@
-import { t } from "../content/translations.mjs?v=20260830-final-polish";
+import { t } from "../content/translations.mjs?v=20260907-online-course";
 
 export const languageStorageKey = "uyp.language";
 
