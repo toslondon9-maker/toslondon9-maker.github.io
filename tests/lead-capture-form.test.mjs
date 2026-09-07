@@ -2,6 +2,106 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { canSubmitLeadForm, formMessages, localizeForm, formCopy, formatLeadError, showRegistrationSuccess, submissionTimestamp } from "../assets/lead-capture-form.mjs";
 
+let runtimeId = 0;
+
+async function createRuntimeHarness(language) {
+  const goal = createControl("goal", "");
+  const difficulty = createControl("difficulty", "A real obstacle");
+  const firstName = createControl("firstName", "Ada");
+  const surname = createControl("surname", "Lovelace");
+  const email = createControl("email", "ada@example.test");
+  const whatsapp = createControl("whatsapp", "+34611223345");
+  const consent = createControl("consent", "on", { type: "checkbox", checked: true });
+  const required = [firstName, surname, email, whatsapp, goal, difficulty, consent];
+  const labels = ["first", "last", "email", "whatsapp", "goal", "difficulty", "consent", "marketing"].map((leadLabel) => ({ dataset: { leadLabel }, textContent: "" }));
+  const placeholders = [firstName, surname, email, whatsapp, goal, difficulty].map((input) => ({ ...input, dataset: { leadPlaceholder: input.name }, placeholder: "" }));
+  const status = { textContent: "", focus() { this.focused += 1; }, focused: 0 };
+  const button = { disabled: true, type: "button", textContent: "" };
+  const listeners = new Map();
+  const controls = new Map([["goal", goal], ["difficulty", difficulty], ["firstName", firstName], ["surname", surname], ["email", email], ["whatsapp", whatsapp], ["consent", consent]]);
+  const form = {
+    dataset: { leadEndpoint: "https://leads.example.test/lead", leadState: "", leadMessage: "" },
+    addEventListener(type, listener) { listeners.set(type, listener); },
+    querySelector(selector) {
+      if (selector === "[data-lead-capture-status]") return status;
+      if (selector === "[data-lead-submit]") return button;
+      if (selector.startsWith("[name=")) return controls.get(selector.slice(6, -1)) ?? null;
+      return null;
+    },
+    querySelectorAll(selector) {
+      if (selector === "[required]") return required;
+      if (selector === "[data-lead-label]") return labels;
+      if (selector === "[data-lead-placeholder]") return placeholders;
+      return [];
+    },
+  };
+  const documentListeners = new Map();
+  const documentRef = {
+    documentElement: { lang: language },
+    addEventListener(type, listener) { documentListeners.set(type, listener); },
+    querySelector(selector) { return selector === "[data-lead-capture-form]" ? form : null; },
+  };
+  const originalDocument = globalThis.document;
+  const originalFormData = globalThis.FormData;
+  const originalFetch = globalThis.fetch;
+  let fetchCalls = 0;
+
+  globalThis.document = documentRef;
+  globalThis.FormData = class HarnessFormData {
+    constructor() {}
+    *entries() {
+      for (const control of controls.values()) {
+        if (control.type !== "checkbox" || control.checked) yield [control.name, control.value];
+      }
+    }
+    [Symbol.iterator]() { return this.entries(); }
+  };
+  globalThis.fetch = async () => { fetchCalls += 1; throw new Error("fetch must not run for invalid input"); };
+
+  try {
+    await import(new URL(`../assets/lead-capture-form.mjs?runtime=${runtimeId += 1}`, import.meta.url));
+    documentListeners.get("DOMContentLoaded")();
+  } catch (error) {
+    globalThis.document = originalDocument;
+    globalThis.FormData = originalFormData;
+    globalThis.fetch = originalFetch;
+    throw error;
+  }
+
+  return {
+    button,
+    difficulty,
+    fetchCalls: () => fetchCalls,
+    form,
+    goal,
+    labels,
+    status,
+    async submit() { await listeners.get("submit")({ preventDefault() {} }); },
+    switchLanguage(nextLanguage) {
+      documentRef.documentElement.lang = nextLanguage;
+      documentListeners.get("uyp:language-change")({ detail: { language: nextLanguage } });
+    },
+    restore() {
+      globalThis.document = originalDocument;
+      globalThis.FormData = originalFormData;
+      globalThis.fetch = originalFetch;
+    },
+  };
+}
+
+function createControl(name, value, { type = "text", checked = false } = {}) {
+  return {
+    attributes: new Map(),
+    checked,
+    focus() { this.focused += 1; },
+    focused: 0,
+    name,
+    setAttribute(attribute, attributeValue) { this.attributes.set(attribute, attributeValue); },
+    type,
+    value,
+  };
+}
+
 test("browser submission timestamp keeps a seven-second safety margin", () => {
   const now = 1_770_000_000_000;
   assert.equal(now - submissionTimestamp(now), 10_000);
@@ -30,6 +130,29 @@ test("visible registration labels and states change when the language runtime sw
   localizeForm(form, "es", { querySelector: (selector) => selector.includes("success-prompt") ? successPrompt : selector.includes("success-action") ? successAction : selector.includes("success-download") ? successDownload : selector.includes("success-note") ? successNote : success });
   assert.equal(first.textContent, "Nombre"); assert.match(consent.textContent, /Acepto/); assert.equal(placeholder.placeholder, "Tu nombre"); assert.match(status.textContent, /WhatsApp/); assert.equal(button.textContent, "COMENZAR MIS 7 DÍAS GRATIS"); assert.equal(success.textContent, "Tu registro se ha completado.");
   assert.equal(successPrompt.textContent, "Elige cómo te gustaría continuar."); assert.equal(successAction.textContent, "COMPLETAR ONLINE"); assert.equal(successDownload.textContent, "DESCARGAR EL CUADERNO (PDF)"); assert.equal(successNote.textContent, "Puedes usar una opción, o ambas.");
+});
+
+test("browser validation blocks fetch and focuses each blank qualifying answer", async () => {
+  const runtime = await createRuntimeHarness("en");
+
+  try {
+    assert.equal(runtime.labels.find((label) => label.dataset.leadLabel === "goal").textContent.includes("(optional)"), false);
+    await runtime.submit();
+    assert.equal(runtime.fetchCalls(), 0);
+    assert.equal(runtime.goal.focused, 1);
+    assert.equal(runtime.status.textContent, formCopy.en.required);
+
+    runtime.goal.value = "Build a calmer daily practice.";
+    runtime.difficulty.value = "   ";
+    runtime.switchLanguage("es");
+    assert.equal(runtime.labels.find((label) => label.dataset.leadLabel === "difficulty").textContent.includes("(opcional)"), false);
+    await runtime.submit();
+    assert.equal(runtime.fetchCalls(), 0);
+    assert.equal(runtime.difficulty.focused, 1);
+    assert.equal(runtime.status.textContent, formCopy.es.required);
+  } finally {
+    runtime.restore();
+  }
 });
 
 test("ready registration state clears the unavailable fallback message", () => {

@@ -44,7 +44,7 @@ export function validateLeadPayload(payload, nowMs = Date.now()) {
   if (!lead.firstName || !lead.surname || lead.firstName.length > LIMITS.name || lead.surname.length > LIMITS.name) return { ok: false, code: "invalid-name" };
   if (!emailPattern.test(lead.email) || lead.email.length > LIMITS.email) return { ok: false, code: "invalid-email" };
   if (!isValidInternationalWhatsApp(lead.whatsapp) || lead.whatsapp.length > LIMITS.whatsapp) return { ok: false, code: "invalid-whatsapp" };
-  if (lead.goal.length > LIMITS.message || lead.difficulty.length > LIMITS.message) return { ok: false, code: "invalid-message" };
+  if (!lead.goal || !lead.difficulty || lead.goal.length > LIMITS.message || lead.difficulty.length > LIMITS.message) return { ok: false, code: "invalid-message" };
   if (!lead.consent || typeof payload.emailMarketing !== "boolean") return { ok: false, code: "consent-required" };
   if (lead.affiliate_code && !affiliatePattern.test(lead.affiliate_code)) return { ok: false, code: "invalid-request" };
   if (!Number.isFinite(lead.submittedAtMs) || lead.submittedAtMs > nowMs || nowMs - lead.submittedAtMs < 3_000) return { ok: false, code: "invalid-request" };
