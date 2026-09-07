@@ -19,7 +19,6 @@ function localized(key, language) {
   }
 }
 
-const money = (value) => `£${new Intl.NumberFormat("en-GB").format(value)}`;
 const copy = (key, language, tag = "span") => `<${tag} data-i18n="${key}">${localized(key, language)}</${tag}>`;
 
 export function renderWhatHappensNext({
@@ -27,8 +26,8 @@ export function renderWhatHappensNext({
   data = canonicalSiteData,
   startHref = data.routes.startFree,
 } = {}) {
-  const steps = [1, 2, 3].map((step) => `<li><strong>${String(step).padStart(2, "0")}</strong><div><h3>${copy(`conversion.next.step${step}Title`, language)}</h3><p>${copy(`conversion.next.step${step}Body`, language)}</p></div></li>`).join("");
-  return `<section class="conversionJourney"><div class="conversionJourney__intro"><h2>${copy("conversion.next.heading", language)}</h2></div><ol class="conversionJourney__steps">${steps}</ol><a class="button--primary" href="${escapeHtml(startHref)}">${copy("conversion.next.cta", language)}</a></section>`;
+  const steps = [1, 2, 3].map((step) => `<li><span aria-hidden="true">0${step}</span><div>${copy(`conversion.next.step${step}Title`, language, "h3")}${copy(`conversion.next.step${step}Body`, language, "p")}</div></li>`).join("");
+  return `<section class="conversionJourney" aria-labelledby="conversion-next-heading"><div class="conversionJourney__inner">${copy("conversion.next.heading", language, "h2")}<ol class="conversionJourney__steps">${steps}</ol><a class="button--primary" href="${escapeHtml(startHref)}" data-i18n="conversion.next.cta">${localized("conversion.next.cta", language)}</a></div></section>`;
 }
 
 export function renderFoundationNextStep({
@@ -37,5 +36,5 @@ export function renderFoundationNextStep({
 } = {}) {
   const foundation = data.stages?.find((stage) => stage.id === "foundation");
   if (!foundation) throw new Error("Foundation stage is required");
-  return `<section class="foundationNextStep"><h2>${copy("conversion.foundation.heading", language)}</h2><p class="foundationNextStep__price"><span data-i18n="conversion.foundation.price">${localized("conversion.foundation.price", language)}</span> <strong>${money(foundation.price)}</strong></p><div class="foundationNextStep__actions"><a class="button--primary" href="${escapeHtml(foundation.paymentUrl)}" target="_blank" rel="noopener noreferrer">${copy("conversion.foundation.payment", language)}</a><a class="button--secondary" href="${escapeHtml(data.routes.coaching)}">${copy("conversion.foundation.coaching", language)}</a></div></section>`;
+  return `<section class="foundationNextStep" aria-labelledby="foundation-next-heading"><div class="foundationNextStep__copy">${copy("conversion.foundation.eyebrow", language, "p")}${copy("conversion.foundation.heading", language, "h2")}${copy("conversion.foundation.body", language, "p")}<p class="foundationNextStep__qualification" data-i18n="conversion.foundation.qualification">${localized("conversion.foundation.qualification", language)}</p></div><div class="foundationNextStep__offer"><strong>£${foundation.price}</strong><a class="button--primary" href="${escapeHtml(foundation.paymentUrl)}" target="_blank" rel="noopener noreferrer" data-i18n="conversion.foundation.cta">${localized("conversion.foundation.cta", language)}</a><a class="button--text" href="${escapeHtml(data.routes.coaching)}" data-i18n="conversion.foundation.secondary">${localized("conversion.foundation.secondary", language)}</a></div></section>`;
 }
