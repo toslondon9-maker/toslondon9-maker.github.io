@@ -86,6 +86,9 @@ test("desktop header uses a spacious two-level brand and navigation layout", () 
   assert.match(desktop, /\.siteHeader[\s\S]*?\{[^}]*flex-direction:\s*column/s);
   assert.match(desktop, /\.siteHeader__actions\s*\{[^}]*display:\s*grid/s);
   assert.match(desktop, /\.siteHeader__actions\s*>\s*\.siteNav\s*\{[^}]*justify-content:\s*center/s);
-  assert.match(desktop, /\.siteHeader \.brand img[\s\S]*?\{[^}]*width:\s*(?:9[0-9]|100)px/s);
+  assert.match(desktop, /\.siteHeader \.brand img[\s\S]*?\{[^}]*width:\s*112px/s);
+  assert.match(desktop, /\.siteHeader \.brand img[\s\S]*?\{[^}]*border:\s*1px solid var\(--gold\)/s);
+  assert.match(desktop, /\.siteHeader \.brand img[\s\S]*?\{[^}]*box-shadow:\s*var\(--shadow-raised\)/s);
   assert.match(desktop, /\.siteHeader \.brand__wordmark[\s\S]*?\{[^}]*font-size:\s*1\.55rem/s);
+  assert.match(css, /@media \(max-width: 480px\)[\s\S]*?\.brand img\s*\{[^}]*width:\s*3rem/s);
 });

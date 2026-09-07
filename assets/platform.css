@@ -5309,9 +5309,11 @@ body {
 
   .siteHeader .brand img,
   .site-header .brand img {
-    width: 96px;
+    width: 112px;
     max-width: none;
     border-radius: 0.9rem;
+    border: 1px solid var(--gold);
+    box-shadow: var(--shadow-raised);
   }
 
   .siteHeader .brand__wordmark,
