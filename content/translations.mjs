@@ -151,6 +151,16 @@ const translations = deepFreeze({
     en: "An independent coaching experience inspired by the Master Key System.",
     es: "Una experiencia de coaching independiente inspirada en el Master Key System.",
   },
+  "home.origins.beyond.eyebrow": { en: "A MESSAGE THAT HAS INSPIRED MILLIONS", es: "UN MENSAJE QUE HA INSPIRADO A MILLONES" },
+  "home.origins.beyond.title": { en: "A timeless conversation about thought, purpose and action.", es: "Una conversación atemporal sobre pensamiento, propósito y acción." },
+  "home.origins.beyond.body1": { en: "The ideas of focused thought, gratitude, imagination and purposeful action have appeared in influential self-development writing for generations.", es: "Las ideas del pensamiento enfocado, la gratitud, la imaginación y la acción con propósito aparecen desde hace generaciones en obras influyentes de desarrollo personal." },
+  "home.origins.beyond.body2": { en: "The Secret brought these ideas to a vast modern audience. Oprah Winfrey publicly spoke positively about its central message. Earlier writers, including Napoleon Hill, also explored how definite purpose, belief and disciplined action can shape a person’s direction.", es: "The Secret acercó estas ideas a una amplia audiencia moderna. Oprah Winfrey habló públicamente de forma positiva sobre su mensaje central. Escritores anteriores, como Napoleon Hill, también exploraron cómo un propósito definido, la convicción y la acción disciplinada pueden orientar el rumbo de una persona." },
+  "home.origins.beyond.body3": { en: "Unleash Your Power is independent study and coaching inspired by Charles F. Haanel’s The Master Key System. It is not affiliated with, endorsed by, or connected to Rhonda Byrne, Oprah Winfrey, Napoleon Hill, The Secret, or their organisations.", es: "Unleash Your Power es un espacio independiente de estudio y coaching inspirado en The Master Key System de Charles F. Haanel. No está afiliado, respaldado ni conectado con Rhonda Byrne, Oprah Winfrey, Napoleon Hill, The Secret ni sus organizaciones." },
+  "home.origins.beyond.grounding": {
+    en: "This is not a promise that thought alone controls life. It is a guided practice to help you direct your thinking, choices and actions more consciously.",
+    es: "Esto no promete que el pensamiento por sí solo controle la vida. Es una práctica guiada para ayudarte a dirigir tus pensamientos, decisiones y acciones de forma más consciente.",
+  },
+  "home.origins.beyond.cta": { en: "START FREE FOR 7 DAYS", es: "EMPIEZA GRATIS DURANTE 7 DÍAS" },
   "home.coaching.eyebrow": { en: "COACHING WITH TARIQ", es: "COACHING CON TARIQ" },
   "home.coaching.title": { en: "Turn insight into consistent practice", es: "Convierte el aprendizaje en una práctica constante" },
   "home.coaching.intro": {

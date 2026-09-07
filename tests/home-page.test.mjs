@@ -5,13 +5,13 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "lineage", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
+const approvedSections = ["hero", "lineage", "origins", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
 
 test("homepage follows the approved concise customer journey", () => {
   const html = renderHome({ language: "en" });
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(sections, approvedSections);
-  assert.equal((html.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
+  assert.equal((html.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 2);
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
   assert.match(html, /START FREE FOR 7 DAYS/);
@@ -95,7 +95,7 @@ test("homepage presents the approved lineage image and people in order", () => {
   const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]);
   assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
   assert.match(lineage, /Charles F\. Haanel and Tariq Saddique — Master Key System inspired coaching journey/);
-  assert.equal((html.match(/haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
+  assert.equal((html.match(/haanel-tariq-portraits\.jpeg/g) ?? []).length, 3);
 });
 
 test("homepage lineage section retains the premium portrait, cards and independence disclosure", () => {
@@ -105,6 +105,16 @@ test("homepage lineage section retains the premium portrait, cards and independe
   assert.match(lineage, /class="homeLineage__grid"/);
   assert.equal((lineage.match(/class="homeLineage__card"/g) ?? []).length, 3);
   assert.match(lineage, /class="homeLineage__disclaimer"/);
+});
+
+test("homepage origins section grounds the Beyond The Secret message without endorsement claims", () => {
+  const html = renderHome({ language: "en" });
+  const origins = html.match(/<section class="homeOrigins"[\s\S]*?<\/section>/)?.[0] ?? "";
+  for (const text of ["A MESSAGE THAT HAS INSPIRED MILLIONS", "A timeless conversation about thought, purpose and action.", "The Secret", "Oprah Winfrey", "Napoleon Hill", "This is not a promise that thought alone controls life."]) assert.match(origins, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(origins, /not affiliated with, endorsed by, or connected to Rhonda Byrne, Oprah Winfrey, Napoleon Hill, The Secret, or their organisations\./);
+  assert.match(origins, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
+  assert.match(renderHome({ language: "es" }), /UNA MENSAJE QUE HA INSPIRADO A MILLONES|UN MENSAJE QUE HA INSPIRADO A MILLONES/);
+  assert.match(renderHome({ language: "es" }), /Oprah Winfrey/);
 });
 
 test("homepage Spanish render is complete, natural and conversion focused", () => {
