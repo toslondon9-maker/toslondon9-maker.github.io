@@ -50,3 +50,11 @@ test("Master Key page exposes a mobile navigator control alongside all 24 chapte
   assert.match(html, /<nav class="curriculumStudyNav" id="curriculum-study-navigator" data-curriculum-navigator/);
   assert.equal((html.match(/data-curriculum-chapter-link/g) ?? []).length, 70);
 });
+
+test("Master Key hero keeps its existing actions and adds a Start Free CTA", () => {
+  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+
+  assert.match(html, /<a class="button--primary" href="\/start-free\/">START FREE FOR 7 DAYS<\/a>/);
+  assert.match(html, /<a class="button--secondary" href="\/get-the-book\/">GET THE MKS BOOK<\/a>/);
+  assert.match(html, /<a class="button--text" href="\/ai-mentors\/">USE THE FREE AI MENTOR<\/a>/);
+});
