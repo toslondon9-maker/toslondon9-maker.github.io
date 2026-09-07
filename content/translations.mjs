@@ -36,6 +36,7 @@ const translations = deepFreeze({
   "cta.startFree": { en: "Start free for 7 days", es: "Empieza gratis durante 7 días" },
   "cta.exploreJourney": { en: "Explore the 24-week journey", es: "Descubre el recorrido de 24 semanas" },
   "cta.bookSession": { en: "Book a session", es: "Reserva una sesión" },
+  "cta.bookCall": { en: "BOOK A FREE 15-MINUTE CALL", es: "RESERVAR UNA LLAMADA GRATUITA DE 15 MINUTOS" },
   "home.hero.title": { en: "Where timeless wisdom meets modern transformation.", es: "Donde la sabiduría atemporal se une a la transformación moderna." },
   "home.hero.eyebrow": { en: "CHARLES F. HAANEL'S MASTER KEY SYSTEM", es: "UN RECORRIDO DE DOMINIO INTERIOR" },
   "home.hero.lead": {

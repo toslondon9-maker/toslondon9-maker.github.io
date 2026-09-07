@@ -34,6 +34,18 @@ test("coaching page clarifies fit, boundaries and the enquiry path", () => {
   assert.match(html, /A simple next step\. No pressure\./);
 });
 
+test("coaching and contact pages offer the free fifteen-minute WhatsApp call", () => {
+  const expected = encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
+  const coaching = renderCoaching({ language: "en", siteData });
+  const contact = renderContact({ data: siteData, language: "en" });
+  for (const html of [coaching, contact]) {
+    assert.match(html, /BOOK A FREE 15-MINUTE CALL/);
+    assert.match(html, new RegExp(`https://wa\\.me/34611223345\\?text=${expected}`));
+    assert.match(html, /target="_blank" rel="noopener noreferrer"/);
+  }
+  assert.match(contact, /contactPage__hero[\s\S]*BOOK A FREE 15-MINUTE CALL/);
+});
+
 test("Session Hub provides a private weekly return point", () => {
   const html = renderSessionHub({ data: siteData, language: "en" });
   assert.match(html, /YOUR SESSION HUB/);

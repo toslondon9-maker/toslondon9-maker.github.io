@@ -19,6 +19,14 @@ test("homepage follows the approved concise customer journey", () => {
   assert.match(html, /Free 7-Day Experience • No Previous Experience Required/);
 });
 
+test("homepage offers the free fifteen-minute WhatsApp call beside both free-entry CTAs", () => {
+  const html = renderHome({ language: "en" });
+  const expected = encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
+  assert.equal((html.match(/BOOK A FREE 15-MINUTE CALL/g) ?? []).length, 2);
+  assert.equal((html.match(new RegExp(`https://wa\\.me/34611223345\\?text=${expected}`, "g")) ?? []).length, 2);
+  assert.match(html, /target="_blank" rel="noopener noreferrer"/);
+});
+
 test("homepage explains the independent three-person learning lineage near the top", () => {
   const html = renderHome({ language: "en" });
   const lineage = html.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";
@@ -114,7 +122,7 @@ test("homepage CTA destinations are generated routes", () => {
   const routeSet = new Set(Object.values(siteData.routes));
   const ctaRoutes = [...html.matchAll(/<a class="button--(?:primary|secondary|text)[^"]*" href="([^"]+)"/g)].map((match) => match[1]);
   assert.ok(ctaRoutes.length >= 7);
-  for (const route of ctaRoutes) assert.ok(routeSet.has(route), `missing generated destination: ${route}`);
+  for (const route of ctaRoutes) if (!route.startsWith("https://wa.me/")) assert.ok(routeSet.has(route), `missing generated destination: ${route}`);
 });
 
 test("homepage keeps detailed pricing off the teaser and never restores the payment plan", () => {

@@ -4017,6 +4017,13 @@ body {
   max-width: 48rem;
 }
 
+.coachingTrust__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
 /* About Tariq */
 .aboutTariqHero,
 .aboutTariqPrinciples,
