@@ -839,6 +839,20 @@ const translations = deepFreeze({
   "phase2.coaching.discussService": { en: "Discuss this service", es: "Hablar sobre este servicio" },
   "phase2.coaching.nextStepEyebrow": { en: "NEXT STEP", es: "SIGUIENTE PASO" },
   "phase2.coaching.trustTitle": { en: "Enquire about coaching", es: "Consulta sobre coaching" },
+  "conversion.next.heading": { en: "WHAT HAPPENS NEXT?", es: "¿QUÉ OCURRE DESPUÉS?" },
+  "conversion.next.step1Title": { en: "START FREE", es: "EMPIEZA GRATIS" },
+  "conversion.next.step1Body": { en: "Experience seven days of guided Master Key System study, reflection and practical exercises.", es: "Vive siete días de estudio guiado del Sistema de la Llave Maestra, reflexión y ejercicios prácticos." },
+  "conversion.next.step2Title": { en: "BUILD YOUR FOUNDATION", es: "CONSTRUYE TUS FUNDAMENTOS" },
+  "conversion.next.step2Body": { en: "If the journey feels right for you, continue with the four-week Foundation stage for £97.", es: "Si sientes que este camino es adecuado para ti, continúa con la etapa de Fundamentos de cuatro semanas por £97." },
+  "conversion.next.step3Title": { en: "GO DEEPER, AT YOUR PACE", es: "PROFUNDIZA, A TU RITMO" },
+  "conversion.next.step3Body": { en: "Continue through Visualisation, Concentration and Contemplation & Mastery—or join the complete 24-week journey.", es: "Continúa con Visualización, Concentración y Contemplación y Maestría, o únete al recorrido completo de 24 semanas." },
+  "conversion.next.cta": { en: "START FREE FOR 7 DAYS", es: "EMPIEZA GRATIS DURANTE 7 DÍAS" },
+  "conversion.foundation.eyebrow": { en: "YOUR NEXT STEP", es: "TU SIGUIENTE PASO" },
+  "conversion.foundation.heading": { en: "Continue with Foundation", es: "Continúa con Fundamentos" },
+  "conversion.foundation.body": { en: "You have begun to explore the principles. Foundation gives you four guided weeks to establish the practice: greater calm, self-awareness and a stronger mental base for the journey ahead.", es: "Has comenzado a explorar los principios. Fundamentos te ofrece cuatro semanas guiadas para establecer la práctica: mayor calma, autoconocimiento y una base mental más sólida para el camino que tienes por delante." },
+  "conversion.foundation.qualification": { en: "Individual outcomes depend on your circumstances, participation and consistent practice.", es: "Los resultados individuales dependen de tus circunstancias, participación y práctica constante." },
+  "conversion.foundation.cta": { en: "CONTINUE WITH FOUNDATION", es: "CONTINUAR CON FUNDAMENTOS" },
+  "conversion.foundation.secondary": { en: "Explore the complete 24-week journey", es: "Explora el recorrido completo de 24 semanas" },
 });
 
 const warnedKeys = new Set();

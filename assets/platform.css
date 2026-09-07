@@ -5429,3 +5429,132 @@ body {
 @media(max-width:760px){.affiliateApplication__grid{grid-template-columns:1fr}.affiliateLinkBuilder>div{align-items:stretch;flex-direction:column}.affiliateLinkBuilder button{width:100%}.affiliateJourney{flex-wrap:wrap;gap:.6rem}}
 .affiliateLinkBuilder__label{display:block;font-weight:700;margin-top:1rem;color:var(--ink)}.affiliateLinkBuilder__actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem}.affiliateLinkBuilder__actions button{min-height:44px}.affiliateLinkBuilder small{display:block;margin-top:.8rem;color:#536477;line-height:1.5}.affiliateLinkBuilder [data-affiliate-link-status]{min-height:1.4em;color:#7a571d;font-weight:700}
 .referralInvite,.affiliateLinkSection{scroll-margin-top:6rem}.referralAffiliateBridge{margin:1.5rem auto 0;color:#536477;font-size:.95rem}.referralAffiliateBridge a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:.2em}
+
+/* Foundation conversion journey */
+.conversionJourney,
+.foundationNextStep {
+  scroll-margin-top: 7rem;
+}
+
+.conversionJourney {
+  padding-block: var(--space-section);
+  background: var(--cream);
+}
+
+.conversionJourney__inner {
+  width: min(100% - (2 * var(--space-gutter)), var(--content-max));
+  margin-inline: auto;
+  text-align: center;
+}
+
+.conversionJourney__steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.conversionJourney__steps li {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+  text-align: start;
+}
+
+.conversionJourney__steps li > span {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.conversionJourney__steps h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+}
+
+.conversionJourney__steps p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.foundationNextStep {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: center;
+  width: min(100% - (2 * var(--space-gutter)), var(--content-max));
+  margin: var(--space-section) auto;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-card);
+  background: linear-gradient(145deg, var(--night), var(--night-soft));
+  color: var(--cream);
+  box-shadow: var(--shadow-card);
+}
+
+.conversionJourney__steps li,
+.foundationNextStep__copy,
+.foundationNextStep__offer {
+  min-width: 0;
+}
+
+.foundationNextStep .eyebrow,
+.foundationNextStep__offer strong {
+  color: var(--gold-bright);
+}
+
+.foundationNextStep__copy > p:not(.eyebrow),
+.foundationNextStep__qualification {
+  color: rgba(247, 241, 229, 0.84);
+}
+
+.foundationNextStep__offer {
+  display: grid;
+  gap: 0.85rem;
+  justify-items: start;
+}
+
+.foundationNextStep__offer strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1;
+}
+
+.foundationNextStep .button--text {
+  color: var(--cream);
+}
+
+.conversionJourney__steps p,
+.foundationNextStep p,
+.foundationNextStep a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .conversionJourney__steps,
+  .foundationNextStep {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .foundationNextStep {
+    margin-block: clamp(2.5rem, 8vw, 4rem);
+  }
+
+  .foundationNextStep__offer {
+    justify-items: stretch;
+  }
+
+  .conversionJourney .button--primary,
+  .foundationNextStep .button--primary,
+  .foundationNextStep .button--text {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+}
