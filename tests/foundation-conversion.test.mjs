@@ -70,6 +70,8 @@ test("conversion presentation keeps cards safe and responsive", async () => {
   assert.match(css, /\.foundationNextStep\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1\.2fr\) minmax\(0, 0\.8fr\)[^}]*background:\s*linear-gradient\(145deg, var\(--night\), var\(--night-soft\)\)/s);
   assert.match(css, /\.conversionJourney__steps li,\s*\.foundationNextStep__copy,\s*\.foundationNextStep__offer\s*\{[^}]*min-width:\s*0/s);
   assert.match(css, /\.conversionJourney__steps p,\s*\.foundationNextStep p,\s*\.foundationNextStep a\s*\{[^}]*overflow-wrap:\s*anywhere/s);
+  assert.doesNotMatch(css, /rgba\(247,\s*241,\s*229,\s*0\.84\)/);
+  assert.match(css, /\.foundationNextStep__copy > p:not\(\.eyebrow\),\s*\.foundationNextStep__qualification\s*\{[^}]*color:\s*color-mix\(in srgb, var\(--cream\) 84%, transparent\)/s);
   assert.match(css, /@media \(max-width: 720px\)\s*\{[\s\S]*\.conversionJourney__steps,\s*\.foundationNextStep\s*\{[\s\S]*grid-template-columns:\s*minmax\(0, 1fr\)[\s\S]*\.conversionJourney \.button--primary,\s*\.foundationNextStep \.button--primary,\s*\.foundationNextStep \.button--text\s*\{[\s\S]*width:\s*100%[\s\S]*box-sizing:\s*border-box[\s\S]*justify-content:\s*center/s);
 });
 

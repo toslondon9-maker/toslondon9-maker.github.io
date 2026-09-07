@@ -5511,7 +5511,7 @@ body {
 
 .foundationNextStep__copy > p:not(.eyebrow),
 .foundationNextStep__qualification {
-  color: rgba(247, 241, 229, 0.84);
+  color: color-mix(in srgb, var(--cream) 84%, transparent);
 }
 
 .foundationNextStep__offer {
