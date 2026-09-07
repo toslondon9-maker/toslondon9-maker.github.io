@@ -118,6 +118,29 @@ test("every lesson includes a private online workbook that remains on the visito
   }
 });
 
+test("only Day 7 places the Foundation next step after completion and before the completion bridge", () => {
+  const foundation = siteData.stages.find((stage) => stage.id === "foundation");
+  assert.ok(foundation, "the canonical Foundation offer is available");
+
+  for (const lesson of sevenDayExperience.lessons) {
+    const html = lessonPage(lesson).body;
+    const foundationIndex = html.indexOf('class="foundationNextStep"');
+
+    if (lesson.sequence < 7) {
+      assert.equal(foundationIndex, -1, `${lesson.id} must not render the Foundation offer`);
+      continue;
+    }
+
+    const completionIndex = html.indexOf('class="sevenDayLesson__completion"');
+    const bridgeIndex = html.indexOf('class="sevenDayLesson__bridge"');
+    assert.equal((html.match(/class="foundationNextStep"/g) ?? []).length, 1);
+    assert.ok(completionIndex < foundationIndex && foundationIndex < bridgeIndex);
+    assert.match(html, new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"[^>]+target="_blank" rel="noopener noreferrer"`));
+    assert.match(html, /Individual outcomes depend on your circumstances, participation and consistent practice\./);
+    assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.coaching)}"[^>]+data-i18n="conversion\.foundation\.secondary"`));
+  }
+});
+
 test("the workbook follows all four daily practice cards", () => {
   const html = lessonPage(sevenDayExperience.lessons[0]).body;
   const action = html.indexOf('data-i18n="sevenDay.lesson.actionHeading"');

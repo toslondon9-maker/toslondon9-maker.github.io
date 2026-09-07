@@ -60,11 +60,19 @@ test("all commercial comparisons are derived from the canonical offer data", () 
   assert.equal(Math.round((1 - siteData.offer.completePrice / siteData.offer.msrpTotal) * 100), siteData.offer.msrpDiscount);
 });
 
-test("the free dashboard remains free while registration is required before the dashboard is revealed", () => {
+test("the Foundation offer stays inside the registration-gated dashboard", () => {
   const html = routeRenderers[siteData.routes.startFree](siteData).body;
+  const foundation = siteData.stages.find((stage) => stage.id === "foundation");
+  const dashboardIndex = html.indexOf("data-lead-capture-dashboard hidden");
 
+  assert.ok(foundation, "the canonical Foundation offer is available");
   assert.match(html, /data-lead-capture-form/);
-  assert.doesNotMatch(html, /paypal|stripe|payment|checkout/i);
   assert.match(html, /data-lead-capture-dashboard hidden/);
+  assert.doesNotMatch(html.slice(0, dashboardIndex), /paypal|stripe|payment|checkout/i);
+  assert.match(html.slice(dashboardIndex), new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"[^>]+target="_blank" rel="noopener noreferrer"`));
   assert.match(html, /href="\/start-free\/day-1-see-whats-running-your-life\/"/);
 });
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}

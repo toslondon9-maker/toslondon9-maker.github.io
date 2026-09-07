@@ -58,6 +58,22 @@ test("the Start Free page requires registration before its main dashboard while 
   }
 });
 
+test("the registration-gated dashboard places the Foundation next step after the workbook and before the next-steps panel", () => {
+  const html = dashboard().body;
+  const foundation = siteData.stages.find((stage) => stage.id === "foundation");
+  const dashboardStart = html.indexOf("data-lead-capture-dashboard hidden");
+  const workbookIndex = html.indexOf('class="sevenDayDashboard__workbook"', dashboardStart);
+  const foundationIndex = html.indexOf('class="foundationNextStep"', dashboardStart);
+  const afterSevenDaysIndex = html.indexOf('id="after-seven-days"', dashboardStart);
+
+  assert.ok(foundation, "the canonical Foundation offer is available");
+  assert.equal((html.match(/class="foundationNextStep"/g) ?? []).length, 1);
+  assert.ok(workbookIndex < foundationIndex && foundationIndex < afterSevenDaysIndex);
+  assert.match(html.slice(dashboardStart), new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"[^>]+target="_blank" rel="noopener noreferrer"`));
+  assert.match(html.slice(dashboardStart), /Individual outcomes depend on your circumstances, participation and consistent practice\./);
+  assert.match(html.slice(dashboardStart), new RegExp(`href="${escapeRegExp(siteData.routes.coaching)}"[^>]+data-i18n="conversion\.foundation\.secondary"`));
+});
+
 test("the Start Free qualifying-question labels are required in both languages", () => {
   const spanish = renderStartFree({ language: "es" });
 
@@ -197,3 +213,7 @@ test("the seven-day flyer has an accessible enlarge control and lightbox", () =>
   assert.match(html, /data-flyer-image/);
   assert.ok(page.scripts.includes("/assets/flyer-lightbox.mjs"));
 });
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
