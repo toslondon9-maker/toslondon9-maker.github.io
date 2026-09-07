@@ -74,6 +74,28 @@ test("accepted registration keeps its existing success response", async () => {
   } finally { globalThis.fetch = originalFetch; console.log = originalLog; }
 });
 
+for (const field of ["goal", "difficulty"]) {
+  test(`Worker rejects blank ${field} before calling Apps Script`, async () => {
+    const originalFetch = globalThis.fetch;
+    let calls = 0;
+    globalThis.fetch = async () => {
+      calls += 1;
+      throw new Error("upstream should not be called");
+    };
+    try {
+      const response = await app.fetch(request("/lead", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...validLead, [field]: "   " }),
+      }), env);
+      assert.equal(response.status, 400);
+      assert.deepEqual(await response.json(), { ok: false, code: "invalid" });
+      assert.match(response.headers.get("X-Request-ID") ?? "", /^[0-9a-f-]{20,}$/i);
+      assert.equal(calls, 0);
+    } finally { globalThis.fetch = originalFetch; }
+  });
+}
+
 test("lead Worker rejects missing secrets, oversized bodies and disallowed origins safely", async () => {
   const blocked = await app.fetch(new Request("https://worker.example/lead", { method: "POST", headers: { origin: "https://example.invalid" } }), env);
   assert.equal(blocked.status, 403);
