@@ -14,7 +14,7 @@ export const siteData = deepFreeze({
   contact: { email: "toslondon9@gmail.com", whatsapp: "+34 611 223 345" },
   sitemap: {
     baseUrl: "https://unleashyourpowerwithtariq.com/",
-    lastModified: "2026-08-30",
+    lastModified: "2026-09-08",
     lastModifiedByRoute: {
       "/": "2026-09-07",
       "/master-key-system/": "2026-09-07",

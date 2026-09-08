@@ -25,6 +25,7 @@ test("sitemap lists every indexable generated route exactly once and excludes Se
   assert.deepEqual(locations, expected);
   assert.equal(new Set(locations).size, locations.length);
   assert.ok(locations.every((location) => location.startsWith(`${liveDomain}/`)));
+  assert.ok(!sitemap.includes("toslondon9-maker.github.io"));
   assert.ok(locations.every((location) => location.endsWith("/") || location === liveDomain));
   assert.ok(!locations.includes(`${liveDomain}${siteData.routes.liveCoaching}`));
 });
@@ -52,6 +53,7 @@ test("the static build publishes each sitemap URL as one canonical public page",
     }
 
     await access(path.join(outputRoot, "robots.txt"));
+    assert.ok(!sitemap.includes("toslondon9-maker.github.io"));
     assert.ok(!locations.some((location) => location.includes("/live-coaching/")));
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
