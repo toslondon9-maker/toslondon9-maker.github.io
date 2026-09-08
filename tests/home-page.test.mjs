@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "lineage", "origins", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
+const approvedSections = ["hero", "lineage", "origins", "books", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
 const conversionJourneyHooks = [
   "conversion.next.heading",
   "conversion.next.step1Title",
@@ -144,6 +144,31 @@ test("homepage origins section grounds the Beyond The Secret message without end
   assert.match(origins, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
   assert.match(renderHome({ language: "es" }), /UNA MENSAJE QUE HA INSPIRADO A MILLONES|UN MENSAJE QUE HA INSPIRADO A MILLONES/);
   assert.match(renderHome({ language: "es" }), /Oprah Winfrey/);
+});
+
+test("homepage presents the ten books behind the method in both languages", async () => {
+  const english = renderHome({ language: "en" });
+  const spanish = renderHome({ language: "es" });
+  const books = english.match(/<section[^>]+data-home-section="books"[\s\S]*?<\/section>/)?.[0] ?? "";
+  for (const title of [
+    "Think and Grow Rich",
+    "The Secret",
+    "The Science of Getting Rich",
+    "The Power of Your Subconscious Mind",
+    "Psycho-Cybernetics",
+    "The Magic of Believing",
+    "You Were Born Rich",
+    "Tapping the Source",
+    "The Master Key Workbook",
+    "Master Key Arcana",
+  ]) assert.match(books, new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(books, /wider Master Key and New Thought tradition/i);
+  assert.match(books, /not a claim that every author was directly inspired by Charles F\. Haanel/i);
+  assert.match(spanish, /LOS LIBROS DETRÁS DEL MÉTODO/);
+  assert.match(spanish, /tradición más amplia del Master Key y del New Thought/i);
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(css, /\.homeBooks__grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2/);
+  assert.match(css, /@media[\s\S]*max-width:\s*768px[\s\S]*\.homeBooks__grid\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
 });
 
 test("homepage Spanish render is complete, natural and conversion focused", () => {

@@ -27,5 +27,17 @@ export const homeContent = Object.freeze({
     }),
   ]),
   originsImage: "/images/haanel-tariq-portraits.jpeg",
+  books: Object.freeze([
+    Object.freeze({ titleKey: "home.books.book1.title", authorKey: "home.books.book1.author" }),
+    Object.freeze({ titleKey: "home.books.book2.title", authorKey: "home.books.book2.author" }),
+    Object.freeze({ titleKey: "home.books.book3.title", authorKey: "home.books.book3.author" }),
+    Object.freeze({ titleKey: "home.books.book4.title", authorKey: "home.books.book4.author" }),
+    Object.freeze({ titleKey: "home.books.book5.title", authorKey: "home.books.book5.author" }),
+    Object.freeze({ titleKey: "home.books.book6.title", authorKey: "home.books.book6.author" }),
+    Object.freeze({ titleKey: "home.books.book7.title", authorKey: "home.books.book7.author" }),
+    Object.freeze({ titleKey: "home.books.book8.title", authorKey: "home.books.book8.author" }),
+    Object.freeze({ titleKey: "home.books.book9.title", authorKey: "home.books.book9.author" }),
+    Object.freeze({ titleKey: "home.books.book10.title", authorKey: "home.books.book10.author" }),
+  ]),
   heroImage: "/images/tariq-happiness-harmony.png",
 });

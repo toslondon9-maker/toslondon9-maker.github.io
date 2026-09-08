@@ -1563,6 +1563,68 @@ main > article {
   text-align: center;
 }
 
+.homeBooks {
+  background: var(--cream);
+}
+
+.homeBooks__inner {
+  max-width: 70rem;
+}
+
+.homeBooks__intro {
+  max-width: 48rem;
+}
+
+.homeBooks__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.homeBooks__card {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 1rem;
+  row-gap: 0.35rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.homeBooks__number {
+  color: #85611f;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.homeBooks__card h3 {
+  margin: 0;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
+
+.homeBooks__author {
+  grid-column: 2;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.homeBooks__disclaimer {
+  max-width: 52rem;
+  margin: 1.5rem auto 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .homeWhy__inner {
   max-width: 56rem;
   text-align: center;
@@ -4466,7 +4528,8 @@ body {
   }
 
   .homeCoaching__layout,
-  .aboutTariqPrinciples__grid {
+  .aboutTariqPrinciples__grid,
+  .homeBooks__grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
