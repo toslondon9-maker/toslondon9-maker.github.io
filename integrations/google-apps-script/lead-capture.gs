@@ -43,7 +43,7 @@ function ensureColumns(sheet) {
 function escapeHtml(value) { return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&#39;"); }
 function welcomeEmail(lead) {
   const firstName = escapeHtml(lead.firstName);
-  const dayOne = "https://toslondon9-maker.github.io/start-free/day-1-see-whats-running-your-life/";
+  const dayOne = "https://unleashyourpowerwithtariq.com/start-free/day-1-see-whats-running-your-life/";
   const body = "Hi " + lead.firstName + ",\n\nWelcome — I’m really glad you’re here.\n\nOver the next seven days, you’ll take a little time each day to slow down, observe your thinking, and take one simple action. There is nothing to catch up on and no need to rush.\n\nYour first step is ready:\n\nStart Day 1:\n" + dayOne + "\n\nGive yourself a few quiet minutes today. Read the lesson, complete the exercise, and simply notice what comes up.\n\nI’ll be with you throughout the experience.\n\nWith you on the journey,\nTariq Saddique\nUnleash Your Power";
   const html = "<p>Hi " + firstName + ",</p><p>Welcome — I’m really glad you’re here.</p><p>Over the next seven days, you’ll take a little time each day to slow down, observe your thinking, and take one simple action. There is nothing to catch up on and no need to rush.</p><p>Your first step is ready:</p><p><a href=\"" + dayOne + "\">Start Day 1</a></p><p>Give yourself a few quiet minutes today. Read the lesson, complete the exercise, and simply notice what comes up.</p><p>I’ll be with you throughout the experience.</p><p>With you on the journey,<br>Tariq Saddique<br>Unleash Your Power</p>";
   return { body: body, html: html };
@@ -55,7 +55,7 @@ function dayNumber(value) {
 }
 function sequenceEmail(firstName, lesson, language) {
   const name = escapeHtml(firstName);
-  const url = "https://toslondon9-maker.github.io" + lesson.route;
+  const url = "https://unleashyourpowerwithtariq.com" + lesson.route;
   const spanish = language === "es";
   const title = spanish ? lesson.titleEs : lesson.title;
   const message = spanish ? lesson.messageEs : lesson.message;
@@ -73,7 +73,7 @@ function sequenceEmail(firstName, lesson, language) {
     : "<p>Hi " + name + ",</p><p>" + escapeHtml(intro) + ".</p><p>" + escapeHtml(message) + "</p><p>" + quiet + "</p><p><a href=\"" + url + "\">" + start + "</a></p>";
   if (lesson.day === 7) {
     const foundationUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
-    const journeyUrl = "https://toslondon9-maker.github.io/master-key-system/";
+    const journeyUrl = "https://unleashyourpowerwithtariq.com/master-key-system/";
     const next = spanish ? "Si quieres continuar, puedes explorar Foundation durante cuatro semanas por £97 o conocer el recorrido completo de 24 semanas." : "If you would like to continue, you can explore the four-week Foundation stage for £97 or the complete 24-week journey.";
     const caveat = spanish ? "Los resultados dependen de tus circunstancias, participación y práctica constante." : "Outcomes depend on your circumstances, participation and consistent practice.";
     const foundationLabel = spanish ? "Continuar con Foundation (£97)" : "Continue with Foundation (£97)";

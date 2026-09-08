@@ -54,7 +54,7 @@ function initReferral() {
   application?.addEventListener("submit", (event) => {
     event.preventDefault();
     const values = Object.fromEntries(new FormData(application));
-    const recipient = application.dataset.affiliateApplicationEmail || "toslondon9@gmail.com";
+    const recipient = application.dataset.affiliateApplicationEmail || "tariq@unleashyourpowerwithtariq.com";
     const subject = encodeURIComponent("Unleash Your Power affiliate application");
     const body = encodeURIComponent(`First name: ${values.firstName || ""}\nSurname: ${values.surname || ""}\nEmail: ${values.email || ""}\nWhatsApp: ${values.whatsapp || ""}\nPlatform: ${values.platform || ""}\nOrganisation: ${values.organisation || ""}\nPlan: ${values.plan || ""}`);
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;

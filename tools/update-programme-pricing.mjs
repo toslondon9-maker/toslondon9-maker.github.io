@@ -8,7 +8,7 @@ const rscPath = path.join(siteRoot, "index.rsc");
 const cssPath = path.join(siteRoot, "assets", "index-Bgwsdhov.css");
 const legacyRanges = [["Weeks 5–9", "Weeks 5–11"], ["Weeks 10–18", "Weeks 12–18"]];
 
-const valueHtml = '<article class="programmeValueCard" data-offer="complete"><div><p class="eyebrow">BEST COMPLETE VALUE</p><h3>Complete 24-Week Programme</h3><p>Experience the full progressive journey with every stage working together.</p></div><div class="programmeCompletePrice"><span>Founding member investment</span><strong>£997</strong></div><div class="programmeSavings"><p>Four stages separately: <b>£1,188</b> <em>Save £191</em></p><p>Full combined MSRP: <b>£1,788</b> <em>Save £791</em></p></div><strong class="programmeDiscount">44% off full MSRP</strong><a class="primary full" href="mailto:toslondon9@gmail.com?subject=Complete%2024-Week%20Master%20Key%20Programme&amp;body=Hello%20Tariq%2C%0A%0AI%27m%20interested%20in%20the%20complete%2024-week%20programme%20at%20%C2%A3997.%0A%0AMy%20main%20goal%20is%3A%20">Choose the Complete Journey →</a></article>';
+const valueHtml = '<article class="programmeValueCard" data-offer="complete"><div><p class="eyebrow">BEST COMPLETE VALUE</p><h3>Complete 24-Week Programme</h3><p>Experience the full progressive journey with every stage working together.</p></div><div class="programmeCompletePrice"><span>Founding member investment</span><strong>£997</strong></div><div class="programmeSavings"><p>Four stages separately: <b>£1,188</b> <em>Save £191</em></p><p>Full combined MSRP: <b>£1,788</b> <em>Save £791</em></p></div><strong class="programmeDiscount">44% off full MSRP</strong><a class="primary full" href="mailto:tariq@unleashyourpowerwithtariq.com?subject=Complete%2024-Week%20Master%20Key%20Programme&amp;body=Hello%20Tariq%2C%0A%0AI%27m%20interested%20in%20the%20complete%2024-week%20programme%20at%20%C2%A3997.%0A%0AMy%20main%20goal%20is%3A%20">Choose the Complete Journey →</a></article>';
 
 const valueRsc = ["$", "article", null, { className: "programmeValueCard", "data-offer": "complete", children: [
   ["$", "div", null, { children: [
@@ -25,7 +25,7 @@ const valueRsc = ["$", "article", null, { className: "programmeValueCard", "data
     ["$", "p", null, { children: ["Full combined MSRP: ", ["$", "b", null, { children: "£1,788" }], " ", ["$", "em", null, { children: "Save £791" }]] }],
   ] }],
   ["$", "strong", null, { className: "programmeDiscount", children: "44% off full MSRP" }],
-  ["$", "a", null, { className: "primary full", href: "mailto:toslondon9@gmail.com?subject=Complete%2024-Week%20Master%20Key%20Programme&body=Hello%20Tariq%2C%0A%0AI%27m%20interested%20in%20the%20complete%2024-week%20programme%20at%20%C2%A3997.%0A%0AMy%20main%20goal%20is%3A%20", children: "Choose the Complete Journey →" }],
+  ["$", "a", null, { className: "primary full", href: "mailto:tariq@unleashyourpowerwithtariq.com?subject=Complete%2024-Week%20Master%20Key%20Programme&body=Hello%20Tariq%2C%0A%0AI%27m%20interested%20in%20the%20complete%2024-week%20programme%20at%20%C2%A3997.%0A%0AMy%20main%20goal%20is%3A%20", children: "Choose the Complete Journey →" }],
 ] }];
 
 const valueCss = `

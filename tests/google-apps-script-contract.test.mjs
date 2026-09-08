@@ -11,7 +11,7 @@ const lead = (overrides = {}) => ({
 });
 
 function receiver({ now = new Date("2026-09-04T10:00:00Z"), emailFailure = false, failAfter = null, sequenceMode, sequenceTestEmail } = {}) {
-  const rows = []; const propertyValues = { LEAD_CAPTURE_SHARED_SECRET: "shared-secret", LEAD_SHEET_ID: "sheet", LEAD_SHEET_NAME: "Leads", LEAD_NOTIFICATION_EMAIL: "toslondon9@gmail.com", LEAD_DUPLICATE_WINDOW_MINUTES: "60" };
+  const rows = []; const propertyValues = { LEAD_CAPTURE_SHARED_SECRET: "shared-secret", LEAD_SHEET_ID: "sheet", LEAD_SHEET_NAME: "Leads", LEAD_NOTIFICATION_EMAIL: "tariq@unleashyourpowerwithtariq.com", LEAD_DUPLICATE_WINDOW_MINUTES: "60" };
   if (sequenceMode !== undefined) propertyValues.LEAD_SEQUENCE_MODE = sequenceMode;
   if (sequenceTestEmail !== undefined) propertyValues.LEAD_SEQUENCE_TEST_EMAIL = sequenceTestEmail;
   const properties = new Map(Object.entries(propertyValues));
@@ -238,7 +238,7 @@ test("Day 7 sequence email includes the existing Foundation and complete-journey
   assert.equal(app.sentEmails.length, 8);
   const email = app.sentEmails[7];
   assert.match(email[2], /https:\/\/www\.paypal\.com\/ncp\/payment\/V5QYXZZS6KQE2/);
-  assert.match(email[2], /https:\/\/toslondon9-maker\.github\.io\/master-key-system\//);
+  assert.match(email[2], /https:\/\/unleashyourpowerwithtariq\.com\/master-key-system\//);
   assert.match(email[3].htmlBody, /V5QYXZZS6KQE2/);
   assert.match(email[3].htmlBody, /master-key-system/);
   assert.match(email[2], /circumstances, participation and consistent practice/);
