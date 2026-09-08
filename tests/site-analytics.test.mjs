@@ -53,6 +53,8 @@ test("GA does not load or emit events before analytics acceptance", () => {
   assert.equal(dom.scripts.length, 1);
   assert.equal(dom.scripts[0].srcValue, "https://www.googletagmanager.com/gtag/js?id=G-7TSSP2WYHJ");
   assert.equal(dom.window.calls.some(([kind, name]) => kind === "event" && name === "page_view"), true);
+  const consent = dom.window.calls.find(([kind, name]) => kind === "consent" && name === "default");
+  assert.deepEqual(consent[2], { analytics_storage: "granted", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
 });
 
 test("decline prevents tracking, withdrawal stops events, and re-accept restores it", () => {

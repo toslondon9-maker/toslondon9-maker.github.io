@@ -61,6 +61,12 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
     windowRef.dataLayer = windowRef.dataLayer || [];
     if (typeof windowRef.gtag !== "function") windowRef.gtag = function gtag() { windowRef.dataLayer.push(arguments); };
     windowRef.gtag("js", new Date());
+    windowRef.gtag("consent", "default", {
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
     windowRef.gtag("config", analyticsMeasurementId, {
       send_page_view: false,
       allow_google_signals: false,
@@ -77,7 +83,7 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
     choice = "accepted";
     writeChoice(storage, choice);
     if (loaded) {
-      windowRef.gtag?.("consent", "update", { analytics_storage: "granted" });
+      windowRef.gtag?.("consent", "update", { analytics_storage: "granted", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
       emit("page_view", { page_location: documentRef?.location?.pathname || "/" });
     } else load();
     updateBanner();
@@ -85,13 +91,13 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
   const declineAnalytics = () => {
     choice = "declined";
     writeChoice(storage, choice);
-    if (typeof windowRef?.gtag === "function") windowRef.gtag("consent", "update", { analytics_storage: "denied" });
+    if (typeof windowRef?.gtag === "function") windowRef.gtag("consent", "update", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
     updateBanner();
   };
   const withdraw = () => {
     choice = null;
     writeChoice(storage, null);
-    if (typeof windowRef?.gtag === "function") windowRef.gtag("consent", "update", { analytics_storage: "denied" });
+    if (typeof windowRef?.gtag === "function") windowRef.gtag("consent", "update", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
     updateBanner();
   };
 
