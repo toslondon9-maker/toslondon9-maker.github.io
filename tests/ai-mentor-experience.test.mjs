@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { hasTranslation, t } from "../content/translations.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 import { aiMentorChapters, mentorProfiles, purposes } from "../src/pages/ai-mentors.mjs";
-import { buildAiMentorPrompt } from "../assets/ai-mentors.mjs";
+import { CONCISE_RESPONSE_INSTRUCTION, buildAiMentorPrompt } from "../assets/ai-mentors.mjs";
 
 function mentorPage() {
   return routeRenderers[siteData.routes.aiMentors](siteData).body;
@@ -152,9 +152,18 @@ test("AI Mentor prompt generator supports every mentor, chapter and purpose", ()
         assert.match(prompt, new RegExp(mentor.name));
         assert.match(prompt, new RegExp(purpose.label));
         assert.match(prompt, new RegExp(chapter.exercise.slice(0, 28).replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")));
+        assert.match(prompt, /Respond in approximately 150–250 words/);
+        assert.match(prompt, /external ChatGPT account; the website cannot technically enforce the word count/);
       }
     }
   }
+});
+
+test("copied prompt exposes the concise-response target without changing chapter or language hooks", () => {
+  assert.equal(CONCISE_RESPONSE_INSTRUCTION, "Respond in approximately 150–250 words. Use short paragraphs or concise bullets. Answer directly, avoid repetition and end with one practical reflection or action.");
+  const html = mentorPage();
+  assert.match(html, /data-ai-mentor-chapter/);
+  assert.match(html, /data-i18n="aiMentor\.chat\.disclosure"/);
 });
 
 test("AI Mentor presentation uses accessible contrast and responsive chapter grids", () => {

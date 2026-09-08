@@ -116,7 +116,12 @@ test("uses trusted context, a fixed model, and Workers AI request shape", async 
   assert.equal(calls.length, 1);
   assert.equal(calls[0].model, "@cf/meta/llama-3.2-3b-instruct");
   const body = calls[0].input;
+  assert.equal(body.max_tokens, 320);
   assert.equal(body.messages[0].role, "system");
+  assert.match(body.messages[0].content, /Respond in approximately 150–250 words/);
+  assert.match(body.messages[0].content, /short paragraphs or concise bullets/);
+  assert.match(body.messages[0].content, /end with one practical reflection or action/);
+  assert.match(body.messages[0].content, /Do not invent citations, book titles, quotations or attributions/);
   assert.match(body.messages[0].content, /Helmar Rudolph Study Mentor/);
   assert.match(body.messages[0].content, /Week 3: Thoughts become Things/);
   assert.match(body.messages[0].content, /Untrusted conversation text/);

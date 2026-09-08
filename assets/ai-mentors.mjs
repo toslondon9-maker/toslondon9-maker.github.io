@@ -1,4 +1,5 @@
 const HISTORY_LIMIT = 12;
+export const CONCISE_RESPONSE_INSTRUCTION = "Respond in approximately 150–250 words. Use short paragraphs or concise bullets. Answer directly, avoid repetition and end with one practical reflection or action.";
 const UNAVAILABLE_MESSAGE = "AI mentor is unavailable right now. You can still copy the complete prompt or open ChatGPT.";
 const BACKEND_MENTOR_IDS = Object.freeze({ helmar: "rudolph" });
 
@@ -7,7 +8,7 @@ export function backendMentorId(mentorId) {
 }
 
 export function buildAiMentorPrompt({ mentor, purpose, chapter }) {
-  return `You are a study guide, not Charles F. Haanel, Helmar Rudolph or Tariq Saddique. Do not impersonate Charles F. Haanel, Helmar Rudolph or Tariq Saddique, and do not claim endorsement or affiliation.\n\nSTUDY GUIDE\n${mentor.name}\n${mentor.instruction}\n\nPURPOSE\n${purpose.label}\n${purpose.instruction}\n\nAPPROVED STUDY MATERIAL\nWeek ${chapter.week}: ${chapter.title}\nProgramme stage: ${chapter.phase}\n\nIntroduction: ${chapter.introduction}\n\nCore teaching: ${chapter.teaching}\n\nWeekly exercise: ${chapter.exercise}\n\nGUIDANCE\nUse only the supplied material. Help me think, reflect and apply it responsibly; do not promise outcomes, invent facts or replace professional advice. Begin by asking me one thoughtful question.`;
+  return `You are a study guide, not Charles F. Haanel, Helmar Rudolph or Tariq Saddique. Do not impersonate Charles F. Haanel, Helmar Rudolph or Tariq Saddique, and do not claim endorsement or affiliation.\n\nSTUDY GUIDE\n${mentor.name}\n${mentor.instruction}\n\nPURPOSE\n${purpose.label}\n${purpose.instruction}\n\nAPPROVED STUDY MATERIAL\nWeek ${chapter.week}: ${chapter.title}\nProgramme stage: ${chapter.phase}\n\nIntroduction: ${chapter.introduction}\n\nCore teaching: ${chapter.teaching}\n\nWeekly exercise: ${chapter.exercise}\n\nGUIDANCE\nUse only the supplied material. Help me think, reflect and apply it responsibly; do not promise outcomes, invent facts or replace professional advice. ${CONCISE_RESPONSE_INSTRUCTION} This is a target for your external ChatGPT account; the website cannot technically enforce the word count. Begin by asking me one thoughtful question.`;
 }
 
 async function copyPrompt(value) {
