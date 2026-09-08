@@ -1,15 +1,15 @@
-const ALLOWED_MENTORS = Object.freeze({
+export const ALLOWED_MENTORS = Object.freeze({
   haanel: {
     name: "Charles Haanel Study Mentor",
-    guidance: "Use a calm, clear study-guide voice. Explain ideas without presenting yourself as Charles Haanel.",
+    guidance: "Focus on careful study of the original Master Key System ideas, their language and the selected chapter's principles. Separate historical source material from your own modern explanation. Use a calm, analytical study-guide voice.",
   },
   rudolph: {
     name: "Helmar Rudolph Study Mentor",
-    guidance: "Use a practical, reflective study-guide voice. Do not present yourself as Helmar Rudolph.",
+    guidance: "Focus on modern study, interpretation and practical application of the selected principle. Offer grounded ways to observe the idea in present-day life while clearly labelling interpretation as interpretation. Use a practical, reflective study-guide voice.",
   },
   tariq: {
     name: "Tariq Coaching Mentor",
-    guidance: "Use a supportive coaching-study voice. Do not present yourself as Tariq Saddique.",
+    guidance: "Focus on coaching-style reflection, accountability and one realistic next action connected to the selected chapter. Ask thoughtful questions and support the learner's own judgement without presenting yourself as a personal coach or as Tariq Saddique.",
   },
 });
 
@@ -42,6 +42,7 @@ const CHAPTERS = Object.freeze([
 
 export const MAX_MESSAGES = 12;
 export const MAX_REQUEST_BYTES = 80 * 1024;
+export const AI_TIMEOUT_MS = 15000;
 const MAX_MESSAGE_CHARACTERS = 1500;
 const FIXED_MODEL = "@cf/meta/llama-3.2-3b-instruct";
 
@@ -141,7 +142,7 @@ function extractReply(payload) {
   return null;
 }
 
-export function createWorker({ fetchImpl = fetch } = {}) {
+export function createWorker({ fetchImpl = fetch, aiTimeoutMs = AI_TIMEOUT_MS } = {}) {
   return {
     async fetch(request, env) {
       const requestOrigin = request.headers.get("Origin");
@@ -161,15 +162,26 @@ export function createWorker({ fetchImpl = fetch } = {}) {
       if (!env?.AI || typeof env.AI.run !== "function") return json({ error: "Unable to process mentor request." }, 500, requestOrigin);
 
       try {
-        const result = await env.AI.run(FIXED_MODEL, {
+        const aiPromise = env.AI.run(FIXED_MODEL, {
           messages: [
             { role: "system", content: systemPrompt(payload) },
             ...payload.messages.map(({ role, content }) => ({ role, content: content.trim() })),
           ],
         });
+        let timeoutId;
+        const timeoutPromise = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(Object.assign(new Error("AI request timed out"), { code: "AI_TIMEOUT" })), aiTimeoutMs);
+        });
+        let result;
+        try {
+          result = await Promise.race([aiPromise, timeoutPromise]);
+        } finally {
+          clearTimeout(timeoutId);
+        }
         const reply = extractReply(result);
         return reply ? json({ reply }, 200, requestOrigin) : json({ error: "Unable to process mentor request." }, 500, requestOrigin);
-      } catch {
+      } catch (error) {
+        if (error?.code === "AI_TIMEOUT") return json({ error: "AI mentor timed out." }, 504, requestOrigin);
         return json({ error: "Unable to process mentor request." }, 500, requestOrigin);
       }
     },

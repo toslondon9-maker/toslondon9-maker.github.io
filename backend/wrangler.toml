@@ -4,7 +4,7 @@ compatibility_date = "2026-08-31"
 
 # Public, comma-separated browser origins. Set this for each deployed environment.
 [vars]
-ALLOWED_ORIGIN = "https://toslondon9-maker.github.io"
+ALLOWED_ORIGIN = "https://toslondon9-maker.github.io,https://unleashyourpowerwithtariq.com,https://www.unleashyourpowerwithtariq.com"
 
 [ai]
 binding = "AI"
