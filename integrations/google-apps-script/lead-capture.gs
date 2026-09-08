@@ -1,12 +1,12 @@
 const LEAD_COLUMNS = ["Submission date/time", "Submission ID", "First name", "Surname", "Email", "WhatsApp", "Main goal", "Current difficulty", "WhatsApp consent", "Email marketing consent", "Source page", "Language", "Lead status", "Notes", "Notification status", "Remaining email quota", "Dedupe key", "Welcome email status", "Welcome email sent at", "Welcome email error", "Sequence day sent", "Sequence email sent at", "Sequence email status", "Sequence email error", "Affiliate code"];
 const LEAD_COLUMN_INDEX = { submissionId: 1, email: 4, whatsapp: 5, notification: 14, dedupe: 16, welcomeStatus: 17, welcomeSentAt: 18, welcomeError: 19, sequenceDay: 20, sequenceSentAt: 21, sequenceStatus: 22, sequenceError: 23 };
 const SEQUENCE_LESSONS = [
-  { day: 2, title: "Take Back Your Attention", route: "/start-free/day-2-take-back-your-attention/" },
-  { day: 3, title: "Recognise What Keeps Repeating", route: "/start-free/day-3-recognise-what-keeps-repeating/" },
-  { day: 4, title: "Give Your Mind a Direction", route: "/start-free/day-4-give-your-mind-a-direction/" },
-  { day: 5, title: "Become Someone You Can Rely On", route: "/start-free/day-5-become-someone-you-can-rely-on/" },
-  { day: 6, title: "Change From the Inside Out", route: "/start-free/day-6-change-from-the-inside-out/" },
-  { day: 7, title: "Make It Part of How You Live", route: "/start-free/day-7-make-it-part-of-how-you-live/" },
+  { day: 2, title: "Take Back Your Attention", titleEs: "Recupera tu atención", message: "Notice what most often captures your attention without permission, then return gently to what you chose to focus on.", messageEs: "Fíjate en qué capta tu atención sin que lo decidas y vuelve con suavidad a aquello en lo que elegiste enfocarte.", route: "/start-free/day-2-take-back-your-attention/" },
+  { day: 3, title: "Recognise What Keeps Repeating", titleEs: "Reconoce lo que se repite", message: "When a familiar situation appears, look for the first thought and the response that usually follows it.", messageEs: "Cuando aparezca una situación conocida, observa el primer pensamiento y la respuesta que suele venir después.", route: "/start-free/day-3-recognise-what-keeps-repeating/" },
+  { day: 4, title: "Give Your Mind a Direction", titleEs: "Dale una dirección a tu mente", message: "Choose one clear direction for your attention and write it in a sentence you can return to today.", messageEs: "Elige una dirección clara para tu atención y escríbela en una frase a la que puedas volver hoy.", route: "/start-free/day-4-give-your-mind-a-direction/" },
+  { day: 5, title: "Become Someone You Can Rely On", titleEs: "Conviértete en alguien en quien puedas confiar", message: "Choose one small commitment you can keep today; a promise you follow through on helps build self-trust.", messageEs: "Elige hoy un pequeño compromiso que puedas cumplir; una promesa que mantienes ayuda a fortalecer la confianza en ti.", route: "/start-free/day-5-become-someone-you-can-rely-on/" },
+  { day: 6, title: "Change From the Inside Out", titleEs: "Cambia de dentro hacia fuera", message: "Notice the meaning beneath one response today, then choose a useful direction and express it through one action.", messageEs: "Observa hoy el significado que hay detrás de una respuesta, elige una dirección útil y exprésala con una acción.", route: "/start-free/day-6-change-from-the-inside-out/" },
+  { day: 7, title: "Make It Part of How You Live", titleEs: "Haz que forme parte de tu vida", message: "Look back across the week, notice which practice you would willingly repeat and choose a realistic time to return to it.", messageEs: "Repasa la semana, observa qué práctica repetirías de buen grado y elige un momento realista para retomarla.", route: "/start-free/day-7-make-it-part-of-how-you-live/" },
 ];
 const LEAD_LIMITS = { name: 80, email: 254, whatsapp: 32, message: 1000 };
 const LEAD_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -53,12 +53,37 @@ function dayNumber(value) {
   const parts = formatted.split("-").map(Number);
   return Date.UTC(parts[0], parts[1] - 1, parts[2]) / 86400000;
 }
-function sequenceEmail(firstName, lesson) {
+function sequenceEmail(firstName, lesson, language) {
   const name = escapeHtml(firstName);
   const url = "https://toslondon9-maker.github.io" + lesson.route;
-  const body = "Hi " + firstName + ",\n\nDay " + lesson.day + " of your Free 7-Day Experience is ready: " + lesson.title + ".\n\nGive yourself a few quiet minutes today. Read the lesson, complete the exercise and notice what comes up.\n\nStart Day " + lesson.day + ":\n" + url + "\n\nWith you on the journey,\nTariq Saddique\nUnleash Your Power";
-  const html = "<p>Hi " + name + ",</p><p>Day " + lesson.day + " of your Free 7-Day Experience is ready: <strong>" + escapeHtml(lesson.title) + "</strong>.</p><p>Give yourself a few quiet minutes today. Read the lesson, complete the exercise and notice what comes up.</p><p><a href=\"" + url + "\">Start Day " + lesson.day + "</a></p><p>With you on the journey,<br>Tariq Saddique<br>Unleash Your Power</p>";
-  return { body: body, html: html };
+  const spanish = language === "es";
+  const title = spanish ? lesson.titleEs : lesson.title;
+  const message = spanish ? lesson.messageEs : lesson.message;
+  const dayLabel = spanish ? "Día " + lesson.day + " de 7" : "Day " + lesson.day + " of 7";
+  const ready = spanish ? "Tu experiencia gratuita de 7 días está lista" : "your Free 7-Day Experience is ready";
+  const intro = spanish ? ready + ": " + title : dayLabel + " of " + ready + ": " + title;
+  const quiet = spanish ? "Regálate unos minutos tranquilos hoy. Lee la lección, completa el ejercicio y observa qué aparece." : "Give yourself a few quiet minutes today. Read the lesson, complete the exercise and notice what comes up.";
+  const start = spanish ? "Empezar el día " + lesson.day : "Start Day " + lesson.day;
+  const signoff = spanish ? "Te acompaño en el camino" : "With you on the journey";
+  let body = spanish
+    ? "Hola " + firstName + ",\n\n" + intro + ".\n\n" + message + "\n\n" + quiet + "\n\n" + start + ":\n" + url
+    : "Hi " + firstName + ",\n\n" + intro + ".\n\n" + message + "\n\n" + quiet + "\n\n" + start + ":\n" + url;
+  let html = spanish
+    ? "<p>Hola " + name + ",</p><p>" + escapeHtml(intro) + ".</p><p>" + escapeHtml(message) + "</p><p>" + quiet + "</p><p><a href=\"" + url + "\">" + start + "</a></p>"
+    : "<p>Hi " + name + ",</p><p>" + escapeHtml(intro) + ".</p><p>" + escapeHtml(message) + "</p><p>" + quiet + "</p><p><a href=\"" + url + "\">" + start + "</a></p>";
+  if (lesson.day === 7) {
+    const foundationUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
+    const journeyUrl = "https://toslondon9-maker.github.io/master-key-system/";
+    const next = spanish ? "Si quieres continuar, puedes explorar Foundation durante cuatro semanas por £97 o conocer el recorrido completo de 24 semanas." : "If you would like to continue, you can explore the four-week Foundation stage for £97 or the complete 24-week journey.";
+    const caveat = spanish ? "Los resultados dependen de tus circunstancias, participación y práctica constante." : "Outcomes depend on your circumstances, participation and consistent practice.";
+    const foundationLabel = spanish ? "Continuar con Foundation (£97)" : "Continue with Foundation (£97)";
+    const journeyLabel = spanish ? "Explorar el recorrido completo de 24 semanas" : "Explore the complete 24-week journey";
+    body += "\n\n" + next + "\n" + foundationLabel + ":\n" + foundationUrl + "\n" + journeyLabel + ":\n" + journeyUrl + "\n\n" + caveat;
+    html += "<p>" + next + "</p><p><a href=\"" + foundationUrl + "\">" + foundationLabel + "</a><br><a href=\"" + journeyUrl + "\">" + journeyLabel + "</a></p><p>" + caveat + "</p>";
+  }
+  body += "\n\n" + signoff + ",\nTariq Saddique\nUnleash Your Power";
+  html += "<p>" + signoff + ",<br>Tariq Saddique<br>Unleash Your Power</p>";
+  return { body: body, html: html, subject: dayLabel + ": " + title };
 }
 function sendDueSequenceEmails(now) {
   const properties = PropertiesService.getScriptProperties();
@@ -80,8 +105,8 @@ function sendDueSequenceEmails(now) {
       if (!next || dayNumber(current) - dayNumber(row[0]) < next.day - 1) return;
       const rowNumber = offset + 2;
       try {
-        const email = sequenceEmail(row[2], next);
-        MailApp.sendEmail(liveMode ? row[LEAD_COLUMN_INDEX.email] : testRecipient, "Day " + next.day + " of 7: " + next.title, email.body, { htmlBody: email.html });
+        const email = sequenceEmail(row[2], next, row[11]);
+        MailApp.sendEmail(liveMode ? row[LEAD_COLUMN_INDEX.email] : testRecipient, email.subject, email.body, { htmlBody: email.html });
         sheet.getRange(rowNumber, LEAD_COLUMN_INDEX.sequenceDay + 1, 1, 4).setValues([[next.day, new Date().toISOString(), "sent", ""]]);
       } catch (_) {
         sheet.getRange(rowNumber, LEAD_COLUMN_INDEX.sequenceDay + 1, 1, 4).setValues([[sentDay, "", "failed", "Email delivery failed"]]);

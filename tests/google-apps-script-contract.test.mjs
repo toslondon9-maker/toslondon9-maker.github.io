@@ -209,3 +209,47 @@ test("live mode retains normal sequence delivery", () => {
   assert.equal(app.sentEmails[2][0], "ada@example.test");
   assert.equal(app.rows[1][20], 2);
 });
+
+test("sequence emails use every canonical Day 2 through Day 7 route and subject", () => {
+  const app = receiver({ sequenceMode: "live" });
+  app.submit(lead());
+  const expected = [
+    [2, "Take Back Your Attention", "/start-free/day-2-take-back-your-attention/"],
+    [3, "Recognise What Keeps Repeating", "/start-free/day-3-recognise-what-keeps-repeating/"],
+    [4, "Give Your Mind a Direction", "/start-free/day-4-give-your-mind-a-direction/"],
+    [5, "Become Someone You Can Rely On", "/start-free/day-5-become-someone-you-can-rely-on/"],
+    [6, "Change From the Inside Out", "/start-free/day-6-change-from-the-inside-out/"],
+    [7, "Make It Part of How You Live", "/start-free/day-7-make-it-part-of-how-you-live/"],
+  ];
+  expected.forEach(([day, title, route], index) => {
+    app.runSequence(new Date(`2026-09-${String(4 + day).padStart(2, "0")}T09:00:00+02:00`));
+    const email = app.sentEmails[index + 2];
+    assert.equal(email[1], `Day ${day} of 7: ${title}`);
+    assert.match(email[2], new RegExp(route.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.match(email[3].htmlBody, new RegExp(route.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  });
+  assert.equal(app.rows[1][20], 7);
+});
+
+test("Day 7 sequence email includes the existing Foundation and complete-journey links", () => {
+  const app = receiver({ sequenceMode: "live" });
+  app.submit(lead());
+  for (let day = 2; day <= 7; day += 1) app.runSequence(new Date(`2026-09-${String(3 + day).padStart(2, "0")}T09:00:00+02:00`));
+  assert.equal(app.sentEmails.length, 8);
+  const email = app.sentEmails[7];
+  assert.match(email[2], /https:\/\/www\.paypal\.com\/ncp\/payment\/V5QYXZZS6KQE2/);
+  assert.match(email[2], /https:\/\/toslondon9-maker\.github\.io\/master-key-system\//);
+  assert.match(email[3].htmlBody, /V5QYXZZS6KQE2/);
+  assert.match(email[3].htmlBody, /master-key-system/);
+  assert.match(email[2], /circumstances, participation and consistent practice/);
+});
+
+test("Spanish sequence email uses the existing Spanish lesson title and supportive copy", () => {
+  const app = receiver({ sequenceMode: "live" });
+  app.submit(lead({ language: "es" }));
+  app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
+  const email = app.sentEmails[2];
+  assert.equal(email[1], "Día 2 de 7: Recupera tu atención");
+  assert.match(email[2], /Tu experiencia gratuita de 7 días está lista/);
+  assert.match(email[3].htmlBody, /Recupera tu atención/);
+});
