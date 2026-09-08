@@ -2,6 +2,8 @@
 
 Do not deploy this receiver until the owner has created a private Google Sheet. Add the script to a private, owner-controlled Apps Script project; on its first accepted registration it creates the documented columns, including explicit WhatsApp and email-marketing consent plus a non-secret dedupe key. Set these Script Properties: `LEAD_SHEET_ID`, `LEAD_SHEET_NAME`, `LEAD_NOTIFICATION_EMAIL`, `LEAD_CAPTURE_SHARED_SECRET`, and `LEAD_DUPLICATE_WINDOW_MINUTES`. Set `LEAD_NOTIFICATION_EMAIL` to `tariq@unleashyourpowerwithtariq.com`.
 
+MailApp sends from the Google account that owns the Apps Script. If the sender identity itself must change to the Workspace account, transfer the private Apps Script project to that account and redeploy it there; do not change secrets or the Sheet ID.
+
 Deploy it as a Web App that executes as the owner and copy only its production `/exec` URL to the Worker secret configuration. The Worker receives `GOOGLE_APPS_SCRIPT_EXEC_URL` and `LEAD_CAPTURE_SHARED_SECRET` as secrets; its allowed production origin is `https://toslondon9-maker.github.io`. Configure `LEAD_DUPLICATE_WINDOW_MINUTES` as a positive whole number. Within that window, a repeat normalised email-and-WhatsApp pair returns the existing successful result without adding a second row; the same submission ID is always idempotent.
 
 Before any Worker deployment, create the account's Rate Limiting binding. `backend/lead-capture/wrangler.jsonc` intentionally contains no namespace identifier and therefore fails closed while the binding is absent. Add the owner-created binding locally during Cloudflare setup; do not commit an account identifier or a replacement placeholder.
