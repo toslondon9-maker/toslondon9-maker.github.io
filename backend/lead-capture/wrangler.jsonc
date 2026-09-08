@@ -2,7 +2,7 @@
   "name": "unleash-your-power-leads",
   "main": "src/index.mjs",
   "compatibility_date": "2026-09-04",
-  "vars": { "ALLOWED_ORIGINS": "https://toslondon9-maker.github.io" },
+  "vars": { "ALLOWED_ORIGINS": "https://toslondon9-maker.github.io,https://unleashyourpowerwithtariq.com,https://www.unleashyourpowerwithtariq.com" },
   "observability": {
     "logs": {
       "enabled": true,

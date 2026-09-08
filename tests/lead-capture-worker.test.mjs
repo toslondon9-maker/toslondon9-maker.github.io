@@ -150,3 +150,19 @@ test("production Worker configuration preserves the required rate-limit binding"
   assert.match(config, /"limit"\s*:\s*5/);
   assert.match(config, /"period"\s*:\s*60/);
 });
+
+test("production Worker configuration allowlists both custom-domain variants and the legacy Pages origin", () => {
+  const config = readFileSync(new URL("../backend/lead-capture/wrangler.jsonc", import.meta.url), "utf8");
+  for (const origin of ["https://toslondon9-maker.github.io", "https://unleashyourpowerwithtariq.com", "https://www.unleashyourpowerwithtariq.com"]) {
+    assert.match(config, new RegExp(origin.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+});
+
+test("Worker accepts CORS preflight from each production origin", async () => {
+  const origins = [origin, "https://unleashyourpowerwithtariq.com", "https://www.unleashyourpowerwithtariq.com"];
+  for (const allowed of origins) {
+    const response = await app.fetch(new Request("https://worker.example/lead", { method: "OPTIONS", headers: { origin: allowed } }), { ...env, ALLOWED_ORIGINS: origins.join(",") });
+    assert.equal(response.status, 204);
+    assert.equal(response.headers.get("Access-Control-Allow-Origin"), allowed);
+  }
+});

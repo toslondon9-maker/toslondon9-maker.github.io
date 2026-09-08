@@ -58,6 +58,8 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   const form = document.querySelector("[data-lead-capture-form]"); if (!form) return;
   const applyLanguage = (language) => localizeForm(form, language, document);
   const endpoint = form.dataset.leadEndpoint;
+  const marketing = form.querySelector('[name="emailMarketing"]');
+  if (marketing) marketing.checked = false;
   document.addEventListener("uyp:language-change", (event) => applyLanguage(event.detail?.language));
   const submitButton = form.querySelector("[data-lead-submit]");
   if (!canSubmitLeadForm(endpoint)) { setState(form, "unavailable"); submitButton.disabled = true; applyLanguage(document.documentElement.lang); return; }

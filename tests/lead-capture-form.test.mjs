@@ -12,19 +12,21 @@ async function createRuntimeHarness(language) {
   const email = createControl("email", "ada@example.test");
   const whatsapp = createControl("whatsapp", "+34611223345");
   const consent = createControl("consent", "on", { type: "checkbox", checked: true });
+  const marketing = createControl("emailMarketing", "on", { type: "checkbox", checked: true });
   const required = [firstName, surname, email, whatsapp, goal, difficulty, consent];
   const labels = ["first", "last", "email", "whatsapp", "goal", "difficulty", "consent", "marketing"].map((leadLabel) => ({ dataset: { leadLabel }, textContent: "" }));
   const placeholders = [firstName, surname, email, whatsapp, goal, difficulty].map((input) => ({ ...input, dataset: { leadPlaceholder: input.name }, placeholder: "" }));
   const status = { textContent: "", focus() { this.focused += 1; }, focused: 0 };
   const button = { disabled: true, type: "button", textContent: "" };
   const listeners = new Map();
-  const controls = new Map([["goal", goal], ["difficulty", difficulty], ["firstName", firstName], ["surname", surname], ["email", email], ["whatsapp", whatsapp], ["consent", consent]]);
+  const controls = new Map([["goal", goal], ["difficulty", difficulty], ["firstName", firstName], ["surname", surname], ["email", email], ["whatsapp", whatsapp], ["consent", consent], ["emailMarketing", marketing]]);
   const form = {
     dataset: { leadEndpoint: "https://leads.example.test/lead", leadState: "", leadMessage: "" },
     addEventListener(type, listener) { listeners.set(type, listener); },
     querySelector(selector) {
       if (selector === "[data-lead-capture-status]") return status;
       if (selector === "[data-lead-submit]") return button;
+      if (selector === '[name="emailMarketing"]') return controls.get("emailMarketing");
       if (selector.startsWith("[name=")) return controls.get(selector.slice(6, -1)) ?? null;
       return null;
     },
@@ -71,6 +73,7 @@ async function createRuntimeHarness(language) {
   return {
     button,
     difficulty,
+    marketing,
     fetchCalls: () => fetchCalls,
     form,
     goal,
@@ -111,6 +114,15 @@ test("the unconfigured form fails closed with a visible WhatsApp fallback", () =
   assert.equal(canSubmitLeadForm(null), false);
   assert.match(formMessages.en.unavailable, /WhatsApp/i);
   assert.match(formMessages.es.unavailable, /WhatsApp/i);
+});
+
+test("optional email marketing is reset to unchecked when the form initializes", async () => {
+  const runtime = await createRuntimeHarness("en");
+  try {
+    assert.equal(runtime.marketing.checked, false);
+  } finally {
+    runtime.restore();
+  }
 });
 
 test("form messages provide English and Spanish safe generic failures", () => {
