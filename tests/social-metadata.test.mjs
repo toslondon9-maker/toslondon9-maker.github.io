@@ -44,6 +44,14 @@ test("public generated HTML uses only the custom-domain SEO base", () => {
   assert.doesNotMatch(notFound, oldDomainPattern, "404.html");
 });
 
+test("Start Free generated SEO metadata uses the custom-domain route", () => {
+  const html = readFileSync(new URL("../start-free/index.html", import.meta.url), "utf8");
+  assert.match(html, /<link rel="canonical" href="https:\/\/unleashyourpowerwithtariq\.com\/start-free\/">/);
+  assert.match(html, /<meta property="og:url" content="https:\/\/unleashyourpowerwithtariq\.com\/start-free\/">/);
+  assert.match(html, /<script type="application\/ld\+json">[\s\S]*https:\/\/unleashyourpowerwithtariq\.com\/start-free\//);
+  assert.doesNotMatch(html, /toslondon9-maker\.github\.io/);
+});
+
 
 test("key conversion pages use relevant social preview artwork", () => {
   const expected = new Map([
