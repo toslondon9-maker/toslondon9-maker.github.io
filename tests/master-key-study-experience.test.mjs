@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
+import { masterKeyCurriculumPage } from "../src/pages/master-key-curriculum.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 
 function curriculumPage() {
@@ -14,6 +15,8 @@ test("Master Key page provides the premium 24-chapter study shell around the pre
 
   assert.match(html, /<h1>24 Weeks to Master the Way You Use Your Mind<\/h1>/);
   assert.match(html, /data-curriculum-status[^>]*>Chapter 1 of 24 · FOUNDATION</);
+  assert.equal((html.match(/class="curriculumProtectionNotice"/g) ?? []).length, 25);
+  assert.match(html, /IMPORTANT[\s\S]*?This is a short chapter overview—not the full weekly study\.[\s\S]*?Full teaching, exercises and guided application are available only to enrolled members\./);
   assert.equal((navigator.match(/data-curriculum-chapter-link/g) ?? []).length, 24);
   assert.equal((html.match(/data-curriculum-chapter=/g) ?? []).length, 24);
   assert.equal((html.match(/class="curriculumPractice"/g) ?? []).length, 24);
@@ -46,6 +49,18 @@ test("Master Key page provides the premium 24-chapter study shell around the pre
   for (const [title, range] of [["FOUNDATION", "Chapters 1–4"], ["VISUALISATION", "Chapters 5–11"], ["CONCENTRATION", "Chapters 12–18"], ["CONTEMPLATION & MASTERY", "Chapters 19–24"]]) {
     assert.match(html, new RegExp(`${title}[\\s\\S]*?${range}`));
   }
+});
+
+test("Master Key protection notice is shared, translated and compactly styled", () => {
+  const english = curriculumPage();
+  const spanish = masterKeyCurriculumPage(siteData, "es").body;
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+
+  assert.equal((english.match(/data-i18n="curriculum\.protection\.label"/g) ?? []).length, 25);
+  assert.match(spanish, />IMPORTANTE<\/p>[\s\S]*?Este es un breve resumen del capítulo, no el estudio semanal completo\./);
+  assert.match(spanish, /La enseñanza completa, los ejercicios y la aplicación guiada solo están disponibles para miembros inscritos\./);
+  assert.match(css, /\.curriculumProtectionNotice\s*\{[\s\S]*?border-left:\s*3px solid[^}]*background:\s*#fffdf8/s);
+  assert.match(css, /\.curriculumProtectionNotice__label\s*\{[\s\S]*?color:\s*#8a6220/s);
 });
 
 test("Master Key page keeps the curriculum source file intact while exposing selected chapter controls", () => {

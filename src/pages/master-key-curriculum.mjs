@@ -44,6 +44,10 @@ function phaseFor(index) {
   return phases.find((phase) => index >= phase.start && index < phase.end);
 }
 
+function chapterProtectionNotice(language = "en") {
+  return `<aside class="curriculumProtectionNotice" role="note"><p class="curriculumProtectionNotice__label" data-i18n="curriculum.protection.label">${t("curriculum.protection.label", language)}</p><p data-i18n="curriculum.protection.body">${t("curriculum.protection.body", language)}</p><p data-i18n="curriculum.protection.detail">${t("curriculum.protection.detail", language)}</p></aside>`;
+}
+
 function chapterNavigation(index) {
   const previous = index > 0 ? `<a href="#week-${index}" class="curriculumWeekNav__previous" data-curriculum-chapter-link="${index}">← Previous Chapter</a>` : "";
   const next = index < 23 ? `<a href="#week-${index + 2}" class="curriculumWeekNav__next" data-curriculum-chapter-link="${index + 2}">Next Chapter →</a>` : "";
@@ -71,7 +75,7 @@ function chapterSectionLinks(number) {
   return `<nav class="curriculumSectionLinks" aria-label="Chapter ${number} study sections"><a href="#week-${number}-introduction" data-curriculum-section-link="introduction">Introduction</a><a href="#week-${number}-content" data-curriculum-section-link="content">Core lesson</a><a href="#week-${number}-exercise" data-curriculum-section-link="exercise">Weekly exercise</a></nav>`;
 }
 
-function renderChapters() {
+function renderChapters(language = "en") {
   if (chapterGridStart < 0 || chapterGridEnd < 0) throw new Error("Master Key curriculum chapters could not be located.");
   const source = curriculum.slice(chapterGridStart + chapterGridOpening.length, chapterGridEnd);
   const fragments = source.split("</details><details>");
@@ -84,7 +88,7 @@ function renderChapters() {
     const chapter = `${opening}${index === fragments.length - 1 ? "" : "</details>"}`
       .replace("<details>", `<details id="week-${number}" data-curriculum-chapter="${number}" data-curriculum-stage="${phase.title}"${index === 0 ? " open" : ""}>`)
       .replace("<summary>", `<summary><span class="curriculumChapterSummary__number">CHAPTER ${String(number).padStart(2, "0")}</span>`)
-      .replace("</summary>", `<span class="curriculumChapterSummary__stage">${phase.title}</span></summary>`)
+      .replace("</summary>", `<span class="curriculumChapterSummary__stage">${phase.title}</span></summary>${chapterProtectionNotice(language)}`)
       .replace('<div class="chapterBody">', '<article class="curriculumReadingCard"><div class="chapterBody">')
       .replace("AI MASTERY COACH", "AI MASTERY PROMPT")
       .replace("Paste this into ChatGPT. Your AI coach will test, challenge and guide you one step at a time—without giving away the answers too early.", "Copy this guided prompt into ChatGPT to explore this week's Master Key lesson more deeply.")
@@ -114,13 +118,13 @@ function renderEndResult() {
   return `<aside class="curriculumEndResult" aria-label="24-week end result"><p class="eyebrow">THE END RESULT</p><h2>Carry the practice forward.</h2><p>The final chapter is not an ending; it is an invitation to keep studying, reflecting and applying what you have practised.</p><div class="curriculumEndResult__quotes"><blockquote>“Thought is spiritual energy.” <cite>— Charles F. Haanel, <em>The Master Key System</em>, Part Four</cite></blockquote><blockquote>“Thought is the seed; it results in action, and action results in form.” <cite>— Charles F. Haanel, <em>The Master Key System</em>, Part Nineteen</cite></blockquote></div><a class="button--primary" href="/downloads/mks-end-result.pdf" download>Download the 24-Week End Result</a></aside>`;
 }
 
-function renderCurriculum() {
-  const chapters = renderChapters();
+function renderCurriculum(language = "en") {
+  const chapters = renderChapters(language);
   const groupedChapters = phases.map((phase) => (
     `<section class="curriculumPhase" aria-labelledby="${phase.title.toLowerCase().replaceAll(/[^a-z]+/g, "-")}"><figure class="curriculumPhase__visual"><img src="${phase.image}" alt="${phase.alt}" width="1440" height="810" loading="lazy" decoding="async"></figure><header><p>${phase.range}</p><h2 id="${phase.title.toLowerCase().replaceAll(/[^a-z]+/g, "-")}">${phase.title}</h2></header><div class="chapterGrid">${chapters.slice(phase.start, phase.end).join("")}</div></section>`
   )).join("");
   const notes = curriculum.slice(chapterGridEnd + "</div>".length, -"</section>".length);
-  return `<section class="curriculum section" id="curriculum"><header class="curriculumPage__intro"><figure class="curriculumPage__heroVisual"><img src="/images/master-key-visuals/master-key-24-week-hero.webp" alt="The Master Key System — 24 Weeks to Master the Way You Use Your Mind" width="1440" height="810" fetchpriority="high" decoding="async"></figure><p class="eyebrow">THE MASTER KEY SYSTEM</p><h1>24 Weeks to Master the Way You Use Your Mind</h1><p class="curriculumPage__status" data-curriculum-status aria-live="polite">Chapter 1 of 24 · FOUNDATION</p><p class="curriculumPage__lead">The Master Key System is not simply a book to read. It is a 24-week system of study, reflection and daily practice designed to help you develop greater control of your attention, thinking and actions.</p><p>Move through one chapter each week. Study the principle, practise the exercise each day and allow the learning to compound through consistent application.</p><div class="curriculumPage__introActions"><a class="button--primary" href="${canonicalSiteData.routes.startFree}">START FREE FOR 7 DAYS</a><a class="button--secondary" href="${canonicalSiteData.routes.getTheBook}">GET THE MKS BOOK</a><a class="button--text" href="${canonicalSiteData.routes.aiMentors}">USE THE FREE AI MENTOR</a></div></header><div class="curriculumJourneyNote"><strong>Your transformation is built one week at a time.</strong><span>Study the chapter. Practise the exercise. Apply the principle. Then move forward.</span></div>${renderStudyNavigator()}${groupedChapters}${notes}<aside class="curriculumLineageLink"><span>Explore the study tradition behind this journey.</span><a class="button--text" href="${canonicalSiteData.routes.mksLineage}">Explore the MKS Lineage</a></aside>${renderEndResult()}</section>`;
+  return `<section class="curriculum section" id="curriculum"><header class="curriculumPage__intro"><figure class="curriculumPage__heroVisual"><img src="/images/master-key-visuals/master-key-24-week-hero.webp" alt="The Master Key System — 24 Weeks to Master the Way You Use Your Mind" width="1440" height="810" fetchpriority="high" decoding="async"></figure><p class="eyebrow">THE MASTER KEY SYSTEM</p><h1>24 Weeks to Master the Way You Use Your Mind</h1><p class="curriculumPage__status" data-curriculum-status aria-live="polite">Chapter 1 of 24 · FOUNDATION</p>${chapterProtectionNotice(language)}<p class="curriculumPage__lead">The Master Key System is not simply a book to read. It is a 24-week system of study, reflection and daily practice designed to help you develop greater control of your attention, thinking and actions.</p><p>Move through one chapter each week. Study the principle, practise the exercise each day and allow the learning to compound through consistent application.</p><div class="curriculumPage__introActions"><a class="button--primary" href="${canonicalSiteData.routes.startFree}">START FREE FOR 7 DAYS</a><a class="button--secondary" href="${canonicalSiteData.routes.getTheBook}">GET THE MKS BOOK</a><a class="button--text" href="${canonicalSiteData.routes.aiMentors}">USE THE FREE AI MENTOR</a></div></header><div class="curriculumJourneyNote"><strong>Your transformation is built one week at a time.</strong><span>Study the chapter. Practise the exercise. Apply the principle. Then move forward.</span></div>${renderStudyNavigator()}${groupedChapters}${notes}<aside class="curriculumLineageLink"><span>Explore the study tradition behind this journey.</span><a class="button--text" href="${canonicalSiteData.routes.mksLineage}">Explore the MKS Lineage</a></aside>${renderEndResult()}</section>`;
 }
 
 export function masterKeyCurriculumPage(data = canonicalSiteData, language = "en") {
@@ -131,7 +135,7 @@ export function masterKeyCurriculumPage(data = canonicalSiteData, language = "en
     description: t("route.masterKeySystem.metaDescription", language),
     titleKey: "route.masterKeySystem.metaTitle",
     descriptionKey: "route.masterKeySystem.metaDescription",
-    body: `<main class="curriculumPage" id="main-content">${renderCurriculum()}</main>`,
+    body: `<main class="curriculumPage" id="main-content">${renderCurriculum(language)}</main>`,
     styles: ["/assets/index-Bgwsdhov.css"],
     scripts: ["/assets/curriculum.mjs?v=20260831-section-links-1"],
     socialImage: "/images/master-key-visuals/master-key-24-week-hero.png",
