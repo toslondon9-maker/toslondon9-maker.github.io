@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { renderPage } from "../src/page-shell.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 
-const baseUrl = "https://toslondon9-maker.github.io";
+const baseUrl = "https://unleashyourpowerwithtariq.com";
 const publicRoutes = [...Object.values(siteData.routes).filter((route) => route !== siteData.routes.liveCoaching), ...siteData.experienceRoutes];
 
 test("every public page has canonical, Open Graph and Twitter metadata for its live route", () => {
@@ -29,6 +30,18 @@ test("every public page has canonical, Open Graph and Twitter metadata for its l
     assert.match(html, new RegExp(`<meta name="twitter:image" content="${socialImage.replaceAll("/", "\\/")}">`));
     assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
   }
+});
+
+test("public generated HTML uses only the custom-domain SEO base", () => {
+  const oldDomain = "toslondon9-maker.github.io";
+  const oldDomainPattern = new RegExp(oldDomain.replaceAll(".", "\\."));
+  for (const route of publicRoutes) {
+    const relativeFile = route === "/" ? "index.html" : `${route.slice(1)}index.html`;
+    const publicHtml = readFileSync(new URL(`../${relativeFile}`, import.meta.url), "utf8");
+    assert.doesNotMatch(publicHtml, oldDomainPattern, relativeFile);
+  }
+  const notFound = readFileSync(new URL("../404.html", import.meta.url), "utf8");
+  assert.doesNotMatch(notFound, oldDomainPattern, "404.html");
 });
 
 

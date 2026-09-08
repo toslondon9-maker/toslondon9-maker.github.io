@@ -28,7 +28,7 @@ test("core public pages expose canonical metadata and requested search phrasing"
   ];
   for (const [route, ...phrases] of expectations) {
     const html = page(route);
-    assert.match(html, new RegExp(`<link rel="canonical" href="https://toslondon9-maker\\.github\\.io${route.replaceAll("/", "\\/")}"`));
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://unleashyourpowerwithtariq\\.com${route.replaceAll("/", "\\/")}"`));
     assert.match(html, /<title[^>]*>[^<]+<\/title>/);
     assert.match(html, /<meta name="description" content="[^"]+"/);
     for (const phrase of phrases) assert.match(html.toLowerCase(), new RegExp(phrase.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
@@ -87,6 +87,6 @@ test("online course page uses the premium journey layout with responsive bilingu
 
 test("sitemap includes the online course route and preserves private-route exclusion", () => {
   const sitemap = renderSitemap(siteData);
-  assert.match(sitemap, /https:\/\/toslondon9-maker\.github\.io\/master-key-system-online-course\//);
+  assert.match(sitemap, /https:\/\/unleashyourpowerwithtariq\.com\/master-key-system-online-course\//);
   assert.doesNotMatch(sitemap, /\/live-coaching\//);
 });

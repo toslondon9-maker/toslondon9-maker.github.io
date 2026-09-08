@@ -7,7 +7,7 @@ import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { buildSite } from "../tools/build-site.mjs";
 
-const liveDomain = "https://toslondon9-maker.github.io";
+const liveDomain = "https://unleashyourpowerwithtariq.com";
 const indexableRoutes = Object.freeze([
   ...Object.values(siteData.routes).filter((route) => route !== siteData.routes.liveCoaching),
   ...siteData.experienceRoutes,

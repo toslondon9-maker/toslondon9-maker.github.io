@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /live-coaching/
 
-Sitemap: https://toslondon9-maker.github.io/sitemap.xml
+Sitemap: https://unleashyourpowerwithtariq.com/sitemap.xml

@@ -1,4 +1,4 @@
-const siteUrl = "https://toslondon9-maker.github.io";
+const siteUrl = "https://unleashyourpowerwithtariq.com";
 
 export function organizationSchema() {
   return {
