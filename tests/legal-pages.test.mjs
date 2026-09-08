@@ -11,7 +11,9 @@ test("Privacy page gives visitors the dated, practical privacy information they 
   for (const heading of ["Who We Are", "Information You Provide", "Cookies and Analytics", "AI Mentor and AI Services", "Your Privacy Rights", "Contact Us"]) {
     assert.match(page.body, new RegExp(`<h2>${heading}<\\/h2>`));
   }
-  assert.match(page.body, /do not currently use website analytics or advertising tracking cookies/i);
+  assert.match(page.body, /Google Analytics 4 is used only after you choose to accept/i);
+  assert.match(page.body, /No names, emails, WhatsApp numbers, goals, difficulties or form-answer content is sent to Google Analytics/i);
+  assert.match(page.body, /change your choice at any time using Analytics preferences/i);
   assert.match(page.body, /toslondon9@gmail\.com/);
   assert.match(page.body, /first name, surname, email address, WhatsApp number/i);
   assert.match(page.body, /private Google Sheet/i);

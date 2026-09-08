@@ -21,6 +21,7 @@ const runtimeFiles = Object.freeze([
   "assets/seven-day-progress.mjs",
   "assets/seven-day-workbook.mjs",
   "assets/site-language.mjs",
+  "assets/site-analytics.mjs",
   "assets/site-navigation.mjs",
   "assets/tabs.mjs",
   "content/translations.mjs",

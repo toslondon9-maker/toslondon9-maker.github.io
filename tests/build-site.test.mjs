@@ -193,6 +193,7 @@ test("standalone previews include every local dependency referenced by route she
       "assets/lead-capture-contract.mjs",
       "assets/seven-day-progress.mjs",
       "assets/site-language.mjs",
+      "assets/site-analytics.mjs",
       "assets/site-navigation.mjs",
       "content/translations.mjs",
       "images/the-secret-logo.png",

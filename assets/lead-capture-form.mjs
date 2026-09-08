@@ -76,6 +76,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
       const result = await response.json();
       if (!result.ok || !result.stored) { const error = new Error("unavailable"); error.requestId = requestId; throw error; }
       showRegistrationSuccess(form, document);
+      if (typeof CustomEvent !== "undefined") document.dispatchEvent(new CustomEvent("uyp:registration-success"));
     } catch (error) {
       const reference = error?.requestId ?? response?.headers?.get("X-Request-ID") ?? "";
       setState(form, "error", "failure"); submitButton.disabled = false; localizeForm(form, document.documentElement.lang, document);

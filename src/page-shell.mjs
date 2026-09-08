@@ -4,6 +4,7 @@ import { renderStructuredData } from "./structured-data.mjs";
 const releaseAssetVersion = "20260830-final-polish";
 const platformStyleVersion = "20260904-header-branding-1";
 const languageScript = "/assets/site-language.mjs";
+const analyticsScript = "/assets/site-analytics.mjs";
 const siteUrl = "https://toslondon9-maker.github.io";
 const defaultSocialImage = `${siteUrl}/images/haanel-tariq-portraits.jpeg`;
 const defaultSocialImageAlt = "Tariq Saddique and the Master Key System learning journey";
@@ -12,7 +13,9 @@ const aiMentorRoute = "/ai-mentors/";
 const aiMentorEndpoint = "https://unleash-your-power-ai-mentor.toslondon9.workers.dev/mentor";
 
 function versionReleaseScript(script) {
-  return script === languageScript ? `${script}?v=${releaseAssetVersion}` : script;
+  if (script === languageScript) return `${script}?v=${releaseAssetVersion}`;
+  if (script === analyticsScript) return `${script}?v=20260908-analytics`;
+  return script;
 }
 
 function escapeHtml(value) {
@@ -28,7 +31,7 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const safeTitle = escapeHtml(title);
   const safeDescription = escapeHtml(description);
   const safeLanguage = escapeHtml(language);
-  const pageScripts = [...new Set(["/assets/site-navigation.mjs", languageScript, "/assets/affiliate-tracking.mjs", ...scripts].map(versionReleaseScript))];
+  const pageScripts = [...new Set(["/assets/site-navigation.mjs", languageScript, analyticsScript, "/assets/affiliate-tracking.mjs", ...scripts].map(versionReleaseScript))];
   const stylesheetTags = [...new Set(styles)].map((stylesheet) => (
     `<link rel="stylesheet" href="${escapeHtml(stylesheet)}">`
   )).join("");
