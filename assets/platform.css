@@ -573,7 +573,21 @@ main > article {
 .resourcesPage__links a { color: var(--navy, #10243b); text-decoration: underline; text-underline-offset: .2em; }
 .resourcesPage__optional { margin-top: 1.5rem; border-top: 1px solid rgba(190,148,73,.45); padding-top: 1rem; }
 .resourcesPage__optional summary { cursor: pointer; font-weight: 600; color: var(--navy, #10243b); }
+.resourcesPage__audio { margin-top: 2.5rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid rgba(190,148,73,.55); border-radius: 20px; background: var(--cream, #f7f0e2); }
+.resourcesPage__audio h2, .resourcesPage__affirmations h2 { color: var(--navy, #10243b); margin-top: 0; }
+.resourcesPage__audioIntro { max-width: 46rem; }
+.resourcesPage__audioGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.75rem; }
+.resourcesPage__audioCard { min-width: 0; margin: 0; padding: 1.1rem; border: 1px solid rgba(190,148,73,.45); border-top: 3px solid var(--gold, #be9449); border-radius: 14px; background: rgba(255,255,255,.68); }
+.resourcesPage__audioCard figcaption { margin-bottom: .9rem; }
+.resourcesPage__audioNumber { color: #85611f; font-size: .78rem; font-weight: 800; letter-spacing: .12em; }
+.resourcesPage__audioCard h3 { margin: .35rem 0 .4rem; font-size: 1.1rem; }
+.resourcesPage__audioCard p, .resourcesPage__affirmations p { margin: 0; color: var(--muted, #59616d); font-size: .92rem; }
+.resourcesPage__audio audio, .resourcesPage__affirmations audio { display: block; width: 100%; max-width: 100%; }
+.resourcesPage__affirmations { margin-top: 2rem; padding: 1.4rem; border: 1px solid rgba(16,36,59,.32); border-radius: 16px; background: var(--navy, #10243b); color: var(--cream, #f7f0e2); }
+.resourcesPage__affirmations h2 { color: var(--cream, #f7f0e2); }
+.resourcesPage__affirmations p { color: rgba(247,240,226,.82); margin-bottom: 1rem; }
 @media (max-width: 700px) { .resourcesPage { padding: 3rem 1rem 4rem; } .resourcesPage__grid { grid-template-columns: 1fr; } .resourcesPage__links { flex-direction: column; } }
+@media (max-width: 700px) { .resourcesPage__audioGrid { grid-template-columns: 1fr; } .resourcesPage__audio { padding: 1.2rem; } }
 
 .homeOutcome,
 .coachingOutcome {

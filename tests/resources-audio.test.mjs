@@ -1,0 +1,40 @@
+import assert from "node:assert/strict";
+import { access, readFile } from "node:fs/promises";
+import test from "node:test";
+import { resourcesPage } from "../src/pages/resources.mjs";
+
+const lessonNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 24];
+const audioRoot = new URL("../audio/mks/", import.meta.url);
+
+test("Resources renders every supplied lesson audio with its actual chapter number and title", async () => {
+  const page = resourcesPage();
+  assert.match(page.body, /Master Key System Audio Lessons/);
+  assert.doesNotMatch(page.body, /Lesson_9\.mp3|Lesson_11\.mp3|Lesson_19\.mp3|Lesson_23\.mp3/);
+
+  for (const number of lessonNumbers) {
+    await access(new URL(`Lesson_${number}.mp3`, audioRoot));
+    assert.match(page.body, new RegExp(`/audio/mks/Lesson_${number}\.mp3`));
+    assert.match(page.body, new RegExp(`>${String(number).padStart(2, "0")}<`));
+  }
+});
+
+test("Resources separates the supplied affirmations track and keeps labels bilingual", async () => {
+  const english = resourcesPage(undefined, "en").body;
+  const spanish = resourcesPage(undefined, "es").body;
+  const file = "The Master Key System Affirmations For Success And Prosperity.mp3";
+  await access(new URL(file, audioRoot));
+  assert.match(english, /MKS Affirmations for Success and Prosperity/);
+  assert.match(english, /audio\/mks\/The%20Master%20Key%20System%20Affirmations%20For%20Success%20And%20Prosperity\.mp3/);
+  assert.match(spanish, /Afirmaciones del MKS para el éxito y la prosperidad/);
+  assert.match(spanish, /Audio de la lección 1/);
+  assert.match(english, /<audio controls[^>]+aria-label=/g);
+  assert.equal((english.match(/<audio controls/g) ?? []).length, 21);
+});
+
+test("the build copies the complete audio directory into generated output", async () => {
+  const build = await readFile(new URL("../tools/build-site.mjs", import.meta.url), "utf8");
+  assert.match(build, /collectFiles\(path\.join\(repositoryRoot, "audio"\), "audio"\)/);
+  const css = await readFile(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /resourcesPage__audioGrid/);
+  assert.match(css, /resourcesPage__audio audio/);
+});

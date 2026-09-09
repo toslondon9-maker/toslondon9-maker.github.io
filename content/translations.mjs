@@ -327,6 +327,20 @@ const translations = deepFreeze({
     es: "Utiliza preguntas, notas de estudio y orientaciones claras para profundizar en tu comprensión y actuar con constancia.",
   },
   "route.resources.action": { en: "Begin with the free challenge", es: "Empieza con el reto gratuito" },
+  "resources.audio.eyebrow": { en: "LISTEN AND STUDY", es: "ESCUCHA Y ESTUDIA" },
+  "resources.audio.title": { en: "Master Key System Audio Lessons", es: "Lecciones de audio del Master Key System" },
+  "resources.audio.intro": {
+    en: "Supplementary audio for your Master Key System study. Choose the lesson you are working through and listen at your own pace.",
+    es: "Audio complementario para tu estudio del Master Key System. Elige la lección que estás trabajando y escucha a tu propio ritmo.",
+  },
+  "resources.audio.lessonLabel": { en: "Lesson {number} Audio", es: "Audio de la lección {number}" },
+  "resources.audio.lessonDescription": { en: "Supplementary audio for Lesson {number}.", es: "Audio complementario para la lección {number}." },
+  "resources.audio.affirmationsTitle": { en: "MKS Affirmations for Success and Prosperity", es: "Afirmaciones del MKS para el éxito y la prosperidad" },
+  "resources.audio.affirmationsDescription": {
+    en: "A separate affirmations track to accompany your study and quiet practice.",
+    es: "Una pista independiente de afirmaciones para acompañar tu estudio y tu práctica tranquila.",
+  },
+  "resources.audio.playerFallback": { en: "Your browser does not support HTML audio.", es: "Tu navegador no admite audio HTML." },
   "aiMentor.hero.title": { en: "Your Master Key Study Companion", es: "Tu acompañante de estudio del Master Key" },
   "aiMentor.hero.intro": {
     en: "Choose a perspective and chapter, then explore the lesson in a thoughtful conversation without leaving Unleash Your Power.",

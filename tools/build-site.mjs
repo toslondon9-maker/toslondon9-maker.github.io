@@ -52,6 +52,7 @@ async function copyBuildDependencies(outputRoot) {
     ...runtimeFiles,
     ...await collectFiles(path.join(repositoryRoot, "images"), "images"),
     ...await collectFiles(path.join(repositoryRoot, "downloads"), "downloads"),
+    ...await collectFiles(path.join(repositoryRoot, "audio"), "audio"),
   ];
 
   for (const relativeFile of files) {
