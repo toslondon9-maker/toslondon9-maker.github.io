@@ -28,7 +28,7 @@ test("the complete historic 24-week curriculum is visitor-accessible from home a
   assert.ok(page.styles?.includes("/assets/index-Bgwsdhov.css"));
 
   const home = renderHome({ language: "en" });
-  assert.match(home, /href="\/master-key-system\/"[^>]*>EXPLORE ALL 24 WEEKS<\/a>/);
+  assert.match(home, /href="\/master-key-system\/"[^>]*>VIEW THE 24-WEEK JOURNEY<\/a>/);
 
   const navigation = renderHeader({ route: "/", language: "en" });
   assert.equal((navigation.match(/href="\/master-key-system\/"[^>]*>Master Key System<\/a>/g) ?? []).length, 2);

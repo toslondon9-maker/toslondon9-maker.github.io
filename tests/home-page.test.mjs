@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "lineage", "origins", "books", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
+const approvedSections = ["hero", "welcome-video", "lineage", "origins", "books", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
 const conversionJourneyHooks = [
   "conversion.next.heading",
   "conversion.next.step1Title",
@@ -40,12 +40,31 @@ test("homepage follows the approved concise customer journey", () => {
   const html = renderHome({ language: "en" });
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(sections, approvedSections);
-  assert.equal((html.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 2);
+  assert.equal((html.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
   assert.match(html, /START FREE FOR 7 DAYS/);
-  assert.match(html, /EXPLORE THE MASTER KEY SYSTEM/);
+  assert.match(html, /EXPLORE THE METHOD/);
   assert.match(html, /Free 7-Day Experience • No Previous Experience Required/);
+  assert.match(html, /Free registration required\. No purchase required\./);
+  assert.match(html, /<source srcset="\/images\/tariq-happiness-harmony-720\.webp" type="image\/webp">/);
+  assert.match(html, /VIEW THE 24-WEEK JOURNEY/);
+});
+
+test("homepage provides an honest welcome-video placeholder and accessible fallback", () => {
+  const html = renderHome({ language: "en" });
+  const video = html.match(/<section class="homeVideo"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.match(video, /A personal welcome from Tariq/);
+  assert.match(video, /Discover why Tariq created Unleash Your Power/);
+  assert.match(video, /homeVideo__placeholder/);
+  assert.match(video, /Video coming soon/);
+  assert.match(video, /captions/i);
+  assert.doesNotMatch(video, /<video\b/);
+  assert.doesNotMatch(video, /\.mp4|\.webm/);
+  assert.match(video, /data-i18n="home\.video\.fallback"/);
+  const spanish = renderHome({ language: "es" });
+  assert.match(spanish, /Una bienvenida personal de Tariq/);
+  assert.match(spanish, /Vídeo próximamente/);
 });
 
 test("homepage offers the free fifteen-minute WhatsApp call beside both free-entry CTAs", () => {
@@ -71,7 +90,7 @@ test("homepage presents the complete seven-day taster", () => {
   assert.match(taster, /See What’s Running Your Life/);
   assert.match(taster, /Choose What Happens Next/);
   assert.match(taster, /href="\/start-free\/"[^>]*>START MY FREE 7 DAYS<\/a>/);
-  assert.match(taster, /No pressure\. No purchase required\./);
+  assert.match(taster, /Free registration required\. No purchase required\./);
   assert.match(taster, /class="[^"]*homeTaster__layout[^"]*"/);
 });
 
@@ -103,7 +122,7 @@ test("homepage loads with the concise four-phase journey and safe responsive act
   assert.match(html, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
   for (const expected of ["Weeks 1–4", "Foundation", "Weeks 5–11", "Awareness &amp; Control", "Weeks 12–18", "Application", "Weeks 19–24", "Integration &amp; Mastery"]) assert.match(visibleText, new RegExp(expected));
   assert.equal((pathway.match(/class="homeMasterKey__phaseDescription"/g) ?? []).length, 4);
-  assert.match(pathway, /href="\/master-key-system\/"[^>]*>EXPLORE ALL 24 WEEKS<\/a>/);
+  assert.match(pathway, /href="\/master-key-system\/"[^>]*>VIEW THE 24-WEEK JOURNEY<\/a>/);
   assert.doesNotMatch(pathway, /questions?\s*(?:&amp;|and)\s*answers?|mastery prompt|guided exercise/i);
   assert.match(css, /\.homeMasterKey__phases li\s*\{[^}]*min-width:\s*0/s);
   assert.match(css, /@media[^}]*max-width:\s*480px[\s\S]*?\.homeMasterKey__phases[^{]*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
@@ -124,7 +143,7 @@ test("homepage presents the approved lineage image and people in order", () => {
   const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]);
   assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
   assert.match(lineage, /Charles F\. Haanel and Tariq Saddique — Master Key System inspired coaching journey/);
-  assert.equal((html.match(/haanel-tariq-portraits\.jpeg/g) ?? []).length, 3);
+  assert.equal((html.match(/haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
 });
 
 test("homepage lineage section retains the premium portrait, cards and independence disclosure", () => {
@@ -174,10 +193,11 @@ test("homepage presents the ten books behind the method in both languages", asyn
 test("homepage Spanish render is complete, natural and conversion focused", () => {
   const html = renderHome({ language: "es" });
   assert.match(html, /Domina tu mente\. Cambia tu rumbo\./);
-  assert.match(html, /Desarrolla claridad, enfoque y una acción con propósito/);
+  assert.match(html, /claridad, enfoque, disciplina y acción con propósito/);
   assert.match(html, /Empieza gratis durante 7 días/);
-  assert.match(html, /Descubre el recorrido/);
+  assert.match(html, /EXPLORA EL MÉTODO/);
   assert.match(html, /Este programa de coaching independiente está inspirado en el Master Key System/);
+  assert.match(html, /Registro gratuito obligatorio\. No es necesario comprar\./);
   assert.doesNotMatch(html, /START FREE FOR 7 DAYS|EXPLORE ALL 24 WEEKS|Book a Session/);
 });
 
