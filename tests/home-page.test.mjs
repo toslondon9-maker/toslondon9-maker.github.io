@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "welcome-video", "lineage", "origins", "books", "start-free", "master-key", "outcome", "testimonials", "coaching", "next-step"];
+const approvedSections = ["hero", "welcome-video", "lineage", "origins", "books", "start-free", "master-key", "outcome", "testimonials", "coaching", "insights", "next-step"];
 const conversionJourneyHooks = [
   "conversion.next.heading",
   "conversion.next.step1Title",

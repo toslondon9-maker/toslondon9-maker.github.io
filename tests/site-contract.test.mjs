@@ -28,6 +28,7 @@ test("canonical route definitions are locked", () => {
     aboutTariq: "/about-tariq/",
     resources: "/resources/",
     resourcesAudio: "/resources/audio/",
+    insightsCourse: "/insights/how-the-24-week-master-key-system-course-works/",
     getTheBook: "/get-the-book/",
     aiMentors: "/ai-mentors/",
     contact: "/contact/",

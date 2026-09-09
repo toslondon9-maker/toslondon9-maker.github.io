@@ -18,6 +18,7 @@ import { mksLineagePage } from "./pages/mks-lineage.mjs";
 import { referralPage } from "./pages/referral.mjs";
 import { faqPage } from "./pages/faq.mjs";
 import { masterKeySystemOnlineCoursePage } from "./pages/master-key-system-online-course.mjs";
+import { insightsCoursePage } from "./pages/insights-course-works.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -75,6 +76,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.mksLineage]: (data) => mksLineagePage(data),
   [siteData.routes.resources]: (data) => resourcesPage(data),
   [siteData.routes.resourcesAudio]: (data) => resourcesAudioPage(data),
+  [siteData.routes.insightsCourse]: (data) => insightsCoursePage(data),
   [siteData.routes.aiMentors]: (data) => aiMentorsPage(data),
   [siteData.routes.getTheBook]: (data) => getTheBookPage(data),
   [siteData.routes.aboutTariq]: (data) => aboutTariqPage(data),

@@ -74,6 +74,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "about-tariq/index.html",
       "resources/index.html",
       "resources/audio/index.html",
+      "insights/how-the-24-week-master-key-system-course-works/index.html",
       "get-the-book/index.html",
       "ai-mentors/index.html",
       "contact/index.html",
@@ -108,7 +109,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 24);
+    assert.equal(pageFiles.length, 25);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -141,6 +142,13 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
       if (globalPageFiles[index] === "mks-lineage/index.html") {
         assert.match(page, /<main class="mksLineagePage"/);
         assert.match(page, /From Original Wisdom to Practical Application/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "insights/how-the-24-week-master-key-system-course-works/index.html") {
+        assert.match(page, /<title data-i18n="insights\.courseWorks\.metaTitle">/);
+        assert.match(page, /data-i18n="insights\.courseWorks\.metaDescription"/);
+        assert.match(page, /class="[^"]*insightArticle/);
         continue;
       }
 
