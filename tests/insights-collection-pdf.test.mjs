@@ -13,5 +13,9 @@ test("all three branded Insights PDFs exist and contain their article identity",
     assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
     assert.match(pdf.toString("latin1"), new RegExp(title));
     assert.match(pdf.toString("latin1"), /start-free/);
+    assert.match(pdf.toString("latin1"), /Reflection for the reader/);
+    assert.match(pdf.toString("latin1"), /not an original Haanel lesson/);
+    assert.doesNotMatch(pdf.toString("latin1"), /Lesson\s+[0-9]+/);
+    assert.ok((pdf.toString("latin1").match(/\/Type \/Page\b/g) ?? []).length >= 1, `${file} has no page objects`);
   }
 });
