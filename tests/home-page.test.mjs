@@ -206,7 +206,7 @@ test("homepage CTA destinations are generated routes", () => {
   const routeSet = new Set(Object.values(siteData.routes));
   const ctaRoutes = [...html.matchAll(/<a class="button--(?:primary|secondary|text)[^"]*" href="([^"]+)"/g)].map((match) => match[1]);
   assert.ok(ctaRoutes.length >= 7);
-  for (const route of ctaRoutes) if (!route.startsWith("https://wa.me/")) assert.ok(routeSet.has(route), `missing generated destination: ${route}`);
+  for (const route of ctaRoutes) if (!route.startsWith("https://wa.me/") && !route.startsWith("/downloads/")) assert.ok(routeSet.has(route), `missing generated destination: ${route}`);
 });
 
 test("homepage keeps detailed pricing off the teaser and never restores the payment plan", () => {

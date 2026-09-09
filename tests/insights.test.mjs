@@ -4,6 +4,8 @@ import { homePage } from "../src/pages/home.mjs";
 import { insightsCoursePage } from "../src/pages/insights-course-works.mjs";
 import { insightsIndexPage } from "../src/pages/insights-index.mjs";
 import { insightsPrinciplesPage } from "../src/pages/insights-principles.mjs";
+import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs";
+import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
 import { siteData } from "../content/site-data.mjs";
 
 test("homepage presents three Insights & Guides cards above the final conversion panel", () => {
@@ -13,7 +15,11 @@ test("homepage presents three Insights & Guides cards above the final conversion
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
   assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 3);
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsCourse}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsIntroduction}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsPrinciples}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsWorldWithin}"`));
+  assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 3);
+  assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 3);
 });
 
 test("the course article exposes bilingual content, internal links and CTA", () => {
@@ -45,11 +51,12 @@ test("insights presentation uses scoped responsive layout hooks", () => {
   assert.match(homePage().body, /class="insightsPreview/);
 });
 
-test("the Insights hub links the existing article and the eight-principles guide", () => {
+test("the Insights hub links the three branded collection articles", () => {
   const page = insightsIndexPage();
   assert.equal(page.route, siteData.routes.insights);
-  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsCourse}"`));
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsIntroduction}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPrinciples}"`));
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsWorldWithin}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
 });
 
@@ -69,4 +76,18 @@ test("the principles article contains all eight principles, careful Tact guidanc
   assert.match(spanish.body, /Tacto/);
   assert.doesNotMatch(spanish.body, />insights\.principles\.[^<]*</);
   assert.equal(english.structuredData[0]["@type"], "Article");
+});
+
+test("the introduction and world-within articles render bilingual content, links and PDF downloads", () => {
+  for (const [page, route, pdf, phrase] of [[insightsIntroductionPage(), siteData.routes.insightsIntroduction, "charles-haanel-master-key-system-introduction.pdf", "The mind as a creative power"], [insightsWorldWithinPage(), siteData.routes.insightsWorldWithin, "world-within-and-world-without.pdf", "The world within"]]) {
+    assert.equal(page.route, route);
+    assert.match(page.body, new RegExp(phrase));
+    assert.match(page.body, /DOWNLOAD THIS ARTICLE AS A PDF/);
+    assert.match(page.body, new RegExp(`/downloads/${pdf}`));
+    assert.match(page.body, new RegExp(`href="${siteData.routes.startFree}"`));
+    assert.match(page.body, new RegExp(`href="${siteData.routes.masterKeySystem}"`));
+    assert.equal(page.structuredData[0]["@type"], "Article");
+  }
+  assert.match(insightsIntroductionPage(undefined, "es").body, /La mente como poder creativo/);
+  assert.match(insightsWorldWithinPage(undefined, "es").body, /El mundo interior/);
 });

@@ -21,6 +21,8 @@ import { masterKeySystemOnlineCoursePage } from "./pages/master-key-system-onlin
 import { insightsCoursePage } from "./pages/insights-course-works.mjs";
 import { insightsIndexPage } from "./pages/insights-index.mjs";
 import { insightsPrinciplesPage } from "./pages/insights-principles.mjs";
+import { insightsIntroductionPage } from "./pages/insights-introduction.mjs";
+import { insightsWorldWithinPage } from "./pages/insights-world-within.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -81,6 +83,8 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.insightsCourse]: (data) => insightsCoursePage(data),
   [siteData.routes.insights]: (data) => insightsIndexPage(data),
   [siteData.routes.insightsPrinciples]: (data) => insightsPrinciplesPage(data),
+  [siteData.routes.insightsIntroduction]: (data) => insightsIntroductionPage(data),
+  [siteData.routes.insightsWorldWithin]: (data) => insightsWorldWithinPage(data),
   [siteData.routes.aiMentors]: (data) => aiMentorsPage(data),
   [siteData.routes.getTheBook]: (data) => getTheBookPage(data),
   [siteData.routes.aboutTariq]: (data) => aboutTariqPage(data),

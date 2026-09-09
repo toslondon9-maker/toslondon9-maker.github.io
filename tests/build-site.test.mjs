@@ -77,6 +77,8 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "insights/how-the-24-week-master-key-system-course-works/index.html",
       "insights/index.html",
       "insights/eight-principles-master-key-system/index.html",
+      "insights/introduction-charles-haanel-master-key-system/index.html",
+      "insights/world-within-and-world-without/index.html",
       "get-the-book/index.html",
       "ai-mentors/index.html",
       "contact/index.html",
@@ -111,7 +113,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 27);
+    assert.equal(pageFiles.length, 29);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -164,6 +166,12 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         assert.match(page, /data-i18n="insights\.principles\.heading"/);
         assert.match(page, /data-i18n="insights\.principles\.tactBody"/);
         assert.match(page, /href="\/downloads\/eight-principles-master-key-system\.pdf" download/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "insights/introduction-charles-haanel-master-key-system/index.html" || globalPageFiles[index] === "insights/world-within-and-world-without/index.html") {
+        assert.match(page, /data-i18n="insights\.(introduction|worldWithin)\.heading"/);
+        assert.match(page, /DOWNLOAD THIS ARTICLE AS A PDF/);
         continue;
       }
 

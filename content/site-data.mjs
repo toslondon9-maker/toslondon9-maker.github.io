@@ -27,6 +27,8 @@ export const siteData = deepFreeze({
       "/insights/": "2026-09-09",
       "/insights/how-the-24-week-master-key-system-course-works/": "2026-09-08",
       "/insights/eight-principles-master-key-system/": "2026-09-09",
+      "/insights/introduction-charles-haanel-master-key-system/": "2026-09-09",
+      "/insights/world-within-and-world-without/": "2026-09-09",
     }
   },
   routes: {
@@ -42,6 +44,8 @@ export const siteData = deepFreeze({
     insightsCourse: "/insights/how-the-24-week-master-key-system-course-works/",
     insights: "/insights/",
     insightsPrinciples: "/insights/eight-principles-master-key-system/",
+    insightsIntroduction: "/insights/introduction-charles-haanel-master-key-system/",
+    insightsWorldWithin: "/insights/world-within-and-world-without/",
     getTheBook: "/get-the-book/",
     aiMentors: "/ai-mentors/",
     contact: "/contact/",
