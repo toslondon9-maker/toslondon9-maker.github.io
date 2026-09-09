@@ -2,27 +2,40 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 import { resourcesPage } from "../src/pages/resources.mjs";
+import { resourcesAudioPage } from "../src/pages/resources-audio.mjs";
+import { siteData } from "../content/site-data.mjs";
 
 const lessonNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 24];
 const audioRoot = new URL("../audio/mks/", import.meta.url);
 
-test("Resources renders every supplied lesson audio with its actual chapter number and title", async () => {
+test("main Resources keeps LISTEN as a compact link card without audio players", () => {
   const page = resourcesPage();
+  assert.match(page.body, /<h2>LISTEN<\/h2>/);
+  assert.match(page.body, new RegExp(`href="${siteData.routes.resourcesAudio}"[^>]*>Use the guided daily practice`));
+  assert.doesNotMatch(page.body, /<audio controls/);
+  assert.doesNotMatch(page.body, /youtube\.com\/watch\?v=/);
+});
+
+test("the guided-practice destination contains every available audio and missing-lesson links", async () => {
+  const page = resourcesAudioPage();
+  assert.equal(page.route, siteData.routes.resourcesAudio);
   assert.match(page.body, /Master Key System Audio Lessons/);
-  const listenStart = page.body.indexOf('<section class="resourcesPage__group resourcesPage__group--listen"');
-  const listenEnd = page.body.indexOf('</section>', listenStart);
-  assert.ok(listenStart >= 0 && listenEnd > listenStart, "LISTEN section should be present");
-  assert.ok(page.body.slice(listenStart, listenEnd).includes("resourcesPage__audio"), "audio should be nested in LISTEN");
 
   for (const number of lessonNumbers) {
     await access(new URL(`Lesson_${number}.mp3`, audioRoot));
     assert.match(page.body, new RegExp(`/audio/mks/Lesson_${number}\.mp3`));
     assert.match(page.body, new RegExp(`>${String(number).padStart(2, "0")}<`));
   }
+  assert.equal((page.body.match(/<audio controls/g) ?? []).length, 21);
+  assert.match(page.body, /XfuM-NAMX3E/);
+  assert.match(page.body, /sDKwDhfXTOM/);
+  assert.match(page.body, /SSH9AioaNZE/);
+  assert.match(page.body, /tzNhOZTELX4/);
+  assert.match(page.body, /MKS Affirmations for Success and Prosperity/);
 });
 
 test("missing lessons use clearly labelled external recordings without local MP3 links", () => {
-  const page = resourcesPage().body;
+  const page = resourcesAudioPage().body;
   const external = [
     [9, "XfuM-NAMX3E"],
     [11, "sDKwDhfXTOM"],
@@ -39,8 +52,8 @@ test("missing lessons use clearly labelled external recordings without local MP3
 });
 
 test("Resources separates the supplied affirmations track and keeps labels bilingual", async () => {
-  const english = resourcesPage(undefined, "en").body;
-  const spanish = resourcesPage(undefined, "es").body;
+  const english = resourcesAudioPage(undefined, "en").body;
+  const spanish = resourcesAudioPage(undefined, "es").body;
   const file = "The Master Key System Affirmations For Success And Prosperity.mp3";
   await access(new URL(file, audioRoot));
   assert.match(english, /MKS Affirmations for Success and Prosperity/);

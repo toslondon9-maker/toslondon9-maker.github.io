@@ -327,6 +327,10 @@ const translations = deepFreeze({
     es: "Utiliza preguntas, notas de estudio y orientaciones claras para profundizar en tu comprensión y actuar con constancia.",
   },
   "route.resources.action": { en: "Begin with the free challenge", es: "Empieza con el reto gratuito" },
+  "route.resourcesAudio.metaTitle": { en: "Master Key System Audio Lessons | Unleash Your Power", es: "Lecciones de audio del Master Key System | Unleash Your Power" },
+  "route.resourcesAudio.metaDescription": { en: "Listen to supplementary Master Key System lesson recordings and affirmations for your independent study.", es: "Escucha grabaciones complementarias de las lecciones y afirmaciones del Master Key System para tu estudio independiente." },
+  "route.resourcesAudio.heading": { en: "Master Key System Audio Lessons", es: "Lecciones de audio del Master Key System" },
+  "route.resourcesAudio.purpose": { en: "Supplementary recordings to support your Master Key System study at your own pace.", es: "Grabaciones complementarias para apoyar tu estudio del Master Key System a tu propio ritmo." },
   "resources.audio.eyebrow": { en: "LISTEN AND STUDY", es: "ESCUCHA Y ESTUDIA" },
   "resources.audio.title": { en: "Master Key System Audio Lessons", es: "Lecciones de audio del Master Key System" },
   "resources.audio.intro": {

@@ -27,6 +27,7 @@ test("canonical route definitions are locked", () => {
     coaching: "/coaching/",
     aboutTariq: "/about-tariq/",
     resources: "/resources/",
+    resourcesAudio: "/resources/audio/",
     getTheBook: "/get-the-book/",
     aiMentors: "/ai-mentors/",
     contact: "/contact/",

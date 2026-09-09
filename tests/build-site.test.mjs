@@ -73,6 +73,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "coaching/index.html",
       "about-tariq/index.html",
       "resources/index.html",
+      "resources/audio/index.html",
       "get-the-book/index.html",
       "ai-mentors/index.html",
       "contact/index.html",
@@ -107,7 +108,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 23);
+    assert.equal(pageFiles.length, 24);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -168,6 +169,12 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
       if (globalPageFiles[index] === "referral/index.html") {
         assert.match(page, /class="referralPage"/);
         assert.match(page, /href="#personal-invite"/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "resources/audio/index.html") {
+        assert.match(page, /class="[^"]*resourcesAudioPage/);
+        assert.match(page, /data-i18n="route\.resourcesAudio\.heading"/);
         continue;
       }
 

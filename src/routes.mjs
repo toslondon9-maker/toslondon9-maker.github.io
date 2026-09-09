@@ -7,6 +7,7 @@ import { masterKeyCurriculumPage } from "./pages/master-key-curriculum.mjs";
 import { startFreePage } from "./pages/start-free.mjs";
 import { sevenDayLessonPage } from "./pages/seven-day-lesson.mjs";
 import { resourcesPage } from "./pages/resources.mjs";
+import { resourcesAudioPage } from "./pages/resources-audio.mjs";
 import { getTheBookPage } from "./pages/get-the-book.mjs";
 import { aboutTariqPage } from "./pages/about-tariq.mjs";
 import { aiMentorsPage } from "./pages/ai-mentors.mjs";
@@ -73,6 +74,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.masterKeySystem]: (data) => masterKeyCurriculumPage(data),
   [siteData.routes.mksLineage]: (data) => mksLineagePage(data),
   [siteData.routes.resources]: (data) => resourcesPage(data),
+  [siteData.routes.resourcesAudio]: (data) => resourcesAudioPage(data),
   [siteData.routes.aiMentors]: (data) => aiMentorsPage(data),
   [siteData.routes.getTheBook]: (data) => getTheBookPage(data),
   [siteData.routes.aboutTariq]: (data) => aboutTariqPage(data),
