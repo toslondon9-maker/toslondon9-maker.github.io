@@ -1,17 +1,20 @@
 const LEAD_COLUMNS = ["Submission date/time", "Submission ID", "First name", "Surname", "Email", "WhatsApp", "Main goal", "Current difficulty", "WhatsApp consent", "Email marketing consent", "Source page", "Language", "Lead status", "Notes", "Notification status", "Remaining email quota", "Dedupe key", "Welcome email status", "Welcome email sent at", "Welcome email error", "Sequence day sent", "Sequence email sent at", "Sequence email status", "Sequence email error", "Affiliate code"];
 const LEAD_COLUMN_INDEX = { submissionId: 1, email: 4, whatsapp: 5, emailMarketing: 9, notification: 14, dedupe: 16, welcomeStatus: 17, welcomeSentAt: 18, welcomeError: 19, sequenceDay: 20, sequenceSentAt: 21, sequenceStatus: 22, sequenceError: 23 };
 const SEQUENCE_LESSONS = [
-  { day: 2, title: "Take Back Your Attention", titleEs: "Recupera tu atención", message: "Notice what most often captures your attention without permission, then return gently to what you chose to focus on.", messageEs: "Fíjate en qué capta tu atención sin que lo decidas y vuelve con suavidad a aquello en lo que elegiste enfocarte.", route: "/start-free/day-2-take-back-your-attention/" },
-  { day: 3, title: "Recognise What Keeps Repeating", titleEs: "Reconoce lo que se repite", message: "When a familiar situation appears, look for the first thought and the response that usually follows it.", messageEs: "Cuando aparezca una situación conocida, observa el primer pensamiento y la respuesta que suele venir después.", route: "/start-free/day-3-recognise-what-keeps-repeating/" },
-  { day: 4, title: "Give Your Mind a Direction", titleEs: "Dale una dirección a tu mente", message: "Choose one clear direction for your attention and write it in a sentence you can return to today.", messageEs: "Elige una dirección clara para tu atención y escríbela en una frase a la que puedas volver hoy.", route: "/start-free/day-4-give-your-mind-a-direction/" },
-  { day: 5, title: "Become Someone You Can Rely On", titleEs: "Conviértete en alguien en quien puedas confiar", message: "Choose one small commitment you can keep today; a promise you follow through on helps build self-trust.", messageEs: "Elige hoy un pequeño compromiso que puedas cumplir; una promesa que mantienes ayuda a fortalecer la confianza en ti.", route: "/start-free/day-5-become-someone-you-can-rely-on/" },
-  { day: 6, title: "Change From the Inside Out", titleEs: "Cambia de dentro hacia fuera", message: "Notice the meaning beneath one response today, then choose a useful direction and express it through one action.", messageEs: "Observa hoy el significado que hay detrás de una respuesta, elige una dirección útil y exprésala con una acción.", route: "/start-free/day-6-change-from-the-inside-out/" },
+  { day: 2, title: "Take Back Your Attention", titleEs: "Recupera tu atención", message: "Take a few quiet minutes to observe and reflect on what captures your attention, then return gently to what you chose to focus on.", messageEs: "Dedica unos minutos tranquilos: observa y reflexiona sobre lo que capta tu atención y vuelve con suavidad a aquello en lo que elegiste enfocarte.", route: "/start-free/day-2-take-back-your-attention/" },
+  { day: 3, title: "Recognise What Keeps Repeating", titleEs: "Reconoce lo que se repite", message: "This is a supportive check-in: notice the first thought and response when a familiar situation appears. Continue with today's practice; no purchase is needed.", messageEs: "Este es un mensaje de apoyo: observa el primer pensamiento y la respuesta cuando aparezca una situación conocida. Continúa con la práctica de hoy; no necesitas comprar nada.", route: "/start-free/day-3-recognise-what-keeps-repeating/" },
+  { day: 4, title: "Give Your Mind a Direction", titleEs: "Dale una dirección a tu mente", message: "Consistent practice matters more than rushing. Choose one clear direction for your attention and write it in a sentence you can return to today.", messageEs: "La práctica constante importa más que avanzar deprisa. Elige una dirección clara para tu atención y escríbela en una frase a la que puedas volver hoy.", route: "/start-free/day-4-give-your-mind-a-direction/" },
+  { day: 5, title: "Become Someone You Can Rely On", titleEs: "Conviértete en alguien en quien puedas confiar", message: "Review what you are noticing across the experience, then choose one small commitment you can keep today to build self-trust.", messageEs: "Repasa lo que estás observando durante la experiencia y elige hoy un pequeño compromiso que puedas cumplir para fortalecer la confianza en ti.", route: "/start-free/day-5-become-someone-you-can-rely-on/" },
+  { day: 6, title: "Change From the Inside Out", titleEs: "Cambia de dentro hacia fuera", message: "Use today's practice to decide what you would like to do next, then express that useful direction through one action.", messageEs: "Usa la práctica de hoy para decidir qué te gustaría hacer después y expresa esa dirección útil mediante una acción.", route: "/start-free/day-6-change-from-the-inside-out/" },
   { day: 7, title: "Make It Part of How You Live", titleEs: "Haz que forme parte de tu vida", message: "Look back across the week, notice which practice you would willingly repeat and choose a realistic time to return to it.", messageEs: "Repasa la semana, observa qué práctica repetirías de buen grado y elige un momento realista para retomarla.", route: "/start-free/day-7-make-it-part-of-how-you-live/" },
 ];
 const LEAD_LIMITS = { name: 80, email: 254, whatsapp: 32, message: 1000 };
 const LEAD_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const LEAD_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const LEAD_WHATSAPP = /^\+[1-9]\d{7,30}$/;
+const START_FREE_DASHBOARD_URL = "https://unleashyourpowerwithtariq.com/start-free/";
+const DAY_ONE_URL = START_FREE_DASHBOARD_URL + "day-1-see-whats-running-your-life/";
+const WHATSAPP_BOOKING_URL = "https://wa.me/34611223345?text=" + encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
 function json(body) { return ContentService.createTextOutput(JSON.stringify(body)).setMimeType(ContentService.MimeType.JSON); }
 function text(value) { return typeof value === "string" ? value.trim() : ""; }
 function sanitizeSpreadsheetValue(value) { const safe = String(value === undefined || value === null ? "" : value).trim(); return /^[=+\-@]/.test(safe) ? "'" + safe : safe; }
@@ -43,10 +46,15 @@ function ensureColumns(sheet) {
 function escapeHtml(value) { return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&#39;"); }
 function welcomeEmail(lead) {
   const firstName = escapeHtml(lead.firstName);
-  const dayOne = "https://unleashyourpowerwithtariq.com/start-free/day-1-see-whats-running-your-life/";
-  const body = "Hi " + lead.firstName + ",\n\nWelcome — I’m really glad you’re here.\n\nOver the next seven days, you’ll take a little time each day to slow down, observe your thinking, and take one simple action. There is nothing to catch up on and no need to rush.\n\nYour first step is ready:\n\nStart Day 1:\n" + dayOne + "\n\nGive yourself a few quiet minutes today. Read the lesson, complete the exercise, and simply notice what comes up.\n\nI’ll be with you throughout the experience.\n\nWith you on the journey,\nTariq Saddique\nUnleash Your Power";
-  const html = "<p>Hi " + firstName + ",</p><p>Welcome — I’m really glad you’re here.</p><p>Over the next seven days, you’ll take a little time each day to slow down, observe your thinking, and take one simple action. There is nothing to catch up on and no need to rush.</p><p>Your first step is ready:</p><p><a href=\"" + dayOne + "\">Start Day 1</a></p><p>Give yourself a few quiet minutes today. Read the lesson, complete the exercise, and simply notice what comes up.</p><p>I’ll be with you throughout the experience.</p><p>With you on the journey,<br>Tariq Saddique<br>Unleash Your Power</p>";
-  return { body: body, html: html };
+  const spanish = lead.language === "es";
+  const subject = spanish ? "Bienvenido a tu experiencia gratuita de 7 días" : "Welcome to your Free 7-Day Experience";
+  const body = spanish
+    ? "Hola " + lead.firstName + ",\n\nTu registro se ha completado. Bienvenido a Unleash Your Power.\n\nDurante los próximos siete días, dedica un poco de tiempo cada día a detenerte, observar tu pensamiento y dar un paso sencillo. El registro es gratuito y no es necesario comprar.\n\nTu primer paso está listo:\n\nEmpieza el Día 1:\n" + DAY_ONE_URL + "\n\nTu panel de Start Free:\n" + START_FREE_DASHBOARD_URL + "\n\n¿Tienes alguna pregunta sobre el recorrido? De forma opcional, habla con Tariq por WhatsApp y reserva una llamada gratuita de 15 minutos:\n" + WHATSAPP_BOOKING_URL + "\n\nTe acompaño en el camino,\nTariq Saddique\nUnleash Your Power"
+    : "Hi " + lead.firstName + ",\n\nYour registration is confirmed. Welcome — I’m really glad you’re here.\n\nOver the next seven days, take a little time each day to slow down, observe your thinking, and take one simple action. Registration is free and no purchase is required.\n\nYour first step is ready:\n\nStart Day 1:\n" + DAY_ONE_URL + "\n\nYour Start Free dashboard:\n" + START_FREE_DASHBOARD_URL + "\n\nHave a question about the journey? You can optionally speak with Tariq on WhatsApp and book a free 15-minute call:\n" + WHATSAPP_BOOKING_URL + "\n\nWith you on the journey,\nTariq Saddique\nUnleash Your Power";
+  const html = spanish
+    ? "<p>Hola " + firstName + ",</p><p>Tu registro se ha completado. Bienvenido a Unleash Your Power.</p><p>Durante los próximos siete días, dedica un poco de tiempo cada día a detenerte, observar tu pensamiento y dar un paso sencillo. El registro es gratuito y no es necesario comprar.</p><p>Tu primer paso está listo:</p><p><a href=\"" + DAY_ONE_URL + "\">Empieza el Día 1</a></p><p><a href=\"" + START_FREE_DASHBOARD_URL + "\">Abre tu panel de Start Free</a></p><p>¿Tienes alguna pregunta sobre el recorrido? De forma opcional, <a href=\"" + WHATSAPP_BOOKING_URL + "\">habla con Tariq por WhatsApp</a> y reserva una llamada gratuita de 15 minutos.</p><p>Te acompaño en el camino,<br>Tariq Saddique<br>Unleash Your Power</p>"
+    : "<p>Hi " + firstName + ",</p><p>Your registration is confirmed. Welcome — I’m really glad you’re here.</p><p>Over the next seven days, take a little time each day to slow down, observe your thinking, and take one simple action. Registration is free and no purchase is required.</p><p>Your first step is ready:</p><p><a href=\"" + DAY_ONE_URL + "\">Start Day 1</a></p><p><a href=\"" + START_FREE_DASHBOARD_URL + "\">Open your Start Free dashboard</a></p><p>Have a question about the journey? You can optionally <a href=\"" + WHATSAPP_BOOKING_URL + "\">speak with Tariq on WhatsApp</a> and book a free 15-minute call.</p><p>With you on the journey,<br>Tariq Saddique<br>Unleash Your Power</p>";
+  return { body: body, html: html, subject: subject };
 }
 function dayNumber(value) {
   const formatted = Utilities.formatDate(new Date(value), "Europe/Madrid", "yyyy-MM-dd");
@@ -74,12 +82,16 @@ function sequenceEmail(firstName, lesson, language) {
   if (lesson.day === 7) {
     const foundationUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
     const journeyUrl = "https://unleashyourpowerwithtariq.com/master-key-system/";
-    const next = spanish ? "Si quieres continuar, puedes explorar Foundation durante cuatro semanas por £97 o conocer el recorrido completo de 24 semanas." : "If you would like to continue, you can explore the four-week Foundation stage for £97 or the complete 24-week journey.";
+    const congratulations = spanish ? "Enhorabuena: has llegado al final de tu experiencia gratuita de 7 días." : "Congratulations — you have reached the end of your Free 7-Day Experience.";
+    const next = spanish ? "Si quieres continuar, puedes explorar Foundation de cuatro semanas por £97 o conocer el recorrido completo de 24 semanas." : "If you would like to continue, you can explore the four-week Foundation stage for £97 or the complete 24-week journey.";
+    const whatsapp = spanish ? "Si te ayudaría conversar, puedes reservar una conversación gratuita de 15 minutos por WhatsApp con Tariq." : "If a conversation would help, you can book a free 15-minute WhatsApp conversation with Tariq.";
+    const whatsappLabel = spanish ? "Hablar con Tariq por WhatsApp" : "Speak with Tariq on WhatsApp";
+    const noPressure = spanish ? "No hay presión para elegir ningún siguiente paso." : "There is no pressure to choose any next step.";
     const caveat = spanish ? "Los resultados dependen de tus circunstancias, participación y práctica constante." : "Outcomes depend on your circumstances, participation and consistent practice.";
     const foundationLabel = spanish ? "Continuar con Foundation (£97)" : "Continue with Foundation (£97)";
     const journeyLabel = spanish ? "Explorar el recorrido completo de 24 semanas" : "Explore the complete 24-week journey";
-    body += "\n\n" + next + "\n" + foundationLabel + ":\n" + foundationUrl + "\n" + journeyLabel + ":\n" + journeyUrl + "\n\n" + caveat;
-    html += "<p>" + next + "</p><p><a href=\"" + foundationUrl + "\">" + foundationLabel + "</a><br><a href=\"" + journeyUrl + "\">" + journeyLabel + "</a></p><p>" + caveat + "</p>";
+    body += "\n\n" + congratulations + "\n\n" + whatsapp + "\n" + whatsappLabel + ":\n" + WHATSAPP_BOOKING_URL + "\n\n" + next + "\n" + foundationLabel + ":\n" + foundationUrl + "\n" + journeyLabel + ":\n" + journeyUrl + "\n\n" + noPressure + "\n" + caveat;
+    html += "<p>" + congratulations + "</p><p>" + whatsapp + "</p><p><a href=\"" + WHATSAPP_BOOKING_URL + "\">" + whatsappLabel + "</a></p><p>" + next + "</p><p><a href=\"" + foundationUrl + "\">" + foundationLabel + "</a><br><a href=\"" + journeyUrl + "\">" + journeyLabel + "</a></p><p>" + noPressure + " " + caveat + "</p>";
   }
   body += "\n\n" + signoff + ",\nTariq Saddique\nUnleash Your Power";
   html += "<p>" + signoff + ",<br>Tariq Saddique<br>Unleash Your Power</p>";
@@ -138,7 +150,7 @@ function doPost(e) {
     let welcomeStatus = "failed"; let welcomeSentAt = ""; let welcomeError = "";
     try {
       const email = welcomeEmail(lead);
-      MailApp.sendEmail(lead.email, "Welcome to your Free 7-Day Experience", email.body, { htmlBody: email.html });
+      MailApp.sendEmail(lead.email, email.subject, email.body, { htmlBody: email.html });
       welcomeStatus = "sent"; welcomeSentAt = new Date().toISOString();
     } catch (_) { welcomeError = "Email delivery failed"; }
     sheet.getRange(rowNumber, 18, 1, 3).setValues([[welcomeStatus, welcomeSentAt, welcomeError]]);

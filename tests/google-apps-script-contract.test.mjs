@@ -5,6 +5,8 @@ import vm from "node:vm";
 
 const source = readFileSync(new URL("../integrations/google-apps-script/lead-capture.gs", import.meta.url), "utf8");
 const fixedNow = new Date("2026-09-04T10:00:00Z").getTime();
+const bookingUrl = `https://wa.me/34611223345?text=${encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.")}`;
+const dashboardUrl = "https://unleashyourpowerwithtariq.com/start-free/";
 const lead = (overrides = {}) => ({
   gatewaySecret: "shared-secret", submissionId: "9d5e99a1-8280-4e41-89ac-4e2e051569d2", submittedAtMs: fixedNow - 5_000,
   firstName: "Ada", surname: "Lovelace", email: "ADA@example.test", whatsapp: "+34 611 223 345", goal: "Build a calmer daily practice.", difficulty: "I lose focus when busy.", consent: true, emailMarketing: false, sourcePage: "/start-free/", language: "en", website: "", ...overrides,
@@ -115,8 +117,26 @@ test("new lead is saved before one personalised welcome email is sent", () => {
   assert.equal(welcome[1], "Welcome to your Free 7-Day Experience");
   assert.match(welcome[2], /Hi Ada/);
   assert.match(welcome[2], /day-1-see-whats-running-your-life/);
+  assert.match(welcome[2], new RegExp(dashboardUrl));
+  assert.match(welcome[2], new RegExp(bookingUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(welcome[3].htmlBody, new RegExp(bookingUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal(app.rows[1][17], "sent");
   assert.ok(app.rows[1][18]);
+});
+
+test("Spanish registration receives a complete Spanish welcome with Day 1, dashboard, and optional WhatsApp links", () => {
+  const app = receiver();
+  app.submit(lead({ language: "es" }));
+  const welcome = app.sentEmails[1];
+
+  assert.equal(welcome[1], "Bienvenido a tu experiencia gratuita de 7 días");
+  assert.match(welcome[2], /Hola Ada/);
+  assert.match(welcome[2], /Tu registro se ha completado/);
+  assert.match(welcome[2], /Empieza el Día 1/);
+  assert.match(welcome[2], new RegExp(dashboardUrl));
+  assert.match(welcome[2], new RegExp(bookingUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(welcome[3].htmlBody, /habla con Tariq por WhatsApp/i);
+  assert.doesNotMatch(`${welcome[1]} ${welcome[2]} ${welcome[3].htmlBody}`, /\b(?:leadCapture|phase2|route|sequence)\.[A-Za-z]/);
 });
 
 test("duplicate submission does not send a second welcome email", () => {
@@ -231,6 +251,28 @@ test("sequence emails use every canonical Day 2 through Day 7 route and subject"
   assert.equal(app.rows[1][20], 7);
 });
 
+test("Days 2 through 6 carry the approved engagement purpose in English and Spanish", () => {
+  const english = receiver({ sequenceMode: "live" });
+  const spanish = receiver({ sequenceMode: "live" });
+  english.submit(lead({ emailMarketing: true }));
+  spanish.submit(lead({ emailMarketing: true, language: "es" }));
+  const expected = [
+    [2, /observe and reflect/i, /observa y reflexiona/i],
+    [3, /supportive check-in.+continue.+no purchase/i, /mensaje de apoyo.+continúa.+comprar/i],
+    [4, /consistent practice/i, /práctica constante/i],
+    [5, /review what you are noticing/i, /repasa lo que estás observando/i],
+    [6, /decide what you would like to do next/i, /decidir qué te gustaría hacer después/i],
+  ];
+
+  expected.forEach(([day, englishCopy, spanishCopy], index) => {
+    const due = new Date(`2026-09-${String(4 + day).padStart(2, "0")}T09:00:00+02:00`);
+    english.runSequence(due);
+    spanish.runSequence(due);
+    assert.match(english.sentEmails[index + 2][2], englishCopy);
+    assert.match(spanish.sentEmails[index + 2][2], spanishCopy);
+  });
+});
+
 test("Day 7 sequence email includes the existing Foundation and complete-journey links", () => {
   const app = receiver({ sequenceMode: "live" });
   app.submit(lead({ emailMarketing: true }));
@@ -241,7 +283,28 @@ test("Day 7 sequence email includes the existing Foundation and complete-journey
   assert.match(email[2], /https:\/\/unleashyourpowerwithtariq\.com\/master-key-system\//);
   assert.match(email[3].htmlBody, /V5QYXZZS6KQE2/);
   assert.match(email[3].htmlBody, /master-key-system/);
+  assert.match(email[2], /Congratulations.+reached the end of your Free 7-Day Experience/);
+  assert.match(email[2], /free 15-minute WhatsApp conversation/);
+  assert.match(email[2], new RegExp(bookingUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(email[3].htmlBody, new RegExp(bookingUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(email[2], /There is no pressure/);
   assert.match(email[2], /circumstances, participation and consistent practice/);
+});
+
+test("Spanish Day 7 congratulates the participant and offers every optional next step without pressure", () => {
+  const app = receiver({ sequenceMode: "live" });
+  app.submit(lead({ emailMarketing: true, language: "es" }));
+  for (let day = 2; day <= 7; day += 1) app.runSequence(new Date(`2026-09-${String(3 + day).padStart(2, "0")}T09:00:00+02:00`));
+  const email = app.sentEmails[7];
+
+  assert.match(email[2], /Enhorabuena.+has llegado al final de tu experiencia gratuita de 7 días/);
+  assert.match(email[2], /conversación gratuita de 15 minutos por WhatsApp/);
+  assert.match(email[2], new RegExp(bookingUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(email[2], /Foundation de cuatro semanas por £97/);
+  assert.match(email[2], /recorrido completo de 24 semanas/);
+  assert.match(email[2], /No hay presión/);
+  assert.match(email[3].htmlBody, /Enhorabuena/);
+  assert.doesNotMatch(`${email[1]} ${email[2]} ${email[3].htmlBody}`, /\b(?:leadCapture|phase2|route|sequence)\.[A-Za-z]/);
 });
 
 test("Spanish sequence email uses the existing Spanish lesson title and supportive copy", () => {
