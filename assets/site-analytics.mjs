@@ -1,6 +1,21 @@
 export const analyticsMeasurementId = "G-7TSSP2WYHJ";
 export const analyticsConsentStorageKey = "uyp.analyticsConsent";
 
+const allowedEventNames = new Set([
+  "page_view",
+  "generate_lead",
+  "begin_checkout",
+  "article_cta_click",
+  "start_free_view",
+  "start_free_registration_confirmed",
+  "day_1_open",
+  "day_7_completion",
+  "whatsapp_call_click",
+  "foundation_begin_checkout",
+  "complete_journey_begin_checkout",
+]);
+const foundationPaymentUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
+
 function readChoice(storage) {
   try {
     const value = storage?.getItem?.(analyticsConsentStorageKey);
@@ -50,9 +65,16 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
   };
 
   const emit = (name, parameters = {}) => {
-    if (choice !== "accepted" || typeof windowRef?.gtag !== "function") return false;
+    if (!allowedEventNames.has(name) || choice !== "accepted" || typeof windowRef?.gtag !== "function") return false;
     windowRef.gtag("event", name, safeEventParameters(name, parameters));
     return true;
+  };
+
+  const emitRouteEvents = () => {
+    const pathname = documentRef?.location?.pathname ?? "";
+    if (pathname === "/start-free/") emit("start_free_view");
+    if (pathname.startsWith("/start-free/day-1-")) emit("day_1_open");
+    if (pathname.startsWith("/start-free/day-7-")) emit("day_7_completion");
   };
 
   const load = () => {
@@ -77,6 +99,7 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
     script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsMeasurementId}`;
     documentRef.head?.appendChild?.(script);
     emit("page_view", { page_location: documentRef?.location?.pathname || "/" });
+    emitRouteEvents();
   };
 
   const acceptAnalytics = () => {
@@ -104,10 +127,20 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
   accept?.addEventListener?.("click", acceptAnalytics);
   decline?.addEventListener?.("click", declineAnalytics);
   preferences?.addEventListener?.("click", withdraw);
-  documentRef?.addEventListener?.("uyp:registration-success", () => emit("generate_lead", { method: "website" }));
+  documentRef?.addEventListener?.("uyp:registration-success", () => {
+    emit("generate_lead", { method: "website" });
+    emit("start_free_registration_confirmed");
+  });
   documentRef?.addEventListener?.("click", (event) => {
     const link = event.target?.closest?.("a[href]");
-    if (link?.href?.includes("paypal.com/ncp/payment/")) emit("begin_checkout", { currency: "GBP" });
+    const href = link?.href ?? "";
+    if (href.includes("/start-free/")) emit("article_cta_click");
+    if (href.includes("wa.me/34611223345")) emit("whatsapp_call_click");
+    if (link?.dataset?.analyticsEvent) emit(link.dataset.analyticsEvent);
+    if (href.includes("paypal.com/ncp/payment/")) {
+      emit("begin_checkout", { currency: "GBP" });
+      if (href.includes(foundationPaymentUrl)) emit("foundation_begin_checkout");
+    }
   });
 
   updateBanner();

@@ -25,6 +25,7 @@ function makeDom() {
         return { set async(value) { this.asyncValue = value; }, set src(value) { this.srcValue = value; } };
       },
       head: { appendChild(script) { scripts.push(script); } },
+      location: { pathname: "/" },
       addEventListener(type, listener) { documentListeners.set(type, listener); },
       removeEventListener() {},
     },
@@ -106,11 +107,32 @@ test("PayPal clicks and confirmed registration emit only anonymous conversion ev
   controller.accept();
   dom.documentListeners.get("click")({ target: { closest: () => ({ href: "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2" }) } });
   dom.documentListeners.get("uyp:registration-success")();
-  const conversionEvents = dom.window.calls.filter(([kind, name]) => kind === "event" && ["begin_checkout", "generate_lead"].includes(name));
+  const conversionEvents = dom.window.calls.filter(([kind, name]) => kind === "event" && ["begin_checkout", "generate_lead", "start_free_registration_confirmed"].includes(name));
   assert.deepEqual(conversionEvents.map(([, name, params]) => [name, params]), [
     ["begin_checkout", { currency: "GBP" }],
     ["generate_lead", { method: "website" }],
+    ["start_free_registration_confirmed", {}],
   ]);
+});
+
+test("route and choice hooks emit only their anonymous Phase 2 events", () => {
+  const dayOne = makeDom();
+  dayOne.document.location.pathname = "/start-free/day-1-see-whats-running-your-life/";
+  createAnalyticsController({ documentRef: dayOne.document, windowRef: dayOne.window, storage: dayOne.storage }).accept();
+
+  const daySeven = makeDom();
+  daySeven.document.location.pathname = "/start-free/day-7-make-it-part-of-how-you-live/";
+  const controller = createAnalyticsController({ documentRef: daySeven.document, windowRef: daySeven.window, storage: daySeven.storage });
+  controller.accept();
+  const click = daySeven.documentListeners.get("click");
+  click({ target: { closest: () => ({ href: "https://wa.me/34611223345?text=Hello", dataset: {} }) } });
+  click({ target: { closest: () => ({ href: "/master-key-system/", dataset: { analyticsEvent: "complete_journey_begin_checkout" } }) } });
+  click({ target: { closest: () => ({ href: "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2", dataset: {} }) } });
+
+  const eventNames = daySeven.window.calls.filter(([kind]) => kind === "event").map(([, name]) => name);
+  assert.ok(dayOne.window.calls.some(([kind, name, parameters]) => kind === "event" && name === "day_1_open" && Object.keys(parameters).length === 0));
+  for (const name of ["day_7_completion", "whatsapp_call_click", "complete_journey_begin_checkout", "begin_checkout", "foundation_begin_checkout"]) assert.ok(eventNames.includes(name));
+  assert.equal(daySeven.window.calls.filter(([kind, name]) => kind === "event" && name === "foundation_begin_checkout")[0][2].email, undefined);
 });
 
 test("Phase 2 conversion events allow only named anonymous events", () => {

@@ -1075,9 +1075,18 @@ const translations = deepFreeze({
   "conversion.foundation.cta": { en: "CONTINUE WITH FOUNDATION", es: "CONTINUAR CON FUNDAMENTOS" },
   "conversion.foundation.secondary": { en: "Explore the complete 24-week journey", es: "Explora el recorrido completo de 24 semanas" },
   "leadCapture.success.free": { en: "Free registration required. No purchase required.", es: "Registro gratuito obligatorio. No es necesario comprar." },
-  "leadCapture.success.nextSteps": { en: "What happens next: start Day 1 online, download the workbook, or optionally open WhatsApp to ask Tariq a question.", es: "Qué ocurre después: comienza el Día 1 online, descarga el cuaderno o abre WhatsApp opcionalmente para hacerle una pregunta a Tariq." },
-  "leadCapture.success.whatsapp": { en: "ASK A QUESTION ON WHATSAPP", es: "HACER UNA PREGUNTA POR WHATSAPP" },
-  "leadCapture.success.whatsappMessage": { en: "Hi Tariq, I've registered for the free 7-day experience and would like to ask a question.", es: "Hola Tariq, me he registrado en la experiencia gratuita de 7 días y me gustaría hacer una pregunta." },
+  "leadCapture.success.nextSteps": { en: "What happens next: start Day 1 online, download the workbook, or optionally open WhatsApp to book a free 15-minute call.", es: "Qué ocurre después: comienza el Día 1 online, descarga el cuaderno o abre WhatsApp opcionalmente para reservar una llamada gratuita de 15 minutos." },
+  "leadCapture.success.whatsapp": { en: "BOOK A FREE 15-MINUTE CALL ON WHATSAPP", es: "RESERVAR UNA LLAMADA GRATUITA DE 15 MINUTOS POR WHATSAPP" },
+  "sevenDay.day7.choices.eyebrow": { en: "YOUR OPTIONS", es: "TUS OPCIONES" },
+  "sevenDay.day7.choices.heading": { en: "Choose the next step that suits you", es: "Elige el siguiente paso que te convenga" },
+  "sevenDay.day7.choices.body": { en: "There is no pressure to decide today. Continue independently, ask a question, or explore more structure when it feels useful to you.", es: "No hay presión para decidir hoy. Continúa de forma independiente, haz una pregunta o explora una estructura mayor cuando te resulte útil." },
+  "sevenDay.day7.choices.resourcesTitle": { en: "USE THE RESOURCES", es: "USA LOS RECURSOS" },
+  "sevenDay.day7.choices.resourcesBody": { en: "Keep a steady independent practice with practical study guidance.", es: "Mantén una práctica independiente y constante con orientación práctica de estudio." },
+  "sevenDay.day7.choices.whatsappTitle": { en: "ASK ON WHATSAPP", es: "PREGUNTA POR WHATSAPP" },
+  "sevenDay.day7.choices.whatsappBody": { en: "Open an optional conversation with Tariq.", es: "Abre una conversación opcional con Tariq." },
+  "sevenDay.day7.choices.journeyTitle": { en: "EXPLORE THE COMPLETE JOURNEY", es: "EXPLORA EL RECORRIDO COMPLETO" },
+  "sevenDay.day7.choices.journeyBody": { en: "See the full 24-week Master Key System journey before deciding.", es: "Conoce el recorrido completo de 24 semanas del Master Key System antes de decidir." },
+  "sevenDay.day7.whatsappMessage": { en: "Hi Tariq, I have completed the free 7-day experience and would like to ask a question.", es: "Hola Tariq, he completado la experiencia gratuita de 7 días y me gustaría hacer una pregunta." },
 });
 
 const warnedKeys = new Set();
