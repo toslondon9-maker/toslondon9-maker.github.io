@@ -38,6 +38,7 @@ html:not(.has-js) .sevenDayRegistration form { display: none; }
 .sevenDayRegistration form[hidden] { display: none !important; }
 .sevenDayRegistration__successActions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
 .sevenDayRegistration__successActions > a { flex: 1 1 14rem; text-align: center; }
+.sevenDayRegistration__successWhatsapp { margin-top: .25rem; }
 .sevenDayRegistration label { display: grid; gap: .4rem; color: var(--navy, #0b2038); font-weight: 600; line-height: 1.45; }
 .sevenDayRegistration input:not([type="checkbox"]), .sevenDayRegistration textarea { width: 100%; min-height: 2.75rem; box-sizing: border-box; border: 1px solid #b78a3c; border-radius: .35rem; padding: .7rem; font: inherit; background: #fffdf8; color: #0b2038; }
 .sevenDayRegistration input.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }

@@ -1074,6 +1074,10 @@ const translations = deepFreeze({
   "conversion.foundation.qualification": { en: "Individual outcomes depend on your circumstances, participation and consistent practice.", es: "Los resultados individuales dependen de tus circunstancias, participación y práctica constante." },
   "conversion.foundation.cta": { en: "CONTINUE WITH FOUNDATION", es: "CONTINUAR CON FUNDAMENTOS" },
   "conversion.foundation.secondary": { en: "Explore the complete 24-week journey", es: "Explora el recorrido completo de 24 semanas" },
+  "leadCapture.success.free": { en: "Free registration required. No purchase required.", es: "Registro gratuito obligatorio. No es necesario comprar." },
+  "leadCapture.success.nextSteps": { en: "What happens next: start Day 1 online, download the workbook, or optionally open WhatsApp to ask Tariq a question.", es: "Qué ocurre después: comienza el Día 1 online, descarga el cuaderno o abre WhatsApp opcionalmente para hacerle una pregunta a Tariq." },
+  "leadCapture.success.whatsapp": { en: "ASK A QUESTION ON WHATSAPP", es: "HACER UNA PREGUNTA POR WHATSAPP" },
+  "leadCapture.success.whatsappMessage": { en: "Hi Tariq, I've registered for the free 7-day experience and would like to ask a question.", es: "Hola Tariq, me he registrado en la experiencia gratuita de 7 días y me gustaría hacer una pregunta." },
 });
 
 const warnedKeys = new Set();
