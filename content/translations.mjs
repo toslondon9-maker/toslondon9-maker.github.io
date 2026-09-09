@@ -341,6 +341,11 @@ const translations = deepFreeze({
     es: "Una pista independiente de afirmaciones para acompañar tu estudio y tu práctica tranquila.",
   },
   "resources.audio.playerFallback": { en: "Your browser does not support HTML audio.", es: "Tu navegador no admite audio HTML." },
+  "resources.audio.externalLabel": { en: "Listen online · External recording", es: "Escuchar online · Grabación externa" },
+  "resources.audio.externalNote": {
+    en: "These four lessons currently link to external recordings. They may differ from the locally provided audio collection.",
+    es: "Estas cuatro lecciones enlazan actualmente a grabaciones externas. Pueden diferir de la colección de audio proporcionada localmente.",
+  },
   "aiMentor.hero.title": { en: "Your Master Key Study Companion", es: "Tu acompañante de estudio del Master Key" },
   "aiMentor.hero.intro": {
     en: "Choose a perspective and chapter, then explore the lesson in a thoughtful conversation without leaving Unleash Your Power.",

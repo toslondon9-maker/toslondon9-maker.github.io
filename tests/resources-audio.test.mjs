@@ -9,13 +9,29 @@ const audioRoot = new URL("../audio/mks/", import.meta.url);
 test("Resources renders every supplied lesson audio with its actual chapter number and title", async () => {
   const page = resourcesPage();
   assert.match(page.body, /Master Key System Audio Lessons/);
-  assert.doesNotMatch(page.body, /Lesson_9\.mp3|Lesson_11\.mp3|Lesson_19\.mp3|Lesson_23\.mp3/);
 
   for (const number of lessonNumbers) {
     await access(new URL(`Lesson_${number}.mp3`, audioRoot));
     assert.match(page.body, new RegExp(`/audio/mks/Lesson_${number}\.mp3`));
     assert.match(page.body, new RegExp(`>${String(number).padStart(2, "0")}<`));
   }
+});
+
+test("missing lessons use clearly labelled external recordings without local MP3 links", () => {
+  const page = resourcesPage().body;
+  const external = [
+    [9, "XfuM-NAMX3E"],
+    [11, "sDKwDhfXTOM"],
+    [19, "SSH9AioaNZE"],
+    [23, "tzNhOZTELX4"],
+  ];
+  for (const [number, videoId] of external) {
+    assert.match(page, new RegExp(`Lesson ${number === 9 || number === 11 || number === 19 || number === 23 ? number : number}`));
+    assert.match(page, new RegExp(`youtube\\.com/watch\\?v=${videoId}`));
+    assert.match(page, /target="_blank" rel="noopener noreferrer"/);
+    assert.doesNotMatch(page, new RegExp(`Lesson_${number}\\.mp3`));
+  }
+  assert.match(page, /These four lessons currently link to external recordings/);
 });
 
 test("Resources separates the supplied affirmations track and keeps labels bilingual", async () => {

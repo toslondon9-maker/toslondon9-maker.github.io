@@ -582,12 +582,16 @@ main > article {
 .resourcesPage__audioNumber { color: #85611f; font-size: .78rem; font-weight: 800; letter-spacing: .12em; }
 .resourcesPage__audioCard h3 { margin: .35rem 0 .4rem; font-size: 1.1rem; }
 .resourcesPage__audioCard p, .resourcesPage__affirmations p { margin: 0; color: var(--muted, #59616d); font-size: .92rem; }
+.resourcesPage__audioCard--external { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.resourcesPage__audioCard--external .button--secondary { flex: 0 0 auto; white-space: nowrap; }
+.resourcesPage__externalNote { margin: 1.2rem 0 0; color: var(--muted, #59616d); font-size: .9rem; }
 .resourcesPage__audio audio, .resourcesPage__affirmations audio { display: block; width: 100%; max-width: 100%; }
 .resourcesPage__affirmations { margin-top: 2rem; padding: 1.4rem; border: 1px solid rgba(16,36,59,.32); border-radius: 16px; background: var(--navy, #10243b); color: var(--cream, #f7f0e2); }
 .resourcesPage__affirmations h2 { color: var(--cream, #f7f0e2); }
 .resourcesPage__affirmations p { color: rgba(247,240,226,.82); margin-bottom: 1rem; }
 @media (max-width: 700px) { .resourcesPage { padding: 3rem 1rem 4rem; } .resourcesPage__grid { grid-template-columns: 1fr; } .resourcesPage__links { flex-direction: column; } }
 @media (max-width: 700px) { .resourcesPage__audioGrid { grid-template-columns: 1fr; } .resourcesPage__audio { padding: 1.2rem; } }
+@media (max-width: 700px) { .resourcesPage__audioCard--external { align-items: flex-start; flex-direction: column; } .resourcesPage__audioCard--external .button--secondary { width: 100%; text-align: center; } }
 
 .homeOutcome,
 .coachingOutcome {

@@ -4,6 +4,13 @@ import { aiMentorChapters } from "./ai-mentors.mjs";
 
 const esc = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 const lessonNumbers = Object.freeze([1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 24]);
+const externalLessons = Object.freeze({
+  9: "https://www.youtube.com/watch?v=XfuM-NAMX3E",
+  11: "https://www.youtube.com/watch?v=sDKwDhfXTOM",
+  19: "https://www.youtube.com/watch?v=SSH9AioaNZE",
+  23: "https://www.youtube.com/watch?v=tzNhOZTELX4",
+});
+const allLessonNumbers = Object.freeze([...lessonNumbers, 9, 11, 19, 23].sort((a, b) => a - b));
 const affirmationsFile = "The Master Key System Affirmations For Success And Prosperity.mp3";
 
 function audioCard(number, language) {
@@ -14,10 +21,17 @@ function audioCard(number, language) {
   return `<figure class="resourcesPage__audioCard"><figcaption><span class="resourcesPage__audioNumber">${String(number).padStart(2, "0")}</span><h3>${esc(chapter.title)}</h3><p>${esc(description)}</p></figcaption><audio controls preload="none" aria-label="${esc(`${label}: ${chapter.title}`)}"><source src="/audio/mks/${encodeURIComponent(file)}" type="audio/mpeg">${esc(t("resources.audio.playerFallback", language))}</audio></figure>`;
 }
 
+function externalAudioCard(number, language) {
+  const chapter = aiMentorChapters[number - 1];
+  const label = t("resources.audio.externalLabel", language);
+  const lessonLabel = language === "es" ? `Lección ${number}` : `Lesson ${number}`;
+  return `<article class="resourcesPage__audioCard resourcesPage__audioCard--external"><div><span class="resourcesPage__audioNumber">${String(number).padStart(2, "0")}</span><h3>${esc(chapter.title)}</h3><p>${esc(`${lessonLabel} · ${label}`)}</p></div><a class="button--secondary" href="${externalLessons[number]}" target="_blank" rel="noopener noreferrer" aria-label="${esc(`${label}: ${chapter.title}`)}">${esc(language === "es" ? "ESCUCHAR ONLINE" : "LISTEN ONLINE")} <span aria-hidden="true">↗</span></a></article>`;
+}
+
 function audioSection(language) {
-  const lessons = lessonNumbers.map((number) => audioCard(number, language)).join("");
+  const lessons = allLessonNumbers.map((number) => externalLessons[number] ? externalAudioCard(number, language) : audioCard(number, language)).join("");
   const affirmationsLabel = t("resources.audio.affirmationsTitle", language);
-  return `<section class="resourcesPage__audio" aria-labelledby="resources-audio-title"><p class="eyebrow">${esc(t("resources.audio.eyebrow", language))}</p><h2 id="resources-audio-title">${esc(t("resources.audio.title", language))}</h2><p class="resourcesPage__audioIntro">${esc(t("resources.audio.intro", language))}</p><div class="resourcesPage__audioGrid">${lessons}</div><section class="resourcesPage__affirmations" aria-labelledby="resources-affirmations-title"><p class="eyebrow">MKS</p><h2 id="resources-affirmations-title">${esc(affirmationsLabel)}</h2><p>${esc(t("resources.audio.affirmationsDescription", language))}</p><audio controls preload="none" aria-label="${esc(affirmationsLabel)}"><source src="/audio/mks/${encodeURIComponent(affirmationsFile)}" type="audio/mpeg">${esc(t("resources.audio.playerFallback", language))}</audio></section></section>`;
+  return `<section class="resourcesPage__audio" aria-labelledby="resources-audio-title"><p class="eyebrow" data-i18n="resources.audio.eyebrow">${esc(t("resources.audio.eyebrow", language))}</p><h2 id="resources-audio-title" data-i18n="resources.audio.title">${esc(t("resources.audio.title", language))}</h2><p class="resourcesPage__audioIntro" data-i18n="resources.audio.intro">${esc(t("resources.audio.intro", language))}</p><div class="resourcesPage__audioGrid">${lessons}</div><p class="resourcesPage__externalNote" data-i18n="resources.audio.externalNote">${esc(t("resources.audio.externalNote", language))}</p><section class="resourcesPage__affirmations" aria-labelledby="resources-affirmations-title"><p class="eyebrow">MKS</p><h2 id="resources-affirmations-title">${esc(affirmationsLabel)}</h2><p>${esc(t("resources.audio.affirmationsDescription", language))}</p><audio controls preload="none" aria-label="${esc(affirmationsLabel)}"><source src="/audio/mks/${encodeURIComponent(affirmationsFile)}" type="audio/mpeg">${esc(t("resources.audio.playerFallback", language))}</audio></section></section>`;
 }
 
 export function resourcesPage(data = siteData, language = "en") {
