@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { canSubmitLeadForm, formMessages, localizeForm, formCopy, formatLeadError, showRegistrationSuccess, submissionTimestamp } from "../assets/lead-capture-form.mjs";
+import { bookingCallHref } from "../src/whatsapp.mjs";
 
 let runtimeId = 0;
 
@@ -137,11 +138,11 @@ test("browser error copy appends the Worker reference ID", () => {
 
 test("visible registration labels and success choices change when the language runtime switches", () => {
   const first = { dataset: { leadLabel: "first" }, textContent: "" }; const consent = { dataset: { leadLabel: "consent" }, textContent: "" };
-  const placeholder = { dataset: { leadPlaceholder: "first" }, placeholder: "" }; const status = { textContent: "" }; const button = { textContent: "" }; const success = { textContent: "" }; const successFree = { textContent: "" }; const successPrompt = { textContent: "" }; const successNextSteps = { textContent: "" }; const successAction = { textContent: "" }; const successDownload = { textContent: "" }; const successWhatsapp = { textContent: "", href: "", setAttribute(name, value) { this[name] = value; } }; const successNote = { textContent: "" };
+  const placeholder = { dataset: { leadPlaceholder: "first" }, placeholder: "" }; const status = { textContent: "" }; const button = { textContent: "" }; const success = { textContent: "" }; const successFree = { textContent: "" }; const successPrompt = { textContent: "" }; const successNextSteps = { textContent: "" }; const successAction = { textContent: "" }; const successDownload = { textContent: "" }; const successWhatsapp = { textContent: "", href: bookingCallHref("34611223345") }; const successNote = { textContent: "" };
   const form = { dataset: { leadState: "unavailable", leadMessage: "" }, querySelectorAll: (selector) => selector.includes("placeholder") ? [placeholder] : [first, consent], querySelector: (selector) => selector.includes("status") ? status : selector.includes("submit") ? button : null };
   localizeForm(form, "es", { querySelector: (selector) => selector.includes("success-free") ? successFree : selector.includes("success-prompt") ? successPrompt : selector.includes("success-next-steps") ? successNextSteps : selector.includes("success-action") ? successAction : selector.includes("success-download") ? successDownload : selector.includes("success-whatsapp") ? successWhatsapp : selector.includes("success-note") ? successNote : success });
   assert.equal(first.textContent, "Nombre"); assert.match(consent.textContent, /Acepto/); assert.equal(placeholder.placeholder, "Tu nombre"); assert.match(status.textContent, /WhatsApp/); assert.equal(button.textContent, "COMENZAR MIS 7 DÍAS GRATIS"); assert.match(success.textContent, /Bienvenido/);
-  assert.match(successFree.textContent, /No es necesario comprar/); assert.equal(successPrompt.textContent, "Elige cómo te gustaría continuar."); assert.match(successNextSteps.textContent, /Qué ocurre después/); assert.equal(successAction.textContent, "COMPLETAR ONLINE"); assert.equal(successDownload.textContent, "DESCARGAR EL CUADERNO (PDF)"); assert.match(successWhatsapp.textContent, /WHATSAPP/); assert.match(successWhatsapp.href, /^https:\/\/wa\.me\/34611223345\?text=/); assert.equal(successNote.textContent, "Puedes usar una opción, o ambas.");
+  assert.match(successFree.textContent, /No es necesario comprar/); assert.equal(successPrompt.textContent, "Elige cómo te gustaría continuar."); assert.match(successNextSteps.textContent, /Qué ocurre después/); assert.equal(successAction.textContent, "COMPLETAR ONLINE"); assert.equal(successDownload.textContent, "DESCARGAR EL CUADERNO (PDF)"); assert.match(successWhatsapp.textContent, /WHATSAPP/); assert.equal(successWhatsapp.href, bookingCallHref("34611223345")); assert.equal(successNote.textContent, "Puedes usar una opción, o ambas.");
 });
 
 test("browser validation blocks fetch and focuses each blank qualifying answer", async () => {
@@ -190,7 +191,7 @@ test("only an HTTPS Worker lead endpoint enables registration", () => {
 
 test("English and Spanish copy includes all interactive registration states", () => {
   for (const language of ["en", "es"]) {
-    for (const key of ["heading", "helper", "consent", "marketing", "privacy", "submit", "loading", "success", "successFree", "successPrompt", "successNextSteps", "successAction", "successDownload", "successWhatsapp", "successWhatsappMessage", "successNote", "required", "invalidEmail", "invalidWhatsapp", "failure", "unavailable"]) {
+    for (const key of ["heading", "helper", "consent", "marketing", "privacy", "submit", "loading", "success", "successFree", "successPrompt", "successNextSteps", "successAction", "successDownload", "successWhatsapp", "successNote", "required", "invalidEmail", "invalidWhatsapp", "failure", "unavailable"]) {
       assert.equal(typeof formCopy[language][key], "string", `${language}.${key}`);
       assert.ok(formCopy[language][key].length > 3, `${language}.${key}`);
     }

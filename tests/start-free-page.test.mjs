@@ -5,6 +5,7 @@ import { sevenDayExperience } from "../content/seven-day-experience.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { routeRenderers } from "../src/routes.mjs";
+import { bookingCallHref } from "../src/whatsapp.mjs";
 import { renderStartFree } from "../src/pages/start-free.mjs";
 
 const dashboard = () => routeRenderers[siteData.routes.startFree](siteData);
@@ -141,7 +142,7 @@ test("registration success explains the free Day 1 and optional WhatsApp next st
     assert.match(success, copy.welcome);
     assert.match(success, copy.noPurchase);
     assert.match(success, /data-lead-success-action[^>]+href="\/start-free\/day-1-see-whats-running-your-life\/"/);
-    assert.match(success, /data-lead-success-whatsapp[^>]+href="https:\/\/wa\.me\/34611223345\?text=[^"]+"[^>]*>[^<]*WhatsApp/i);
+    assert.match(success, new RegExp(`data-lead-success-whatsapp[^>]+href="${escapeRegExp(bookingCallHref(siteData.contact.whatsapp))}"[^>]*>[^<]*WhatsApp`, "i"));
     assert.match(success, /data-lead-success-next-steps/);
     assert.match(success, copy.next);
   }
