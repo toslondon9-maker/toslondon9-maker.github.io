@@ -60,6 +60,19 @@ test("the Insights hub links the three branded collection articles", () => {
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
 });
 
+test("the Insights hub gives bilingual readers a free-study or optional WhatsApp choice", () => {
+  const english = insightsIndexPage(undefined, "en").body;
+  const spanish = insightsIndexPage(undefined, "es").body;
+  const bookingMessage = encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
+
+  assert.match(english, /Start with the free seven-day experience, or book a free 15-minute WhatsApp call to ask a question before you begin\./);
+  assert.match(english, /BOOK A FREE 15-MINUTE CALL/);
+  assert.match(english, new RegExp(`href="https://wa\\.me/34611223345\\?text=${bookingMessage}"`));
+  assert.match(english, /target="_blank" rel="noopener noreferrer"/);
+  assert.match(spanish, /Empieza con la experiencia gratuita de siete días o reserva una llamada gratuita de 15 minutos por WhatsApp para hacer una pregunta antes de empezar\./);
+  assert.match(spanish, /RESERVAR UNA LLAMADA GRATUITA DE 15 MINUTOS/);
+});
+
 test("the principles article contains all eight principles, careful Tact guidance and the PDF CTA", () => {
   const english = insightsPrinciplesPage(undefined, "en");
   const spanish = insightsPrinciplesPage(undefined, "es");
