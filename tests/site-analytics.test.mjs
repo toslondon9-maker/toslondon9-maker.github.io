@@ -113,6 +113,23 @@ test("PayPal clicks and confirmed registration emit only anonymous conversion ev
   ]);
 });
 
+test("Phase 2 conversion events allow only named anonymous events", () => {
+  const dom = makeDom();
+  const controller = createAnalyticsController({ documentRef: dom.document, windowRef: dom.window, storage: dom.storage });
+  controller.accept();
+  const phaseTwoEvents = [
+    "article_cta_click", "start_free_view", "start_free_registration_confirmed", "day_1_open",
+    "day_7_completion", "whatsapp_call_click", "foundation_begin_checkout", "complete_journey_begin_checkout",
+  ];
+
+  for (const name of phaseTwoEvents) assert.equal(controller.trackEvent(name, { email: "visitor@example.test", firstName: "Visitor", whatsapp: "+34611223345" }), true);
+  assert.equal(controller.trackEvent("unapproved_conversion", { email: "visitor@example.test" }), false);
+
+  const events = dom.window.calls.filter(([kind, name]) => kind === "event" && phaseTwoEvents.includes(name));
+  assert.deepEqual(events.map(([, name, parameters]) => [name, parameters]), phaseTwoEvents.map((name) => [name, {}]));
+  assert.equal(dom.window.calls.some(([kind, name]) => kind === "event" && name === "unapproved_conversion"), false);
+});
+
 test("shared chrome exposes bilingual consent controls and preferences", () => {
   const footer = renderFooter({ language: "es" });
   assert.match(footer, /data-analytics-preferences/);

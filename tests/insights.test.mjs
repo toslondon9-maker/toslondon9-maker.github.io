@@ -91,3 +91,16 @@ test("the introduction and world-within articles render bilingual content, links
   assert.match(insightsIntroductionPage(undefined, "es").body, /La mente como poder creativo/);
   assert.match(insightsWorldWithinPage(undefined, "es").body, /El mundo interior/);
 });
+
+test("every published article has one free-experience hook, a 24-week journey hook, and no payment link", () => {
+  const articles = [insightsCoursePage, insightsIntroductionPage, insightsWorldWithinPage, insightsPrinciplesPage];
+
+  for (const renderArticle of articles) {
+    const body = renderArticle(undefined, "en").body;
+    const startHooks = body.match(/<a\b(?=[^>]*href="\/start-free\/")[^>]*>START THE FREE SEVEN-DAY EXPERIENCE<\/a>/g) ?? [];
+
+    assert.equal(startHooks.length, 1, "article has one primary free-experience CTA");
+    assert.match(body, /<a\b(?=[^>]*href="\/master-key-system\/")[^>]*data-i18n="insights\.cta\.viewJourney"/);
+    assert.doesNotMatch(body, /paypal\.com/i);
+  }
+});

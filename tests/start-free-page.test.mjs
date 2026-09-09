@@ -122,6 +122,31 @@ test("success panel offers online and PDF continuation choices", () => {
   assert.match(html, /data-lead-success-note/);
 });
 
+test("registration success explains the free Day 1 and optional WhatsApp next step in both languages", () => {
+  const expected = {
+    en: {
+      welcome: /Welcome to Unleash Your Power/, noPurchase: /Free registration required\. No purchase required\./,
+      next: /what happens next|next step/i,
+    },
+    es: {
+      welcome: /Bienvenid[oa]/i, noPurchase: /Registro gratuito obligatorio\. No es necesario comprar\./,
+      next: /qué ocurre después|siguiente paso/i,
+    },
+  };
+
+  for (const [language, copy] of Object.entries(expected)) {
+    const html = renderStartFree({ language });
+    const success = html.match(/<div class="sevenDayRegistration__success"[\s\S]*?<\/div><\/div><\/section>/)?.[0] ?? "";
+
+    assert.match(success, copy.welcome);
+    assert.match(success, copy.noPurchase);
+    assert.match(success, /data-lead-success-action[^>]+href="\/start-free\/day-1-see-whats-running-your-life\/"/);
+    assert.match(success, /data-lead-success-whatsapp[^>]+href="https:\/\/wa\.me\/34611223345\?text=[^"]+"[^>]*>[^<]*WhatsApp/i);
+    assert.match(success, /data-lead-success-next-steps/);
+    assert.match(success, copy.next);
+  }
+});
+
 test("hidden registration form stays out of layout despite generic form display", () => {
   const css = fs.readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
   assert.match(css, /\.sevenDayRegistration form\[hidden\]\s*\{[\s\S]*display:\s*none\s*!important/);

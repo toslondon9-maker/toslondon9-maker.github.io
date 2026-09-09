@@ -141,6 +141,25 @@ test("only Day 7 places the Foundation next step after completion and before the
   }
 });
 
+test("only Day 7 presents resources, WhatsApp, Foundation, and the complete journey choices", () => {
+  const foundation = siteData.stages.find((stage) => stage.id === "foundation");
+  assert.ok(foundation, "the canonical Foundation offer is available");
+
+  for (const lesson of sevenDayExperience.lessons) {
+    const html = lessonPage(lesson).body;
+
+    if (lesson.sequence < 7) {
+      assert.doesNotMatch(html, /class="foundationNextStep"/);
+      continue;
+    }
+
+    assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.resources)}"`));
+    assert.match(html, /href="https:\/\/wa\.me\/34611223345\?text=[^"]+"/);
+    assert.match(html, new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"`));
+    assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.masterKeySystem)}"`));
+  }
+});
+
 test("the workbook follows all four daily practice cards", () => {
   const html = lessonPage(sevenDayExperience.lessons[0]).body;
   const action = html.indexOf('data-i18n="sevenDay.lesson.actionHeading"');
