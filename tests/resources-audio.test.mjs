@@ -5,7 +5,7 @@ import { resourcesPage } from "../src/pages/resources.mjs";
 import { resourcesAudioPage } from "../src/pages/resources-audio.mjs";
 import { siteData } from "../content/site-data.mjs";
 
-const lessonNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 24];
+const lessonNumbers = Array.from({ length: 24 }, (_, index) => index + 1);
 const audioRoot = new URL("../audio/mks/", import.meta.url);
 
 test("main Resources keeps LISTEN as a compact link card without audio players", () => {
@@ -16,7 +16,7 @@ test("main Resources keeps LISTEN as a compact link card without audio players",
   assert.doesNotMatch(page.body, /youtube\.com\/watch\?v=/);
 });
 
-test("the guided-practice destination contains every available audio and missing-lesson links", async () => {
+test("the guided-practice destination contains all 24 local lessons in numerical order", async () => {
   const page = resourcesAudioPage();
   assert.equal(page.route, siteData.routes.resourcesAudio);
   assert.match(page.body, /Master Key System Audio Lessons/);
@@ -24,31 +24,17 @@ test("the guided-practice destination contains every available audio and missing
   for (const number of lessonNumbers) {
     await access(new URL(`Lesson_${number}.mp3`, audioRoot));
     assert.match(page.body, new RegExp(`/audio/mks/Lesson_${number}\.mp3`));
+    assert.equal((page.body.match(new RegExp(`/audio/mks/Lesson_${number}\.mp3`, "g")) ?? []).length, 1);
     assert.match(page.body, new RegExp(`>${String(number).padStart(2, "0")}<`));
   }
-  assert.equal((page.body.match(/<audio controls/g) ?? []).length, 21);
-  assert.match(page.body, /XfuM-NAMX3E/);
-  assert.match(page.body, /sDKwDhfXTOM/);
-  assert.match(page.body, /SSH9AioaNZE/);
-  assert.match(page.body, /tzNhOZTELX4/);
+  assert.equal((page.body.match(/<audio controls/g) ?? []).length, 25);
+  assert.doesNotMatch(page.body, /youtube\.com\/watch\?v=/);
+  assert.doesNotMatch(page.body, /External recording/);
+  assert.doesNotMatch(page.body, /These four lessons currently link to external recordings/);
+  const lessonPositions = lessonNumbers.map((number) => page.body.indexOf(`/audio/mks/Lesson_${number}.mp3`));
+  assert.ok(lessonPositions.every((position) => position >= 0));
+  assert.deepEqual([...lessonPositions].sort((a, b) => a - b), lessonPositions);
   assert.match(page.body, /MKS Affirmations for Success and Prosperity/);
-});
-
-test("missing lessons use clearly labelled external recordings without local MP3 links", () => {
-  const page = resourcesAudioPage().body;
-  const external = [
-    [9, "XfuM-NAMX3E"],
-    [11, "sDKwDhfXTOM"],
-    [19, "SSH9AioaNZE"],
-    [23, "tzNhOZTELX4"],
-  ];
-  for (const [number, videoId] of external) {
-    assert.match(page, new RegExp(`Lesson ${number === 9 || number === 11 || number === 19 || number === 23 ? number : number}`));
-    assert.match(page, new RegExp(`youtube\\.com/watch\\?v=${videoId}`));
-    assert.match(page, /target="_blank" rel="noopener noreferrer"/);
-    assert.doesNotMatch(page, new RegExp(`Lesson_${number}\\.mp3`));
-  }
-  assert.match(page, /These four lessons currently link to external recordings/);
 });
 
 test("Resources separates the supplied affirmations track and keeps labels bilingual", async () => {
@@ -62,7 +48,7 @@ test("Resources separates the supplied affirmations track and keeps labels bilin
   assert.match(spanish, /Afirmaciones del MKS para el éxito y la prosperidad/);
   assert.match(spanish, /Audio de la lección 1/);
   assert.match(english, /<audio controls[^>]+aria-label=/g);
-  assert.equal((english.match(/<audio controls/g) ?? []).length, 21);
+  assert.equal((english.match(/<audio controls/g) ?? []).length, 25);
 });
 
 test("the build copies the complete audio directory into generated output", async () => {
