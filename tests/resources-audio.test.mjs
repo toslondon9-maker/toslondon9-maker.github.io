@@ -9,6 +9,10 @@ const audioRoot = new URL("../audio/mks/", import.meta.url);
 test("Resources renders every supplied lesson audio with its actual chapter number and title", async () => {
   const page = resourcesPage();
   assert.match(page.body, /Master Key System Audio Lessons/);
+  const listenStart = page.body.indexOf('<section class="resourcesPage__group resourcesPage__group--listen"');
+  const listenEnd = page.body.indexOf('</section>', listenStart);
+  assert.ok(listenStart >= 0 && listenEnd > listenStart, "LISTEN section should be present");
+  assert.ok(page.body.slice(listenStart, listenEnd).includes("resourcesPage__audio"), "audio should be nested in LISTEN");
 
   for (const number of lessonNumbers) {
     await access(new URL(`Lesson_${number}.mp3`, audioRoot));
@@ -40,6 +44,7 @@ test("Resources separates the supplied affirmations track and keeps labels bilin
   const file = "The Master Key System Affirmations For Success And Prosperity.mp3";
   await access(new URL(file, audioRoot));
   assert.match(english, /MKS Affirmations for Success and Prosperity/);
+  assert.equal((english.match(/Master Key System Audio Lessons/g) ?? []).length, 1);
   assert.match(english, /audio\/mks\/The%20Master%20Key%20System%20Affirmations%20For%20Success%20And%20Prosperity\.mp3/);
   assert.match(spanish, /Afirmaciones del MKS para el éxito y la prosperidad/);
   assert.match(spanish, /Audio de la lección 1/);
