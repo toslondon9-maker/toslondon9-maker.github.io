@@ -1086,7 +1086,6 @@ const translations = deepFreeze({
   "sevenDay.day7.choices.whatsappBody": { en: "Open an optional conversation with Tariq.", es: "Abre una conversación opcional con Tariq." },
   "sevenDay.day7.choices.journeyTitle": { en: "EXPLORE THE COMPLETE JOURNEY", es: "EXPLORA EL RECORRIDO COMPLETO" },
   "sevenDay.day7.choices.journeyBody": { en: "See the full 24-week Master Key System journey before deciding.", es: "Conoce el recorrido completo de 24 semanas del Master Key System antes de decidir." },
-  "sevenDay.day7.whatsappMessage": { en: "Hi Tariq, I have completed the free 7-day experience and would like to ask a question.", es: "Hola Tariq, he completado la experiencia gratuita de 7 días y me gustaría hacer una pregunta." },
 });
 
 const warnedKeys = new Set();

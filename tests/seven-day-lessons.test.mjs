@@ -5,6 +5,7 @@ import { sevenDayExperience } from "../content/seven-day-experience.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { routeRenderers } from "../src/routes.mjs";
+import { bookingCallHref } from "../src/whatsapp.mjs";
 
 function lessonPage(lesson) {
   return routeRenderers[lesson.route](siteData);
@@ -154,7 +155,7 @@ test("only Day 7 presents resources, WhatsApp, Foundation, and the complete jour
     }
 
     assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.resources)}"`));
-    assert.match(html, /href="https:\/\/wa\.me\/34611223345\?text=[^"]+"/);
+    assert.match(html, new RegExp(`href="${escapeRegExp(bookingCallHref(siteData.contact.whatsapp))}"[^>]+target="_blank" rel="noopener noreferrer"`));
     assert.match(html, new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"`));
     assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.masterKeySystem)}"`));
   }

@@ -115,7 +115,7 @@ test("PayPal clicks and confirmed registration emit only anonymous conversion ev
   ]);
 });
 
-test("route and choice hooks emit only their anonymous Phase 2 events", () => {
+test("route loads stay informational while explicit conversion actions emit anonymous Phase 2 events", () => {
   const dayOne = makeDom();
   dayOne.document.location.pathname = "/start-free/day-1-see-whats-running-your-life/";
   createAnalyticsController({ documentRef: dayOne.document, windowRef: dayOne.window, storage: dayOne.storage }).accept();
@@ -125,13 +125,20 @@ test("route and choice hooks emit only their anonymous Phase 2 events", () => {
   const controller = createAnalyticsController({ documentRef: daySeven.document, windowRef: daySeven.window, storage: daySeven.storage });
   controller.accept();
   const click = daySeven.documentListeners.get("click");
-  click({ target: { closest: () => ({ href: "https://wa.me/34611223345?text=Hello", dataset: {} }) } });
-  click({ target: { closest: () => ({ href: "/master-key-system/", dataset: { analyticsEvent: "complete_journey_begin_checkout" } }) } });
-  click({ target: { closest: () => ({ href: "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2", dataset: {} }) } });
+  click({ target: { closest: (selector) => selector === "[data-progress-complete]" ? { dataset: { progressComplete: "day-7" } } : null } });
+  click({ target: { closest: (selector) => selector === "a[href]" ? ({ href: "https://wa.me/34611223345?text=Hello", dataset: {} }) : null } });
+  click({ target: { closest: (selector) => selector === "a[href]" ? ({ href: "/master-key-system/", dataset: {} }) : null } });
+  click({ target: { closest: (selector) => selector === "a[href]" ? ({ href: "/start-free/", dataset: { i18n: "nav.startFree" } }) : null } });
+  click({ target: { closest: (selector) => selector === "a[href]" ? ({ href: "/start-free/", dataset: { i18n: "insights.cta.start" } }) : null } });
+  click({ target: { closest: (selector) => selector === "a[href]" ? ({ href: "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6", dataset: {} }) : null } });
+  click({ target: { closest: (selector) => selector === "a[href]" ? ({ href: "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2", dataset: {} }) : null } });
 
   const eventNames = daySeven.window.calls.filter(([kind]) => kind === "event").map(([, name]) => name);
   assert.ok(dayOne.window.calls.some(([kind, name, parameters]) => kind === "event" && name === "day_1_open" && Object.keys(parameters).length === 0));
   for (const name of ["day_7_completion", "whatsapp_call_click", "complete_journey_begin_checkout", "begin_checkout", "foundation_begin_checkout"]) assert.ok(eventNames.includes(name));
+  assert.equal(eventNames.filter((name) => name === "article_cta_click").length, 1);
+  assert.equal(eventNames.filter((name) => name === "complete_journey_begin_checkout").length, 1);
+  assert.equal(daySeven.window.calls.slice(0, 4).some(([kind, name]) => kind === "event" && name === "day_7_completion"), false);
   assert.equal(daySeven.window.calls.filter(([kind, name]) => kind === "event" && name === "foundation_begin_checkout")[0][2].email, undefined);
 });
 

@@ -15,6 +15,7 @@ const allowedEventNames = new Set([
   "complete_journey_begin_checkout",
 ]);
 const foundationPaymentUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
+const completeJourneyPaymentUrl = "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6";
 
 function readChoice(storage) {
   try {
@@ -74,7 +75,6 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
     const pathname = documentRef?.location?.pathname ?? "";
     if (pathname === "/start-free/") emit("start_free_view");
     if (pathname.startsWith("/start-free/day-1-")) emit("day_1_open");
-    if (pathname.startsWith("/start-free/day-7-")) emit("day_7_completion");
   };
 
   const load = () => {
@@ -132,14 +132,16 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
     emit("start_free_registration_confirmed");
   });
   documentRef?.addEventListener?.("click", (event) => {
+    const completion = event.target?.closest?.("[data-progress-complete]");
+    if (completion?.dataset?.progressComplete === "day-7") emit("day_7_completion");
     const link = event.target?.closest?.("a[href]");
     const href = link?.href ?? "";
-    if (href.includes("/start-free/")) emit("article_cta_click");
+    if (link?.dataset?.i18n === "insights.cta.start") emit("article_cta_click");
     if (href.includes("wa.me/34611223345")) emit("whatsapp_call_click");
-    if (link?.dataset?.analyticsEvent) emit(link.dataset.analyticsEvent);
     if (href.includes("paypal.com/ncp/payment/")) {
       emit("begin_checkout", { currency: "GBP" });
       if (href.includes(foundationPaymentUrl)) emit("foundation_begin_checkout");
+      if (href.includes(completeJourneyPaymentUrl)) emit("complete_journey_begin_checkout");
     }
   });
 
