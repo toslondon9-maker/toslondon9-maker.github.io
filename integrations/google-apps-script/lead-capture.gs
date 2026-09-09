@@ -1,5 +1,5 @@
 const LEAD_COLUMNS = ["Submission date/time", "Submission ID", "First name", "Surname", "Email", "WhatsApp", "Main goal", "Current difficulty", "WhatsApp consent", "Email marketing consent", "Source page", "Language", "Lead status", "Notes", "Notification status", "Remaining email quota", "Dedupe key", "Welcome email status", "Welcome email sent at", "Welcome email error", "Sequence day sent", "Sequence email sent at", "Sequence email status", "Sequence email error", "Affiliate code"];
-const LEAD_COLUMN_INDEX = { submissionId: 1, email: 4, whatsapp: 5, notification: 14, dedupe: 16, welcomeStatus: 17, welcomeSentAt: 18, welcomeError: 19, sequenceDay: 20, sequenceSentAt: 21, sequenceStatus: 22, sequenceError: 23 };
+const LEAD_COLUMN_INDEX = { submissionId: 1, email: 4, whatsapp: 5, emailMarketing: 9, notification: 14, dedupe: 16, welcomeStatus: 17, welcomeSentAt: 18, welcomeError: 19, sequenceDay: 20, sequenceSentAt: 21, sequenceStatus: 22, sequenceError: 23 };
 const SEQUENCE_LESSONS = [
   { day: 2, title: "Take Back Your Attention", titleEs: "Recupera tu atención", message: "Notice what most often captures your attention without permission, then return gently to what you chose to focus on.", messageEs: "Fíjate en qué capta tu atención sin que lo decidas y vuelve con suavidad a aquello en lo que elegiste enfocarte.", route: "/start-free/day-2-take-back-your-attention/" },
   { day: 3, title: "Recognise What Keeps Repeating", titleEs: "Reconoce lo que se repite", message: "When a familiar situation appears, look for the first thought and the response that usually follows it.", messageEs: "Cuando aparezca una situación conocida, observa el primer pensamiento y la respuesta que suele venir después.", route: "/start-free/day-3-recognise-what-keeps-repeating/" },
@@ -100,6 +100,7 @@ function sendDueSequenceEmails(now) {
     const current = now || new Date();
     values.slice(1).forEach(function(row, offset) {
       if (row[LEAD_COLUMN_INDEX.welcomeStatus] !== "sent" && row[LEAD_COLUMN_INDEX.welcomeStatus] !== "Sent") return;
+      if (row[LEAD_COLUMN_INDEX.emailMarketing] !== true && row[LEAD_COLUMN_INDEX.emailMarketing] !== "true") return;
       const sentDay = Number(row[LEAD_COLUMN_INDEX.sequenceDay] || 1);
       const next = SEQUENCE_LESSONS.find(function(lesson) { return lesson.day === sentDay + 1; });
       if (!next || dayNumber(current) - dayNumber(row[0]) < next.day - 1) return;
