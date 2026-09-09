@@ -80,8 +80,8 @@ test("page shell cache-busts the release assets that control visible copy and la
   const languageModule = readFileSync(new URL("../assets/site-language.mjs", import.meta.url), "utf8");
 
   assert.match(html, /href="\/assets\/platform\.css\?v=20260904-header-branding-1"/);
-  assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260909-insights-guides"/);
-  assert.match(languageModule, /translations\.mjs\?v=20260909-insights-guides/);
+  assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260909-eight-principles"/);
+  assert.match(languageModule, /translations\.mjs\?v=20260909-eight-principles/);
 });
 
 test("page shell establishes enhancement state before styles can paint mobile chrome", () => {

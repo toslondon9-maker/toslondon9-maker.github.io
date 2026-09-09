@@ -24,6 +24,9 @@ export const siteData = deepFreeze({
       "/resources/": "2026-09-07",
       "/faq/": "2026-09-07",
       "/master-key-system-online-course/": "2026-09-07",
+      "/insights/": "2026-09-09",
+      "/insights/how-the-24-week-master-key-system-course-works/": "2026-09-08",
+      "/insights/eight-principles-master-key-system/": "2026-09-09",
     }
   },
   routes: {
@@ -37,6 +40,8 @@ export const siteData = deepFreeze({
     resources: "/resources/",
     resourcesAudio: "/resources/audio/",
     insightsCourse: "/insights/how-the-24-week-master-key-system-course-works/",
+    insights: "/insights/",
+    insightsPrinciples: "/insights/eight-principles-master-key-system/",
     getTheBook: "/get-the-book/",
     aiMentors: "/ai-mentors/",
     contact: "/contact/",

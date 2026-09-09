@@ -1,4 +1,4 @@
-import { t } from "../content/translations.mjs?v=20260909-insights-guides";
+import { t } from "../content/translations.mjs?v=20260909-eight-principles";
 
 const courseFallbacks = Object.freeze({
   "route.masterKeySystemOnlineCourse.heroWeeks": { en: "24 WEEKS", es: "24 SEMANAS" },

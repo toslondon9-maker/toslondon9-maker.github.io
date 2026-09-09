@@ -1,7 +1,7 @@
 import { renderFooter, renderHeader } from "./shared-chrome.mjs";
 import { renderStructuredData } from "./structured-data.mjs";
 
-const releaseAssetVersion = "20260909-insights-guides";
+const releaseAssetVersion = "20260909-eight-principles";
 const platformStyleVersion = "20260904-header-branding-1";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
