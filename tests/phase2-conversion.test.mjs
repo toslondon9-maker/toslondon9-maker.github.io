@@ -18,12 +18,14 @@ test("free experience gives visitors a clear post-Day-7 choice without forcing c
   assert.match(html, /OPEN THE 24 CHAPTERS/);
 });
 
-test("Day 7 bridges to independent study, AI reflection and coaching", () => {
+test("Day 7 presents informed independent, WhatsApp, Foundation and complete-journey choices", () => {
   const html = renderSevenDayLesson({ lesson: daySeven, data: siteData, language: "en" });
-  assert.match(html, /YOU HAVE COMPLETED THE FREE EXPERIENCE/);
-  assert.match(html, /Continue through all 24 chapters/);
-  assert.match(html, /Use the AI Mentor/);
-  assert.match(html, /Explore the 24-week programme/);
+  assert.match(html, /YOUR OPTIONS/);
+  assert.match(html, /Choose the next step that suits you/);
+  assert.match(html, /USE THE RESOURCES/);
+  assert.match(html, /ASK ON WHATSAPP/);
+  assert.match(html, /CONTINUE WITH FOUNDATION/);
+  assert.match(html, /EXPLORE THE COMPLETE JOURNEY/);
 });
 
 test("coaching page clarifies fit, boundaries and the enquiry path", () => {
