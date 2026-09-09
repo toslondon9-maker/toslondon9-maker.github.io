@@ -137,7 +137,7 @@ test("welcome email failure keeps the saved row and records a safe failure", () 
 
 test("Day 2 becomes due on the calendar day after registration", () => {
   const app = receiver({ sequenceMode: "live" });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.sentEmails.length, 3);
   assert.equal(app.sentEmails[2][1], "Day 2 of 7: Take Back Your Attention");
@@ -146,7 +146,7 @@ test("Day 2 becomes due on the calendar day after registration", () => {
 
 test("repeated scheduler runs do not send the same sequence day twice", () => {
   const app = receiver({ sequenceMode: "live" });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   const nextDay = new Date("2026-09-05T09:00:00+02:00");
   app.runSequence(nextDay);
   app.runSequence(nextDay);
@@ -156,7 +156,7 @@ test("repeated scheduler runs do not send the same sequence day twice", () => {
 
 test("sequence does not send before the Day 1 welcome is marked sent", () => {
   const app = receiver({ emailFailure: true });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.sentEmails.length, 0);
   assert.equal(app.rows[1][20], "0");
@@ -164,7 +164,7 @@ test("sequence does not send before the Day 1 welcome is marked sent", () => {
 
 test("failed sequence email records failure and retries the same day later", () => {
   const app = receiver({ sequenceMode: "live", failAfter: 2 });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.rows[1][20], 1);
   assert.equal(app.rows[1][22], "failed");
@@ -181,14 +181,14 @@ test("scheduler source contains no logging of lead data", () => {
 
 test("missing sequence mode is safely test-only", () => {
   const app = receiver({ sequenceTestEmail: "test-recipient@example.test" });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.sentEmails[2][0], "test-recipient@example.test");
 });
 
 test("test mode never sends to a lead address", () => {
   const app = receiver({ sequenceMode: "test", sequenceTestEmail: "test-recipient@example.test" });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.sentEmails[2][0], "test-recipient@example.test");
   assert.equal(app.sentEmails.some((email) => email[0] === "ada@example.test" && email[1].startsWith("Day ")), false);
@@ -196,7 +196,7 @@ test("test mode never sends to a lead address", () => {
 
 test("test mode without a recipient sends no sequence email", () => {
   const app = receiver({ sequenceMode: "test" });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.sentEmails.length, 2);
   assert.equal(app.rows[1][20], 1);
@@ -204,7 +204,7 @@ test("test mode without a recipient sends no sequence email", () => {
 
 test("live mode retains normal sequence delivery", () => {
   const app = receiver({ sequenceMode: "live" });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   assert.equal(app.sentEmails[2][0], "ada@example.test");
   assert.equal(app.rows[1][20], 2);
@@ -212,7 +212,7 @@ test("live mode retains normal sequence delivery", () => {
 
 test("sequence emails use every canonical Day 2 through Day 7 route and subject", () => {
   const app = receiver({ sequenceMode: "live" });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   const expected = [
     [2, "Take Back Your Attention", "/start-free/day-2-take-back-your-attention/"],
     [3, "Recognise What Keeps Repeating", "/start-free/day-3-recognise-what-keeps-repeating/"],
@@ -233,7 +233,7 @@ test("sequence emails use every canonical Day 2 through Day 7 route and subject"
 
 test("Day 7 sequence email includes the existing Foundation and complete-journey links", () => {
   const app = receiver({ sequenceMode: "live" });
-  app.submit(lead());
+  app.submit(lead({ emailMarketing: true }));
   for (let day = 2; day <= 7; day += 1) app.runSequence(new Date(`2026-09-${String(3 + day).padStart(2, "0")}T09:00:00+02:00`));
   assert.equal(app.sentEmails.length, 8);
   const email = app.sentEmails[7];
@@ -246,7 +246,7 @@ test("Day 7 sequence email includes the existing Foundation and complete-journey
 
 test("Spanish sequence email uses the existing Spanish lesson title and supportive copy", () => {
   const app = receiver({ sequenceMode: "live" });
-  app.submit(lead({ language: "es" }));
+  app.submit(lead({ emailMarketing: true, language: "es" }));
   app.runSequence(new Date("2026-09-05T09:00:00+02:00"));
   const email = app.sentEmails[2];
   assert.equal(email[1], "Día 2 de 7: Recupera tu atención");
