@@ -16,14 +16,13 @@ test("homepage presents the Insights & Guides collection above the final convers
   const finalPanelIndex = body.indexOf('data-home-section="next-step"');
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
-  assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 5);
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsIntroduction}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsPrinciples}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsWorldWithin}"`));
+  assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 3);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsJourney}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
-  assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 5);
-  assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 5);
+  assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
+  assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 3);
+  assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 3);
+  assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 3);
 });
 
 test("the course article exposes bilingual content, internal links and CTA", () => {
@@ -64,6 +63,10 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsJourney}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
+  assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 5);
+  assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
+  assert.ok(page.body.indexOf("The Master Key System: A 24-Week Journey") < page.body.indexOf("An introduction to Charles F. Haanel"));
 });
 
 test("the Insights hub gives bilingual readers a free-study or optional WhatsApp choice", () => {
@@ -95,6 +98,8 @@ test("the principles article contains all eight principles, careful Tact guidanc
   assert.match(spanish.body, /Tacto/);
   assert.doesNotMatch(spanish.body, />insights\.principles\.[^<]*</);
   assert.equal(english.structuredData[0]["@type"], "Article");
+  assert.equal(english.structuredData[0].datePublished, "2026-09-10");
+  assert.match(english.body, /Published 10 September 2026/);
 });
 
 test("the introduction and world-within articles render bilingual content, links and PDF downloads", () => {
@@ -122,6 +127,10 @@ test("the two source articles preserve supplied wording, PDF links and BOOK YOUR
   assert.match(law.body, /BOOK YOUR CALL/);
   assert.equal(journey.structuredData[0]["@type"], "Article");
   assert.equal(law.structuredData[0]["@type"], "Article");
+  assert.equal(journey.structuredData[0].datePublished, "2026-09-10");
+  assert.equal(law.structuredData[0].datePublished, "2026-09-10");
+  assert.match(journey.body, /Published 10 September 2026/);
+  assert.match(law.body, /Published 10 September 2026/);
 });
 
 test("the two new article PDFs are valid downloadable files", () => {
