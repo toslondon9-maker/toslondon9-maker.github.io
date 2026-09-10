@@ -30,6 +30,8 @@ test("canonical route definitions are locked", () => {
     resourcesAudio: "/resources/audio/",
     insights: "/insights/",
     insightsCourse: "/insights/how-the-24-week-master-key-system-course-works/",
+    insightsJourney: "/insights/master-key-system-24-week-journey/",
+    insightsLawAttraction: "/insights/law-of-attraction-week-18/",
     insights: "/insights/",
     insightsPrinciples: "/insights/eight-principles-master-key-system/",
     insightsIntroduction: "/insights/introduction-charles-haanel-master-key-system/",

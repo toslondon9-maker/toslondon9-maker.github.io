@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { homePage } from "../src/pages/home.mjs";
 import { insightsCoursePage } from "../src/pages/insights-course-works.mjs";
@@ -6,20 +7,23 @@ import { insightsIndexPage } from "../src/pages/insights-index.mjs";
 import { insightsPrinciplesPage } from "../src/pages/insights-principles.mjs";
 import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs";
 import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
+import { insightsJourneyPage, insightsLawAttractionPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 
-test("homepage presents three Insights & Guides cards above the final conversion panel", () => {
+test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
   const body = homePage().body;
   const insightsIndex = body.indexOf("Insights &amp; Guides");
   const finalPanelIndex = body.indexOf('data-home-section="next-step"');
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
-  assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 3);
+  assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 5);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsIntroduction}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsPrinciples}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsWorldWithin}"`));
-  assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 3);
-  assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 3);
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsJourney}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
+  assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 5);
+  assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 5);
 });
 
 test("the course article exposes bilingual content, internal links and CTA", () => {
@@ -51,12 +55,14 @@ test("insights presentation uses scoped responsive layout hooks", () => {
   assert.match(homePage().body, /class="insightsPreview/);
 });
 
-test("the Insights hub links the three branded collection articles", () => {
+test("the Insights hub links the branded collection articles", () => {
   const page = insightsIndexPage();
   assert.equal(page.route, siteData.routes.insights);
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsIntroduction}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPrinciples}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsWorldWithin}"`));
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsJourney}"`));
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
 });
 
@@ -103,6 +109,25 @@ test("the introduction and world-within articles render bilingual content, links
   }
   assert.match(insightsIntroductionPage(undefined, "es").body, /La mente como poder creativo/);
   assert.match(insightsWorldWithinPage(undefined, "es").body, /El mundo interior/);
+});
+
+test("the two source articles preserve supplied wording, PDF links and BOOK YOUR CALL", () => {
+  const journey = insightsJourneyPage();
+  const law = insightsLawAttractionPage();
+  assert.match(journey.body, /The Master Key System: A 24-Week Journey of Personal Development/);
+  assert.match(journey.body, /href="\/downloads\/master-key-system-24-week-journey\.pdf" download/);
+  assert.match(journey.body, /BOOK YOUR CALL/);
+  assert.match(law.body, /The Law of Attraction: Week 18 and the Transformation of Completing the Master Key System/);
+  assert.match(law.body, /href="\/downloads\/law-of-attraction-week-18\.pdf" download/);
+  assert.match(law.body, /BOOK YOUR CALL/);
+  assert.equal(journey.structuredData[0]["@type"], "Article");
+  assert.equal(law.structuredData[0]["@type"], "Article");
+});
+
+test("the two new article PDFs are valid downloadable files", () => {
+  for (const file of ["downloads/master-key-system-24-week-journey.pdf", "downloads/law-of-attraction-week-18.pdf"]) {
+    assert.equal(readFileSync(new URL(`../${file}`, import.meta.url)).subarray(0, 5).toString(), "%PDF-");
+  }
 });
 
 test("every published article has one free-experience hook, a 24-week journey hook, and no payment link", () => {
