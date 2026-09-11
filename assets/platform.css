@@ -507,7 +507,7 @@ main > article {
 
 .button--text {
   padding-inline: 0;
-  color: #7f5c1c;
+  color: var(--night);
   text-decoration: underline;
   text-decoration-color: var(--gold);
   text-decoration-thickness: 2px;
@@ -595,6 +595,7 @@ main > article {
 @media (max-width: 700px) { .resourcesPage { padding: 3rem 1rem 4rem; } .resourcesPage__grid { grid-template-columns: 1fr; } .resourcesPage__links { flex-direction: column; } }
 @media (max-width: 700px) { .resourcesPage__audioGrid { grid-template-columns: 1fr; } .resourcesPage__audio { padding: 1.2rem; } }
 @media (max-width: 700px) { .resourcesPage__audioCard--external { align-items: flex-start; flex-direction: column; } .resourcesPage__audioCard--external .button--secondary { width: 100%; text-align: center; } }
+.insightArticle__links a.button--primary { color: var(--night); }
 
 .homeOutcome,
 .coachingOutcome {

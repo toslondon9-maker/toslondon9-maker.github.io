@@ -90,3 +90,9 @@ test("sitemap includes the online course route and preserves private-route exclu
   assert.match(sitemap, /https:\/\/unleashyourpowerwithtariq\.com\/master-key-system-online-course\//);
   assert.doesNotMatch(sitemap, /\/live-coaching\//);
 });
+
+test("insight CTAs keep readable navy text on gold and cream surfaces", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.button--text\s*\{[^}]*color:\s*var\(--night\)/s);
+  assert.match(css, /\.insightArticle__links a\.button--primary\s*\{[^}]*color:\s*var\(--night\)/s);
+});
