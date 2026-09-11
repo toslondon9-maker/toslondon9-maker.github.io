@@ -77,6 +77,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "insights/how-the-24-week-master-key-system-course-works/index.html",
       "insights/master-key-system-24-week-journey/index.html",
       "insights/law-of-attraction-week-18/index.html",
+      "insights/10-people-connected-to-the-master-key-system/index.html",
       "insights/index.html",
       "insights/eight-principles-master-key-system/index.html",
       "insights/introduction-charles-haanel-master-key-system/index.html",
@@ -115,7 +116,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 31);
+    assert.equal(pageFiles.length, 32);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -179,6 +180,13 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
 
       if (globalPageFiles[index] === "insights/master-key-system-24-week-journey/index.html" || globalPageFiles[index] === "insights/law-of-attraction-week-18/index.html") {
         assert.match(page, /data-i18n="insights\.(journey|lawAttraction)\.metaDescription"/);
+        assert.match(page, /BOOK YOUR CALL/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "insights/10-people-connected-to-the-master-key-system/index.html") {
+        assert.match(page, /data-i18n="insights\.people\.metaDescription"/);
+        assert.match(page, /"datePublished":"2026-09-11"/);
         assert.match(page, /BOOK YOUR CALL/);
         continue;
       }

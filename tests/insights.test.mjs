@@ -7,7 +7,7 @@ import { insightsIndexPage } from "../src/pages/insights-index.mjs";
 import { insightsPrinciplesPage } from "../src/pages/insights-principles.mjs";
 import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs";
 import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
-import { insightsJourneyPage, insightsLawAttractionPage } from "../src/pages/insights-source-article.mjs";
+import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 
 test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
@@ -19,10 +19,13 @@ test("homepage presents the Insights & Guides collection above the final convers
   assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 3);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsJourney}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsPeople}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
   assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 3);
   assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 3);
-  assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 3);
+  assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 2);
+  assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 1);
+  assert.doesNotMatch(body, /insightsIntroduction/);
 });
 
 test("the course article exposes bilingual content, internal links and CTA", () => {
@@ -64,9 +67,10 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 5);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 6);
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
-  assert.ok(page.body.indexOf("The Master Key System: A 24-Week Journey") < page.body.indexOf("An introduction to Charles F. Haanel"));
+  assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
+  assert.ok(page.body.indexOf("10 People Connected to The Master Key System") < page.body.indexOf("The Master Key System: A 24-Week Journey"));
 });
 
 test("the Insights hub gives bilingual readers a free-study or optional WhatsApp choice", () => {
@@ -133,8 +137,25 @@ test("the two source articles preserve supplied wording, PDF links and BOOK YOUR
   assert.match(law.body, /Published 10 September 2026/);
 });
 
+test("the connected-people article preserves supplied content, date, sources and structured data", () => {
+  const english = insightsPeoplePage(undefined, "en");
+  const spanish = insightsPeoplePage(undefined, "es");
+  assert.equal(english.route, siteData.routes.insightsPeople);
+  assert.match(english.body, /10 People Connected to The Master Key System—and What We Can Learn from Them/);
+  assert.match(english.body, /Published 11 September 2026/);
+  assert.match(english.body, /href="\/downloads\/10-people-connected-to-the-master-key-system\.pdf" download/);
+  assert.match(english.body, /BOOK YOUR CALL/);
+  assert.match(english.body, /Sources and Further Reading/);
+  assert.match(english.body, /target="_blank" rel="noopener noreferrer"/);
+  assert.match(spanish.body, /data-i18n="insights\.people\.heading"/);
+  assert.equal(english.structuredData[0].datePublished, "2026-09-11");
+  assert.equal(english.structuredData[0].author.name, "Tariq Saddique");
+  assert.equal(english.structuredData[0].publisher.name, "Unleash Your Power");
+  assert.match(english.description, /Discover ten people connected/);
+});
+
 test("the two new article PDFs are valid downloadable files", () => {
-  for (const file of ["downloads/master-key-system-24-week-journey.pdf", "downloads/law-of-attraction-week-18.pdf"]) {
+  for (const file of ["downloads/master-key-system-24-week-journey.pdf", "downloads/law-of-attraction-week-18.pdf", "downloads/10-people-connected-to-the-master-key-system.pdf"]) {
     assert.equal(readFileSync(new URL(`../${file}`, import.meta.url)).subarray(0, 5).toString(), "%PDF-");
   }
 });

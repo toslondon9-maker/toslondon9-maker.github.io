@@ -32,6 +32,7 @@ test("canonical route definitions are locked", () => {
     insightsCourse: "/insights/how-the-24-week-master-key-system-course-works/",
     insightsJourney: "/insights/master-key-system-24-week-journey/",
     insightsLawAttraction: "/insights/law-of-attraction-week-18/",
+    insightsPeople: "/insights/10-people-connected-to-the-master-key-system/",
     insights: "/insights/",
     insightsPrinciples: "/insights/eight-principles-master-key-system/",
     insightsIntroduction: "/insights/introduction-charles-haanel-master-key-system/",
