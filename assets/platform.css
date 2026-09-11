@@ -596,6 +596,8 @@ main > article {
 @media (max-width: 700px) { .resourcesPage__audioGrid { grid-template-columns: 1fr; } .resourcesPage__audio { padding: 1.2rem; } }
 @media (max-width: 700px) { .resourcesPage__audioCard--external { align-items: flex-start; flex-direction: column; } .resourcesPage__audioCard--external .button--secondary { width: 100%; text-align: center; } }
 .insightArticle__links a.button--primary { color: var(--night); }
+.insightArticle__links a { color: var(--night); }
+.insightArticle__start .insightArticle__links a:not(.button--primary) { color: var(--cream); }
 
 .homeOutcome,
 .coachingOutcome {
