@@ -7,19 +7,19 @@ function escapeHtml(value) {
 
 export function renderInsightCard({ id, href, language = "en" }) {
   const key = `insights.preview.${id}`;
-  const number = { people: "01", journey: "02", lawAttraction: "03", introduction: "04", principles: "05", worldWithin: "06" }[id];
-  const pdfs = { people: "10-people-connected-to-the-master-key-system.pdf", introduction: "charles-haanel-master-key-system-introduction.pdf", principles: "eight-principles-master-key-system.pdf", worldWithin: "world-within-and-world-without.pdf", journey: "master-key-system-24-week-journey.pdf", lawAttraction: "law-of-attraction-week-18.pdf" };
+  const number = { foundationDevelopment: "01", foundationFirstStep: "02", foundationQA: "03", people: "04", journey: "05", lawAttraction: "06", introduction: "07", principles: "08", worldWithin: "09" }[id];
+  const pdfs = { foundationDevelopment: "foundation-stage-development.pdf", foundationFirstStep: "foundation-first-step.pdf", foundationQA: "foundation-stage-questions-and-answers.pdf", people: "10-people-connected-to-the-master-key-system.pdf", introduction: "charles-haanel-master-key-system-introduction.pdf", principles: "eight-principles-master-key-system.pdf", worldWithin: "world-within-and-world-without.pdf", journey: "master-key-system-24-week-journey.pdf", lawAttraction: "law-of-attraction-week-18.pdf" };
   const pdf = pdfs[id];
-  const date = id === "people" ? "2026-09-11" : "2026-09-10";
-  const dateKey = id === "people" ? "insights.publicationDatePeople" : "insights.publicationDate";
+  const date = ["people", "foundationDevelopment", "foundationFirstStep", "foundationQA"].includes(id) ? "2026-09-11" : "2026-09-10";
+  const dateKey = date === "2026-09-11" ? "insights.publicationDatePeople" : "insights.publicationDate";
   return `<article class="insightsPreview__card"><span class="insightsPreview__number" aria-hidden="true">${number}</span><p class="insightsPreview__category" data-i18n="${key}.category">${escapeHtml(t(`${key}.category`, language))}</p><h3 data-i18n="${key}.title">${escapeHtml(t(`${key}.title`, language))}</h3><time class="insightsPreview__date" datetime="${date}" data-i18n="${dateKey}">${escapeHtml(t(dateKey, language))}</time><p data-i18n="${key}.body">${escapeHtml(t(`${key}.body`, language))}</p><p class="insightsPreview__meta" data-i18n="${key}.readingTime">${escapeHtml(t(`${key}.readingTime`, language))}</p><p><a class="button--text" href="${escapeHtml(href)}" data-i18n="${key}.action">${escapeHtml(t(`${key}.action`, language))}</a>${pdf ? ` <a class="button--text" href="/downloads/${pdf}" download data-i18n="${key}.pdfAction">${escapeHtml(t(`${key}.pdfAction`, language))}</a>` : ""}</p></article>`;
 }
 
 export function renderInsightsPreview({ language = "en", data = siteData } = {}) {
   const cards = [
-    renderInsightCard({ id: "people", href: data.routes.insightsPeople, language }),
-    renderInsightCard({ id: "journey", href: data.routes.insightsJourney, language }),
-    renderInsightCard({ id: "lawAttraction", href: data.routes.insightsLawAttraction, language }),
+    renderInsightCard({ id: "foundationDevelopment", href: data.routes.insightsFoundationDevelopment, language }),
+    renderInsightCard({ id: "foundationFirstStep", href: data.routes.insightsFoundationFirstStep, language }),
+    renderInsightCard({ id: "foundationQA", href: data.routes.insightsFoundationQA, language }),
   ].join("");
   return `<section class="homeSection insightsPreview" data-home-section="insights" aria-labelledby="insights-preview-title"><div class="homeSection__inner"><p class="eyebrow" data-i18n="insights.preview.eyebrow">${escapeHtml(t("insights.preview.eyebrow", language))}</p><h2 id="insights-preview-title" data-i18n="insights.preview.title">${escapeHtml(t("insights.preview.title", language))}</h2><p class="homeSection__intro" data-i18n="insights.preview.intro">${escapeHtml(t("insights.preview.intro", language))}</p><div class="insightsPreview__grid">${cards}</div><p class="insightsPreview__all"><a class="button--secondary" href="${data.routes.insights}" data-i18n="insights.preview.viewAll">${escapeHtml(t("insights.preview.viewAll", language))}</a></p></div></section>`;
 }

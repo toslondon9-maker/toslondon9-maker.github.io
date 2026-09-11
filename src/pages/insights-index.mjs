@@ -7,6 +7,9 @@ function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").repla
 
 export function insightsIndexPage(data = siteData, language = "en") {
   const cards = [
+    renderInsightCard({ id: "foundationDevelopment", href: data.routes.insightsFoundationDevelopment, language }),
+    renderInsightCard({ id: "foundationFirstStep", href: data.routes.insightsFoundationFirstStep, language }),
+    renderInsightCard({ id: "foundationQA", href: data.routes.insightsFoundationQA, language }),
     renderInsightCard({ id: "people", href: data.routes.insightsPeople, language }),
     renderInsightCard({ id: "journey", href: data.routes.insightsJourney, language }),
     renderInsightCard({ id: "lawAttraction", href: data.routes.insightsLawAttraction, language }),

@@ -78,6 +78,9 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "insights/master-key-system-24-week-journey/index.html",
       "insights/law-of-attraction-week-18/index.html",
       "insights/10-people-connected-to-the-master-key-system/index.html",
+      "insights/what-students-develop-during-foundation-stage/index.html",
+      "insights/take-your-first-step-master-key-system/index.html",
+      "insights/foundation-stage-questions-and-answers/index.html",
       "insights/index.html",
       "insights/eight-principles-master-key-system/index.html",
       "insights/introduction-charles-haanel-master-key-system/index.html",
@@ -116,7 +119,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 32);
+    assert.equal(pageFiles.length, 35);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -184,8 +187,8 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
-      if (globalPageFiles[index] === "insights/10-people-connected-to-the-master-key-system/index.html") {
-        assert.match(page, /data-i18n="insights\.people\.metaDescription"/);
+      if (globalPageFiles[index].startsWith("insights/10-people-connected-to-the-master-key-system/") || globalPageFiles[index].startsWith("insights/what-students-develop-") || globalPageFiles[index].startsWith("insights/take-your-first-step-") || globalPageFiles[index].startsWith("insights/foundation-stage-questions-")) {
+        assert.match(page, /data-i18n="insights\.(people|foundationDevelopment|foundationFirstStep|foundationQA)\.metaDescription"/);
         assert.match(page, /"datePublished":"2026-09-11"/);
         assert.match(page, /BOOK YOUR CALL/);
         continue;
