@@ -5747,3 +5747,6 @@ body {
   .siteNav ul { gap: clamp(.65rem, 1.3vw, 1.25rem); }
   .siteNav a { font-size: .84rem; letter-spacing: .035em; }
 }
+
+/* Refined social footer buttons */
+.siteFooter__socialLinks{display:flex;align-items:center;gap:.5rem;flex-wrap:nowrap}.siteFooter__socialLinks a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;min-height:2.1rem;padding:.35rem .65rem;border:1px solid var(--gold);border-radius:.35rem;background:rgba(6,23,41,.35);color:var(--cream);text-decoration:none}.siteFooter__socialLinks a:hover,.siteFooter__socialLinks a:focus-visible{color:var(--cream);border-color:var(--gold-bright);background:rgba(181,138,59,.2)}.siteFooter__socialLinks a:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}@media (max-width:680px){.siteFooter__socialLinks{flex-wrap:wrap}}
