@@ -1215,6 +1215,15 @@ main > article {
 .insightArticle__start .insightArticle__links a,
 .insightArticle__start .insightArticle__links a:visited,
 .insightArticle__start .insightArticle__links a:hover,
+.insightArticle__start .insightArticle__links a:focus-visible,
+.insightArticle__start .insightArticle__links a.button--primary,
+.insightArticle__start .insightArticle__links a.button--text {
+  color: var(--cream) !important;
+  text-decoration-color: var(--cream) !important;
+}
+.insightArticle__start .insightArticle__links a,
+.insightArticle__start .insightArticle__links a:visited,
+.insightArticle__start .insightArticle__links a:hover,
 .insightArticle__start .insightArticle__links a:focus-visible { color: var(--cream); text-decoration-color: var(--cream); }
 .insightArticle__start .insightArticle__links a.button--text,
 .insightArticle__start .insightArticle__links a.button--text:visited,
