@@ -7,6 +7,7 @@ export function organizationSchema() {
     name: "Unleash Your Power",
     url: `${siteUrl}/`,
     founder: { "@type": "Person", name: "Tariq Saddique" },
+    sameAs: ["https://www.linkedin.com/in/tariq-saddique-0648bb436/", "https://www.instagram.com/tariq_uyp/", "https://www.tiktok.com/@tariq_uyp", "https://www.facebook.com/profile.php?id=61594378315784", "https://www.youtube.com/channel/UCFO-egu-r2RCtqHywd4lU8A"],
   };
 }
 

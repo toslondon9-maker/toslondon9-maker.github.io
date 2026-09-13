@@ -13,6 +13,7 @@ const allowedEventNames = new Set([
   "whatsapp_call_click",
   "foundation_begin_checkout",
   "complete_journey_begin_checkout",
+  "social_click",
 ]);
 const foundationPaymentUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
 const completeJourneyPaymentUrl = "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6";
@@ -46,6 +47,11 @@ function getDefaultStorage() {
 function safeEventParameters(name, parameters = {}) {
   if (name === "generate_lead") return { method: "website" };
   if (name === "begin_checkout") return { currency: "GBP" };
+  if (name === "social_click") return {
+    platform: ["linkedin", "instagram", "tiktok", "facebook", "youtube"].includes(parameters.platform) ? parameters.platform : "",
+    destination_url: typeof parameters.destination_url === "string" ? parameters.destination_url : "",
+    page_path: typeof parameters.page_path === "string" && parameters.page_path.startsWith("/") ? parameters.page_path : "/",
+  };
   if (name === "page_view") return { page_location: typeof parameters.page_location === "string" && parameters.page_location.startsWith("/") ? parameters.page_location : "/" };
   return {};
 }
@@ -143,6 +149,7 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
       if (href.includes(foundationPaymentUrl)) emit("foundation_begin_checkout");
       if (href.includes(completeJourneyPaymentUrl)) emit("complete_journey_begin_checkout");
     }
+    if (link?.dataset?.socialPlatform) emit("social_click", { platform: link.dataset.socialPlatform, destination_url: href, page_path: documentRef?.location?.pathname || "/" });
   });
 
   updateBanner();

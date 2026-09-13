@@ -5737,6 +5737,7 @@ body {
   color: var(--cream) !important;
   text-decoration-color: var(--cream) !important;
 }
+.siteFooter__social{max-width:320px}.siteFooter__social p:not(.eyebrow){color:#dbe1e5;font-size:.9rem;line-height:1.5}.siteFooter__socialLinks{display:flex;gap:.8rem;flex-wrap:wrap}.siteFooter__socialLink{color:var(--cream);text-decoration:underline;text-underline-offset:3px}.siteFooter__socialLink:hover,.siteFooter__socialLink:focus-visible{color:var(--gold-bright)}
 @media (min-width: 801px) {
   .siteHeader { padding: 1.1rem clamp(2rem, 5vw, 5rem); gap: 2rem; }
   .siteHeader > .brand { gap: 1rem; }
