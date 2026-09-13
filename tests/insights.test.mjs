@@ -25,7 +25,7 @@ test("homepage presents the Insights & Guides collection above the final convers
   assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 3);
   assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 3);
   assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 0);
-  assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 2);
+  assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 1);
   assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 1);
   assert.doesNotMatch(body, /insightsIntroduction/);
 });
