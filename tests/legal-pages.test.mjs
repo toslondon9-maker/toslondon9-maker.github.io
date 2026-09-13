@@ -8,7 +8,7 @@ test("Privacy page gives visitors the dated, practical privacy information they 
   const page = routeRenderers[siteData.routes.privacy](siteData);
 
   assert.match(page.body, /<h1[^>]*>PRIVACY POLICY<\/h1>/);
-  assert.match(page.body, /Last updated: 1 September 2026/);
+  assert.match(page.body, /Effective date: 13 September 2026/);
   for (const heading of ["Who We Are", "Information You Provide", "Cookies and Analytics", "AI Mentor and AI Services", "Your Privacy Rights", "Contact Us"]) {
     assert.match(page.body, new RegExp(`<h2>${heading}<\\/h2>`));
   }
@@ -28,7 +28,7 @@ test("Terms page makes the educational boundaries and independent status clear",
   const page = routeRenderers[siteData.routes.terms](siteData);
 
   assert.match(page.body, /<h1[^>]*>TERMS OF USE<\/h1>/);
-  assert.match(page.body, /Last updated: 1 September 2026/);
+  assert.match(page.body, /Effective date: 13 September 2026/);
   for (const heading of ["Educational and Coaching Purpose", "No Guaranteed Results", "AI Mentor and AI-Generated Information", "Charles F\. Haanel and Third-Party Materials", "Governing Law", "Contact Us"]) {
     assert.match(page.body, new RegExp(`<h2>${heading}<\\/h2>`));
   }
@@ -36,6 +36,14 @@ test("Terms page makes the educational boundaries and independent status clear",
   assert.match(page.body, /not an official product of, or endorsed by, Charles F\. Haanel/i);
   assert.match(page.body, /Helmar Rudolph created, approved, endorsed or is affiliated with Unleash Your Power/i);
   assert.match(page.body, /not professional medical, legal, financial or mental-health advice/i);
+});
+
+test("Refund Policy includes English and complete Spanish statutory wording", () => {
+  const page = routeRenderers[siteData.routes.refundPolicy](siteData);
+  assert.match(page.body, /REFUND POLICY/);
+  assert.match(page.body, /refundPolicySpanish/);
+  assert.match(page.body, /Derechos legales del consumidor/);
+  assert.match(page.body, /Effective date: 13 September 2026/);
 });
 
 test("public contact surfaces use the primary business email", () => {

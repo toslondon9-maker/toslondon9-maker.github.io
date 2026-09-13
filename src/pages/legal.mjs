@@ -54,26 +54,55 @@ function termsContent(data) {
   ].join("");
 }
 
+function refundContent(data) {
+  return [
+    section("Seven-Day Free Taster", `<p>The Seven-Day Taster is provided free of charge. No payment is taken, and there is therefore no refund applicable.</p>`),
+    section("Paid Coaching Programmes", `<p>For paid coaching programmes, you may request cancellation within 14 calendar days of purchase, provided that the coaching service has not substantially started and you have not accessed or received significant programme materials.</p>`),
+    section("After the Coaching Has Started", `<p>Once coaching sessions, course materials, workbooks or other programme resources have been accessed or delivered, refunds are normally not available for change of mind.</p><p>This does not affect your statutory consumer rights where the service is faulty, not supplied as agreed, or otherwise covered by applicable law.</p>`),
+    section("Exceptional Circumstances", `<p>We may consider a refund or partial refund where exceptional circumstances prevent you from continuing the programme. Each request will be reviewed fairly and individually. Approval is not automatic.</p>`),
+    section("How to Request a Refund", `<p>To request cancellation or a refund, contact the existing Unleash Your Power business email address at ${email(data)}. Please include your full name, purchase email, programme, purchase date and reason. We will acknowledge your request and respond within 14 days.</p>`),
+    section("Approved Refunds", `<p>Approved refunds will normally be made to the original payment method within 14 days of approval. Your bank or payment provider may require additional time.</p>`),
+    section("Payment Provider Fees", `<p>We will not charge an administration fee for an approved refund. Any non-refundable provider fees may be deducted only where permitted by law and disclosed before purchase.</p>`),
+    section("Programme Results", `<p>We provide education, coaching, exercises and support. We do not guarantee specific results; outcomes depend on commitment, circumstances and application.</p>`),
+    section("Statutory Rights", `<p>Nothing in this policy limits or removes any rights you may have under applicable consumer-protection law.</p><p>By purchasing a programme, you confirm that you have read and understood this Refund Policy and the applicable programme terms.</p>`),
+  ].join("");
+}
+
+function refundContentEs(data) {
+  return [
+    section("Cancelación gratuita de siete días", `<p>La experiencia gratuita de siete días se ofrece sin coste. No se realiza ningún pago y, por tanto, no procede ningún reembolso.</p>`),
+    section("Programas de coaching de pago", `<p>Puedes solicitar la cancelación dentro de los 14 días naturales siguientes a la compra, siempre que el servicio no haya comenzado sustancialmente ni hayas recibido materiales importantes. Si solicitas el inicio inmediato, asistes a una sesión, accedes a contenido restringido o descargas materiales, puedes perder el derecho de desistimiento cuando la ley lo permita.</p>`),
+    section("Después de comenzar el coaching", `<p>Una vez accedidos o entregados sesiones, materiales, cuadernos u otros recursos, normalmente no hay reembolso por cambio de opinión.</p><p>Esto no afecta a tus derechos legales cuando el servicio sea defectuoso, no se suministre según lo acordado o esté cubierto por la ley aplicable.</p>`),
+    section("Circunstancias excepcionales", `<p>Podemos considerar un reembolso total o parcial si circunstancias excepcionales te impiden continuar. Cada solicitud se revisa individualmente y la aprobación no es automática.</p>`),
+    section("Cómo solicitar un reembolso", `<p>Contacta con ${email(data)} e incluye tu nombre completo, el correo usado para la compra, el programa, la fecha de compra y el motivo. Confirmaremos la recepción y responderemos en un plazo de 14 días.</p>`),
+    section("Reembolsos aprobados", `<p>Se realizarán normalmente al método de pago original dentro de los 14 días siguientes a la aprobación; el banco o proveedor puede tardar más.</p>`),
+    section("Comisiones del proveedor de pago", `<p>No cobraremos comisión administrativa. Las comisiones no reembolsables solo podrán deducirse cuando la ley lo permita y se hayan informado antes de la compra.</p>`),
+    section("Resultados del programa", `<p>Ofrecemos educación, coaching, ejercicios y apoyo. No garantizamos resultados concretos; dependen del compromiso, las circunstancias y la aplicación de cada participante.</p>`),
+    section("Derechos legales del consumidor", `<p>Nada de esta política limita ni elimina los derechos que tengas conforme a la legislación aplicable de protección de los consumidores.</p><p>Al comprar, confirmas que has leído y comprendido esta Política de reembolsos y las condiciones aplicables.</p>`),
+  ].join("");
+}
+
 export function legalPage(kind, data = canonicalSiteData) {
   const privacy = kind === "privacy";
-  const title = privacy ? "Privacy Policy | Unleash Your Power" : "Terms of Use | Unleash Your Power";
+  const refund = kind === "refundPolicy";
+  const title = privacy ? "Privacy Policy | Unleash Your Power" : refund ? "Refund Policy | Unleash Your Power" : "Terms of Use | Unleash Your Power";
   const description = privacy
     ? "Read how Unleash Your Power handles enquiries, browser-local features and third-party services."
     : "Read the terms for Unleash Your Power study resources, AI tools and coaching.";
-  const heading = privacy ? "PRIVACY POLICY" : "TERMS OF USE";
+  const heading = privacy ? "PRIVACY POLICY" : refund ? "REFUND POLICY" : "TERMS OF USE";
   const purpose = privacy
     ? "How Unleash Your Power handles information connected with enquiries, study tools and external services."
     : "The terms that support responsible use of Unleash Your Power study resources and coaching.";
-  const routeKey = privacy ? "route.privacy" : "route.terms";
+  const routeKey = privacy ? "route.privacy" : refund ? "route.refundPolicy" : "route.terms";
 
   return {
-    route: privacy ? data.routes.privacy : data.routes.terms,
+    route: privacy ? data.routes.privacy : refund ? data.routes.refundPolicy : data.routes.terms,
     language: "en",
     title,
     description,
     titleKey: privacy ? "route.privacy.metaTitle" : "route.terms.metaTitle",
     descriptionKey: privacy ? "route.privacy.metaDescription" : "route.terms.metaDescription",
-    body: `<main id="main-content"><article class="routeShell card legalPage"><p class="eyebrow">UNLEASH YOUR POWER</p><h1 data-i18n="${routeKey}.heading">${heading}</h1><p class="routeShell__purpose" data-i18n="${routeKey}.purpose">${purpose}</p><p><strong>Last updated: 1 September 2026</strong></p>${privacy ? privacyContent(data) : termsContent(data)}<a class="button--primary routeShell__action" href="${data.routes.contact}" data-i18n="${routeKey}.action">${privacy ? "Ask a privacy question" : "Ask about these terms"}</a></article></main>`,
+    body: `<main id="main-content"><article class="routeShell card legalPage"><p class="eyebrow">UNLEASH YOUR POWER</p><h1 data-i18n="${routeKey}.heading">${heading}</h1><p class="routeShell__purpose" data-i18n="${routeKey}.purpose">${purpose}</p><p><strong>Effective date: 13 September 2026</strong></p>${privacy ? privacyContent(data) : refund ? `<div lang="en">${refundContent(data)}</div><div lang="es" class="refundPolicySpanish" hidden>${refundContentEs(data)}</div>` : termsContent(data)}<a class="button--primary routeShell__action" href="${data.routes.contact}" data-i18n="${routeKey}.action">${privacy ? "Ask a privacy question" : refund ? "Ask about a refund" : "Ask about these terms"}</a></article></main>`,
     scripts: [],
   };
 }

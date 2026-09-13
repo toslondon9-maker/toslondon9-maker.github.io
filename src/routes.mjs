@@ -36,6 +36,7 @@ const routeShells = Object.freeze({
   referral: { actionRoute: "contact" },
   privacy: { actionRoute: "contact" },
   terms: { actionRoute: "contact" },
+  refundPolicy: { actionRoute: "contact" },
   liveCoaching: { actionRoute: "contact" },
 });
 
@@ -103,6 +104,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.masterKeySystemOnlineCourse]: (data) => masterKeySystemOnlineCoursePage(data),
   [siteData.routes.privacy]: (data) => legalPage("privacy", data),
   [siteData.routes.terms]: (data) => legalPage("terms", data),
+  [siteData.routes.refundPolicy]: (data) => legalPage("refundPolicy", data),
   ...Object.fromEntries(
     sevenDayExperience.lessons.map((lesson) => [
       lesson.route,

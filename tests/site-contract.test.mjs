@@ -48,6 +48,7 @@ test("canonical route definitions are locked", () => {
     referral: "/referral/",
     privacy: "/privacy/",
     terms: "/terms/",
+    refundPolicy: "/refund-policy/",
     liveCoaching: "/live-coaching/"
   });
 });
