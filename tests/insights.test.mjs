@@ -68,10 +68,11 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 9);
-  assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 10);
+  assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 6);
   assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
   assert.ok(page.body.indexOf("What Students Develop During the Foundation Stage") < page.body.indexOf("10 People Connected to The Master Key System"));
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
 });
 
 test("the Insights hub gives bilingual readers a free-study or optional WhatsApp choice", () => {

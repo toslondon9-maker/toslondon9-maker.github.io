@@ -10,6 +10,7 @@ export function insightsIndexPage(data = siteData, language = "en") {
     renderInsightCard({ id: "foundationDevelopment", href: data.routes.insightsFoundationDevelopment, language }),
     renderInsightCard({ id: "foundationFirstStep", href: data.routes.insightsFoundationFirstStep, language }),
     renderInsightCard({ id: "foundationQA", href: data.routes.insightsFoundationQA, language }),
+    renderInsightCard({ id: "personalCoaching", href: data.routes.insightsPersonalCoaching, language }),
     renderInsightCard({ id: "people", href: data.routes.insightsPeople, language }),
     renderInsightCard({ id: "journey", href: data.routes.insightsJourney, language }),
     renderInsightCard({ id: "lawAttraction", href: data.routes.insightsLawAttraction, language }),

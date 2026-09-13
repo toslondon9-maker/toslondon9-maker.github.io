@@ -36,6 +36,7 @@ test("canonical route definitions are locked", () => {
     insightsFoundationDevelopment: "/insights/what-students-develop-during-foundation-stage/",
     insightsFoundationFirstStep: "/insights/take-your-first-step-master-key-system/",
     insightsFoundationQA: "/insights/foundation-stage-questions-and-answers/",
+    insightsPersonalCoaching: "/insights/advantages-personal-master-key-system-coaching/",
     insights: "/insights/",
     insightsPrinciples: "/insights/eight-principles-master-key-system/",
     insightsIntroduction: "/insights/introduction-charles-haanel-master-key-system/",
