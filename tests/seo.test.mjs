@@ -97,4 +97,5 @@ test("insight CTAs keep readable navy text on gold and cream surfaces", () => {
   assert.match(css, /\.insightArticle__links a\.button--primary\s*\{[^}]*color:\s*var\(--night\)/s);
   assert.match(css, /\.insightArticle__links a\s*\{[^}]*color:\s*var\(--night\)/s);
   assert.match(css, /\.insightArticle__start \.insightArticle__links a:not\(\.button--primary\)\s*\{[^}]*color:\s*var\(--cream\)/s);
+  assert.match(css, /\.insightArticle__start \.insightArticle__links a\.button--text,[\s\S]*?color: var\(--cream\); text-decoration-color: var\(--cream\)/);
 });

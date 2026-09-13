@@ -1212,6 +1212,10 @@ main > article {
   color: #000;
 }
 .insightArticle__start .insightArticle__links a.button--primary { color: #000; }
+.insightArticle__start .insightArticle__links a.button--text,
+.insightArticle__start .insightArticle__links a.button--text:visited,
+.insightArticle__start .insightArticle__links a.button--text:hover,
+.insightArticle__start .insightArticle__links a.button--text:focus-visible { color: var(--cream); text-decoration-color: var(--cream); }
 .curriculumProtectionNotice__label {
   margin: 0 0 .3rem;
   color: #8a6220;
