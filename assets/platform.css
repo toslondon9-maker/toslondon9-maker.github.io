@@ -5768,3 +5768,37 @@ body {
 
 /* Refined social footer buttons */
 .siteFooter__socialLinks{display:flex;align-items:center;gap:.5rem;flex-wrap:nowrap}.siteFooter__socialLinks a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;min-height:2.1rem;padding:.35rem .65rem;border:1px solid var(--gold);border-radius:.35rem;background:rgba(6,23,41,.35);color:var(--cream);text-decoration:none}.siteFooter__socialLinks a:hover,.siteFooter__socialLinks a:focus-visible{color:var(--cream);border-color:var(--gold-bright);background:rgba(181,138,59,.2)}.siteFooter__socialLinks a:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}.siteFooter__socialLinks svg{width:18px;height:18px;fill:currentColor;stroke:currentColor;stroke-width:1.4;flex:none;margin-right:.4rem}@media (max-width:680px){.siteFooter__socialLinks{flex-wrap:wrap}}
+/* Session Hub final contrast and containment overrides. */
+.sessionHub__hero .button--secondary,
+.sessionHub__hero .button--secondary:visited,
+.sessionHub__hero .button--secondary:hover,
+.sessionHub__hero .button--secondary:focus-visible,
+.sessionHub__focus .button--secondary,
+.sessionHub__focus .button--secondary:visited,
+.sessionHub__focus .button--secondary:hover,
+.sessionHub__focus .button--secondary:focus-visible {
+  color: var(--cream) !important;
+  border-color: var(--gold-bright);
+  text-decoration-color: var(--cream);
+}
+.sessionHub__hero .button--secondary:hover,
+.sessionHub__focus .button--secondary:hover,
+.sessionHub__hero .button--secondary:focus-visible,
+.sessionHub__focus .button--secondary:focus-visible { background: rgba(201,155,87,.18); }
+.sessionHub__focus,
+.sessionHub__reflection {
+  width: min(100% - (2 * var(--space-gutter)), var(--content-max));
+  margin-inline: auto;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+}
+.sessionHub__focusActions > *,
+.sessionHub__heroActions > * { max-width: 100%; box-sizing: border-box; }
+@media (max-width: 520px) {
+  .sessionHub__hero,
+  .sessionHub__welcome,
+  .sessionHub__reflection,
+  .sessionHub__quick,
+  .sessionHub__prepare,
+  .sessionHub__note { padding-inline: var(--space-gutter); }
+}
