@@ -18,8 +18,8 @@ export function renderInsightCard({ id, href, language = "en" }) {
 export function renderInsightsPreview({ language = "en", data = siteData } = {}) {
   const cards = [
     renderInsightCard({ id: "personalCoaching", href: data.routes.insightsPersonalCoaching, language }),
+    renderInsightCard({ id: "imagineMeditation", href: data.routes.insightsImagineMeditation, language }),
     renderInsightCard({ id: "foundationDevelopment", href: data.routes.insightsFoundationDevelopment, language }),
-    renderInsightCard({ id: "foundationFirstStep", href: data.routes.insightsFoundationFirstStep, language }),
   ].join("");
   return `<section class="homeSection insightsPreview" data-home-section="insights" aria-labelledby="insights-preview-title"><div class="homeSection__inner"><p class="eyebrow" data-i18n="insights.preview.eyebrow">${escapeHtml(t("insights.preview.eyebrow", language))}</p><h2 id="insights-preview-title" data-i18n="insights.preview.title">${escapeHtml(t("insights.preview.title", language))}</h2><p class="homeSection__intro" data-i18n="insights.preview.intro">${escapeHtml(t("insights.preview.intro", language))}</p><div class="insightsPreview__grid">${cards}</div><p class="insightsPreview__all"><a class="button--secondary" href="${data.routes.insights}" data-i18n="insights.preview.viewAll">${escapeHtml(t("insights.preview.viewAll", language))}</a></p></div></section>`;
 }
