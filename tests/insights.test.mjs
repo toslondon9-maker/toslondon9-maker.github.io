@@ -8,7 +8,7 @@ import { insightsPrinciplesPage } from "../src/pages/insights-principles.mjs";
 import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs";
 import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
 import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage } from "../src/pages/insights-source-article.mjs";
-import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage } from "../src/pages/insights-source-article.mjs";
+import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 
 test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
@@ -18,9 +18,9 @@ test("homepage presents the Insights & Guides collection above the final convers
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
   assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 3);
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsFoundationDevelopment}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsFoundationFirstStep}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsFoundationQA}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
   assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 3);
   assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 3);
@@ -69,7 +69,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
   assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 10);
-  assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 6);
+  assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
   assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
   assert.ok(page.body.indexOf("What Students Develop During the Foundation Stage") < page.body.indexOf("10 People Connected to The Master Key System"));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
@@ -168,6 +168,14 @@ test("the three Foundation articles are published as separate dated source artic
   }
   const qa = pages[2].body;
   for (const number of [1, 10, 11, 20, 21, 30, 31, 40]) assert.match(qa, new RegExp(`${number}\\.`));
+});
+
+test("personal coaching article is visible and linked from the homepage/archive", () => {
+  const page = insightsPersonalCoachingPage();
+  assert.match(page.body, /The Advantages of Personal Master Key System Coaching/);
+  assert.match(page.body, /START THE FREE SEVEN-DAY EXPERIENCE/);
+  assert.match(page.body, /BOOK YOUR CALL/);
+  assert.match(page.body, /advantages-personal-master-key-system-coaching\.pdf/);
 });
 
 test("the two new article PDFs are valid downloadable files", () => {
