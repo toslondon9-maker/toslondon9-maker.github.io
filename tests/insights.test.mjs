@@ -72,6 +72,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 10);
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
   assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
+  assert.ok(page.body.indexOf("The Advantages of Personal Master Key System Coaching") < page.body.indexOf("What Students Develop During the Foundation Stage"));
   assert.ok(page.body.indexOf("What Students Develop During the Foundation Stage") < page.body.indexOf("10 People Connected to The Master Key System"));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
 });
