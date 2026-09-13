@@ -88,7 +88,9 @@ export function legalPage(kind, data = canonicalSiteData) {
   const title = privacy ? "Privacy Policy | Unleash Your Power" : refund ? "Refund Policy | Unleash Your Power" : "Terms of Use | Unleash Your Power";
   const description = privacy
     ? "Read how Unleash Your Power handles enquiries, browser-local features and third-party services."
-    : "Read the terms for Unleash Your Power study resources, AI tools and coaching.";
+    : refund
+      ? "Read the Unleash Your Power refund terms, eligibility requirements and cancellation information."
+      : "Read the terms for Unleash Your Power study resources, AI tools and coaching.";
   const heading = privacy ? "PRIVACY POLICY" : refund ? "REFUND POLICY" : "TERMS OF USE";
   const purpose = privacy
     ? "How Unleash Your Power handles information connected with enquiries, study tools and external services."
@@ -100,8 +102,8 @@ export function legalPage(kind, data = canonicalSiteData) {
     language: "en",
     title,
     description,
-    titleKey: privacy ? "route.privacy.metaTitle" : "route.terms.metaTitle",
-    descriptionKey: privacy ? "route.privacy.metaDescription" : "route.terms.metaDescription",
+    titleKey: privacy ? "route.privacy.metaTitle" : refund ? "route.refundPolicy.metaTitle" : "route.terms.metaTitle",
+    descriptionKey: privacy ? "route.privacy.metaDescription" : refund ? "route.refundPolicy.metaDescription" : "route.terms.metaDescription",
     body: `<main id="main-content"><article class="routeShell card legalPage"><p class="eyebrow">UNLEASH YOUR POWER</p><h1 data-i18n="${routeKey}.heading">${heading}</h1><p class="routeShell__purpose" data-i18n="${routeKey}.purpose">${purpose}</p><p><strong>Effective date: 13 September 2026</strong></p>${privacy ? privacyContent(data) : refund ? `<div lang="en">${refundContent(data)}</div><div lang="es" class="refundPolicySpanish" hidden>${refundContentEs(data)}</div>` : termsContent(data)}<a class="button--primary routeShell__action" href="${data.routes.contact}" data-i18n="${routeKey}.action">${privacy ? "Ask a privacy question" : refund ? "Ask about a refund" : "Ask about these terms"}</a></article></main>`,
     scripts: [],
   };
