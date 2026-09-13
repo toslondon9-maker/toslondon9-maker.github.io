@@ -5726,3 +5726,12 @@ body {
 .sourceInsightArticle .insightArticle__links a.button--text { color: #000; }
 .insightArticle__start .insightArticle__links a.button--primary { color: #000; }
 .analyticsConsent{position:fixed;z-index:50;right:18px;bottom:18px;left:18px;color:#f8f4ed;background:#0b1826;border:1px solid #c99b57;box-shadow:0 18px 45px #0a182633;padding:18px 22px}.analyticsConsent[aria-hidden="true"]{display:none}.analyticsConsent__inner{width:min(1120px,100%);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px}.analyticsConsent p:not(.eyebrow){color:#dbe1e5;max-width:760px;margin:6px 0 0;line-height:1.6;font-size:13px}.analyticsConsent .eyebrow{margin:0;color:#d1ad73}.analyticsConsent__actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;flex:none}.analyticsConsent__actions button{white-space:nowrap}.analyticsConsent__actions a{color:#e6c98f;text-decoration:underline;text-underline-offset:3px;font-size:12px}.siteFooter .footerLink{background:none;border:0;cursor:pointer;color:#9b7137;text-decoration:underline;text-underline-offset:3px;padding:0;font:inherit;font-size:12px}.siteFooter .footerLink:focus-visible,.analyticsConsent button:focus-visible,.analyticsConsent a:focus-visible{outline:2px solid #d1ad73;outline-offset:3px}@media (width<=680px){.analyticsConsent{right:10px;bottom:10px;left:10px;padding:16px}.analyticsConsent__inner{display:block}.analyticsConsent__actions{margin-top:14px;display:grid;grid-template-columns:1fr 1fr}.analyticsConsent__actions button{width:100%}.analyticsConsent__actions a{grid-column:1 / -1;text-align:center;padding-top:4px}}
+@media (min-width: 801px) {
+  .siteHeader { padding: 1.1rem clamp(2rem, 5vw, 5rem); gap: 2rem; }
+  .siteHeader > .brand { gap: 1rem; }
+  .siteHeader .brand img { width: 104px; height: auto; }
+  .siteHeader .brand__wordmark { font-size: 1.28rem; letter-spacing: .08em; line-height: 1.05; }
+  .siteHeader__actions { gap: 1.4rem; }
+  .siteNav ul { gap: clamp(.65rem, 1.3vw, 1.25rem); }
+  .siteNav a { font-size: .84rem; letter-spacing: .035em; }
+}

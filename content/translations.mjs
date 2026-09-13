@@ -12,7 +12,7 @@ const translations = deepFreeze({
   "nav.aiMentors": { en: "AI Learning", es: "Aprendizaje con IA" },
   "nav.coaching": { en: "Coaching", es: "Coaching" },
   "nav.resources": { en: "Resources", es: "Recursos" },
-  "nav.getTheBook": { en: "BUY THE MKS BOOK", es: "COMPRA EL LIBRO MKS" },
+  "nav.getTheBook": { en: "Buy the MKS Book", es: "COMPRA EL LIBRO MKS" },
   "nav.liveCoaching": { en: "Session Hub", es: "Centro de sesiones" },
   "nav.referral": { en: "Affiliate / Refer & Earn", es: "Afiliados / Recomienda y gana" },
   "nav.aboutTariq": { en: "About Tariq", es: "Quién soy" },

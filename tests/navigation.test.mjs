@@ -30,7 +30,7 @@ test("header presents the simplified seven-destination conversion path", () => {
   assert.match(html, /class="navStartFree" href="\/start-free\/"/);
   assert.match(html, />Master Key System<\/a>/);
   assert.match(html, />About Tariq<\/a>/);
-  assert.match(html, />BUY THE MKS BOOK<\/a>/);
+  assert.match(html, />Buy the MKS Book<\/a>/);
   assert.match(html, />Start Free<\/a>/);
   assert.match(html, /<span class="brand__wordmark"><span>UNLEASH YOUR<\/span><span>POWER<\/span><\/span>/);
   assert.match(html, /aria-expanded="false"/);
