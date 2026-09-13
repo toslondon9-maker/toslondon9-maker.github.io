@@ -1212,6 +1212,10 @@ main > article {
   color: #000;
 }
 .insightArticle__start .insightArticle__links a.button--primary { color: #000; }
+.insightArticle__start .insightArticle__links a,
+.insightArticle__start .insightArticle__links a:visited,
+.insightArticle__start .insightArticle__links a:hover,
+.insightArticle__start .insightArticle__links a:focus-visible { color: var(--cream); text-decoration-color: var(--cream); }
 .insightArticle__start .insightArticle__links a.button--text,
 .insightArticle__start .insightArticle__links a.button--text:visited,
 .insightArticle__start .insightArticle__links a.button--text:hover,
