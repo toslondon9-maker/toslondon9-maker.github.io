@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "welcome-video", "lineage", "origins", "books", "start-free", "master-key", "outcome", "testimonials", "coaching", "insights", "next-step"];
+const approvedSections = ["hero", "welcome-video", "lineage", "origins", "books", "start-free", "master-key", "premium-offer", "receive", "ideal", "outcome", "testimonials", "coaching", "insights", "next-step"];
 const conversionJourneyHooks = [
   "conversion.next.heading",
   "conversion.next.step1Title",
@@ -106,6 +106,10 @@ test("homepage presents the approved premium conversion upgrades", () => {
   assert.equal((coaching.match(/<article>/g) ?? []).length, 4);
   assert.doesNotMatch(html, /unleash-your-power-programme\.jpeg/);
   assert.match(html, /class="homeNext__actionPanel"/);
+  assert.match(html, /£997/);
+  assert.match(html, /WHAT STUDENTS RECEIVE/);
+  assert.match(html, /WHO THIS IS FOR/);
+  assert.match(html, /Explore the 24-week programme/);
 });
 
 test("homepage keeps its premium SEO title when language enhancements run", () => {

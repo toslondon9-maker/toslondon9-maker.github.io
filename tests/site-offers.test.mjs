@@ -40,7 +40,7 @@ test("canonical coaching page owns every locked commercial fact", () => {
   ]) assert.ok(coaching.includes(value), value);
   assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
   assert.match(home, /conversion\.next\.step2Body[^>]*>If the journey feels right for you, continue with the four-week Foundation stage for £97\./);
-  assert.doesNotMatch(home, /£197|£397|£497|£997|£1,188|£1,788/);
+  assert.doesNotMatch(home, /£197|£397|£497|£1,188|£1,788/);
   assert.doesNotMatch(home, /class="foundationNextStep"|href="https:\/\/www\.paypal\.com\/ncp\/payment\//);
 });
 

@@ -2059,6 +2059,24 @@ main > article {
   margin-inline: auto;
 }
 
+/* Phase 1 premium offer: scoped to the homepage sections only. */
+.homePremiumOffer__inner { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr); gap:clamp(2rem,6vw,5rem); align-items:center; }
+.homePremiumOffer__card { background:var(--night); color:var(--cream); border:1px solid var(--gold); padding:clamp(1.5rem,4vw,2.5rem); }
+.homePremiumOffer__price { color:var(--gold); font:700 clamp(2.5rem,5vw,4rem)/1 Georgia, serif; margin:0; }
+.homePremiumOffer__label { margin:.5rem 0 1.25rem; font-weight:700; }
+.homePremiumOffer__card ul { margin:0 0 1.5rem; padding-left:1.2rem; }
+.homePremiumOffer__card li { margin:.5rem 0; }
+.homePremiumOffer__card a { color:var(--night); background:var(--gold); border-color:#9a6f1f; }
+.homeReceive__grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; list-style:none; padding:0; margin:2rem 0 0; }
+.homeReceive__grid li { border-top:2px solid var(--gold); padding-top:1rem; display:grid; gap:.45rem; }
+.homeReceive__grid strong { color:var(--night); }
+.homeIdeal__inner { max-width:900px; }
+.homeIdeal__inner > ul { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; list-style:none; padding:0; margin:2rem 0 0; }
+.homeIdeal__inner li { background:var(--cream-deep); border-left:3px solid var(--gold); padding:1rem; }
+@media (max-width: 760px) {
+  .homePremiumOffer__inner, .homeReceive__grid, .homeIdeal__inner > ul { grid-template-columns:1fr; }
+}
+
 .homeCoaching__price {
   margin-block: 1.75rem;
   color: var(--night);
