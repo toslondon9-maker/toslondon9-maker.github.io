@@ -2077,6 +2077,43 @@ main > article {
   .homePremiumOffer__inner, .homeReceive__grid, .homeIdeal__inner > ul { grid-template-columns:1fr; }
 }
 
+/* Final desktop header balance and consent-banner contrast overrides. */
+@media (min-width: 801px) {
+  .siteHeader .brand__wordmark {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    gap: 0.35em;
+    width: max-content;
+    max-width: none;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    line-height: 1.08;
+    font-size: clamp(0.82rem, 0.9vw, 1rem);
+  }
+  .siteHeader .brand__wordmark > span { display: inline; }
+  .siteHeader > .brand {
+    flex: 0 0 auto;
+    margin-right: clamp(2rem, 4vw, 4.5rem);
+  }
+  .siteHeader__actions {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .siteHeader .siteNav ul { justify-content: flex-end; }
+}
+
+.analyticsConsent__actions [data-analytics-decline],
+.analyticsConsent__actions [data-analytics-decline]:visited,
+.analyticsConsent__actions [data-analytics-decline]:hover,
+.analyticsConsent__actions [data-analytics-decline]:active,
+.analyticsConsent__actions [data-analytics-decline]:focus-visible {
+  color: var(--cream) !important;
+  border-color: var(--gold) !important;
+  text-decoration-color: var(--cream);
+}
+
 .homeCoaching__price {
   margin-block: 1.75rem;
   color: var(--night);
