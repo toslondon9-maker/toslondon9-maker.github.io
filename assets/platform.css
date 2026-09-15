@@ -2079,6 +2079,24 @@ main > article {
 
 /* Final desktop header balance and consent-banner contrast overrides. */
 @media (min-width: 801px) {
+  .siteHeader,
+  .site-header {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    min-height: 5.5rem;
+    padding-block: 1rem;
+  }
+  .siteHeader__actions {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: clamp(0.65rem, 1.4vw, 1.25rem);
+  }
+  .siteHeader__actions > .siteNav { flex: 1 1 auto; min-width: 0; }
+  .siteHeader__actions > .languageSwitch--header { flex: 0 0 auto; }
   .siteHeader .brand__wordmark {
     display: inline-flex;
     flex-direction: row;
@@ -5815,6 +5833,16 @@ body {
 .sessionHub__stageGrid,
 .sessionHub__focus,
 .sessionHub__reflection { min-width: 0; max-width: 100%; box-sizing: border-box; }
+/* Final desktop header row override: keep brand, navigation and language controls together. */
+@media (min-width: 801px) {
+  .siteHeader, .site-header { display:flex; flex-direction:row; align-items:center; flex-wrap:nowrap; min-height:5.5rem; }
+  .siteHeader > .brand, .site-header > .brand { flex:0 0 auto; margin-right:clamp(1.5rem,3vw,4rem); }
+  .siteHeader__actions { display:flex; flex:1 1 auto; flex-direction:row; align-items:center; justify-content:flex-end; flex-wrap:nowrap; min-width:0; width:auto; }
+  .siteHeader__actions > .siteNav { flex:1 1 auto; width:auto; min-width:0; }
+  .siteHeader__actions > .siteNav ul { display:flex; flex-wrap:nowrap; justify-content:flex-end; gap:clamp(.35rem,.7vw,.8rem); }
+  .siteHeader__actions > .languageSwitch--header { flex:0 0 auto; margin-left:clamp(.5rem,1vw,1rem); }
+}
+
 /* Session Hub final contrast and containment overrides. */
 .sessionHub__hero .button--secondary,
 .sessionHub__hero .button--secondary:visited,
