@@ -60,9 +60,16 @@ function makePages(title, sections) {
     used += HEADING_LEADING + 4;
     for (const paragraph of paragraphs) {
       const lines = wrap(paragraph);
-      ensure(lines.length * BODY_LEADING + 8);
-      page.push({ kind: "paragraph", lines });
-      used += lines.length * BODY_LEADING + 8;
+      let remaining = lines;
+      while (remaining.length) {
+        const availableLines = Math.max(1, Math.floor((TOP_Y - BOTTOM_Y - used - 8) / BODY_LEADING));
+        if (availableLines === 1 && used > 0) { pushPage(); continue; }
+        const chunk = remaining.slice(0, availableLines);
+        page.push({ kind: "paragraph", lines: chunk });
+        used += chunk.length * BODY_LEADING + 8;
+        remaining = remaining.slice(chunk.length);
+        if (remaining.length) pushPage();
+      }
     }
   }
   pushPage();

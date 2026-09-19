@@ -17,16 +17,18 @@ test("homepage presents the Insights & Guides collection above the final convers
   const finalPanelIndex = body.indexOf('data-home-section="next-step"');
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
-  assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 3);
+  assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 4);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsFoundationDevelopment}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsImagineMeditation}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
-  assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 3);
-  assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 3);
+  assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 4);
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsHaanelBiography}"`));
+  assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 4);
   assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 0);
   assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 1);
-  assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 1);
+  assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 2);
+  assert.equal((body.match(/data-i18n="insights\.publicationDateHaanel"/g) ?? []).length, 1);
   assert.doesNotMatch(body, /insightsIntroduction/);
 });
 
@@ -69,9 +71,11 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 11);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 12);
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
   assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
+  assert.match(page.body, /data-i18n="insights\.publicationDateHaanel"/);
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsHaanelBiography}"`));
   assert.ok(page.body.indexOf("The Advantages of Personal Master Key System Coaching") < page.body.indexOf("What Students Develop During the Foundation Stage"));
   assert.ok(page.body.indexOf("What Students Develop During the Foundation Stage") < page.body.indexOf("10 People Connected to The Master Key System"));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));

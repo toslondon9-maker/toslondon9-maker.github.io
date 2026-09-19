@@ -37,7 +37,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
-  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260914-session-hub-2">/);
+  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260915-header-consent-2">/);
   assert.match(html, /<link rel="preload" href="\/images\/the-secret-logo\.png" as="image">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
@@ -83,6 +83,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "insights/foundation-stage-questions-and-answers/index.html",
       "insights/advantages-personal-master-key-system-coaching/index.html",
       "insights/imagine-combining-deep-meditation-personal-development/index.html",
+      "insights/who-was-charles-f-haanel-life-and-legacy/index.html",
       "insights/index.html",
       "insights/eight-principles-master-key-system/index.html",
       "insights/introduction-charles-haanel-master-key-system/index.html",
@@ -122,7 +123,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 38);
+    assert.equal(pageFiles.length, 39);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -169,6 +170,13 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         assert.match(page, /data-i18n="insights\.imagineMeditation\.metaDescription"/);
         assert.match(page, /"datePublished":"2026-09-13"/);
         assert.match(page, /BOOK YOUR CALL/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "insights/who-was-charles-f-haanel-life-and-legacy/index.html") {
+        assert.match(page, /data-i18n="insights\.haanelBiography\.metaDescription"/);
+        assert.match(page, /"datePublished":"2026-09-19"/);
+        assert.match(page, /DOWNLOAD THIS ARTICLE AS A PDF|Download PDF/);
         continue;
       }
 

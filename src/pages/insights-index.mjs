@@ -9,6 +9,7 @@ export function insightsIndexPage(data = siteData, language = "en") {
   const cards = [
     renderInsightCard({ id: "personalCoaching", href: data.routes.insightsPersonalCoaching, language }),
     renderInsightCard({ id: "imagineMeditation", href: data.routes.insightsImagineMeditation, language }),
+    renderInsightCard({ id: "haanelBiography", href: data.routes.insightsHaanelBiography, language }),
     renderInsightCard({ id: "foundationDevelopment", href: data.routes.insightsFoundationDevelopment, language }),
     renderInsightCard({ id: "foundationFirstStep", href: data.routes.insightsFoundationFirstStep, language }),
     renderInsightCard({ id: "foundationQA", href: data.routes.insightsFoundationQA, language }),
