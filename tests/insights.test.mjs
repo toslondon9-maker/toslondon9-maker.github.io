@@ -19,16 +19,16 @@ test("homepage presents the Insights & Guides collection above the final convers
   assert.ok(finalPanelIndex > insightsIndex);
   assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 4);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsFoundationDevelopment}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsPowerWithin}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsImagineMeditation}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
   assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 4);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsHaanelBiography}"`));
   assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 4);
   assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 0);
-  assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 1);
+  assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 0);
   assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 2);
-  assert.equal((body.match(/data-i18n="insights\.publicationDateHaanel"/g) ?? []).length, 1);
+  assert.equal((body.match(/data-i18n="insights\.publicationDateHaanel"/g) ?? []).length, 2);
   assert.doesNotMatch(body, /insightsIntroduction/);
 });
 
@@ -71,7 +71,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 12);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 13);
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
   assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
   assert.match(page.body, /data-i18n="insights\.publicationDateHaanel"/);

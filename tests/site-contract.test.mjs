@@ -39,6 +39,7 @@ test("canonical route definitions are locked", () => {
     insightsPersonalCoaching: "/insights/advantages-personal-master-key-system-coaching/",
     insightsImagineMeditation: "/insights/imagine-combining-deep-meditation-personal-development/",
     insightsHaanelBiography: "/insights/who-was-charles-f-haanel-life-and-legacy/",
+    insightsPowerWithin: "/insights/the-power-within-charles-haanel-foreword/",
     insights: "/insights/",
     insightsPrinciples: "/insights/eight-principles-master-key-system/",
     insightsIntroduction: "/insights/introduction-charles-haanel-master-key-system/",

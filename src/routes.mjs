@@ -23,7 +23,7 @@ import { insightsIndexPage } from "./pages/insights-index.mjs";
 import { insightsPrinciplesPage } from "./pages/insights-principles.mjs";
 import { insightsIntroductionPage } from "./pages/insights-introduction.mjs";
 import { insightsWorldWithinPage } from "./pages/insights-world-within.mjs";
-import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage, insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage, insightsImagineMeditationPage, insightsHaanelBiographyPage } from "./pages/insights-source-article.mjs";
+import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage, insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage, insightsImagineMeditationPage, insightsHaanelBiographyPage, insightsPowerWithinPage } from "./pages/insights-source-article.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -96,6 +96,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.insightsPersonalCoaching]: (data) => insightsPersonalCoachingPage(data),
   [siteData.routes.insightsImagineMeditation]: (data) => insightsImagineMeditationPage(data),
   [siteData.routes.insightsHaanelBiography]: (data) => insightsHaanelBiographyPage(data),
+  [siteData.routes.insightsPowerWithin]: (data) => insightsPowerWithinPage(data),
   [siteData.routes.aiMentors]: (data) => aiMentorsPage(data),
   [siteData.routes.getTheBook]: (data) => getTheBookPage(data),
   [siteData.routes.aboutTariq]: (data) => aboutTariqPage(data),
