@@ -10,6 +10,7 @@ const BODY_SIZE = 10.5;
 const BODY_LEADING = 15;
 const HEADING_SIZE = 15;
 const HEADING_LEADING = 19;
+const HEADING_GAP = 15;
 const CHAR_WIDTH = 5.35;
 const MAX_CHARS = Math.floor((PAGE_WIDTH - (MARGIN_X * 2)) / CHAR_WIDTH);
 
@@ -50,14 +51,16 @@ function makePages(title, sections) {
   let used = 0;
   const pushPage = () => { if (page.length) pages.push(page); page = []; used = 0; };
   const ensure = (height) => { if (used + height > (TOP_Y - BOTTOM_Y)) pushPage(); };
-  page.push({ kind: "title", text: title });
-  used += 34;
+  const titleLines = wrap(title, Math.floor((PAGE_WIDTH - (MARGIN_X * 2)) / 8.7));
+  page.push({ kind: "title", lines: titleLines });
+  used += titleLines.length * 22 + 12;
   for (const section of sections) {
     const paragraphs = String(section.body).split(/\n\s*\n/);
+    const headingLines = wrap(section.heading, Math.floor((PAGE_WIDTH - (MARGIN_X * 2)) / 7.5));
     const firstParagraphLines = wrap(paragraphs[0]).length;
-    ensure(HEADING_LEADING + 4 + (firstParagraphLines * BODY_LEADING) + 8);
-    page.push({ kind: "heading", text: section.heading });
-    used += HEADING_LEADING + 4;
+    ensure(HEADING_GAP + headingLines.length * HEADING_LEADING + 4 + (firstParagraphLines * BODY_LEADING) + 8);
+    page.push({ kind: "heading", lines: headingLines });
+    used += HEADING_GAP + headingLines.length * HEADING_LEADING + 4;
     for (const paragraph of paragraphs) {
       const lines = wrap(paragraph);
       let remaining = lines;
@@ -81,13 +84,21 @@ function streamForPage(page, pageNumber, total) {
   const commands = ["BT"];
   for (const item of page) {
     if (item.kind === "title") {
-      commands.push(`/F1 18 Tf 1 0 0 1 ${MARGIN_X} ${y} Tm (${escapePdf(item.text)}) Tj`);
-      y -= 34;
+      commands.push(`/F1 18 Tf`);
+      for (const line of item.lines) {
+        commands.push(`1 0 0 1 ${MARGIN_X} ${y} Tm (${escapePdf(line)}) Tj`);
+        y -= 22;
+      }
+      y -= 12;
       continue;
     }
     if (item.kind === "heading") {
-      commands.push(`/F1 ${HEADING_SIZE} Tf 1 0 0 1 ${MARGIN_X} ${y} Tm (${escapePdf(item.text)}) Tj`);
-      y -= HEADING_LEADING;
+      commands.push(`/F1 ${HEADING_SIZE} Tf`);
+      for (const line of item.lines) {
+        commands.push(`1 0 0 1 ${MARGIN_X} ${y} Tm (${escapePdf(line)}) Tj`);
+        y -= HEADING_LEADING;
+      }
+      y -= HEADING_GAP;
       continue;
     }
     commands.push(`/F1 ${BODY_SIZE} Tf`);
