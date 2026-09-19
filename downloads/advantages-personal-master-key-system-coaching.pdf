@@ -1,18 +1,50 @@
-%PDF-1.4
+%PDF-1.3
+%‚„œ”
 1 0 obj
-<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R] /Count 7 >>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
 2 0 obj
-<< /Type /Catalog /Pages 1 0 R >>
+<<
+/Type /Pages
+/Kids [ 3 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R ]
+/Count 7
+>>
 endobj
 3 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/Contents 6 0 R
+>>
 endobj
 4 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Times-Roman
+>>
 endobj
 5 0 obj
-<< /Length 549 >>
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+6 0 obj
+<<
+/Length 549
+>>
 stream
 q
 0.965 0.945 0.910 rg 0 0 595 842 re f
@@ -33,11 +65,24 @@ q
 Q
 endstream
 endobj
-6 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
-endobj
 7 0 obj
-<< /Length 2894 >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/Contents 8 0 R
+>>
+endobj
+8 0 obj
+<<
+/Length 2894
+>>
 stream
 q
 0.063 0.133 0.208 rg
@@ -109,11 +154,24 @@ q
 Q
 endstream
 endobj
-8 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
-endobj
 9 0 obj
-<< /Length 2819 >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/Contents 10 0 R
+>>
+endobj
+10 0 obj
+<<
+/Length 2819
+>>
 stream
 q
 0.063 0.133 0.208 rg
@@ -190,11 +248,24 @@ q
 Q
 endstream
 endobj
-10 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
-endobj
 11 0 obj
-<< /Length 2799 >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/Contents 12 0 R
+>>
+endobj
+12 0 obj
+<<
+/Length 2799
+>>
 stream
 q
 0.31 0.36 0.41 rg
@@ -269,11 +340,24 @@ q
 Q
 endstream
 endobj
-12 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
-endobj
 13 0 obj
-<< /Length 2783 >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/Contents 14 0 R
+>>
+endobj
+14 0 obj
+<<
+/Length 2783
+>>
 stream
 q
 0.063 0.133 0.208 rg
@@ -346,11 +430,24 @@ q
 Q
 endstream
 endobj
-14 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
-endobj
 15 0 obj
-<< /Length 2820 >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/Contents 16 0 R
+>>
+endobj
+16 0 obj
+<<
+/Length 2820
+>>
 stream
 q
 0.31 0.36 0.41 rg
@@ -426,11 +523,25 @@ q
 Q
 endstream
 endobj
-16 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
-endobj
 17 0 obj
-<< /Length 758 >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/Contents 18 0 R
+/Annots [ 19 0 R ]
+>>
+endobj
+18 0 obj
+<<
+/Length 758
+>>
 stream
 q
 0.063 0.133 0.208 rg
@@ -458,32 +569,46 @@ q
 Q
 endstream
 endobj
-18 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 17 0 R >>
+19 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [ 58 696.6195 257.41 712.1195 ]
+/Border [ 0 0 0 ]
+/A <<
+/Type /Action
+/S /URI
+/URI (https\072\057\057unleashyourpowerwithtariq\056com\057)
+>>
+>>
 endobj
 xref
-0 19
+0 20
 0000000000 65535 f 
-0000000009 00000 n 
-0000000107 00000 n 
-0000000156 00000 n 
-0000000228 00000 n 
-0000000298 00000 n 
-0000000898 00000 n 
-0000001034 00000 n 
-0000003980 00000 n 
-0000004116 00000 n 
-0000006987 00000 n 
-0000007124 00000 n 
-0000009976 00000 n 
-0000010114 00000 n 
-0000012950 00000 n 
-0000013088 00000 n 
-0000015961 00000 n 
-0000016099 00000 n 
-0000016909 00000 n 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000163 00000 n 
+0000000301 00000 n 
+0000000373 00000 n 
+0000000443 00000 n 
+0000001043 00000 n 
+0000001181 00000 n 
+0000004127 00000 n 
+0000004266 00000 n 
+0000007138 00000 n 
+0000007278 00000 n 
+0000010130 00000 n 
+0000010270 00000 n 
+0000013106 00000 n 
+0000013246 00000 n 
+0000016119 00000 n 
+0000016278 00000 n 
+0000017088 00000 n 
 trailer
-<< /Size 19 /Root 2 0 R >>
+<<
+/Size 20
+/Root 1 0 R
+>>
 startxref
-17047
+17286
 %%EOF

@@ -1,94 +1,172 @@
-%PDF-1.4
+%PDF-1.3
+%‚„œ”
 1 0 obj
-<< /Type /Pages /Kids [5 0 R 7 0 R] /Count 2 >>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
 2 0 obj
-<< /Type /Catalog /Pages 1 0 R >>
+<<
+/Type /Pages
+/Kids [ 3 0 R 6 0 R ]
+/Count 2
+>>
 endobj
 3 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+>>
+>>
+/Contents 5 0 R
+>>
 endobj
 4 0 obj
-<< /Length 3207 >>
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+5 0 obj
+<<
+/Length 2975
+>>
 stream
 BT
-/F1 18 Tf 1 0 0 1 58 770 Tm (An Introduction to Charles F. Haanel's Master Key System) Tj
-/F1 15 Tf 1 0 0 1 58 736 Tm (Source-based overview) Tj
+/F1 18 Tf
+1 0 0 1 58 770 Tm (An Introduction to Charles F. Haanel's Master Key) Tj
+1 0 0 1 58 748 Tm (System) Tj
+/F1 15 Tf
+1 0 0 1 58 714 Tm (Source-based overview) Tj
 /F1 10.5 Tf
-1 0 0 1 58 717 Tm (The Master Key System is a structured study of thought, consciousness, character and) Tj
-1 0 0 1 58 702 Tm (purposeful action. Haanel presents it as a course requiring patience, reflection and) Tj
-1 0 0 1 58 687 Tm (repeated practice.) Tj
-/F1 15 Tf 1 0 0 1 58 664 Tm (The mind as a creative power) Tj
+1 0 0 1 58 680 Tm (The Master Key System is a structured study of thought, consciousness, character and) Tj
+1 0 0 1 58 665 Tm (purposeful action. Haanel presents it as a course requiring patience, reflection and) Tj
+1 0 0 1 58 650 Tm (repeated practice.) Tj
+/F1 15 Tf
+1 0 0 1 58 627 Tm (The mind as a creative power) Tj
 /F1 10.5 Tf
-1 0 0 1 58 645 Tm (Haanel describes the mind as active and creative. Ideas, beliefs and mental attitudes) Tj
-1 0 0 1 58 630 Tm (influence how we interpret the world and the actions we take. A clear idea must be) Tj
-1 0 0 1 58 615 Tm (followed by disciplined attention and purposeful action.) Tj
-/F1 15 Tf 1 0 0 1 58 592 Tm (From understanding to action) Tj
+1 0 0 1 58 593 Tm (Haanel describes the mind as active and creative. Ideas, beliefs and mental attitudes) Tj
+1 0 0 1 58 578 Tm (influence how we interpret the world and the actions we take. A clear idea must be) Tj
+1 0 0 1 58 563 Tm (followed by disciplined attention and purposeful action.) Tj
+/F1 15 Tf
+1 0 0 1 58 540 Tm (From understanding to action) Tj
 /F1 10.5 Tf
-1 0 0 1 58 573 Tm (The text discusses Truth, Tact, Loyalty, Individuality, Courage, Accumulation,) Tj
-1 0 0 1 58 558 Tm (Constructiveness and Sagacity. These qualities connect imagination with character,) Tj
-1 0 0 1 58 543 Tm (responsibility, judgement and disciplined behaviour. Reading about concentration does not) Tj
-1 0 0 1 58 528 Tm (automatically create concentration; the principle becomes meaningful through repeated) Tj
-1 0 0 1 58 513 Tm (application.) Tj
-/F1 15 Tf 1 0 0 1 58 490 Tm (One energy, different forms) Tj
+1 0 0 1 58 506 Tm (The text discusses Truth, Tact, Loyalty, Individuality, Courage, Accumulation,) Tj
+1 0 0 1 58 491 Tm (Constructiveness and Sagacity. These qualities connect imagination with character,) Tj
+1 0 0 1 58 476 Tm (responsibility, judgement and disciplined behaviour. Reading about concentration does not) Tj
+1 0 0 1 58 461 Tm (automatically create concentration; the principle becomes meaningful through repeated) Tj
+1 0 0 1 58 446 Tm (application.) Tj
+/F1 15 Tf
+1 0 0 1 58 423 Tm (One energy, different forms) Tj
 /F1 10.5 Tf
-1 0 0 1 58 471 Tm (Haanel's illustrations of water, ice and steam show different forms of one substance) Tj
-1 0 0 1 58 456 Tm (changed by conditions. This is a philosophical illustration, not a scientific claim about) Tj
-1 0 0 1 58 441 Tm (mental causation. It invites the reader to consider how attention, imagination and effort) Tj
-1 0 0 1 58 426 Tm (may be organised toward a definite purpose.) Tj
-/F1 15 Tf 1 0 0 1 58 403 Tm (Reflection for the reader) Tj
+1 0 0 1 58 389 Tm (Haanel's illustrations of water, ice and steam show different forms of one substance) Tj
+1 0 0 1 58 374 Tm (changed by conditions. This is a philosophical illustration, not a scientific claim about) Tj
+1 0 0 1 58 359 Tm (mental causation. It invites the reader to consider how attention, imagination and effort) Tj
+1 0 0 1 58 344 Tm (may be organised toward a definite purpose.) Tj
+/F1 15 Tf
+1 0 0 1 58 321 Tm (Reflection for the reader) Tj
 /F1 10.5 Tf
-1 0 0 1 58 384 Tm (This is a modern reader reflection, not an original Haanel lesson or instruction. Take) Tj
-1 0 0 1 58 369 Tm (ten quiet minutes. Ask what thought pattern has influenced you recently, whether it helps) Tj
-1 0 0 1 58 354 Tm (you move towards your purpose and what one action would express clearer thinking. Write) Tj
-1 0 0 1 58 339 Tm (your answers and complete one small action before the day ends.) Tj
-/F1 15 Tf 1 0 0 1 58 316 Tm (Studying the Master Key System today) Tj
+1 0 0 1 58 287 Tm (This is a modern reader reflection, not an original Haanel lesson or instruction. Take) Tj
+1 0 0 1 58 272 Tm (ten quiet minutes. Ask what thought pattern has influenced you recently, whether it helps) Tj
+1 0 0 1 58 257 Tm (you move towards your purpose and what one action would express clearer thinking. Write) Tj
+1 0 0 1 58 242 Tm (your answers and complete one small action before the day ends.) Tj
+/F1 15 Tf
+1 0 0 1 58 219 Tm (Studying the Master Key System today) Tj
 /F1 10.5 Tf
-1 0 0 1 58 297 Tm (The system is best approached progressively. Each part builds on the previous one, giving) Tj
-1 0 0 1 58 282 Tm (you time to study, reflect and practise. Unleash Your Power presents it as a structured) Tj
-1 0 0 1 58 267 Tm (24-week journey with weekly guidance, exercises, reflection and accountability. Haanel) Tj
-1 0 0 1 58 252 Tm (provided the original system; the modern student must approach it thoughtfully and decide) Tj
-1 0 0 1 58 237 Tm (what can be applied constructively.) Tj
-/F1 15 Tf 1 0 0 1 58 214 Tm (Begin your own study) Tj
-/F1 10.5 Tf
-1 0 0 1 58 195 Tm (Free registration is required. No purchase is required. Start the free seven-day) Tj
-1 0 0 1 58 180 Tm (experience: https://unleashyourpowerwithtariq.com/start-free/) Tj
+1 0 0 1 58 185 Tm (The system is best approached progressively. Each part builds on the previous one, giving) Tj
+1 0 0 1 58 170 Tm (you time to study, reflect and practise. Unleash Your Power presents it as a structured) Tj
+1 0 0 1 58 155 Tm (24-week journey with weekly guidance, exercises, reflection and accountability. Haanel) Tj
+1 0 0 1 58 140 Tm (provided the original system; the modern student must approach it thoughtfully and decide) Tj
+1 0 0 1 58 125 Tm (what can be applied constructively.) Tj
 /F1 9 Tf 1 0 0 1 58 34 Tm (Unleash Your Power with Tariq - 1 / 2) Tj
 ET
 endstream
 endobj
-5 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
-endobj
 6 0 obj
-<< /Length 538 >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+>>
+>>
+/Contents 7 0 R
+/Annots [ 8 0 R 9 0 R ]
+>>
+endobj
+7 0 obj
+<<
+/Length 793
+>>
 stream
 BT
-/F1 15 Tf 1 0 0 1 58 770 Tm (Independent coaching disclaimer) Tj
+/F1 15 Tf
+1 0 0 1 58 770 Tm (Begin your own study) Tj
 /F1 10.5 Tf
-1 0 0 1 58 751 Tm (Unleash Your Power is an independent coaching experience inspired by Charles F. Haanel's) Tj
-1 0 0 1 58 736 Tm (The Master Key System. It is not affiliated with or endorsed by Charles F. Haanel, his) Tj
-1 0 0 1 58 721 Tm (estate or Helmar Rudolph. Individual outcomes depend on personal circumstances,) Tj
-1 0 0 1 58 706 Tm (participation and consistent practice.) Tj
+1 0 0 1 58 736 Tm (Free registration is required. No purchase is required. Start the free seven-day) Tj
+1 0 0 1 58 721 Tm (experience: https://unleashyourpowerwithtariq.com/start-free/) Tj
+/F1 15 Tf
+1 0 0 1 58 698 Tm (Independent coaching disclaimer) Tj
+/F1 10.5 Tf
+1 0 0 1 58 664 Tm (Unleash Your Power is an independent coaching experience inspired by Charles F. Haanel's) Tj
+1 0 0 1 58 649 Tm (The Master Key System. It is not affiliated with or endorsed by Charles F. Haanel, his) Tj
+1 0 0 1 58 634 Tm (estate or Helmar Rudolph. Individual outcomes depend on personal circumstances,) Tj
+1 0 0 1 58 619 Tm (participation and consistent practice.) Tj
 /F1 9 Tf 1 0 0 1 58 34 Tm (Unleash Your Power with Tariq - 2 / 2) Tj
 ET
 endstream
 endobj
-7 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+8 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [ 122.2 718 384.35 733.5 ]
+/Border [ 0 0 0 ]
+/A <<
+/Type /Action
+/S /URI
+/URI (https\072\057\057unleashyourpowerwithtariq\056com\057start\055free\057)
+>>
+>>
+endobj
+9 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [ 58 716.8265 342.193 731.3265 ]
+/Border [ 0 0 0 ]
+/A <<
+/Type /Action
+/S /URI
+/URI (https\072\057\057unleashyourpowerwithtariq\056com\057start\055free\057)
+>>
+>>
 endobj
 xref
-0 8
+0 10
 0000000000 65535 f 
-0000000009 00000 n 
-0000000072 00000 n 
-0000000121 00000 n 
-0000000191 00000 n 
-0000003450 00000 n 
-0000003576 00000 n 
-0000004165 00000 n 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000129 00000 n 
+0000000257 00000 n 
+0000000327 00000 n 
+0000003354 00000 n 
+0000003506 00000 n 
+0000004350 00000 n 
+0000004559 00000 n 
 trailer
-<< /Size 8 /Root 2 0 R >>
+<<
+/Size 10
+/Root 1 0 R
+>>
 startxref
-4291
+4774
 %%EOF

@@ -1,78 +1,168 @@
-%PDF-1.4
+%PDF-1.3
+%‚„œ”
 1 0 obj
-<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
 2 0 obj
-<< /Type /Catalog /Pages 1 0 R >>
+<<
+/Type /Pages
+/Kids [ 3 0 R 7 0 R ]
+/Count 2
+>>
 endobj
 3 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+>>
+>>
+/Contents 5 0 R
+/Annots [ 6 0 R 9 0 R ]
+>>
 endobj
 4 0 obj
-<< /Length 3265 >>
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+5 0 obj
+<<
+/Length 2801
+>>
 stream
 BT
-/F1 18 Tf 1 0 0 1 58 770 Tm (The World Within and the World Without) Tj
-/F1 15 Tf 1 0 0 1 58 736 Tm (Source-based overview) Tj
+/F1 18 Tf
+1 0 0 1 58 770 Tm (The World Within and the World Without) Tj
+/F1 15 Tf
+1 0 0 1 58 736 Tm (Source-based overview) Tj
 /F1 10.5 Tf
-1 0 0 1 58 717 Tm (One central idea in The Master Key System is the relationship between the world within) Tj
-1 0 0 1 58 702 Tm (and the world without. Haanel invites the reader to examine inner patterns influencing) Tj
-1 0 0 1 58 687 Tm (how we see, choose and act.) Tj
-/F1 15 Tf 1 0 0 1 58 664 Tm (The world within) Tj
+1 0 0 1 58 702 Tm (One central idea in The Master Key System is the relationship between the world within) Tj
+1 0 0 1 58 687 Tm (and the world without. Haanel invites the reader to examine inner patterns influencing) Tj
+1 0 0 1 58 672 Tm (how we see, choose and act.) Tj
+/F1 15 Tf
+1 0 0 1 58 649 Tm (The world within) Tj
 /F1 10.5 Tf
-1 0 0 1 58 645 Tm (The world within describes thoughts, beliefs, images, emotions and purposes that give) Tj
-1 0 0 1 58 630 Tm (direction to action. Haanel presents this inner world as a source of possibility; a) Tj
-1 0 0 1 58 615 Tm (careful reading keeps the claim grounded: thought influences attention, interpretation) Tj
-1 0 0 1 58 600 Tm (and action rather than automatically creating every external event.) Tj
-/F1 15 Tf 1 0 0 1 58 577 Tm (The world without) Tj
+1 0 0 1 58 615 Tm (The world within describes thoughts, beliefs, images, emotions and purposes that give) Tj
+1 0 0 1 58 600 Tm (direction to action. Haanel presents this inner world as a source of possibility; a) Tj
+1 0 0 1 58 585 Tm (careful reading keeps the claim grounded: thought influences attention, interpretation) Tj
+1 0 0 1 58 570 Tm (and action rather than automatically creating every external event.) Tj
+/F1 15 Tf
+1 0 0 1 58 547 Tm (The world without) Tj
 /F1 10.5 Tf
-1 0 0 1 58 558 Tm (The world without is the visible part of life: environment, responsibilities,) Tj
-1 0 0 1 58 543 Tm (relationships, habits and results. This does not deny external events, other people's) Tj
-1 0 0 1 58 528 Tm (choices or genuine difficulty; it invites examination of the choices and actions over) Tj
-1 0 0 1 58 513 Tm (which we do have influence.) Tj
-/F1 15 Tf 1 0 0 1 58 490 Tm (Harmony within) Tj
+1 0 0 1 58 513 Tm (The world without is the visible part of life: environment, responsibilities,) Tj
+1 0 0 1 58 498 Tm (relationships, habits and results. This does not deny external events, other people's) Tj
+1 0 0 1 58 483 Tm (choices or genuine difficulty; it invites examination of the choices and actions over) Tj
+1 0 0 1 58 468 Tm (which we do have influence.) Tj
+/F1 15 Tf
+1 0 0 1 58 445 Tm (Harmony within) Tj
 /F1 10.5 Tf
-1 0 0 1 58 471 Tm (Harmony means bringing greater agreement between what you believe, want, imagine, say and) Tj
-1 0 0 1 58 456 Tm (do. It does not mean life will always feel easy. Greater coherence can make deliberate) Tj
-1 0 0 1 58 441 Tm (action easier.) Tj
-/F1 15 Tf 1 0 0 1 58 418 Tm (Thought and action) Tj
+1 0 0 1 58 411 Tm (Harmony means bringing greater agreement between what you believe, want, imagine, say and) Tj
+1 0 0 1 58 396 Tm (do. It does not mean life will always feel easy. Greater coherence can make deliberate) Tj
+1 0 0 1 58 381 Tm (action easier.) Tj
+/F1 15 Tf
+1 0 0 1 58 358 Tm (Thought and action) Tj
 /F1 10.5 Tf
-1 0 0 1 58 399 Tm (The system does not present thought as a substitute for action. A definite purpose needs) Tj
-1 0 0 1 58 384 Tm (practical expression through decisions, habits and consistent effort. The world within) Tj
-1 0 0 1 58 369 Tm (provides direction; the world without provides opportunity.) Tj
-/F1 15 Tf 1 0 0 1 58 346 Tm (Reflection for the reader) Tj
+1 0 0 1 58 324 Tm (The system does not present thought as a substitute for action. A definite purpose needs) Tj
+1 0 0 1 58 309 Tm (practical expression through decisions, habits and consistent effort. The world within) Tj
+1 0 0 1 58 294 Tm (provides direction; the world without provides opportunity.) Tj
+/F1 15 Tf
+1 0 0 1 58 271 Tm (Reflection for the reader) Tj
 /F1 10.5 Tf
-1 0 0 1 58 327 Tm (This is a modern reader reflection, not an original Haanel lesson or instruction. Choose) Tj
-1 0 0 1 58 312 Tm (one area you want to improve. Write what condition you are experiencing, what thoughts) Tj
-1 0 0 1 58 297 Tm (may influence your response, what inner quality would help and what action you can take) Tj
-1 0 0 1 58 282 Tm (today.) Tj
-/F1 15 Tf 1 0 0 1 58 259 Tm (Begin your study) Tj
+1 0 0 1 58 237 Tm (This is a modern reader reflection, not an original Haanel lesson or instruction. Choose) Tj
+1 0 0 1 58 222 Tm (one area you want to improve. Write what condition you are experiencing, what thoughts) Tj
+1 0 0 1 58 207 Tm (may influence your response, what inner quality would help and what action you can take) Tj
+1 0 0 1 58 192 Tm (today.) Tj
+/F1 15 Tf
+1 0 0 1 58 169 Tm (Begin your study) Tj
 /F1 10.5 Tf
-1 0 0 1 58 240 Tm (Unleash Your Power presents these ideas as part of a structured 24-week journey. Begin) Tj
-1 0 0 1 58 225 Tm (with the free seven-day experience: https://unleashyourpowerwithtariq.com/start-free/) Tj
-/F1 15 Tf 1 0 0 1 58 202 Tm (Independent coaching disclaimer) Tj
-/F1 10.5 Tf
-1 0 0 1 58 183 Tm (Unleash Your Power is an independent coaching experience inspired by Charles F. Haanel's) Tj
-1 0 0 1 58 168 Tm (The Master Key System. It is not affiliated with or endorsed by Charles F. Haanel, his) Tj
-1 0 0 1 58 153 Tm (estate or Helmar Rudolph. Individual outcomes depend on personal circumstances,) Tj
-1 0 0 1 58 138 Tm (participation and consistent practice.) Tj
-/F1 9 Tf 1 0 0 1 58 34 Tm (Unleash Your Power with Tariq - 1 / 1) Tj
+1 0 0 1 58 135 Tm (Unleash Your Power presents these ideas as part of a structured 24-week journey. Begin) Tj
+1 0 0 1 58 120 Tm (with the free seven-day experience: https://unleashyourpowerwithtariq.com/start-free/) Tj
+/F1 9 Tf 1 0 0 1 58 34 Tm (Unleash Your Power with Tariq - 1 / 2) Tj
 ET
 endstream
 endobj
-5 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+6 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [ 250.6 117 512.75 132.5 ]
+/Border [ 0 0 0 ]
+/A <<
+/Type /Action
+/S /URI
+/URI (https\072\057\057unleashyourpowerwithtariq\056com\057start\055free\057)
+>>
+>>
+endobj
+7 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+>>
+>>
+/Contents 8 0 R
+>>
+endobj
+8 0 obj
+<<
+/Length 538
+>>
+stream
+BT
+/F1 15 Tf
+1 0 0 1 58 770 Tm (Independent coaching disclaimer) Tj
+/F1 10.5 Tf
+1 0 0 1 58 736 Tm (Unleash Your Power is an independent coaching experience inspired by Charles F. Haanel's) Tj
+1 0 0 1 58 721 Tm (The Master Key System. It is not affiliated with or endorsed by Charles F. Haanel, his) Tj
+1 0 0 1 58 706 Tm (estate or Helmar Rudolph. Individual outcomes depend on personal circumstances,) Tj
+1 0 0 1 58 691 Tm (participation and consistent practice.) Tj
+/F1 9 Tf 1 0 0 1 58 34 Tm (Unleash Your Power with Tariq - 2 / 2) Tj
+ET
+endstream
+endobj
+9 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [ 58 115.8265 453.661 130.3265 ]
+/Border [ 0 0 0 ]
+/A <<
+/Type /Action
+/S /URI
+/URI (https\072\057\057unleashyourpowerwithtariq\056com\057start\055free\057)
+>>
+>>
 endobj
 xref
-0 6
+0 10
 0000000000 65535 f 
-0000000009 00000 n 
-0000000066 00000 n 
-0000000115 00000 n 
-0000000185 00000 n 
-0000003502 00000 n 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000129 00000 n 
+0000000281 00000 n 
+0000000351 00000 n 
+0000003204 00000 n 
+0000003413 00000 n 
+0000003541 00000 n 
+0000004130 00000 n 
 trailer
-<< /Size 6 /Root 2 0 R >>
+<<
+/Size 10
+/Root 1 0 R
+>>
 startxref
-3628
+4345
 %%EOF

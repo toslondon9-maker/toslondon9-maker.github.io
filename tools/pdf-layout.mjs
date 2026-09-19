@@ -82,11 +82,21 @@ function makePages(title, sections) {
 function streamForPage(page, pageNumber, total) {
   let y = TOP_Y;
   const commands = ["BT"];
+  const links = [];
+  const addLine = (line, x, baseline, size) => {
+    const urlMatch = line.match(/https?:\/\/\S+/);
+    if (urlMatch) {
+      const start = x + (urlMatch.index * CHAR_WIDTH);
+      const width = Math.max(24, urlMatch[0].length * CHAR_WIDTH);
+      links.push({ url: urlMatch[0], rect: [start, baseline - 3, Math.min(PAGE_WIDTH - MARGIN_X, start + width), baseline + size + 2] });
+    }
+    commands.push(`1 0 0 1 ${x} ${baseline} Tm (${escapePdf(line)}) Tj`);
+  };
   for (const item of page) {
     if (item.kind === "title") {
       commands.push(`/F1 18 Tf`);
       for (const line of item.lines) {
-        commands.push(`1 0 0 1 ${MARGIN_X} ${y} Tm (${escapePdf(line)}) Tj`);
+        addLine(line, MARGIN_X, y, 18);
         y -= 22;
       }
       y -= 12;
@@ -95,7 +105,7 @@ function streamForPage(page, pageNumber, total) {
     if (item.kind === "heading") {
       commands.push(`/F1 ${HEADING_SIZE} Tf`);
       for (const line of item.lines) {
-        commands.push(`1 0 0 1 ${MARGIN_X} ${y} Tm (${escapePdf(line)}) Tj`);
+        addLine(line, MARGIN_X, y, HEADING_SIZE);
         y -= HEADING_LEADING;
       }
       y -= HEADING_GAP;
@@ -103,14 +113,14 @@ function streamForPage(page, pageNumber, total) {
     }
     commands.push(`/F1 ${BODY_SIZE} Tf`);
     for (const line of item.lines) {
-      commands.push(`1 0 0 1 ${MARGIN_X} ${y} Tm (${escapePdf(line)}) Tj`);
+      addLine(line, MARGIN_X, y, BODY_SIZE);
       y -= BODY_LEADING;
     }
     y -= 8;
   }
   commands.push(`/F1 9 Tf 1 0 0 1 ${MARGIN_X} 34 Tm (Unleash Your Power with Tariq - ${pageNumber} / ${total}) Tj`);
   commands.push("ET");
-  return commands.join("\n");
+  return { stream: commands.join("\n"), links };
 }
 
 export function writePdf(filename, title, sections) {
@@ -123,9 +133,11 @@ export function writePdf(filename, title, sections) {
   const fontId = add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>");
   const pageIds = [];
   pages.forEach((page, index) => {
-    const stream = streamForPage(page, index + 1, pages.length);
-    const streamId = add(`<< /Length ${Buffer.byteLength(stream)} >>\nstream\n${stream}\nendstream`);
-    pageIds.push(add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${PAGE_WIDTH} ${PAGE_HEIGHT}] /Resources << /Font << /F1 ${fontId} 0 R >> >> /Contents ${streamId} 0 R >>`));
+    const rendered = streamForPage(page, index + 1, pages.length);
+    const streamId = add(`<< /Length ${Buffer.byteLength(rendered.stream)} >>\nstream\n${rendered.stream}\nendstream`);
+    const annotationIds = rendered.links.map(({ url, rect }) => add(`<< /Type /Annot /Subtype /Link /Rect [${rect.join(" ")}] /Border [0 0 0] /A << /Type /Action /S /URI /URI (${escapePdf(url)}) >> >>`));
+    const annots = annotationIds.length ? ` /Annots [${annotationIds.map((id) => `${id} 0 R`).join(" ")}]` : "";
+    pageIds.push(add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${PAGE_WIDTH} ${PAGE_HEIGHT}] /Resources << /Font << /F1 ${fontId} 0 R >> >> /Contents ${streamId} 0 R${annots} >>`));
   });
   objects[pagesId - 1] = `<< /Type /Pages /Kids [${pageIds.map((id) => `${id} 0 R`).join(" ")}] /Count ${pageIds.length} >>`;
   objects[catalogId - 1] = `<< /Type /Catalog /Pages ${pagesId} 0 R >>`;

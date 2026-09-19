@@ -1,113 +1,194 @@
-%PDF-1.4
+%PDF-1.3
+%‚„œ”
 1 0 obj
-<< /Type /Pages /Kids [5 0 R 7 0 R] /Count 2 >>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
 2 0 obj
-<< /Type /Catalog /Pages 1 0 R >>
+<<
+/Type /Pages
+/Kids [ 3 0 R 6 0 R ]
+/Count 2
+>>
 endobj
 3 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+>>
+>>
+/Contents 5 0 R
+>>
 endobj
 4 0 obj
-<< /Length 3014 >>
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+5 0 obj
+<<
+/Length 2561
+>>
 stream
 BT
-/F1 18 Tf 1 0 0 1 58 770 Tm (The Eight Principles of the Master Key System) Tj
-/F1 15 Tf 1 0 0 1 58 736 Tm (Source-based overview) Tj
+/F1 18 Tf
+1 0 0 1 58 770 Tm (The Eight Principles of the Master Key System) Tj
+/F1 15 Tf
+1 0 0 1 58 736 Tm (Source-based overview) Tj
 /F1 10.5 Tf
-1 0 0 1 58 717 Tm (This guide presents Truth, Tact, Loyalty, Individuality, Courage, Accumulation,) Tj
-1 0 0 1 58 702 Tm (Constructiveness and Sagacity as themes for independent study. The wording below is a) Tj
-1 0 0 1 58 687 Tm (neutral explanation of the principles, not a claim that every modern phrase is a direct) Tj
-1 0 0 1 58 672 Tm (quotation from Haanel.) Tj
-/F1 15 Tf 1 0 0 1 58 649 Tm (1. Truth) Tj
+1 0 0 1 58 702 Tm (This guide presents Truth, Tact, Loyalty, Individuality, Courage, Accumulation,) Tj
+1 0 0 1 58 687 Tm (Constructiveness and Sagacity as themes for independent study. The wording below is a) Tj
+1 0 0 1 58 672 Tm (neutral explanation of the principles, not a claim that every modern phrase is a direct) Tj
+1 0 0 1 58 657 Tm (quotation from Haanel.) Tj
+/F1 15 Tf
+1 0 0 1 58 634 Tm (1. Truth) Tj
 /F1 10.5 Tf
-1 0 0 1 58 630 Tm (Truth begins with seeing what is actually present. Separate an observation from an) Tj
-1 0 0 1 58 615 Tm (assumption and notice where a story has been added. Truth is the willingness to meet) Tj
-1 0 0 1 58 600 Tm (facts, feelings and choices honestly before deciding what to do next.) Tj
-/F1 15 Tf 1 0 0 1 58 577 Tm (2. Tact) Tj
+1 0 0 1 58 600 Tm (Truth begins with seeing what is actually present. Separate an observation from an) Tj
+1 0 0 1 58 585 Tm (assumption and notice where a story has been added. Truth is the willingness to meet) Tj
+1 0 0 1 58 570 Tm (facts, feelings and choices honestly before deciding what to do next.) Tj
+/F1 15 Tf
+1 0 0 1 58 547 Tm (2. Tact) Tj
 /F1 10.5 Tf
-1 0 0 1 58 558 Tm (Tact is thoughtful judgement in relationship with other people. It includes sympathy,) Tj
-1 0 0 1 58 543 Tm (understanding and the ability to consider likely consequences before acting. Tact is not) Tj
-1 0 0 1 58 528 Tm (weakness or people-pleasing; it allows clear speech while remembering another person's) Tj
-1 0 0 1 58 513 Tm (perspective and dignity.) Tj
-/F1 15 Tf 1 0 0 1 58 490 Tm (3. Loyalty) Tj
+1 0 0 1 58 513 Tm (Tact is thoughtful judgement in relationship with other people. It includes sympathy,) Tj
+1 0 0 1 58 498 Tm (understanding and the ability to consider likely consequences before acting. Tact is not) Tj
+1 0 0 1 58 483 Tm (weakness or people-pleasing; it allows clear speech while remembering another person's) Tj
+1 0 0 1 58 468 Tm (perspective and dignity.) Tj
+/F1 15 Tf
+1 0 0 1 58 445 Tm (3. Loyalty) Tj
 /F1 10.5 Tf
-1 0 0 1 58 471 Tm (Loyalty is steadiness toward a chosen value, promise or relationship. It is tested by) Tj
-1 0 0 1 58 456 Tm (ordinary repetition: keeping an agreement, returning to a practice and acting) Tj
-1 0 0 1 58 441 Tm (consistently when enthusiasm changes. Loyalty should include discernment and boundaries.) Tj
-/F1 15 Tf 1 0 0 1 58 418 Tm (4. Individuality) Tj
+1 0 0 1 58 411 Tm (Loyalty is steadiness toward a chosen value, promise or relationship. It is tested by) Tj
+1 0 0 1 58 396 Tm (ordinary repetition: keeping an agreement, returning to a practice and acting) Tj
+1 0 0 1 58 381 Tm (consistently when enthusiasm changes. Loyalty should include discernment and boundaries.) Tj
+/F1 15 Tf
+1 0 0 1 58 358 Tm (4. Individuality) Tj
 /F1 10.5 Tf
-1 0 0 1 58 399 Tm (Individuality means developing your own understanding and responsibility. Study can offer) Tj
-1 0 0 1 58 384 Tm (a map, but it cannot make decisions for you. Notice which interpretations help you think) Tj
-1 0 0 1 58 369 Tm (and act deliberately, then make room for your own experience.) Tj
-/F1 15 Tf 1 0 0 1 58 346 Tm (5. Courage) Tj
+1 0 0 1 58 324 Tm (Individuality means developing your own understanding and responsibility. Study can offer) Tj
+1 0 0 1 58 309 Tm (a map, but it cannot make decisions for you. Notice which interpretations help you think) Tj
+1 0 0 1 58 294 Tm (and act deliberately, then make room for your own experience.) Tj
+/F1 15 Tf
+1 0 0 1 58 271 Tm (5. Courage) Tj
 /F1 10.5 Tf
-1 0 0 1 58 327 Tm (Courage is the capacity to take a considered step while uncertainty is still present. It) Tj
-1 0 0 1 58 312 Tm (may mean asking an honest question, changing a familiar response or beginning an exercise) Tj
-1 0 0 1 58 297 Tm (without knowing exactly what you will discover. A brave action can be small, informed and) Tj
-1 0 0 1 58 282 Tm (reversible.) Tj
-/F1 15 Tf 1 0 0 1 58 259 Tm (6. Accumulation) Tj
-/F1 10.5 Tf
-1 0 0 1 58 240 Tm (Accumulation describes how repeated attention and practice build a pattern over time. A) Tj
-1 0 0 1 58 225 Tm (single reflection may feel modest, yet a series of observations can reveal what supports) Tj
-1 0 0 1 58 210 Tm (your direction. The principle points toward patient consistency, not instant results or a) Tj
-1 0 0 1 58 195 Tm (promise of a particular outcome.) Tj
+1 0 0 1 58 237 Tm (Courage is the capacity to take a considered step while uncertainty is still present. It) Tj
+1 0 0 1 58 222 Tm (may mean asking an honest question, changing a familiar response or beginning an exercise) Tj
+1 0 0 1 58 207 Tm (without knowing exactly what you will discover. A brave action can be small, informed and) Tj
+1 0 0 1 58 192 Tm (reversible.) Tj
 /F1 9 Tf 1 0 0 1 58 34 Tm (Unleash Your Power with Tariq - 1 / 2) Tj
 ET
 endstream
 endobj
-5 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
-endobj
 6 0 obj
-<< /Length 2092 >>
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [ 0 0 595 842 ]
+/Resources <<
+/Font <<
+/F1 4 0 R
+>>
+>>
+/Contents 7 0 R
+/Annots [ 8 0 R 9 0 R ]
+>>
+endobj
+7 0 obj
+<<
+/Length 2545
+>>
 stream
 BT
-/F1 15 Tf 1 0 0 1 58 770 Tm (7. Constructiveness) Tj
+/F1 15 Tf
+1 0 0 1 58 770 Tm (6. Accumulation) Tj
 /F1 10.5 Tf
-1 0 0 1 58 751 Tm (Constructiveness asks whether your thinking leads toward useful action. It is not forced) Tj
-1 0 0 1 58 736 Tm (optimism. It means identifying what can be built, repaired, clarified or practised next,) Tj
-1 0 0 1 58 721 Tm (even when a situation is imperfect. Constructive attention turns reflection into a choice) Tj
-1 0 0 1 58 706 Tm (that can be tested in real life.) Tj
-/F1 15 Tf 1 0 0 1 58 683 Tm (8. Sagacity) Tj
+1 0 0 1 58 736 Tm (Accumulation describes how repeated attention and practice build a pattern over time. A) Tj
+1 0 0 1 58 721 Tm (single reflection may feel modest, yet a series of observations can reveal what supports) Tj
+1 0 0 1 58 706 Tm (your direction. The principle points toward patient consistency, not instant results or a) Tj
+1 0 0 1 58 691 Tm (promise of a particular outcome.) Tj
+/F1 15 Tf
+1 0 0 1 58 668 Tm (7. Constructiveness) Tj
 /F1 10.5 Tf
-1 0 0 1 58 664 Tm (Sagacity is practical wisdom: the ability to weigh context, timing and consequences) Tj
-1 0 0 1 58 649 Tm (before choosing. It grows through experience, honest review and a willingness to revise) Tj
-1 0 0 1 58 634 Tm (an idea when new information appears. Sagacity keeps principles grounded.) Tj
-/F1 15 Tf 1 0 0 1 58 611 Tm (Reflection for the reader) Tj
+1 0 0 1 58 634 Tm (Constructiveness asks whether your thinking leads toward useful action. It is not forced) Tj
+1 0 0 1 58 619 Tm (optimism. It means identifying what can be built, repaired, clarified or practised next,) Tj
+1 0 0 1 58 604 Tm (even when a situation is imperfect. Constructive attention turns reflection into a choice) Tj
+1 0 0 1 58 589 Tm (that can be tested in real life.) Tj
+/F1 15 Tf
+1 0 0 1 58 566 Tm (8. Sagacity) Tj
 /F1 10.5 Tf
-1 0 0 1 58 592 Tm (This is a modern reader reflection, not an original Haanel lesson or instruction. Choose) Tj
-1 0 0 1 58 577 Tm (one principle that feels relevant today. Write one situation in which it already appears,) Tj
-1 0 0 1 58 562 Tm (one situation in which you would like to practise it differently and one small action you) Tj
-1 0 0 1 58 547 Tm (can take within the next 24 hours. Keep the note specific and review what happened later.) Tj
-/F1 15 Tf 1 0 0 1 58 524 Tm (Continue your study) Tj
+1 0 0 1 58 532 Tm (Sagacity is practical wisdom: the ability to weigh context, timing and consequences) Tj
+1 0 0 1 58 517 Tm (before choosing. It grows through experience, honest review and a willingness to revise) Tj
+1 0 0 1 58 502 Tm (an idea when new information appears. Sagacity keeps principles grounded.) Tj
+/F1 15 Tf
+1 0 0 1 58 479 Tm (Reflection for the reader) Tj
 /F1 10.5 Tf
-1 0 0 1 58 505 Tm (The free seven-day experience gives you a short lesson, reflection and practical action) Tj
-1 0 0 1 58 490 Tm (each day. Start here: https://unleashyourpowerwithtariq.com/start-free/) Tj
-/F1 15 Tf 1 0 0 1 58 467 Tm (Independent study disclaimer) Tj
+1 0 0 1 58 445 Tm (This is a modern reader reflection, not an original Haanel lesson or instruction. Choose) Tj
+1 0 0 1 58 430 Tm (one principle that feels relevant today. Write one situation in which it already appears,) Tj
+1 0 0 1 58 415 Tm (one situation in which you would like to practise it differently and one small action you) Tj
+1 0 0 1 58 400 Tm (can take within the next 24 hours. Keep the note specific and review what happened later.) Tj
+/F1 15 Tf
+1 0 0 1 58 377 Tm (Continue your study) Tj
 /F1 10.5 Tf
-1 0 0 1 58 448 Tm (Unleash Your Power is independent study and coaching inspired by the Master Key System.) Tj
-1 0 0 1 58 433 Tm (It is not affiliated with or endorsed by the historical authors discussed here.) Tj
-1 0 0 1 58 418 Tm (Individual outcomes depend on circumstances, participation and consistent practice.) Tj
+1 0 0 1 58 343 Tm (The free seven-day experience gives you a short lesson, reflection and practical action) Tj
+1 0 0 1 58 328 Tm (each day. Start here: https://unleashyourpowerwithtariq.com/start-free/) Tj
+/F1 15 Tf
+1 0 0 1 58 305 Tm (Independent study disclaimer) Tj
+/F1 10.5 Tf
+1 0 0 1 58 271 Tm (Unleash Your Power is independent study and coaching inspired by the Master Key System.) Tj
+1 0 0 1 58 256 Tm (It is not affiliated with or endorsed by the historical authors discussed here.) Tj
+1 0 0 1 58 241 Tm (Individual outcomes depend on circumstances, participation and consistent practice.) Tj
 /F1 9 Tf 1 0 0 1 58 34 Tm (Unleash Your Power with Tariq - 2 / 2) Tj
 ET
 endstream
 endobj
-7 0 obj
-<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+8 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [ 175.7 325 437.85 340.5 ]
+/Border [ 0 0 0 ]
+/A <<
+/Type /Action
+/S /URI
+/URI (https\072\057\057unleashyourpowerwithtariq\056com\057start\055free\057)
+>>
+>>
+endobj
+9 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [ 58 323.8265 385.39 338.3265 ]
+/Border [ 0 0 0 ]
+/A <<
+/Type /Action
+/S /URI
+/URI (https\072\057\057unleashyourpowerwithtariq\056com\057start\055free\057)
+>>
+>>
 endobj
 xref
-0 8
+0 10
 0000000000 65535 f 
-0000000009 00000 n 
-0000000072 00000 n 
-0000000121 00000 n 
-0000000191 00000 n 
-0000003257 00000 n 
-0000003383 00000 n 
-0000005527 00000 n 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000129 00000 n 
+0000000257 00000 n 
+0000000327 00000 n 
+0000002940 00000 n 
+0000003092 00000 n 
+0000005689 00000 n 
+0000005898 00000 n 
 trailer
-<< /Size 8 /Root 2 0 R >>
+<<
+/Size 10
+/Root 1 0 R
+>>
 startxref
-5653
+6112
 %%EOF
