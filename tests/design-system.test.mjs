@@ -80,15 +80,11 @@ test("responsive rules protect the desktop navigation from wrapping before space
   assert.doesNotMatch(css, /(?:html|body|\*)[^{}]*\{[^{}]*overflow-x:\s*hidden/s);
 });
 
-test("desktop header uses a spacious two-level brand and navigation layout", () => {
+test("desktop header keeps the brand, navigation and language controls in one row", () => {
   const css = readFileSync(cssUrl, "utf8");
-  const desktop = css.slice(css.lastIndexOf("@media (min-width: 1361px)"));
-  assert.match(desktop, /\.siteHeader[\s\S]*?\{[^}]*flex-direction:\s*column/s);
-  assert.match(desktop, /\.siteHeader__actions\s*\{[^}]*display:\s*grid/s);
-  assert.match(desktop, /\.siteHeader__actions\s*>\s*\.siteNav\s*\{[^}]*justify-content:\s*center/s);
-  assert.match(desktop, /\.siteHeader \.brand img[\s\S]*?\{[^}]*width:\s*112px/s);
-  assert.match(desktop, /\.siteHeader \.brand img[\s\S]*?\{[^}]*border:\s*1px solid var\(--gold\)/s);
-  assert.match(desktop, /\.siteHeader \.brand img[\s\S]*?\{[^}]*box-shadow:\s*var\(--shadow-raised\)/s);
-  assert.match(desktop, /\.siteHeader \.brand__wordmark[\s\S]*?\{[^}]*font-size:\s*1\.55rem/s);
+  const desktop = css;
+  assert.match(css, /\.siteHeader, \.site-header \{ display:flex;[\s\S]*?flex-direction:row;[\s\S]*?align-items:center;[\s\S]*?flex-wrap:nowrap/s);
+  assert.match(css, /\.siteHeader__actions \{ display:flex; flex:1 1 auto; flex-direction:row/s);
+  assert.match(css, /digital-key-lockup\.svg/);
   assert.match(css, /@media \(max-width: 480px\)[\s\S]*?\.brand img\s*\{[^}]*width:\s*3rem/s);
 });

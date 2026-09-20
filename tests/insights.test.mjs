@@ -40,7 +40,7 @@ test("the course article exposes bilingual content, internal links and CTA", () 
   assert.match(english.body, /Foundation/);
   assert.match(english.body, /Visualisation/);
   assert.match(english.body, /Concentration/);
-  assert.match(english.body, /Contemplation and Mastery/);
+  assert.match(english.body, /Integration &amp; Mastery/);
   assert.match(english.body, new RegExp(`href="${siteData.routes.startFree}"`));
   assert.match(english.body, new RegExp(`href="${siteData.routes.coaching}"`));
   assert.match(english.body, new RegExp(`href="${siteData.routes.masterKeySystem}"`));

@@ -46,7 +46,7 @@ test("Master Key page provides the premium 24-chapter study shell around the pre
   assert.equal((html.match(/READY TO GO DEEPER\?/g) ?? []).length, 24);
   assert.equal((html.match(/EXPLORE THE 24-WEEK PROGRAMME/g) ?? []).length, 24);
   assert.equal((html.match(/href="\/coaching\/"/g) ?? []).length >= 24, true);
-  for (const [title, range] of [["FOUNDATION", "Chapters 1–4"], ["VISUALISATION", "Chapters 5–11"], ["CONCENTRATION", "Chapters 12–18"], ["CONTEMPLATION & MASTERY", "Chapters 19–24"]]) {
+  for (const [title, range] of [["FOUNDATION", "Chapters 1–4"], ["VISUALISATION", "Chapters 5–11"], ["CONCENTRATION", "Chapters 12–18"], ["INTEGRATION & MASTERY", "Chapters 19–24"]]) {
     assert.match(html, new RegExp(`${title}[\\s\\S]*?${range}`));
   }
 });

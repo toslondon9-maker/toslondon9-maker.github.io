@@ -75,12 +75,12 @@ test("accepted registration keeps its existing success response", async () => {
 });
 
 for (const field of ["goal", "difficulty"]) {
-  test(`Worker rejects blank ${field} before calling Apps Script`, async () => {
+  test(`Worker accepts blank ${field} and forwards to Apps Script`, async () => {
     const originalFetch = globalThis.fetch;
     let calls = 0;
     globalThis.fetch = async () => {
       calls += 1;
-      throw new Error("upstream should not be called");
+      return new Response(JSON.stringify({ ok: true, stored: true, notification: "pending" }), { headers: { "content-type": "application/json" } });
     };
     try {
       const response = await app.fetch(request("/lead", {
@@ -88,10 +88,10 @@ for (const field of ["goal", "difficulty"]) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ ...validLead, [field]: "   " }),
       }), env);
-      assert.equal(response.status, 400);
-      assert.deepEqual(await response.json(), { ok: false, code: "invalid" });
+      assert.equal(response.status, 200);
+      assert.deepEqual(await response.json(), { ok: true, stored: true, notification: "pending" });
       assert.match(response.headers.get("X-Request-ID") ?? "", /^[0-9a-f-]{20,}$/i);
-      assert.equal(calls, 0);
+      assert.equal(calls, 1);
     } finally { globalThis.fetch = originalFetch; }
   });
 }

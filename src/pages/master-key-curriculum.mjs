@@ -10,7 +10,7 @@ const phases = Object.freeze([
   { title: "FOUNDATION", range: "Chapters 1–4", start: 0, end: 4, image: "/images/master-key-visuals/foundation-chapters-1-4.webp", alt: "Foundation — Master Key System Chapters 1 to 4" },
   { title: "VISUALISATION", range: "Chapters 5–11", start: 4, end: 11, image: "/images/master-key-visuals/visualisation-chapters-5-11.webp", alt: "Visualisation — Master Key System Chapters 5 to 11" },
   { title: "CONCENTRATION", range: "Chapters 12–18", start: 11, end: 18, image: "/images/master-key-visuals/concentration-chapters-12-18.webp", alt: "Concentration — Master Key System Chapters 12 to 18" },
-  { title: "CONTEMPLATION & MASTERY", range: "Chapters 19–24", start: 18, end: 24, image: "/images/master-key-visuals/contemplation-mastery-chapters-19-24.webp", alt: "Contemplation and Mastery — Master Key System Chapters 19 to 24" },
+  { title: "INTEGRATION & MASTERY", range: "Chapters 19–24", start: 18, end: 24, image: "/images/master-key-visuals/contemplation-mastery-chapters-19-24.webp", alt: "Contemplation and Mastery — Master Key System Chapters 19 to 24" },
 ]);
 
 const practiceGuides = Object.freeze([

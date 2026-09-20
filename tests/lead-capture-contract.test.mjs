@@ -50,9 +50,8 @@ test("lead contract retains the explicit optional email-marketing choice", () =>
   assert.equal(declined.emailMarketing, false);
 });
 
-test("goal and difficulty are required while identity and WhatsApp consent remain required", () => {
-  assert.deepEqual(validateLeadPayload({ ...validLead, goal: "" }, now), { ok: false, code: "invalid-message" });
-  assert.deepEqual(validateLeadPayload({ ...validLead, difficulty: "   " }, now), { ok: false, code: "invalid-message" });
+test("goal and difficulty are optional while identity and WhatsApp consent remain required", () => {
+  assert.equal(validateLeadPayload({ ...validLead, goal: "", difficulty: "" }, now).ok, true);
   assert.equal(validateLeadPayload({ ...validLead, firstName: "" }, now).ok, false);
   assert.equal(validateLeadPayload({ ...validLead, consent: false }, now).ok, false);
 });

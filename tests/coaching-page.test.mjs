@@ -88,7 +88,7 @@ test("Spanish coaching copy is complete and natural", () => {
   const html = renderCoaching({ language: "es", siteData });
   for (const text of [
     "Resumen", "Fundamentos", "Visualización", "Concentración",
-    "Contemplación y dominio", "Recorrido completo", "Preguntas frecuentes",
+    "Integración y dominio", "Recorrido completo", "Preguntas frecuentes",
     "Semanas 1–4", "Ahorra £191", "44% de descuento sobre el PVP completo",
     "Habla con Tariq sobre tu inscripción",
   ]) assert.ok(html.includes(text), text);

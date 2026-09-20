@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 150" role="img" aria-labelledby="title desc">
+  <title id="title">Unleash Your Power</title>
+  <desc id="desc">Gold Digital Key symbol with the words Unleash Your Power and the tagline All Power Is From Within.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e0bd78"/>
+      <stop offset="0.52" stop-color="#b68032"/>
+      <stop offset="1" stop-color="#8d6125"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="69" cy="67" r="38" stroke-width="8"/>
+    <path d="M96 94 145 143M126 124l14-14M112 110l14-14" stroke-width="8"/>
+  </g>
+  <text x="178" y="72" fill="#102235" font-family="Georgia, 'Times New Roman', serif" font-size="39" font-weight="700" letter-spacing="4">UNLEASH YOUR POWER</text>
+  <text x="181" y="111" fill="#8d6125" font-family="Arial, Helvetica, sans-serif" font-size="17" letter-spacing="3">ALL POWER IS FROM WITHIN.</text>
+</svg>

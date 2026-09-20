@@ -39,10 +39,10 @@ test("the Start Free page requires registration before its main dashboard while 
   assert.match(html, /name="surname"[^>]+required/);
   assert.match(html, /name="whatsapp"[^>]+required/);
   assert.match(html, /name="consent"[^>]+required/);
-  assert.match(html, /name="goal"[^>]+required/);
-  assert.match(html, /name="difficulty"[^>]+required/);
-  assert.match(html, /What would you most like to change or improve right now\?(?! \(optional\))/);
-  assert.match(html, /What is currently holding you back most\?(?! \(optional\))/);
+  assert.doesNotMatch(html, /name="goal"[^>]+required/);
+  assert.doesNotMatch(html, /name="difficulty"[^>]+required/);
+  assert.match(html, /What would you most like to change or improve right now\? \(optional\)/);
+  assert.match(html, /What is currently holding you back most\? \(optional\)/);
   assert.match(html, /name="emailMarketing"/);
   assert.match(html, /<input type="checkbox" name="emailMarketing">/);
   assert.match(html, /data-lead-heading/);
@@ -76,13 +76,13 @@ test("the registration-gated dashboard places the Foundation next step after the
   assert.match(html.slice(dashboardStart), new RegExp(`href="${escapeRegExp(siteData.routes.coaching)}"[^>]+data-i18n="conversion\.foundation\.secondary"`));
 });
 
-test("the Start Free qualifying-question labels are required in both languages", () => {
+test("the Start Free qualifying-question labels are optional in both languages", () => {
   const spanish = renderStartFree({ language: "es" });
 
-  assert.match(spanish, /¿Qué te gustaría cambiar o mejorar ahora mismo\?(?! \(opcional\))/);
-  assert.match(spanish, /¿Qué te está frenando más\?(?! \(opcional\))/);
-  assert.match(spanish, /<textarea name="goal"[^>]+required/);
-  assert.match(spanish, /<textarea name="difficulty"[^>]+required/);
+  assert.match(spanish, /¿Qué te gustaría cambiar o mejorar ahora mismo\? \(opcional\)/);
+  assert.match(spanish, /¿Qué te está frenando más\? \(opcional\)/);
+  assert.doesNotMatch(spanish, /<textarea name="goal"[^>]+required/);
+  assert.doesNotMatch(spanish, /<textarea name="difficulty"[^>]+required/);
 });
 
 test("the registration honeypot is hidden without changing the status message element", () => {

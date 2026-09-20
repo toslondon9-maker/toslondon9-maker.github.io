@@ -5877,3 +5877,22 @@ body {
   .sessionHub__prepare,
   .sessionHub__note { padding-inline: var(--space-gutter); }
 }
+
+/* Approved Digital Key lock-up: preserve the compact premium header across breakpoints. */
+.siteHeader .brand img[src$="digital-key-lockup.svg"] {
+  width: clamp(250px, 28vw, 360px);
+  height: auto;
+  max-width: 100%;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+}
+@media (min-width: 801px) {
+  .siteHeader, .site-header { min-height: 152px; padding-block: 1rem; }
+  .siteHeader > .brand, .site-header > .brand { min-width: 0; }
+}
+@media (max-width: 800px) {
+  .siteHeader .brand img[src$="digital-key-lockup.svg"] { width: min(300px, 78vw); }
+  .siteHeader, .site-header { min-height: 140px; }
+}

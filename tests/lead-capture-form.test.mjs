@@ -14,7 +14,7 @@ async function createRuntimeHarness(language) {
   const whatsapp = createControl("whatsapp", "+34611223345");
   const consent = createControl("consent", "on", { type: "checkbox", checked: true });
   const marketing = createControl("emailMarketing", "on", { type: "checkbox", checked: true });
-  const required = [firstName, surname, email, whatsapp, goal, difficulty, consent];
+  const required = [firstName, surname, email, whatsapp, consent];
   const labels = ["first", "last", "email", "whatsapp", "goal", "difficulty", "consent", "marketing"].map((leadLabel) => ({ dataset: { leadLabel }, textContent: "" }));
   const placeholders = [firstName, surname, email, whatsapp, goal, difficulty].map((input) => ({ ...input, dataset: { leadPlaceholder: input.name }, placeholder: "" }));
   const status = { textContent: "", focus() { this.focused += 1; }, focused: 0 };
@@ -145,24 +145,20 @@ test("visible registration labels and success choices change when the language r
   assert.match(successFree.textContent, /No es necesario comprar/); assert.equal(successPrompt.textContent, "Elige cómo te gustaría continuar."); assert.match(successNextSteps.textContent, /Qué ocurre después/); assert.equal(successAction.textContent, "COMPLETAR ONLINE"); assert.equal(successDownload.textContent, "DESCARGAR EL CUADERNO (PDF)"); assert.match(successWhatsapp.textContent, /WHATSAPP/); assert.equal(successWhatsapp.href, bookingCallHref("34611223345")); assert.equal(successNote.textContent, "Puedes usar una opción, o ambas.");
 });
 
-test("browser validation blocks fetch and focuses each blank qualifying answer", async () => {
+test("browser validation permits blank optional qualifying answers", async () => {
   const runtime = await createRuntimeHarness("en");
 
   try {
-    assert.equal(runtime.labels.find((label) => label.dataset.leadLabel === "goal").textContent.includes("(optional)"), false);
+    assert.equal(runtime.labels.find((label) => label.dataset.leadLabel === "goal").textContent.includes("(optional)"), true);
     await runtime.submit();
-    assert.equal(runtime.fetchCalls(), 0);
-    assert.equal(runtime.goal.focused, 1);
-    assert.equal(runtime.status.textContent, formCopy.en.required);
+    assert.equal(runtime.fetchCalls(), 1);
 
     runtime.goal.value = "Build a calmer daily practice.";
     runtime.difficulty.value = "   ";
     runtime.switchLanguage("es");
-    assert.equal(runtime.labels.find((label) => label.dataset.leadLabel === "difficulty").textContent.includes("(opcional)"), false);
+    assert.equal(runtime.labels.find((label) => label.dataset.leadLabel === "difficulty").textContent.includes("(opcional)"), true);
     await runtime.submit();
-    assert.equal(runtime.fetchCalls(), 0);
-    assert.equal(runtime.difficulty.focused, 1);
-    assert.equal(runtime.status.textContent, formCopy.es.required);
+    assert.equal(runtime.fetchCalls(), 2);
   } finally {
     runtime.restore();
   }

@@ -81,7 +81,7 @@ export const siteData = deepFreeze({
     { id: "foundation", name: "Foundation", weeks: "1–4", price: 97, msrp: 147, paymentUrl: "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2" },
     { id: "visualisation", name: "Visualisation", weeks: "5–11", price: 197, msrp: 297, paymentUrl: "https://www.paypal.com/ncp/payment/NWD3VU5VUTKCL" },
     { id: "concentration", name: "Concentration", weeks: "12–18", price: 397, msrp: 597, paymentUrl: "https://www.paypal.com/ncp/payment/A7KJBWNCJARJC" },
-    { id: "mastery", name: "Contemplation & Mastery", weeks: "19–24", price: 497, msrp: 747, paymentUrl: "https://www.paypal.com/ncp/payment/N45ETXRZ9E3LQ" }
+    { id: "mastery", name: "Integration & Mastery", weeks: "19–24", price: 497, msrp: 747, paymentUrl: "https://www.paypal.com/ncp/payment/N45ETXRZ9E3LQ" }
   ],
   offer: {
     separateTotal: 1188,

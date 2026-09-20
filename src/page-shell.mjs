@@ -2,7 +2,7 @@ import { renderFooter, renderHeader } from "./shared-chrome.mjs";
 import { renderStructuredData } from "./structured-data.mjs";
 
 const releaseAssetVersion = "20260909-day7-choices";
-const platformStyleVersion = "20260915-header-consent-2";
+const platformStyleVersion = "20260920-branding-registration-1";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
 const siteUrl = "https://unleashyourpowerwithtariq.com";
@@ -53,5 +53,5 @@ export function renderPage({ route, language, title, description, titleKey, desc
     : `<meta name="robots" content="noindex, nofollow">`;
 
   const structuredDataTag = publicMetadata ? renderStructuredData({ route, title, structuredData }) : "";
-  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/the-secret-logo.png" as="image">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${platformStyleVersion}"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ route, language })}${scriptTags}</body></html>`;
+  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/digital-key-lockup.svg" as="image" type="image/svg+xml">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${platformStyleVersion}"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ route, language })}${scriptTags}</body></html>`;
 }
