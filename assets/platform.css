@@ -5895,3 +5895,15 @@ body {
   .siteHeader .brand img[src$="digital-key-lockup.svg"] { width: min(300px, 78vw); }
   .siteHeader, .site-header { min-height: 140px; }
 }
+
+@media (min-width: 1101px) and (max-width: 1360px) {
+  .siteHeader:not(.navigationEnhanced) { flex-wrap: nowrap; }
+  .siteHeader:not(.navigationEnhanced) .siteHeader__actions {
+    width: auto;
+    flex: 1 1 auto;
+  }
+  .siteHeader:not(.navigationEnhanced) .mobileNav { width: auto; }
+  .siteNav { display: flex; }
+  .mobileNav { display: none; }
+  .languageSwitch--header { display: flex; }
+}
