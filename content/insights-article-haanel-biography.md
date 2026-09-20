@@ -44,10 +44,10 @@ His best-known work is **The Master Key System**, first published in 1916.
 
 He also wrote:
 
-* **Mental Chemistry**
-* **The New Psychology**
-* **A Book About You**
-* **The Amazing Secrets of the Yogi**, written in collaboration with Victor S. Perera
+- **Mental Chemistry**
+- **The New Psychology**
+- **A Book About You**
+- **The Amazing Secrets of the Yogi**, written in collaboration with Victor S. Perera
 
 These works reflect Haanel’s wider interest in psychology, personal development, the mind and the relationship between thought and experience.
 
@@ -117,12 +117,12 @@ The lasting value of his work is not found only in the historical details of his
 
 It is found in the questions his writing continues to raise:
 
-* What thoughts do I repeatedly accept?
-* Where is my attention going each day?
-* What is my definite purpose?
-* Can I become physically and mentally still?
-* Am I applying what I study?
-* What kind of person am I becoming through my daily habits?
+- What thoughts do I repeatedly accept?
+- Where is my attention going each day?
+- What is my definite purpose?
+- Can I become physically and mentally still?
+- Am I applying what I study?
+- What kind of person am I becoming through my daily habits?
 
 These questions transform the Master Key System from something to read into something to practise.
 
@@ -136,13 +136,13 @@ The principles associated with Haanel’s work offer a structured opportunity to
 
 Through daily practice, students can begin developing:
 
-* Greater inner awareness.
-* Physical stillness.
-* Mental discernment.
-* Conscious direction of thought.
-* Concentration upon a chosen purpose.
-* Visualisation and practical application.
-* Greater responsibility for personal development.
+- Greater inner awareness.
+- Physical stillness.
+- Mental discernment.
+- Conscious direction of thought.
+- Concentration upon a chosen purpose.
+- Visualisation and practical application.
+- Greater responsibility for personal development.
 
 These skills do not develop through reading alone.
 
