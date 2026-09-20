@@ -6046,3 +6046,79 @@ body {
     padding-block: .35rem;
   }
 }
+
+/* Authoritative header layout: one stable two-row desktop/tablet grid. */
+@media (min-width: 801px) {
+  .siteHeader, .site-header {
+    position: relative !important;
+    z-index: 20;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 78px 48px !important;
+    grid-template-areas: "brand" "actions" !important;
+    align-items: center !important;
+    justify-content: stretch !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+    min-height: 126px !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 clamp(1rem, 3vw, 2.5rem) !important;
+    gap: 0 !important;
+    overflow: visible !important;
+  }
+  .siteHeader > .brand, .site-header > .brand {
+    grid-area: brand !important;
+    display: inline-flex;
+    align-self: center !important;
+    justify-self: start;
+    margin: 0 !important;
+    min-width: 0;
+  }
+  .siteHeader .brand img[src$="digital-key-lockup.svg"] {
+    width: clamp(360px, 31vw, 450px) !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  .siteHeader__actions {
+    grid-area: actions !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    gap: .75rem;
+  }
+  .siteHeader__actions > .siteNav {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+  }
+  .siteHeader__actions > .siteNav ul {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    gap: clamp(.3rem, .65vw, .75rem) !important;
+  }
+  .siteHeader__actions > .languageSwitch--header {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    margin-left: .35rem !important;
+  }
+  .siteHeader .mobileNav, .siteHeader .mobileNav__panel { display: none !important; }
+}
+
+@media (max-width: 800px) {
+  .siteHeader, .site-header {
+    position: relative !important;
+    min-height: 110px !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+}
