@@ -3,8 +3,8 @@ export const homeContent = Object.freeze({
   lineageIds: Object.freeze(["haanel", "helmar", "tariq"]),
   educationPhases: Object.freeze([
     Object.freeze({ id: "foundation", weeks: "1–4", outcome: "foundation" }),
-    Object.freeze({ id: "awareness", weeks: "5–11", outcome: "visualisation" }),
-    Object.freeze({ id: "application", weeks: "12–18", outcome: "concentration" }),
+    Object.freeze({ id: "visualisation", weeks: "5–11", outcome: "visualisation" }),
+    Object.freeze({ id: "concentration", weeks: "12–18", outcome: "concentration" }),
     Object.freeze({ id: "integration", weeks: "19–24", outcome: "mastery" }),
   ]),
   tasterDays: Object.freeze([1, 2, 3, 4, 5, 6, 7]),
@@ -32,12 +32,7 @@ export const homeContent = Object.freeze({
     Object.freeze({ titleKey: "home.books.book2.title", authorKey: "home.books.book2.author" }),
     Object.freeze({ titleKey: "home.books.book3.title", authorKey: "home.books.book3.author" }),
     Object.freeze({ titleKey: "home.books.book4.title", authorKey: "home.books.book4.author" }),
-    Object.freeze({ titleKey: "home.books.book5.title", authorKey: "home.books.book5.author" }),
-    Object.freeze({ titleKey: "home.books.book6.title", authorKey: "home.books.book6.author" }),
     Object.freeze({ titleKey: "home.books.book7.title", authorKey: "home.books.book7.author" }),
-    Object.freeze({ titleKey: "home.books.book8.title", authorKey: "home.books.book8.author" }),
-    Object.freeze({ titleKey: "home.books.book9.title", authorKey: "home.books.book9.author" }),
-    Object.freeze({ titleKey: "home.books.book10.title", authorKey: "home.books.book10.author" }),
   ]),
   heroImage: "/images/tariq-happiness-harmony.png",
 });

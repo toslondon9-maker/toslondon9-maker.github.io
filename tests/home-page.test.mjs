@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
+import { homeContent } from "../content/pages/home.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
@@ -124,7 +125,7 @@ test("homepage loads with the concise four-phase journey and safe responsive act
   const visibleText = pathway.replace(/<[^>]+>/g, "");
   assert.match(html, /^<main class="home">/);
   assert.match(html, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
-  for (const expected of ["Weeks 1–4", "Foundation", "Weeks 5–11", "Awareness &amp; Control", "Weeks 12–18", "Application", "Weeks 19–24", "Integration &amp; Mastery"]) assert.match(visibleText, new RegExp(expected));
+  for (const expected of ["Weeks 1–4", "Foundation", "Weeks 5–11", "Visualisation", "Weeks 12–18", "Concentration", "Weeks 19–24", "Integration &amp; Mastery"]) assert.match(visibleText, new RegExp(expected));
   assert.equal((pathway.match(/class="homeMasterKey__phaseDescription"/g) ?? []).length, 4);
   assert.match(pathway, /href="\/master-key-system\/"[^>]*>VIEW THE 24-WEEK JOURNEY<\/a>/);
   assert.doesNotMatch(pathway, /questions?\s*(?:&amp;|and)\s*answers?|mastery prompt|guided exercise/i);
@@ -169,7 +170,7 @@ test("homepage origins section grounds the Beyond The Secret message without end
   assert.match(renderHome({ language: "es" }), /Oprah Winfrey/);
 });
 
-test("homepage presents the ten books behind the method in both languages", async () => {
+test("homepage presents the approved five-book selection without changing source availability", async () => {
   const english = renderHome({ language: "en" });
   const spanish = renderHome({ language: "es" });
   const books = english.match(/<section[^>]+data-home-section="books"[\s\S]*?<\/section>/)?.[0] ?? "";
@@ -178,13 +179,15 @@ test("homepage presents the ten books behind the method in both languages", asyn
     "The Secret",
     "The Science of Getting Rich",
     "The Power of Your Subconscious Mind",
-    "Psycho-Cybernetics",
-    "The Magic of Believing",
     "You Were Born Rich",
-    "Tapping the Source",
-    "The Master Key Workbook",
-    "Master Key Arcana",
   ]) assert.match(books, new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  for (const removed of ["Psycho-Cybernetics", "The Magic of Believing", "Tapping the Source", "The Master Key Workbook", "Master Key Arcana"]) {
+    assert.doesNotMatch(books, new RegExp(removed.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")));
+  }
+  assert.deepEqual(homeContent.books.map(({ titleKey }) => titleKey), [
+    "home.books.book1.title", "home.books.book2.title", "home.books.book3.title",
+    "home.books.book4.title", "home.books.book7.title",
+  ]);
   assert.match(books, /wider Master Key and New Thought tradition/i);
   assert.match(books, /not a claim that every author was directly inspired by Charles F\. Haanel/i);
   assert.match(spanish, /LOS LIBROS DETRÁS DEL MÉTODO/);
