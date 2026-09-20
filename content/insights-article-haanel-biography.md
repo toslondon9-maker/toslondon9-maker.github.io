@@ -176,6 +176,4 @@ If you would like to discuss your goals, book a free 15-minute call with Tariq.
 
 **[BOOK A FREE 15-MINUTE CALL]**
 
----
-
 *This article is based primarily on the supplied biographical pages and the principles presented in The Master Key System. Historical details and biographical claims are attributed to the supplied source. Individual experiences and results will vary. The Master Key System is presented as a programme of study and personal practice, not a guarantee of specific outcomes.*
