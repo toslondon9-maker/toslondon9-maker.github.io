@@ -6123,8 +6123,10 @@ body {
     flex-wrap: nowrap !important;
     min-height: 0 !important;
     height: auto !important;
+    box-sizing: border-box !important;
     margin: 0 !important;
-    padding: .55rem 1.25rem !important;
+    padding-block: 14px !important;
+    padding-inline: 22px !important;
     gap: .75rem !important;
     overflow: visible !important;
   }
@@ -6154,9 +6156,9 @@ body {
     flex: 0 0 auto !important;
   }
   .siteHeader .mobileNav__toggle {
-    width: 60px;
-    min-width: 60px;
-    min-height: 60px;
+    width: 56px;
+    min-width: 56px;
+    min-height: 56px;
     margin: 0;
   }
 }
