@@ -3590,7 +3590,6 @@ body {
 
 .brand img {
   object-fit: contain;
-  background: var(--night);
 }
 
 .siteNav .navStartFree,
