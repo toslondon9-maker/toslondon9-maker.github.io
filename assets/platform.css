@@ -5907,3 +5907,43 @@ body {
   .mobileNav { display: none; }
   .languageSwitch--header { display: flex; }
 }
+
+/* Compact single-row desktop header with a readable Digital Key lock-up. */
+@media (min-width: 801px) {
+  .siteHeader, .site-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    min-height: 7rem;
+    padding-block: .75rem;
+    gap: 1.5rem;
+  }
+  .siteHeader > .brand, .site-header > .brand {
+    align-self: center;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+  .siteHeader .brand img[src$="digital-key-lockup.svg"] {
+    width: clamp(320px, 30vw, 450px);
+    max-width: none;
+  }
+  .siteHeader__actions {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    min-width: 0;
+    width: auto;
+    gap: .85rem;
+  }
+  .siteHeader__actions > .siteNav { flex: 1 1 auto; width: auto; min-width: 0; }
+  .siteHeader__actions > .siteNav ul { display: flex; flex-wrap: nowrap; justify-content: flex-end; gap: clamp(.3rem, .55vw, .7rem); }
+  .siteHeader__actions > .languageSwitch--header { flex: 0 0 auto; margin-left: .4rem; }
+}
+
+@media (max-width: 800px) {
+  .siteHeader .brand img[src$="digital-key-lockup.svg"] { width: min(270px, 70vw); }
+}
