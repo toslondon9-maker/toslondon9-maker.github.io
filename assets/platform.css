@@ -6028,3 +6028,21 @@ body {
   .siteHeader__actions { justify-content: center; }
   .siteHeader .siteNav ul { justify-content: space-between; }
 }
+
+/* Final compact sizing: preserve readable logo/nav without vertical dead space. */
+@media (min-width: 801px) {
+  .siteHeader, .site-header {
+    grid-template-rows: 78px 48px;
+    min-height: 126px;
+    height: auto;
+    padding-block: 0;
+    gap: 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .siteHeader, .site-header {
+    min-height: 110px;
+    padding-block: .35rem;
+  }
+}
