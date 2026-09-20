@@ -6122,11 +6122,11 @@ body {
     justify-content: space-between !important;
     flex-wrap: nowrap !important;
     min-height: 0 !important;
-    height: auto !important;
+    height: 96px !important;
+    max-height: 96px !important;
     box-sizing: border-box !important;
     margin: 0 !important;
-    padding-block: 14px !important;
-    padding-inline: 22px !important;
+    padding: 8px 20px !important;
     gap: .75rem !important;
     overflow: visible !important;
   }
