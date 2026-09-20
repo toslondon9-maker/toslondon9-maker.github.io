@@ -5896,6 +5896,16 @@ body {
   .siteHeader, .site-header { min-height: 140px; }
 }
 
+/* Navigation typography only: retain existing sizing, spacing and layout. */
+.siteNav a,
+.site-header nav a,
+.mobileNav a,
+.siteNav .navStartFree,
+.mobileNav .navStartFree {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+}
+
 @media (min-width: 1101px) and (max-width: 1360px) {
   .siteHeader:not(.navigationEnhanced) { flex-wrap: nowrap; }
   .siteHeader:not(.navigationEnhanced) .siteHeader__actions {
