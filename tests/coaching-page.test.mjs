@@ -16,6 +16,18 @@ test("coaching rate card exposes all seven offers in both languages", () => {
   }
 });
 
+test("additional coaching offers expose bilingual descriptions and specific CTAs", () => {
+  const keys = ["mastery", "mentoring", "alumni", "corporate"];
+  for (const language of ["en", "es"]) {
+    const html = renderCoaching({ language, siteData });
+    for (const key of keys) {
+      assert.match(html, new RegExp(`data-i18n="coaching\\.rate\\.${key}\\.description"`));
+      assert.match(html, new RegExp(`data-i18n="coaching\\.rate\\.${key}\\.action"`));
+    }
+  }
+  assert.match(renderCoaching({ language: "en", siteData }), /Apply for the Circle|Request a Private Conversation|Join the Waitlist|Discuss Your Team’s Needs/);
+});
+
 test("coaching places one shared What Happens Next journey before its investment section", () => {
   const html = renderCoaching({ language: "en", siteData });
   const journeyIndex = html.indexOf('class="conversionJourney"');
