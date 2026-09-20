@@ -12,6 +12,6 @@
     <circle cx="69" cy="67" r="38" stroke-width="8"/>
     <path d="M96 94 145 143M126 124l14-14M112 110l14-14" stroke-width="8"/>
   </g>
-  <text x="178" y="72" fill="#102235" font-family="Georgia, 'Times New Roman', serif" font-size="39" font-weight="700" letter-spacing="4">UNLEASH YOUR POWER</text>
-  <text x="181" y="116" fill="#8d6125" font-family="Arial, Helvetica, sans-serif" font-size="24" letter-spacing="2.5">ALL POWER IS FROM WITHIN.</text>
+  <text x="178" y="74" fill="#102235" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="700" letter-spacing="3.5">UNLEASH YOUR POWER</text>
+  <text x="181" y="122" fill="#8d6125" font-family="Arial, Helvetica, sans-serif" font-size="30" letter-spacing="2">ALL POWER IS FROM WITHIN.</text>
 </svg>
