@@ -5987,3 +5987,44 @@ body {
   .siteHeader .languageSwitch--header { grid-area: language; display: flex; justify-self: end; }
   .siteHeader .mobileNav { display: none; }
 }
+
+/* Compact two-row desktop/tablet header: logo above navigation. */
+@media (min-width: 801px) {
+  .siteHeader, .site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "brand" "actions";
+    align-items: center;
+    min-height: 150px;
+    padding: .45rem clamp(1rem, 3vw, 2.5rem) .55rem;
+    gap: .35rem;
+  }
+  .siteHeader > .brand, .site-header > .brand {
+    grid-area: brand;
+    align-self: start;
+    margin: 0;
+  }
+  .siteHeader .brand img[src$="digital-key-lockup.svg"] {
+    width: clamp(360px, 31vw, 450px);
+    max-width: 100%;
+  }
+  .siteHeader__actions {
+    grid-area: actions;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .75rem;
+  }
+  .siteHeader .siteNav { display: flex; flex: 1 1 auto; min-width: 0; width: auto; }
+  .siteHeader .siteNav ul { display: flex; flex-wrap: nowrap; justify-content: flex-end; gap: clamp(.3rem, .65vw, .75rem); width: 100%; }
+  .siteHeader .languageSwitch--header { display: flex; flex: 0 0 auto; margin-left: .35rem; }
+  .siteHeader .mobileNav { display: none; }
+}
+
+@media (min-width: 801px) and (max-width: 1100px) {
+  .siteHeader { min-height: 145px; }
+  .siteHeader__actions { justify-content: center; }
+  .siteHeader .siteNav ul { justify-content: space-between; }
+}
