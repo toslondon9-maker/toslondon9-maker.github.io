@@ -6,6 +6,16 @@ import { siteData } from "../content/site-data.mjs";
 import { renderCoaching } from "../src/pages/coaching.mjs";
 import { mountTabs } from "../assets/tabs.mjs";
 
+test("coaching rate card exposes all seven offers in both languages", () => {
+  const expected = ["Free 7-Day Journey", "Foundation", "Complete 24-Week Coaching", "Mastery Circle", "Private Mentoring", "Alumni Practice Membership", "Corporate Programmes"];
+  for (const language of ["en", "es"]) {
+    const html = renderCoaching({ language, siteData });
+    assert.equal((html.match(/data-coaching-section="rate-card"/g) ?? []).length, 1);
+    for (const title of expected) assert.ok(html.includes(title) || language === "es");
+    for (const key of ["coaching.rate.free.title", "coaching.rate.foundation.title", "coaching.rate.complete.title", "coaching.rate.mastery.title", "coaching.rate.mentoring.title", "coaching.rate.alumni.title", "coaching.rate.corporate.title"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
+  }
+});
+
 test("coaching places one shared What Happens Next journey before its investment section", () => {
   const html = renderCoaching({ language: "en", siteData });
   const journeyIndex = html.indexOf('class="conversionJourney"');
@@ -42,7 +52,7 @@ test("coaching is the accurate canonical offer", () => {
     complete: "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6",
   };
   for (const url of Object.values(payments)) {
-    assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.complete ? 1 : 2);
+    assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.foundation ? 3 : 2);
     assert.match(html, new RegExp(`href="${url.replaceAll("/", "\\/")}" target="_blank" rel="noopener noreferrer"`));
   }
   assert.equal((html.match(/data-i18n="coaching\.payNow">Pay Now<\/span>/g) ?? []).length, 9);
