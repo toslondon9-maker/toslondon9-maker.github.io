@@ -3766,12 +3766,12 @@ body {
   display: grid;
   gap: 0.1rem;
   padding: 0.9rem 1rem;
-  border: 1px solid rgba(224, 183, 101, 0.42);
+  border: 1px solid rgba(212, 170, 87, 0.55);
   border-radius: 1rem;
-  background: linear-gradient(90deg, rgba(4, 19, 33, 0.98) 0%, rgba(4, 19, 33, 0.82) 45%, rgba(4, 19, 33, 0.25) 100%);
+  background: linear-gradient(90deg, rgba(4, 19, 33, 0.60) 0%, rgba(4, 19, 33, 0.38) 52%, rgba(4, 19, 33, 0.12) 100%);
   color: var(--cream);
-  box-shadow: 0 14px 32px rgba(7, 24, 40, 0.22);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(4, 19, 33, 0.12);
+  backdrop-filter: blur(5px);
 }
 
 .homeHero__caption span {
