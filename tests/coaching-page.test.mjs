@@ -16,6 +16,15 @@ test("coaching rate card exposes all seven offers in both languages", () => {
   }
 });
 
+test("coaching rate card uses direct purchase labels for available offers", () => {
+  const english = renderCoaching({ language: "en", siteData });
+  const spanish = renderCoaching({ language: "es", siteData });
+  assert.match(english, /data-i18n="coaching\.rate\.free\.action">Begin Now For Free<\/a>/);
+  assert.equal((english.match(/data-i18n="coaching\.rate\.action\.default">Buy Now<\/a>/g) ?? []).length, 2);
+  assert.match(spanish, /data-i18n="coaching\.rate\.free\.action">Comienza ahora gratis<\/a>/);
+  assert.equal((spanish.match(/data-i18n="coaching\.rate\.action\.default">Comprar ahora<\/a>/g) ?? []).length, 2);
+});
+
 test("additional coaching offers expose bilingual descriptions and specific CTAs", () => {
   const keys = ["mastery", "mentoring", "alumni", "corporate"];
   for (const language of ["en", "es"]) {
