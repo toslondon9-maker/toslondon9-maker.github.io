@@ -3768,7 +3768,7 @@ body {
   padding: 0.9rem 1rem;
   border: 1px solid rgba(224, 183, 101, 0.42);
   border-radius: 1rem;
-  background: rgba(7, 24, 40, 0.9);
+  background: linear-gradient(90deg, rgba(4, 19, 33, 0.98) 0%, rgba(4, 19, 33, 0.82) 45%, rgba(4, 19, 33, 0.25) 100%);
   color: var(--cream);
   box-shadow: 0 14px 32px rgba(7, 24, 40, 0.22);
   backdrop-filter: blur(10px);
