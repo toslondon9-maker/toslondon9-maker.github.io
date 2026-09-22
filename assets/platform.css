@@ -1637,6 +1637,8 @@ main > article {
 
 .homeBooks__card {
   min-width: 0;
+  height: 96px;
+  box-sizing: border-box;
   position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -4704,6 +4706,10 @@ body {
   .homeBooks__secretMark {
     width: 38px;
     height: 38px;
+  }
+
+  .homeBooks__card {
+    height: 112px;
   }
 
   .homeCoaching__visual {
