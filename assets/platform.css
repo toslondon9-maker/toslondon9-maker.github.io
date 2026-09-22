@@ -3970,15 +3970,20 @@ body {
   gap: 0.7rem;
 }
 
-.homeCoaching__stageGrid article {
+.homeCoaching__stageGrid article,
+.homeCoaching__stageCard {
   min-width: 0;
   padding: 1rem 0.85rem 1.1rem;
   border: 1px solid rgba(214, 166, 77, 0.27);
   border-radius: 0.9rem;
   background: rgba(255, 255, 255, 0.035);
 }
+.homeCoaching__stageCard { color: inherit; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease; }
+.homeCoaching__stageCard:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.homeCoaching__stageCard:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
-.homeCoaching__stageGrid article > span {
+.homeCoaching__stageGrid article > span,
+.homeCoaching__stageCard > span {
   display: block;
   margin-bottom: 0.55rem;
   color: rgba(214, 166, 77, 0.7);

@@ -104,7 +104,7 @@ test("homepage presents the approved premium conversion upgrades", () => {
   assert.match(html, /THE 24-WEEK JOURNEY/);
   assert.match(html, /THE MASTER KEY SYSTEM/);
   const coaching = html.match(/<section[^>]+data-home-section="coaching"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.equal((coaching.match(/<article>/g) ?? []).length, 4);
+  assert.equal((coaching.match(/class="homeCoaching__stageCard"/g) ?? []).length, 4);
   assert.doesNotMatch(html, /unleash-your-power-programme\.jpeg/);
   assert.match(html, /class="homeNext__actionPanel"/);
   assert.match(html, /£997/);
@@ -195,6 +195,13 @@ test("homepage presents the approved five-book selection without changing source
   const css = await readFile("assets/platform.css", "utf8");
   assert.match(css, /\.homeBooks__grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2/);
   assert.match(css, /@media[\s\S]*max-width:\s*768px[\s\S]*\.homeBooks__grid\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+});
+
+test("homepage journey cards link to their matching coaching panels", () => {
+  const html = renderHome({ language: "en" });
+  for (const panel of ["foundation", "visualisation", "concentration", "mastery"]) {
+    assert.match(html, new RegExp(`href="/coaching/#panel-${panel}"`));
+  }
 });
 
 test("homepage Spanish render is complete, natural and conversion focused", () => {

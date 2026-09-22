@@ -34,7 +34,8 @@ function enhanceTabSet(root) {
     listeners.push([tab, onClick, onKeydown]);
   });
 
-  const initial = Math.max(0, tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true"));
+  const hash = globalThis.location?.hash?.slice(1);
+  const initial = hash ? Math.max(0, panels.findIndex((panel) => panel.id === hash)) : Math.max(0, tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true"));
   activate(initial);
   return () => {
     for (const [tab, onClick, onKeydown] of listeners) {
