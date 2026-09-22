@@ -75,7 +75,7 @@ function renderWelcomeVideo(language) {
 }
 
 function renderBooks(language) {
-  const books = homeContent.books.map((book, index) => `<li class="homeBooks__card"><span class="homeBooks__number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><h3 data-i18n="${book.titleKey}">${escapeHtml(t(book.titleKey, language))}</h3><p class="homeBooks__author" data-i18n="${book.authorKey}">${escapeHtml(t(book.authorKey, language))}</p></li>`).join("");
+  const books = homeContent.books.map((book, index) => `<li class="homeBooks__card${book.titleKey === "home.books.book2.title" ? " homeBooks__card--secret" : ""}"><span class="homeBooks__number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><h3 data-i18n="${book.titleKey}">${escapeHtml(t(book.titleKey, language))}</h3><p class="homeBooks__author" data-i18n="${book.authorKey}">${escapeHtml(t(book.authorKey, language))}</p>${book.titleKey === "home.books.book2.title" ? '<img class="homeBooks__secretMark" src="/images/secret-mark-transparent.png" width="52" height="52" alt="The Secret logo">' : ""}</li>`).join("");
   return `<section class="homeSection homeBooks" data-home-section="books"><div class="homeSection__inner homeBooks__inner">${copy("home.books.eyebrow", language, "p", "eyebrow")}${copy("home.books.title", language, "h2")}${copy("home.books.intro", language, "p", "homeSection__intro")}<ol class="homeBooks__grid">${books}</ol>${copy("home.books.disclaimer", language, "p", "homeBooks__disclaimer")}</div></section>`;
 }
 
