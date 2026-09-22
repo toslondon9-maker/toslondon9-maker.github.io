@@ -1872,6 +1872,15 @@ main > article {
   color: var(--night);
 }
 
+.secret-mark {
+  display: block;
+  width: 145px;
+  height: auto;
+  margin: 0 auto 28px;
+  opacity: 0.82;
+  filter: drop-shadow(0 5px 10px rgba(92, 45, 20, 0.14));
+}
+
 .homeOrigins__beyond h2 {
   max-width: 44rem;
   margin: 0.35rem 0 1.25rem;
@@ -2873,6 +2882,11 @@ main > article {
 }
 .curriculumStudyNav__links a { min-width: 2.1rem; }
 @media (max-width: 640px) {
+  .secret-mark {
+    width: 105px;
+    margin-bottom: 22px;
+  }
+
   .curriculumStudyNav__links { grid-template-columns: repeat(4, minmax(2.6rem, 1fr)); }
   .curriculumStudyNav__links a { min-height: 2.75rem; }
   .curriculumPage__intro h1 { font-size: clamp(2.15rem, 11vw, 3.4rem); }

@@ -56,10 +56,18 @@ function renderTaster(language) {
   return `<section class="homeSection homeTaster section--night" data-home-section="start-free"><div class="homeSection__inner homeTaster__layout"><div class="homeTaster__intro">${copy("home.taster.eyebrow", language, "p", "eyebrow")}${copy("home.taster.title", language, "h2")}${copy("home.taster.intro", language, "p", "homeSection__intro")}<div class="homeTaster__promise"><strong data-i18n="home.taster.promiseTitle">${escapeHtml(t("home.taster.promiseTitle", language))}</strong><span data-i18n="home.taster.promiseBody">${escapeHtml(t("home.taster.promiseBody", language))}</span></div>${cta(siteData.routes.startFree, "home.taster.cta", language)}</div><ol class="homeTaster__days">${days}</ol></div></section>`;
 }
 
-function renderOrigins(language) {
+function renderOriginsBase(language) {
   const statementTitle = escapeHtml(t("home.origins.statementTitle", language));
   const beyondBody = ["body1", "body2", "body3"].map((part) => copy(`home.origins.beyond.${part}`, language)).join("");
   return `<section class="homeOrigins" data-home-section="origins"><div class="homeOrigins__prelude">${copy("home.origins.eyebrow", language, "p", "eyebrow")}${copy("home.origins.preludeTitle", language, "h2")}${copy("home.origins.preludeBody", language, "p")}</div><div class="homeOrigins__beyond"><p class="eyebrow" data-i18n="home.origins.beyond.eyebrow">${escapeHtml(t("home.origins.beyond.eyebrow", language))}</p><h2 data-i18n="home.origins.beyond.title">${escapeHtml(t("home.origins.beyond.title", language))}</h2><div class="homeOrigins__beyondBody">${beyondBody}</div>${copy("home.origins.beyond.grounding", language, "p", "homeOrigins__grounding")}</div>${cta(siteData.routes.startFree, "home.origins.beyond.cta", language)}<div class="homeOrigins__statement"><div class="homeOrigins__ornament" aria-hidden="true"><span></span><svg class="homeOrigins__key" viewBox="0 0 64 32" role="presentation"><circle cx="17" cy="16" r="8"></circle><path d="M25 16h28m-8 0v7m-8-7v5"></path></svg><span></span></div><h2 class="homeOrigins__statementTitle" aria-label="${statementTitle}" data-i18n-aria-label="home.origins.statementTitle"><span class="homeOrigins__statementLead" data-i18n="home.origins.statementLead">${escapeHtml(t("home.origins.statementLead", language))}</span><span class="homeOrigins__statementEmphasis" data-i18n="home.origins.statementEmphasis">${escapeHtml(t("home.origins.statementEmphasis", language))}</span></h2>${copy("home.origins.statementBody", language, "p", "homeOrigins__statementBody")}<span class="homeOrigins__statementDivider" aria-hidden="true"></span>${copy("home.origins.disclaimer", language, "p", "homeOrigins__disclaimer")}</div></section>`;
+}
+
+function renderOrigins(language) {
+  const html = renderOriginsBase(language);
+  return html.replace(
+    '<div class="homeOrigins__beyond">',
+    '<div class="homeOrigins__beyond"><img class="secret-mark" src="/images/secret-mark-transparent.png" width="145" height="145" alt="The Secret">',
+  );
 }
 
 function renderWelcomeVideo(language) {
