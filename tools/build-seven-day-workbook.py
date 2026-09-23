@@ -97,10 +97,8 @@ def page_background(canvas, document):
     width, height = A4
     page = canvas.getPageNumber()
     canvas.saveState()
-    canvas.setFillColor(CREAM)
+    canvas.setFillColor(HexColor("#FFFFFF"))
     canvas.rect(0, 0, width, height, fill=1, stroke=0)
-    canvas.setFillColor(NAVY)
-    canvas.rect(0, height - 15 * mm, width, 15 * mm, fill=1, stroke=0)
     canvas.setStrokeColor(GOLD)
     canvas.setLineWidth(1)
     canvas.line(18 * mm, 13 * mm, width - 18 * mm, 13 * mm)
@@ -115,7 +113,7 @@ def page_background(canvas, document):
 def cover_background(canvas, document):
     width, height = A4
     canvas.saveState()
-    canvas.setFillColor(DEEP_NAVY)
+    canvas.setFillColor(HexColor("#FFFFFF"))
     canvas.rect(0, 0, width, height, fill=1, stroke=0)
     canvas.setStrokeColor(GOLD)
     canvas.setLineWidth(1.2)
@@ -144,9 +142,9 @@ def build_workbook(output_path):
 
     styles = getSampleStyleSheet()
     cover_kicker = ParagraphStyle("CoverKicker", parent=styles["Normal"], fontName="Helvetica-Bold", fontSize=11, leading=14, textColor=GOLD, alignment=TA_CENTER, spaceAfter=16)
-    cover_title = ParagraphStyle("CoverTitle", parent=styles["Title"], fontName="Times-Bold", fontSize=31, leading=36, textColor=CREAM, alignment=TA_CENTER, spaceAfter=18)
+    cover_title = ParagraphStyle("CoverTitle", parent=styles["Title"], fontName="Times-Bold", fontSize=31, leading=36, textColor=NAVY, alignment=TA_CENTER, spaceAfter=18)
     cover_subtitle = ParagraphStyle("CoverSubtitle", parent=styles["Normal"], fontName="Times-Italic", fontSize=16, leading=22, textColor=GOLD, alignment=TA_CENTER, spaceAfter=22)
-    cover_body = ParagraphStyle("CoverBody", parent=styles["Normal"], fontName="Helvetica", fontSize=11, leading=17, textColor=CREAM, alignment=TA_CENTER, spaceAfter=14)
+    cover_body = ParagraphStyle("CoverBody", parent=styles["Normal"], fontName="Helvetica", fontSize=11, leading=17, textColor=INK, alignment=TA_CENTER, spaceAfter=14)
     day_label = ParagraphStyle("DayLabel", parent=styles["Normal"], fontName="Helvetica-Bold", fontSize=10, leading=12, textColor=GOLD, spaceAfter=5)
     day_title = ParagraphStyle("DayTitle", parent=styles["Heading1"], fontName="Times-Bold", fontSize=25, leading=29, textColor=NAVY, spaceAfter=10)
     intro = ParagraphStyle("Intro", parent=styles["BodyText"], fontName="Times-Roman", fontSize=11.5, leading=16, textColor=INK, spaceAfter=11)
@@ -164,7 +162,7 @@ def build_workbook(output_path):
         Paragraph("TARIQ SADDIQUE", cover_kicker),
         Paragraph("An independent coaching experience inspired by the Master Key System.", cover_body),
         Spacer(1, 14 * mm),
-        Paragraph("toslondon9-maker.github.io", cover_body),
+        Paragraph("unleashyourpowerwithtariq.com", cover_body),
         PageBreak(),
     ]
 
