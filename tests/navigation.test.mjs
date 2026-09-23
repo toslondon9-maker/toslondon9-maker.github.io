@@ -79,7 +79,7 @@ test("page shell cache-busts the release assets that control visible copy and la
   });
   const languageModule = readFileSync(new URL("../assets/site-language.mjs", import.meta.url), "utf8");
 
-  assert.match(html, /href="\/assets\/platform\.css\?v=20260923-navigation-arial-2"/);
+  assert.match(html, /href="\/assets\/platform\.css\?v=20260923-navigation-georgia-regular-1"/);
   assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260909-day7-choices"/);
   assert.match(languageModule, /translations\.mjs\?v=20260909-day7-choices/);
 });
