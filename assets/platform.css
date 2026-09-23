@@ -5958,8 +5958,8 @@ body {
 .mobileNav a,
 .siteNav .navStartFree,
 .mobileNav .navStartFree {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
 }
 
 @media (min-width: 1101px) and (max-width: 1360px) {
