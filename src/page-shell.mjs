@@ -2,7 +2,7 @@ import { renderFooter, renderHeader } from "./shared-chrome.mjs";
 import { renderStructuredData } from "./structured-data.mjs";
 
 const releaseAssetVersion = "20260909-day7-choices";
-const platformStyleVersion = "20260922-hero-caption-transparency-2";
+const platformStyleVersion = "20260923-navigation-weight-1";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
 const siteUrl = "https://unleashyourpowerwithtariq.com";
