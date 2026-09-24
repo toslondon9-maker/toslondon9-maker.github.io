@@ -48,6 +48,9 @@ export function localizeForm(form, language, documentRef = globalThis.document) 
 
 function validateForm(form, copy) {
   const values = Object.fromEntries(new FormData(form));
+  const consent = form.querySelector('[name="consent"]');
+  const whatsappSupplied = Boolean(String(values.whatsapp ?? "").trim());
+  if (consent) consent.required = whatsappSupplied;
   let invalidInput = [...form.querySelectorAll("[required]")].find((input) => input.type === "checkbox" ? !input.checked : !input.value.trim());
   let message = invalidInput ? "required" : "";
   if (!message && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email ?? "")) { message = "invalidEmail"; invalidInput = form.querySelector("[name=email]"); }
@@ -70,6 +73,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   setState(form, "ready"); applyLanguage(document.documentElement.lang);
   form.addEventListener("submit", async (event) => {
     event.preventDefault(); const copy = languageCopy(document.documentElement.lang); const values = validateForm(form, copy); if (!values || !canSubmitLeadForm(endpoint)) return;
+    document.dispatchEvent?.(new CustomEvent("uyp:registration-start"));
     form.dataset.submissionId ||= crypto.randomUUID(); setState(form, "loading"); submitButton.disabled = true; localizeForm(form, document.documentElement.lang, document);
     const payload = { ...values, consent: values.consent === "on", emailMarketing: values.emailMarketing === "on", affiliate_code: getStoredAffiliateCode(), submissionId: form.dataset.submissionId, submittedAtMs: submissionTimestamp(), sourcePage: "/start-free/", language: document.documentElement.lang === "es" ? "es" : "en", website: "" };
     let response;

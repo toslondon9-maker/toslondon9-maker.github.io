@@ -174,6 +174,13 @@ export function mountSevenDayProgress(document = globalThis.document, options = 
         marker.hidden = !completed;
         marker.textContent = message("sevenDay.progress.lessonComplete");
       }
+      const completionMessage = card.querySelector?.("[data-progress-completion-message]");
+      if (completionMessage) {
+        completionMessage.hidden = !completed;
+        completionMessage.textContent = completed
+          ? message("sevenDay.progress.lessonCompletionMessage", { day: card.dataset.progressLesson?.replace("day-", "") ?? "" })
+          : "";
+      }
     }
 
     if (reset) reset.disabled = completedCount === 0;
@@ -182,8 +189,11 @@ export function mountSevenDayProgress(document = globalThis.document, options = 
   for (const button of buttons) {
     const onClick = () => {
       announcementKey = null;
-      state = toggleCompletion(state, button.dataset.progressComplete);
+      const lessonId = button.dataset.progressComplete;
+      const wasComplete = state.completed[lessonId] === true;
+      state = toggleCompletion(state, lessonId);
       persistent = writeProgress(storage, state);
+      if (!wasComplete) document.dispatchEvent?.(new CustomEvent("uyp:day-complete", { detail: { day: Number(lessonId?.replace("day-", "")) } }));
       render();
     };
     button.addEventListener?.("click", onClick);

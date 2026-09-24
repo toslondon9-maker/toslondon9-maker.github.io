@@ -10,22 +10,53 @@ import { renderStartFree } from "../src/pages/start-free.mjs";
 
 const dashboard = () => routeRenderers[siteData.routes.startFree](siteData);
 
-test("Start Free places the shared journey immediately before the anchored registration gate", () => {
+test("Start Free places free value and preview immediately before the anchored registration gate", () => {
   const html = dashboard().body;
-  const journeyIndex = html.indexOf('class="conversionJourney"');
+  const journeyIndex = html.indexOf('class="sevenDayPreview"');
   const registrationIndex = html.indexOf('id="start-free-registration"');
 
-  assert.equal((html.match(/class="conversionJourney"/g) ?? []).length, 1);
+  assert.equal((html.match(/class="sevenDayConversion"/g) ?? []).length, 1);
   assert.ok(journeyIndex >= 0 && journeyIndex < registrationIndex);
-  assert.match(html.slice(journeyIndex, registrationIndex), /href="#start-free-registration"[^>]*data-i18n="conversion\.next\.cta"/);
+  assert.match(html.slice(0, registrationIndex), /sevenDayConversion/);
   assert.match(html, /<section class="sevenDayRegistration" id="start-free-registration">/);
 });
 
-test("Start Free keeps shared journey translation hooks stable in English and Spanish", () => {
+test("Start Free preserves the shared Digital Key header brand", () => {
+  const html = fs.readFileSync(new URL("../start-free/index.html", import.meta.url), "utf8");
+  assert.match(html, /<a class="brand" href="\/"[^>]*><img src="\/images\/digital-key-lockup\.svg"/);
+  assert.match(html, /alt="Unleash Your Power logo"/);
+  assert.match(html, /<div class="siteHeader__actions">/);
+});
+
+test("Start Free gives the primary conversion CTA a scoped line of space before its reassurance", () => {
+  const css = fs.readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.sevenDayConversion__cta\s*\{[^}]*margin-bottom:\s*1em/i);
+});
+
+test("Start Free explains the free value and previews all seven days before registration", () => {
+  const html = dashboard().body;
+  const valueIndex = html.indexOf("Give Yourself Seven Days to Think More Clearly");
+  const previewIndex = html.indexOf("sevenDayPreview");
+  const registrationIndex = html.indexOf('id="start-free-registration"');
+  assert.ok(valueIndex >= 0 && previewIndex > valueIndex && registrationIndex > previewIndex);
+  assert.equal((html.match(/class="sevenDayPreview__day"/g) ?? []).length, 7);
+  assert.match(html, /Total commitment: approximately 75–90 minutes across the entire week\./);
+});
+
+test("Start Free keeps only first name and email required and discloses optional details", () => {
+  const html = dashboard().body;
+  assert.match(html, /<input id="lead-first-name"[^>]+required/);
+  assert.match(html, /name="email"[^>]+required/);
+  assert.match(html, /<details[^>]+data-optional-details/);
+  assert.doesNotMatch(html, /name="surname"[^>]+required/);
+  assert.doesNotMatch(html, /name="whatsapp"[^>]+required/);
+  assert.doesNotMatch(html, /name="consent" required/);
+});
+
+test("Start Free keeps conversion translation hooks stable in English and Spanish", () => {
   for (const language of ["en", "es"]) {
     const html = renderStartFree({ language });
-    const journey = html.match(/<section class="conversionJourney"[\s\S]*?<\/section>/)?.[0] ?? "";
-    for (const key of ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"]) assert.match(journey, new RegExp(`data-i18n="${key}"`));
+    for (const key of ["sevenDay.conversion.title", "sevenDay.conversion.intro", "sevenDay.conversion.benefitsHeading", "sevenDay.conversion.commitment", "sevenDay.conversion.reassurance", "sevenDay.conversion.cta", "sevenDay.registration.optionalDetails"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
   }
 });
 
@@ -36,9 +67,9 @@ test("the Start Free page requires registration before its main dashboard while 
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
   assert.match(html, /data-lead-capture-form/);
   assert.match(html, /name="firstName"[^>]+required/);
-  assert.match(html, /name="surname"[^>]+required/);
-  assert.match(html, /name="whatsapp"[^>]+required/);
-  assert.match(html, /name="consent"[^>]+required/);
+  assert.doesNotMatch(html, /name="surname"[^>]+required/);
+  assert.doesNotMatch(html, /name="whatsapp"[^>]+required/);
+  assert.doesNotMatch(html, /name="consent"[^>]+required/);
   assert.doesNotMatch(html, /name="goal"[^>]+required/);
   assert.doesNotMatch(html, /name="difficulty"[^>]+required/);
   assert.match(html, /What would you most like to change or improve right now\? \(optional\)/);
@@ -47,7 +78,7 @@ test("the Start Free page requires registration before its main dashboard while 
   assert.match(html, /<input type="checkbox" name="emailMarketing">/);
   assert.match(html, /data-lead-heading/);
   assert.match(html, /data-lead-placeholder="first"/);
-  assert.match(html, /<input type="checkbox" name="consent" required><span data-lead-label="consent"/);
+  assert.match(html, /<input type="checkbox" name="consent"><span data-lead-label="consent"/);
   assert.match(html, /data-lead-privacy-link/);
   assert.match(html, /data-lead-success-action/);
   assert.match(html, /data-lead-capture-dashboard hidden/);
@@ -116,7 +147,7 @@ test("success panel offers online and PDF continuation choices", () => {
   assert.match(html, /data-lead-capture-success hidden/);
   assert.match(html, /data-lead-success-prompt/);
   assert.match(html, /data-lead-success-prompt>Choose how you’d like to continue\.<\/p>/);
-  assert.match(html, /data-lead-success-action[^>]*>COMPLETE ONLINE<\/a>/);
+  assert.match(html, /data-lead-success-action[^>]*>YOU’RE IN — START DAY 1 NOW<\/a>/);
   assert.match(html, /data-lead-success-download[^>]*>DOWNLOAD WORKBOOK \(PDF\)<\/a>/);
   assert.match(html, /data-lead-success-action[^>]+href="\/start-free\/day-1-see-whats-running-your-life\/"/);
   assert.match(html, /data-lead-success-download[^>]+href="\/downloads\/seven-day-experience-workbook-en\.pdf"[^>]+download/);
@@ -185,7 +216,7 @@ test("the dashboard describes active local-only progress saving in both language
 test("the dashboard loads form and progress enhancements while preserving disabled no-JavaScript controls", () => {
   const page = dashboard();
 
-  assert.deepEqual(page.scripts, ["/assets/lead-capture-form.mjs", "/assets/seven-day-progress.mjs", "/assets/flyer-lightbox.mjs"]);
+  assert.deepEqual(page.scripts, ["/assets/lead-capture-form.mjs", "/assets/seven-day-progress.mjs", "/assets/start-free-conversion.mjs", "/assets/flyer-lightbox.mjs"]);
   assert.match(page.body, /data-progress-reset disabled/);
   for (const lesson of sevenDayExperience.lessons) {
     assert.match(page.body, new RegExp(`data-progress-lesson="${lesson.id}"`));

@@ -14,6 +14,9 @@ const allowedEventNames = new Set([
   "foundation_begin_checkout",
   "complete_journey_begin_checkout",
   "social_click",
+  "start_free_cta_click",
+  "registration_start",
+  "day_complete",
 ]);
 const foundationPaymentUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
 const completeJourneyPaymentUrl = "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6";
@@ -53,6 +56,7 @@ function safeEventParameters(name, parameters = {}) {
     page_path: typeof parameters.page_path === "string" && parameters.page_path.startsWith("/") ? parameters.page_path : "/",
   };
   if (name === "page_view") return { page_location: typeof parameters.page_location === "string" && parameters.page_location.startsWith("/") ? parameters.page_location : "/" };
+  if (name === "day_complete") return { day: Number.isInteger(parameters.day) ? parameters.day : 0 };
   return {};
 }
 
@@ -137,6 +141,11 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
     emit("generate_lead", { method: "website" });
     emit("start_free_registration_confirmed");
   });
+  documentRef?.addEventListener?.("uyp:registration-start", () => emit("registration_start"));
+  documentRef?.addEventListener?.("uyp:day-complete", (event) => {
+    const day = Number(event.detail?.day);
+    if (day >= 1 && day <= 6) emit("day_complete", { day });
+  });
   documentRef?.addEventListener?.("click", (event) => {
     const completion = event.target?.closest?.("[data-progress-complete]");
     if (completion?.dataset?.progressComplete === "day-7") emit("day_7_completion");
@@ -150,6 +159,7 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
       if (href.includes(completeJourneyPaymentUrl)) emit("complete_journey_begin_checkout");
     }
     if (link?.dataset?.socialPlatform) emit("social_click", { platform: link.dataset.socialPlatform, destination_url: href, page_path: documentRef?.location?.pathname || "/" });
+    if (link?.dataset?.startFreeCta) emit("start_free_cta_click");
   });
 
   updateBanner();

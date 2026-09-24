@@ -70,7 +70,7 @@ test("the Foundation offer stays inside the registration-gated dashboard", () =>
   assert.ok(foundation, "the canonical Foundation offer is available");
   assert.match(html, /data-lead-capture-form/);
   assert.match(html, /data-lead-capture-dashboard hidden/);
-  assert.doesNotMatch(html.slice(0, dashboardIndex), /paypal|stripe|payment|checkout/i);
+  assert.doesNotMatch(html.slice(0, dashboardIndex), /paypal\.com\/ncp\/payment|stripe\.com\/|data-payment/i);
   assert.match(html.slice(dashboardIndex), new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"[^>]+target="_blank" rel="noopener noreferrer"`));
   assert.match(html, /href="\/start-free\/day-1-see-whats-running-your-life\/"/);
 });

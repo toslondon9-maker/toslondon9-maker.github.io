@@ -49,6 +49,25 @@ html:not(.has-js) .sevenDayRegistration form { display: none; }
 .sevenDayRegistration button { min-height: 2.75rem; }
 .sevenDayRegistration [role="status"] { color: #0b2038; min-height: 1.5em; overflow-wrap: anywhere; }
 .sevenDayRegistration input[aria-invalid="true"], .sevenDayRegistration textarea[aria-invalid="true"] { border-color: #9f2222; box-shadow: 0 0 0 2px rgba(159, 34, 34, .15); }
+.sevenDayConversion, .sevenDayPreview { background: var(--paper, #fffdf8); color: var(--navy, #0b2038); padding: clamp(2.25rem, 5vw, 4.5rem) 1rem; }
+.sevenDayConversion__intro, .sevenDayConversion__commitment, .sevenDayConversion__reassurance, .sevenDayConversion__ctaNote { max-width: 48rem; }
+.sevenDayConversion__benefits { display: grid; gap: .7rem; max-width: 48rem; padding-left: 1.25rem; }
+.sevenDayConversion__benefits li::marker { color: var(--gold, #b78a3c); }
+.sevenDayConversion__cta { display: inline-flex; margin-top: .75rem; margin-bottom: 1em; }
+.sevenDayPreview { background: var(--cream, #f7f1e6); }
+.sevenDayPreview ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; padding: 0; list-style: none; }
+.sevenDayPreview__day { display: grid; gap: .25rem; padding: 1rem; border: 1px solid rgba(183, 138, 60, .35); border-radius: .45rem; background: var(--paper, #fffdf8); }
+.sevenDayPreview__day small { color: var(--muted, #526274); }
+.sevenDayRegistration details { border: 1px solid rgba(183, 138, 60, .45); border-radius: .45rem; padding: .8rem 1rem; background: var(--paper, #fffdf8); }
+.sevenDayRegistration details summary { cursor: pointer; font-weight: 600; color: var(--navy, #0b2038); }
+.sevenDayRegistration details[open] { display: grid; gap: 1rem; }
+.sevenDayRegistration__notice, .sevenDayRegistration__supporting { color: var(--muted, #526274); }
+.sevenDayDashboard__time, .sevenDayDashboard__completionMessage { display: block; color: var(--muted, #526274); font-size: .9rem; }
+.sevenDayConversion__cta:focus-visible, .sevenDayRegistration details summary:focus-visible { outline: 3px solid rgba(183, 138, 60, .55); outline-offset: 3px; }
+@media (max-width: 640px) {
+  .sevenDayPreview ol { grid-template-columns: minmax(0, 1fr); }
+  .sevenDayConversion, .sevenDayPreview { padding-inline: .75rem; }
+}
 @media (max-width: 430px) { .sevenDayRegistration { padding: 1.5rem .75rem; overflow-x: clip; } .sevenDayRegistration h2 { font-size: clamp(1.6rem, 8vw, 2.2rem); } .sevenDayRegistration label { font-size: .98rem; } .sevenDayRegistration input:not([type="checkbox"]), .sevenDayRegistration textarea, .sevenDayRegistration button { min-height: 2.75rem; } }
 @media (max-width: 520px) { .sevenDayRegistration__successActions { display: grid; grid-template-columns: minmax(0, 1fr); } .sevenDayRegistration__successActions > a { width: 100%; box-sizing: border-box; } }
 
