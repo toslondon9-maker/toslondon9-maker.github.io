@@ -32,6 +32,7 @@ const translations = deepFreeze({
   "footer.social.tiktok": { en: "TikTok", es: "TikTok" },
   "footer.social.facebook": { en: "Facebook", es: "Facebook" },
   "footer.social.youtube": { en: "YouTube", es: "YouTube" },
+  "footer.socialXLabel": { en: "Follow Unleash Your Power on X", es: "Sigue a Unleash Your Power en X" },
   "route.refundPolicy.heading": { en: "Refund Policy", es: "Política de reembolsos" },
   "route.refundPolicy.metaTitle": { en: "Refund Policy | Unleash Your Power", es: "Política de reembolsos | Unleash Your Power" },
   "route.refundPolicy.metaDescription": { en: "Read the Unleash Your Power refund terms, eligibility requirements and cancellation information.", es: "Consulta las condiciones de reembolso de Unleash Your Power, los requisitos de elegibilidad y la información sobre cancelaciones." },

@@ -52,6 +52,16 @@ test("footer includes mission, primary routes, policies, language and copyright"
   assert.match(html, /© \d{4} Unleash Your Power/);
 });
 
+test("footer includes one accessible X social link in English and Spanish", () => {
+  for (const language of ["en", "es"]) {
+    const html = renderFooter({ language });
+    assert.equal((html.match(/data-social-platform="x"/g) ?? []).length, 1);
+    assert.match(html, /href="https:\/\/x\.com\/UYPwithTariq"/);
+    assert.match(html, /aria-label="(?:Follow Unleash Your Power on X|Sigue a Unleash Your Power en X)"/);
+    assert.match(html, /<svg aria-hidden="true" viewBox="0 0 24 24"[^>]*>[^<]*<path/);
+  }
+});
+
 test("page shell mounts shared chrome and the navigation module once", () => {
   const html = renderPage({
     route: "/faq/",
