@@ -9,6 +9,7 @@ import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs
 import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
 import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage } from "../src/pages/insights-source-article.mjs";
 import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage } from "../src/pages/insights-source-article.mjs";
+import { insightsHowToStudyPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 
 test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
@@ -18,7 +19,7 @@ test("homepage presents the Insights & Guides collection above the final convers
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
   assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 4);
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsHowToStudy}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsPowerWithin}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsImagineMeditation}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
@@ -27,7 +28,7 @@ test("homepage presents the Insights & Guides collection above the final convers
   assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 4);
   assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 0);
   assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 0);
-  assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 2);
+  assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 1);
   assert.equal((body.match(/data-i18n="insights\.publicationDateHaanel"/g) ?? []).length, 2);
   assert.doesNotMatch(body, /insightsIntroduction/);
 });
@@ -71,7 +72,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 13);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 14);
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
   assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
   assert.match(page.body, /data-i18n="insights\.publicationDateHaanel"/);
@@ -79,6 +80,28 @@ test("the Insights hub links the branded collection articles", () => {
   assert.ok(page.body.indexOf("The Advantages of Personal Master Key System Coaching") < page.body.indexOf("What Students Develop During the Foundation Stage"));
   assert.ok(page.body.indexOf("What Students Develop During the Foundation Stage") < page.body.indexOf("10 People Connected to The Master Key System"));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
+});
+
+test("the how-to-study article is registered with exact source title, SEO and PDF", () => {
+  const page = insightsHowToStudyPage();
+  assert.equal(page.route, "/insights/how-to-study-the-master-key-system/");
+  assert.equal(page.titleKey, "insights.howToStudy.metaTitle");
+  assert.equal(page.descriptionKey, "insights.howToStudy.metaDescription");
+  assert.match(page.body, /How to Study the Master Key System: A Practical Daily Routine/);
+  assert.match(page.body, /A practical daily Master Key System routine/);
+  assert.match(page.body, /<ul>/);
+  assert.match(page.body, /<table/);
+  assert.match(page.body, /Start your free 7-Day Experience/);
+  assert.match(page.body, /href="\/downloads\/how-to-study-the-master-key-system\.pdf"/);
+  assert.equal(page.structuredData[0].mainEntityOfPage, "https://unleashyourpowerwithtariq.com/insights/how-to-study-the-master-key-system/");
+});
+
+test("the how-to-study PDF is a non-empty A4 PDF generated from the article source", () => {
+  const pdf = readFileSync("downloads/how-to-study-the-master-key-system.pdf");
+  assert.ok(pdf.length > 1000);
+  assert.equal(pdf.subarray(0, 8).toString(), "%PDF-1.4");
+  assert.match(pdf.toString("latin1"), /How to Study the Master Key System/);
+  assert.match(pdf.toString("latin1"), /Begin with the free 7-Day Experience/);
 });
 
 test("the Insights hub gives bilingual readers a free-study or optional WhatsApp choice", () => {

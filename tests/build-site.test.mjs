@@ -85,6 +85,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "insights/imagine-combining-deep-meditation-personal-development/index.html",
       "insights/who-was-charles-f-haanel-life-and-legacy/index.html",
       "insights/the-power-within-charles-haanel-foreword/index.html",
+      "insights/how-to-study-the-master-key-system/index.html",
       "insights/index.html",
       "insights/eight-principles-master-key-system/index.html",
       "insights/introduction-charles-haanel-master-key-system/index.html",
@@ -124,7 +125,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 40);
+    assert.equal(pageFiles.length, 41);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -206,9 +207,9 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
-      if (globalPageFiles[index].startsWith("insights/10-people-connected-to-the-master-key-system/") || globalPageFiles[index].startsWith("insights/what-students-develop-") || globalPageFiles[index].startsWith("insights/take-your-first-step-") || globalPageFiles[index].startsWith("insights/foundation-stage-questions-") || globalPageFiles[index].startsWith("insights/advantages-personal-master-key-system-coaching/") || globalPageFiles[index].startsWith("insights/the-power-within-charles-haanel-foreword/")) {
-        assert.match(page, /data-i18n="insights\.(people|foundationDevelopment|foundationFirstStep|foundationQA|personalCoaching|powerWithin)\.metaDescription"/);
-        assert.match(page, /"datePublished":"2026-09-(11|13|19)"/);
+      if (globalPageFiles[index].startsWith("insights/10-people-connected-to-the-master-key-system/") || globalPageFiles[index].startsWith("insights/what-students-develop-") || globalPageFiles[index].startsWith("insights/take-your-first-step-") || globalPageFiles[index].startsWith("insights/foundation-stage-questions-") || globalPageFiles[index].startsWith("insights/advantages-personal-master-key-system-coaching/") || globalPageFiles[index].startsWith("insights/the-power-within-charles-haanel-foreword/") || globalPageFiles[index].startsWith("insights/how-to-study-the-master-key-system/")) {
+        assert.match(page, /data-i18n="insights\.(people|foundationDevelopment|foundationFirstStep|foundationQA|personalCoaching|powerWithin|howToStudy)\.metaDescription"/);
+        assert.match(page, /"datePublished":"2026-09-(11|13|19|25)"/);
         assert.match(page, /BOOK YOUR CALL/);
         continue;
       }
