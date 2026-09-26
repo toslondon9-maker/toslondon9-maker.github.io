@@ -9,7 +9,7 @@ import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs
 import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
 import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage } from "../src/pages/insights-source-article.mjs";
 import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage } from "../src/pages/insights-source-article.mjs";
-import { insightsHowToStudyPage } from "../src/pages/insights-source-article.mjs";
+import { insightsHowToStudyPage, insightsEnergyAttentionPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 
 test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
@@ -21,14 +21,15 @@ test("homepage presents the Insights & Guides collection above the final convers
   assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 4);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsHowToStudy}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsPowerWithin}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsImagineMeditation}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
   assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 4);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsHaanelBiography}"`));
   assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 4);
   assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 0);
   assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 0);
-  assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 1);
+  assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 0);
+  assert.equal((body.match(/data-i18n="insights\.publicationDateEnergyAttention"/g) ?? []).length, 1);
   assert.equal((body.match(/data-i18n="insights\.publicationDateHaanel"/g) ?? []).length, 2);
   assert.doesNotMatch(body, /insightsIntroduction/);
 });
@@ -72,7 +73,8 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 14);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 15);
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
   assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
   assert.match(page.body, /data-i18n="insights\.publicationDateHaanel"/);
@@ -94,6 +96,28 @@ test("the how-to-study article is registered with exact source title, SEO and PD
   assert.match(page.body, /Start your free 7-Day Experience/);
   assert.match(page.body, /href="\/downloads\/how-to-study-the-master-key-system\.pdf"/);
   assert.equal(page.structuredData[0].mainEntityOfPage, "https://unleashyourpowerwithtariq.com/insights/how-to-study-the-master-key-system/");
+});
+
+test("the energy-attention article is registered with its source image, SEO, CTA and PDF", () => {
+  const page = insightsEnergyAttentionPage();
+  assert.equal(page.route, "/insights/energy-goes-where-attention-flows/");
+  assert.equal(page.titleKey, "insights.energyAttention.metaTitle");
+  assert.equal(page.descriptionKey, "insights.energyAttention.metaDescription");
+  assert.match(page.body, /Energy Goes Where Attention Flows: How I Used a 90-Day Vision to Change My Weight/);
+  assert.match(page.body, /82 kg became 75 kg/);
+  assert.match(page.body, /energy-goes-where-attention-flows-82kg-75kg\.png/);
+  assert.match(page.body, /Visualization kept the destination in front of me/);
+  assert.match(page.body, /href="\/start-free\/"/);
+  assert.match(page.body, /href="\/downloads\/energy-goes-where-attention-flows\.pdf"/);
+  assert.equal(page.structuredData[0].mainEntityOfPage, "https://unleashyourpowerwithtariq.com/insights/energy-goes-where-attention-flows/");
+});
+
+test("the energy-attention PDF is a non-empty PDF generated from the article source", () => {
+  const pdf = readFileSync("downloads/energy-goes-where-attention-flows.pdf");
+  assert.ok(pdf.length > 1000);
+  assert.equal(pdf.subarray(0, 8).toString(), "%PDF-1.4");
+  assert.match(pdf.toString("latin1"), /Energy Goes Where Attention Flows/);
+  assert.match(pdf.toString("latin1"), /Health note/);
 });
 
 test("the how-to-study PDF is a non-empty A4 PDF generated from the article source", () => {

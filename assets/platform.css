@@ -22,6 +22,9 @@
   --transition: 180ms ease;
 }
 
+.insightArticle__heroImage{margin:2rem 0 2.5rem;border:1px solid rgba(184,140,59,.35);border-radius:1rem;overflow:hidden;background:var(--paper,#fffdf8);box-shadow:0 12px 28px rgba(7,24,40,.08)}
+.insightArticle__heroImage img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+
 /* Referral invitation page */
 .referralPage{background:var(--cream);color:var(--ink);padding-bottom:clamp(3rem,7vw,7rem)}
 .referralHero,.referralSection,.referralInvite,.referralCta{width:min(1180px,calc(100% - 2rem));margin-inline:auto}

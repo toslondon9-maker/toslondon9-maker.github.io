@@ -40,6 +40,7 @@ test("canonical route definitions are locked", () => {
     insightsImagineMeditation: "/insights/imagine-combining-deep-meditation-personal-development/",
     insightsHaanelBiography: "/insights/who-was-charles-f-haanel-life-and-legacy/",
     insightsHowToStudy: "/insights/how-to-study-the-master-key-system/",
+    insightsEnergyAttention: "/insights/energy-goes-where-attention-flows/",
     insightsPowerWithin: "/insights/the-power-within-charles-haanel-foreword/",
     insights: "/insights/",
     insightsPrinciples: "/insights/eight-principles-master-key-system/",
