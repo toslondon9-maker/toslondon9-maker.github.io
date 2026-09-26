@@ -118,6 +118,7 @@ export function mountSevenDayProgress(document = globalThis.document, options = 
   const reset = document.querySelector?.("[data-progress-reset]");
   const buttons = [...document.querySelectorAll("[data-progress-complete]")];
   const cards = [...document.querySelectorAll("[data-progress-lesson]")];
+  const day7Foundation = document.querySelector("[data-day7-foundation]");
   const languageControls = [...document.querySelectorAll("[data-language]")];
   const completionKeys = new Map(buttons.map((button) => [
     button,
@@ -184,6 +185,7 @@ export function mountSevenDayProgress(document = globalThis.document, options = 
     }
 
     if (reset) reset.disabled = completedCount === 0;
+    if (day7Foundation) day7Foundation.hidden = state.completed["day-7"] !== true;
   }
 
   for (const button of buttons) {

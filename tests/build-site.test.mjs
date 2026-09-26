@@ -70,6 +70,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "master-key-system-online-course/index.html",
       "mks-lineage/index.html",
       "start-free/index.html",
+      "foundation/index.html",
       "coaching/index.html",
       "about-tariq/index.html",
       "resources/index.html",
@@ -126,7 +127,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 42);
+    assert.equal(pageFiles.length, 43);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -215,8 +216,8 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
-        assert.match(page, /<title data-i18n="(?:route|insights\.[^"]+)\.[^"]+">/);
-        assert.match(page, /<meta name="description"[^>]+data-i18n="(?:route|insights\.[^"]+)\.[^"]+">/);
+      assert.match(page, /<title data-i18n="(?:route|foundation|insights\.[^"]+)\.[^"]+">/);
+      assert.match(page, /<meta name="description"[^>]+data-i18n="(?:route|foundation|insights\.[^"]+)\.[^"]+">/);
 
       if (globalPageFiles[index] === "start-free/index.html") {
         assert.match(page, /<main class="sevenDayDashboard"/);
@@ -246,6 +247,13 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
       if (globalPageFiles[index] === "resources/audio/index.html") {
         assert.match(page, /class="[^"]*resourcesAudioPage/);
         assert.match(page, /data-i18n="route\.resourcesAudio\.heading"/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "foundation/index.html") {
+        assert.match(page, /class="foundationPage"/);
+        assert.match(page, /data-i18n="foundation\.heading"/);
+        assert.match(page, /data-i18n="foundation\.cta"/);
         continue;
       }
 

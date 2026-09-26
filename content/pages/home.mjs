@@ -27,6 +27,7 @@ export const homeContent = Object.freeze({
     }),
   ]),
   originsImage: "/images/haanel-tariq-portraits.jpeg",
+  welcomeImage: "/images/tariq-welcome-portrait.png",
   books: Object.freeze([
     Object.freeze({ titleKey: "home.books.book1.title", authorKey: "home.books.book1.author" }),
     Object.freeze({ titleKey: "home.books.book2.title", authorKey: "home.books.book2.author" }),

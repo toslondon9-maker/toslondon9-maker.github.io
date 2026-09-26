@@ -102,9 +102,16 @@ test("the registration-gated dashboard places the Foundation next step after the
   assert.ok(foundation, "the canonical Foundation offer is available");
   assert.equal((html.match(/class="foundationNextStep"/g) ?? []).length, 1);
   assert.ok(workbookIndex < foundationIndex && foundationIndex < afterSevenDaysIndex);
-  assert.match(html.slice(dashboardStart), new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"[^>]+target="_blank" rel="noopener noreferrer"`));
+  assert.match(html.slice(dashboardStart), new RegExp(`href="${escapeRegExp(siteData.routes.foundation)}"`));
   assert.match(html.slice(dashboardStart), /Individual outcomes depend on your circumstances, participation and consistent practice\./);
-  assert.match(html.slice(dashboardStart), new RegExp(`href="${escapeRegExp(siteData.routes.coaching)}"[^>]+data-i18n="conversion\.foundation\.secondary"`));
+  assert.match(html.slice(dashboardStart), new RegExp(`href="${escapeRegExp(siteData.routes.startFree)}"[^>]+data-i18n="conversion\.foundation\.secondary"`));
+});
+
+test("the Foundation handoff is hidden until Day 7 progress is complete", () => {
+  const html = dashboard().body;
+  assert.match(html, /data-day7-foundation[^>]+hidden/);
+  assert.match(html, /CONTINUE TO FOUNDATION — £97/);
+  assert.match(html, /href="\/foundation\/"/);
 });
 
 test("the Start Free qualifying-question labels are optional in both languages", () => {

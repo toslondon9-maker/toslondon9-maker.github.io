@@ -136,9 +136,10 @@ test("only Day 7 places the Foundation next step after completion and before the
     const bridgeIndex = html.indexOf('class="sevenDayLesson__bridge"');
     assert.equal((html.match(/class="foundationNextStep"/g) ?? []).length, 1);
     assert.ok(completionIndex < foundationIndex && foundationIndex < bridgeIndex);
-    assert.match(html, new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"[^>]+target="_blank" rel="noopener noreferrer"`));
+    assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.foundation)}"`));
+    assert.match(html, /data-day7-foundation hidden/);
     assert.match(html, /Individual outcomes depend on your circumstances, participation and consistent practice\./);
-    assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.coaching)}"[^>]+data-i18n="conversion\.foundation\.secondary"`));
+    assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.startFree)}"[^>]+data-i18n="conversion\.foundation\.secondary"`));
   }
 });
 
@@ -156,7 +157,7 @@ test("only Day 7 presents resources, WhatsApp, Foundation, and the complete jour
 
     assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.resources)}"`));
     assert.match(html, new RegExp(`href="${escapeRegExp(bookingCallHref(siteData.contact.whatsapp))}"[^>]+target="_blank" rel="noopener noreferrer"`));
-    assert.match(html, new RegExp(`href="${escapeRegExp(foundation.paymentUrl)}"`));
+    assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.foundation)}"`));
     assert.match(html, new RegExp(`href="${escapeRegExp(siteData.routes.masterKeySystem)}"`));
   }
 });

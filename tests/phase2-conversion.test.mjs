@@ -24,7 +24,8 @@ test("Day 7 presents informed independent, WhatsApp, Foundation and complete-jou
   assert.match(html, /Choose the next step that suits you/);
   assert.match(html, /USE THE RESOURCES/);
   assert.match(html, /ASK ON WHATSAPP/);
-  assert.match(html, /CONTINUE WITH FOUNDATION/);
+  assert.match(html, /CONTINUE TO FOUNDATION — £97/);
+  assert.match(html, /href="\/foundation\/"/);
   assert.match(html, /EXPLORE THE COMPLETE JOURNEY/);
 });
 

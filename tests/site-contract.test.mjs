@@ -24,6 +24,7 @@ test("canonical route definitions are locked", () => {
     masterKeySystemOnlineCourse: "/master-key-system-online-course/",
     mksLineage: "/mks-lineage/",
     startFree: "/start-free/",
+    foundation: "/foundation/",
     coaching: "/coaching/",
     aboutTariq: "/about-tariq/",
     resources: "/resources/",

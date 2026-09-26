@@ -41,7 +41,7 @@ test("homepage follows the approved concise customer journey", () => {
   const html = renderHome({ language: "en" });
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(sections, approvedSections);
-  assert.equal((html.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
+  assert.equal((html.match(/<img[^>]+tariq-welcome-portrait\.png/g) ?? []).length, 1);
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
   assert.match(html, /START FREE FOR 7 DAYS/);
@@ -52,14 +52,14 @@ test("homepage follows the approved concise customer journey", () => {
   assert.match(html, /VIEW THE 24-WEEK JOURNEY/);
 });
 
-test("homepage provides an honest welcome-video placeholder and accessible fallback", () => {
+test("homepage welcome section uses the approved portrait panel and accessible fallback", () => {
   const html = renderHome({ language: "en" });
   const video = html.match(/<section class="homeVideo"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.match(video, /A personal welcome from Tariq/);
   assert.match(video, /Discover why Tariq created Unleash Your Power/);
-  assert.match(video, /homeVideo__placeholder/);
+  assert.match(video, /homeVideo__portrait/);
+  assert.match(video, /tariq-welcome-portrait\.png/);
   assert.match(video, /Video coming soon/);
-  assert.match(video, /captions/i);
   assert.doesNotMatch(video, /<video\b/);
   assert.doesNotMatch(video, /\.mp4|\.webm/);
   assert.match(video, /data-i18n="home\.video\.fallback"/);
@@ -68,12 +68,19 @@ test("homepage provides an honest welcome-video placeholder and accessible fallb
   assert.match(spanish, /Vídeo próximamente/);
 });
 
-test("homepage offers the free fifteen-minute WhatsApp call beside both free-entry CTAs", () => {
+test("homepage offers the secondary WhatsApp question beside both free-entry CTAs", () => {
   const html = renderHome({ language: "en" });
   const expected = encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
-  assert.equal((html.match(/BOOK A FREE 15-MINUTE CALL/g) ?? []).length, 2);
+  assert.equal((html.match(/Questions\? WhatsApp Tariq/g) ?? []).length, 2);
   assert.equal((html.match(new RegExp(`https://wa\\.me/34611223345\\?text=${expected}`, "g")) ?? []).length, 2);
   assert.match(html, /target="_blank" rel="noopener noreferrer"/);
+});
+
+test("homepage keeps Start Free primary and makes WhatsApp a secondary question", () => {
+  const html = renderHome({ language: "en" });
+  assert.match(html, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
+  assert.match(html, /Questions\? WhatsApp Tariq/);
+  assert.doesNotMatch(html, /BOOK A FREE 15-MINUTE CALL/);
 });
 
 test("homepage explains the independent three-person learning lineage near the top", () => {
@@ -148,7 +155,7 @@ test("homepage presents the approved lineage image and people in order", () => {
   const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]);
   assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
   assert.match(lineage, /Charles F\. Haanel and Tariq Saddique — Master Key System inspired coaching journey/);
-  assert.equal((html.match(/haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
+  assert.equal((html.match(/tariq-welcome-portrait\.png/g) ?? []).length, 1);
 });
 
 test("homepage lineage section retains the premium portrait, cards and independence disclosure", () => {

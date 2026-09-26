@@ -25,7 +25,7 @@ function cta(route, key, language, variant = "primary", extraClass = "") {
 }
 
 function bookingCta(language) {
-  return `<a class="button--secondary" href="${bookingCallHref(siteData.contact.whatsapp)}" target="_blank" rel="noopener noreferrer" data-i18n="cta.bookCall">${escapeHtml(t("cta.bookCall", language))}</a>`;
+  return `<a class="button--secondary" href="${bookingCallHref(siteData.contact.whatsapp)}" target="_blank" rel="noopener noreferrer" data-i18n="home.cta.whatsappQuestion">${escapeHtml(t("home.cta.whatsappQuestion", language))}</a>`;
 }
 
 function renderJourney(language) {
@@ -41,7 +41,7 @@ function renderLineage(language) {
     `<li class="homeLineage__card">${copy(`home.lineage.${person}.name`, language, "h3")}${copy(`home.lineage.${person}.role`, language, "p", "homeLineage__role")}${copy(`home.lineage.${person}.body`, language)}</li>`
   )).join("");
 
-  return `<section class="homeSection homeLineage" data-home-section="lineage"><div class="homeSection__inner">${copy("home.lineage.eyebrow", language, "p", "eyebrow")}${copy("home.lineage.title", language, "h2")}${copy("home.lineage.intro", language, "p", "homeSection__intro")}<div class="homeLineage__portrait"><img src="${homeContent.originsImage}" width="1080" height="806" loading="eager" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"></div><ol class="homeLineage__grid">${people}</ol>${copy("home.lineage.disclaimer", language, "p", "homeLineage__disclaimer")}<p class="homeLineage__links"><a href="${siteData.routes.mksLineage}">Explore the MKS Lineage</a> · <a href="${siteData.routes.masterKeySystem}">Study the 24-week course</a> · <a href="${siteData.routes.resources}">Use the study resources</a></p></div></section>`;
+  return `<section class="homeSection homeLineage" data-home-section="lineage"><div class="homeSection__inner">${copy("home.lineage.eyebrow", language, "p", "eyebrow")}${copy("home.lineage.title", language, "h2")}${copy("home.lineage.intro", language, "p", "homeSection__intro")}<div class="homeLineage__portrait"><img src="${homeContent.originsImage}" width="358" height="418" loading="eager" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"></div><ol class="homeLineage__grid">${people}</ol>${copy("home.lineage.disclaimer", language, "p", "homeLineage__disclaimer")}<p class="homeLineage__links"><a href="${siteData.routes.mksLineage}">Explore the MKS Lineage</a> · <a href="${siteData.routes.masterKeySystem}">Study the 24-week course</a> · <a href="${siteData.routes.resources}">Use the study resources</a></p></div></section>`;
 }
 
 function renderWhy(language) {
@@ -71,7 +71,7 @@ function renderOrigins(language) {
 }
 
 function renderWelcomeVideo(language) {
-  return `<section class="homeVideo" data-home-section="welcome-video" aria-labelledby="home-video-title"><div class="homeVideo__copy">${copy("home.video.eyebrow", language, "p", "eyebrow")}${copy("home.video.title", language, "h2")}${copy("home.video.body", language, "p", "homeVideo__body")}</div><div class="homeVideo__placeholder" role="img" aria-label="${escapeHtml(t("home.video.placeholder", language))}" data-i18n-aria-label="home.video.placeholder"><span class="homeVideo__mark" aria-hidden="true">▶</span><strong data-i18n="home.video.placeholder">${escapeHtml(t("home.video.placeholder", language))}</strong><p data-i18n="home.video.placeholderBody">${escapeHtml(t("home.video.placeholderBody", language))}</p></div>${copy("home.video.fallback", language, "p", "homeVideo__fallback")}</section>`;
+  return `<section class="homeVideo" data-home-section="welcome-video" aria-labelledby="home-video-title"><div class="homeVideo__copy">${copy("home.video.eyebrow", language, "p", "eyebrow")}${copy("home.video.title", language, "h2")}${copy("home.video.body", language, "p", "homeVideo__body")}</div><div class="homeVideo__portrait"><img src="${homeContent.welcomeImage}" width="358" height="418" loading="lazy" decoding="async" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"><span class="sr-only" data-i18n="home.video.placeholder">${escapeHtml(t("home.video.placeholder", language))}</span></div>${copy("home.video.fallback", language, "p", "homeVideo__fallback")}</section>`;
 }
 
 function renderBooks(language) {

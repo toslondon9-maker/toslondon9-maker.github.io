@@ -15,11 +15,11 @@ const translationExpectations = {
   "conversion.next.step3Body": ["Continue through Visualisation, Concentration and Contemplation & Mastery—or join the complete 24-week journey.", "Continúa con Visualización, Concentración y Contemplación y Maestría, o únete al recorrido completo de 24 semanas."],
   "conversion.next.cta": ["START FREE FOR 7 DAYS", "EMPIEZA GRATIS DURANTE 7 DÍAS"],
   "conversion.foundation.eyebrow": ["YOUR NEXT STEP", "TU SIGUIENTE PASO"],
-  "conversion.foundation.heading": ["Continue with Foundation", "Continúa con Fundamentos"],
-  "conversion.foundation.body": ["You have begun to explore the principles. Foundation gives you four guided weeks to establish the practice: greater calm, self-awareness and a stronger mental base for the journey ahead.", "Has comenzado a explorar los principios. Fundamentos te ofrece cuatro semanas guiadas para establecer la práctica: mayor calma, autoconocimiento y una base mental más sólida para el camino que tienes por delante."],
+  "conversion.foundation.heading": ["You completed the seven-day experience.", "Has completado la experiencia de siete días."],
+  "conversion.foundation.body": ["If the journey feels right, continue with Foundation — four weeks to build a dependable mental foundation.", "Si el recorrido encaja contigo, continúa con Fundamentos: cuatro semanas para construir una base mental sólida."],
   "conversion.foundation.qualification": ["Individual outcomes depend on your circumstances, participation and consistent practice.", "Los resultados individuales dependen de tus circunstancias, participación y práctica constante."],
-  "conversion.foundation.cta": ["CONTINUE WITH FOUNDATION", "CONTINUAR CON FUNDAMENTOS"],
-  "conversion.foundation.secondary": ["Explore the complete 24-week journey", "Explora el recorrido completo de 24 semanas"],
+  "conversion.foundation.cta": ["CONTINUE TO FOUNDATION — £97", "CONTINÚA CON FUNDAMENTOS — £97"],
+  "conversion.foundation.secondary": ["KEEP EXPLORING", "SEGUIR EXPLORANDO"],
 };
 
 test("conversion copy is complete in English and Spanish", () => {
@@ -41,20 +41,20 @@ test("renderWhatHappensNext renders three ordered translated steps and the suppl
   assert.match(html, /href="\/custom-start\/"/);
 });
 
-test("renderFoundationNextStep renders the supplied canonical offer and safe external payment link", () => {
-  const data = { routes: { startFree: "/start-free/", coaching: "/custom-coaching/" }, stages: [{ id: "foundation", name: "Foundation", weeks: "1–4", price: 123, paymentUrl: "https://payments.example.test/foundation?x=1&y=2" }] };
+test("renderFoundationNextStep renders the gated Foundation route offer", () => {
+  const data = { routes: { startFree: "/start-free/", foundation: "/foundation/", coaching: "/custom-coaching/" }, stages: [{ id: "foundation", name: "Foundation", weeks: "1–4", price: 123, paymentUrl: "https://payments.example.test/foundation?x=1&y=2" }] };
   const html = renderFoundationNextStep({ data });
   assert.match(html, /^<section[^>]+class="foundationNextStep"[^>]+aria-labelledby="foundation-next-heading"/);
   assert.match(html, /<p class="eyebrow" data-i18n="conversion.foundation.eyebrow">YOUR NEXT STEP<\/p>/);
-  assert.match(html, /<h2 id="foundation-next-heading" data-i18n="conversion.foundation.heading">Continue with Foundation<\/h2>/);
+  assert.match(html, /<h2 id="foundation-next-heading" data-i18n="conversion.foundation.heading">You completed the seven-day experience\.<\/h2>/);
   assert.match(html, /£123/);
-  assert.match(html, /href="https:\/\/payments\.example\.test\/foundation\?x=1&amp;y=2"[^>]+target="_blank" rel="noopener noreferrer"/);
-  assert.match(html, /href="\/custom-coaching\/"/);
+  assert.match(html, /href="\/foundation\/"/);
+  assert.match(html, /href="\/start-free\/"/);
   for (const key of ["conversion.foundation.eyebrow", "conversion.foundation.heading", "conversion.foundation.body", "conversion.foundation.qualification", "conversion.foundation.cta", "conversion.foundation.secondary"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
 });
 
 test("conversion renderers expose each visible Spanish string through its translation hook", () => {
-  const data = { routes: { startFree: "/start-free/", coaching: "/coaching/" }, stages: [{ id: "foundation", price: 97, paymentUrl: "https://payments.example.test/foundation" }] };
+  const data = { routes: { startFree: "/start-free/", foundation: "/foundation/", coaching: "/coaching/" }, stages: [{ id: "foundation", price: 97, paymentUrl: "https://payments.example.test/foundation" }] };
   const html = `${renderWhatHappensNext({ language: "es", data })}${renderFoundationNextStep({ language: "es", data })}`;
   for (const [key, [, spanish]] of Object.entries(translationExpectations)) {
     assert.match(html, new RegExp(`data-i18n="${key}">`));
