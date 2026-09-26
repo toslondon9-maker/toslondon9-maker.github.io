@@ -111,7 +111,7 @@ test("SEE ALL 7 DAYS keeps pure-white text in every interaction state", () => {
   const html = dashboard().body;
   assert.match(html, /class="button--secondary" href="#seven-day-lessons-heading"[^>]*>(?:SEE ALL 7 DAYS|VER LOS 7 DIAS)/);
   const css = fs.readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
-  assert.match(css, /\.sevenDayDashboard__heroActions > \.button--secondary,[\s\S]*?\.sevenDayDashboard__heroActions > \.button--secondary:active\{color:#fff\}/);
+  assert.match(css, /\.sevenDayDashboard__heroActions a\.button--secondary,[\s\S]*?\.sevenDayDashboard__heroActions a\.button--secondary:active\{color:#fff\}/);
 });
 
 test("the Foundation handoff is hidden until Day 7 progress is complete", () => {
