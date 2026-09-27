@@ -43,20 +43,26 @@ test("Start Free explains the free value and previews all seven days before regi
   assert.match(html, /Total commitment: approximately 75–90 minutes across the entire week\./);
 });
 
-test("Start Free keeps only first name and email required and discloses optional details", () => {
+test("Start Free shows all lead-system requirements before optional details", () => {
   const html = dashboard().body;
   assert.match(html, /<input id="lead-first-name"[^>]+required/);
   assert.match(html, /name="email"[^>]+required/);
-  assert.match(html, /<details[^>]+data-optional-details/);
-  assert.doesNotMatch(html, /name="surname"[^>]+required/);
-  assert.doesNotMatch(html, /name="whatsapp"[^>]+required/);
-  assert.doesNotMatch(html, /name="consent" required/);
+  assert.doesNotMatch(html, /<details[^>]+data-optional-details/);
+  assert.match(html, /name="surname"[^>]+required/);
+  assert.match(html, /name="whatsapp"[^>]+required/);
+  assert.match(html, /name="consent"[^>]+required/);
+  assert.doesNotMatch(html, /name="goal"[^>]+required/);
+  assert.doesNotMatch(html, /name="difficulty"[^>]+required/);
+  assert.doesNotMatch(html, /name="emailMarketing"[^>]+required/);
 });
 
 test("Start Free keeps conversion translation hooks stable in English and Spanish", () => {
   for (const language of ["en", "es"]) {
     const html = renderStartFree({ language });
-    for (const key of ["sevenDay.conversion.title", "sevenDay.conversion.intro", "sevenDay.conversion.benefitsHeading", "sevenDay.conversion.commitment", "sevenDay.conversion.reassurance", "sevenDay.conversion.cta", "sevenDay.registration.optionalDetails"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
+    for (const key of ["sevenDay.conversion.title", "sevenDay.conversion.intro", "sevenDay.conversion.benefitsHeading", "sevenDay.conversion.commitment", "sevenDay.conversion.reassurance", "sevenDay.conversion.cta"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
+    assert.match(html, /name="surname"[^>]+required/);
+    assert.match(html, /name="whatsapp"[^>]+required/);
+    assert.match(html, /name="consent"[^>]+required/);
   }
 });
 
@@ -67,9 +73,9 @@ test("the Start Free page requires registration before its main dashboard while 
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
   assert.match(html, /data-lead-capture-form/);
   assert.match(html, /name="firstName"[^>]+required/);
-  assert.doesNotMatch(html, /name="surname"[^>]+required/);
-  assert.doesNotMatch(html, /name="whatsapp"[^>]+required/);
-  assert.doesNotMatch(html, /name="consent"[^>]+required/);
+  assert.match(html, /name="surname"[^>]+required/);
+  assert.match(html, /name="whatsapp"[^>]+required/);
+  assert.match(html, /name="consent"[^>]+required/);
   assert.doesNotMatch(html, /name="goal"[^>]+required/);
   assert.doesNotMatch(html, /name="difficulty"[^>]+required/);
   assert.match(html, /What would you most like to change or improve right now\? \(optional\)/);
@@ -78,7 +84,7 @@ test("the Start Free page requires registration before its main dashboard while 
   assert.match(html, /<input type="checkbox" name="emailMarketing">/);
   assert.match(html, /data-lead-heading/);
   assert.match(html, /data-lead-placeholder="first"/);
-  assert.match(html, /<input type="checkbox" name="consent"><span data-lead-label="consent"/);
+  assert.match(html, /<input type="checkbox" name="consent" required><span data-lead-label="consent"/);
   assert.match(html, /data-lead-privacy-link/);
   assert.match(html, /data-lead-success-action/);
   assert.match(html, /data-lead-capture-dashboard hidden/);
