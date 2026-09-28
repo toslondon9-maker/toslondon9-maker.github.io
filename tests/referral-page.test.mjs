@@ -28,14 +28,38 @@ test("bottom referral CTA targets the personal invite section", () => {
   assert.doesNotMatch(page.body, /href="#personal-invite">REFER A FRIEND TODAY<\/a>/);
 });
 
-test("referral page explains the approved 5% full-course reward", () => {
+test("referral page explains the approved 5% reward across eligible product lines", () => {
   const page = referralPage(siteData);
   const reward = page.body.match(/<section[^>]+class="referralSection affiliateReward"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.match(reward, /Earn 5% for every complete-course referral/);
-  assert.match(reward, /Full programme[\s\S]*£997/);
-  assert.match(reward, /Affiliate reward[\s\S]*5%/);
-  assert.match(reward, /You earn[\s\S]*£49\.85/);
-  assert.match(reward, /eligible, completed, non-refunded purchases attributed to your tracked affiliate link/i);
+  assert.match(reward, /Earn 5% every time you help someone begin their journey/);
+  assert.match(reward, /5% commission across all eligible product lines/);
+  assert.match(reward, /If you believe in Unleash Your Power/);
+  assert.match(reward, /Inspire change\. Share the journey\. Earn as you grow the movement\./);
+  for (const text of [
+    "5% Commission",
+    "All Eligible Product Lines",
+    "Your Personal Affiliate Link",
+    "Earn As You Inspire Others",
+    "Foundation step",
+    "£97 product",
+    "You earn £4.85",
+    "Signature programme",
+    "£997 product",
+    "You earn £49.85",
+    "Growth example",
+    "£5,000 in eligible referred sales",
+    "You earn £250",
+    "A simple introduction can still create momentum.",
+    "One meaningful referral can create real value for both of you.",
+    "As your reach grows, your rewards can grow with it.",
+  ]) assert.match(reward, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), text);
+  assert.match(reward, /eligible referred sales[\s\S]*not a product price/i);
+  assert.match(page.body, /Create your affiliate link and start sharing today\./);
+  assert.match(reward, /Affiliate reward summary/);
+  assert.match(reward, /£97 sale → £4\.85 commission/);
+  assert.match(reward, /£997 sale → £49\.85 commission/);
+  assert.match(reward, /£5,000 in eligible referred sales → £250 commission/);
+  assert.match(reward, /eligible, completed, non-refunded purchases successfully attributed to your tracked affiliate link/i);
   assert.doesNotMatch(page.body, /Affiliate rewards and commission terms will be confirmed upon approval/);
 });
 
