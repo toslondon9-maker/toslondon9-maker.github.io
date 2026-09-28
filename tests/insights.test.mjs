@@ -15,7 +15,7 @@ import { siteData } from "../content/site-data.mjs";
 test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
   const body = homePage().body;
   const insightsIndex = body.indexOf("Insights &amp; Guides");
-  const finalPanelIndex = body.indexOf('data-home-section="next-step"');
+  const finalPanelIndex = body.indexOf('data-home-section="final-cta"');
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
   assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 4);

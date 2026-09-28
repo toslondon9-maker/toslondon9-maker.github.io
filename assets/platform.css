@@ -5879,6 +5879,62 @@ body {
 .homeVideo__placeholder strong{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.25rem,2.2vw,1.7rem);color:var(--cream)}
 .homeVideo__placeholder p{max-width:24rem;margin:0;color:color-mix(in srgb,var(--cream) 82%,transparent);line-height:1.6}
 .homeVideo__fallback{grid-column:1 / -1;margin:0;font-size:.95rem}
+
+/* Premium homepage sequence: scoped additions only. */
+.homeFreeExperience__layout,.homeWhyTariq__inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,5vw,4rem);align-items:start}
+.homeFreeExperience__copy,.homeFreeExperience__progress,.homeWhyTariq__inner>div{min-width:0}
+.homeFreeExperience__facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem 1.25rem;margin:1.5rem 0 2rem;padding:0;list-style:none}
+.homeFreeExperience__facts li{position:relative;padding-left:1.1rem;color:var(--cream);line-height:1.45}
+.homeFreeExperience__facts li::before{content:"";position:absolute;left:0;top:.55em;width:.45rem;height:.45rem;border-radius:50%;background:var(--gold-bright)}
+.homeFreeExperience__progress{padding:clamp(1.25rem,3vw,2rem);border:1px solid var(--gold);background:color-mix(in srgb,var(--night-soft) 78%,black);border-radius:var(--radius-card)}
+.homeFreeExperience__progress h3{margin:0 0 1.25rem;color:var(--cream);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.35rem,2.5vw,2rem)}
+.homeFreeExperience__days{display:grid;gap:.35rem;margin:0;padding:0;list-style:none}
+.homeFreeExperience__days li{display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:.75rem;align-items:center;padding:.65rem 0;border-bottom:1px solid color-mix(in srgb,var(--gold) 45%,transparent);color:var(--cream)}
+.homeFreeExperience__days li>span:first-child{color:var(--gold-bright);font-weight:700;letter-spacing:.08em}
+.homeFreeExperience__note{margin:1.25rem 0 0;color:color-mix(in srgb,var(--cream) 78%,transparent);font-size:.9rem}
+.homeLineage__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.homeIdeas{background:var(--paper)}
+.homeIdeas__books{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin:2rem 0;padding:0;list-style:none}
+.homeIdeas__books li{padding:1.25rem;border-top:2px solid var(--gold);background:var(--cream)}
+.homeIdeas__books h3{margin:0 0 .45rem;color:var(--night);font-family:Georgia,"Times New Roman",serif;font-size:1.15rem;line-height:1.2}
+.homeIdeas__books p{margin:0;color:var(--muted);font-size:.9rem}
+.homeIdeas__disclaimer{max-width:58rem;margin:1.5rem 0;color:var(--muted);line-height:1.65}
+.homeJourney{background:var(--cream)}
+.homeJourney__model{display:inline-block;margin:1rem 0 2rem;padding:.7rem 1rem;border:1px solid var(--gold);color:var(--night);font-weight:700;letter-spacing:.08em}
+.homeJourney__stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin:0 0 2rem;padding:0;list-style:none}
+.homeJourney__stages li{padding:1.25rem;border-top:3px solid var(--gold);background:var(--paper);box-shadow:var(--shadow-card)}
+.homeJourney__stages strong{display:block;margin-bottom:.8rem;color:var(--gold-dark);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.homeJourney__stages h3{margin:0 0 .6rem;color:var(--night);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.2rem,2vw,1.55rem)}
+.homeJourney__stages p{margin:0;color:var(--muted);line-height:1.55}
+.homeWhyTariq{background:var(--paper)}
+.homeWhyTariq__inner{align-items:center}
+.homeWhyTariq__inner>div:last-child{padding-left:clamp(0rem,4vw,3rem);border-left:2px solid var(--gold)}
+.homeOffers{background:var(--cream)}
+.homeOffers__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2rem}
+.homeOffers__card{display:flex;min-width:0;flex-direction:column;align-items:flex-start;padding:clamp(1.25rem,3vw,2rem);border:1px solid var(--border);background:var(--paper);box-shadow:var(--shadow-card)}
+.homeOffers__card--free{border-color:var(--gold);background:var(--night);color:var(--cream)}
+.homeOffers__card h3{margin:0 0 .75rem;color:var(--night);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.15}
+.homeOffers__card--free h3{color:var(--cream)}
+.homeOffers__price{display:block;margin:0 0 .7rem;color:var(--gold-dark);font-family:Georgia,"Times New Roman",serif;font-size:2.25rem}
+.homeOffers__card p{flex:1;margin:0 0 1.4rem;color:var(--muted);line-height:1.6}
+.homeOffers__card--free p{color:color-mix(in srgb,var(--cream) 78%,transparent)}
+.homeOffers__more{max-width:60rem;margin:1.5rem 0 0;color:var(--muted);font-size:.92rem}
+.homeFinalCta{text-align:center}
+.homeFinalCta__inner{display:grid;justify-items:center;gap:1rem}
+.homeFinalCta .homeActions{justify-content:center}
+
+@media (max-width: 900px){
+  .homeFreeExperience__layout,.homeWhyTariq__inner{grid-template-columns:minmax(0,1fr)}
+  .homeIdeas__books,.homeJourney__stages{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .homeOffers__grid{grid-template-columns:minmax(0,1fr)}
+  .homeWhyTariq__inner>div:last-child{padding:1.25rem 0 0;border-top:2px solid var(--gold);border-left:0}
+}
+
+@media (max-width: 600px){
+  .homeFreeExperience__facts,.homeIdeas__books,.homeJourney__stages{grid-template-columns:minmax(0,1fr)}
+  .homeFreeExperience__progress{padding:1rem}
+  .homeJourney__model{font-size:.85rem}
+}
 @media (max-width: 720px) {
   .insightsPreview__grid{grid-template-columns:minmax(0,1fr)}
   .insightArticle{padding-top:2.5rem}

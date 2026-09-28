@@ -1,17 +1,11 @@
 import { homeContent } from "../../content/pages/home.mjs";
 import { siteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
-import { renderWhatHappensNext } from "../conversion-components.mjs";
 import { bookingCallHref } from "../whatsapp.mjs";
 import { renderInsightsPreview } from "../insights.mjs";
 
 function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
+  return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 }
 
 function copy(key, language, tag = "p", className = "") {
@@ -28,111 +22,65 @@ function bookingCta(language) {
   return `<a class="button--secondary" href="${bookingCallHref(siteData.contact.whatsapp)}" target="_blank" rel="noopener noreferrer" data-i18n="home.cta.whatsappQuestion">${escapeHtml(t("home.cta.whatsappQuestion", language))}</a>`;
 }
 
-function renderJourney(language) {
-  const items = homeContent.journeySteps.map((step, index) => (
-    `<li class="homeJourney__step"><span aria-hidden="true">0${index + 1}</span>${copy(`home.journey.${step}.title`, language, "h3")}${copy(`home.journey.${step}.body`, language)}</li>`
-  )).join("");
+function renderHero(language) {
+  return `<section class="homeHero" data-home-section="hero"><div class="homeHero__copy">${copy("home.hero.eyebrow", language, "p", "eyebrow")}${copy("route.home.heading", language, "h1")}${copy("route.home.purpose", language, "h2", "homeHero__subheading")}${copy("home.hero.change", language, "p", "homeHero__change")}<ul class="homeHero__proof" aria-label="${escapeHtml(t("home.hero.proofLabel", language))}" data-i18n-aria-label="home.hero.proofLabel"><li><strong>7</strong>${copy("home.hero.proofFree", language, "span")}</li><li><strong>24</strong>${copy("home.hero.proofWeeks", language, "span")}</li><li><strong>3</strong>${copy("home.hero.proofPerspectives", language, "span")}</li></ul><div class="homeActions">${cta(siteData.routes.startFree, "route.home.action", language, "primary", "routeShell__action")}${bookingCta(language)}${cta(siteData.routes.masterKeySystem, "home.cta.exploreJourney", language, "secondary")}</div>${copy("home.hero.microcopy", language, "p", "homeHero__microcopy")}</div><div class="homeHero__visual"><picture><source srcset="/images/tariq-happiness-harmony-720.webp" type="image/webp"><img src="${homeContent.heroImage}" width="1088" height="1445" fetchpriority="high" decoding="async" alt="${escapeHtml(t("home.hero.alt", language))}" data-i18n-alt="home.hero.alt"></picture><div class="homeHero__caption"><span data-i18n="home.hero.guideLabel">${escapeHtml(t("home.hero.guideLabel", language))}</span><strong>Tariq Saddique</strong><small data-i18n="home.hero.guideLine">${escapeHtml(t("home.hero.guideLine", language))}</small></div></div></section>`;
+}
 
-  return `<section class="homeSection homeJourney" data-home-section="journey"><div class="homeSection__inner">${copy("home.journey.eyebrow", language, "p", "eyebrow")}${copy("home.journey.title", language, "h2")}${copy("home.journey.intro", language, "p", "homeSection__intro")}<ol class="homeJourney__list">${items}</ol></div></section>`;
+function renderWelcome(language) {
+  return `<section class="homeVideo homeWelcome" data-home-section="welcome" aria-labelledby="home-video-title"><div class="homeVideo__copy">${copy("home.video.eyebrow", language, "p", "eyebrow")}${copy("home.video.title", language, "h2")}${copy("home.video.body", language, "p", "homeVideo__body")}</div><div class="homeVideo__portrait"><img src="${homeContent.welcomeImage}" width="358" height="418" loading="lazy" decoding="async" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"><span class="sr-only" data-i18n="home.video.placeholder">${escapeHtml(t("home.video.placeholder", language))}</span></div>${copy("home.video.fallback", language, "p", "homeVideo__fallback")}</section>`;
+}
+
+function renderFreeExperience(language) {
+  const days = homeContent.tasterDays.map((day) => `<li><span aria-hidden="true">${String(day).padStart(2, "0")}</span><span data-i18n="home.taster.day${day}">${escapeHtml(t(`home.taster.day${day}`, language))}</span></li>`).join("");
+  const facts = ["time", "workbook", "online", "ai", "noPurchase"].map((key) => `<li data-i18n="home.free.${key}">${escapeHtml(t(`home.free.${key}`, language))}</li>`).join("");
+  return `<section class="homeSection homeFreeExperience section--night" data-home-section="free-experience"><div class="homeSection__inner homeFreeExperience__layout"><div class="homeFreeExperience__copy">${copy("home.free.eyebrow", language, "p", "eyebrow")}${copy("home.free.title", language, "h2")}${copy("home.free.intro", language, "p", "homeSection__intro")}<ul class="homeFreeExperience__facts">${facts}</ul>${cta(siteData.routes.startFree, "home.free.cta", language, "primary")}</div><div class="homeFreeExperience__progress"><h3 data-i18n="home.taster.title">${escapeHtml(t("home.taster.title", language))}</h3><ol class="homeFreeExperience__days">${days}</ol><p class="homeFreeExperience__note" data-i18n="home.taster.promiseTitle">${escapeHtml(t("home.taster.promiseTitle", language))}</p></div></div></section>`;
 }
 
 function renderLineage(language) {
-  const people = homeContent.lineageIds.map((person) => (
-    `<li class="homeLineage__card">${copy(`home.lineage.${person}.name`, language, "h3")}${copy(`home.lineage.${person}.role`, language, "p", "homeLineage__role")}${copy(`home.lineage.${person}.body`, language)}</li>`
-  )).join("");
-
-  return `<section class="homeSection homeLineage" data-home-section="lineage"><div class="homeSection__inner">${copy("home.lineage.eyebrow", language, "p", "eyebrow")}${copy("home.lineage.title", language, "h2")}${copy("home.lineage.intro", language, "p", "homeSection__intro")}<div class="homeLineage__portrait"><img src="${homeContent.originsImage}" width="358" height="418" loading="eager" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"></div><ol class="homeLineage__grid">${people}</ol>${copy("home.lineage.disclaimer", language, "p", "homeLineage__disclaimer")}<p class="homeLineage__links"><a href="${siteData.routes.mksLineage}">Explore the MKS Lineage</a> · <a href="${siteData.routes.masterKeySystem}">Study the 24-week course</a> · <a href="${siteData.routes.resources}">Use the study resources</a></p></div></section>`;
+  const people = homeContent.lineageIds.map((person) => `<li class="homeLineage__card">${copy(`home.lineage.${person}.name`, language, "h3")}${copy(`home.lineage.${person}.role`, language, "p", "homeLineage__role")}${copy(`home.lineage.${person}.body`, language)}</li>`).join("");
+  const links = `<p class="homeLineage__links"><a href="${siteData.routes.mksLineage}">${language === "es" ? "Explora el linaje del MKS" : "Explore the MKS Lineage"}</a> · <a href="${siteData.routes.masterKeySystem}">${language === "es" ? "Estudia el recorrido de 24 semanas" : "Study the 24-week course"}</a> · <a href="${siteData.routes.resources}">${language === "es" ? "Usa los recursos de estudio" : "Use the study resources"}</a></p>`;
+  return `<section class="homeSection homeLineage" data-home-section="lineage"><div class="homeSection__inner">${copy("home.lineage.eyebrow", language, "p", "eyebrow")}${copy("home.lineage.title", language, "h2")}${copy("home.lineage.intro", language, "p", "homeSection__intro")}<ol class="homeLineage__grid">${people}</ol>${copy("home.lineage.disclaimer", language, "p", "homeLineage__disclaimer")}${links}</div></section>`;
 }
 
-function renderWhy(language) {
-  return `<section class="homeSection homeWhy" data-home-section="why"><div class="homeSection__inner homeWhy__inner">${copy("home.why.eyebrow", language, "p", "eyebrow")}${copy("home.why.title", language, "h2")}${copy("home.why.body", language, "p", "homeSection__intro")}${cta(siteData.routes.masterKeySystem, "home.why.cta", language, "text")}</div></section>`;
+function renderIdeas(language) {
+  const books = homeContent.books.slice(0, 4).map((book) => `<li><h3 data-i18n="${book.titleKey}">${escapeHtml(t(book.titleKey, language))}</h3><p data-i18n="${book.authorKey}">${escapeHtml(t(book.authorKey, language))}</p></li>`).join("");
+  return `<section class="homeSection homeIdeas" data-home-section="ideas"><div class="homeSection__inner">${copy("home.ideas.eyebrow", language, "p", "eyebrow")}${copy("home.ideas.title", language, "h2")}${copy("home.ideas.body", language, "p", "homeSection__intro")}<ul class="homeIdeas__books">${books}</ul>${copy("home.ideas.disclaimer", language, "p", "homeIdeas__disclaimer")}<a class="button--text" href="${siteData.routes.resources}" data-i18n="home.ideas.cta">${escapeHtml(t("home.ideas.cta", language))}</a></div></section>`;
 }
 
-function renderTaster(language) {
-  const days = homeContent.tasterDays.map((day) => (
-    `<li><span>${String(day).padStart(2, "0")}</span><span data-i18n="home.taster.day${day}">${escapeHtml(t(`home.taster.day${day}`, language))}</span></li>`
-  )).join("");
-
-  return `<section class="homeSection homeTaster section--night" data-home-section="start-free"><div class="homeSection__inner homeTaster__layout"><div class="homeTaster__intro">${copy("home.taster.eyebrow", language, "p", "eyebrow")}${copy("home.taster.title", language, "h2")}${copy("home.taster.intro", language, "p", "homeSection__intro")}<div class="homeTaster__promise"><strong data-i18n="home.taster.promiseTitle">${escapeHtml(t("home.taster.promiseTitle", language))}</strong><span data-i18n="home.taster.promiseBody">${escapeHtml(t("home.taster.promiseBody", language))}</span></div>${cta(siteData.routes.startFree, "home.taster.cta", language)}</div><ol class="homeTaster__days">${days}</ol></div></section>`;
+function renderJourney(language) {
+  const stages = homeContent.educationPhases.map((phase) => `<li><strong><span data-i18n="home.masterKey.weeks">${escapeHtml(t("home.masterKey.weeks", language))}</span> ${phase.weeks}</strong>${copy(`home.masterKey.phase.${phase.id}`, language, "h3")}${copy(`coaching.stage.${phase.outcome}.outcome`, language, "p")}</li>`).join("");
+  return `<section class="homeSection homeJourney" data-home-section="journey"><div class="homeSection__inner">${copy("home.journey.newEyebrow", language, "p", "eyebrow")}${copy("home.journey.newTitle", language, "h2")}${copy("home.journey.newIntro", language, "p", "homeSection__intro")}<p class="homeJourney__model" data-i18n="home.journey.model">${escapeHtml(t("home.journey.model", language))}</p><ol class="homeJourney__stages">${stages}</ol>${cta(siteData.routes.masterKeySystem, "home.masterKey.cta", language, "secondary")}</div></section>`;
 }
 
-function renderOriginsBase(language) {
-  const statementTitle = escapeHtml(t("home.origins.statementTitle", language));
-  const beyondBody = ["body1", "body2", "body3"].map((part) => copy(`home.origins.beyond.${part}`, language)).join("");
-  return `<section class="homeOrigins" data-home-section="origins"><div class="homeOrigins__prelude">${copy("home.origins.eyebrow", language, "p", "eyebrow")}${copy("home.origins.preludeTitle", language, "h2")}${copy("home.origins.preludeBody", language, "p")}</div><div class="homeOrigins__beyond"><p class="eyebrow" data-i18n="home.origins.beyond.eyebrow">${escapeHtml(t("home.origins.beyond.eyebrow", language))}</p><h2 data-i18n="home.origins.beyond.title">${escapeHtml(t("home.origins.beyond.title", language))}</h2><div class="homeOrigins__beyondBody">${beyondBody}</div>${copy("home.origins.beyond.grounding", language, "p", "homeOrigins__grounding")}</div>${cta(siteData.routes.startFree, "home.origins.beyond.cta", language)}<div class="homeOrigins__statement"><div class="homeOrigins__ornament" aria-hidden="true"><span></span><svg class="homeOrigins__key" viewBox="0 0 64 32" role="presentation"><circle cx="17" cy="16" r="8"></circle><path d="M25 16h28m-8 0v7m-8-7v5"></path></svg><span></span></div><h2 class="homeOrigins__statementTitle" aria-label="${statementTitle}" data-i18n-aria-label="home.origins.statementTitle"><span class="homeOrigins__statementLead" data-i18n="home.origins.statementLead">${escapeHtml(t("home.origins.statementLead", language))}</span><span class="homeOrigins__statementEmphasis" data-i18n="home.origins.statementEmphasis">${escapeHtml(t("home.origins.statementEmphasis", language))}</span></h2>${copy("home.origins.statementBody", language, "p", "homeOrigins__statementBody")}<span class="homeOrigins__statementDivider" aria-hidden="true"></span>${copy("home.origins.disclaimer", language, "p", "homeOrigins__disclaimer")}</div></section>`;
+function renderReceive(language) {
+  const items = [1, 2, 3, 4, 5, 6].map((index) => `<li><strong data-i18n="home.receive.item${index}Title">${escapeHtml(t(`home.receive.item${index}Title`, language))}</strong><span data-i18n="home.receive.item${index}Body">${escapeHtml(t(`home.receive.item${index}Body`, language))}</span></li>`).join("");
+  return `<section class="homeSection homeReceive" data-home-section="receive"><div class="homeSection__inner">${copy("home.receive.eyebrow", language, "p", "eyebrow")}${copy("home.receive.title", language, "h2")}${copy("home.receive.intro", language, "p", "homeSection__intro")}<ul class="homeReceive__grid">${items}</ul></div></section>`;
 }
 
-function renderOrigins(language) {
-  const html = renderOriginsBase(language);
-  return html.replace(
-    '<div class="homeOrigins__beyond">',
-    '<div class="homeOrigins__beyond"><img class="secret-mark" src="/images/secret-mark-transparent.png" width="145" height="145" alt="The Secret">',
-  );
-}
-
-function renderWelcomeVideo(language) {
-  return `<section class="homeVideo" data-home-section="welcome-video" aria-labelledby="home-video-title"><div class="homeVideo__copy">${copy("home.video.eyebrow", language, "p", "eyebrow")}${copy("home.video.title", language, "h2")}${copy("home.video.body", language, "p", "homeVideo__body")}</div><div class="homeVideo__portrait"><img src="${homeContent.welcomeImage}" width="358" height="418" loading="lazy" decoding="async" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"><span class="sr-only" data-i18n="home.video.placeholder">${escapeHtml(t("home.video.placeholder", language))}</span></div>${copy("home.video.fallback", language, "p", "homeVideo__fallback")}</section>`;
-}
-
-function renderBooks(language) {
-  const books = homeContent.books.map((book, index) => `<li class="homeBooks__card${book.titleKey === "home.books.book2.title" ? " homeBooks__card--secret" : ""}"><span class="homeBooks__number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><h3 data-i18n="${book.titleKey}">${escapeHtml(t(book.titleKey, language))}</h3><p class="homeBooks__author" data-i18n="${book.authorKey}">${escapeHtml(t(book.authorKey, language))}</p>${book.titleKey === "home.books.book2.title" ? '<img class="homeBooks__secretMark" src="/images/secret-mark-transparent.png" width="52" height="52" alt="The Secret logo">' : ""}</li>`).join("");
-  return `<section class="homeSection homeBooks" data-home-section="books"><div class="homeSection__inner homeBooks__inner">${copy("home.books.eyebrow", language, "p", "eyebrow")}${copy("home.books.title", language, "h2")}${copy("home.books.intro", language, "p", "homeSection__intro")}<ol class="homeBooks__grid">${books}</ol>${copy("home.books.disclaimer", language, "p", "homeBooks__disclaimer")}</div></section>`;
-}
-
-function renderCoaching(language) {
-  const stages = [["1–4", "home.coaching.foundation", "panel-foundation"], ["5–11", "home.coaching.visualisation", "panel-visualisation"], ["12–18", "home.coaching.concentration", "panel-concentration"], ["19–24", "home.coaching.mastery", "panel-mastery"]];
-  const stageCards = stages.map(([weeks, key, panel], index) => `<a class="homeCoaching__stageCard" href="${siteData.routes.coaching}#${panel}"><span aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><strong><span data-i18n="home.coaching.weeks">${escapeHtml(t("home.coaching.weeks", language))}</span> ${weeks}</strong><p data-i18n="${key}">${escapeHtml(t(key, language))}</p></a>`).join("");
-  return `<section class="homeSection homeCoaching" data-home-section="coaching"><div class="homeSection__inner homeCoaching__layout"><div class="homeCoaching__visual" aria-label="${escapeHtml(t("home.coaching.alt", language))}" data-i18n-aria-label="home.coaching.alt"><div class="homeCoaching__visualInner"><div class="homeCoaching__keyMark" aria-hidden="true"><span></span></div><p class="homeCoaching__visualEyebrow">THE 24-WEEK JOURNEY</p><h3>THE MASTER KEY SYSTEM</h3><div class="homeCoaching__stageGrid">${stageCards}</div><div class="homeCoaching__visualFooter"><span aria-hidden="true"></span><strong data-i18n="home.coaching.complete">${escapeHtml(t("home.coaching.complete", language))}</strong><span aria-hidden="true"></span></div></div></div><div class="homeCoaching__teaser">${copy("home.coaching.eyebrow", language, "p", "eyebrow")}${copy("home.coaching.title", language, "h2")}${copy("home.coaching.intro", language, "p", "homeSection__intro")}<ul class="homeCoaching__benefits"><li data-i18n="home.coaching.benefit1">${escapeHtml(t("home.coaching.benefit1", language))}</li><li data-i18n="home.coaching.benefit2">${escapeHtml(t("home.coaching.benefit2", language))}</li><li data-i18n="home.coaching.benefit3">${escapeHtml(t("home.coaching.benefit3", language))}</li></ul>${cta(siteData.routes.coaching, "home.coaching.cta", language, "secondary")}</div></div></section>`;
-}
-
-function renderPremiumOffer(language) {
-  return `<section class="homeSection homePremiumOffer" data-home-section="premium-offer"><div class="homeSection__inner homePremiumOffer__inner"><div class="homePremiumOffer__copy">${copy("home.premium.eyebrow", language, "p", "eyebrow")}${copy("home.premium.title", language, "h2")}${copy("home.premium.body", language, "p", "homeSection__intro")}</div><div class="homePremiumOffer__card"><p class="homePremiumOffer__price" aria-label="£997">£997</p><p class="homePremiumOffer__label" data-i18n="home.premium.priceLabel">${escapeHtml(t("home.premium.priceLabel", language))}</p><ul>${[1, 2, 3, 4].map((index) => `<li data-i18n="home.premium.receive${index}">${escapeHtml(t(`home.premium.receive${index}`, language))}</li>`).join("")}</ul>${cta(siteData.routes.coaching, "home.premium.cta", language, "primary")}</div></div></section>`;
-}
-
-function renderStudentsReceive(language) {
-  return `<section class="homeSection homeReceive" data-home-section="receive"><div class="homeSection__inner">${copy("home.receive.eyebrow", language, "p", "eyebrow")}${copy("home.receive.title", language, "h2")}${copy("home.receive.intro", language, "p", "homeSection__intro")}<ul class="homeReceive__grid">${[1, 2, 3, 4].map((index) => `<li><strong data-i18n="home.receive.item${index}Title">${escapeHtml(t(`home.receive.item${index}Title`, language))}</strong><span data-i18n="home.receive.item${index}Body">${escapeHtml(t(`home.receive.item${index}Body`, language))}</span></li>`).join("")}</ul></div></section>`;
-}
-
-function renderIdealParticipant(language) {
-  return `<section class="homeSection homeIdeal" data-home-section="ideal"><div class="homeSection__inner homeIdeal__inner">${copy("home.ideal.eyebrow", language, "p", "eyebrow")}${copy("home.ideal.title", language, "h2")}${copy("home.ideal.body", language, "p", "homeSection__intro")}<ul>${[1, 2, 3].map((index) => `<li data-i18n="home.ideal.item${index}">${escapeHtml(t(`home.ideal.item${index}`, language))}</li>`).join("")}</ul></div></section>`;
+function renderWhyTariq(language) {
+  return `<section class="homeSection homeWhyTariq" data-home-section="why-tariq"><div class="homeSection__inner homeWhyTariq__inner"><div>${copy("home.whyTariq.eyebrow", language, "p", "eyebrow")}${copy("home.whyTariq.title", language, "h2")}</div><div>${copy("home.whyTariq.body", language, "p", "homeSection__intro")}<a class="button--text" href="${siteData.routes.aboutTariq}" data-i18n="home.whyTariq.cta">${escapeHtml(t("home.whyTariq.cta", language))}</a></div></div></section>`;
 }
 
 function renderTestimonials() {
-  const cards = homeContent.testimonials.map((testimonial) => (
-    `<figure class="homeTestimonials__card"><blockquote>“${escapeHtml(testimonial.quote)}”</blockquote><figcaption><strong>${escapeHtml(testimonial.name)}</strong><span>${escapeHtml(testimonial.location)}</span></figcaption></figure>`
-  )).join("");
-
+  const cards = homeContent.testimonials.map((testimonial) => `<figure class="homeTestimonials__card"><blockquote>“${escapeHtml(testimonial.quote)}”</blockquote><figcaption><strong>${escapeHtml(testimonial.name)}</strong><span>${escapeHtml(testimonial.location)}</span></figcaption></figure>`).join("");
   return `<section class="homeSection homeTestimonials" data-home-section="testimonials"><div class="homeSection__inner"><p class="eyebrow">GENUINE STUDENT EXPERIENCES</p><h2>What students say about the journey</h2><div class="homeTestimonials__grid">${cards}</div></div></section>`;
 }
 
-function renderOutcome(language) {
-  return `<section class="homeSection homeOutcome" data-home-section="outcome"><div class="homeSection__inner homeOutcome__inner"><p class="eyebrow">THE JOURNEY IN PRACTICE</p><h2>Become the conscious creator of your life.</h2><p class="homeSection__intro">This is not simply a 24-week course to read. It is a six-month journey of study, reflection and daily practice that can help you become calmer, clearer and more deliberate in the way you think, choose and act.</p><p>As you work through the system, the learning can compound: quiet the noise of distraction, build concentration and align your thoughts, feelings, vision and actions with the life you want to build.</p><p class="homeOutcome__quote">“The reading gives you the knowledge. The daily exercise creates the transformation.”</p><p class="homeOutcome__note">Individual outcomes depend on your circumstances, participation and consistent practice.</p></div></section>`;
+function renderOffers(language) {
+  const card = (className, titleKey, bodyKey, ctaKey, href, price = "") => `<article class="homeOffers__card ${className}"><h3 data-i18n="${titleKey}">${escapeHtml(t(titleKey, language))}</h3>${price ? `<strong class="homeOffers__price">${price}</strong>` : ""}<p data-i18n="${bodyKey}">${escapeHtml(t(bodyKey, language))}</p><a class="button--${className === "homeOffers__card--free" ? "primary" : "secondary"}" href="${href}" data-i18n="${ctaKey}">${escapeHtml(t(ctaKey, language))}</a></article>`;
+  return `<section class="homeSection homeOffers" data-home-section="offers"><div class="homeSection__inner">${copy("home.offers.eyebrow", language, "p", "eyebrow")}${copy("home.offers.title", language, "h2")}${copy("home.offers.intro", language, "p", "homeSection__intro")}<div class="homeOffers__grid">${card("homeOffers__card--free", "home.offers.freeTitle", "home.offers.freeBody", "home.offers.freeCta", siteData.routes.startFree)}${card("homeOffers__card--foundation", "home.offers.foundationTitle", "home.offers.foundationBody", "home.offers.foundationCta", siteData.routes.foundation, "£97")}${card("homeOffers__card--complete", "home.offers.completeTitle", "home.offers.completeBody", "home.offers.completeCta", siteData.routes.coaching, "£997")}</div>${copy("home.offers.more", language, "p", "homeOffers__more")}</div></section>`;
 }
 
-function renderEducationPhases(language) {
-  return homeContent.educationPhases.map((phase) => (
-    `<li><strong><span data-i18n="home.masterKey.weeks">${escapeHtml(t("home.masterKey.weeks", language))}</span> ${phase.weeks}</strong>${copy(`home.masterKey.phase.${phase.id}`, language, "span", "homeMasterKey__phaseName")}${copy(`coaching.stage.${phase.outcome}.outcome`, language, "p", "homeMasterKey__phaseDescription")}</li>`
-  )).join("");
-}
-
-function renderMentors(language) {
-  const mentors = homeContent.mentorIds.map((mentor) => (
-    `<li class="card">${copy(`home.mentors.${mentor}.name`, language, "h3")}${copy(`home.mentors.${mentor}.role`, language)}</li>`
-  )).join("");
-
-  return `<section class="homeSection homeMentors" data-home-section="mentors"><div class="homeSection__inner">${copy("home.mentors.eyebrow", language, "p", "eyebrow")}${copy("home.mentors.title", language, "h2")}${copy("home.mentors.intro", language, "p", "homeSection__intro")}<ul class="homeMentors__grid">${mentors}</ul>${copy("home.mentors.disclosure", language, "p", "homeMentors__disclosure")}${cta(siteData.routes.aiMentors, "home.mentors.cta", language, "text")}</div></section>`;
+function renderFinalCta(language) {
+  return `<section class="homeSection homeFinalCta section--night" data-home-section="final-cta"><div class="homeSection__inner homeFinalCta__inner">${copy("home.final.eyebrow", language, "p", "eyebrow")}${copy("home.final.title", language, "h2")}${copy("home.final.body", language, "p", "homeSection__intro")}<div class="homeActions">${cta(siteData.routes.startFree, "home.final.start", language)}${bookingCta(language)}${cta(siteData.routes.masterKeySystem, "home.final.method", language, "secondary")}</div></div></section>`;
 }
 
 function renderHomeBody({ language = "en" } = {}) {
-  const heroImage = homeContent.heroImage;
-  return `<main class="home"><section class="homeHero" data-home-section="hero"><div class="homeHero__copy">${copy("home.hero.eyebrow", language, "p", "eyebrow")}${copy("route.home.heading", language, "h1")}${copy("route.home.purpose", language, "h2", "homeHero__subheading")}${copy("home.hero.change", language, "p", "homeHero__change")}<ul class="homeHero__proof" aria-label="${escapeHtml(t("home.hero.proofLabel", language))}" data-i18n-aria-label="home.hero.proofLabel"><li><strong>7</strong>${copy("home.hero.proofFree", language, "span")}</li><li><strong>24</strong>${copy("home.hero.proofWeeks", language, "span")}</li><li><strong>3</strong>${copy("home.hero.proofPerspectives", language, "span")}</li></ul><div class="homeActions">${cta(siteData.routes.startFree, "route.home.action", language, "primary", "routeShell__action")}${bookingCta(language)}${cta(siteData.routes.masterKeySystem, "home.cta.exploreJourney", language, "secondary")}</div>${copy("home.hero.microcopy", language, "p", "homeHero__microcopy")}</div><div class="homeHero__visual"><picture><source srcset="/images/tariq-happiness-harmony-720.webp" type="image/webp"><img src="${heroImage}" width="1088" height="1445" fetchpriority="high" decoding="async" alt="${escapeHtml(t("home.hero.alt", language))}" data-i18n-alt="home.hero.alt"></picture><div class="homeHero__caption"><span data-i18n="home.hero.guideLabel">${escapeHtml(t("home.hero.guideLabel", language))}</span><strong>Tariq Saddique</strong><small data-i18n="home.hero.guideLine">${escapeHtml(t("home.hero.guideLine", language))}</small></div></div></section>${renderLineage(language)}${renderOrigins(language)}${renderBooks(language)}${renderTaster(language)}<section class="homeSection homeMasterKey" data-home-section="master-key"><div class="homeSection__inner homeMasterKey__inner">${copy("home.masterKey.eyebrow", language, "p", "eyebrow")}${copy("home.masterKey.title", language, "h2")}${copy("home.masterKey.body", language, "p", "homeSection__intro")}<ol class="homeMasterKey__phases">${renderEducationPhases(language)}</ol>${copy("home.masterKey.progressive", language, "p", "homeMasterKey__progressive")}${cta(siteData.routes.masterKeySystem, "home.masterKey.cta", language, "text")}</div></section>${renderPremiumOffer(language)}${renderStudentsReceive(language)}${renderIdealParticipant(language)}${renderOutcome(language)}${renderTestimonials()}${renderCoaching(language)}${renderInsightsPreview({ language, data: siteData })}<section class="homeSection homeNext section--night" data-home-section="next-step"><div class="homeSection__inner homeNext__inner"><div>${copy("home.next.eyebrow", language, "p", "eyebrow")}${copy("home.next.title", language, "h2")}${copy("home.next.body", language, "p", "homeSection__intro")}</div><div class="homeNext__actionPanel"><strong data-i18n="home.next.actionTitle">${escapeHtml(t("home.next.actionTitle", language))}</strong><span data-i18n="home.next.actionBody">${escapeHtml(t("home.next.actionBody", language))}</span><div class="homeActions">${cta(siteData.routes.startFree, "home.cta.startFree", language)}${bookingCta(language)}${cta(siteData.routes.contact, "home.cta.book", language, "secondary")}</div></div></div></section></main>`;
+  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderFreeExperience(language)}${renderLineage(language)}${renderIdeas(language)}${renderJourney(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials()}${renderOffers(language)}${renderInsightsPreview({ language, data: siteData })}${renderFinalCta(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {
-  return renderHomeBody({ language }).replace(
-    '</section><section class="homeSection homeLineage"',
-    `</section>${renderWhatHappensNext({ language, data: siteData, startHref: siteData.routes.startFree })}${renderWelcomeVideo(language)}<section class="homeSection homeLineage"`,
-  );
+  return renderHomeBody({ language });
 }
 
 export function homePage(data = siteData, language = "en") {

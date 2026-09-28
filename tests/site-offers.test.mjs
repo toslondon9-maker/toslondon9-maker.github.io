@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
@@ -20,16 +19,16 @@ test("deployed homepage uses the approved static Master Key experience", () => {
   assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__|data-rsc|_rsc=/);
 });
 
-test("deployed homepage preserves the approved lineage sequence and assets", () => {
+test("deployed homepage preserves the approved compact lineage section", () => {
   const lineage = home.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";
   const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]);
   assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
-  assert.equal((lineage.match(/<img[^>]+haanel-tariq-portraits\.jpeg/g) ?? []).length, 1);
   assert.match(lineage, /Modern Study &amp; Application/);
   assert.match(lineage, /Your Guide &amp; Coach/);
   assert.match(lineage, /not affiliated with or endorsed by/i);
-  assert.ok(existsSync(path.join(root, "images", "haanel-tariq-portraits.jpeg")));
-  assert.ok(existsSync(path.join(root, "images", "tariq-happiness-harmony.png")));
+  assert.match(lineage, new RegExp(`href="${escapeRegExp(siteData.routes.mksLineage)}"`));
+  assert.match(lineage, new RegExp(`href="${escapeRegExp(siteData.routes.resources)}"`));
+  assert.match(home, new RegExp(`href="${escapeRegExp(siteData.routes.aboutTariq)}"`));
 });
 
 test("canonical coaching page owns every locked commercial fact", () => {
@@ -39,7 +38,10 @@ test("canonical coaching page owns every locked commercial fact", () => {
     "Save £191", "£1,788", "Save £791", "44% off full RRP",
   ]) assert.ok(coaching.includes(value), value);
   assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
-  assert.match(home, /conversion\.next\.step2Body[^>]*>If the journey feels right for you, continue with the four-week Foundation stage for £97\./);
+  const offers = home.match(/<section[^>]+data-home-section="offers"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.match(offers, /Free 7-Day Experience/);
+  assert.match(offers, new RegExp(`Foundation[\\s\\S]*£97[\\s\\S]*href="${escapeRegExp(siteData.routes.foundation)}"`));
+  assert.match(offers, new RegExp(`Complete 24-Week Journey[\\s\\S]*£997[\\s\\S]*href="${escapeRegExp(siteData.routes.coaching)}"`));
   assert.doesNotMatch(home, /£197|£397|£497|£1,188|£1,788/);
   assert.doesNotMatch(home, /class="foundationNextStep"|href="https:\/\/www\.paypal\.com\/ncp\/payment\//);
 });
