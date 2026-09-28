@@ -111,6 +111,15 @@ test("homepage changed content remains bilingual and route-safe", async () => {
   assert.match(css, /\.home/);
 });
 
+test("homepage Lineage cards stack safely on mobile", async () => {
+  const css = await readFile("assets/platform.css", "utf8");
+  const gridIndex = css.lastIndexOf(".homeLineage__grid {\n    grid-template-columns: minmax(0, 1fr);");
+  const mobileStart = css.lastIndexOf("@media (max-width: 480px)", gridIndex);
+  const mobileBlock = css.slice(mobileStart, gridIndex + 320);
+  assert.match(mobileBlock, /\.homeLineage__grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);[\s\S]*?\}/);
+  assert.match(mobileBlock, /\.homeLineage__card\s*\{[\s\S]*?min-width:\s*0;[\s\S]*?width:\s*100%;[\s\S]*?\}/);
+});
+
 test("homepage preserves SEO metadata", () => {
   assert.equal(homePage(siteData, "en").title, "Unleash Your Power | Master Key System Coaching with Tariq");
   assert.equal(t("meta.home.title", "en"), "Unleash Your Power | Master Key System Coaching with Tariq");

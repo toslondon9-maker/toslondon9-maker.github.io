@@ -2658,11 +2658,19 @@ main > article {
   }
 
   .homeJourney__list,
-  .homeLineage__grid,
   .homeTestimonials__grid,
   .homeMasterKey__phases,
   .homeTaster__days {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .homeLineage__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .homeLineage__card {
+    min-width: 0;
+    width: 100%;
   }
 
   .homeTestimonials__grid {
@@ -5894,7 +5902,6 @@ body {
 .homeFreeExperience__days li{display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:.75rem;align-items:center;padding:.65rem 0;border-bottom:1px solid color-mix(in srgb,var(--gold) 45%,transparent);color:var(--cream)}
 .homeFreeExperience__days li>span:first-child{color:var(--gold-bright);font-weight:700;letter-spacing:.08em}
 .homeFreeExperience__note{margin:1.25rem 0 0;color:color-mix(in srgb,var(--cream) 78%,transparent);font-size:.9rem}
-.homeLineage__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .homeIdeas{background:var(--paper)}
 .homeIdeas__books{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin:2rem 0;padding:0;list-style:none}
 .homeIdeas__books li{padding:1.25rem;border-top:2px solid var(--gold);background:var(--cream)}
