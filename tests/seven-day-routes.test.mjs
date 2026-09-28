@@ -14,8 +14,8 @@ const expectedLessons = [
   ["day-3", 3, "recognise-what-keeps-repeating", "/start-free/day-3-recognise-what-keeps-repeating/", "Recognise What Keeps Repeating", "sevenDay.lessons.day3"],
   ["day-4", 4, "give-your-mind-a-direction", "/start-free/day-4-give-your-mind-a-direction/", "Give Your Mind a Direction", "sevenDay.lessons.day4"],
   ["day-5", 5, "become-someone-you-can-rely-on", "/start-free/day-5-become-someone-you-can-rely-on/", "Become Someone You Can Rely On", "sevenDay.lessons.day5"],
-  ["day-6", 6, "change-from-the-inside-out", "/start-free/day-6-change-from-the-inside-out/", "Change From the Inside Out", "sevenDay.lessons.day6"],
-  ["day-7", 7, "make-it-part-of-how-you-live", "/start-free/day-7-make-it-part-of-how-you-live/", "Make It Part of How You Live", "sevenDay.lessons.day7"],
+  ["day-6", 6, "change-from-the-inside-out", "/start-free/day-6-change-from-the-inside-out/", "Strengthen the New Pattern", "sevenDay.lessons.day6"],
+  ["day-7", 7, "make-it-part-of-how-you-live", "/start-free/day-7-make-it-part-of-how-you-live/", "Choose What Happens Next", "sevenDay.lessons.day7"],
 ];
 
 test("the seven-day experience fixes the ordered lesson contract", () => {

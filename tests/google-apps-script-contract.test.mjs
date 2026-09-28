@@ -234,8 +234,8 @@ test("sequence emails use every canonical Day 2 through Day 7 route and subject"
     [3, "Recognise What Keeps Repeating", "/start-free/day-3-recognise-what-keeps-repeating/"],
     [4, "Give Your Mind a Direction", "/start-free/day-4-give-your-mind-a-direction/"],
     [5, "Become Someone You Can Rely On", "/start-free/day-5-become-someone-you-can-rely-on/"],
-    [6, "Change From the Inside Out", "/start-free/day-6-change-from-the-inside-out/"],
-    [7, "Make It Part of How You Live", "/start-free/day-7-make-it-part-of-how-you-live/"],
+    [6, "Strengthen the New Pattern", "/start-free/day-6-change-from-the-inside-out/"],
+    [7, "Choose What Happens Next", "/start-free/day-7-make-it-part-of-how-you-live/"],
   ];
   expected.forEach(([day, title, route], index) => {
     app.runSequence(new Date(`2026-09-${String(4 + day).padStart(2, "0")}T09:00:00+02:00`));

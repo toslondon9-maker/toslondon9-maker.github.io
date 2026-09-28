@@ -10,8 +10,8 @@ const canonicalTitles = {
     "Recognise What Keeps Repeating",
     "Give Your Mind a Direction",
     "Become Someone You Can Rely On",
-    "Change From the Inside Out",
-    "Make It Part of How You Live",
+    "Strengthen the New Pattern",
+    "Choose What Happens Next",
   ],
   es: [
     "Observa qué dirige tu vida",
@@ -19,8 +19,8 @@ const canonicalTitles = {
     "Reconoce lo que se repite",
     "Dale una dirección a tu mente",
     "Conviértete en alguien en quien puedas confiar",
-    "Cambia de dentro hacia fuera",
-    "Haz que forme parte de tu vida",
+    "Refuerza el nuevo patrón",
+    "Elige qué viene después",
   ],
 };
 

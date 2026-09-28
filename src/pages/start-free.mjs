@@ -43,7 +43,7 @@ function renderConversionValue(language) {
 
 function renderPreview(language) {
   const times = ["Approximately 10–15 minutes", "Approximately 10 minutes", "Approximately 10–15 minutes", "Approximately 10–15 minutes", "Approximately 10 minutes", "Approximately 10 minutes", "Approximately 15 minutes"];
-  const titles = ["See What’s Running Your Life", "Take Back Your Attention", "Recognise What Keeps Repeating", "Give Your Mind a Direction", "Become Someone You Can Rely On", "Change From the Inside Out", "Make It Part of How You Live"];
+  const titles = ["See What’s Running Your Life", "Take Back Your Attention", "Recognise What Keeps Repeating", "Give Your Mind a Direction", "Become Someone You Can Rely On", "Strengthen the New Pattern", "Choose What Happens Next"];
   const cards = titles.map((title, index) => `<li class="sevenDayPreview__day"><strong>Day ${index + 1} — ${title}</strong><span data-i18n="sevenDay.preview.day${index + 1}">${escapeHtml(t(`sevenDay.preview.day${index + 1}`, language))}</span><small>${times[index]}</small></li>`).join("");
   return `<section class="sevenDayPreview" aria-labelledby="seven-day-preview-title"><div class="sevenDayDashboard__inner"><h2 id="seven-day-preview-title" data-i18n="sevenDay.preview.heading">${escapeHtml(t("sevenDay.preview.heading", language))}</h2><ol>${cards}</ol><p data-i18n="sevenDay.preview.total">${escapeHtml(t("sevenDay.preview.total", language))}</p></div></section>`;
 }
