@@ -6371,3 +6371,4 @@ body {
 @media (max-width:640px){.foundationPage__actions>*{width:100%;text-align:center}.foundationPage__price{align-items:flex-start;flex-direction:column}}
 @media(max-width:900px){.affiliateReward__benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.affiliateReward__examples,.affiliateReward__summary ul{grid-template-columns:1fr}}
 @media(max-width:600px){.affiliateReward__benefits{grid-template-columns:1fr}.affiliateReward__examples article{padding:1.1rem}.affiliateReward__tagline{letter-spacing:.02em}}
+.affiliateReward__examples article>p:not(.eyebrow):not(.affiliateReward__secondary):not(.affiliateReward__amount){color:#26384a;font-size:1rem;line-height:1.65}.affiliateReward__salesExample small{color:#26384a;font-size:.92rem;line-height:1.55}
