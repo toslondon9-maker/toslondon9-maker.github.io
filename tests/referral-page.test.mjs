@@ -22,6 +22,33 @@ test("referral page contains the approved share journey sections", () => {
   assert.deepEqual(page.scripts, ["/assets/referral.mjs"]);
 });
 
+test("referral page explains the approved 5% full-course reward", () => {
+  const page = referralPage(siteData);
+  const reward = page.body.match(/<section[^>]+class="referralSection affiliateReward"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.match(reward, /Earn 5% for every complete-course referral/);
+  assert.match(reward, /Full programme[\s\S]*£997/);
+  assert.match(reward, /Affiliate reward[\s\S]*5%/);
+  assert.match(reward, /You earn[\s\S]*£49\.85/);
+  assert.match(reward, /eligible, completed, non-refunded purchases attributed to your tracked affiliate link/i);
+  assert.doesNotMatch(page.body, /Affiliate rewards and commission terms will be confirmed upon approval/);
+});
+
+test("referral page includes the concise affiliate terms summary", () => {
+  const page = referralPage(siteData);
+  for (const text of [
+    "5% of eligible completed full-course sales",
+    "successfully attributed to the affiliate’s tracked link or code",
+    "Refunded, cancelled, reversed or fraudulent transactions are not commissionable",
+    "Self-referrals are not eligible unless explicitly approved",
+    "must not be altered to misrepresent attribution",
+    "must not make misleading claims",
+    "applicable disclosure rules",
+    "Payment timing and method will be confirmed",
+    "may review or reject affiliate applications",
+    "accrued eligible commissions should not be retrospectively reduced",
+  ]) assert.match(page.body, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"), text);
+});
+
 test("referral runtime provides stable personal and affiliate anchors with a bridge", async () => {
   const source = await import("../assets/referral.mjs");
   const script = await (await import("node:fs/promises")).readFile(new URL("../assets/referral.mjs", import.meta.url), "utf8");
