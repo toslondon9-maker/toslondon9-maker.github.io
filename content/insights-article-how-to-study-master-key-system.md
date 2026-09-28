@@ -152,10 +152,10 @@ A useful Master Key System routine does not need to be complicated:
 
 The objective is not merely to know what Haanel wrote. It is to develop greater awareness of your inner world and become more deliberate about the thoughts, attitudes and actions you carry into the outer world.
 
-## Begin with the free 7-Day Experience
+## Begin 7 Days to Change the Way You Use Your Mind
 
-If you would like a guided introduction before beginning the full 24-week journey, start with my free 7-Day Experience.
+If you would like a guided introduction before beginning the full 24-week journey, start with 7 Days to Change the Way You Use Your Mind.
 
 Each day takes approximately 10 to 15 minutes and helps you begin developing stillness, awareness, focus and purposeful thought. There is no payment card required.
 
-[Start your free 7-Day Experience](/start-free/)
+[Start your 7 days](/start-free/)

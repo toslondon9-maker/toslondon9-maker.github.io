@@ -7,7 +7,7 @@ import { renderCoaching } from "../src/pages/coaching.mjs";
 import { mountTabs } from "../assets/tabs.mjs";
 
 test("coaching rate card exposes all seven offers in both languages", () => {
-  const expected = ["Free 7-Day Journey", "Foundation", "Complete 24-Week Coaching", "Mastery Circle", "Private Mentoring", "Alumni Practice Membership", "Corporate Programmes"];
+  const expected = ["7 Days to Change the Way You Use Your Mind", "Foundation", "Complete 24-Week Coaching", "Mastery Circle", "Private Mentoring", "Alumni Practice Membership", "Corporate Programmes"];
   for (const language of ["en", "es"]) {
     const html = renderCoaching({ language, siteData });
     assert.equal((html.match(/data-coaching-section="rate-card"/g) ?? []).length, 1);

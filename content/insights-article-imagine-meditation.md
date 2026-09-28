@@ -362,9 +362,9 @@ At the midpoint of 45 minutes per day, it represents approximately 137 hours.
 
 This is a substantial commitment to understanding your thoughts, developing concentration, clarifying your purpose and applying constructive principles in everyday life.
 
-If you are ready to combine deep meditation with a structured personal-development journey, start with the free seven-day experience or book a free 15-minute WhatsApp call with Tariq to discuss your goals.
+If you are ready to combine deep meditation with a structured personal-development journey, start 7 Days to Change the Way You Use Your Mind or book a free 15-minute WhatsApp call with Tariq to discuss your goals.
 
-**[START THE FREE SEVEN-DAY EXPERIENCE]**
+**[START YOUR 7 DAYS]**
 
 **[BOOK A FREE 15-MINUTE CALL]**
 

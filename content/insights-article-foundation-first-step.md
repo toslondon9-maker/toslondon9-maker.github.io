@@ -312,9 +312,9 @@ Over four weeks, you will dedicate approximately 14 hours to meditation and quie
 
 If you are ready to understand your mind, develop greater self-control and begin studying the Master Key System in a structured way, take the first stage with me today.
 
-Start with the free seven-day experience, or book a free 15-minute WhatsApp call with Tariq to discuss your goals and begin your Foundation Stage.
+Start 7 Days to Change the Way You Use Your Mind, or book a free 15-minute WhatsApp call with Tariq to discuss your goals and begin your Foundation Stage.
 
-**[START THE FREE SEVEN-DAY EXPERIENCE]**
+**[START YOUR 7 DAYS]**
 
 **[BOOK A FREE 15-MINUTE CALL]**
 

@@ -44,9 +44,9 @@ test("homepage follows the approved concise customer journey", () => {
   assert.equal((html.match(/<img[^>]+tariq-welcome-portrait\.png/g) ?? []).length, 1);
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
-  assert.match(html, /START FREE FOR 7 DAYS/);
+  assert.match(html, /START YOUR 7 DAYS/);
   assert.match(html, /EXPLORE THE METHOD/);
-  assert.match(html, /Free 7-Day Experience • No Previous Experience Required/);
+  assert.match(html, /7 Days to Change the Way You Use Your Mind • No Previous Experience Required/);
   assert.match(html, /Free registration required\. No purchase required\./);
   assert.match(html, /<source srcset="\/images\/tariq-happiness-harmony-720\.webp" type="image\/webp">/);
   assert.match(html, /VIEW THE 24-WEEK JOURNEY/);
@@ -78,7 +78,7 @@ test("homepage offers the secondary WhatsApp question beside both free-entry CTA
 
 test("homepage keeps Start Free primary and makes WhatsApp a secondary question", () => {
   const html = renderHome({ language: "en" });
-  assert.match(html, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
+  assert.match(html, /href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
   assert.match(html, /Questions\? WhatsApp Tariq/);
   assert.doesNotMatch(html, /BOOK A FREE 15-MINUTE CALL/);
 });
@@ -97,7 +97,7 @@ test("homepage presents the complete seven-day taster", () => {
   assert.equal((taster.match(/data-i18n="home\.taster\.day\d"/g) ?? []).length, 7);
   assert.match(taster, /See What’s Running Your Life/);
   assert.match(taster, /Choose What Happens Next/);
-  assert.match(taster, /href="\/start-free\/"[^>]*>START MY FREE 7 DAYS<\/a>/);
+  assert.match(taster, /href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
   assert.match(taster, /Free registration required\. No purchase required\./);
   assert.match(taster, /class="[^"]*homeTaster__layout[^"]*"/);
 });
@@ -131,7 +131,7 @@ test("homepage loads with the concise four-phase journey and safe responsive act
   const pathway = html.match(/<section[^>]+data-home-section="master-key"[\s\S]*?<\/section>/)?.[0] ?? "";
   const visibleText = pathway.replace(/<[^>]+>/g, "");
   assert.match(html, /^<main class="home">/);
-  assert.match(html, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
+  assert.match(html, /href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
   for (const expected of ["Weeks 1–4", "Foundation", "Weeks 5–11", "Visualisation", "Weeks 12–18", "Concentration", "Weeks 19–24", "Integration &amp; Mastery"]) assert.match(visibleText, new RegExp(expected));
   assert.equal((pathway.match(/class="homeMasterKey__phaseDescription"/g) ?? []).length, 4);
   assert.match(pathway, /href="\/master-key-system\/"[^>]*>VIEW THE 24-WEEK JOURNEY<\/a>/);
@@ -172,7 +172,7 @@ test("homepage origins section grounds the Beyond The Secret message without end
   const origins = html.match(/<section class="homeOrigins"[\s\S]*?<\/section>/)?.[0] ?? "";
   for (const text of ["A MESSAGE THAT HAS INSPIRED MILLIONS", "A timeless conversation about thought, purpose and action.", "The Secret", "Oprah Winfrey", "Napoleon Hill", "This is not a promise that thought alone controls life."]) assert.match(origins, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(origins, /not affiliated with, endorsed by, or connected to Rhonda Byrne, Oprah Winfrey, Napoleon Hill, The Secret, or their organisations\./);
-  assert.match(origins, /href="\/start-free\/"[^>]*>START FREE FOR 7 DAYS<\/a>/);
+  assert.match(origins, /href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
   assert.match(renderHome({ language: "es" }), /UNA MENSAJE QUE HA INSPIRADO A MILLONES|UN MENSAJE QUE HA INSPIRADO A MILLONES/);
   assert.match(renderHome({ language: "es" }), /Oprah Winfrey/);
 });
@@ -215,11 +215,11 @@ test("homepage Spanish render is complete, natural and conversion focused", () =
   const html = renderHome({ language: "es" });
   assert.match(html, /Domina tu mente\. Cambia tu rumbo\./);
   assert.match(html, /claridad, enfoque, disciplina y acción con propósito/);
-  assert.match(html, /Empieza gratis durante 7 días/);
+  assert.match(html, /EMPIEZA TUS 7 DÍAS/);
   assert.match(html, /EXPLORA EL MÉTODO/);
   assert.match(html, /Este programa de coaching independiente está inspirado en el Master Key System/);
   assert.match(html, /Registro gratuito obligatorio\. No es necesario comprar\./);
-  assert.doesNotMatch(html, /START FREE FOR 7 DAYS|EXPLORE ALL 24 WEEKS|Book a Session/);
+  assert.doesNotMatch(html, /START FREE FOR 7 DAYS|START MY FREE 7 DAYS|EXPLORE ALL 24 WEEKS|Book a Session/);
 });
 
 test("homepage CTA destinations are generated routes", () => {

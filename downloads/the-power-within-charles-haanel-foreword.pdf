@@ -1,42 +1,15 @@
-%PDF-1.3
-%‚„œ”
+%PDF-1.4
 1 0 obj
-<<
-/Type /Catalog
-/Pages 2 0 R
->>
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
 endobj
 2 0 obj
-<<
-/Type /Pages
-/Kids [ 3 0 R 6 0 R 8 0 R 10 0 R ]
-/Count 4
->>
+<< /Type /Catalog /Pages 1 0 R >>
 endobj
 3 0 obj
-<<
-/Type /Page
-/Parent 2 0 R
-/MediaBox [ 0 0 595 842 ]
-/Resources <<
-/Font <<
-/F1 4 0 R
->>
->>
-/Contents 5 0 R
->>
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
 4 0 obj
-<<
-/Type /Font
-/Subtype /Type1
-/BaseFont /Helvetica
->>
-endobj
-5 0 obj
-<<
-/Length 3109
->>
+<< /Length 3109 >>
 stream
 BT
 /F1 18 Tf
@@ -81,23 +54,11 @@ BT
 ET
 endstream
 endobj
-6 0 obj
-<<
-/Type /Page
-/Parent 2 0 R
-/MediaBox [ 0 0 595 842 ]
-/Resources <<
-/Font <<
-/F1 4 0 R
->>
->>
-/Contents 7 0 R
->>
+5 0 obj
+<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
 endobj
-7 0 obj
-<<
-/Length 3400
->>
+6 0 obj
+<< /Length 3400 >>
 stream
 BT
 /F1 15 Tf
@@ -143,23 +104,11 @@ BT
 ET
 endstream
 endobj
-8 0 obj
-<<
-/Type /Page
-/Parent 2 0 R
-/MediaBox [ 0 0 595 842 ]
-/Resources <<
-/Font <<
-/F1 4 0 R
->>
->>
-/Contents 9 0 R
->>
+7 0 obj
+<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
 endobj
-9 0 obj
-<<
-/Length 3714
->>
+8 0 obj
+<< /Length 3714 >>
 stream
 BT
 /F1 15 Tf
@@ -209,23 +158,11 @@ BT
 ET
 endstream
 endobj
-10 0 obj
-<<
-/Type /Page
-/Parent 2 0 R
-/MediaBox [ 0 0 595 842 ]
-/Resources <<
-/Font <<
-/F1 4 0 R
->>
->>
-/Contents 11 0 R
->>
+9 0 obj
+<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
 endobj
-11 0 obj
-<<
-/Length 3685
->>
+10 0 obj
+<< /Length 3728 >>
 stream
 BT
 /F1 15 Tf
@@ -266,34 +203,35 @@ BT
 1 0 0 1 58 265 Tm (mental direction. Apply what you learn. The purpose is not to promise instant results. It) Tj
 1 0 0 1 58 250 Tm (is to begin developing the inner qualities that can help you respond to life with greater) Tj
 1 0 0 1 58 235 Tm (awareness, courage and purpose. If you are ready to begin, start with a simple daily) Tj
-1 0 0 1 58 220 Tm (practice of reading, stillness, reflection and application. This article is based only on) Tj
-1 0 0 1 58 205 Tm (the foreword presented on pages 10-16 of the supplied edition of The Master Key System.) Tj
-1 0 0 1 58 190 Tm (The original historical language has been interpreted for modern readers. Individual) Tj
-1 0 0 1 58 175 Tm (experiences and results will vary, and the Master Key System is presented as a programme) Tj
-1 0 0 1 58 160 Tm (of study and personal practice rather than a guarantee of specific outcomes.) Tj
+1 0 0 1 58 220 Tm (practice of reading, stillness, reflection and application. [START YOUR 7 DAYS] This) Tj
+1 0 0 1 58 205 Tm (article is based only on the foreword presented on pages 10-16 of the supplied edition of) Tj
+1 0 0 1 58 190 Tm (The Master Key System. The original historical language has been interpreted for modern) Tj
+1 0 0 1 58 175 Tm (readers. Individual experiences and results will vary, and the Master Key System is) Tj
+1 0 0 1 58 160 Tm (presented as a programme of study and personal practice rather than a guarantee of) Tj
+1 0 0 1 58 145 Tm (specific outcomes.) Tj
 /F1 9 Tf 1 0 0 1 58 34 Tm (Unleash Your Power with Tariq - 4 / 4) Tj
 ET
 endstream
 endobj
+11 0 obj
+<< /Type /Page /Parent 1 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
 xref
 0 12
 0000000000 65535 f 
-0000000015 00000 n 
-0000000064 00000 n 
-0000000142 00000 n 
-0000000270 00000 n 
-0000000340 00000 n 
-0000003501 00000 n 
-0000003629 00000 n 
-0000007081 00000 n 
-0000007209 00000 n 
-0000010975 00000 n 
-0000011105 00000 n 
+0000000009 00000 n 
+0000000085 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000003365 00000 n 
+0000003491 00000 n 
+0000006943 00000 n 
+0000007069 00000 n 
+0000010835 00000 n 
+0000010961 00000 n 
+0000014742 00000 n 
 trailer
-<<
-/Size 12
-/Root 1 0 R
->>
+<< /Size 12 /Root 2 0 R >>
 startxref
-14843
+14870
 %%EOF

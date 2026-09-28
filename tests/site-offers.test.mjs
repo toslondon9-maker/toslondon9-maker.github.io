@@ -15,7 +15,7 @@ test("deployed homepage uses the approved static Master Key experience", () => {
   assert.match(home, /^<!doctype html>/i);
   assert.match(home, /<main class="home">/);
   assert.match(home, /Master the world within\./);
-  assert.match(home, /START FREE FOR 7 DAYS/);
+  assert.match(home, /START YOUR 7 DAYS/);
   assert.match(home, /EXPLORE THE METHOD/);
   assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__|data-rsc|_rsc=/);
 });

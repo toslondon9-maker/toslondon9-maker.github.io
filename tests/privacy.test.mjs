@@ -9,7 +9,7 @@ test("privacy copy documents consent-gated anonymous Phase 2 analytics", () => {
   assert.match(page, /Google Analytics 4 is used only after you choose to accept optional Analytics/i);
   for (const phrase of [
     "article CTA clicks",
-    "opening the Free 7-Day experience",
+    "opening 7 Days to Change the Way You Use Your Mind",
     "opening Day 1",
     "completing Day 7",
     "choosing WhatsApp",

@@ -35,7 +35,7 @@ test("Start Free gives the primary conversion CTA a scoped line of space before 
 
 test("Start Free explains the free value and previews all seven days before registration", () => {
   const html = dashboard().body;
-  const valueIndex = html.indexOf("Give Yourself Seven Days to Think More Clearly");
+  const valueIndex = html.indexOf("7 Days to Change the Way You Use Your Mind");
   const previewIndex = html.indexOf("sevenDayPreview");
   const registrationIndex = html.indexOf('id="start-free-registration"');
   assert.ok(valueIndex >= 0 && previewIndex > valueIndex && registrationIndex > previewIndex);

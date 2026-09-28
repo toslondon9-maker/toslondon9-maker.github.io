@@ -65,7 +65,7 @@ test("online course page uses the premium journey layout with responsive bilingu
   const html = page(siteData.routes.masterKeySystemOnlineCourse);
 
   assert.match(html, /class="onlineCoursePage__hero"/);
-  assert.match(html, /START FREE FOR 7 DAYS|route\.masterKeySystemOnlineCourse\.action/);
+  assert.match(html, /START YOUR 7 DAYS|route\.masterKeySystemOnlineCourse\.action/);
   assert.match(html, /EXPLORE MASTER KEY COACHING|route\.masterKeySystemOnlineCourse\.coaching/);
   assert.equal((html.match(/class="onlineCoursePage__stage"/g) ?? []).length, 4);
   assert.equal((html.match(/class="onlineCoursePage__studyCard"/g) ?? []).length, 3);

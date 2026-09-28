@@ -389,11 +389,11 @@ And that is when:
 
 ## Start Your Own 7-Day Experiment
 
-If you would like to experience these principles rather than simply read about them, begin with my **free 7-Day Unleash Your Power journey**.
+If you would like to experience these principles rather than simply read about them, begin with **7 Days to Change the Way You Use Your Mind**.
 
 Over seven days, you'll start exploring focused thought, visualization and ideas inspired by the *Master Key System* — and begin applying them to your own goals.
 
-**Start your free 7-Day journey at:**
+**Start your 7 days at:**
 
 **unleashyourpowerwithtariq.com**
 

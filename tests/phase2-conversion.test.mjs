@@ -62,7 +62,7 @@ test("contact page offers coaching, WhatsApp, questions and a free fallback", ()
   assert.match(html, /ENQUIRE ABOUT COACHING/);
   assert.match(html, /https:\/\/wa\.me\/34611223345/);
   assert.match(html, /ASK A QUESTION/);
-  assert.match(html, /START FREE FOR 7 DAYS/);
+  assert.match(html, /START YOUR 7 DAYS/);
 });
 
 test("Phase 2 conversion sections remain complete when visitors switch to Spanish", () => {

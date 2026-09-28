@@ -7,7 +7,7 @@ import { renderFooter, renderHeader } from "../src/shared-chrome.mjs";
 import { renderPage } from "../src/page-shell.mjs";
 
 test("core conversion copy has natural Spanish", () => {
-  assert.equal(t("cta.startFree", "es"), "Empieza gratis durante 7 días");
+  assert.equal(t("cta.startFree", "es"), "Empieza tus 7 días");
   assert.equal(t("cta.exploreJourney", "es"), "Descubre el recorrido de 24 semanas");
   assert.equal(t("cta.bookSession", "es"), "Reserva una sesión");
   assert.notEqual(t("home.hero.title", "en"), t("home.hero.title", "es"));

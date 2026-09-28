@@ -164,13 +164,13 @@ It is a programme of study and personal application. The results will vary from 
 
 ## Your next step
 
-If you are curious about Charles Haanel and want to understand how The Master Key System can be studied in a practical and structured way, begin with the free seven-day experience.
+If you are curious about Charles Haanel and want to understand how The Master Key System can be studied in a practical and structured way, begin with 7 Days to Change the Way You Use Your Mind.
 
 You can also explore the 24-week coaching journey, where the principles are studied gradually with guidance, practice and personal accountability.
 
 If you would like to discuss your goals, book a free 15-minute call with Tariq.
 
-**[START THE FREE SEVEN-DAY EXPERIENCE]**
+**[START YOUR 7 DAYS]**
 
 **[EXPLORE THE MASTER KEY SYSTEM]**
 

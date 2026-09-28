@@ -8,14 +8,14 @@ import { renderFoundationNextStep, renderWhatHappensNext } from "../src/conversi
 const translationExpectations = {
   "conversion.next.heading": ["WHAT HAPPENS NEXT?", "¿QUÉ OCURRE DESPUÉS?"],
   "conversion.next.step1Title": ["START FREE", "EMPIEZA GRATIS"],
-  "conversion.next.step1Body": ["Experience seven days of guided Master Key System study, reflection and practical exercises.", "Vive siete días de estudio guiado del Sistema de la Llave Maestra, reflexión y ejercicios prácticos."],
+  "conversion.next.step1Body": ["Experience 7 Days to Change the Way You Use Your Mind through guided Master Key System study, reflection and practical exercises.", "Vive 7 días para cambiar la forma en que usas tu mente mediante el estudio guiado del Sistema de la Llave Maestra, la reflexión y ejercicios prácticos."],
   "conversion.next.step2Title": ["BUILD YOUR FOUNDATION", "CONSTRUYE TUS FUNDAMENTOS"],
   "conversion.next.step2Body": ["If the journey feels right for you, continue with the four-week Foundation stage for £97.", "Si sientes que este camino es adecuado para ti, continúa con la etapa de Fundamentos de cuatro semanas por £97."],
   "conversion.next.step3Title": ["GO DEEPER, AT YOUR PACE", "PROFUNDIZA, A TU RITMO"],
   "conversion.next.step3Body": ["Continue through Visualisation, Concentration and Contemplation & Mastery—or join the complete 24-week journey.", "Continúa con Visualización, Concentración y Contemplación y Maestría, o únete al recorrido completo de 24 semanas."],
-  "conversion.next.cta": ["START FREE FOR 7 DAYS", "EMPIEZA GRATIS DURANTE 7 DÍAS"],
+  "conversion.next.cta": ["START YOUR 7 DAYS", "EMPIEZA TUS 7 DÍAS"],
   "conversion.foundation.eyebrow": ["YOUR NEXT STEP", "TU SIGUIENTE PASO"],
-  "conversion.foundation.heading": ["You completed the seven-day experience.", "Has completado la experiencia de siete días."],
+  "conversion.foundation.heading": ["You completed 7 Days to Change the Way You Use Your Mind.", "Has completado 7 días para cambiar la forma en que usas tu mente."],
   "conversion.foundation.body": ["If the journey feels right, continue with Foundation — four weeks to build a dependable mental foundation.", "Si el recorrido encaja contigo, continúa con Fundamentos: cuatro semanas para construir una base mental sólida."],
   "conversion.foundation.qualification": ["Individual outcomes depend on your circumstances, participation and consistent practice.", "Los resultados individuales dependen de tus circunstancias, participación y práctica constante."],
   "conversion.foundation.cta": ["CONTINUE TO FOUNDATION — £97", "CONTINÚA CON FUNDAMENTOS — £97"],
@@ -46,7 +46,7 @@ test("renderFoundationNextStep renders the gated Foundation route offer", () => 
   const html = renderFoundationNextStep({ data });
   assert.match(html, /^<section[^>]+class="foundationNextStep"[^>]+aria-labelledby="foundation-next-heading"/);
   assert.match(html, /<p class="eyebrow" data-i18n="conversion.foundation.eyebrow">YOUR NEXT STEP<\/p>/);
-  assert.match(html, /<h2 id="foundation-next-heading" data-i18n="conversion.foundation.heading">You completed the seven-day experience\.<\/h2>/);
+  assert.match(html, /<h2 id="foundation-next-heading" data-i18n="conversion.foundation.heading">You completed 7 Days to Change the Way You Use Your Mind\.<\/h2>/);
   assert.match(html, /£123/);
   assert.match(html, /href="\/foundation\/"/);
   assert.match(html, /href="\/start-free\/"/);

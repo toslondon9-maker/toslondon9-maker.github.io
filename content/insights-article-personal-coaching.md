@@ -158,13 +158,13 @@ If you are looking for a quick solution without practice, this may not be the ri
 
 You do not need to wait for the perfect moment.
 
-Begin with the free seven-day experience and discover how the coaching approach works. If you feel ready to take the next step, book a free 15-minute WhatsApp call with me so we can discuss your goals and whether the Foundation Stage is right for you.
+Begin with 7 Days to Change the Way You Use Your Mind and discover how the coaching approach works. If you feel ready to take the next step, book a free 15-minute WhatsApp call with me so we can discuss your goals and whether the Foundation Stage is right for you.
 
 I will back you, motivate you, inspire you and empower you as you begin developing your own understanding of *The Master Key System*.
 
 Your journey starts with one decision and one committed step.
 
-**[START THE FREE SEVEN-DAY EXPERIENCE]**
+**[START YOUR 7 DAYS]**
 
 **[BOOK A FREE 15-MINUTE CALL]**
 

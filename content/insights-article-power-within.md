@@ -308,7 +308,7 @@ The purpose is not to promise instant results. It is to begin developing the inn
 
 If you are ready to begin, start with a simple daily practice of reading, stillness, reflection and application.
 
-**[START THE FREE SEVEN-DAY EXPERIENCE]**
+**[START YOUR 7 DAYS]**
 
 **[EXPLORE THE MASTER KEY SYSTEM]**
 

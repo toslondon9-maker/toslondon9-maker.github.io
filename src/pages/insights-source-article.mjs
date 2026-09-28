@@ -39,7 +39,7 @@ function markdownToHtml(markdown, { skipCtas = false, richMarkdown = false } = {
     if (!line.trim()) { flushBlocks(); continue; }
     if (line.trim().replaceAll("*", "") === "[BOOK YOUR CALL]") { flushBlocks(); continue; }
     if (/^!\[.*\]\([^\)]+\)$/.test(line.trim())) { flushBlocks(); const match = line.trim().match(/^!\[([^\]]+)\]\(([^\)]+)\)$/); out.push(`<figure class="insightArticle__heroImage"><img src="${escapeHtml(match[2])}" alt="${escapeHtml(match[1])}" width="1280" height="1280" loading="eager" decoding="async"></figure>`); continue; }
-    if (skipCtas && /^\**\[(START THE FREE SEVEN-DAY EXPERIENCE|EXPLORE THE MASTER KEY SYSTEM|BOOK A FREE 15-MINUTE CALL)\]\**$/.test(line.trim())) { flushBlocks(); continue; }
+    if (skipCtas && /^\**\[(START YOUR 7 DAYS|START THE FREE SEVEN-DAY EXPERIENCE|EXPLORE THE MASTER KEY SYSTEM|BOOK A FREE 15-MINUTE CALL)\]\**$/.test(line.trim())) { flushBlocks(); continue; }
     if (richMarkdown && /^\|.*\|$/.test(line.trim())) { flushBlocks(); table.push(line.trim().slice(1, -1).split("|").map((cell) => cell.trim())); continue; }
     if (richMarkdown && /^- /.test(line)) { flush(); flushTable(); list.push(line.slice(2).trim()); continue; }
     if (line.startsWith("# ")) { flushBlocks(); if (firstHeading) { firstHeading = false; continue; } out.push(`<h2>${inline(line.slice(2))}</h2>`); continue; }

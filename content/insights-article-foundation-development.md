@@ -196,9 +196,9 @@ The Foundation Stage is a practical beginning for anyone who wants to study the 
 
 Through 30 minutes of daily practice over four weeks, students begin developing awareness, stillness, discernment, concentration and visualisation.
 
-If you are ready to begin developing your inner foundation, start with the free seven-day experience or book a free 15-minute WhatsApp call with Tariq to discuss your goals.
+If you are ready to begin developing your inner foundation, start 7 Days to Change the Way You Use Your Mind or book a free 15-minute WhatsApp call with Tariq to discuss your goals.
 
-**\(START THE FREE SEVEN-DAY EXPERIENCE\)**
+**\(START YOUR 7 DAYS\)**
 
 **\(BOOK A FREE 15-MINUTE CALL\)**
 

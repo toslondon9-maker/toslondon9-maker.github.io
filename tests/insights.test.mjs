@@ -93,7 +93,7 @@ test("the how-to-study article is registered with exact source title, SEO and PD
   assert.match(page.body, /A practical daily Master Key System routine/);
   assert.match(page.body, /<ul>/);
   assert.match(page.body, /<table/);
-  assert.match(page.body, /Start your free 7-Day Experience/);
+  assert.match(page.body, /Start your 7 days/);
   assert.match(page.body, /href="\/downloads\/how-to-study-the-master-key-system\.pdf"/);
   assert.equal(page.structuredData[0].mainEntityOfPage, "https://unleashyourpowerwithtariq.com/insights/how-to-study-the-master-key-system/");
 });
@@ -125,7 +125,7 @@ test("the how-to-study PDF is a non-empty A4 PDF generated from the article sour
   assert.ok(pdf.length > 1000);
   assert.equal(pdf.subarray(0, 8).toString(), "%PDF-1.4");
   assert.match(pdf.toString("latin1"), /How to Study the Master Key System/);
-  assert.match(pdf.toString("latin1"), /Begin with the free 7-Day Experience/);
+  assert.match(pdf.toString("latin1"), /Begin 7 Days to Change the Way You Use Your Mind/);
 });
 
 test("the Insights hub gives bilingual readers a free-study or optional WhatsApp choice", () => {
@@ -133,11 +133,11 @@ test("the Insights hub gives bilingual readers a free-study or optional WhatsApp
   const spanish = insightsIndexPage(undefined, "es").body;
   const bookingMessage = encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
 
-  assert.match(english, /Start with the free seven-day experience, or book a free 15-minute WhatsApp call to ask a question before you begin\./);
+  assert.match(english, /Start 7 Days to Change the Way You Use Your Mind, or book a free 15-minute WhatsApp call to ask a question before you begin\./);
   assert.match(english, /BOOK A FREE 15-MINUTE CALL/);
   assert.match(english, new RegExp(`href="https://wa\\.me/34611223345\\?text=${bookingMessage}"`));
   assert.match(english, /target="_blank" rel="noopener noreferrer"/);
-  assert.match(spanish, /Empieza con la experiencia gratuita de siete días o reserva una llamada gratuita de 15 minutos por WhatsApp para hacer una pregunta antes de empezar\./);
+  assert.match(spanish, /Empieza 7 días para cambiar la forma en que usas tu mente o reserva una llamada gratuita de 15 minutos por WhatsApp para hacer una pregunta antes de empezar\./);
   assert.match(spanish, /RESERVAR UNA LLAMADA GRATUITA DE 15 MINUTOS/);
 });
 
@@ -147,7 +147,7 @@ test("the principles article contains all eight principles, careful Tact guidanc
   for (const principle of ["Truth", "Tact", "Loyalty", "Individuality", "Courage", "Accumulation", "Constructiveness", "Sagacity"]) assert.match(english.body, new RegExp(principle));
   assert.match(english.body, /sympathy, understanding/);
   assert.match(english.body, /not weakness or people-pleasing/);
-  assert.match(english.body, /START THE FREE SEVEN-DAY EXPERIENCE/);
+  assert.match(english.body, /START YOUR 7 DAYS/);
   assert.match(english.body, /href="\/downloads\/eight-principles-master-key-system\.pdf" download/);
   assert.match(english.body, new RegExp(`href="${siteData.routes.startFree}"`));
   assert.match(english.body, new RegExp(`href="${siteData.routes.masterKeySystem}"`));
@@ -214,7 +214,7 @@ test("the three Foundation articles are published as separate dated source artic
   assert.deepEqual(pages.map((page) => page.route), [siteData.routes.insightsFoundationDevelopment, siteData.routes.insightsFoundationFirstStep, siteData.routes.insightsFoundationQA]);
   for (const page of pages) {
     assert.match(page.body, /Published 11 September 2026/);
-    assert.match(page.body, /START THE FREE SEVEN-DAY EXPERIENCE/);
+    assert.match(page.body, /START YOUR 7 DAYS/);
     assert.match(page.body, /BOOK YOUR CALL/);
     assert.match(page.body, /wa\.me\/34611223345/);
     assert.equal(page.structuredData[0].datePublished, "2026-09-11");
@@ -226,7 +226,7 @@ test("the three Foundation articles are published as separate dated source artic
 test("personal coaching article is visible and linked from the homepage/archive", () => {
   const page = insightsPersonalCoachingPage();
   assert.match(page.body, /The Advantages of Personal Master Key System Coaching/);
-  assert.match(page.body, /START THE FREE SEVEN-DAY EXPERIENCE/);
+  assert.match(page.body, /START YOUR 7 DAYS/);
   assert.match(page.body, /BOOK YOUR CALL/);
   assert.match(page.body, /advantages-personal-master-key-system-coaching\.pdf/);
 });
@@ -242,7 +242,7 @@ test("every published article has one free-experience hook, a 24-week journey ho
 
   for (const renderArticle of articles) {
     const body = renderArticle(undefined, "en").body;
-    const startHooks = body.match(/<a\b(?=[^>]*href="\/start-free\/")[^>]*>START THE FREE SEVEN-DAY EXPERIENCE<\/a>/g) ?? [];
+    const startHooks = body.match(/<a\b(?=[^>]*href="\/start-free\/")[^>]*>START YOUR 7 DAYS<\/a>/g) ?? [];
 
     assert.equal(startHooks.length, 1, "article has one primary free-experience CTA");
     assert.match(body, /<a\b(?=[^>]*href="\/master-key-system\/")[^>]*data-i18n="insights\.cta\.viewJourney"/);
