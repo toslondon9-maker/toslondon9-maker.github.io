@@ -119,6 +119,23 @@ test("homepage Lineage cards stack safely on mobile", async () => {
   assert.match(mobileBlock, /\.homeLineage__card\s*\{[\s\S]*?min-width:\s*0;[\s\S]*?width:\s*100%;[\s\S]*?\}/);
 });
 
+test("Haanel lineage card provides a closed bilingual reference disclosure", () => {
+  const english = renderHome({ language: "en" });
+  const spanish = renderHome({ language: "es" });
+  const disclosure = english.match(/<details class="homeLineage__links">[\s\S]*?<\/details>/)?.[0] ?? "";
+
+  assert.match(english, /<details class="homeLineage__links">/);
+  assert.match(english, /<summary[^>]*>WHO WAS CHARLES HAANEL<\/summary>/);
+  assert.doesNotMatch(disclosure, /<details[^>]* open/);
+  assert.match(disclosure, /href="\/insights\/who-was-charles-f-haanel-life-and-legacy\/"[^>]*>Who Was Charles F\. Haanel\?</);
+  assert.match(disclosure, /href="\/master-key-system\/"[^>]*>The Master Key System</);
+  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/Charles_F\._Haanel"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>Charles F\. Haanel — Wikipedia</);
+  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/The_Master_Key_System"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>The Master Key System — Wikipedia</);
+  assert.match(spanish, /<summary[^>]*>¿QUIÉN FUE CHARLES F\. HAANEL\?<\/summary>/);
+  assert.match(spanish, /¿Quién fue Charles F\. Haanel\?/);
+  assert.match(spanish, /El Master Key System/);
+});
+
 test("homepage preserves SEO metadata", () => {
   assert.equal(homePage(siteData, "en").title, "Unleash Your Power | Master Key System Coaching with Tariq");
   assert.equal(t("meta.home.title", "en"), "Unleash Your Power | Master Key System Coaching with Tariq");
