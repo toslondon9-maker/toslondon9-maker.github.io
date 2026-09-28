@@ -9,15 +9,19 @@ const money = (value) => `£${new Intl.NumberFormat("en-GB").format(value)}`;
 const copy = (key, language) => `<span data-i18n="${key}">${escapeHtml(t(key, language))}</span>`;
 const paymentLink = (url, className, label) => `<a class="${className}" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
 const bookingCta = (language, className = "button--secondary") => `<a class="${className}" href="${bookingCallHref(canonicalSiteData.contact.whatsapp)}" target="_blank" rel="noopener noreferrer" data-i18n="cta.bookCall">${escapeHtml(t("cta.bookCall", language))}</a>`;
+const foundationInfoLink = (data, language, className = "button--text") => `<a class="${className}" href="${escapeHtml(data.routes.foundation)}" data-i18n="coaching.foundation.learnMore">${escapeHtml(t("coaching.foundation.learnMore", language))}</a>`;
 
-function stageSummary(stage, language) {
-  return `<article class="coachingStage card"><p class="coachingStage__weeks" aria-label="${escapeHtml(t(`coaching.stage.${stage.id}.weeks`, language))}" data-i18n-aria-label="coaching.stage.${stage.id}.weeks">${copy("coaching.weeks", language)} ${stage.weeks}</p><h3>${copy(`coaching.stage.${stage.id}.name`, language)}</h3><p>${copy(`coaching.stage.${stage.id}.outcome`, language)}</p><p class="coachingStage__price"><span>${copy("coaching.foundingPrice", language)}</span><strong>${money(stage.price)}</strong></p>${paymentLink(stage.paymentUrl, "button--text", copy("coaching.payNow", language))}</article>`;
+function stageSummary(stage, language, data) {
+  const action = stage.id === "foundation" ? foundationInfoLink(data, language) : paymentLink(stage.paymentUrl, "button--text", copy("coaching.payNow", language));
+  const foundationSummary = stage.id === "foundation" ? `<p class="coachingStage__details">${copy("coaching.foundation.summary", language)}</p>` : "";
+  return `<article class="coachingStage card"><p class="coachingStage__weeks" aria-label="${escapeHtml(t(`coaching.stage.${stage.id}.weeks`, language))}" data-i18n-aria-label="coaching.stage.${stage.id}.weeks">${copy("coaching.weeks", language)} ${stage.weeks}</p><h3>${copy(`coaching.stage.${stage.id}.name`, language)}</h3><p>${copy(`coaching.stage.${stage.id}.outcome`, language)}</p>${foundationSummary}<p class="coachingStage__price"><span>${copy("coaching.foundingPrice", language)}</span><strong>${money(stage.price)}</strong></p>${action}</article>`;
 }
 
-function stagePanel(stage, language) {
+function stagePanel(stage, language, data) {
   const items = Array.from({ length: coachingContent.inclusionCount }, (_, index) => `<li>${copy(`coaching.stage.${stage.id}.inclusion${index + 1}`, language)}</li>`).join("");
   const foundationDetails = stage.id !== "foundation" ? "" : `<section class="coachingFoundationDetails" aria-labelledby="foundation-details-heading"><h3 id="foundation-details-heading">${copy("coaching.stage.foundation.name", language)} · ${copy("coaching.stage.foundation.weeks", language)}</h3><p>${copy("coaching.foundation.format", language)}</p><ul class="coachingInclusions"><li>${copy("coaching.foundation.call", language)}</li><li>${copy("coaching.foundation.whatsapp", language)}</li><li>${copy("coaching.foundation.access", language)}</li><li>${copy("coaching.foundation.time", language)}</li></ul><h3>${copy("coaching.foundation.afterPaymentLabel", language)}</h3><p>${copy("coaching.foundation.afterPayment", language)}</p><h3>${copy("coaching.foundation.forLabel", language)}</h3><p>${copy("coaching.foundation.for", language)}</p><h3>${copy("coaching.foundation.notForLabel", language)}</h3><p>${copy("coaching.foundation.notFor", language)}</p><h3>${copy("coaching.foundation.week1Label", language)}</h3><p>${copy("coaching.foundation.week1", language)}</p><h3>${copy("coaching.foundation.transitionLabel", language)}</h3><p>${copy("coaching.foundation.transition", language)}</p><blockquote><p class="eyebrow">${copy("coaching.foundation.testimonialLabel", language)}</p><p>“${copy("coaching.foundation.testimonial", language)}”</p><cite>${copy("coaching.foundation.testimonialByline", language)}</cite></blockquote><details><summary>${copy("coaching.faq.6.question", language)}</summary><p>${copy("coaching.foundation.paymentRefund", language)}</p></details></section>`;
-  return `<p class="eyebrow" aria-label="${escapeHtml(t(`coaching.stage.${stage.id}.weeks`, language))}" data-i18n-aria-label="coaching.stage.${stage.id}.weeks">${copy("coaching.stageLabel", language)} · ${copy("coaching.weeks", language)} ${stage.weeks}</p><h2>${copy(`coaching.stage.${stage.id}.name`, language)}</h2><p class="coachingPanel__lead">${copy(`coaching.stage.${stage.id}.outcome`, language)}</p><ul class="coachingInclusions">${items}</ul>${foundationDetails}<p class="coachingPanel__price">${copy("coaching.foundingPrice", language)} <strong>${money(stage.price)}</strong> <span>(${copy("coaching.msrp", language)} ${money(stage.msrp)})</span></p>${paymentLink(stage.paymentUrl, "button--primary", copy("coaching.payNow", language))}`;
+  const action = stage.id === "foundation" ? foundationInfoLink(data, language, "button--primary") : paymentLink(stage.paymentUrl, "button--primary", copy("coaching.payNow", language));
+  return `<p class="eyebrow" aria-label="${escapeHtml(t(`coaching.stage.${stage.id}.weeks`, language))}" data-i18n-aria-label="coaching.stage.${stage.id}.weeks">${copy("coaching.stageLabel", language)} · ${copy("coaching.weeks", language)} ${stage.weeks}</p><h2>${copy(`coaching.stage.${stage.id}.name`, language)}</h2><p class="coachingPanel__lead">${copy(`coaching.stage.${stage.id}.outcome`, language)}</p><ul class="coachingInclusions">${items}</ul>${foundationDetails}<p class="coachingPanel__price">${copy("coaching.foundingPrice", language)} <strong>${money(stage.price)}</strong> <span>(${copy("coaching.msrp", language)} ${money(stage.msrp)})</span></p>${action}`;
 }
 
 function fullJourney(language, data) {
@@ -53,7 +57,7 @@ function coachingOutcome() {
 
 function coachingRateCard(language, siteData) {
   const offers = [
-    ["coaching.rate.free", siteData.routes.startFree, "", "coaching.rate.free.action"], ["coaching.rate.foundation", siteData.stages[0].paymentUrl, "", "coaching.rate.action.default"], ["coaching.rate.complete", siteData.offer.paymentUrl, "coachingRateCard__featured", "coaching.rate.action.default"], ["coaching.rate.mastery", siteData.routes.contact, "", "coaching.rate.mastery.action"], ["coaching.rate.mentoring", siteData.routes.contact, "", "coaching.rate.mentoring.action"], ["coaching.rate.alumni", siteData.routes.contact, "", "coaching.rate.alumni.action"], ["coaching.rate.corporate", siteData.routes.contact, "", "coaching.rate.corporate.action"],
+    ["coaching.rate.free", siteData.routes.startFree, "", "coaching.rate.free.action"], ["coaching.rate.foundation", siteData.routes.foundation, "", "coaching.foundation.learnMore"], ["coaching.rate.complete", siteData.offer.paymentUrl, "coachingRateCard__featured", "coaching.rate.action.default"], ["coaching.rate.mastery", siteData.routes.contact, "", "coaching.rate.mastery.action"], ["coaching.rate.mentoring", siteData.routes.contact, "", "coaching.rate.mentoring.action"], ["coaching.rate.alumni", siteData.routes.contact, "", "coaching.rate.alumni.action"], ["coaching.rate.corporate", siteData.routes.contact, "", "coaching.rate.corporate.action"],
   ];
   return `<section class="coachingRateCard section" data-coaching-section="rate-card"><div class="coachingRateCard__inner"><p class="eyebrow">${copy("coaching.rate.eyebrow", language)}</p><h2>${copy("coaching.rate.title", language)}</h2><div class="coachingRateCard__grid">${offers.map(([key, href, className, actionKey]) => `<article class="coachingRateCard__item ${className}"><h3>${copy(`${key}.title`, language)}</h3><p class="coachingRateCard__price">${copy(`${key}.price`, language)}</p><p class="coachingRateCard__status">${copy(`${key}.status`, language)}</p>${["mastery", "mentoring", "alumni", "corporate"].some((id) => key.endsWith(`.${id}`)) ? `<p class="coachingRateCard__description">${copy(`${key}.description`, language)}</p>` : ""}<a class="button--${className ? "primary" : "secondary"}" href="${escapeHtml(href)}" data-i18n="${actionKey}">${escapeHtml(t(actionKey, language))}</a></article>`).join("")}</div></div></section>`;
 }
@@ -63,11 +67,11 @@ function coachingNextSteps(language, route, startFreeRoute) {
 }
 
 function renderCoachingBody({ language = "en", siteData = canonicalSiteData } = {}) {
-  const summaries = siteData.stages.map((stage) => stageSummary(stage, language)).join("");
+  const summaries = siteData.stages.map((stage) => stageSummary(stage, language, siteData)).join("");
   const labels = coachingContent.tabs.map((id) => t(`coaching.tab.${id}`, language));
   const panels = [
     `<h2>${copy("coaching.overview.title", language)}</h2><p class="coachingPanel__lead">${copy("coaching.overview.body", language)}</p><div class="coachingStageGrid">${summaries}</div>`,
-    ...siteData.stages.map((stage) => stagePanel(stage, language)),
+    ...siteData.stages.map((stage) => stagePanel(stage, language, siteData)),
     fullJourney(language, siteData),
     faqPanel(language),
   ];

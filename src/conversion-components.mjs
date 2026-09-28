@@ -26,7 +26,7 @@ export function renderWhatHappensNext({
   data = canonicalSiteData,
   startHref = data.routes.startFree,
 } = {}) {
-  const steps = [1, 2, 3].map((step) => `<li><span aria-hidden="true">0${step}</span><div>${copy(`conversion.next.step${step}Title`, language, "h3")}${copy(`conversion.next.step${step}Body`, language, "p")}</div></li>`).join("");
+  const steps = [1, 2, 3].map((step) => `<li><span aria-hidden="true">0${step}</span><div>${copy(`conversion.next.step${step}Title`, language, "h3")}${copy(`conversion.next.step${step}Body`, language, "p")}${step === 2 ? `<a class="button--text" href="${escapeHtml(data.routes.foundation)}" data-i18n="conversion.next.step2Link">${localized("conversion.next.step2Link", language)}</a>` : ""}</div></li>`).join("");
   return `<section class="conversionJourney" aria-labelledby="conversion-next-heading"><div class="conversionJourney__inner"><h2 id="conversion-next-heading" data-i18n="conversion.next.heading">${localized("conversion.next.heading", language)}</h2><ol class="conversionJourney__steps">${steps}</ol><a class="button--primary" href="${escapeHtml(startHref)}" data-i18n="conversion.next.cta">${localized("conversion.next.cta", language)}</a></div></section>`;
 }
 

@@ -20,9 +20,11 @@ test("coaching rate card uses direct purchase labels for available offers", () =
   const english = renderCoaching({ language: "en", siteData });
   const spanish = renderCoaching({ language: "es", siteData });
   assert.match(english, /data-i18n="coaching\.rate\.free\.action">Begin Now For Free<\/a>/);
-  assert.equal((english.match(/data-i18n="coaching\.rate\.action\.default">Buy Now<\/a>/g) ?? []).length, 2);
+  assert.equal((english.match(/data-i18n="coaching\.rate\.action\.default">Buy Now<\/a>/g) ?? []).length, 1);
+  assert.match(english, /href="\/foundation\/"[^>]*data-i18n="coaching\.foundation\.learnMore">Explore Foundation — £97<\/a>/);
   assert.match(spanish, /data-i18n="coaching\.rate\.free\.action">Comienza ahora gratis<\/a>/);
-  assert.equal((spanish.match(/data-i18n="coaching\.rate\.action\.default">Comprar ahora<\/a>/g) ?? []).length, 2);
+  assert.equal((spanish.match(/data-i18n="coaching\.rate\.action\.default">Comprar ahora<\/a>/g) ?? []).length, 1);
+  assert.match(spanish, /href="\/foundation\/"[^>]*data-i18n="coaching\.foundation\.learnMore">Explora Fundamentos — £97<\/a>/);
 });
 
 test("additional coaching offers expose bilingual descriptions and specific CTAs", () => {
@@ -45,6 +47,7 @@ test("coaching places one shared What Happens Next journey before its investment
   assert.equal((html.match(/class="conversionJourney"/g) ?? []).length, 1);
   assert.ok(journeyIndex >= 0 && journeyIndex < investmentIndex);
   assert.match(html.slice(journeyIndex, investmentIndex), /href="\/start-free\/"[^>]*data-i18n="conversion\.next\.cta"/);
+  assert.match(html.slice(journeyIndex, investmentIndex), /href="\/foundation\/"[^>]*data-i18n="conversion\.next\.step2Link"/);
 });
 
 test("coaching keeps shared journey translation hooks stable in English and Spanish", () => {
@@ -73,10 +76,11 @@ test("coaching is the accurate canonical offer", () => {
     complete: "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6",
   };
   for (const url of Object.values(payments)) {
-    assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.foundation ? 3 : 2);
-    assert.match(html, new RegExp(`href="${url.replaceAll("/", "\\/")}" target="_blank" rel="noopener noreferrer"`));
+    assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.foundation ? 0 : 2);
+    if (url !== payments.foundation) assert.match(html, new RegExp(`href="${url.replaceAll("/", "\\/")}" target="_blank" rel="noopener noreferrer"`));
   }
-  assert.equal((html.match(/data-i18n="coaching\.payNow">Pay Now<\/span>/g) ?? []).length, 9);
+  assert.equal((html.match(/data-i18n="coaching\.payNow">Pay Now<\/span>/g) ?? []).length, 7);
+  assert.match(html, /href="\/foundation\/"[^>]*data-i18n="coaching\.foundation\.learnMore">Explore Foundation — £97<\/a>/);
   assert.match(html, /Complete 24-Week Programme/);
 });
 

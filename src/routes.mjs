@@ -78,7 +78,7 @@ export const routeRenderers = Object.freeze({
   ),
   [siteData.routes.home]: (data) => homePage(data),
   [siteData.routes.startFree]: (data) => startFreePage(data),
-  [siteData.routes.foundation]: (data) => foundationPage(data),
+  [siteData.routes.foundation]: (data, language = "en") => foundationPage(data, language),
   [siteData.routes.coaching]: (data) => coachingPage(data),
   [siteData.routes.masterKeySystem]: (data) => masterKeyCurriculumPage(data),
   [siteData.routes.mksLineage]: (data) => mksLineagePage(data),

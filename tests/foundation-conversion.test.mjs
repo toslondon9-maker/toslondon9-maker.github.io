@@ -10,13 +10,13 @@ const translationExpectations = {
   "conversion.next.step1Title": ["START FREE", "EMPIEZA GRATIS"],
   "conversion.next.step1Body": ["Experience 7 Days to Change the Way You Use Your Mind through guided Master Key System study, reflection and practical exercises.", "Vive 7 días para cambiar la forma en que usas tu mente mediante el estudio guiado del Sistema de la Llave Maestra, la reflexión y ejercicios prácticos."],
   "conversion.next.step2Title": ["BUILD YOUR FOUNDATION", "CONSTRUYE TUS FUNDAMENTOS"],
-  "conversion.next.step2Body": ["If the journey feels right for you, continue with the four-week Foundation stage for £97.", "Si sientes que este camino es adecuado para ti, continúa con la etapa de Fundamentos de cuatro semanas por £97."],
+  "conversion.next.step2Body": ["If the journey feels right for you, continue with Foundation: four progressive weekly lessons, two 45-minute Zoom coaching calls each week throughout the four-week stage and WhatsApp support between calls for £97.", "Si sientes que este camino es adecuado para ti, continúa con Fundamentos: cuatro lecciones semanales progresivas, dos llamadas de coaching por Zoom de 45 minutos cada semana durante las cuatro semanas y apoyo por WhatsApp entre llamadas por £97."],
   "conversion.next.step3Title": ["GO DEEPER, AT YOUR PACE", "PROFUNDIZA, A TU RITMO"],
   "conversion.next.step3Body": ["Continue through Visualisation, Concentration and Contemplation & Mastery—or join the complete 24-week journey.", "Continúa con Visualización, Concentración y Contemplación y Maestría, o únete al recorrido completo de 24 semanas."],
   "conversion.next.cta": ["START YOUR 7 DAYS", "EMPIEZA TUS 7 DÍAS"],
   "conversion.foundation.eyebrow": ["YOUR NEXT STEP", "TU SIGUIENTE PASO"],
   "conversion.foundation.heading": ["You completed 7 Days to Change the Way You Use Your Mind.", "Has completado 7 días para cambiar la forma en que usas tu mente."],
-  "conversion.foundation.body": ["If the journey feels right, continue with Foundation — four weeks to build a dependable mental foundation.", "Si el recorrido encaja contigo, continúa con Fundamentos: cuatro semanas para construir una base mental sólida."],
+  "conversion.foundation.body": ["If the journey feels right, continue with Foundation: four progressive weekly lessons, two 45-minute Zoom coaching calls each week throughout the four-week stage, workbook access and WhatsApp support between calls.", "Si el recorrido encaja contigo, continúa con Fundamentos: cuatro lecciones semanales progresivas, dos llamadas de coaching por Zoom de 45 minutos cada semana durante las cuatro semanas, acceso al cuaderno y apoyo por WhatsApp entre llamadas."],
   "conversion.foundation.qualification": ["Individual outcomes depend on your circumstances, participation and consistent practice.", "Los resultados individuales dependen de tus circunstancias, participación y práctica constante."],
   "conversion.foundation.cta": ["CONTINUE TO FOUNDATION — £97", "CONTINÚA CON FUNDAMENTOS — £97"],
   "conversion.foundation.secondary": ["KEEP EXPLORING", "SEGUIR EXPLORANDO"],
@@ -37,7 +37,7 @@ test("renderWhatHappensNext renders three ordered translated steps and the suppl
   assert.equal((html.match(/<span aria-hidden="true">0[1-3]<\/span>/g) ?? []).length, 3);
   assert.ok(html.indexOf('data-i18n="conversion.next.step1Title"') < html.indexOf('data-i18n="conversion.next.step2Title"'));
   assert.ok(html.indexOf('data-i18n="conversion.next.step2Title"') < html.indexOf('data-i18n="conversion.next.step3Title"'));
-  for (const key of ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
+  for (const key of ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step2Link", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
   assert.match(html, /href="\/custom-start\/"/);
 });
 
@@ -63,7 +63,7 @@ test("conversion renderers expose each visible Spanish string through its transl
 });
 
 test("renderWhatHappensNext exposes the same hook contract in both supported languages", () => {
-  const keys = ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"];
+  const keys = ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step2Link", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"];
   for (const language of ["en", "es"]) {
     const html = renderWhatHappensNext({ language });
     for (const key of keys) assert.match(html, new RegExp(`data-i18n="${key}"`));
