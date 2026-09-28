@@ -162,7 +162,7 @@ const translations = deepFreeze({
   "home.taster.promiseBody": { en: "Use the seven days to decide whether this way of learning and practising is right for you.", es: "Utiliza los siete días para decidir si esta forma de aprender y practicar encaja contigo." },
   "home.taster.day1": { en: "See What’s Running Your Life", es: "Observa qué dirige tu vida" },
   "home.taster.day2": { en: "Take Back Your Attention", es: "Recupera tu atención" },
-  "home.taster.day3": { en: "Recognize What Keeps Repeating", es: "Reconoce lo que se repite" },
+  "home.taster.day3": { en: "Recognise What Keeps Repeating", es: "Reconoce lo que se repite" },
   "home.taster.day4": { en: "Give Your Mind a Direction", es: "Dale una dirección a tu mente" },
   "home.taster.day5": { en: "Become Someone You Can Rely On", es: "Conviértete en alguien en quien puedas confiar" },
   "home.taster.day6": { en: "Strengthen the New Pattern", es: "Refuerza el nuevo patrón" },
