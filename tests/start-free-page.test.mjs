@@ -23,8 +23,9 @@ test("Start Free places free value and preview immediately before the anchored r
 
 test("Start Free preserves the shared Digital Key header brand", () => {
   const html = fs.readFileSync(new URL("../start-free/index.html", import.meta.url), "utf8");
-  assert.match(html, /<a class="brand" href="\/"[^>]*><img src="\/images\/digital-key-lockup\.svg"/);
-  assert.match(html, /alt="Unleash Your Power logo"/);
+  assert.match(html, /<a class="brand" href="\/"[^>]*><img class="brand__mark" src="\/images\/power-key-mark\.png" alt=""/);
+  assert.match(html, /UNLEASH YOUR POWER/);
+  assert.match(html, /ALL POWER COMES FROM WITHIN\./);
   assert.match(html, /<div class="siteHeader__actions">/);
 });
 

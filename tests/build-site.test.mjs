@@ -38,7 +38,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
   assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20260923-typography-restore-1">/);
-  assert.match(html, /<link rel="preload" href="\/images\/digital-key-lockup\.svg" as="image" type="image\/svg\+xml">/);
+  assert.match(html, /<link rel="preload" href="\/images\/power-key-mark\.png" as="image" type="image\/png">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
   assert.match(html, /<footer[\s>]/);
@@ -282,7 +282,7 @@ test("standalone previews include every local dependency referenced by route she
       "assets/site-analytics.mjs",
       "assets/site-navigation.mjs",
       "content/translations.mjs",
-      "images/digital-key-lockup.svg",
+      "images/power-key-mark.png",
       "content/seven-day-canonical.json",
       "images/haanel-tariq-portraits.jpeg",
     ];

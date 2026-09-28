@@ -6381,3 +6381,83 @@ body {
 .home .homeIdeas__books,.home .homeOffers__grid,.home .homeReceive__grid{margin-top:1.25rem}
 @media(max-width:700px){.homeTradition__ideas{align-items:flex-start;flex-direction:column}.homeTradition__links{font-size:.95rem}.homeIdeas__books{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .affiliateReward__examples article>p:not(.eyebrow):not(.affiliateReward__secondary):not(.affiliateReward__amount){color:#26384a;font-size:1rem;line-height:1.65}.affiliateReward__salesExample small{color:#26384a;font-size:.92rem;line-height:1.55}
+
+/* Shared header branding: visual key mark plus live, stacked HTML wording. */
+.siteHeader .brand img.brand__mark {
+  width: clamp(9rem, 14vw, 13rem);
+  height: auto;
+  aspect-ratio: 2048 / 786;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.siteHeader .brand__wordmark {
+  display: grid;
+  gap: .12rem;
+  min-width: 0;
+  width: max-content;
+  white-space: nowrap;
+  line-height: 1.05;
+}
+.siteHeader .brand__wordmark > span {
+  color: var(--night);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 1.65vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+.siteHeader .brand__wordmark small {
+  color: var(--gold-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(.48rem, .7vw, .68rem);
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+@media (min-width: 801px) {
+  .siteHeader, .site-header {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    min-height: 126px !important;
+    height: 126px !important;
+    padding-block: 0 !important;
+    gap: clamp(1rem, 2vw, 2rem) !important;
+  }
+  .siteHeader > .brand, .site-header > .brand {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    min-width: max-content !important;
+    margin: 0 !important;
+  }
+  .siteHeader__actions {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    width: auto !important;
+    margin-left: auto !important;
+  }
+  .siteHeader__actions > .siteNav { display: flex !important; flex: 1 1 auto !important; min-width: 0 !important; width: auto !important; }
+  .siteHeader__actions > .siteNav ul { display: flex !important; flex-wrap: nowrap !important; justify-content: flex-end !important; width: 100% !important; }
+  .siteHeader__actions > .languageSwitch--header { display: flex !important; flex: 0 0 auto !important; }
+  .siteHeader .mobileNav { display: none !important; }
+}
+@media (max-width: 800px) {
+  .siteHeader, .site-header {
+    height: 96px !important;
+    min-height: 96px !important;
+    max-height: 96px !important;
+    padding: 8px 20px !important;
+  }
+  .siteHeader > .brand, .site-header > .brand { flex: 1 1 auto !important; min-width: 0 !important; gap: .45rem !important; margin-right: 0 !important; }
+  .siteHeader .brand img.brand__mark { width: clamp(5.5rem, 25vw, 7rem); flex: 0 0 auto; }
+  .siteHeader .brand__wordmark { flex: 1 1 auto; min-width: 0; max-width: none; }
+  .siteHeader .brand__wordmark > span { font-size: clamp(.78rem, 2.6vw, .9rem); letter-spacing: 0; }
+  .siteHeader .brand__wordmark small { font-size: clamp(.36rem, 1.65vw, .5rem); letter-spacing: .08em; }
+  .siteHeader, .site-header { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; column-gap: 0 !important; }
+  .siteHeader__actions { display: flex !important; flex: 0 0 auto !important; width: auto !important; min-width: 0 !important; margin: 0 !important; gap: 0 !important; }
+}

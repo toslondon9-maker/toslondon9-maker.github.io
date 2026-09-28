@@ -85,6 +85,17 @@ test("desktop header keeps the brand, navigation and language controls in one ro
   const desktop = css;
   assert.match(css, /\.siteHeader, \.site-header \{ display:flex;[\s\S]*?flex-direction:row;[\s\S]*?align-items:center;[\s\S]*?flex-wrap:nowrap/s);
   assert.match(css, /\.siteHeader__actions \{ display:flex; flex:1 1 auto; flex-direction:row/s);
-  assert.match(css, /digital-key-lockup\.svg/);
+  assert.match(css, /\.brand__mark/);
+  assert.match(css, /\.brand__wordmark/);
+  assert.match(css, /\.brand__wordmark small/);
   assert.match(css, /@media \(max-width: 480px\)[\s\S]*?\.brand img\s*\{[^}]*width:\s*3rem/s);
+});
+
+test("header lock-up enlarges the key and keeps a visible gold tagline", () => {
+  const css = readFileSync(cssUrl, "utf8");
+  assert.match(css, /\.siteHeader \.brand img\.brand__mark\s*\{[^}]*width:\s*clamp\(9rem, 14vw, 13rem\)/s);
+  assert.match(css, /\.siteHeader \.brand__wordmark > span\s*\{[^}]*font-size:\s*clamp\(1\.25rem, 1\.65vw, 1\.6rem\)/s);
+  assert.match(css, /\.siteHeader \.brand__wordmark small\s*\{[^}]*color:\s*var\(--gold-dark\)/s);
+  assert.match(css, /@media \(max-width: 800px\)[\s\S]*?\.siteHeader \.brand img\.brand__mark\s*\{[^}]*width:\s*clamp\(5\.5rem, 25vw, 7rem\)/s);
+  assert.match(css, /@media \(max-width: 800px\)[\s\S]*?\.siteHeader \.brand__wordmark > span\s*\{[^}]*font-size:\s*clamp\(\.78rem, 2\.6vw, \.9rem\)/s);
 });

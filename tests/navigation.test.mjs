@@ -32,12 +32,22 @@ test("header presents the simplified seven-destination conversion path", () => {
   assert.match(html, />About Tariq<\/a>/);
   assert.match(html, />Buy the MKS Book<\/a>/);
   assert.match(html, />Start Free<\/a>/);
-  assert.match(html, /<img src="\/images\/digital-key-lockup\.svg" alt="Unleash Your Power logo"/);
+  assert.match(html, /<img class="brand__mark" src="\/images\/power-key-mark\.png" alt=""/);
+  assert.match(html, /<span class="brand__wordmark"[^>]*>.*UNLEASH YOUR POWER.*<small[^>]*>ALL POWER COMES FROM WITHIN\.<\/small>/s);
   assert.match(html, /aria-expanded="false"/);
   assert.match(html, />EN<.*>ES</s);
   assert.equal((html.match(/class="siteNav"/g) ?? []).length, 1);
   assert.match(html, /href="\/" aria-current="page"/);
   assert.doesNotMatch(html, /<div[^>]+(?:onclick|role="button")/);
+});
+
+test("header branding keeps the key visual separate from its accessible HTML wording", () => {
+  const html = renderHeader({ route: "/", language: "en" });
+  const brand = html.match(/<a class="brand"[\s\S]*?<\/a>/)?.[0] ?? "";
+  assert.match(brand, /class="brand__mark"/);
+  assert.match(brand, /UNLEASH YOUR POWER/);
+  assert.match(brand, /ALL POWER COMES FROM WITHIN\./);
+  assert.doesNotMatch(brand, /digital-key-lockup\.svg/);
 });
 
 test("footer includes mission, primary routes, policies, language and copyright", () => {

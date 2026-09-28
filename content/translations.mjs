@@ -58,6 +58,8 @@ const translations = deepFreeze({
   "menu.open": { en: "Open menu", es: "Abrir menú" },
   "menu.close": { en: "Close menu", es: "Cerrar menú" },
   "brand.homeLabel": { en: "Unleash Your Power home", es: "Inicio de Unleash Your Power" },
+  "brand.wordmark": { en: "UNLEASH YOUR POWER", es: "UNLEASH YOUR POWER" },
+  "brand.tagline": { en: "ALL POWER COMES FROM WITHIN.", es: "ALL POWER COMES FROM WITHIN." },
   "nav.primaryLabel": { en: "Primary navigation", es: "Navegación principal" },
   "nav.mobileLabel": { en: "Mobile navigation", es: "Navegación móvil" },
   "nav.footerLabel": { en: "Footer navigation", es: "Navegación del pie de página" },
