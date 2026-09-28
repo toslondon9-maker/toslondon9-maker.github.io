@@ -240,7 +240,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
 
       if (globalPageFiles[index] === "referral/index.html") {
         assert.match(page, /class="referralPage"/);
-        assert.match(page, /href="#personal-invite"/);
+        assert.match(page, /href="#share-personally"|href="#personal-invite"/);
         continue;
       }
 

@@ -22,6 +22,12 @@ test("referral page contains the approved share journey sections", () => {
   assert.deepEqual(page.scripts, ["/assets/referral.mjs"]);
 });
 
+test("bottom referral CTA targets the personal invite section", () => {
+  const page = referralPage(siteData);
+  assert.match(page.body, /href="#share-personally">REFER A FRIEND TODAY<\/a>/);
+  assert.doesNotMatch(page.body, /href="#personal-invite">REFER A FRIEND TODAY<\/a>/);
+});
+
 test("referral page explains the approved 5% full-course reward", () => {
   const page = referralPage(siteData);
   const reward = page.body.match(/<section[^>]+class="referralSection affiliateReward"[\s\S]*?<\/section>/)?.[0] ?? "";
