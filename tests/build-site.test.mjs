@@ -283,6 +283,7 @@ test("standalone previews include every local dependency referenced by route she
       "assets/site-navigation.mjs",
       "content/translations.mjs",
       "images/digital-key-lockup.svg",
+      "content/seven-day-canonical.json",
       "images/haanel-tariq-portraits.jpeg",
     ];
 

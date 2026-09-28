@@ -1,3 +1,12 @@
+import canonical from "./seven-day-canonical.json" with { type: "json" };
+
+function canonicalLessonTranslations() {
+  return Object.fromEntries(canonical.lessons.flatMap((lesson) => {
+    const prefix = `sevenDay.lessons.day${lesson.sequence}`;
+    return Object.keys(lesson.en).map((field) => [`${prefix}.${field}`, { en: lesson.en[field], es: lesson.es[field] }]);
+  }));
+}
+
 function deepFreeze(value) {
   for (const nested of Object.values(value)) {
     if (nested && typeof nested === "object") deepFreeze(nested);
@@ -970,6 +979,11 @@ const translations = deepFreeze({
   "sevenDay.lesson.observationHeading": { en: "What to observe today", es: "Qué observar hoy" },
   "sevenDay.lesson.reflectionHeading": { en: "Your reflection", es: "Tu reflexión" },
   "sevenDay.lesson.actionHeading": { en: "One practical action", es: "Una acción práctica" },
+  "sevenDay.lesson.mksConnectionHeading": { en: "MASTER KEY CONNECTION", es: "CONEXIÓN CON EL MASTER KEY SYSTEM" },
+  "sevenDay.lesson.optionalPracticeHeading": { en: "OPTIONAL MKS PRACTICE", es: "PRÁCTICA OPCIONAL DEL MKS" },
+  "sevenDay.lesson.optionalTimeLabel": { en: "Optional MKS practice", es: "Práctica opcional del MKS" },
+  "sevenDay.lesson.coreTimeLabel": { en: "Core lesson", es: "Lección principal" },
+  "sevenDay.lesson.fullTimeLabel": { en: "Full optional experience", es: "Experiencia opcional completa" },
   "sevenDay.navigation.dashboard": { en: "Back to the seven days", es: "Volver a los siete días" },
   "sevenDay.navigation.previous": { en: "Previous lesson", es: "Lección anterior" },
   "sevenDay.navigation.next": { en: "Next lesson", es: "Siguiente lección" },
@@ -1163,7 +1177,6 @@ const translations = deepFreeze({
   "sevenDay.lessons.day7.completion": { en: "Mark Day 7 complete", es: "Marcar el día 7 como completado" },
   "sevenDay.lessons.day7.navigation": { en: "Return to your seven-day dashboard", es: "Vuelve al panel de tus siete días" },
   "sevenDay.lessons.day7.status": { en: "Day 7 of 7", es: "Día 7 de 7" },
-
   // Phase 2 conversion and student-journey copy. These hooks keep the live EN/ES toggle complete.
   "phase2.after.eyebrow": { en: "AFTER DAY 7", es: "DESPUÉS DEL DÍA 7" },
   "phase2.after.title": { en: "Decide your next step from experience, not pressure", es: "Decide tu siguiente paso desde la experiencia, no desde la presión" },
@@ -1357,6 +1370,7 @@ const translations = deepFreeze({
   "insights.journey.heading": { en: "The Master Key System: A 24-Week Journey of Personal Development", es: "The Master Key System: un viaje de desarrollo personal de 24 semanas" },
   "insights.lawAttraction.metaDescription": { en: "A source-based study of the Law of Attraction in Week 18 and the meaning of completing The Master Key System.", es: "Un estudio basado en la fuente sobre la Ley de la Atracción en la Semana 18 y el sentido de completar The Master Key System." },
   "insights.lawAttraction.heading": { en: "The Law of Attraction: Week 18 and the Transformation of Completing the Master Key System", es: "La Ley de la Atracción: la Semana 18 y la transformación de completar el Master Key System" },
+  ...canonicalLessonTranslations(),
 });
 
 const warnedKeys = new Set();

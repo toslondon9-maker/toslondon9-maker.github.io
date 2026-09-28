@@ -4,6 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
+import canonical from "../content/seven-day-canonical.json" with { type: "json" };
 import { routeRenderers } from "../src/routes.mjs";
 import { buildSite } from "../tools/build-site.mjs";
 
@@ -32,4 +33,16 @@ test("the deterministic site build publishes the English workbook", async () => 
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
+});
+
+test("the workbook generator consumes canonical lesson content and embeds fonts", async () => {
+  const builder = await readFile("tools/build-seven-day-workbook.py", "utf8");
+  const workbook = await readFile(workbookFile);
+  assert.match(builder, /seven-day-canonical\.json/);
+  assert.doesNotMatch(builder, /LESSONS\s*=\s*\[/);
+  assert.match(builder, /copy\["mksConnection"\]/);
+  assert.match(builder, /copy\["optionalPractice"\]/);
+  assert.ok(canonical.lessons.every((lesson) => lesson.en.mksConnection && lesson.en.optionalPractice));
+  assert.match(workbook.toString("latin1"), /FontFile/);
+  assert.match(workbook.toString("latin1"), /Arial|Georgia/);
 });

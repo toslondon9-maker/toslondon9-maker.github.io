@@ -4918,6 +4918,8 @@ body {
 }
 
 .sevenDayLesson__practice,
+.sevenDayLesson__mksConnection,
+.sevenDayLesson__optionalPractice,
 .sevenDayLesson__completion {
   min-width: 0;
   padding: clamp(1.25rem, 3vw, 2rem);
@@ -4927,12 +4929,30 @@ body {
   box-shadow: var(--shadow-card);
 }
 
+.sevenDayLesson__mksConnection,
+.sevenDayLesson__optionalPractice {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-card);
+  background: linear-gradient(145deg, rgba(199, 154, 69, 0.12), var(--paper));
+}
+
+.sevenDayLesson__optionalPractice {
+  border-inline-start: 0.35rem solid var(--gold);
+  background: var(--cream-deep);
+}
+
 .sevenDayLesson__practice h2,
+.sevenDayLesson__mksConnection h2,
+.sevenDayLesson__optionalPractice h2,
 .sevenDayLesson__completion h2 {
   font-size: clamp(1.4rem, 3vw, 1.9rem);
 }
 
 .sevenDayLesson__practice p,
+.sevenDayLesson__mksConnection p,
+.sevenDayLesson__optionalPractice p,
 .sevenDayLesson__completion p {
   overflow-wrap: anywhere;
 }
@@ -4940,6 +4960,22 @@ body {
 .sevenDayLesson__practice p {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.sevenDayLesson__mksConnection p,
+.sevenDayLesson__optionalPractice p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.sevenDayLesson__practiceTime {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
 }
 
 .sevenDayLesson__completion {

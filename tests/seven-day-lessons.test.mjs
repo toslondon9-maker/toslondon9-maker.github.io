@@ -67,7 +67,7 @@ test("lessons provide working sequential navigation and reserve coaching for day
 });
 
 test("lesson pages expose every changeable value to the runtime language switcher", () => {
-  const { dashboard, lesson: headings, navigation, progress } = sevenDayExperience.sharedKeys;
+  const { dashboard, lesson: headings, time, navigation, progress } = sevenDayExperience.sharedKeys;
 
   for (const lesson of sevenDayExperience.lessons) {
     const html = lessonPage(lesson).body;
@@ -77,10 +77,16 @@ test("lesson pages expose every changeable value to the runtime language switche
       lesson.contentKeys.observation,
       lesson.contentKeys.reflection,
       lesson.contentKeys.action,
+      lesson.contentKeys.mksConnection,
+      lesson.contentKeys.optionalPractice,
+      lesson.contentKeys.practiceTime,
+      lesson.contentKeys.coreTime,
+      lesson.contentKeys.fullTime,
       lesson.contentKeys.completion,
       lesson.contentKeys.navigation,
       lesson.contentKeys.status,
       ...Object.values(headings),
+      ...Object.values(time),
       navigation.dashboard,
       dashboard.eyebrow,
       progress.heading,

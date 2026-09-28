@@ -26,6 +26,7 @@ const runtimeFiles = Object.freeze([
   "assets/site-navigation.mjs",
   "assets/tabs.mjs",
   "content/translations.mjs",
+  "content/seven-day-canonical.json",
 ]);
 const siteMetadataFiles = Object.freeze(["robots.txt"]);
 const buildRoutes = Object.freeze([...Object.values(siteData.routes), ...siteData.experienceRoutes]);

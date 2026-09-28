@@ -1,0 +1,225 @@
+{
+  "title": {
+    "en": "7 Days to Change the Way You Use Your Mind",
+    "es": "7 días para cambiar la forma en que usas tu mente"
+  },
+  "lessons": [
+    {
+      "id": "day-1",
+      "sequence": 1,
+      "slug": "see-whats-running-your-life",
+      "route": "/start-free/day-1-see-whats-running-your-life/",
+      "mksPart": 1,
+      "en": {
+        "title": "See What's Running Your Life",
+        "teaching": "Much of a day can be shaped by thoughts and reactions that happen before you consciously choose them. Awareness creates a pause: not to judge what appears, but to see it clearly enough to choose your response.",
+        "observation": "Notice one moment when a thought, feeling or habit seems to take over. Name what happened, what you told yourself and what you did next.",
+        "reflection": "Which automatic reaction most often pulls you away from the way you want to act?",
+        "action": "Pause once today before reacting. Take one slow breath and choose your next response deliberately.",
+        "mksConnection": "Part One connects awareness with the world within: thoughts and mental attitudes influence how we meet the world without, while the ability to direct our response begins with recognising that power is developed from within.",
+        "optionalPractice": "Sit quietly and remain physically still. Notice the impulse to move or react, and return to stillness without forcing yourself. The original MKS exercise develops physical stillness progressively.",
+        "practiceTime": "10–15 minutes",
+        "coreTime": "10–15 minutes",
+        "fullTime": "20–25 minutes"
+      },
+      "es": {
+        "title": "Observa qué dirige tu vida",
+        "teaching": "Gran parte de tu día puede estar guiada por pensamientos y reacciones que surgen antes de que elijas de forma consciente. Tomar conciencia abre una pausa: no para juzgar lo que aparece, sino para verlo con claridad y elegir cómo responder.",
+        "observation": "Observa un momento en el que un pensamiento, una emoción o un hábito parezca tomar el control. Pon nombre a lo que ha ocurrido, a lo que te has dicho y a lo que has hecho después.",
+        "reflection": "¿Qué reacción automática te aleja con más frecuencia de la forma en que quieres actuar?",
+        "action": "Haz una pausa hoy antes de reaccionar. Respira lentamente una vez y elige tu siguiente respuesta de forma deliberada.",
+        "mksConnection": "La Parte Uno conecta la conciencia con el mundo interior: los pensamientos y las actitudes mentales influyen en cómo encuentras el mundo exterior, y dirigir tu respuesta empieza por reconocer que ese poder se desarrolla desde dentro.",
+        "optionalPractice": "Siéntate en silencio y mantén el cuerpo quieto. Observa el impulso de moverte o reaccionar y vuelve a la quietud sin forzarte. El ejercicio original del MKS desarrolla la quietud física de forma progresiva.",
+        "practiceTime": "10–15 minutos",
+        "coreTime": "10–15 minutos",
+        "fullTime": "20–25 minutos"
+      }
+    },
+    {
+      "id": "day-2",
+      "sequence": 2,
+      "slug": "take-back-your-attention",
+      "route": "/start-free/day-2-take-back-your-attention/",
+      "mksPart": 2,
+      "en": {
+        "title": "Take Back Your Attention",
+        "teaching": "Attention is not something you either have or lack; it is something you can practise directing. Each time you notice distraction and return to your chosen focus, you make a deliberate choice.",
+        "observation": "Notice what most often captures your attention without permission. Observe the trigger and how long it takes you to realise your focus has moved.",
+        "reflection": "What deserves more of your attention than it currently receives?",
+        "action": "Choose one ordinary activity and give it your full attention for five minutes. When your mind wanders, return without criticising yourself.",
+        "mksConnection": "Part Two distinguishes conscious choice from automatic subconscious activity. It invites you to take responsibility for directing attention and to guard your mind from suggestions that do not serve your chosen purpose.",
+        "optionalPractice": "Choose one simple object or activity and hold your attention on it. When your mind wanders, return calmly without self-criticism or force.",
+        "practiceTime": "5–10 minutes",
+        "coreTime": "10–15 minutes",
+        "fullTime": "15–25 minutes"
+      },
+      "es": {
+        "title": "Recupera tu atención",
+        "teaching": "La atención no es algo que simplemente tengas o te falte: puedes practicar cómo dirigirla. Cada vez que notas una distracción y vuelves al foco que has elegido, tomas una decisión deliberada.",
+        "observation": "Fíjate en qué capta tu atención con más frecuencia sin que lo decidas. Observa qué lo desencadena y cuánto tardas en darte cuenta de que tu foco se ha desplazado.",
+        "reflection": "¿Qué merece más de tu atención de la que le dedicas ahora?",
+        "action": "Elige una actividad cotidiana y préstale toda tu atención durante cinco minutos. Cuando tu mente se distraiga, vuelve sin criticarte.",
+        "mksConnection": "La Parte Dos distingue la elección consciente de la actividad automática del subconsciente. Te invita a responsabilizarte de dirigir tu atención y a proteger tu mente de sugerencias que no sirven a tu propósito elegido.",
+        "optionalPractice": "Elige un objeto o una actividad sencilla y mantén tu atención en ella. Cuando tu mente se distraiga, vuelve con calma, sin criticarte ni forzarte.",
+        "practiceTime": "5–10 minutos",
+        "coreTime": "10–15 minutos",
+        "fullTime": "15–25 minutos"
+      }
+    },
+    {
+      "id": "day-3",
+      "sequence": 3,
+      "slug": "recognise-what-keeps-repeating",
+      "route": "/start-free/day-3-recognise-what-keeps-repeating/",
+      "mksPart": 3,
+      "en": {
+        "title": "Recognise What Keeps Repeating",
+        "teaching": "Repeated outcomes often have a repeated mental pattern behind them: an assumption, interpretation or familiar response. Recognising the pattern gives you useful information; it does not require you to blame yourself.",
+        "observation": "When a familiar situation appears today, look for the first thought that follows it and the behaviour that usually comes next.",
+        "reflection": "Which repeated thought seems to lead towards a response you would like to change?",
+        "action": "Write one pattern as a simple sequence: trigger, thought, response. Add one alternative response you could try next time.",
+        "mksConnection": "Part Three explores how thought, attitude and experience relate through cause and effect. Relaxation, concentration and practical application can help you meet fear or resistance without letting it dictate your next action.",
+        "optionalPractice": "Relax your body deliberately. Notice one fear, resistance or tension response, distinguish the event from your interpretation of it, and choose one calmer, constructive response.",
+        "practiceTime": "5–10 minutes",
+        "coreTime": "10–15 minutes",
+        "fullTime": "15–25 minutes"
+      },
+      "es": {
+        "title": "Reconoce lo que se repite",
+        "teaching": "Detrás de los resultados que se repiten suele haber un patrón mental recurrente: una suposición, una interpretación o una respuesta conocida. Reconocer ese patrón te aporta información útil; no exige que te culpes.",
+        "observation": "Cuando hoy aparezca una situación conocida, observa el primer pensamiento que surge y la conducta que suele venir después.",
+        "reflection": "¿Qué pensamiento recurrente parece conducirte a una respuesta que te gustaría cambiar?",
+        "action": "Escribe un patrón como una secuencia sencilla: desencadenante, pensamiento y respuesta. Añade una respuesta alternativa que puedas probar la próxima vez.",
+        "mksConnection": "La Parte Tres explora cómo se relacionan el pensamiento, la actitud y la experiencia mediante causa y efecto. La relajación, la concentración y la aplicación práctica pueden ayudarte a encontrarte con el miedo o la resistencia sin dejar que dicten tu siguiente acción.",
+        "optionalPractice": "Relaja el cuerpo de forma deliberada. Observa una respuesta de miedo, resistencia o tensión, distingue el hecho de tu interpretación y elige una respuesta más serena y constructiva.",
+        "practiceTime": "5–10 minutos",
+        "coreTime": "10–15 minutos",
+        "fullTime": "15–25 minutos"
+      }
+    },
+    {
+      "id": "day-4",
+      "sequence": 4,
+      "slug": "give-your-mind-a-direction",
+      "route": "/start-free/day-4-give-your-mind-a-direction/",
+      "mksPart": 4,
+      "en": {
+        "title": "Give Your Mind a Direction",
+        "teaching": "A vague wish is difficult to hold in mind or act upon. A clear intention names a direction you can return to and helps you recognise choices that support it.",
+        "observation": "Notice where you use broad words such as better, more or different. Ask what that would look like in one real part of your day.",
+        "reflection": "If you could give your attention one clear direction for the next week, what would it be?",
+        "action": "Write one intention in a single sentence beginning, 'I choose to...'. Keep it specific enough to guide one decision today.",
+        "mksConnection": "Part Four presents the 'I' as a directing principle expressed through will, choice and constructive purpose. Repeated thought can become a habit, so self-control grows through small choices made consistently.",
+        "optionalPractice": "Write one constructive intention, including the careful adaptation, 'I can be what I will to be.' Repeat it calmly once in the morning and once in the evening, then connect it to one concrete action. It is a practice of direction, not a promise about what will happen.",
+        "practiceTime": "5–10 minutes",
+        "coreTime": "10–15 minutes",
+        "fullTime": "15–25 minutes"
+      },
+      "es": {
+        "title": "Dale una dirección a tu mente",
+        "teaching": "Es difícil mantener en mente un deseo impreciso y actuar a partir de él. Una intención clara señala una dirección a la que puedes volver y te ayuda a reconocer las decisiones que la apoyan.",
+        "observation": "Observa cuándo utilizas palabras generales como mejor, más o diferente. Pregúntate cómo se vería eso en una parte concreta de tu día.",
+        "reflection": "Si pudieras dar una dirección clara a tu atención durante la próxima semana, ¿cuál sería?",
+        "action": "Escribe una intención en una sola frase que empiece por «Elijo…». Hazla lo bastante concreta como para orientar una decisión de hoy.",
+        "mksConnection": "La Parte Cuatro presenta el «yo» como un principio que dirige y se expresa mediante la voluntad, la elección y un propósito constructivo. El pensamiento repetido puede convertirse en hábito, por lo que el autocontrol crece a través de pequeñas decisiones constantes.",
+        "optionalPractice": "Escribe una intención constructiva que incluya esta adaptación cuidadosa: «Puedo ser lo que decida ser». Repítela con calma una vez por la mañana y otra por la noche, y conéctala con una acción concreta. Es una práctica de dirección, no una promesa sobre lo que ocurrirá.",
+        "practiceTime": "5–10 minutos",
+        "coreTime": "10–15 minutos",
+        "fullTime": "15–25 minutos"
+      }
+    },
+    {
+      "id": "day-5",
+      "sequence": 5,
+      "slug": "become-someone-you-can-rely-on",
+      "route": "/start-free/day-5-become-someone-you-can-rely-on/",
+      "mksPart": 5,
+      "en": {
+        "title": "Become Someone You Can Rely On",
+        "teaching": "Self-trust grows when your actions match a commitment you have chosen carefully. Begin small: a specific promise you can keep matters more than an ambitious promise you abandon.",
+        "observation": "Notice how you speak to yourself before and after a commitment. Look for excuses, unrealistic standards and evidence that you followed through.",
+        "reflection": "What small commitment would help you trust your own word a little more?",
+        "action": "Choose one action that takes no more than ten minutes, decide when you will do it and keep that appointment with yourself.",
+        "mksConnection": "Part Five describes the mind as a home that benefits from regular mental housekeeping. Repeated thoughts shape habits, while desire, decision and consistent use develop the power that comes from within.",
+        "optionalPractice": "Identify one recurring thought that is not useful. Write a more constructive replacement thought, notice it during the day, and complete one small action consistent with it.",
+        "practiceTime": "5–10 minutes",
+        "coreTime": "10–15 minutes",
+        "fullTime": "15–25 minutes"
+      },
+      "es": {
+        "title": "Conviértete en alguien en quien puedas confiar",
+        "teaching": "La confianza en ti crece cuando tus acciones coinciden con un compromiso que has elegido con cuidado. Empieza por algo pequeño: una promesa concreta que puedes cumplir importa más que una promesa ambiciosa que abandonas.",
+        "observation": "Observa cómo te hablas antes y después de asumir un compromiso. Detecta las excusas, las expectativas poco realistas y las pruebas de que has cumplido.",
+        "reflection": "¿Qué pequeño compromiso te ayudaría a confiar un poco más en tu propia palabra?",
+        "action": "Elige una acción que no te lleve más de diez minutos, decide cuándo la harás y cumple esa cita contigo.",
+        "mksConnection": "La Parte Cinco describe la mente como un hogar que se beneficia de una limpieza mental habitual. Los pensamientos repetidos forman hábitos, mientras que el deseo, la decisión y el uso constante desarrollan el poder que viene de dentro.",
+        "optionalPractice": "Identifica un pensamiento recurrente que no te resulte útil. Escribe un pensamiento sustituto más constructivo, obsérvalo durante el día y completa una acción pequeña que sea coherente con él.",
+        "practiceTime": "5–10 minutos",
+        "coreTime": "10–15 minutos",
+        "fullTime": "15–25 minutos"
+      }
+    },
+    {
+      "id": "day-6",
+      "sequence": 6,
+      "slug": "change-from-the-inside-out",
+      "route": "/start-free/day-6-change-from-the-inside-out/",
+      "mksPart": 6,
+      "en": {
+        "title": "Change From the Inside Out",
+        "teaching": "Outward behaviour is influenced by the inner meaning you give to a situation. Working from the inside out means noticing that meaning, choosing a more useful direction and then expressing it through action.",
+        "observation": "In one challenging moment, notice the assumption beneath your first response. Ask whether it is a fact, an interpretation or an old expectation.",
+        "reflection": "What inner assumption would you like to meet with a more deliberate response?",
+        "action": "Choose one useful sentence that supports your intention from Day 4. Recall it before one relevant action today, then act in line with it.",
+        "mksConnection": "Part Six treats the mind as a mechanism that becomes more reliable through training. Attention and concentration direct mental energy, and practice is the means of developing mental strength.",
+        "optionalPractice": "Choose a simple object or image and study it carefully for approximately five minutes. Close your eyes and recreate as many details as possible, then open your eyes, compare and repeat if useful. Keep the total practice to approximately ten minutes.",
+        "practiceTime": "10 minutes",
+        "coreTime": "10–15 minutes",
+        "fullTime": "20–25 minutes"
+      },
+      "es": {
+        "title": "Cambia de dentro hacia fuera",
+        "teaching": "Tu conducta exterior está influida por el significado interior que das a una situación. Cambiar de dentro hacia fuera consiste en observar ese significado, elegir una dirección más útil y expresarla después mediante tus acciones.",
+        "observation": "En un momento difícil, observa la suposición que hay debajo de tu primera respuesta. Pregúntate si es un hecho, una interpretación o una expectativa antigua.",
+        "reflection": "¿A qué suposición interior te gustaría responder de una forma más deliberada?",
+        "action": "Elige una frase útil que apoye la intención del día 4. Recuérdala antes de una acción relacionada de hoy y actúa de acuerdo con ella.",
+        "mksConnection": "La Parte Seis trata la mente como un mecanismo que se vuelve más fiable mediante el entrenamiento. La atención y la concentración dirigen la energía mental, y la práctica desarrolla la fortaleza mental.",
+        "optionalPractice": "Elige un objeto o una imagen sencilla y estúdialo con atención durante unos cinco minutos. Cierra los ojos y recrea tantos detalles como puedas; después ábrelos, compara y repite si te resulta útil. Mantén la práctica total en unos diez minutos.",
+        "practiceTime": "10 minutos",
+        "coreTime": "10–15 minutos",
+        "fullTime": "20–25 minutos"
+      }
+    },
+    {
+      "id": "day-7",
+      "sequence": 7,
+      "slug": "make-it-part-of-how-you-live",
+      "route": "/start-free/day-7-make-it-part-of-how-you-live/",
+      "mksPart": 7,
+      "en": {
+        "title": "Make It Part of How You Live",
+        "teaching": "A sustainable practice is small enough to repeat and flexible enough to return to after a missed day. You can keep practising independently and consider the 24-week programme only if structured support feels appropriate.",
+        "observation": "Look back across the week and notice which exercise fitted naturally into your life, which required effort and which you would willingly repeat.",
+        "reflection": "Which simple daily practice would help you keep choosing your attention and actions deliberately?",
+        "action": "Choose one practice from these seven days, set a realistic time for it tomorrow and decide when you will review whether it still serves you.",
+        "mksConnection": "Part Seven develops idealisation and visualisation: make a clear, constructive picture of how you want to act, then connect that picture with the qualities and actions needed to move towards it.",
+        "optionalPractice": "Choose one constructive area of life. Create a clear, realistic mental picture of how you want to act, including the qualities and actions required. Hold the image calmly for several minutes and write one practical action to take tomorrow.",
+        "practiceTime": "5–10 minutes",
+        "coreTime": "10–15 minutes",
+        "fullTime": "15–25 minutes"
+      },
+      "es": {
+        "title": "Haz que forme parte de tu vida",
+        "teaching": "Una práctica sostenible es lo bastante pequeña como para repetirla y lo bastante flexible como para retomarla si un día no la haces. Puedes seguir practicando por tu cuenta y plantearte el programa de 24 semanas solo si sientes que un apoyo estructurado encaja contigo.",
+        "observation": "Repasa la semana y observa qué ejercicio ha encajado de forma natural en tu vida, cuál te ha exigido esfuerzo y cuál repetirías de buen grado.",
+        "reflection": "¿Qué práctica diaria sencilla te ayudaría a seguir eligiendo tu atención y tus acciones de forma deliberada?",
+        "action": "Elige una práctica de estos siete días, reserva un momento realista para hacerla mañana y decide cuándo revisarás si te sigue resultando útil.",
+        "mksConnection": "La Parte Siete desarrolla la idealización y la visualización: crea una imagen clara y constructiva de cómo quieres actuar y conéctala con las cualidades y acciones necesarias para avanzar hacia ella.",
+        "optionalPractice": "Elige un área constructiva de tu vida. Crea una imagen mental clara y realista de cómo quieres actuar, incluyendo las cualidades y acciones necesarias. Mantén la imagen con calma durante varios minutos y escribe una acción práctica para mañana.",
+        "practiceTime": "5–10 minutos",
+        "coreTime": "10–15 minutos",
+        "fullTime": "15–25 minutos"
+      }
+    }
+  ]
+}
