@@ -6371,4 +6371,13 @@ body {
 @media (max-width:640px){.foundationPage__actions>*{width:100%;text-align:center}.foundationPage__price{align-items:flex-start;flex-direction:column}}
 @media(max-width:900px){.affiliateReward__benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.affiliateReward__examples,.affiliateReward__summary ul{grid-template-columns:1fr}}
 @media(max-width:600px){.affiliateReward__benefits{grid-template-columns:1fr}.affiliateReward__examples article{padding:1.1rem}.affiliateReward__tagline{letter-spacing:.02em}}
+.homeTradition{background:var(--paper)}.homeTradition__ideas{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-top:clamp(1.5rem,3vw,2.5rem);padding-top:1.25rem;border-top:1px solid var(--border)}.homeTradition__ideas h3{margin:0;color:var(--night);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.3rem,2.3vw,1.8rem)}.homeTradition__ideas p{max-width:42rem;margin:0;color:var(--muted);line-height:1.6}.homeTradition__links{margin-top:1.5rem;line-height:1.8}.homeTradition__links a{color:var(--night);font-weight:700;text-decoration:underline;text-underline-offset:.2em}.insightsPreview__card--compact{padding:clamp(1.1rem,2.5vw,1.6rem)}.insightsPreview__card--compact p{margin-bottom:1rem}.insightsPreview__card--compact .button--text{margin-top:auto}
+/* Keep the compressed homepage calm and scannable without changing shared route spacing. */
+.home .homeHero{padding-block:clamp(2.75rem,5vw,5rem)}
+.home .homeSection{padding-block:clamp(2.25rem,4.5vw,4rem)}
+.home .homeWelcome{margin-block:clamp(2.5rem,5vw,5rem)}
+.home .insightsPreview{padding-block:clamp(2.25rem,4.5vw,4rem)}
+.home .homeLineage__grid,.home .homeJourney__stages,.home .homeTestimonials__grid{margin-top:clamp(1.5rem,3vw,2rem)}
+.home .homeIdeas__books,.home .homeOffers__grid,.home .homeReceive__grid{margin-top:1.25rem}
+@media(max-width:700px){.homeTradition__ideas{align-items:flex-start;flex-direction:column}.homeTradition__links{font-size:.95rem}.homeIdeas__books{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .affiliateReward__examples article>p:not(.eyebrow):not(.affiliateReward__secondary):not(.affiliateReward__amount){color:#26384a;font-size:1rem;line-height:1.65}.affiliateReward__salesExample small{color:#26384a;font-size:.92rem;line-height:1.55}

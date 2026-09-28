@@ -18,19 +18,13 @@ test("homepage presents the Insights & Guides collection above the final convers
   const finalPanelIndex = body.indexOf('data-home-section="final-cta"');
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
-  assert.equal((body.match(/class="insightsPreview__card"/g) ?? []).length, 4);
+  assert.equal((body.match(/class="insightsPreview__card[^\"]*/g) ?? []).length, 3);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsHowToStudy}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsPowerWithin}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
-  assert.equal((body.match(/class="insightsPreview__category"/g) ?? []).length, 4);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsHaanelBiography}"`));
-  assert.equal((body.match(/data-i18n="insights\.preview\.[^"]+\.pdfAction"/g) ?? []).length, 4);
-  assert.equal((body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 0);
-  assert.equal((body.match(/data-i18n="insights\.publicationDatePeople"/g) ?? []).length, 0);
-  assert.equal((body.match(/data-i18n="insights\.publicationDatePersonal"/g) ?? []).length, 0);
-  assert.equal((body.match(/data-i18n="insights\.publicationDateEnergyAttention"/g) ?? []).length, 1);
-  assert.equal((body.match(/data-i18n="insights\.publicationDateHaanel"/g) ?? []).length, 2);
+  assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
+  assert.doesNotMatch(body, /insightsPreview__category|insightsPreview__meta|insightsPreview__date|\/downloads\//);
+  assert.match(body, new RegExp(`data-i18n="insights\.preview\.[^"]+\.action"`));
   assert.doesNotMatch(body, /insightsIntroduction/);
 });
 

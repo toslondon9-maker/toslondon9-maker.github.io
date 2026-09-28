@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "welcome", "free-experience", "lineage", "ideas", "journey", "receive", "why-tariq", "testimonials", "offers", "insights", "final-cta"];
+const approvedSections = ["hero", "welcome", "free-experience", "tradition", "journey", "offers", "receive", "why-tariq", "testimonials", "insights", "final-cta"];
 const legacySections = ["lineage-expanded", "origins", "books", "ideal", "outcome", "coaching"];
 
 function section(html, id) {
@@ -16,6 +16,7 @@ test("homepage follows the approved concise 12-section sequence", () => {
   const html = renderHome({ language: "en" });
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(sections, approvedSections);
+  assert.equal(sections.indexOf("offers"), sections.indexOf("journey") + 1);
   assert.doesNotMatch(html, /conversionJourney/);
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
@@ -46,14 +47,11 @@ test("free experience is the clearest primary action and contains all approved v
   assert.match(html, /class="button--primary[^>]*href="\/start-free\/"[^>]*>START MY FREE 7 DAYS/);
 });
 
-test("lineage and ideas sections preserve authority, context and dedicated links", () => {
+test("tradition section combines lineage, context and dedicated links", () => {
   const html = renderHome({ language: "en" });
-  const lineage = section(html, "lineage");
-  const ideas = section(html, "ideas");
-  for (const value of ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique", "independent coaching", "not affiliated with or endorsed by"]) assert.match(lineage, new RegExp(value, "i"));
-  for (const href of [siteData.routes.mksLineage, siteData.routes.masterKeySystem, siteData.routes.resources]) assert.match(lineage, new RegExp(`href="${href.replaceAll("/", "\\/")}"`));
-  for (const value of ["The Master Key System", "The Secret", "Think and Grow Rich", "wider personal-development tradition", "not a claim of endorsement"]) assert.match(ideas, new RegExp(value, "i"));
-  assert.match(ideas, new RegExp(`href="${siteData.routes.resources.replaceAll("/", "\\/")}"`));
+  const tradition = section(html, "tradition");
+  for (const value of ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique", "The Master Key System", "The Secret", "Think and Grow Rich", "wider personal-development tradition", "not affiliated with or endorsed by", "not a claim of endorsement"]) assert.match(tradition, new RegExp(value, "i"));
+  for (const href of [siteData.routes.mksLineage, siteData.routes.getTheBook, siteData.routes.resources, siteData.routes.masterKeySystem]) assert.match(tradition, new RegExp(`href="${href.replaceAll("/", "\\/")}"`));
 });
 
 test("24-week journey shows exact stages and the study-practise-apply model", () => {
@@ -77,7 +75,8 @@ test("homepage retains existing testimonials and selected insights", () => {
   const testimonials = section(html, "testimonials");
   const insights = section(html, "insights");
   for (const name of ["Mark Smith", "Andy White", "David White"]) assert.match(testimonials, new RegExp(name));
-  assert.ok((insights.match(/class="insightCard|class="insightsPreview__card/g) ?? []).length >= 3);
+  assert.ok((insights.match(/class="insightCard|class="insightsPreview__card/g) ?? []).length <= 3);
+  assert.doesNotMatch(insights, /insightsPreview__meta|insightsPreview__date|\/downloads\/|download/);
   assert.match(insights, /VIEW ALL INSIGHTS|VIEW ALL INSIGHTS &amp; GUIDES/);
 });
 

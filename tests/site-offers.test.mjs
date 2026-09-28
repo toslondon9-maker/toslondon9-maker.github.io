@@ -20,8 +20,8 @@ test("deployed homepage uses the approved static Master Key experience", () => {
 });
 
 test("deployed homepage preserves the approved compact lineage section", () => {
-  const lineage = home.match(/<section[^>]+data-home-section="lineage"[\s\S]*?<\/section>/)?.[0] ?? "";
-  const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]);
+  const lineage = home.match(/<section[^>]+data-home-section="tradition"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]).slice(0, 3);
   assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
   assert.match(lineage, /Modern Study &amp; Application/);
   assert.match(lineage, /Your Guide &amp; Coach/);

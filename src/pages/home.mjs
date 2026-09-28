@@ -36,15 +36,11 @@ function renderFreeExperience(language) {
   return `<section class="homeSection homeFreeExperience section--night" data-home-section="free-experience"><div class="homeSection__inner homeFreeExperience__layout"><div class="homeFreeExperience__copy">${copy("home.free.eyebrow", language, "p", "eyebrow")}${copy("home.free.title", language, "h2")}${copy("home.free.intro", language, "p", "homeSection__intro")}<ul class="homeFreeExperience__facts">${facts}</ul>${cta(siteData.routes.startFree, "home.free.cta", language, "primary")}</div><div class="homeFreeExperience__progress"><h3 data-i18n="home.taster.title">${escapeHtml(t("home.taster.title", language))}</h3><ol class="homeFreeExperience__days">${days}</ol><p class="homeFreeExperience__note" data-i18n="home.taster.promiseTitle">${escapeHtml(t("home.taster.promiseTitle", language))}</p></div></div></section>`;
 }
 
-function renderLineage(language) {
+function renderTradition(language) {
   const people = homeContent.lineageIds.map((person) => `<li class="homeLineage__card">${copy(`home.lineage.${person}.name`, language, "h3")}${copy(`home.lineage.${person}.role`, language, "p", "homeLineage__role")}${copy(`home.lineage.${person}.body`, language)}</li>`).join("");
-  const links = `<p class="homeLineage__links"><a href="${siteData.routes.mksLineage}">${language === "es" ? "Explora el linaje del MKS" : "Explore the MKS Lineage"}</a> · <a href="${siteData.routes.masterKeySystem}">${language === "es" ? "Estudia el recorrido de 24 semanas" : "Study the 24-week course"}</a> · <a href="${siteData.routes.resources}">${language === "es" ? "Usa los recursos de estudio" : "Use the study resources"}</a></p>`;
-  return `<section class="homeSection homeLineage" data-home-section="lineage"><div class="homeSection__inner">${copy("home.lineage.eyebrow", language, "p", "eyebrow")}${copy("home.lineage.title", language, "h2")}${copy("home.lineage.intro", language, "p", "homeSection__intro")}<ol class="homeLineage__grid">${people}</ol>${copy("home.lineage.disclaimer", language, "p", "homeLineage__disclaimer")}${links}</div></section>`;
-}
-
-function renderIdeas(language) {
   const books = homeContent.books.slice(0, 4).map((book) => `<li><h3 data-i18n="${book.titleKey}">${escapeHtml(t(book.titleKey, language))}</h3><p data-i18n="${book.authorKey}">${escapeHtml(t(book.authorKey, language))}</p></li>`).join("");
-  return `<section class="homeSection homeIdeas" data-home-section="ideas"><div class="homeSection__inner">${copy("home.ideas.eyebrow", language, "p", "eyebrow")}${copy("home.ideas.title", language, "h2")}${copy("home.ideas.body", language, "p", "homeSection__intro")}<ul class="homeIdeas__books">${books}</ul>${copy("home.ideas.disclaimer", language, "p", "homeIdeas__disclaimer")}<a class="button--text" href="${siteData.routes.resources}" data-i18n="home.ideas.cta">${escapeHtml(t("home.ideas.cta", language))}</a></div></section>`;
+  const links = `<p class="homeTradition__links"><a href="${siteData.routes.mksLineage}" data-i18n="home.tradition.lineageLink">${escapeHtml(t("home.tradition.lineageLink", language))}</a> · <a href="${siteData.routes.getTheBook}" data-i18n="home.tradition.booksLink">${escapeHtml(t("home.tradition.booksLink", language))}</a> · <a href="${siteData.routes.resources}" data-i18n="home.tradition.resourcesLink">${escapeHtml(t("home.tradition.resourcesLink", language))}</a> · <a href="${siteData.routes.masterKeySystem}" data-i18n="home.tradition.methodLink">${escapeHtml(t("home.tradition.methodLink", language))}</a> · <a href="${siteData.routes.masterKeySystemOnlineCourse}" data-i18n="home.tradition.courseLink">${escapeHtml(t("home.tradition.courseLink", language))}</a></p>`;
+  return `<section class="homeSection homeTradition" data-home-section="tradition"><div class="homeSection__inner">${copy("home.tradition.eyebrow", language, "p", "eyebrow")}${copy("home.tradition.title", language, "h2")}${copy("home.tradition.intro", language, "p", "homeSection__intro")}<ol class="homeLineage__grid">${people}</ol>${copy("home.lineage.disclaimer", language, "p", "homeLineage__disclaimer")}<div class="homeTradition__ideas">${copy("home.ideas.title", language, "h3")}${copy("home.ideas.body", language, "p")}</div><ul class="homeIdeas__books">${books}</ul>${copy("home.ideas.disclaimer", language, "p", "homeIdeas__disclaimer")}${links}</div></section>`;
 }
 
 function renderJourney(language) {
@@ -76,7 +72,7 @@ function renderFinalCta(language) {
 }
 
 function renderHomeBody({ language = "en" } = {}) {
-  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderFreeExperience(language)}${renderLineage(language)}${renderIdeas(language)}${renderJourney(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials()}${renderOffers(language)}${renderInsightsPreview({ language, data: siteData })}${renderFinalCta(language)}</main>`;
+  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials()}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {
