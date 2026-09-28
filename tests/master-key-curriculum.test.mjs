@@ -14,9 +14,9 @@ test("the complete historic 24-week curriculum is visitor-accessible from home a
   const weeks = [...curriculum.matchAll(/<span class="week">WEEK <!-- -->(\d+)<\/span>/g)].map((match) => Number(match[1]));
 
   assert.deepEqual(weeks, Array.from({ length: 24 }, (_, index) => index + 1));
-  assert.equal((curriculum.match(/<h3 id="week-\d+-introduction">Introduction<\/h3>/g) ?? []).length, 24);
-  assert.equal((curriculum.match(/<h3 id="week-\d+-content">Content<\/h3>/g) ?? []).length, 24);
-  assert.equal((curriculum.match(/<h3 id="week-\d+-exercise">Exercise<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<summary>Introduction<b/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<summary>Content<b/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<summary>About the exercise<b/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="weeklyQA"/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="aiMastery"/g) ?? []).length, 24);
   assert.equal((curriculum.match(/Copy prompt/g) ?? []).length, 24);
@@ -32,6 +32,23 @@ test("the complete historic 24-week curriculum is visitor-accessible from home a
 
   const navigation = renderHeader({ route: "/", language: "en" });
   assert.equal((navigation.match(/href="\/master-key-system\/"[^>]*>Master Key System<\/a>/g) ?? []).length, 2);
+});
+
+test("the curriculum keeps the exact Chapter 1 title and collapses all lesson and answer sections", () => {
+  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+  const curriculum = html.match(/<section class="curriculum section" id="curriculum">[\s\S]*<\/section>/)?.[0] ?? "";
+
+  assert.match(curriculum, /Chapter 1 - One Consciousness - One Power/);
+  for (const stage of ["Foundation", "Visualisation", "Concentration", "Integration & Mastery"]) assert.match(curriculum, new RegExp(`<h2[^>]*>${stage}<\\/h2>`));
+  assert.equal((curriculum.match(/class="curriculumPhase__visual"/g) ?? []).length, 4);
+  assert.equal((curriculum.match(/<details id="week-\d+"/g) ?? []).length, 24);
+  assert.doesNotMatch(curriculum, /<details[^>]+open/);
+  assert.equal((curriculum.match(/class="curriculumLesson"/g) ?? []).length, 24 * 5);
+  assert.equal((curriculum.match(/class="qaItem"/g) ?? []).length, 24 * 10);
+  assert.match(curriculum, /About the exercise/);
+  assert.match(curriculum, /Your First Practice: Discover the Strength of Stillness/);
+  assert.match(curriculum, /Each practice is a small promise to yourself/);
+  assert.match(curriculum, /<details class="qaItem"><summary><span class="qaNumber">1<\/span>What is the world without in its relation to the world within\?<b/);
 });
 
 test("Master Key prompts begin minimised with native disclosure controls without changing their original prompt content", () => {

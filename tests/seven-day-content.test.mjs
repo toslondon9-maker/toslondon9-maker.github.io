@@ -171,6 +171,15 @@ test("experience copy makes no guarantees, invented authority claims or payment-
   );
 });
 
+test("lesson copy speaks directly to the reader while retaining British English", () => {
+  const english = experienceCopy("en");
+  const spanish = experienceCopy("es");
+
+  assert.match(english, /you\b/i);
+  assert.match(english, /recognise|practise/i);
+  assert.match(spanish, /\b(?:te|tu|tus|ti)\b/i);
+});
+
 function flattenValues(value) {
   return Object.values(value).flatMap((nested) => (
     nested && typeof nested === "object" ? flattenValues(nested) : nested

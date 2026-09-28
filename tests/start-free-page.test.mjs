@@ -44,6 +44,17 @@ test("Start Free explains the free value and previews all seven days before regi
   assert.match(html, /Total commitment: approximately 75–90 minutes across the entire week\./);
 });
 
+test("Start Free copy recognises the visitor's challenge and makes the next step concrete", () => {
+  const english = renderStartFree({ language: "en" });
+  const spanish = renderStartFree({ language: "es" });
+
+  assert.match(english, /overthinking|distraction|stuck|worry/i);
+  assert.match(english, /START YOUR 7 DAYS/);
+  assert.match(english, /10–15 minutes/);
+  assert.match(spanish, /preocup|distracc|atascad|duda/i);
+  assert.match(spanish, /EMPIEZA TUS 7 DÍAS/);
+});
+
 test("Start Free shows all lead-system requirements before optional details", () => {
   const html = dashboard().body;
   assert.match(html, /<input id="lead-first-name"[^>]+required/);

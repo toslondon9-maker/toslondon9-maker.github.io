@@ -2,15 +2,20 @@ import { readFileSync } from "node:fs";
 import { siteData as canonicalSiteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
 
+function escapeHtml(value) {
+  return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+}
+
 const curriculum = readFileSync(new URL("../../content/master-key-curriculum.html", import.meta.url), "utf8").trim();
+const weekOnePractice = readFileSync(new URL("../../content/master-key-week-one-practice.html", import.meta.url), "utf8").trim();
 const chapterGridOpening = '<div class="chapterGrid">';
 const chapterGridStart = curriculum.indexOf(chapterGridOpening);
 const chapterGridEnd = curriculum.indexOf('</div><p class="sourceNote">', chapterGridStart);
 const phases = Object.freeze([
-  { title: "FOUNDATION", range: "Chapters 1–4", start: 0, end: 4, image: "/images/master-key-visuals/foundation-chapters-1-4.webp", alt: "Foundation — Master Key System Chapters 1 to 4" },
-  { title: "VISUALISATION", range: "Chapters 5–11", start: 4, end: 11, image: "/images/master-key-visuals/visualisation-chapters-5-11.webp", alt: "Visualisation — Master Key System Chapters 5 to 11" },
-  { title: "CONCENTRATION", range: "Chapters 12–18", start: 11, end: 18, image: "/images/master-key-visuals/concentration-chapters-12-18.webp", alt: "Concentration — Master Key System Chapters 12 to 18" },
-  { title: "INTEGRATION & MASTERY", range: "Chapters 19–24", start: 18, end: 24, image: "/images/master-key-visuals/contemplation-mastery-chapters-19-24.webp", alt: "Contemplation and Mastery — Master Key System Chapters 19 to 24" },
+  { title: "Foundation", range: "Chapters 1–4", start: 0, end: 4, image: "/images/master-key-visuals/foundation-chapters-1-4.webp", alt: "Foundation — Master Key System Chapters 1 to 4" },
+  { title: "Visualisation", range: "Chapters 5–11", start: 4, end: 11, image: "/images/master-key-visuals/visualisation-chapters-5-11.webp", alt: "Visualisation — Master Key System Chapters 5 to 11" },
+  { title: "Concentration", range: "Chapters 12–18", start: 11, end: 18, image: "/images/master-key-visuals/concentration-chapters-12-18.webp", alt: "Concentration — Master Key System Chapters 12 to 18" },
+  { title: "Integration & Mastery", range: "Chapters 19–24", start: 18, end: 24, image: "/images/master-key-visuals/contemplation-mastery-chapters-19-24.webp", alt: "Integration and Mastery — Master Key System Chapters 19 to 24" },
 ]);
 
 const practiceGuides = Object.freeze([
@@ -62,7 +67,7 @@ function renderPracticeGuide(number) {
 }
 
 function wrapPractice(chapter, number) {
-  return chapter.replace(/<h3>Exercise<\/h3><p>([\s\S]*?)<\/p>(?=(?:<aside class="curriculumReflectionBridge">[\s\S]*?<\/aside>)?<div class="aiMastery">)/, `<section class="curriculumPractice" aria-label="This week's practice"><p class="curriculumPractice__eyebrow">🔑 THIS WEEK'S PRACTICE</p><div><h3>Exercise</h3><p>$1</p>${renderPracticeGuide(number)}<p class="curriculumPractice__message">“The reading gives you the knowledge. The daily exercise creates the transformation.”</p><p class="curriculumPractice__support">Consistency matters more than intensity. Give the exercise your full attention each day and let the results compound over time.</p></div></section>`);
+  return chapter.replace(/<h3(?: id="week-\d+-exercise")?>Exercise<\/h3><p>([\s\S]*?)<\/p>(?=(?:<aside class="curriculumReflectionBridge">[\s\S]*?<\/aside>)?<div class="aiMastery">)/, (_, exercise) => `<section class="curriculumPractice" aria-label="This week's practice"><p class="curriculumPractice__eyebrow">🔑 THIS WEEK'S PRACTICE</p><div><h3 id="week-${number}-exercise">Exercise</h3><p>${exercise}</p>${renderPracticeGuide(number)}<p class="curriculumPractice__message">“The reading gives you the knowledge. The daily exercise creates the transformation.”</p><p class="curriculumPractice__support">Consistency matters more than intensity. Give the exercise your full attention each day and let the results compound over time.</p></div></section>`);
 }
 
 function enhanceAiPrompt(chapter, number) {
@@ -72,7 +77,32 @@ function enhanceAiPrompt(chapter, number) {
 }
 
 function chapterSectionLinks(number) {
-  return `<nav class="curriculumSectionLinks" aria-label="Chapter ${number} study sections"><a href="#week-${number}-introduction" data-curriculum-section-link="introduction">Introduction</a><a href="#week-${number}-content" data-curriculum-section-link="content">Core lesson</a><a href="#week-${number}-exercise" data-curriculum-section-link="exercise">Weekly exercise</a></nav>`;
+  return `<nav class="curriculumSectionLinks" aria-label="Chapter ${number} study sections"><a href="#week-${number}-introduction" data-curriculum-section-link="introduction">Introduction</a><a href="#week-${number}-content" data-curriculum-section-link="content">Core lesson</a><a href="#week-${number}-exercise" data-curriculum-section-link="exercise">About the exercise</a></nav>`;
+}
+
+function lessonDisclosure(id, label, content) {
+  return `<details id="${id}" class="curriculumLesson"><summary>${label}<b aria-hidden="true">＋</b></summary><div class="curriculumLesson__body">${content}</div></details>`;
+}
+
+function questionDisclosures(questions) {
+  return questions.replace(/<div class="qaPair"><dt>(.*?)<\/dt><dd>(.*?)<\/dd><\/div>/g, '<details class="qaItem"><summary>$1<b aria-hidden="true">＋</b></summary><p>$2</p></details>');
+}
+
+function collapseChapterSections(chapter, number) {
+  let result = chapter;
+  if (number === 1) result = result.replace(/(<h3 id="week-1-exercise">Exercise<\/h3><p>.*?<\/p>)/s, `$1${weekOnePractice}`);
+  result = result.replace(/<h3 id="week-(\d+)-introduction">Introduction<\/h3>(.*?)(?=<h3 id="week-\d+-content">)/s, (_, chapterNumber, content) => lessonDisclosure(`week-${chapterNumber}-introduction`, "Introduction", content));
+  result = result.replace(/<h3 id="week-(\d+)-content">Content<\/h3>(.*?)(?=<h3 id="week-\d+-exercise">Exercise<\/h3>)/s, (_, chapterNumber, content) => lessonDisclosure(`week-${chapterNumber}-content`, "Content", content));
+  result = result.replace(/<h3 id="week-(\d+)-exercise">Exercise<\/h3>(.*?)(?=<aside class="curriculumReflectionBridge">)/s, (_, chapterNumber, content) => lessonDisclosure(`week-${chapterNumber}-exercise`, "About the exercise", content));
+  result = result.replace(/<aside class="curriculumReflectionBridge">[\s\S]*?(?=<\/div><div class="weeklyQA">)/, (content) => lessonDisclosure(`week-${number}-ai`, "AI mastery prompt", content));
+  result = result.replace(/<div class="weeklyQA"><h3>Questions &amp; Answers<\/h3><dl>([\s\S]*?)<\/dl><\/div>/, (_, questions) => lessonDisclosure(`week-${number}-questions`, "Questions &amp; Answers", `<div class="weeklyQA"><div class="weeklyQA__items">${questionDisclosures(questions)}</div></div>`));
+  return result;
+}
+
+function addChapterNavigation(chapter, index) {
+  const position = chapter.lastIndexOf("</details>");
+  if (position < 0) throw new Error(`Chapter ${index + 1} closing structure could not be located.`);
+  return `${chapter.slice(0, position)}${chapterNavigation(index)}${chapter.slice(position)}`;
 }
 
 function renderChapters(language = "en") {
@@ -85,20 +115,20 @@ function renderChapters(language = "en") {
     const number = index + 1;
     const phase = phaseFor(index);
     const opening = index === 0 ? fragment : `<details>${fragment}`;
-    const chapter = `${opening}${index === fragments.length - 1 ? "" : "</details>"}`
-      .replace("<details>", `<details id="week-${number}" data-curriculum-chapter="${number}" data-curriculum-stage="${phase.title}"${index === 0 ? " open" : ""}>`)
+    const chapter = enhanceAiPrompt(wrapPractice(`${opening}${index === fragments.length - 1 ? "" : "</details>"}`
+      .replace("<details>", `<details id="week-${number}" data-curriculum-chapter="${number}" data-curriculum-stage="${phase.title}">`)
       .replace("<summary>", `<summary><span class="curriculumChapterSummary__number">CHAPTER ${String(number).padStart(2, "0")}</span>`)
       .replace("</summary>", `<span class="curriculumChapterSummary__stage">${phase.title}</span></summary>${chapterProtectionNotice(language)}`)
       .replace('<div class="chapterBody">', '<article class="curriculumReadingCard"><div class="chapterBody">')
+      .replace('<strong>One Consciousness - One Power</strong>', '<strong>Chapter 1 - One Consciousness - One Power</strong>')
       .replace("AI MASTERY COACH", "AI MASTERY PROMPT")
       .replace("Paste this into ChatGPT. Your AI coach will test, challenge and guide you one step at a time—without giving away the answers too early.", "Copy this guided prompt into ChatGPT to explore this week's Master Key lesson more deeply.")
-      .replace('<div class="aiMastery">', '<aside class="curriculumReflectionBridge"><h3>TURN KNOWLEDGE INTO APPLICATION</h3><p>Understanding a principle intellectually is only the beginning. Take a moment to reflect on what this week\'s lesson means in your own life and how you can apply it today.</p></aside><div class="aiMastery">');
-    return enhanceAiPrompt(wrapPractice(chapter, number), number)
+      .replace('<div class="aiMastery">', '<aside class="curriculumReflectionBridge"><h3>TURN KNOWLEDGE INTO APPLICATION</h3><p>Understanding a principle intellectually is only the beginning. Take a moment to reflect on what this week\'s lesson means in your own life and how you can apply it today.</p></aside><div class="aiMastery">')
       .replace('<article class="curriculumReadingCard">', `${chapterSectionLinks(number)}<article class="curriculumReadingCard">`)
       .replace("<h3>Introduction</h3>", `<h3 id="week-${number}-introduction">Introduction</h3>`)
       .replace("<h3>Content</h3>", `<h3 id="week-${number}-content">Content</h3>`)
-      .replace("<h3>Exercise</h3>", `<h3 id="week-${number}-exercise">Exercise</h3>`)
-      .replace("</div></details>", `</div>${chapterNavigation(index)}</article></details>`);
+      .replace("<h3>Exercise</h3>", `<h3 id="week-${number}-exercise">Exercise</h3>`), number), number);
+    return addChapterNavigation(collapseChapterSections(chapter, number), index);
   });
 }
 
@@ -109,7 +139,7 @@ function renderStudyNavigator() {
       const current = chapter === 1 ? ' aria-current="true"' : "";
       return `<a href="#week-${chapter}" data-curriculum-chapter-link="${chapter}"${current}>${String(chapter).padStart(2, "0")}</a>`;
     }).join("");
-    return `<section class="curriculumStudyNav__group"><header><strong>${phase.title}</strong><span>${phase.range}</span></header><div class="curriculumStudyNav__links">${links}</div></section>`;
+    return `<section class="curriculumStudyNav__group"><header><strong>${phase.title.toUpperCase()}</strong><span>${phase.range}</span></header><div class="curriculumStudyNav__links">${links}</div></section>`;
   }).join("");
   return `<button class="curriculumStudyNav__toggle" type="button" data-curriculum-navigator-toggle aria-expanded="false" aria-controls="curriculum-study-navigator">Show all 24 chapters <span aria-hidden="true">⌄</span></button><nav class="curriculumStudyNav" id="curriculum-study-navigator" data-curriculum-navigator aria-label="24 chapter navigator">${groups}</nav>`;
 }
@@ -124,7 +154,7 @@ function renderCurriculum(language = "en") {
     `<section class="curriculumPhase" aria-labelledby="${phase.title.toLowerCase().replaceAll(/[^a-z]+/g, "-")}"><figure class="curriculumPhase__visual"><img src="${phase.image}" alt="${phase.alt}" width="1440" height="810" loading="lazy" decoding="async"></figure><header><p>${phase.range}</p><h2 id="${phase.title.toLowerCase().replaceAll(/[^a-z]+/g, "-")}">${phase.title}</h2></header><div class="chapterGrid">${chapters.slice(phase.start, phase.end).join("")}</div></section>`
   )).join("");
   const notes = curriculum.slice(chapterGridEnd + "</div>".length, -"</section>".length);
-  return `<section class="curriculum section" id="curriculum"><header class="curriculumPage__intro"><figure class="curriculumPage__heroVisual"><img src="/images/master-key-visuals/master-key-24-week-hero.webp" alt="The Master Key System — 24 Weeks to Master the Way You Use Your Mind" width="1440" height="810" fetchpriority="high" decoding="async"></figure><p class="eyebrow">THE MASTER KEY SYSTEM</p><h1>24 Weeks to Master the Way You Use Your Mind</h1><p class="curriculumPage__status" data-curriculum-status aria-live="polite">Chapter 1 of 24 · FOUNDATION</p>${chapterProtectionNotice(language)}<p class="curriculumPage__lead">The Master Key System is not simply a book to read. It is a 24-week system of study, reflection and daily practice designed to help you develop greater control of your attention, thinking and actions.</p><p>Move through one chapter each week. Study the principle, practise the exercise each day and allow the learning to compound through consistent application.</p><div class="curriculumPage__introActions"><a class="button--primary" href="${canonicalSiteData.routes.startFree}">START YOUR 7 DAYS</a><a class="button--secondary" href="${canonicalSiteData.routes.getTheBook}">GET THE MKS BOOK</a><a class="button--text" href="${canonicalSiteData.routes.aiMentors}">USE THE FREE AI MENTOR</a></div></header><div class="curriculumJourneyNote"><strong>Your transformation is built one week at a time.</strong><span>Study the chapter. Practise the exercise. Apply the principle. Then move forward.</span></div>${renderStudyNavigator()}${groupedChapters}${notes}<aside class="curriculumLineageLink"><span>Explore the study tradition behind this journey.</span><a class="button--text" href="${canonicalSiteData.routes.mksLineage}">Explore the MKS Lineage</a></aside>${renderEndResult()}</section>`;
+  return `<section class="curriculum section" id="curriculum"><header class="curriculumPage__intro"><figure class="curriculumPage__heroVisual"><img src="/images/master-key-visuals/master-key-24-week-hero.webp" alt="The Master Key System — 24 Weeks to Master the Way You Use Your Mind" width="1440" height="810" fetchpriority="high" decoding="async"></figure><p class="eyebrow" data-i18n="curriculum.hero.eyebrow">${escapeHtml(t("curriculum.hero.eyebrow", language))}</p><h1>24 Weeks to Master the Way You Use Your Mind</h1><p class="curriculumPage__status" data-curriculum-status aria-live="polite" data-i18n="curriculum.hero.status">${escapeHtml(t("curriculum.hero.status", language))}</p>${chapterProtectionNotice(language)}<p class="curriculumPage__lead" data-i18n="curriculum.hero.lead">${escapeHtml(t("curriculum.hero.lead", language))}</p><p data-i18n="curriculum.hero.rhythm">${escapeHtml(t("curriculum.hero.rhythm", language))}</p><div class="curriculumPage__introActions"><a class="button--primary" href="${canonicalSiteData.routes.startFree}">START YOUR 7 DAYS</a><a class="button--secondary" href="${canonicalSiteData.routes.getTheBook}">GET THE MKS BOOK</a><a class="button--text" href="${canonicalSiteData.routes.aiMentors}">USE THE FREE AI MENTOR</a></div></header><div class="curriculumJourneyNote"><strong>Your transformation is built one week at a time.</strong><span>Study the chapter. Practise the exercise. Apply the principle. Then move forward.</span></div>${renderStudyNavigator()}${groupedChapters}${notes}<aside class="curriculumLineageLink"><span>Explore the study tradition behind this journey.</span><a class="button--text" href="${canonicalSiteData.routes.mksLineage}">Explore the MKS Lineage</a></aside>${renderEndResult()}</section>`;
 }
 
 export function masterKeyCurriculumPage(data = canonicalSiteData, language = "en") {

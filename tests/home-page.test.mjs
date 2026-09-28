@@ -123,3 +123,15 @@ test("homepage preserves SEO metadata", () => {
   assert.equal(homePage(siteData, "en").title, "Unleash Your Power | Master Key System Coaching with Tariq");
   assert.equal(t("meta.home.title", "en"), "Unleash Your Power | Master Key System Coaching with Tariq");
 });
+
+test("homepage reader connection moves from challenge to a clear next step in both languages", () => {
+  const english = renderHome({ language: "en" });
+  const spanish = renderHome({ language: "es" });
+
+  assert.match(english, /overthinking|scattered|stuck/i);
+  assert.match(english, /START YOUR 7 DAYS/i);
+  assert.match(english, /Foundation/);
+  assert.match(spanish, /mente|atención|atascad|dirección/i);
+  assert.match(spanish, /EMPIEZA TUS 7 DÍAS/i);
+  assert.match(spanish, /Fundamentos/);
+});
