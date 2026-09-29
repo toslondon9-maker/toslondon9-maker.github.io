@@ -10,17 +10,68 @@ const translationExpectations = {
   "conversion.next.step1Title": ["START FREE", "EMPIEZA GRATIS"],
   "conversion.next.step1Body": ["Experience 7 Days to Change the Way You Use Your Mind through guided Master Key System study, reflection and practical exercises.", "Vive 7 días para cambiar la forma en que usas tu mente mediante el estudio guiado del Sistema de la Llave Maestra, la reflexión y ejercicios prácticos."],
   "conversion.next.step2Title": ["BUILD YOUR FOUNDATION", "CONSTRUYE TUS FUNDAMENTOS"],
-  "conversion.next.step2Body": ["If the journey feels right for you, continue with Foundation: four progressive weekly lessons, two 45-minute Zoom coaching calls each week throughout the four-week stage and WhatsApp support between calls for £97.", "Si sientes que este camino es adecuado para ti, continúa con Fundamentos: cuatro lecciones semanales progresivas, dos llamadas de coaching por Zoom de 45 minutos cada semana durante las cuatro semanas y apoyo por WhatsApp entre llamadas por £97."],
+  "conversion.next.step2Body": ["If the journey feels right for you, continue with Foundation for £97: four progressive lessons across four weeks, two 45-minute Zoom coaching calls each week — eight calls total and six hours of live Zoom coaching — plus workbook and online lesson access, WhatsApp support, approximately 45 minutes to read the chapter and 30 minutes for the meditation exercise each day, approximately 21 hours of chapter reading and approximately 14 hours of meditation practice across four weeks, and approximately 41 hours total commitment.", "Si sientes que este camino es adecuado para ti, continúa con Fundamentos por £97: cuatro lecciones progresivas durante cuatro semanas, dos llamadas de coaching por Zoom de 45 minutos cada semana — ocho llamadas en total y seis horas de coaching en directo por Zoom — además de acceso al cuaderno y a las lecciones online, apoyo por WhatsApp, aproximadamente 45 minutos para leer el capítulo y 30 minutos para el ejercicio de meditación cada día, aproximadamente 21 horas de lectura de los capítulos y aproximadamente 14 horas de práctica de meditación durante cuatro semanas, y aproximadamente 41 horas de dedicación total."],
   "conversion.next.step3Title": ["GO DEEPER, AT YOUR PACE", "PROFUNDIZA, A TU RITMO"],
   "conversion.next.step3Body": ["Continue through Visualisation, Concentration and Contemplation & Mastery—or join the complete 24-week journey.", "Continúa con Visualización, Concentración y Contemplación y Maestría, o únete al recorrido completo de 24 semanas."],
   "conversion.next.cta": ["START YOUR 7 DAYS", "EMPIEZA TUS 7 DÍAS"],
   "conversion.foundation.eyebrow": ["YOUR NEXT STEP", "TU SIGUIENTE PASO"],
   "conversion.foundation.heading": ["You completed 7 Days to Change the Way You Use Your Mind.", "Has completado 7 días para cambiar la forma en que usas tu mente."],
-  "conversion.foundation.body": ["If the journey feels right, continue with Foundation: four progressive weekly lessons, two 45-minute Zoom coaching calls each week throughout the four-week stage, workbook access and WhatsApp support between calls.", "Si el recorrido encaja contigo, continúa con Fundamentos: cuatro lecciones semanales progresivas, dos llamadas de coaching por Zoom de 45 minutos cada semana durante las cuatro semanas, acceso al cuaderno y apoyo por WhatsApp entre llamadas."],
+  "conversion.foundation.body": ["If the journey feels right, continue with Foundation for £97: four progressive lessons across four weeks, two 45-minute Zoom coaching calls each week — eight calls total and six hours of live Zoom coaching — plus workbook and online lesson access, WhatsApp support, approximately 45 minutes to read the chapter and 30 minutes for the meditation exercise each day, approximately 21 hours of chapter reading and approximately 14 hours of meditation practice across four weeks, and approximately 41 hours total commitment.", "Si el recorrido encaja contigo, continúa con Fundamentos por £97: cuatro lecciones progresivas durante cuatro semanas, dos llamadas de coaching por Zoom de 45 minutos cada semana — ocho llamadas en total y seis horas de coaching en directo por Zoom — además de acceso al cuaderno y a las lecciones online, apoyo por WhatsApp, aproximadamente 45 minutos para leer el capítulo y 30 minutos para el ejercicio de meditación cada día, aproximadamente 21 horas de lectura de los capítulos y aproximadamente 14 horas de práctica de meditación durante cuatro semanas, y aproximadamente 41 horas de dedicación total."],
   "conversion.foundation.qualification": ["Individual outcomes depend on your circumstances, participation and consistent practice.", "Los resultados individuales dependen de tus circunstancias, participación y práctica constante."],
   "conversion.foundation.cta": ["CONTINUE TO FOUNDATION — £97", "CONTINÚA CON FUNDAMENTOS — £97"],
   "conversion.foundation.secondary": ["KEEP EXPLORING", "SEGUIR EXPLORANDO"],
 };
+
+test("Foundation delivery copy keeps the exact four lesson titles and complete call commitment", () => {
+  const expected = [
+    "One Consciousness – One Power",
+    "One Method of Finding the Truth",
+    "Thoughts Become Things",
+    "The True “Self”",
+  ];
+  for (const title of expected) assert.equal(t(`foundation.week${expected.indexOf(title) + 1}`, "en").includes(title), true);
+  for (const key of ["foundation.receive2", "foundation.timeBody", "coaching.foundation.summary", "coaching.foundation.call", "coaching.foundation.time", "conversion.next.step2Body", "conversion.foundation.body"]) {
+    assert.match(t(key, "en"), /eight|Eight/);
+    assert.match(t(key, "en"), /six hours of live Zoom coaching/);
+  }
+});
+
+test("Foundation daily rhythm separates chapter reading from meditation practice", () => {
+  const keys = [
+    "foundation.timeBody",
+    "coaching.foundation.time",
+    "home.offers.foundationBody",
+    "conversion.next.step2Body",
+    "conversion.foundation.body",
+  ];
+  for (const key of keys) {
+    assert.match(t(key, "en"), /45 minutes to read the chapter/);
+    assert.match(t(key, "en"), /30 minutes for the meditation exercise each day/);
+    assert.match(t(key, "es"), /45 minutos para leer el capítulo/);
+    assert.match(t(key, "es"), /30 minutos para el ejercicio de meditación cada día/);
+  }
+});
+
+test("Foundation commitment totals account for reading, meditation and live coaching", () => {
+  for (const key of ["foundation.timeBody", "coaching.foundation.time", "home.offers.foundationBody"]) {
+    assert.match(t(key, "en"), /approximately 21 hours of chapter reading/i);
+    assert.match(t(key, "en"), /approximately 14 hours of meditation practice/i);
+    assert.match(t(key, "en"), /six hours of live Zoom coaching|6 hours of live Zoom coaching/);
+    assert.match(t(key, "en"), /approximately 41 hours total commitment/i);
+    assert.match(t(key, "es"), /aproximadamente 21 horas de lectura de los capítulos/i);
+    assert.match(t(key, "es"), /aproximadamente 14 horas de práctica de meditación/i);
+    assert.match(t(key, "es"), /seis horas de coaching en directo por Zoom/i);
+    assert.match(t(key, "es"), /(?:aproximadamente 41 horas|dedicación total de aproximadamente 41 horas)/i);
+  }
+  for (const key of ["conversion.next.step2Body", "conversion.foundation.body"]) {
+    assert.match(t(key, "en"), /approximately 21 hours of chapter reading/i);
+    assert.match(t(key, "en"), /approximately 14 hours of meditation practice/i);
+    assert.match(t(key, "en"), /approximately 41 hours total commitment/i);
+    assert.match(t(key, "es"), /aproximadamente 21 horas de lectura de los capítulos/i);
+    assert.match(t(key, "es"), /aproximadamente 14 horas de práctica de meditación/i);
+    assert.match(t(key, "es"), /aproximadamente 41 horas de dedicación total/i);
+  }
+});
 
 test("conversion copy is complete in English and Spanish", () => {
   for (const [key, [english, spanish]] of Object.entries(translationExpectations)) {

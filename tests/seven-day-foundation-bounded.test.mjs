@@ -23,14 +23,14 @@ test("Foundation explains the confirmed four-week experience without changing th
   const english = renderCoaching({ language: "en", siteData });
   const spanish = renderCoaching({ language: "es", siteData });
   for (const text of [
-    "Weeks 1–4", "£97", "Four progressive weekly lessons", "Two 45-minute Zoom coaching calls each week throughout the four-week Foundation stage",
+    "Weeks 1–4", "£97", "Four progressive lessons across four weeks", "Two 45-minute Zoom coaching calls each week throughout the four-week Foundation stage",
     "WhatsApp support", "Workbook and lesson access", "What happens after payment",
     "Who Foundation is for", "Who Foundation is not for", "What to expect in Week 1",
     "How payment and refunds work", "Start with the free seven-day experience",
     "Mark Smith",
   ]) assert.match(english, new RegExp(text.replace(/[£–]/g, "\\$&")), text);
   for (const text of [
-    "Semanas 1–4", "£97", "Cuatro lecciones semanales progresivas", "Dos llamadas de coaching por Zoom de 45 minutos cada semana durante las cuatro semanas",
+    "Semanas 1–4", "£97", "Cuatro lecciones progresivas durante cuatro semanas", "Dos llamadas de coaching por Zoom de 45 minutos cada semana durante las cuatro semanas",
     "Apoyo por WhatsApp", "Acceso al cuaderno y a las lecciones", "Qué ocurre después del pago",
     "Para quién es Foundation", "Para quién no es Foundation", "Qué esperar en la Semana 1",
     "Cómo funcionan el pago y los reembolsos", "Empieza con la experiencia gratuita de siete días",

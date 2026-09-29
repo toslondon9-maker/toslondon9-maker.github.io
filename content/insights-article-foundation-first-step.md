@@ -8,13 +8,13 @@ Each week is built around one part of the original course. You study the lesson,
 
 The purpose is not simply to read a book. It is to develop your understanding through repeated study, physical stillness, concentration and practical application.
 
-With 30 minutes of daily practice, the four-week Foundation Stage requires approximately:
+Each day of the four-week Foundation Stage includes approximately 45 minutes to read the chapter and 30 minutes for the meditation exercise. The meditation practice requires approximately:
 
-**30 minutes × 28 days = 840 minutes = 14 hours.**
+**30 minutes × 28 days = 840 minutes = around 14 hours of meditation exercise.**
 
-Those 14 hours are completed gradually, through one daily practice session at a time.
+Those 14 hours are completed gradually, through one daily meditation exercise at a time, alongside the chapter reading.
 
-## Week 1 — Understanding the world within and the world without
+## Week 1 — One Consciousness – One Power
 
 The first week introduces the relationship between the inner world and the outer world.
 
@@ -80,7 +80,7 @@ I back you as you begin the first exercise. I motivate you when sitting still fe
 
 You are not expected to understand everything immediately. You are encouraged to study, practise and discover the meaning through your own experience.
 
-## Week 2 — Understanding the conscious and subconscious mind
+## Week 2 — One Method of Finding the Truth
 
 The second week examines the two modes of mental activity: the conscious and subconscious mind.
 
@@ -144,7 +144,7 @@ By the end of this week, you begin developing:
 
 I help you examine your thoughts without becoming overwhelmed by them. I back you as you recognise mental habits, motivate you to guard the impressions entering your mind, inspire you to become more conscious of your potential and empower you to take greater responsibility for your thinking.
 
-## Week 3 — Understanding energy, fear and mental direction
+## Week 3 — Thoughts Become Things
 
 The third week develops the relationship between thought, energy and the body.
 
@@ -208,7 +208,7 @@ By the end of this week, you begin developing:
 
 I back you when fear or doubt appears. I motivate you to return to the exercise instead of allowing distraction to take over. I inspire you to recognise that understanding grows through persistence, and I empower you to direct your attention consciously rather than allowing circumstances to control your thinking.
 
-## Week 4 — Understanding the “I”, thought and the power of service
+## Week 4 — The True “Self”
 
 The fourth week asks you to examine what the lesson calls the true nature of the “I”.
 
@@ -308,7 +308,7 @@ You do not need to wait until you feel completely ready.
 
 You can begin with one lesson, one exercise and one 30-minute practice session.
 
-Over four weeks, you will dedicate approximately 14 hours to meditation and quiet stillness while studying the first four parts of *The Master Key System* with personal coaching, encouragement and accountability from me.
+Over four weeks, you will spend approximately 21 hours reading the chapters and 14 hours on meditation practice, alongside two 45-minute Zoom coaching calls each week — eight calls and six hours of live Zoom coaching in total — for approximately 41 hours of total commitment, with personal coaching, encouragement and accountability from me.
 
 If you are ready to understand your mind, develop greater self-control and begin studying the Master Key System in a structured way, take the first stage with me today.
 

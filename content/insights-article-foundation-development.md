@@ -12,24 +12,24 @@ Over four weeks, students are guided through a structured process that helps the
 
 ## How much meditation is required?
 
-The recommended practice is 30 minutes of meditation or quiet stillness each day for four complete weeks.
+Each day includes approximately 45 minutes to read the chapter and 30 minutes for the meditation exercise, for four complete weeks.
 
 The calculation is:
 
-* 30 minutes per day
+* 30 minutes of meditation exercise per day
 * 7 days per week
 * 4 weeks
 * 28 days in total
 
 This equals:
 
-**840 minutes of practice, or 14 hours of meditation and stillness.**
+**840 minutes of meditation exercise, or around 14 hours of meditation practice.**
 
-These 14 hours are not intended to be completed all at once. They are built gradually through a consistent 30-minute daily practice.
+These 14 hours are not intended to be completed all at once. They are built gradually through a consistent 30-minute daily meditation exercise, alongside the daily chapter reading.
 
 The purpose is to help students develop the discipline of becoming physically still, observing their thoughts and learning to direct their attention towards a chosen purpose.
 
-## Week 1: Awareness of the inner world
+## Week 1: One Consciousness – One Power
 
 During the first week, students begin exploring the relationship between the world within and the world without.
 
@@ -55,7 +55,7 @@ I back students when the exercise feels unfamiliar or difficult. I motivate them
 
 Students are not left to struggle alone with the first exercise. They receive encouragement, direction and accountability as they begin building the habit.
 
-## Week 2: Understanding the conscious and subconscious mind
+## Week 2: One Method of Finding the Truth
 
 In Week 2, students study the different functions of the conscious and subconscious mind.
 
@@ -81,7 +81,7 @@ I help students examine their thinking without becoming overwhelmed by it.
 
 I back them as they learn to notice recurring thoughts. I motivate them to become more selective about the ideas they continue to entertain. I inspire them to see that mental awareness is a skill that develops through practice. I empower them to become the guardian of their own mind rather than allowing every thought to control their direction.
 
-## Week 3: Desire and definite purpose
+## Week 3: Thoughts Become Things
 
 In Week 3, students begin moving from general wishes towards a clearer desire and definite purpose.
 
@@ -109,7 +109,7 @@ I back them when uncertainty appears. I motivate them to return to their chosen 
 
 The purpose is not for me to think on the student’s behalf. My role is to guide, encourage and help them develop their own ability to think clearly and deliberately.
 
-## Week 4: Concentration, visualisation and application
+## Week 4: The True “Self”
 
 Week 4 brings the first part of the Foundation Stage together.
 
@@ -186,7 +186,7 @@ After completing the Foundation Stage, students should have established a cleare
 * The role of concentration and visualisation.
 * The importance of daily practice and application.
 
-They will have completed approximately **14 hours of meditation and quiet stillness** across the four weeks.
+Across the four weeks, they will have completed approximately **21 hours of chapter reading** and **14 hours of meditation practice**, alongside eight 45-minute Zoom coaching calls — six hours of live Zoom coaching in total and approximately 41 hours of total commitment.
 
 More importantly, they will have begun developing the mental habits required for the next stage of the journey.
 
@@ -194,7 +194,7 @@ More importantly, they will have begun developing the mental habits required for
 
 The Foundation Stage is a practical beginning for anyone who wants to study the Master Key System with structure, support and consistent guidance.
 
-Through 30 minutes of daily practice over four weeks, students begin developing awareness, stillness, discernment, concentration and visualisation.
+Through 45 minutes of daily chapter reading and 30 minutes of meditation exercise over four weeks, students begin developing awareness, stillness, discernment, concentration and visualisation.
 
 If you are ready to begin developing your inner foundation, start 7 Days to Change the Way You Use Your Mind or book a free 15-minute WhatsApp call with Tariq to discuss your goals.
 
