@@ -56,6 +56,12 @@ function coachingOutcome() {
 }
 
 function coachingRateCard(language, siteData) {
+  const primary = [["free", siteData.routes.startFree, "primary", "coaching.primary.start"], ["foundation", siteData.routes.foundation, "secondary", "coaching.primary.explore"], ["complete", siteData.routes.coaching, "secondary", "coaching.primary.journey"], ["mentoring", siteData.routes.contact, "secondary", "coaching.primary.apply"]];
+  const primaryMarkup = "<section class=\"coachingPrimaryPath section\" data-coaching-section=\"primary-path\"><div class=\"coachingPrimaryPath__intro\"><p class=\"eyebrow\">" + copy("coaching.primary.eyebrow", language) + "</p><h2>" + copy("coaching.primary.title", language) + "</h2><p>" + copy("coaching.primary.intro", language) + "</p></div><div class=\"coachingPrimaryPath__grid\">" + primary.map(([id, href, variant, action]) => "<article class=\"coachingPrimaryPath__card coachingPrimaryPath__card--" + id + "\"><h3>" + copy("coaching.primary." + id, language) + "</h3><p>" + copy("coaching.primary." + id + "Body", language) + "</p><a class=\"button--" + variant + "\" href=\"" + escapeHtml(href) + "\">" + copy(action, language) + "</a></article>").join("") + "</div></section>";
+  return primaryMarkup + secondaryRateCard(language, siteData);
+}
+
+function secondaryRateCard(language, siteData) {
   const offers = [
     ["coaching.rate.free", siteData.routes.startFree, "", "coaching.rate.free.action"], ["coaching.rate.foundation", siteData.routes.foundation, "", "coaching.foundation.learnMore"], ["coaching.rate.complete", siteData.offer.paymentUrl, "coachingRateCard__featured", "coaching.rate.action.default"], ["coaching.rate.mastery", siteData.routes.contact, "", "coaching.rate.mastery.action"], ["coaching.rate.mentoring", siteData.routes.contact, "", "coaching.rate.mentoring.action"], ["coaching.rate.alumni", siteData.routes.contact, "", "coaching.rate.alumni.action"], ["coaching.rate.corporate", siteData.routes.contact, "", "coaching.rate.corporate.action"],
   ];

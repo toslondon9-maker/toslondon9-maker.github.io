@@ -47,7 +47,7 @@ test("experience lesson routes build without joining shared navigation routes", 
 
     const { files } = await buildSite({ outputRoot });
     assert.deepEqual(
-      files.filter((file) => file.endsWith("index.html")).slice(-7),
+      files.filter((file) => file.startsWith("start-free/day-") && file.endsWith("index.html")),
       lessonRoutes.map((route) => `${route.slice(1)}index.html`),
     );
   } finally {

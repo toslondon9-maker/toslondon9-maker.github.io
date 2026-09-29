@@ -10,7 +10,7 @@ function curriculumPage(language = "en") {
 
 test("Master Key page provides the calm 24-chapter Study Room around the preserved curriculum", () => {
   const html = curriculumPage();
-  assert.match(html, /<h1>Chapter 1 - One Consciousness - One Power<\/h1>/);
+  assert.match(html, /<h1>Chapter 1 - One Consciousness – One Power<\/h1>/);
   assert.equal((html.match(/class="mksStudyRoom__chapter"/g) ?? []).length, 24);
   assert.equal((html.match(/data-week="\d+"/g) ?? []).length, 24);
   assert.equal((html.match(/class="mksStudyRoom__qa"/g) ?? []).length, 240);

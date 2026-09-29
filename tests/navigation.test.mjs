@@ -296,3 +296,12 @@ test("legacy MediaQueryList listeners also reset and clean up the mobile menu", 
 test("mountNavigation is a safe no-op when chrome is absent", () => {
   assert.doesNotThrow(() => mountNavigation({ querySelector: () => null }));
 });
+
+test("shared header keeps the enlarged brand within a non-overlapping desktop row", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(css, /\.siteHeader[^}]*min-width:\s*0/s);
+  assert.match(css, /\.siteHeader__actions[^}]*min-width:\s*0/s);
+  assert.match(css, /\.siteHeader \.brand__wordmark[^}]*min-width:\s*0/s);
+  assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.siteHeader[^}]*overflow-x:\s*clip/s);
+});

@@ -34,8 +34,16 @@ test("homepage keeps an intentional personal welcome without fake video", () => 
   const welcome = section(renderHome({ language: "en" }), "welcome");
   assert.match(welcome, /A personal welcome from Tariq/);
   assert.match(welcome, /tariq-welcome-portrait\.png/);
-  assert.match(welcome, /Video coming soon/);
+  assert.match(welcome, /homeWelcome__panel/);
+  assert.match(welcome, /data-i18n="home\.video\.panelBody"/);
+  assert.doesNotMatch(welcome, /Video coming soon/);
   assert.doesNotMatch(welcome, /<video\b|\.mp4|\.webm/);
+});
+
+test("homepage hero keeps the primary seven-day CTA before secondary actions", () => {
+  const hero = section(renderHome({ language: "en" }), "hero");
+  assert.match(hero, /class="button--primary[^>]*href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
+  assert.ok(hero.indexOf("START YOUR 7 DAYS") < hero.indexOf("WhatsApp"));
 });
 
 test("free experience is the clearest primary action and contains all approved value", () => {

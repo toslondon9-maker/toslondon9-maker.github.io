@@ -47,6 +47,13 @@ test("Foundation page presents the confirmed four-week decision path", () => {
   ]) assert.match(page.body, new RegExp(`data-i18n="${key}"`));
 });
 
+test("Foundation page leads with a compact canonical facts summary", () => {
+  const page = routeRenderers[siteData.routes.foundation](siteData);
+  const summary = page.body.match(/<section class="foundationPage__facts"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.ok(summary, "facts summary should be present");
+  for (const text of ["Four weeks", "Four progressive lessons", "Two 45-minute Zoom calls each week", "Eight calls total", "Six hours of live Zoom coaching", "Workbook and online lessons", "WhatsApp support", "21 hours", "14 hours", "41 hours total", "£97"]) assert.ok(summary.includes(text), text);
+});
+
 test("Foundation page keeps the approved structure available in Spanish", () => {
   const page = routeRenderers[siteData.routes.foundation](siteData, "es");
   for (const key of [

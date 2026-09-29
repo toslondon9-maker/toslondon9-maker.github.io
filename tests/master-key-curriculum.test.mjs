@@ -19,10 +19,10 @@ test("the MKS Study Room preserves the complete 24-week curriculum", () => {
   assert.equal((curriculum.match(/class="weeklyQA(?:\s|\")/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="aiMastery"/g) ?? []).length, 24);
   assert.equal((curriculum.match(/Copy prompt/g) ?? []).length, 24);
-  assert.match(curriculum, /One Consciousness - One Power/);
+  for (const title of ["One Consciousness – One Power", "One Method of Finding the Truth", "Thoughts Become Things", "The True “Self”"]) assert.ok(curriculum.includes(title), title);
   assert.match(curriculum, /The Truth shall set you free/);
   assert.match(curriculum, /class="weekVideo"[^>]+href="https:\/\/photos\.google\.com\/share\//);
-  assert.match(curriculum, /Chapter 1 - One Consciousness - One Power/);
+  assert.match(curriculum, /Chapter 1 - One Consciousness – One Power/);
   assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="foundation"/);
   assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="visualisation"/);
   assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="concentration"/);
@@ -51,7 +51,7 @@ test("the MKS Study Room removes promotional preview language and keeps study co
   assert.equal((html.match(/class="mksStudyRoom__chapter"/g) ?? []).length, 24);
   assert.equal((html.match(/data-complete-week="\d+"/g) ?? []).length, 24);
   assert.match(html, /Complete Week/);
-  assert.match(html, /<h1[^>]*>Chapter 1 - One Consciousness - One Power<\/h1>/);
+  assert.match(html, /<h1[^>]*>Chapter 1 - One Consciousness – One Power<\/h1>/);
 });
 
 test("the MKS Study Room keeps the free experience route separate", () => {

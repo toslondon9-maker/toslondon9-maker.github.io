@@ -27,7 +27,7 @@ function renderHero(language) {
 }
 
 function renderWelcome(language) {
-  return `<section class="homeVideo homeWelcome" data-home-section="welcome" aria-labelledby="home-video-title"><div class="homeVideo__copy">${copy("home.video.eyebrow", language, "p", "eyebrow")}${copy("home.video.title", language, "h2")}${copy("home.video.body", language, "p", "homeVideo__body")}</div><div class="homeVideo__portrait"><img src="${homeContent.welcomeImage}" width="358" height="418" loading="lazy" decoding="async" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"><span class="sr-only" data-i18n="home.video.placeholder">${escapeHtml(t("home.video.placeholder", language))}</span></div>${copy("home.video.fallback", language, "p", "homeVideo__fallback")}</section>`;
+  return `<section class="homeVideo homeWelcome" data-home-section="welcome" aria-labelledby="home-video-title"><div class="homeVideo__copy">${copy("home.video.eyebrow", language, "p", "eyebrow")}${copy("home.video.title", language, "h2")}${copy("home.video.body", language, "p", "homeVideo__body")}</div><div class="homeVideo__portrait"><img src="${homeContent.welcomeImage}" width="358" height="418" loading="lazy" decoding="async" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"></div><div class="homeWelcome__panel"><strong data-i18n="home.video.panelLabel">A welcome from Tariq</strong>${copy("home.video.panelBody", language, "p")}</div></section>`;
 }
 
 function renderFreeExperience(language) {

@@ -119,6 +119,16 @@ test("English coaching page leads with Master Key coaching and keeps professiona
   assert.doesNotMatch(spanish, /Personal Coaching with Tariq|Other Professional Services/);
 });
 
+test("coaching presents the primary customer path before secondary premium services", () => {
+  const html = renderCoaching({ language: "en", siteData });
+  const primary = html.indexOf('data-coaching-section="primary-path"');
+  const secondary = html.indexOf('data-coaching-section="professional-services"');
+  assert.ok(primary >= 0 && primary < secondary);
+  for (const text of ["Free 7-Day Experience", "Foundation — £97", "Complete 24-Week Journey — £997", "Private Mentoring — application only"]) assert.ok(html.includes(text), text);
+  assert.match(html, /data-coaching-section="primary-path"[\s\S]*?href="\/start-free\/"/);
+  assert.match(html, /data-coaching-section="primary-path"[\s\S]*?href="\/foundation\/"/);
+});
+
 test("Spanish coaching copy is complete and natural", () => {
   const html = renderCoaching({ language: "es", siteData });
   for (const text of [
