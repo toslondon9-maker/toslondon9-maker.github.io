@@ -8,7 +8,7 @@ const analyticsScript = "/assets/site-analytics.mjs";
 const siteUrl = "https://unleashyourpowerwithtariq.com";
 const defaultSocialImage = `${siteUrl}/images/haanel-tariq-portraits.jpeg`;
 const defaultSocialImageAlt = "Tariq Saddique and the Master Key System learning journey";
-const privateRoute = "/live-coaching/";
+const privateRoutes = new Set(["/live-coaching/", "/members-study-room-7f3k/"]);
 const aiMentorRoute = "/ai-mentors/";
 const aiMentorEndpoint = "https://unleash-your-power-ai-mentor.toslondon9.workers.dev/mentor";
 
@@ -42,7 +42,7 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const titleHook = titleKey ? ` data-i18n="${escapeHtml(titleKey)}"` : "";
   const descriptionHook = descriptionKey ? ` data-i18n="${escapeHtml(descriptionKey)}"` : "";
   const absoluteUrl = `${siteUrl}${route}`;
-  const publicMetadata = route !== privateRoute;
+  const publicMetadata = !privateRoutes.has(route);
   const pageSocialImage = socialImage ? `${siteUrl}${socialImage}` : defaultSocialImage;
   const pageSocialImageAlt = escapeHtml(socialImageAlt ?? defaultSocialImageAlt);
   const aiMentorEndpointTag = route === aiMentorRoute

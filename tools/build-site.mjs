@@ -7,6 +7,7 @@ import { siteData } from "../content/site-data.mjs";
 import { renderPage } from "../src/page-shell.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 import { renderSitemap } from "../src/sitemap.mjs";
+import { unlistedSessionHubPage, unlistedSessionHubRoute } from "../src/pages/unlisted-session-hub.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const previewRoot = path.join(repositoryRoot, ".build-preview");
@@ -29,7 +30,7 @@ const runtimeFiles = Object.freeze([
   "content/seven-day-canonical.json",
 ]);
 const siteMetadataFiles = Object.freeze(["robots.txt"]);
-const buildRoutes = Object.freeze([...Object.values(siteData.routes), ...siteData.experienceRoutes]);
+const buildRoutes = Object.freeze([...Object.values(siteData.routes), ...siteData.experienceRoutes, unlistedSessionHubRoute]);
 
 function outputPathForRoute(route) {
   return route === "/" ? "index.html" : `${route.slice(1)}index.html`;
@@ -94,7 +95,7 @@ async function writeBuild(outputRoot) {
   const hash = createHash("sha256");
 
   for (const route of buildRoutes) {
-    const render = routeRenderers[route];
+    const render = route === unlistedSessionHubRoute ? unlistedSessionHubPage : routeRenderers[route];
     if (!render) throw new Error(`No renderer is registered for ${route}`);
 
     const relativeFile = outputPathForRoute(route);

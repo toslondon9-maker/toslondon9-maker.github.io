@@ -108,6 +108,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "start-free/day-5-become-someone-you-can-rely-on/index.html",
       "start-free/day-6-change-from-the-inside-out/index.html",
       "start-free/day-7-make-it-part-of-how-you-live/index.html",
+      "members-study-room-7f3k/index.html",
     ];
 
     assert.deepEqual(first.files.filter((file) => file.endsWith("index.html")), expected);
@@ -127,7 +128,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 43);
+    assert.equal(pageFiles.length, 44);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
