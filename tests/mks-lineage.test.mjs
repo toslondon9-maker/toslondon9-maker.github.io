@@ -62,9 +62,9 @@ test("MKS Lineage renders the new supporting content naturally in Spanish", () =
   assert.match(page.body, /data-i18n="route\.mksLineage\.helmarResource\.cta"/);
 });
 
-test("Master Key and Resources pages link to the lineage page", async () => {
+test("Resources keeps the lineage link while Study Room stays focused", async () => {
   const master = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
   const resources = routeRenderers[siteData.routes.resources](siteData).body;
-  assert.match(master, /href="\/mks-lineage\/"/);
+  assert.doesNotMatch(master, /href="\/mks-lineage\/"/);
   assert.match(resources, /href="\/mks-lineage\/"/);
 });

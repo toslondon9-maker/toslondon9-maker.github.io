@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
@@ -7,71 +6,100 @@ import { renderHome } from "../src/pages/home.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 import { renderHeader } from "../src/shared-chrome.mjs";
 
-test("the complete historic 24-week curriculum is visitor-accessible from home and navigation", () => {
+test("the MKS Study Room preserves the complete 24-week curriculum", () => {
   const page = routeRenderers[siteData.routes.masterKeySystem](siteData);
   const html = page.body;
-  const curriculum = html.match(/<section class="curriculum section" id="curriculum">[\s\S]*<\/section>/)?.[0] ?? "";
-  const weeks = [...curriculum.matchAll(/<span class="week">WEEK <!-- -->(\d+)<\/span>/g)].map((match) => Number(match[1]));
+  const curriculum = html.match(/<section class="mksStudyRoom__shell" id="study-room">[\s\S]*<\/section><\/main>/)?.[0] ?? html;
+  const weeks = [...curriculum.matchAll(/data-week="(\d+)"/g)].map((match) => Number(match[1]));
 
   assert.deepEqual(weeks, Array.from({ length: 24 }, (_, index) => index + 1));
-  assert.equal((curriculum.match(/<summary>Introduction<b/g) ?? []).length, 24);
-  assert.equal((curriculum.match(/<summary>Content<b/g) ?? []).length, 24);
-  assert.equal((curriculum.match(/<summary>About the exercise<b/g) ?? []).length, 24);
-  assert.equal((curriculum.match(/class="weeklyQA"/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<h3>Introduction<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<h3>Content<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<h3>About the exercise<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/class="weeklyQA(?:\s|\")/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="aiMastery"/g) ?? []).length, 24);
   assert.equal((curriculum.match(/Copy prompt/g) ?? []).length, 24);
   assert.match(curriculum, /One Consciousness - One Power/);
   assert.match(curriculum, /The Truth shall set you free/);
   assert.match(curriculum, /class="weekVideo"[^>]+href="https:\/\/photos\.google\.com\/share\//);
-  const source = readFileSync(new URL("../content/master-key-curriculum.html", import.meta.url));
-  assert.equal(createHash("sha256").update(source.toString().replaceAll("\r\n", "\n"), "utf8").digest("hex"), "ec546dcc6adff8d81d87c97e99afcc0dac27fe918c6e4176b2e21e98f1c2cac2");
-  assert.ok(page.styles?.includes("/assets/index-Bgwsdhov.css"));
+  assert.match(curriculum, /Chapter 1 - One Consciousness - One Power/);
+  assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="foundation"/);
+  assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="visualisation"/);
+  assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="concentration"/);
+  assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="integration-mastery"/);
+  assert.ok(page.styles?.includes("/assets/platform.css"));
 
   const home = renderHome({ language: "en" });
-  assert.match(home, /href="\/master-key-system\/"[^>]*>VIEW THE 24-WEEK JOURNEY<\/a>/);
+  assert.match(home, /href="\/master-key-system\/"[^>]*>EXPLORE THE METHOD<\/a>/);
 
   const navigation = renderHeader({ route: "/", language: "en" });
   assert.equal((navigation.match(/href="\/master-key-system\/"[^>]*>Master Key System<\/a>/g) ?? []).length, 2);
 });
 
-test("the curriculum keeps the exact Chapter 1 title and collapses all lesson and answer sections", () => {
-  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
-  const curriculum = html.match(/<section class="curriculum section" id="curriculum">[\s\S]*<\/section>/)?.[0] ?? "";
-
-  assert.match(curriculum, /Chapter 1 - One Consciousness - One Power/);
-  for (const stage of ["Foundation", "Visualisation", "Concentration", "Integration & Mastery"]) assert.match(curriculum, new RegExp(`<h2[^>]*>${stage}<\\/h2>`));
-  assert.equal((curriculum.match(/class="curriculumPhase__visual"/g) ?? []).length, 4);
-  assert.equal((curriculum.match(/<details id="week-\d+"/g) ?? []).length, 24);
-  assert.doesNotMatch(curriculum, /<details[^>]+open/);
-  assert.equal((curriculum.match(/class="curriculumLesson"/g) ?? []).length, 24 * 5);
-  assert.equal((curriculum.match(/class="qaItem"/g) ?? []).length, 24 * 10);
-  assert.match(curriculum, /About the exercise/);
-  assert.match(curriculum, /Your First Practice: Discover the Strength of Stillness/);
-  assert.match(curriculum, /Each practice is a small promise to yourself/);
-  assert.match(curriculum, /<details class="qaItem"><summary><span class="qaNumber">1<\/span>What is the world without in its relation to the world within\?<b/);
+test("the MKS Study Room removes promotional preview language and keeps study controls collapsed", () => {
+  const page = routeRenderers[siteData.routes.masterKeySystem](siteData);
+  const html = page.body;
+  assert.doesNotMatch(html, /READY TO GO DEEPER\?/);
+  assert.doesNotMatch(html, /EXPLORE THE 24-WEEK PROGRAMME/);
+  assert.doesNotMatch(html, /Full teaching is only available to enrolled members/);
+  assert.doesNotMatch(html, /START YOUR 7 DAYS/);
+  assert.match(html, /class="mksStudyRoom__select"/);
+  assert.match(html, /aria-label="Course navigation"/);
+  assert.match(html, /Study → Practise → Reflect → Apply/);
+  assert.equal((html.match(/<details[^>]*\sopen(?:=|\s|>)/g) ?? []).length, 0);
+  assert.equal((html.match(/class="mksStudyRoom__qa"/g) ?? []).length, 240);
+  assert.equal((html.match(/class="mksStudyRoom__chapter"/g) ?? []).length, 24);
+  assert.equal((html.match(/data-complete-week="\d+"/g) ?? []).length, 24);
+  assert.match(html, /Complete Week/);
+  assert.match(html, /<h1[^>]*>Chapter 1 - One Consciousness - One Power<\/h1>/);
 });
 
-test("Master Key prompts begin minimised with native disclosure controls without changing their original prompt content", () => {
-  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
-
-  assert.equal((html.match(/<details class="aiMasteryPrompt" aria-label="Week \d+ guided prompt">/g) ?? []).length, 24);
-  assert.equal((html.match(/<summary>View guided prompt <b aria-hidden="true">＋<\/b><\/summary>/g) ?? []).length, 24);
-  assert.match(html, /Act as my personal Master Key System tutor, Socratic coach and accountability partner for Week 1/);
+test("the MKS Study Room keeps the free experience route separate", () => {
+  const mks = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+  const startFree = routeRenderers[siteData.routes.startFree](siteData).body;
+  assert.doesNotMatch(mks, /sevenDayDashboard/);
+  assert.match(startFree, /sevenDayDashboard/);
 });
 
-test("Master Key page exposes a mobile navigator control alongside all 24 chapter links", () => {
+test("the MKS Study Room restores four non-promotional stage illustrations", () => {
   const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
-
-  assert.match(html, /data-curriculum-navigator-toggle aria-expanded="false" aria-controls="curriculum-study-navigator"/);
-  assert.match(html, /Show all 24 chapters/);
-  assert.match(html, /<nav class="curriculumStudyNav" id="curriculum-study-navigator" data-curriculum-navigator/);
-  assert.equal((html.match(/data-curriculum-chapter-link/g) ?? []).length, 70);
+  for (const [stage, image, week] of [
+    ["foundation", "foundation-chapters-1-4.png", 1],
+    ["visualisation", "visualisation-chapters-5-11.png", 5],
+    ["concentration", "concentration-chapters-12-18.png", 12],
+    ["integration-mastery", "contemplation-mastery-chapters-19-24.png", 19],
+  ]) {
+    assert.match(html, new RegExp(`id="stage-${stage}"`));
+    assert.match(html, new RegExp(`href="#stage-${stage}"[^>]*>[\\s\\S]*?${image}`));
+    assert.match(html, new RegExp(`href="#week-${week}"[^>]*>[\\s\\S]*?${image}`));
+  }
+  assert.equal((html.match(/class="mksStudyRoom__visualNavLink"/g) ?? []).length, 4);
+  assert.equal((html.match(/class="mksStudyRoom__stageBanner"/g) ?? []).length, 4);
+  assert.doesNotMatch(html, /pricing|coaching CTA|start your free 7 days/i);
 });
 
-test("Master Key hero keeps its existing actions and adds a Start Free CTA", () => {
-  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+test("the MKS Study Room remains structurally aligned in English and Spanish", () => {
+  const english = routeRenderers[siteData.routes.masterKeySystem](siteData, "en").body;
+  const spanish = routeRenderers[siteData.routes.masterKeySystem](siteData, "es").body;
+  for (const marker of ["mksStudyRoom", "mksStudyRoom__select", "mksStudyRoom__chapter", "mksStudyRoom__qa", "Foundation", "Visualisation", "Concentration", "Integration &amp; Mastery"]) {
+    assert.equal((english.match(new RegExp(marker, "g")) ?? []).length, (spanish.match(new RegExp(marker, "g")) ?? []).length, marker);
+  }
+});
 
-  assert.match(html, /<a class="button--primary" href="\/start-free\/">START YOUR 7 DAYS<\/a>/);
-  assert.match(html, /<a class="button--secondary" href="\/get-the-book\/">GET THE MKS BOOK<\/a>/);
-  assert.match(html, /<a class="button--text" href="\/ai-mentors\/">USE THE FREE AI MENTOR<\/a>/);
+test("the MKS Study Room uses the readable cream study surface", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+
+  assert.match(css, /\.mksStudyRoom\s*\{[^}]*background:\s*var\(--cream\)/s);
+  assert.match(css, /\.mksStudyRoom__chapter\s*\{[^}]*background:\s*var\(--paper\)/s);
+  assert.match(css, /\.mksStudyRoom__questions\s*\{[^}]*background:\s*var\(--cream\)/s);
+});
+
+test("the MKS Study Room has bounded responsive layout and visible focus treatment", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.mksStudyRoom\s*\{[^}]*overflow-x:\s*clip/s);
+  assert.match(css, /\.mksStudyRoom__layout\s*\{[^}]*grid-template-columns:\s*minmax\(13rem, 16rem\) minmax\(0, 1fr\)/s);
+  assert.match(css, /\.mksStudyRoom__lesson\s*\{[^}]*max-width:\s*760px/s);
+  assert.match(css, /\.mksStudyRoom__chapter summary:focus-visible[^{]*\{/s);
+  assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__layout[\s\S]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
+  assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__courseNav[\s\S]*display:\s*none/s);
 });

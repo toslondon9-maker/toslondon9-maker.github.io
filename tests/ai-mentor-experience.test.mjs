@@ -181,5 +181,5 @@ test("Resources and the Master Key page link directly to the AI Mentor experienc
   const curriculum = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
 
   assert.match(resources, /href="\/ai-mentors\/"/);
-  assert.match(curriculum, /href="\/ai-mentors\/"/);
+  assert.doesNotMatch(curriculum, /href="\/ai-mentors\/"/);
 });

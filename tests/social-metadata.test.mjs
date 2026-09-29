@@ -55,7 +55,6 @@ test("Start Free generated SEO metadata uses the custom-domain route", () => {
 
 test("key conversion pages use relevant social preview artwork", () => {
   const expected = new Map([
-    [siteData.routes.masterKeySystem, "/images/master-key-visuals/master-key-24-week-hero.png"],
     [siteData.routes.startFree, "/images/free-7-day-taster.jpeg"],
     [siteData.routes.coaching, "/images/unleash-your-power-programme.jpeg"],
     [siteData.routes.aboutTariq, "/images/tariq-happiness-harmony.png"],

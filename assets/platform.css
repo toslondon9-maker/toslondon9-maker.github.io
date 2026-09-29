@@ -6648,3 +6648,444 @@ body {
   .siteHeader, .site-header { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; column-gap: 0 !important; }
   .siteHeader__actions { display: flex !important; flex: 0 0 auto !important; width: auto !important; min-width: 0 !important; margin: 0 !important; gap: 0 !important; }
 }
+/* MKS Study Room: a focused study surface for the complete paid curriculum. */
+.mksStudyRoom {
+  overflow-x: clip;
+  background: var(--cream);
+}
+
+.mksStudyRoom__shell {
+  width: min(100% - (2 * var(--space-gutter)), 1240px);
+  margin-inline: auto;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.mksStudyRoom__intro {
+  max-width: 760px;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.mksStudyRoom__intro h1 {
+  margin: .6rem 0 1rem;
+  color: var(--night);
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+}
+
+.mksStudyRoom__intro > p:last-child {
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.mksStudyRoom__layout {
+  display: grid;
+  grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.mksStudyRoom__sidebar {
+  position: sticky;
+  top: 1rem;
+  min-width: 0;
+}
+
+.mksStudyRoom__sidebar > label,
+.mksStudyRoom__select {
+  display: none;
+}
+
+.mksStudyRoom__courseNav {
+  display: grid;
+  gap: 1rem;
+}
+
+.mksStudyRoom__visualNav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.mksStudyRoom__visualNavLink {
+  display: grid;
+  gap: .35rem;
+  min-width: 0;
+  color: var(--ink);
+  font-size: .78rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.mksStudyRoom__visualNavLink img,
+.mksStudyRoom__stageBanner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--paper);
+}
+
+.mksStudyRoom__visualNavLink:hover,
+.mksStudyRoom__visualNavLink:focus-visible {
+  color: var(--night);
+}
+
+.mksStudyRoom__visualNavLink:focus-visible,
+.mksStudyRoom__stageBanner:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-control);
+}
+
+.mksStudyRoom__stage {
+  border-left: 2px solid var(--gold);
+  padding-left: .85rem;
+}
+
+.mksStudyRoom__stage header {
+  margin-bottom: .45rem;
+}
+
+.mksStudyRoom__stage header p,
+.mksStudyRoom__stage header h2,
+.mksStudyRoom__stage ol {
+  margin: 0;
+}
+
+.mksStudyRoom__stage header p {
+  color: #85611f;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.mksStudyRoom__stage header h2 {
+  color: var(--night);
+  font-size: 1rem;
+}
+
+.mksStudyRoom__stage ol {
+  display: grid;
+  gap: .15rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.mksStudyRoom__stage a {
+  display: grid;
+  gap: .15rem;
+  min-width: 0;
+  padding: .5rem .55rem;
+  border-radius: var(--radius-control);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.mksStudyRoom__stage a:hover,
+.mksStudyRoom__stage a:focus-visible {
+  background: var(--cream-deep);
+  color: var(--night);
+}
+
+.mksStudyRoom__stage a span {
+  color: #85611f;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.mksStudyRoom__stage a strong,
+.mksStudyRoom__chapter summary strong {
+  overflow-wrap: anywhere;
+}
+
+.mksStudyRoom__lesson {
+  min-width: 0;
+  max-width: 760px;
+}
+
+.mksStudyRoom__current {
+  margin-bottom: 1.5rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius-card);
+  background: var(--night);
+  color: var(--cream);
+  box-shadow: var(--shadow-card);
+}
+
+.mksStudyRoom__current h2 {
+  margin: .35rem 0 .5rem;
+  color: var(--cream);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.mksStudyRoom__current .eyebrow,
+.mksStudyRoom__currentTitle {
+  color: var(--gold-bright);
+}
+
+.mksStudyRoom__currentTitle {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 750;
+}
+
+.mksStudyRoom__purpose {
+  max-width: 65ch;
+  color: color-mix(in srgb, var(--cream) 88%, transparent);
+  line-height: 1.6;
+}
+
+.mksStudyRoom__purpose strong {
+  color: var(--cream);
+}
+
+.mksStudyRoom__progress {
+  display: grid;
+  gap: .4rem;
+  margin-top: 1.25rem;
+  color: var(--cream);
+  font-size: .85rem;
+  font-weight: 750;
+}
+
+.mksStudyRoom__progress progress {
+  width: 100%;
+  height: .55rem;
+  accent-color: var(--gold);
+}
+
+.mksStudyRoom__rhythm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .8rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(247, 241, 229, .2);
+}
+
+.mksStudyRoom__rhythm strong {
+  color: var(--gold-bright);
+}
+
+.mksStudyRoom__rhythm span {
+  color: var(--cream);
+}
+
+.mksStudyRoom__stageBlock {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  scroll-margin-top: 1rem;
+}
+
+.mksStudyRoom__stageBanner {
+  display: block;
+  min-width: 0;
+  margin-bottom: 1rem;
+}
+
+.mksStudyRoom__stageHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem 1rem;
+  margin-bottom: .8rem;
+  padding-bottom: .65rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.mksStudyRoom__stageHeader p,
+.mksStudyRoom__stageHeader h2 {
+  margin: 0;
+}
+
+.mksStudyRoom__stageHeader p {
+  color: #85611f;
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.mksStudyRoom__stageHeader h2 {
+  color: var(--night);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.mksStudyRoom__chapters .chapterGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .8rem;
+}
+
+.mksStudyRoom__chapter {
+  min-width: 0;
+  scroll-margin-top: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: 0 8px 20px rgba(6, 23, 41, .05);
+}
+
+.mksStudyRoom__chapter summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .75rem;
+  min-width: 0;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.mksStudyRoom__chapter summary:focus-visible,
+.mksStudyRoom__qa summary:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.mksStudyRoom__chapter summary .week,
+.mksStudyRoom__chapter summary b {
+  color: #85611f;
+}
+
+.mksStudyRoom__chapter summary b {
+  color: var(--gold);
+  font-size: 1.25rem;
+}
+
+.mksStudyRoom__chapter[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.mksStudyRoom__chapter .chapterBody {
+  min-width: 0;
+  padding: 1.2rem clamp(1rem, 3vw, 2rem) 1.5rem;
+  border-top: 0;
+}
+
+.mksStudyRoom__chapter .chapterBody h3 {
+  margin-top: 1.5rem;
+  color: var(--night);
+}
+
+.mksStudyRoom__chapter .chapterBody h3:first-child {
+  margin-top: 0;
+}
+
+.mksStudyRoom__chapter .chapterBody p,
+.mksStudyRoom__chapter .chapterBody li,
+.mksStudyRoom__chapter .chapterBody dd,
+.mksStudyRoom__chapter .chapterBody a {
+  overflow-wrap: anywhere;
+}
+
+.mksStudyRoom__questions {
+  border-left: 0;
+  background: var(--cream);
+}
+
+.mksStudyRoom__qaList {
+  display: grid;
+  gap: .5rem;
+}
+
+.mksStudyRoom__qa {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--paper);
+}
+
+.mksStudyRoom__qa summary {
+  min-height: 44px;
+  padding: .7rem .8rem;
+  color: var(--ink);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mksStudyRoom__qa > div {
+  padding: 0 .8rem .8rem;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .mksStudyRoom__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mksStudyRoom__sidebar {
+    position: static;
+  }
+
+  .mksStudyRoom__sidebar > label,
+  .mksStudyRoom__select {
+    display: block;
+  }
+
+  .mksStudyRoom__sidebar > label {
+    margin-bottom: .4rem;
+    color: var(--night);
+    font-weight: 750;
+  }
+
+  .mksStudyRoom__select {
+    width: 100%;
+    min-height: 44px;
+    padding: .65rem .75rem;
+    border: 1px solid var(--gold);
+    border-radius: var(--radius-control);
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+  }
+
+  .mksStudyRoom__courseNav {
+    display: none;
+  }
+
+  .mksStudyRoom__visualNav {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .mksStudyRoom__shell {
+    width: min(100% - 2rem, 760px);
+  }
+
+  .mksStudyRoom__chapter summary {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .mksStudyRoom__chapter summary .week {
+    grid-column: 1 / -1;
+  }
+
+  .mksStudyRoom__visualNav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .curriculumJump > div {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .curriculumJump > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .curriculumWeekNav a {
+    flex: 1 1 10rem;
+  }
+}
