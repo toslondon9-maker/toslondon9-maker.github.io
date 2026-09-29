@@ -59,5 +59,5 @@ test("key landing-page hero images get a high-priority loading hint", () => {
   const about = routeRenderers[siteData.routes.aboutTariq](siteData).body;
 
   assert.match(startFree, /free-7-day-taster\.jpeg[^>]+loading="eager"[^>]+fetchpriority="high"/);
-  assert.match(about, /tariq-happiness-harmony\.png[^>]+loading="eager"[^>]+fetchpriority="high"/);
+  assert.match(about, /tariq-saddique-about\.jpeg[^>]+loading="eager"[^>]+fetchpriority="high"/);
 });

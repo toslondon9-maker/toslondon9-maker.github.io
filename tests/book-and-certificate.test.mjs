@@ -52,3 +52,17 @@ test("About Tariq accurately presents the Study Service certificate", () => {
   assert.match(page.body, /Framed certificate confirming Tariq Saddique’s completion of Helmar Rudolph’s Master Key System Study Service in August 2014\./);
   assert.doesNotMatch(page.body, /qualification|accreditation|endorsement/i);
 });
+
+test("About Tariq presents the supplied portrait and approved write-up", () => {
+  const page = routeRenderers[siteData.routes.aboutTariq](siteData);
+
+  assert.equal(existsSync(path.join(process.cwd(), "images", "tariq-saddique-about.jpeg")), true);
+  assert.match(page.body, /src="\/images\/tariq-saddique-about\.jpeg"[^>]+width="720"[^>]+height="1600"/);
+  assert.match(page.body, /alt="Tariq Saddique, creator of Unleash Your Power\."/);
+  assert.match(page.body, /I believe a person’s circumstances can change without taking away their ability to choose what happens next\./);
+  assert.match(page.body, /My life has taken me from London to Barcelona/);
+  assert.match(page.body, /international career in partner sales/);
+  assert.match(page.body, /I created <strong>Unleash Your Power<\/strong>/);
+  assert.match(page.body, /Your next chapter doesn’t have to begin with everything figured out\./);
+  assert.match(page.body, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}">Start with the free 7-Day journey<`));
+});

@@ -4862,6 +4862,21 @@ body {
   line-height: 1.35 !important;
 }
 
+.aboutTariqStory {
+  max-width: 43rem;
+}
+
+.aboutTariqStory > p {
+  margin: 1rem 0 0;
+  line-height: 1.7;
+}
+
+.aboutTariqStory__closing {
+  color: var(--night);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+}
+
 .aboutTariqIntro__actions {
   display: flex;
   flex-wrap: wrap;
@@ -4880,7 +4895,7 @@ body {
 
 .aboutTariqHero__portrait img {
   width: 100%;
-  aspect-ratio: 1088 / 1445;
+  aspect-ratio: 720 / 1600;
   object-fit: contain;
 }
 
