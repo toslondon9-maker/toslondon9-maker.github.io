@@ -99,9 +99,21 @@ test("page shell cache-busts the release assets that control visible copy and la
   });
   const languageModule = readFileSync(new URL("../assets/site-language.mjs", import.meta.url), "utf8");
 
-  assert.match(html, /href="\/assets\/platform\.css\?v=20260923-typography-restore-1"/);
+  assert.match(html, /href="\/assets\/platform\.css\?v=20260929-header-overlap-1"/);
   assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260909-day7-choices"/);
   assert.match(languageModule, /translations\.mjs\?v=20260909-day7-choices/);
+});
+
+test("final header breakpoint guard prevents the desktop cascade from re-enabling overlap", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  const navigation = readFileSync(new URL("../assets/site-navigation.mjs", import.meta.url), "utf8");
+  const compactStart = css.lastIndexOf("@media (max-width: 1360px)");
+  const laterDesktopRule = css.lastIndexOf("@media (min-width: 801px)");
+
+  assert.ok(compactStart > laterDesktopRule, "compact header rules must be last");
+  assert.match(css.slice(compactStart), /\.siteHeader__actions > \.siteNav[\s\S]*?display:\s*none\s*!important/);
+  assert.match(css.slice(compactStart), /\.siteHeader \.mobileNav[\s\S]*?display:\s*block\s*!important/);
+  assert.match(navigation, /matchMedia\?\.\("\(min-width: 1361px\)"\)/);
 });
 
 test("page shell establishes enhancement state before styles can paint mobile chrome", () => {

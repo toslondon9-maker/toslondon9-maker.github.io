@@ -6831,6 +6831,38 @@ body {
   .siteHeader .mobileNav { display: none !important; }
 }
 
+/* Keep this breakpoint guard last: the full navigation must never be
+   re-enabled after the compact header has taken over. */
+@media (max-width: 1360px) {
+  .siteHeader,
+  .site-header {
+    flex-flow: row nowrap !important;
+    min-width: 0 !important;
+    overflow-x: clip !important;
+  }
+  .siteHeader > .brand,
+  .site-header > .brand {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 4.5rem) !important;
+  }
+  .siteHeader__actions {
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+  }
+  .siteHeader__actions > .siteNav,
+  .siteHeader__actions > .languageSwitch--header {
+    display: none !important;
+  }
+  .siteHeader .mobileNav {
+    display: block !important;
+    flex: 0 0 auto !important;
+  }
+  .siteHeader .mobileNav__toggle {
+    display: grid !important;
+  }
+}
+
 @media (max-width: 1360px) {
   .siteHeader, .site-header {
     display: flex !important;
@@ -7349,4 +7381,18 @@ body {
   .curriculumWeekNav a {
     flex: 1 1 10rem;
   }
+}
+
+/* Final cascade guard: compact navigation must win over every earlier
+   desktop rule at widths where the full navigation cannot fit. */
+@media (max-width: 1360px) {
+  .siteHeader,
+  .site-header { flex-flow: row nowrap !important; min-width: 0 !important; overflow-x: clip !important; }
+  .siteHeader > .brand,
+  .site-header > .brand { flex: 1 1 auto !important; min-width: 0 !important; max-width: calc(100% - 4.5rem) !important; }
+  .siteHeader__actions { flex: 0 0 auto !important; min-width: 0 !important; }
+  .siteHeader__actions > .siteNav,
+  .siteHeader__actions > .languageSwitch--header { display: none !important; }
+  .siteHeader .mobileNav { display: block !important; flex: 0 0 auto !important; }
+  .siteHeader .mobileNav__toggle { display: grid !important; }
 }
