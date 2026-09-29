@@ -29,6 +29,11 @@ export function renderInsightCard({ id, href, language = "en", compact = false }
 export function renderInsightsPreview({ language = "en", data = siteData, compact = false } = {}) {
   const routeKeys = { howToStudy: "insightsHowToStudy", haanelBiography: "insightsHaanelBiography", powerWithin: "insightsPowerWithin", personalCoaching: "insightsPersonalCoaching", imagineMeditation: "insightsImagineMeditation", foundationDevelopment: "insightsFoundationDevelopment", foundationFirstStep: "insightsFoundationFirstStep", foundationQA: "insightsFoundationQA", people: "insightsPeople", journey: "insightsJourney", lawAttraction: "insightsLawAttraction", introduction: "insightsIntroduction", principles: "insightsPrinciples", worldWithin: "insightsWorldWithin" };
   routeKeys.energyAttention = "insightsEnergyAttention";
-  const cards = insightsArticles.slice(0, compact ? 3 : 4).map(([id]) => renderInsightCard({ id, href: data.routes[routeKeys[id]], language, compact })).join("");
+  const cards = insightsArticles.slice(0, compact ? 3 : 4).map(([id]) => {
+    const routeKey = routeKeys[id];
+    const href = data.routes[routeKey] ?? siteData.routes[routeKey];
+    if (!href) throw new Error(`Missing Insights route for ${id}`);
+    return renderInsightCard({ id, href, language, compact });
+  }).join("");
   return `<section class="homeSection insightsPreview" data-home-section="insights" aria-labelledby="insights-preview-title"><div class="homeSection__inner"><p class="eyebrow" data-i18n="insights.preview.eyebrow">${escapeHtml(t("insights.preview.eyebrow", language))}</p><h2 id="insights-preview-title" data-i18n="insights.preview.title">${escapeHtml(t("insights.preview.title", language))}</h2><p class="homeSection__intro" data-i18n="insights.preview.intro">${escapeHtml(t("insights.preview.intro", language))}</p><div class="insightsPreview__grid">${cards}</div><p class="insightsPreview__all"><a class="button--secondary" href="${data.routes.insights}" data-i18n="insights.preview.viewAll">${escapeHtml(t("insights.preview.viewAll", language))}</a></p></div></section>`;
 }

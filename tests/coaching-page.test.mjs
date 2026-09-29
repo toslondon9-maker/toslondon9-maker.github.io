@@ -6,25 +6,26 @@ import { siteData } from "../content/site-data.mjs";
 import { renderCoaching } from "../src/pages/coaching.mjs";
 import { mountTabs } from "../assets/tabs.mjs";
 
-test("coaching rate card exposes all seven offers in both languages", () => {
-  const expected = ["7 Days to Change the Way You Use Your Mind", "Foundation", "Complete 24-Week Coaching", "Mastery Circle", "Private Mentoring", "Alumni Practice Membership", "Corporate Programmes"];
+test("coaching keeps the three-step UYP path distinct from secondary services", () => {
+  const expected = ["7 Days to Change the Way You Use Your Mind", "Foundation", "Complete 24-Week Journey", "Private Mentoring", "Mastery Circle", "Alumni Practice Membership", "Corporate Programmes"];
   for (const language of ["en", "es"]) {
     const html = renderCoaching({ language, siteData });
     assert.equal((html.match(/data-coaching-section="rate-card"/g) ?? []).length, 1);
     for (const title of expected) assert.ok(html.includes(title) || language === "es");
-    for (const key of ["coaching.rate.free.title", "coaching.rate.foundation.title", "coaching.rate.complete.title", "coaching.rate.mastery.title", "coaching.rate.mentoring.title", "coaching.rate.alumni.title", "coaching.rate.corporate.title"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
+    for (const key of ["coaching.primary.free", "foundation.compact.title", "coaching.primary.complete", "coaching.primary.mentoring", "coaching.rate.mastery.title", "coaching.rate.mentoring.title", "coaching.rate.alumni.title", "coaching.rate.corporate.title"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
+    assert.equal((html.match(/data-i18n="coaching\.rate\.free\.title"/g) ?? []).length, 0);
+    assert.equal((html.match(/data-i18n="coaching\.rate\.foundation\.title"/g) ?? []).length, 0);
+    assert.equal((html.match(/data-i18n="coaching\.rate\.complete\.title"/g) ?? []).length, 0);
   }
 });
 
 test("coaching rate card uses direct purchase labels for available offers", () => {
   const english = renderCoaching({ language: "en", siteData });
   const spanish = renderCoaching({ language: "es", siteData });
-  assert.match(english, /data-i18n="coaching\.rate\.free\.action">Begin Now For Free<\/a>/);
-  assert.equal((english.match(/data-i18n="coaching\.rate\.action\.default">Buy Now<\/a>/g) ?? []).length, 1);
-  assert.match(english, /href="\/foundation\/"[^>]*data-i18n="coaching\.foundation\.learnMore">Explore Foundation — £97<\/a>/);
-  assert.match(spanish, /data-i18n="coaching\.rate\.free\.action">Comienza ahora gratis<\/a>/);
-  assert.equal((spanish.match(/data-i18n="coaching\.rate\.action\.default">Comprar ahora<\/a>/g) ?? []).length, 1);
-  assert.match(spanish, /href="\/foundation\/"[^>]*data-i18n="coaching\.foundation\.learnMore">Explora Fundamentos — £97<\/a>/);
+  assert.match(english, /data-i18n="coaching\.rate\.mastery\.action">Apply for the Circle<\/a>/);
+  assert.match(english, /data-i18n="coaching\.rate\.corporate\.action">Discuss Your Team’s Needs<\/a>/);
+  assert.match(spanish, /data-i18n="coaching\.rate\.mastery\.action">Solicita entrar en el Círculo<\/a>/);
+  assert.match(spanish, /data-i18n="coaching\.rate\.corporate\.action">Habla sobre las necesidades de tu equipo<\/a>/);
 });
 
 test("additional coaching offers expose bilingual descriptions and specific CTAs", () => {
@@ -76,7 +77,7 @@ test("coaching is the accurate canonical offer", () => {
     complete: "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6",
   };
   for (const url of Object.values(payments)) {
-    assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.foundation ? 0 : 2);
+    assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.foundation ? 0 : url === payments.complete ? 1 : 2);
     if (url !== payments.foundation) assert.match(html, new RegExp(`href="${url.replaceAll("/", "\\/")}" target="_blank" rel="noopener noreferrer"`));
   }
   assert.equal((html.match(/data-i18n="coaching\.payNow">Pay Now<\/span>/g) ?? []).length, 7);
@@ -127,6 +128,14 @@ test("coaching presents the primary customer path before secondary premium servi
   for (const text of ["Free 7-Day Experience", "Foundation — £97", "Complete 24-Week Journey — £997", "Private Mentoring — application only"]) assert.ok(html.includes(text), text);
   assert.match(html, /data-coaching-section="primary-path"[\s\S]*?href="\/start-free\/"/);
   assert.match(html, /data-coaching-section="primary-path"[\s\S]*?href="\/foundation\/"/);
+});
+
+test("coaching uses Integration & Mastery consistently for Stage 4", () => {
+  for (const language of ["en", "es"]) {
+    const html = renderCoaching({ language, siteData });
+    assert.match(html, language === "en" ? /Integration &amp; Mastery/ : /Integración y dominio/);
+    assert.doesNotMatch(html, /Contemplation &amp; Mastery/);
+  }
 });
 
 test("coaching Foundation card uses the shared compact expandable offer", () => {

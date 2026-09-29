@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { analyticsConsentStorageKey, createAnalyticsController } from "../assets/site-analytics.mjs";
 import { renderFooter } from "../src/shared-chrome.mjs";
@@ -168,4 +169,11 @@ test("shared chrome exposes bilingual consent controls and preferences", () => {
   assert.match(page, /data-analytics-accept/);
   assert.match(page, /data-analytics-decline/);
   assert.match(page, /site-analytics\.mjs/);
+});
+
+test("analytics consent reserves readable space instead of covering page actions", async () => {
+  const css = await readFile(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.analyticsConsent\s*\{[\s\S]*?position:\s*relative[\s\S]*?right:\s*auto[\s\S]*?bottom:\s*auto[\s\S]*?left:\s*auto/);
+  assert.match(css, /\.analyticsConsent\s*\{[\s\S]*?max-height:[\s\S]*?overflow:\s*auto/);
+  assert.match(css, /@media \(width\s*<=\s*680px\)[\s\S]*?\.analyticsConsent\s*\{[\s\S]*?margin-inline:\s*10px/);
 });

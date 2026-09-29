@@ -76,6 +76,13 @@ test("the Insights hub links the branded collection articles", () => {
   assert.ok(page.body.indexOf("The Advantages of Personal Master Key System Coaching") < page.body.indexOf("What Students Develop During the Foundation Stage"));
   assert.ok(page.body.indexOf("What Students Develop During the Foundation Stage") < page.body.indexOf("10 People Connected to The Master Key System"));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
+  assert.doesNotMatch(page.body, /href="[^"]*undefined[^"]*"/);
+});
+
+test("the how-to-study preview resolves to its published article route", () => {
+  const page = insightsIndexPage();
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsHowToStudy}"`));
+  assert.doesNotMatch(page.body, /href="\/insights\/undefined"/);
 });
 
 test("the how-to-study article is registered with exact source title, SEO and PDF", () => {

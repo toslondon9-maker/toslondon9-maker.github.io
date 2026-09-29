@@ -9,7 +9,7 @@ const courseFallbacks = Object.freeze({
   "route.masterKeySystemOnlineCourse.stages.foundation": { en: "Foundation", es: "Fundamentos" },
   "route.masterKeySystemOnlineCourse.stages.visualisation": { en: "Visualisation", es: "Visualización" },
   "route.masterKeySystemOnlineCourse.stages.concentration": { en: "Concentration", es: "Concentración" },
-  "route.masterKeySystemOnlineCourse.stages.mastery": { en: "Contemplation & Mastery", es: "Contemplación y dominio" },
+  "route.masterKeySystemOnlineCourse.stages.mastery": { en: "Integration & Mastery", es: "Integración y dominio" },
   "route.masterKeySystemOnlineCourse.studyLabel": { en: "HOW YOU STUDY", es: "CÓMO ESTUDIAS" },
   "route.masterKeySystemOnlineCourse.nextLabel": { en: "YOUR NEXT STEP", es: "TU SIGUIENTE PASO" },
   "route.masterKeySystemOnlineCourse.nextHeading": { en: "Choose how you want to continue.", es: "Elige cómo quieres continuar." },

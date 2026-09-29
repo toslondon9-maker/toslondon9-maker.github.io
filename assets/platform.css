@@ -7396,3 +7396,21 @@ body {
   .siteHeader .mobileNav { display: block !important; flex: 0 0 auto !important; }
   .siteHeader .mobileNav__toggle { display: grid !important; }
 }
+
+/* Keep the consent prompt in document flow so it cannot obscure page content or CTAs. */
+.analyticsConsent {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  margin: 18px;
+  max-height: min(180px, calc(100dvh - 36px));
+  overflow: auto;
+}
+
+@media (width <= 680px) {
+  .analyticsConsent {
+    margin-inline: 10px;
+    max-height: min(240px, calc(100dvh - 20px));
+  }
+}

@@ -43,7 +43,8 @@ test("homepage keeps an intentional personal welcome without fake video", () => 
 test("homepage hero keeps the primary seven-day CTA before secondary actions", () => {
   const hero = section(renderHome({ language: "en" }), "hero");
   assert.match(hero, /class="button--primary[^>]*href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
-  assert.ok(hero.indexOf("START YOUR 7 DAYS") < hero.indexOf("WhatsApp"));
+  assert.match(hero, /href="\/master-key-system\/"[^>]*>EXPLORE THE METHOD<\/a>/);
+  assert.doesNotMatch(hero, /WhatsApp/);
 });
 
 test("free experience is the clearest primary action and contains all approved value", () => {
