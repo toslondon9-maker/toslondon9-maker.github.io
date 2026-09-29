@@ -8,7 +8,7 @@ export function mountNavigation(document) {
 
   if (!root || !button || !panel || !body) return () => {};
 
-  const desktopQuery = document.defaultView?.matchMedia?.("(min-width: 1081px)");
+  const desktopQuery = document.defaultView?.matchMedia?.("(min-width: 1361px)");
 
   const setOpen = (open, restoreFocus = false) => {
     const labelKey = open ? "menu.close" : "menu.open";

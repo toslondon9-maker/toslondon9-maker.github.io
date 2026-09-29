@@ -1,7 +1,7 @@
 import { coachingContent } from "../../content/pages/coaching.mjs";
 import { siteData as canonicalSiteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
-import { renderWhatHappensNext } from "../conversion-components.mjs";
+import { renderCompactFoundationOffer, renderWhatHappensNext } from "../conversion-components.mjs";
 import { bookingCallHref } from "../whatsapp.mjs";
 
 const escapeHtml = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
@@ -57,7 +57,7 @@ function coachingOutcome() {
 
 function coachingRateCard(language, siteData) {
   const primary = [["free", siteData.routes.startFree, "primary", "coaching.primary.start"], ["foundation", siteData.routes.foundation, "secondary", "coaching.primary.explore"], ["complete", siteData.routes.coaching, "secondary", "coaching.primary.journey"], ["mentoring", siteData.routes.contact, "secondary", "coaching.primary.apply"]];
-  const primaryMarkup = "<section class=\"coachingPrimaryPath section\" data-coaching-section=\"primary-path\"><div class=\"coachingPrimaryPath__intro\"><p class=\"eyebrow\">" + copy("coaching.primary.eyebrow", language) + "</p><h2>" + copy("coaching.primary.title", language) + "</h2><p>" + copy("coaching.primary.intro", language) + "</p></div><div class=\"coachingPrimaryPath__grid\">" + primary.map(([id, href, variant, action]) => "<article class=\"coachingPrimaryPath__card coachingPrimaryPath__card--" + id + "\"><h3>" + copy("coaching.primary." + id, language) + "</h3><p>" + copy("coaching.primary." + id + "Body", language) + "</p><a class=\"button--" + variant + "\" href=\"" + escapeHtml(href) + "\">" + copy(action, language) + "</a></article>").join("") + "</div></section>";
+  const primaryMarkup = "<section class=\"coachingPrimaryPath section\" data-coaching-section=\"primary-path\"><div class=\"coachingPrimaryPath__intro\"><p class=\"eyebrow\">" + copy("coaching.primary.eyebrow", language) + "</p><h2>" + copy("coaching.primary.title", language) + "</h2><p>" + copy("coaching.primary.intro", language) + "</p></div><div class=\"coachingPrimaryPath__grid\">" + primary.map(([id, href, variant, action]) => id === "foundation" ? "<article class=\"coachingPrimaryPath__card coachingPrimaryPath__card--foundation\">" + renderCompactFoundationOffer({ language, data: siteData, ctaKey: "foundation.compact.cta", ctaVariant: variant }) + "</article>" : "<article class=\"coachingPrimaryPath__card coachingPrimaryPath__card--" + id + "\"><h3>" + copy("coaching.primary." + id, language) + "</h3><p>" + copy("coaching.primary." + id + "Body", language) + "</p><a class=\"button--" + variant + "\" href=\"" + escapeHtml(href) + "\">" + copy(action, language) + "</a></article>").join("") + "</div></section>";
   return primaryMarkup + secondaryRateCard(language, siteData);
 }
 

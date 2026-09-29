@@ -3,6 +3,7 @@ import { siteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
 import { bookingCallHref } from "../whatsapp.mjs";
 import { renderInsightsPreview } from "../insights.mjs";
+import { renderCompactFoundationOffer } from "../conversion-components.mjs";
 
 function escapeHtml(value) {
   return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
@@ -64,9 +65,8 @@ function renderTestimonials() {
 }
 
 function renderOffers(language) {
-  const foundation = siteData.stages.find((stage) => stage.id === "foundation");
   const card = (className, titleKey, bodyKey, ctaKey, href, price = "") => `<article class="homeOffers__card ${className}"><h3 data-i18n="${titleKey}">${escapeHtml(t(titleKey, language))}</h3>${price ? `<strong class="homeOffers__price">${price}</strong>` : ""}<p data-i18n="${bodyKey}">${escapeHtml(t(bodyKey, language))}</p><a class="button--${className === "homeOffers__card--free" ? "primary" : "secondary"}" href="${href}" data-i18n="${ctaKey}">${escapeHtml(t(ctaKey, language))}</a></article>`;
-  return `<section class="homeSection homeOffers" data-home-section="offers"><div class="homeSection__inner">${copy("home.offers.eyebrow", language, "p", "eyebrow")}${copy("home.offers.title", language, "h2")}${copy("home.offers.intro", language, "p", "homeSection__intro")}<div class="homeOffers__grid">${card("homeOffers__card--free", "home.offers.freeTitle", "home.offers.freeBody", "home.offers.freeCta", siteData.routes.startFree)}${card("homeOffers__card--foundation", "home.offers.foundationTitle", "home.offers.foundationBody", "home.offers.foundationCta", siteData.routes.foundation, `£${foundation.price}`)}${card("homeOffers__card--complete", "home.offers.completeTitle", "home.offers.completeBody", "home.offers.completeCta", siteData.routes.coaching, `£${siteData.offer.completePrice}`)}</div>${copy("home.offers.more", language, "p", "homeOffers__more")}</div></section>`;
+  return `<section class="homeSection homeOffers" data-home-section="offers"><div class="homeSection__inner">${copy("home.offers.eyebrow", language, "p", "eyebrow")}${copy("home.offers.title", language, "h2")}${copy("home.offers.intro", language, "p", "homeSection__intro")}<div class="homeOffers__grid">${card("homeOffers__card--free", "home.offers.freeTitle", "home.offers.freeBody", "home.offers.freeCta", siteData.routes.startFree)}<article class="homeOffers__card homeOffers__card--foundation">${renderCompactFoundationOffer({ language, data: siteData, ctaKey: "home.offers.foundationCta" })}</article>${card("homeOffers__card--complete", "home.offers.completeTitle", "home.offers.completeBody", "home.offers.completeCta", siteData.routes.coaching, `£${siteData.offer.completePrice}`)}</div>${copy("home.offers.more", language, "p", "homeOffers__more")}</div></section>`;
 }
 
 function renderFinalCta(language) {

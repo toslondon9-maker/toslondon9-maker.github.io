@@ -129,6 +129,20 @@ test("coaching presents the primary customer path before secondary premium servi
   assert.match(html, /data-coaching-section="primary-path"[\s\S]*?href="\/foundation\/"/);
 });
 
+test("coaching Foundation card uses the shared compact expandable offer", () => {
+  const english = renderCoaching({ language: "en", siteData });
+  const spanish = renderCoaching({ language: "es", siteData });
+  for (const html of [english, spanish]) {
+    const primary = html.match(/<section class="coachingPrimaryPath[\s\S]*?<\/section>/)?.[0] ?? "";
+    assert.match(primary, /class="compactFoundationOffer__details"/);
+    assert.match(primary, /data-i18n="foundation\.compact\.seeIncluded"/);
+    assert.doesNotMatch(primary, /<details[^>]+open/);
+    assert.match(primary, /href="\/foundation\/"/);
+  }
+  assert.match(english, /EXPLORE FOUNDATION — £97/);
+  assert.match(spanish, /EXPLORA FUNDAMENTOS — £97/);
+});
+
 test("Spanish coaching copy is complete and natural", () => {
   const html = renderCoaching({ language: "es", siteData });
   for (const text of [

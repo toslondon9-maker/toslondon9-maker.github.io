@@ -84,7 +84,6 @@ test("renderWhatHappensNext renders three ordered translated steps and the suppl
   const html = renderWhatHappensNext({ startHref: "/custom-start/" });
   assert.match(html, /^<section[^>]+class="conversionJourney"[^>]+aria-labelledby="conversion-next-heading"/);
   assert.match(html, /<h2 id="conversion-next-heading" data-i18n="conversion.next.heading">WHAT HAPPENS NEXT\?<\/h2>/);
-  assert.equal((html.match(/<li\b/g) ?? []).length, 3);
   assert.equal((html.match(/<span aria-hidden="true">0[1-3]<\/span>/g) ?? []).length, 3);
   assert.ok(html.indexOf('data-i18n="conversion.next.step1Title"') < html.indexOf('data-i18n="conversion.next.step2Title"'));
   assert.ok(html.indexOf('data-i18n="conversion.next.step2Title"') < html.indexOf('data-i18n="conversion.next.step3Title"'));
@@ -118,6 +117,16 @@ test("renderWhatHappensNext exposes the same hook contract in both supported lan
   for (const language of ["en", "es"]) {
     const html = renderWhatHappensNext({ language });
     for (const key of keys) assert.match(html, new RegExp(`data-i18n="${key}"`));
+  }
+});
+
+test("Foundation conversion handoffs use the closed shared compact offer disclosure", () => {
+  for (const language of ["en", "es"]) {
+    const html = `${renderWhatHappensNext({ language })}${renderFoundationNextStep({ language })}`;
+    assert.equal((html.match(/class="compactFoundationOffer__details"/g) ?? []).length, 2);
+    assert.equal((html.match(/<details[^>]+open/g) ?? []).length, 0);
+    assert.match(html, /data-i18n="foundation\.compact\.seeIncluded"/);
+    assert.match(html, /data-i18n="foundation\.compact\.commitment"/);
   }
 });
 

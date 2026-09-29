@@ -160,3 +160,24 @@ test("homepage reader connection moves from challenge to a clear next step in bo
   assert.match(spanish, /EMPIEZA TUS 7 DÍAS/i);
   assert.match(spanish, /Fundamentos/);
 });
+
+test("homepage Foundation offer keeps the essentials visible and details expandable", () => {
+  const english = section(renderHome({ language: "en" }), "offers");
+  const spanish = section(renderHome({ language: "es" }), "offers");
+  for (const html of [english, spanish]) {
+    assert.match(html, /class="homeOffers__card homeOffers__card--foundation"/);
+    assert.match(html, /<details class="compactFoundationOffer__details">/);
+    assert.doesNotMatch(html, /<details[^>]+open/);
+    assert.match(html, /data-i18n="foundation\.compact\.seeIncluded"/);
+    assert.match(html, /data-i18n="foundation\.compact\.totalCalls"/);
+    assert.match(html, /data-i18n="foundation\.compact\.commitment"/);
+    assert.match(html, /href="\/foundation\/"/);
+  }
+  assert.match(english, /Four weeks/);
+  assert.match(english, /Four progressive lessons/);
+  assert.match(english, /Two 45-minute Zoom coaching calls each week/);
+  assert.match(english, /Workbook and WhatsApp support/);
+  assert.match(english, /EXPLORE FOUNDATION — £97/);
+  assert.match(spanish, /Cuatro semanas/);
+  assert.match(spanish, /Ver todo lo que incluye/);
+});
