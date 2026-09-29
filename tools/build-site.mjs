@@ -19,6 +19,7 @@ const runtimeFiles = Object.freeze([
   "assets/lead-capture-form.mjs",
   "assets/affiliate-tracking.mjs",
   "assets/platform.css",
+  "assets/referral.mjs",
   "assets/seven-day-progress.mjs",
   "assets/seven-day-workbook.mjs",
   "assets/session-hub.mjs",

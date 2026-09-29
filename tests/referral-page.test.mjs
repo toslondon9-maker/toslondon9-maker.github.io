@@ -92,15 +92,30 @@ test("navigation labels identify the affiliate area", () => {
   assert.equal(translations["nav.referral"].en, "Affiliate / Refer & Earn");
 });
 
-test("referral share script builds an encoded WhatsApp invitation and copy fallback", async () => {
+test("referral share script builds an encoded WhatsApp invitation without an affiliate code", async () => {
+  const source = await import("../assets/referral.mjs");
+  const share = source.buildReferralShareUrl();
+  assert.match(share, /^https:\/\/wa\.me\/\?text=/);
+  assert.match(decodeURIComponent(share), /I’ve been exploring a 24-week Master Key System programme/);
+  assert.match(decodeURIComponent(share), /https:\/\/unleashyourpowerwithtariq\.com\/start-free\//);
+});
+
+test("referral share script preserves tracked affiliate URLs and encodes the invitation", async () => {
   const source = await import("../assets/referral.mjs");
   const share = source.buildReferralShareUrl(source.buildAffiliateLink("Tariq"));
   assert.match(share, /^https:\/\/wa\.me\/\?text=/);
-  assert.match(decodeURIComponent(share), /I’ve been exploring a 24-week Master Key System programme/);
   assert.match(decodeURIComponent(share), /https:\/\/unleashyourpowerwithtariq\.com\/start-free\/\?ref=tariq/);
+  assert.equal(share, `https://wa.me/?text=${encodeURIComponent(`${source.invitation} ${source.buildAffiliateLink("Tariq")}`)}`);
   assert.equal(typeof source.copyReferralMessage, "function");
-  assert.equal(source.buildReferralShareUrl(), "");
-  assert.equal(await source.copyReferralMessage(""), false);
+});
+
+test("referral WhatsApp button stays usable across rendered desktop and mobile layouts", () => {
+  const page = referralPage(siteData);
+  const whatsapp = page.body.match(/<a class="button--primary" data-referral-whatsapp[^>]*>/)?.[0] ?? "";
+  assert.match(whatsapp, /href="https:\/\/wa\.me\/\?text=/);
+  assert.match(whatsapp, /target="_blank"/);
+  assert.doesNotMatch(whatsapp, /aria-disabled|disabled/);
+  assert.match(page.body, /referralInvite__actions/);
 });
 
 test("referral page keeps existing header and footer shell", () => {

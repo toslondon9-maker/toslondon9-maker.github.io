@@ -1,12 +1,16 @@
-export const invitation = "I’ve been exploring a 24-week Master Key System programme called Unleash Your Power. There’s a free 7-Day Experience if you want to try it for yourself. No pressure — I just thought you might find it interesting.";
+export const invitation = "I’ve been exploring a 24-week Master Key System programme called Unleash Your Power. There’s 7 Days to Change the Way You Use Your Mind if you want to try it for yourself. No pressure — I just thought you might find it interesting.";
 export const startFreeUrl = "https://unleashyourpowerwithtariq.com/start-free/";
 export function sanitiseAffiliateCode(value) { return String(value ?? "").trim().replace(/\s+/g, "-").replace(/[^a-zA-Z0-9_-]/g, "").toLowerCase().slice(0, 40); }
 export function buildAffiliateLink(code) { const safe = sanitiseAffiliateCode(code); return safe ? `${startFreeUrl}?ref=${encodeURIComponent(safe)}` : startFreeUrl; }
 export async function copyAffiliateLink(url, navigatorObject = globalThis.navigator) { if (!navigatorObject?.clipboard?.writeText) return false; try { await navigatorObject.clipboard.writeText(url); return true; } catch { return false; } }
 
 export function buildReferralShareUrl(affiliateUrl = "") {
-  if (!sanitiseAffiliateCode(new URL(affiliateUrl || startFreeUrl).searchParams.get("ref"))) return "";
-  return `https://wa.me/?text=${encodeURIComponent(`${invitation} ${affiliateUrl}`)}`;
+  let destination = startFreeUrl;
+  try {
+    const candidate = new URL(affiliateUrl || startFreeUrl);
+    if (sanitiseAffiliateCode(candidate.searchParams.get("ref"))) destination = candidate.href;
+  } catch {}
+  return `https://wa.me/?text=${encodeURIComponent(`${invitation} ${destination}`)}`;
 }
 
 export async function copyReferralMessage(affiliateUrl, navigatorObject = globalThis.navigator) {
@@ -36,7 +40,7 @@ function initReferral() {
     const url = buildAffiliateLink(codeInput?.value);
     const hasCode = Boolean(sanitiseAffiliateCode(codeInput?.value));
     if (link) { link.href = url; link.textContent = url; }
-    if (whatsapp) { const shareUrl = buildReferralShareUrl(url); if (shareUrl) whatsapp.href = shareUrl; else whatsapp.removeAttribute("href"); whatsapp.toggleAttribute("aria-disabled", !hasCode); }
+    if (whatsapp) { whatsapp.href = buildReferralShareUrl(url); whatsapp.removeAttribute("aria-disabled"); }
     copyButton.disabled = !hasCode;
     return url;
   };
