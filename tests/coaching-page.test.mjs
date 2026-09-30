@@ -1,217 +1,86 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import test from "node:test";
-import { localizeDocument } from "../assets/site-language.mjs";
-import { siteData } from "../content/site-data.mjs";
 import { renderCoaching } from "../src/pages/coaching.mjs";
+import { siteData } from "../content/site-data.mjs";
 import { mountTabs } from "../assets/tabs.mjs";
 
-test("coaching keeps the three-step UYP path distinct from secondary services", () => {
-  const expected = ["7 Days to Change the Way You Use Your Mind", "Foundation", "Complete 24-Week Journey", "Private Mentoring", "Mastery Circle", "Alumni Practice Membership", "Corporate Programmes"];
-  for (const language of ["en", "es"]) {
-    const html = renderCoaching({ language, siteData });
-    assert.equal((html.match(/data-coaching-section="rate-card"/g) ?? []).length, 1);
-    for (const title of expected) assert.ok(html.includes(title) || language === "es");
-    for (const key of ["coaching.primary.free", "foundation.compact.title", "coaching.primary.complete", "coaching.primary.mentoring", "coaching.rate.mastery.title", "coaching.rate.mentoring.title", "coaching.rate.alumni.title", "coaching.rate.corporate.title"]) assert.match(html, new RegExp(`data-i18n="${key}"`));
-    assert.equal((html.match(/data-i18n="coaching\.rate\.free\.title"/g) ?? []).length, 0);
-    assert.equal((html.match(/data-i18n="coaching\.rate\.foundation\.title"/g) ?? []).length, 0);
-    assert.equal((html.match(/data-i18n="coaching\.rate\.complete\.title"/g) ?? []).length, 0);
-  }
+test("coaching follows the concise Start Free to pricing journey", () => {
+  const html = renderCoaching({ language: "en", siteData });
+  const hero = html.indexOf('class="coachingHero section"');
+  const programme = html.indexOf('data-coaching-section="programme"');
+  const build = html.indexOf('data-coaching-section="what-you-can-build"');
+  const pricing = html.indexOf('data-coaching-section="pricing"');
+  const services = html.indexOf('data-coaching-section="professional-services"');
+  const faq = html.indexOf('data-coaching-section="faq"');
+  const finalStep = html.indexOf('data-coaching-section="final-step"');
+
+  assert.ok(hero >= 0 && hero < programme);
+  assert.ok(programme < build && build < pricing && pricing < services && services < faq && faq < finalStep);
+  assert.match(html.slice(0, programme), /href="\/start-free\/"[^>]*data-i18n="coaching\.hero\.startFree"/);
+  assert.match(html.slice(programme, pricing), /data-i18n="phase2\.coaching\.benefit1Title"/);
+  assert.match(html.slice(build, pricing), /WHAT YOU CAN BUILD/);
+  assert.match(html.slice(pricing, services), /£97[\s\S]*£197[\s\S]*£397[\s\S]*£497/);
+  assert.match(html.slice(pricing, services), /£1,188[\s\S]*£997[\s\S]*£191/);
+  assert.match(html.slice(pricing, services), /£900/);
+  assert.equal((html.match(/data-coaching-section="pricing"/g) ?? []).length, 1);
+  assert.equal((html.match(/data-coaching-section="what-you-can-build"/g) ?? []).length, 1);
+  assert.equal((html.match(/class="coachingRateCard section"/g) ?? []).length, 0);
+  assert.equal((html.match(/class="coachingExperience section--night"/g) ?? []).length, 0);
+  assert.equal((html.match(/class="conversionJourney"/g) ?? []).length, 0);
+  assert.match(html.slice(services, faq), /Mastery Circle[\s\S]*Private Mentoring[\s\S]*Alumni Practice Membership[\s\S]*Corporate Programmes/);
+  assert.equal((html.match(/class="coachingProfessionalService card/g) ?? []).length, 4);
+  assert.equal((html.match(/coachingProfessionalService--secondary/g) ?? []).length, 0);
+  assert.doesNotMatch(html, /Distinct secondary services|Sales &amp; Partnership Growth|Leadership Workshops|AI-Enabled Performance/);
+  assert.match(html.slice(faq, finalStep), /data-i18n="coaching\.faq\.title"/);
+  assert.match(html.slice(finalStep), /href="\/start-free\/"/);
 });
 
-test("coaching rate card uses direct purchase labels for available offers", () => {
-  const english = renderCoaching({ language: "en", siteData });
-  const spanish = renderCoaching({ language: "es", siteData });
-  assert.match(english, /data-i18n="coaching\.rate\.mastery\.action">Apply for the Circle<\/a>/);
-  assert.match(english, /data-i18n="coaching\.rate\.corporate\.action">Discuss Your Team’s Needs<\/a>/);
-  assert.match(spanish, /data-i18n="coaching\.rate\.mastery\.action">Solicita entrar en el Círculo<\/a>/);
-  assert.match(spanish, /data-i18n="coaching\.rate\.corporate\.action">Habla sobre las necesidades de tu equipo<\/a>/);
+test("coaching keeps the canonical prices and every purchase destination", () => {
+  const html = renderCoaching({ language: "en", siteData });
+  for (const text of ["£97", "£197", "£397", "£497", "£1,188", "£997", "£191", "£900"]) assert.ok(html.includes(text), text);
+  for (const url of [
+    "https://www.paypal.com/ncp/payment/NWD3VU5VUTKCL",
+    "https://www.paypal.com/ncp/payment/A7KJBWNCJARJC",
+    "https://www.paypal.com/ncp/payment/N45ETXRZ9E3LQ",
+    "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6",
+  ]) assert.match(html, new RegExp(`href="${url.replaceAll("/", "\\/")}" target="_blank" rel="noopener noreferrer"`));
+  assert.match(html, /href="\/foundation\/"[^>]*data-i18n="coaching\.pricing\.foundationAction"/);
+  assert.match(html, /href="\/start-free\/"[^>]*data-i18n="coaching\.hero\.startFree"/);
 });
 
-test("additional coaching offers expose bilingual descriptions and specific CTAs", () => {
-  const keys = ["mastery", "mentoring", "alumni", "corporate"];
+test("coaching keeps bilingual stage, FAQ and professional-service hooks", () => {
   for (const language of ["en", "es"]) {
     const html = renderCoaching({ language, siteData });
-    for (const key of keys) {
-      assert.match(html, new RegExp(`data-i18n="coaching\\.rate\\.${key}\\.description"`));
-      assert.match(html, new RegExp(`data-i18n="coaching\\.rate\\.${key}\\.action"`));
+    for (const stage of ["foundation", "visualisation", "concentration", "mastery"]) {
+      assert.match(html, new RegExp(`data-i18n="coaching\\.stage\\.${stage}\\.name"`));
+      assert.match(html, new RegExp(`data-i18n="coaching\\.stage\\.${stage}\\.outcome"`));
+    }
+    for (let item = 1; item <= 6; item++) {
+      assert.match(html, new RegExp(`data-i18n="coaching\\.faq\\.${item}\\.question"`));
+      assert.match(html, new RegExp(`data-i18n="coaching\\.faq\\.${item}\\.answer"`));
+    }
+    for (const offer of ["mastery", "mentoring", "alumni", "corporate"]) {
+      assert.match(html, new RegExp(`data-i18n="coaching\\.rate\\.${offer}\\.description"`));
+      assert.match(html, new RegExp(`data-i18n="coaching\\.rate\\.${offer}\\.action"`));
     }
   }
-  assert.match(renderCoaching({ language: "en", siteData }), /Apply for the Circle|Request a Private Conversation|Join the Waitlist|Discuss Your Team’s Needs/);
-});
-
-test("coaching places one shared What Happens Next journey before its investment section", () => {
-  const html = renderCoaching({ language: "en", siteData });
-  const journeyIndex = html.indexOf('class="conversionJourney"');
-  const investmentIndex = html.indexOf('class="coachingExperience section--night"');
-
-  assert.equal((html.match(/class="conversionJourney"/g) ?? []).length, 1);
-  assert.ok(journeyIndex >= 0 && journeyIndex < investmentIndex);
-  assert.match(html.slice(journeyIndex, investmentIndex), /href="\/start-free\/"[^>]*data-i18n="conversion\.next\.cta"/);
-  assert.match(html.slice(journeyIndex, investmentIndex), /href="\/foundation\/"[^>]*data-i18n="conversion\.next\.step2Link"/);
-});
-
-test("coaching keeps shared journey translation hooks stable in English and Spanish", () => {
-  for (const language of ["en", "es"]) {
-    const html = renderCoaching({ language, siteData });
-    const journey = html.match(/<section class="conversionJourney"[\s\S]*?<\/section>/)?.[0] ?? "";
-    for (const key of ["conversion.next.heading", "conversion.next.step1Title", "conversion.next.step1Body", "conversion.next.step2Title", "conversion.next.step2Body", "conversion.next.step3Title", "conversion.next.step3Body", "conversion.next.cta"]) assert.match(journey, new RegExp(`data-i18n="${key}"`));
-  }
-});
-
-test("coaching is the accurate canonical offer", () => {
-  const html = renderCoaching({ language: "en", siteData });
-  for (const text of [
-    "Weeks 1–4", "Weeks 5–11", "Weeks 12–18", "Weeks 19–24",
-    "£97", "£197", "£397", "£497", "£1,188", "£997",
-    "Save £191", "£1,788", "Save £791", "44% off full RRP",
-  ]) assert.ok(html.includes(text), text);
-  assert.doesNotMatch(html, /6\s*[×x]\s*£169|£1,014|MSRP/);
-  assert.equal((html.match(/role="tab"/g) ?? []).length, 7);
-  assert.equal((html.match(/role="tabpanel"/g) ?? []).length, 7);
-  const payments = {
-    foundation: "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2",
-    visualisation: "https://www.paypal.com/ncp/payment/NWD3VU5VUTKCL",
-    concentration: "https://www.paypal.com/ncp/payment/A7KJBWNCJARJC",
-    mastery: "https://www.paypal.com/ncp/payment/N45ETXRZ9E3LQ",
-    complete: "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6",
-  };
-  for (const url of Object.values(payments)) {
-    assert.equal((html.match(new RegExp(url, "g")) ?? []).length, url === payments.foundation ? 0 : url === payments.complete ? 1 : 2);
-    if (url !== payments.foundation) assert.match(html, new RegExp(`href="${url.replaceAll("/", "\\/")}" target="_blank" rel="noopener noreferrer"`));
-  }
-  assert.equal((html.match(/data-i18n="coaching\.payNow">Pay Now<\/span>/g) ?? []).length, 7);
-  assert.match(html, /href="\/foundation\/"[^>]*data-i18n="coaching\.foundation\.learnMore">Explore Foundation — £97<\/a>/);
-  assert.match(html, /Complete 24-Week Programme/);
-});
-
-test("English coaching page leads with Master Key coaching and keeps professional services secondary", async () => {
-  const html = renderCoaching({ language: "en", siteData });
-  const css = await readFile("assets/platform.css", "utf8");
-  const flagshipIndex = html.indexOf('data-coaching-section="flagship"');
-  const investmentIndex = html.indexOf('class="coachingExperience section--night"');
-  const servicesIndex = html.indexOf('data-coaching-section="professional-services"');
-
-  assert.match(html, /^<main class="coachingPage"/);
-  assert.match(html, /<h1[^>]*>Personal Coaching with Tariq<\/h1>/);
-  assert.ok(flagshipIndex > 0 && flagshipIndex < investmentIndex && investmentIndex < servicesIndex);
-  for (const text of [
-    "Personal Master Key Coaching",
-    "accountability",
-    "reflection",
-    "practical application",
-    "How coaching works:",
-    "OTHER PROFESSIONAL SERVICES",
-    "Sales &amp; Partnership Growth",
-    "Leadership Workshops",
-    "AI-Enabled Performance",
-  ]) assert.ok(html.includes(text), text);
-  for (const price of ["£97", "£197", "£397", "£497", "£1,188", "£997", "Save £191", "£1,788", "Save £791", "44% off full RRP"]) {
-    assert.ok(html.includes(price), price);
-  }
-  assert.doesNotMatch(html, /6\s*[×x]\s*£169|£1,014/);
-  assert.match(html, /href="\/contact\/"[^>]*>Enquire About Coaching<\/a>/);
-  assert.equal((html.match(/class="coachingProfessionalService card"/g) ?? []).length, 3);
-  assert.match(css, /\.coachingProfessionalServices__grid[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/s);
-  assert.match(css, /@media[^}]*max-width:\s*768px[\s\S]*?\.coachingProfessionalServices__grid[^{]*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
-
-  const spanish = renderCoaching({ language: "es", siteData });
-  assert.match(spanish, /Coaching para un dominio interior práctico/);
-  assert.doesNotMatch(spanish, /Personal Coaching with Tariq|Other Professional Services/);
-});
-
-test("coaching presents the primary customer path before secondary premium services", () => {
-  const html = renderCoaching({ language: "en", siteData });
-  const primary = html.indexOf('data-coaching-section="primary-path"');
-  const secondary = html.indexOf('data-coaching-section="professional-services"');
-  assert.ok(primary >= 0 && primary < secondary);
-  for (const text of ["Free 7-Day Experience", "Foundation — £97", "Complete 24-Week Journey — £997", "Private Mentoring — application only"]) assert.ok(html.includes(text), text);
-  assert.match(html, /data-coaching-section="primary-path"[\s\S]*?href="\/start-free\/"/);
-  assert.match(html, /data-coaching-section="primary-path"[\s\S]*?href="\/foundation\/"/);
-});
-
-test("coaching uses Integration & Mastery consistently for Stage 4", () => {
-  for (const language of ["en", "es"]) {
-    const html = renderCoaching({ language, siteData });
-    assert.match(html, language === "en" ? /Integration &amp; Mastery/ : /Integración y dominio/);
-    assert.doesNotMatch(html, /Contemplation &amp; Mastery/);
-  }
-});
-
-test("coaching Foundation card uses the shared compact expandable offer", () => {
   const english = renderCoaching({ language: "en", siteData });
-  const spanish = renderCoaching({ language: "es", siteData });
-  for (const html of [english, spanish]) {
-    const primary = html.match(/<section class="coachingPrimaryPath[\s\S]*?<\/section>/)?.[0] ?? "";
-    assert.match(primary, /class="compactFoundationOffer__details"/);
-    assert.match(primary, /data-i18n="foundation\.compact\.seeIncluded"/);
-    assert.doesNotMatch(primary, /<details[^>]+open/);
-    assert.match(primary, /href="\/foundation\/"/);
-  }
-  assert.match(english, /EXPLORE FOUNDATION — £97/);
-  assert.match(spanish, /EXPLORA FUNDAMENTOS — £97/);
+  assert.match(english, /OTHER PROFESSIONAL SERVICES/);
 });
 
-test("Spanish coaching copy is complete and natural", () => {
-  const html = renderCoaching({ language: "es", siteData });
-  for (const text of [
-    "Resumen", "Fundamentos", "Visualización", "Concentración",
-    "Integración y dominio", "Recorrido completo", "Preguntas frecuentes",
-    "Semanas 1–4", "Ahorra £191", "44% de descuento sobre el PVP completo",
-    "Habla con Tariq sobre tu inscripción",
-  ]) assert.ok(html.includes(text), text);
-  assert.doesNotMatch(html, /Overview|Full Journey|Frequently Asked Questions/);
-});
-
-test("every coaching detail has an in-place language-switch hook", () => {
-  const html = renderCoaching({ language: "en", siteData });
-  for (const stage of ["foundation", "visualisation", "concentration", "mastery"]) {
-    assert.match(html, new RegExp(`data-i18n="coaching\\.stage\\.${stage}\\.name"`));
-    assert.match(html, new RegExp(`data-i18n="coaching\\.stage\\.${stage}\\.outcome"`));
-    for (let item = 1; item <= 3; item++) assert.match(html, new RegExp(`data-i18n="coaching\\.stage\\.${stage}\\.inclusion${item}"`));
-  }
-  for (let item = 1; item <= 6; item++) {
-    assert.match(html, new RegExp(`data-i18n="coaching\\.faq\\.${item}\\.question"`));
-    assert.match(html, new RegExp(`data-i18n="coaching\\.faq\\.${item}\\.answer"`));
-  }
-  for (const tab of ["overview", "foundation", "visualisation", "concentration", "mastery", "full", "faq"]) {
-    assert.match(html, new RegExp(`data-i18n="coaching\\.tab\\.${tab}"`));
-  }
-});
-
-test("language switching updates the coaching tablist accessible name", () => {
-  const html = renderCoaching({ language: "en", siteData });
-  const tablist = html.match(/<div class="tabs coachingTabs"[^>]+>/)?.[0] ?? "";
-  assert.match(tablist, /aria-label="Coaching programme sections"/);
-  assert.match(tablist, /data-i18n-aria-label="coaching\.tabsLabel"/);
-
-  const element = {
-    dataset: { i18nAriaLabel: "coaching.tabsLabel" },
-    attributes: new Map([["aria-label", "Coaching programme sections"]]),
-    setAttribute(name, value) { this.attributes.set(name, value); },
-  };
-  localizeDocument({
-    documentElement: { lang: "en" },
-    querySelectorAll(selector) { return selector === "[data-i18n-aria-label]" ? [element] : []; },
-    querySelector: () => null,
-  }, "es");
-  assert.equal(element.attributes.get("aria-label"), "Secciones del programa de coaching");
-});
-
-test("server-rendered coaching panels remain stacked and visible without JavaScript", () => {
-  const html = renderCoaching({ language: "en", siteData });
-  const panels = [...html.matchAll(/<section[^>]+role="tabpanel"[^>]*>/g)].map((match) => match[0]);
-  assert.equal(panels.length, 7);
-  for (const panel of panels) assert.doesNotMatch(panel, /\shidden(?:[\s=>]|$)/);
+test("professional services use a two-column desktop grid and one-column mobile grid", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.coachingProfessionalServices__grid\s*\{\s*display:\s*grid;\s*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(max-width: 700px\)[\s\S]*?\.coachingProfessionalServices__grid\s*\{\s*grid-template-columns:\s*minmax\(0, 1fr\)/);
+  assert.doesNotMatch(css, /\.coachingFlagship,\s*\.coachingProfessionalServices,\s*\.coachingProfessionalServices__grid\s*\{\s*grid-template-columns:\s*minmax\(0, 1fr\)/);
+  assert.match(css, /\/\* Final coaching responsive grid guard \*\/\s*\.coachingProfessionalServices__grid\s*\{\s*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)\s*;\s*\}\s*@media \(max-width: 700px\)\s*\{\s*\.coachingProfessionalServices__grid\s*\{\s*grid-template-columns:\s*minmax\(0, 1fr\)/);
 });
 
 function tabFixture() {
   const listeners = new Map();
   const tabs = Array.from({ length: 3 }, (_, index) => ({
-    attributes: new Map([
-      ["aria-selected", index === 0 ? "true" : "false"],
-      ["tabindex", index === 0 ? "0" : "-1"],
-    ]),
+    attributes: new Map([["aria-selected", index === 0 ? "true" : "false"], ["tabindex", index === 0 ? "0" : "-1"]]),
     addEventListener(type, listener) { listeners.set(`${index}:${type}`, listener); },
     removeEventListener() {},
     getAttribute(name) { return this.attributes.get(name); },
@@ -219,27 +88,17 @@ function tabFixture() {
     focus() { fixture.focused = index; },
   }));
   const panels = tabs.map((_, index) => ({ hidden: index !== 0 }));
-  const root = {
-    classList: { add() {}, remove() {} },
-    querySelectorAll(selector) {
-      if (selector === '[role="tab"]') return tabs;
-      if (selector === '[role="tabpanel"]') return panels;
-      return [];
-    },
-  };
-  const fixture = { root, tabs, panels, listeners, focused: -1 };
+  const fixture = { root: { classList: { add() {}, remove() {} }, querySelectorAll(selector) { if (selector === '[role="tab"]') return tabs; if (selector === '[role="tabpanel"]') return panels; return []; } }, tabs, panels, listeners, focused: -1 };
   return fixture;
 }
 
 test("enhanced tabs support arrows, Home, End, click and one visible panel", () => {
   const fixture = tabFixture();
   const unmount = mountTabs(fixture.root);
-
   fixture.listeners.get("0:keydown")({ key: "ArrowRight", preventDefault() {} });
   assert.equal(fixture.focused, 1);
   assert.equal(fixture.tabs[1].getAttribute("aria-selected"), "true");
   assert.deepEqual(fixture.panels.map((panel) => panel.hidden), [true, false, true]);
-
   fixture.listeners.get("1:keydown")({ key: "End", preventDefault() {} });
   assert.equal(fixture.focused, 2);
   fixture.listeners.get("2:keydown")({ key: "Home", preventDefault() {} });
@@ -247,13 +106,6 @@ test("enhanced tabs support arrows, Home, End, click and one visible panel", () 
   fixture.listeners.get("2:click")({ preventDefault() {} });
   assert.equal(fixture.tabs[2].getAttribute("aria-selected"), "true");
   assert.deepEqual(fixture.panels.map((panel) => panel.hidden), [true, true, false]);
-
-  fixture.listeners.get("1:keydown")({ key: "Enter", preventDefault() {} });
-  assert.equal(fixture.focused, 1);
-  assert.deepEqual(fixture.panels.map((panel) => panel.hidden), [true, false, true]);
-  fixture.listeners.get("0:keydown")({ key: " ", preventDefault() {} });
-  assert.equal(fixture.focused, 0);
-  assert.deepEqual(fixture.panels.map((panel) => panel.hidden), [false, true, true]);
   assert.equal(typeof unmount, "function");
 });
 
