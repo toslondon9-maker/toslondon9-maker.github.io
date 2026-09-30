@@ -7093,6 +7093,7 @@ body {
 
 .mksStudyRoom__stage a strong,
 .mksStudyRoom__chapter summary strong {
+  font-weight: 400;
   overflow-wrap: anywhere;
 }
 
