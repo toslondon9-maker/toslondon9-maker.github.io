@@ -1,5 +1,6 @@
 import { siteData as canonicalSiteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
+import { priceCopy, pricingNoteCopy } from "./pricing.mjs";
 
 const escapeHtml = (value) => String(value)
   .replaceAll("&", "&amp;")
@@ -26,7 +27,7 @@ export function renderCompactFoundationOffer({ language = "en", data = canonical
   if (!foundation) throw new Error("Foundation stage is required");
   const visible = ["weeks", "lessons", "calls", "support"].map((key) => `<li>${copy(`foundation.compact.${key}`, language)}</li>`).join("");
   const included = ["totalCalls", "zoomHours", "chapterDay", "meditationDay", "chapterTotal", "meditationTotal", "commitment"].map((key) => `<li>${copy(`foundation.compact.${key}`, language)}</li>`).join("");
-  return `<div class="compactFoundationOffer"><h3>${copy("foundation.compact.title", language)}</h3><strong class="compactFoundationOffer__price">£${foundation.price}</strong><ul class="compactFoundationOffer__summary">${visible}</ul><details class="compactFoundationOffer__details"><summary>${copy("foundation.compact.seeIncluded", language)}</summary><ul>${included}</ul></details>${includeCta ? `<a class="button--${ctaVariant}" href="${escapeHtml(data.routes.foundation)}" data-i18n="${ctaKey}">${localized(ctaKey, language)}</a>` : ""}</div>`;
+  return `<div class="compactFoundationOffer"><h3>${copy("foundation.compact.title", language)}</h3><strong class="compactFoundationOffer__price">${priceCopy("foundation", language)}</strong><ul class="compactFoundationOffer__summary">${visible}</ul><details class="compactFoundationOffer__details"><summary>${copy("foundation.compact.seeIncluded", language)}</summary><ul>${included}</ul></details>${includeCta ? `<a class="button--${ctaVariant}" href="${escapeHtml(data.routes.foundation)}" data-i18n="${ctaKey}">${localized(ctaKey, language)}</a>` : ""}</div>`;
 }
 
 export function renderWhatHappensNext({
@@ -44,5 +45,5 @@ export function renderFoundationNextStep({
 } = {}) {
   const foundation = data.stages?.find((stage) => stage.id === "foundation");
   if (!foundation) throw new Error("Foundation stage is required");
-  return `<section class="foundationNextStep" data-day7-foundation hidden aria-labelledby="foundation-next-heading"><div class="foundationNextStep__copy"><p class="eyebrow" data-i18n="conversion.foundation.eyebrow">${localized("conversion.foundation.eyebrow", language)}</p><h2 id="foundation-next-heading" data-i18n="conversion.foundation.heading">${localized("conversion.foundation.heading", language)}</h2>${copy("conversion.foundation.body", language, "p")}<p class="foundationNextStep__qualification" data-i18n="conversion.foundation.qualification">${localized("conversion.foundation.qualification", language)}</p></div><div class="foundationNextStep__offer">${renderCompactFoundationOffer({ language, data, ctaKey: "conversion.foundation.cta", ctaVariant: "primary" })}<a class="button--text" href="${escapeHtml(data.routes.startFree)}" data-i18n="conversion.foundation.secondary">${localized("conversion.foundation.secondary", language)}</a></div></section>`;
+  return `<section class="foundationNextStep" data-day7-foundation hidden aria-labelledby="foundation-next-heading"><div class="foundationNextStep__copy"><p class="eyebrow" data-i18n="conversion.foundation.eyebrow">${localized("conversion.foundation.eyebrow", language)}</p><h2 id="foundation-next-heading" data-i18n="conversion.foundation.heading">${localized("conversion.foundation.heading", language)}</h2>${copy("conversion.foundation.body", language, "p")}<p class="foundationNextStep__qualification" data-i18n="conversion.foundation.qualification">${localized("conversion.foundation.qualification", language)}</p><p class="foundationNextStep__note">${pricingNoteCopy(language)}</p></div><div class="foundationNextStep__offer">${renderCompactFoundationOffer({ language, data, ctaKey: "conversion.foundation.cta", ctaVariant: "primary" })}<a class="button--text" href="${escapeHtml(data.routes.startFree)}" data-i18n="conversion.foundation.secondary">${localized("conversion.foundation.secondary", language)}</a></div></section>`;
 }

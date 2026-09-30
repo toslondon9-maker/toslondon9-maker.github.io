@@ -34,8 +34,11 @@ test("deployed homepage preserves the approved compact lineage section", () => {
 test("canonical coaching page owns every locked commercial fact", () => {
   for (const value of [
     "Weeks 1–4", "Weeks 5–11", "Weeks 12–18", "Weeks 19–24",
-    "£97", "£197", "£397", "£497", "£1,188", "£997",
-    "Save £191", "£1,788", "Save £791", "44% off full RRP",
+    "£97 / approximately €114", "£197 / approximately €231", "£397 / approximately €465", "£497 / approximately €582",
+    "£1,188 / approximately €1,390", "£997 / approximately €1,167", "£191 / approximately €223",
+    "£900 / approximately €1,053", "£3,000–£5,000 / approximately €3,510–€5,850",
+    "£7,500–£15,000 / approximately €8,776–€17,551", "£29–£79/month / approximately €34–€92/month",
+    "From £5,000 / approximately from €5,850", "GBP is the payment currency",
   ]) assert.ok(coaching.includes(value), value);
   assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
   const offers = home.match(/<section[^>]+data-home-section="offers"[\s\S]*?<\/section>/)?.[0] ?? "";
@@ -48,7 +51,7 @@ test("canonical coaching page owns every locked commercial fact", () => {
 
 test("canonical coaching page is static, bilingual and uses a real contact fallback", () => {
   assert.match(coaching, /<title data-i18n="route\.coaching\.metaTitle">Master Key System Coaching \| 24-Week Course/);
-  assert.match(coaching, /src="\/assets\/tabs\.mjs"/);
+  assert.match(coaching, /data-i18n="pricing\.note"/);
   assert.doesNotMatch(coaching, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/V5QYXZZS6KQE2" target="_blank" rel="noopener noreferrer"/);
   assert.match(coaching, /data-i18n="route\.coaching\.action"/);
   assert.match(coaching, />EN<.*>ES</s);
