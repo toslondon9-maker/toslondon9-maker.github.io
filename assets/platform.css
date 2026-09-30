@@ -6978,8 +6978,6 @@ body {
 }
 
 .mksStudyRoom__sidebar {
-  position: sticky;
-  top: 1rem;
   min-width: 0;
 }
 
@@ -7429,6 +7427,24 @@ body {
   .siteHeader .mobileNav__panel[hidden] { display: none !important; }
   .siteHeader .mobileNav__panel:not([hidden]) { display: block !important; }
   .siteHeader .brand__wordmark { white-space: normal; }
+}
+
+/* Keep the shared header visible in the page flow and protect anchored content. */
+.siteHeader,
+.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+}
+
+html {
+  scroll-padding-block-start: 126px;
+}
+
+@media (max-width: 800px) {
+  html {
+    scroll-padding-block-start: 96px;
+  }
 }
 
 /* Keep the consent prompt in document flow so it cannot obscure page content or CTAs. */

@@ -70,6 +70,8 @@ test("MKS Study Room stays structurally aligned in English and Spanish", () => {
 
 test("Study Room responsive styles keep the content bounded and keyboard focus visible", () => {
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  const sidebarRule = css.match(/\.mksStudyRoom__sidebar\s*\{[^}]*\}/s)?.[0] ?? "";
+  assert.doesNotMatch(sidebarRule, /position:\s*sticky/);
   assert.match(css, /\.mksStudyRoom\s*\{[^}]*overflow-x:\s*clip/s);
   assert.match(css, /\.mksStudyRoom__lesson\s*\{[^}]*max-width:\s*760px/s);
   assert.match(css, /\.mksStudyRoom__stageBanner img\s*\{[^}]*width:\s*100%[^}]*height:\s*auto/s);

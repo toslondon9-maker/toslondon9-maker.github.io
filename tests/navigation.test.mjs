@@ -99,7 +99,7 @@ test("page shell cache-busts the release assets that control visible copy and la
   });
   const languageModule = readFileSync(new URL("../assets/site-language.mjs", import.meta.url), "utf8");
 
-  assert.match(html, /href="\/assets\/platform\.css\?v=20260930-mks-chapter-nav-weight-3"/);
+  assert.match(html, /href="\/assets\/platform\.css\?v=20260930-mks-chapter-nav-weight-4"/);
   assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260909-day7-choices"/);
   assert.match(languageModule, /translations\.mjs\?v=20260909-day7-choices/);
 });
@@ -326,4 +326,12 @@ test("shared header keeps the enlarged brand within a non-overlapping desktop ro
   assert.match(css, /\.siteHeader__actions[^}]*min-width:\s*0/s);
   assert.match(css, /\.siteHeader \.brand__wordmark[^}]*min-width:\s*0/s);
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.siteHeader[^}]*overflow-x:\s*clip/s);
+});
+
+test("shared header stays sticky and protects anchored content from its height", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(css, /\.siteHeader,\s*\.site-header\s*\{[\s\S]*?position:\s*sticky/s);
+  assert.match(css, /\.siteHeader,\s*\.site-header\s*\{[\s\S]*?top:\s*0/s);
+  assert.match(css, /html\s*\{[\s\S]*?scroll-padding-block-start:/s);
 });
