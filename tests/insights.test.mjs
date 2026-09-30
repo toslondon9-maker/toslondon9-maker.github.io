@@ -9,7 +9,7 @@ import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs
 import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
 import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage } from "../src/pages/insights-source-article.mjs";
 import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage } from "../src/pages/insights-source-article.mjs";
-import { insightsHowToStudyPage, insightsEnergyAttentionPage } from "../src/pages/insights-source-article.mjs";
+import { insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 
 test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
@@ -67,7 +67,8 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 15);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 16);
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLifeRebuilt}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
   assert.match(page.body, /data-i18n="insights\.publicationDatePeople"/);
@@ -111,6 +112,25 @@ test("the energy-attention article is registered with its source image, SEO, CTA
   assert.match(page.body, /href="\/start-free\/"/);
   assert.match(page.body, /href="\/downloads\/energy-goes-where-attention-flows\.pdf"/);
   assert.equal(page.structuredData[0].mainEntityOfPage, "https://unleashyourpowerwithtariq.com/insights/energy-goes-where-attention-flows/");
+});
+
+test("the life-rebuilt article preserves its supplied source, SEO metadata and free-experience link", () => {
+  const page = insightsLifeRebuiltPage();
+  assert.equal(page.route, "/insights/how-i-rebuilt-my-life-from-the-inside-out/");
+  assert.equal(page.title, "How I Rebuilt My Life from the Inside Out | Tariq Saddique");
+  assert.equal(page.description, "After losing his business, falling into debt and facing serious illness, Tariq Saddique rebuilt his inner world through meditation and the Master Key System. Discover the story behind Unleash Your Power.");
+  assert.match(page.body, /How I Rebuilt My Life from the Inside Out/);
+  for (const heading of ["When life forced me to stop", "Inspiration opened the door", "Searching for the deeper source", "From reading to disciplined practice", "My internal compass changed", "A different quality of life", "Why I created Unleash Your Power with Tariq", "Your life may need a new direction—not a new identity"]) {
+    assert.match(page.body, new RegExp(heading.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")));
+  }
+  assert.match(page.body, /href="\/start-free\/"/);
+  assert.match(page.body, /unleashyourpowerwithtariq\.com\/start-free/);
+  assert.equal(page.structuredData[0]["@type"], "Article");
+  assert.equal(page.structuredData[0].headline, "How I Rebuilt My Life from the Inside Out");
+  assert.equal(page.structuredData[0].mainEntityOfPage, "https://unleashyourpowerwithtariq.com/insights/how-i-rebuilt-my-life-from-the-inside-out/");
+  const source = readFileSync("content/insights-article-how-i-rebuilt-my-life-from-the-inside-out.md", "utf8");
+  assert.equal((source.match(/\S+/g) ?? []).length, 1603);
+  assert.match(source, /## Suggested SEO details/);
 });
 
 test("the energy-attention PDF is a non-empty PDF generated from the article source", () => {
