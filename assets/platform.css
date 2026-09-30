@@ -7426,6 +7426,8 @@ body {
   .siteHeader__actions > .languageSwitch--header { display: none !important; }
   .siteHeader .mobileNav { display: block !important; flex: 0 0 auto !important; }
   .siteHeader .mobileNav__toggle { display: grid !important; }
+  .siteHeader .mobileNav__panel[hidden] { display: none !important; }
+  .siteHeader .mobileNav__panel:not([hidden]) { display: block !important; }
   .siteHeader .brand__wordmark { white-space: normal; }
 }
 

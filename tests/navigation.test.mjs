@@ -314,6 +314,7 @@ test("shared header reserves branding space and switches to the hamburger before
   const navigation = readFileSync(new URL("../assets/site-navigation.mjs", import.meta.url), "utf8");
   assert.match(css, /@media \(min-width: 1361px\)[\s\S]*?\.siteHeader__actions[^}]*min-width:\s*0[\s\S]*?\.siteHeader \.siteNav[^}]*display:\s*flex/s);
   assert.match(css, /@media \(max-width: 1439px\)[\s\S]*?\.siteHeader__actions > \.siteNav[\s\S]*?display:\s*none\s*!important[\s\S]*?\.siteHeader \.mobileNav[\s\S]*?display:\s*block\s*!important/s);
+  assert.match(css, /@media \(max-width: 1439px\)[\s\S]*?\.siteHeader \.mobileNav__panel\[hidden\][^}]*display:\s*none\s*!important[\s\S]*?\.siteHeader \.mobileNav__panel:not\(\[hidden\]\)[^}]*display:\s*block\s*!important/s);
   assert.match(css, /@media \(max-width: 1439px\)[\s\S]*?overflow-x:\s*clip/s);
   assert.match(navigation, /matchMedia\?\.\("\(min-width: 1440px\)"\)/);
 });
