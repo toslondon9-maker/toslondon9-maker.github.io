@@ -7083,6 +7083,20 @@ body {
   color: var(--night);
 }
 
+.mksStudyRoom__stage[data-active="true"] {
+  border-left-color: var(--gold-bright);
+}
+
+.mksStudyRoom__stage[data-active="true"] header h2 {
+  color: #7f5c1c;
+}
+
+.mksStudyRoom__stage a[aria-current="location"] {
+  background: var(--cream-deep);
+  color: var(--night);
+  box-shadow: inset 3px 0 var(--gold);
+}
+
 .mksStudyRoom__stage a span {
   color: #85611f;
   font-size: .72rem;
@@ -7399,6 +7413,20 @@ body {
   .siteHeader__actions > .languageSwitch--header { display: none !important; }
   .siteHeader .mobileNav { display: block !important; flex: 0 0 auto !important; }
   .siteHeader .mobileNav__toggle { display: grid !important; }
+}
+
+/* Laptop-safe header boundary: keep the hamburger until the full nav has room. */
+@media (max-width: 1439px) {
+  .siteHeader,
+  .site-header { flex-flow: row nowrap !important; min-width: 0 !important; overflow-x: clip !important; }
+  .siteHeader > .brand,
+  .site-header > .brand { flex: 1 1 auto !important; min-width: 0 !important; max-width: calc(100% - 4.5rem) !important; }
+  .siteHeader__actions { flex: 0 0 auto !important; min-width: 0 !important; }
+  .siteHeader__actions > .siteNav,
+  .siteHeader__actions > .languageSwitch--header { display: none !important; }
+  .siteHeader .mobileNav { display: block !important; flex: 0 0 auto !important; }
+  .siteHeader .mobileNav__toggle { display: grid !important; }
+  .siteHeader .brand__wordmark { white-space: normal; }
 }
 
 /* Keep the consent prompt in document flow so it cannot obscure page content or CTAs. */

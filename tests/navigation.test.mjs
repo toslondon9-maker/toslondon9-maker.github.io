@@ -84,7 +84,7 @@ test("page shell mounts shared chrome and the navigation module once", () => {
 
   assert.match(html, /data-site-navigation/);
   assert.match(html, /href="\/faq\/" aria-current="page"/);
-  assert.equal((html.match(/src="\/assets\/site-navigation\.mjs"/g) ?? []).length, 1);
+  assert.equal((html.match(/src="\/assets\/site-navigation\.mjs\?v=20260930-nav-mks-sync-1"/g) ?? []).length, 1);
   assert.equal((html.match(/src="\/assets\/app\.mjs"/g) ?? []).length, 1);
 });
 
@@ -99,7 +99,7 @@ test("page shell cache-busts the release assets that control visible copy and la
   });
   const languageModule = readFileSync(new URL("../assets/site-language.mjs", import.meta.url), "utf8");
 
-  assert.match(html, /href="\/assets\/platform\.css\?v=20260930-mks-chapter-nav-weight-1"/);
+  assert.match(html, /href="\/assets\/platform\.css\?v=20260930-mks-chapter-nav-weight-2"/);
   assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260909-day7-choices"/);
   assert.match(languageModule, /translations\.mjs\?v=20260909-day7-choices/);
 });
@@ -107,13 +107,13 @@ test("page shell cache-busts the release assets that control visible copy and la
 test("final header breakpoint guard prevents the desktop cascade from re-enabling overlap", () => {
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
   const navigation = readFileSync(new URL("../assets/site-navigation.mjs", import.meta.url), "utf8");
-  const compactStart = css.lastIndexOf("@media (max-width: 1360px)");
+  const compactStart = css.lastIndexOf("@media (max-width: 1439px)");
   const laterDesktopRule = css.lastIndexOf("@media (min-width: 801px)");
 
   assert.ok(compactStart > laterDesktopRule, "compact header rules must be last");
   assert.match(css.slice(compactStart), /\.siteHeader__actions > \.siteNav[\s\S]*?display:\s*none\s*!important/);
   assert.match(css.slice(compactStart), /\.siteHeader \.mobileNav[\s\S]*?display:\s*block\s*!important/);
-  assert.match(navigation, /matchMedia\?\.\("\(min-width: 1361px\)"\)/);
+  assert.match(navigation, /matchMedia\?\.\("\(min-width: 1440px\)"\)/);
 });
 
 test("page shell establishes enhancement state before styles can paint mobile chrome", () => {
@@ -188,7 +188,7 @@ function createNavigationFixture({ legacyMediaQuery = false } = {}) {
   const document = {
     defaultView: {
       matchMedia(query) {
-        assert.equal(query, "(min-width: 1361px)");
+        assert.equal(query, "(min-width: 1440px)");
         const mediaQuery = {
           matches: false,
         };
@@ -313,9 +313,9 @@ test("shared header reserves branding space and switches to the hamburger before
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
   const navigation = readFileSync(new URL("../assets/site-navigation.mjs", import.meta.url), "utf8");
   assert.match(css, /@media \(min-width: 1361px\)[\s\S]*?\.siteHeader__actions[^}]*min-width:\s*0[\s\S]*?\.siteHeader \.siteNav[^}]*display:\s*flex/s);
-  assert.match(css, /@media \(max-width: 1360px\)[\s\S]*?\.siteHeader \.siteNav[\s\S]*?display:\s*none\s*!important[\s\S]*?\.siteHeader \.mobileNav[\s\S]*?display:\s*block\s*!important/s);
-  assert.match(css, /@media \(max-width: 1360px\)[\s\S]*?overflow-x:\s*clip/s);
-  assert.match(navigation, /matchMedia\?\.\("\(min-width: 1361px\)"\)/);
+  assert.match(css, /@media \(max-width: 1439px\)[\s\S]*?\.siteHeader__actions > \.siteNav[\s\S]*?display:\s*none\s*!important[\s\S]*?\.siteHeader \.mobileNav[\s\S]*?display:\s*block\s*!important/s);
+  assert.match(css, /@media \(max-width: 1439px\)[\s\S]*?overflow-x:\s*clip/s);
+  assert.match(navigation, /matchMedia\?\.\("\(min-width: 1440px\)"\)/);
 });
 
 test("shared header keeps the enlarged brand within a non-overlapping desktop row", async () => {

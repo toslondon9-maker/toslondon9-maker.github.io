@@ -69,10 +69,10 @@ test("the design system provides every shared layout and component primitive", (
 
 test("responsive rules protect the desktop navigation from wrapping before space becomes constrained", () => {
   const css = readFileSync(cssUrl, "utf8");
-  for (const breakpoint of [1360, 768, 480]) {
+  for (const breakpoint of [1439, 768, 480]) {
     assert.match(css, new RegExp(`@media\\s*\\(max-width:\\s*${breakpoint}px\\)`));
   }
-  const desktopMenuSwitch = css.slice(css.indexOf("@media (max-width: 1360px)"));
+  const desktopMenuSwitch = css.slice(css.indexOf("@media (max-width: 1439px)"));
   assert.match(desktopMenuSwitch, /\.siteNav[\s\S]*?\{[^}]*display:\s*none/s);
   assert.match(desktopMenuSwitch, /\.mobileNav\s*\{[^}]*display:\s*block/s);
   assert.match(css, /\.siteNav ul[\s\S]*?\{[^}]*flex-wrap:\s*nowrap/s);

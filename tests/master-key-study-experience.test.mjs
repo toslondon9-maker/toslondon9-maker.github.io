@@ -4,6 +4,8 @@ import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 
+const curriculumScript = readFileSync(new URL("../assets/curriculum.mjs", import.meta.url), "utf8");
+
 function curriculumPage(language = "en") {
   return routeRenderers[siteData.routes.masterKeySystem](siteData, language).body;
 }
@@ -50,6 +52,12 @@ test("MKS Study Room uses the four approved visual stage banners without promoti
   assert.equal((html.match(/class="mksStudyRoom__visualNavLink"/g) ?? []).length, 4);
   assert.equal((html.match(/class="mksStudyRoom__stageBanner"/g) ?? []).length, 4);
   assert.doesNotMatch(html, /pricing|coaching CTA|start your free 7 days/i);
+});
+
+test("MKS Study Room synchronizes the active sidebar stage and chapter while scrolling", () => {
+  assert.match(curriculumScript, /IntersectionObserver/);
+  assert.match(curriculumScript, /aria-current/);
+  assert.match(curriculumScript, /mksStudyRoom__currentTitle/);
 });
 
 test("MKS Study Room stays structurally aligned in English and Spanish", () => {

@@ -8,7 +8,7 @@ export function mountNavigation(document) {
 
   if (!root || !button || !panel || !body) return () => {};
 
-  const desktopQuery = document.defaultView?.matchMedia?.("(min-width: 1361px)");
+  const desktopQuery = document.defaultView?.matchMedia?.("(min-width: 1440px)");
 
   const setOpen = (open, restoreFocus = false) => {
     const labelKey = open ? "menu.close" : "menu.open";
@@ -21,7 +21,10 @@ export function mountNavigation(document) {
     if (!open && restoreFocus) button.focus();
   };
 
-  const onToggle = () => setOpen(button.getAttribute("aria-expanded") !== "true");
+  const onToggle = (event) => {
+    event?.stopPropagation?.();
+    setOpen(button.getAttribute("aria-expanded") !== "true");
+  };
   const onKeydown = (event) => {
     if (event.key === "Escape" && button.getAttribute("aria-expanded") === "true") {
       setOpen(false, true);
