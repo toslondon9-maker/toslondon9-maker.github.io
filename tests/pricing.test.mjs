@@ -35,7 +35,13 @@ test("canonical pricing catalogue contains every approved GBP/EUR pair", () => {
     assert.match(pricing[key].es, new RegExp(`${escapeRegExp(gbp.replace("From ", ""))}.*${escapeRegExp(eur.replace("from ", ""))}`));
   }
   assert.match(pricingNote.en, /GBP is the payment currency/);
-  assert.match(pricingNote.es, /La moneda de pago es GBP/);
+  assert.match(pricingNote.en, /EUR figures are indicative/);
+  assert.match(pricingNote.es, /El pago se realiza en GBP/);
+  assert.match(pricingNote.es, /cifras en EUR son orientativas/);
+  for (const value of Object.values(pricing)) {
+    assert.doesNotMatch(value.en, /approximately/);
+    assert.doesNotMatch(value.es, /aproximadamente/);
+  }
 });
 
 test("public paid routes render every approved price in both languages and keep GBP official", () => {
@@ -46,7 +52,9 @@ test("public paid routes render every approved price in both languages and keep 
     assert.match(spanish, new RegExp(escapeRegExp(value.es)));
   }
   assert.match(english, /GBP is the payment currency/);
-  assert.match(spanish, /La moneda de pago es GBP/);
+  assert.match(spanish, /El pago se realiza en GBP/);
+  assert.doesNotMatch(english, /approximately €|aproximadamente €/);
+  assert.doesNotMatch(spanish, /approximately €|aproximadamente €/);
   assert.match(english, /GBP is the payment currency/);
 });
 
@@ -61,10 +69,10 @@ test("Foundation, homepage and FAQ use paired pricing while free and book pages 
   assert.match(home, /£997.*€1,167/);
   assert.match(faq, /£97.*€114/);
   assert.match(faq, /GBP is the payment currency/);
-  assert.match(faqPage(siteData, "es").body, /La moneda de pago es GBP/);
+  assert.match(faqPage(siteData, "es").body, /El pago se realiza en GBP/);
   assert.match(free, /Free registration required|No purchase required/);
   assert.match(free, /GBP is the payment currency/);
-  assert.match(startFreePage(siteData, "es").body, /La moneda de pago es GBP/);
+  assert.match(startFreePage(siteData, "es").body, /El pago se realiza en GBP/);
   assert.doesNotMatch(book, /€114|€1,167|approximately €|aproximadamente €/);
   const referral = await readFile(path.join(root, "referral", "index.html"), "utf8");
   assert.match(referral, /£97/);
@@ -93,6 +101,7 @@ test("generated public HTML does not leave an approved paid offer GBP-only", asy
   const files = ["index.html", "foundation/index.html", "coaching/index.html", "faq/index.html", "start-free/index.html", "start-free/day-7-make-it-part-of-how-you-live/index.html"];
   for (const relativeFile of files) {
     const html = await readFile(path.join(root, relativeFile), "utf8");
+    assert.doesNotMatch(html, /(?:approximately|aproximadamente) €|(?:approximately|aproximadamente) desde €/);
     for (const value of Object.values(pricing)) {
       if (!html.includes(value.gbp)) continue;
       assert.match(html, new RegExp(escapeRegExp(value.en.split(" / ")[0])));

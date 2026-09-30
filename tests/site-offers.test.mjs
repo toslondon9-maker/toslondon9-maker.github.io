@@ -34,11 +34,11 @@ test("deployed homepage preserves the approved compact lineage section", () => {
 test("canonical coaching page owns every locked commercial fact", () => {
   for (const value of [
     "Weeks 1–4", "Weeks 5–11", "Weeks 12–18", "Weeks 19–24",
-    "£97 / approximately €114", "£197 / approximately €231", "£397 / approximately €465", "£497 / approximately €582",
-    "£1,188 / approximately €1,390", "£997 / approximately €1,167", "£191 / approximately €223",
-    "£900 / approximately €1,053", "£3,000–£5,000 / approximately €3,510–€5,850",
-    "£7,500–£15,000 / approximately €8,776–€17,551", "£29–£79/month / approximately €34–€92/month",
-    "From £5,000 / approximately from €5,850", "GBP is the payment currency",
+    "£97 / €114", "£197 / €231", "£397 / €465", "£497 / €582",
+    "£1,188 / €1,390", "£997 / €1,167", "£191 / €223",
+    "£900 / €1,053", "£3,000–£5,000 / €3,510–€5,850",
+    "£7,500–£15,000 / €8,776–€17,551", "£29–£79/month / €34–€92/month",
+    "From £5,000 / from €5,850", "GBP is the payment currency",
   ]) assert.ok(coaching.includes(value), value);
   assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
   const offers = home.match(/<section[^>]+data-home-section="offers"[\s\S]*?<\/section>/)?.[0] ?? "";

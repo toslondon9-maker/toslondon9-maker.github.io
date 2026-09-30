@@ -135,7 +135,7 @@ test("SEE ALL 7 DAYS keeps pure-white text in every interaction state", () => {
 test("the Foundation handoff is hidden until Day 7 progress is complete", () => {
   const html = dashboard().body;
   assert.match(html, /data-day7-foundation[^>]+hidden/);
-  assert.match(html, /CONTINUE TO FOUNDATION — £97 \/ approximately €114/);
+  assert.match(html, /CONTINUE TO FOUNDATION — £97 \/ €114/);
   assert.match(html, /href="\/foundation\/"/);
 });
 
