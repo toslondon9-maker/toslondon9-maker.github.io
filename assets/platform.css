@@ -7096,6 +7096,10 @@ body {
   overflow-wrap: anywhere;
 }
 
+.curriculumPage.mksStudyRoom .mksStudyRoom__chapter summary strong {
+  font-weight: 400;
+}
+
 .mksStudyRoom__lesson {
   min-width: 0;
   max-width: 760px;
