@@ -59,7 +59,7 @@ test("About Tariq presents the supplied portrait and approved write-up", () => {
   assert.equal(existsSync(path.join(process.cwd(), "images", "tariq-saddique-about.jpeg")), true);
   assert.match(page.body, /class="aboutTariqHero__visual"[\s\S]*class="aboutTariqHero__logos"/);
   assert.match(page.body, /src="\/images\/the-secret-logo\.png"[^>]+alt="The Secret logo"/);
-  assert.match(page.body, /src="\/images\/the-secret-inspiration\.png"[^>]+alt="The Secret book by Rhonda Byrne on a desk"/);
+  assert.doesNotMatch(page.body, /the-secret-inspiration\.png/);
   assert.match(page.body, /class="aboutTariqHero__logos"[\s\S]*class="aboutTariqHero__portrait"/);
   assert.match(page.body, /src="\/images\/tariq-saddique-about\.jpeg"[^>]+width="720"[^>]+height="1600"/);
   assert.match(page.body, /alt="Tariq Saddique, creator of Unleash Your Power\."/);

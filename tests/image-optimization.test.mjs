@@ -17,10 +17,10 @@ test("approved Secret logo assets are used on the homepage and About Tariq page"
   const home = renderHome({ language: "en" });
   const about = routeRenderers[siteData.routes.aboutTariq](siteData).body;
 
-  for (const asset of [secretLogo, secretInspiration]) {
-    assert.equal(existsSync(path.join(root, asset)), true, asset);
-    assert.match(about, new RegExp(`src="${asset.replaceAll("/", "\\/")}"`));
-  }
+  assert.equal(existsSync(path.join(root, secretLogo)), true, secretLogo);
+  assert.equal(existsSync(path.join(root, secretInspiration)), true, secretInspiration);
+  assert.match(about, new RegExp(`src="${secretLogo.replaceAll("/", "\\/")}"`));
+  assert.doesNotMatch(about, new RegExp(`src="${secretInspiration.replaceAll("/", "\\/")}"`));
   assert.match(home, new RegExp(`src="${secretLogo.replaceAll("/", "\\/")}"`));
   assert.doesNotMatch(home, new RegExp(`src="${secretInspiration.replaceAll("/", "\\/")}"`));
 });
