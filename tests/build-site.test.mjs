@@ -37,7 +37,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
-  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20261002-home-welcome-image-1">/);
+  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20261002-ai-mentor-chapter-select-1">/);
   assert.match(html, /<link rel="preload" href="\/images\/power-key-mark\.png" as="image" type="image\/png">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
@@ -155,7 +155,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
 
       if (globalPageFiles[index] === "ai-mentors/index.html") {
         assert.match(page, /data-ai-mentor-prompt/);
-        assert.match(page, /src="\/assets\/ai-mentors\.mjs"/);
+        assert.match(page, /src="\/assets\/ai-mentors\.mjs\?v=20261002-chapter-select-1"/);
         continue;
       }
 
@@ -356,7 +356,7 @@ test("the committed AI mentor page contains the current client and safe fallback
   assert.match(html, /data-ai-mentor-new-conversation/);
   assert.match(html, /data-ai-mentor-prompt/);
   assert.match(html, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
-  assert.match(html, /src="\/assets\/ai-mentors\.mjs"/);
+  assert.match(html, /src="\/assets\/ai-mentors\.mjs\?v=20261002-chapter-select-1"/);
 });
 
 test("the public AI mentor build uses the deployed non-secret Worker endpoint", async () => {

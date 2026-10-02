@@ -2,7 +2,7 @@ import { renderFooter, renderHeader } from "./shared-chrome.mjs";
 import { renderStructuredData } from "./structured-data.mjs";
 
 const releaseAssetVersion = "20260909-day7-choices";
-const platformStyleVersion = "20261002-home-welcome-image-1";
+const platformStyleVersion = "20261002-ai-mentor-chapter-select-1";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
@@ -11,12 +11,14 @@ const defaultSocialImage = `${siteUrl}/images/haanel-tariq-portraits.jpeg`;
 const defaultSocialImageAlt = "Tariq Saddique and the Master Key System learning journey";
 const privateRoutes = new Set(["/live-coaching/", "/members-study-room-7f3k/"]);
 const aiMentorRoute = "/ai-mentors/";
+const aiMentorScript = "/assets/ai-mentors.mjs";
 const aiMentorEndpoint = "https://unleash-your-power-ai-mentor.toslondon9.workers.dev/mentor";
 
 function versionReleaseScript(script) {
   if (script === navigationScript) return `${script}?v=20260930-nav-mks-sync-1`;
   if (script === languageScript) return `${script}?v=${releaseAssetVersion}`;
   if (script === analyticsScript) return `${script}?v=20260908-analytics`;
+  if (script === aiMentorScript) return `${script}?v=20261002-chapter-select-1`;
   return script;
 }
 

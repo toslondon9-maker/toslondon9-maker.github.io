@@ -51,6 +51,7 @@ function initialiseAiMentors() {
   const endpoint = endpointElement?.content || "/api/mentor";
   const promptElement = document.querySelector("[data-ai-mentor-prompt]");
   const selectedChapter = document.querySelector("[data-ai-mentor-selected-chapter]");
+  const chapterSelect = document.querySelector("[data-ai-mentor-chapter-select]");
   const copyButton = document.querySelector("[data-ai-mentor-copy]");
   const copyStatus = document.querySelector("[data-ai-mentor-copy-status]");
   const messages = document.querySelector("[data-ai-mentor-messages]");
@@ -93,9 +94,9 @@ function initialiseAiMentors() {
   const render = ({ reset = false } = {}) => {
     const current = selection();
     promptElement.textContent = buildAiMentorPrompt(current);
+    chapterSelect.value = String(state.chapter);
     selectedChapter.textContent = `Week ${current.chapter.week} · ${current.chapter.title} · ${current.chapter.phase}`;
     document.querySelectorAll("[data-ai-mentor-id]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.aiMentorId === state.mentor)));
-    document.querySelectorAll("[data-ai-mentor-chapter]").forEach((button) => button.setAttribute("aria-pressed", String(Number(button.dataset.aiMentorChapter) === state.chapter)));
     document.querySelectorAll("[data-ai-mentor-purpose]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.aiMentorPurpose === state.purpose)));
     copyStatus.textContent = "";
     if (reset) resetConversation();
@@ -141,7 +142,7 @@ function initialiseAiMentors() {
   };
 
   document.querySelectorAll("[data-ai-mentor-id]").forEach((button) => button.addEventListener("click", () => { state.mentor = button.dataset.aiMentorId; render({ reset: true }); }));
-  document.querySelectorAll("[data-ai-mentor-chapter]").forEach((button) => button.addEventListener("click", () => { state.chapter = Number(button.dataset.aiMentorChapter); render({ reset: true }); }));
+  chapterSelect.addEventListener("change", () => { state.chapter = Number(chapterSelect.value); render({ reset: true }); });
   document.querySelectorAll("[data-ai-mentor-purpose]").forEach((button) => button.addEventListener("click", () => { state.purpose = button.dataset.aiMentorPurpose; render({ reset: true }); }));
   document.querySelectorAll("[data-ai-mentor-starter]").forEach((button) => button.addEventListener("click", () => sendQuestion(button.dataset.aiMentorStarter ?? "")));
   newConversation.addEventListener("click", () => resetConversation(labels().reset));

@@ -15,7 +15,9 @@ test("AI Mentor page offers three independent study guides, 24 chapters and thre
   const html = mentorPage();
 
   for (const name of ["Charles Haanel Study Mentor", "Helmar Rudolph Study Mentor", "Tariq Coaching Mentor"]) assert.match(html, new RegExp(name));
-  assert.equal((html.match(/data-ai-mentor-chapter/g) ?? []).length, 24);
+  assert.equal((html.match(/<option value="(?:[1-9]|1[0-9]|2[0-4])"/g) ?? []).length, 24);
+  assert.match(html, /<label[^>]+for="ai-mentor-chapter-select"[^>]*>Choose a chapter<\/label>/);
+  assert.doesNotMatch(html, /data-ai-mentor-chapter="/);
   for (const purpose of ["Understand this chapter", "Apply it to my life", "Prepare for the weekly exercise"]) assert.match(html, new RegExp(purpose));
   assert.match(html, /data-ai-mentor-prompt/);
   assert.match(html, /COPY PROMPT/);
@@ -33,6 +35,7 @@ test("AI Mentor page renders an accessible on-page conversation shell with the p
   assert.match(html, /Helmar Perspective/);
   assert.match(html, /Tariq Coaching Perspective/);
   assert.match(html, /CHOOSE YOUR CHAPTER/);
+  assert.match(html, /<select[^>]+id="ai-mentor-chapter-select"[^>]+data-ai-mentor-chapter-select/);
   assert.match(html, /data-ai-mentor-selected-chapter/);
   assert.match(html, /data-ai-mentor-messages/);
   assert.match(html, /data-ai-mentor-welcome/);
@@ -100,7 +103,7 @@ test("AI Mentor page uses approved Week 1 and Week 24 study content without impe
 test("AI Mentor client code produces selected prompts, copy feedback and safe ChatGPT launch", () => {
   const client = readFileSync(new URL("../assets/ai-mentors.mjs", import.meta.url), "utf8");
 
-  assert.match(client, /data-ai-mentor-chapter/);
+  assert.match(client, /data-ai-mentor-chapter-select/);
   assert.match(client, /data-ai-mentor-purpose/);
   assert.match(client, /data-ai-mentor-prompt/);
   assert.match(client, /Prompt copied\./);
@@ -162,7 +165,7 @@ test("AI Mentor prompt generator supports every mentor, chapter and purpose", ()
 test("copied prompt exposes the concise-response target without changing chapter or language hooks", () => {
   assert.equal(CONCISE_RESPONSE_INSTRUCTION, "Respond in approximately 150–250 words. Use short paragraphs or concise bullets. Answer directly, avoid repetition and end with one practical reflection or action.");
   const html = mentorPage();
-  assert.match(html, /data-ai-mentor-chapter/);
+  assert.match(html, /data-ai-mentor-chapter-select/);
   assert.match(html, /data-i18n="aiMentor\.chat\.disclosure"/);
 });
 
@@ -172,8 +175,8 @@ test("AI Mentor presentation uses accessible contrast and responsive chapter gri
   assert.match(css, /\.aiMentorPage\s*\{[^}]*background:\s*var\(--cream-deep\)/s);
   assert.match(css, /\.aiMentorPrompt\s*\{[^}]*background:\s*var\(--night\)/s);
   assert.match(css, /\.aiMentorPrompt pre\s*\{[^}]*color:\s*var\(--cream\)/s);
-  assert.match(css, /\.aiMentorChapters\s*\{[^}]*grid-template-columns:\s*repeat\(8, minmax\(0, 1fr\)\)/s);
-  assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.aiMentorChapters\s*\{[^}]*grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\)/s);
+  assert.match(css, /\.aiMentorChapterSelect\s*\{/);
+  assert.match(css, /\.aiMentorChapterSelect:focus-visible\s*\{/);
 });
 
 test("Resources and the Master Key page link directly to the AI Mentor experience", () => {

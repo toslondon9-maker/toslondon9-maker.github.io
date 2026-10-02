@@ -115,7 +115,9 @@ function mentorChoice(mentor, active) {
 }
 
 function chapterChoice(chapter) {
-  return `<button type="button" data-ai-mentor-chapter="${chapter.week}" aria-pressed="${chapter.week === 1 ? "true" : "false"}" aria-label="Select Week ${chapter.week}: ${escapeHtml(chapter.title)}">${String(chapter.week).padStart(2, "0")}</button>`;
+  if (chapter.week !== 1) return "";
+  const options = aiMentorChapters.map((option) => `<option value="${option.week}">Week ${option.week} · ${escapeHtml(option.title)}</option>`).join("");
+  return `<label class="aiMentorChapterLabel" for="ai-mentor-chapter-select" data-i18n="aiMentor.chapter.label">Choose a chapter</label><select class="aiMentorChapterSelect" id="ai-mentor-chapter-select" data-ai-mentor-chapter-select aria-describedby="ai-mentor-selected-chapter">${options}</select>`;
 }
 
 function purposeChoice(purpose, active) {

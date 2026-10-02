@@ -3588,7 +3588,7 @@ main > article {
 
 .aiMentorChoice,
 .aiMentorPurpose,
-.aiMentorChapters button {
+.aiMentorChapterSelect {
   min-width: 0;
   border: 1px solid var(--border);
   background: var(--cream);
@@ -3600,13 +3600,13 @@ main > article {
 
 .aiMentorChoice:hover,
 .aiMentorPurpose:hover,
-.aiMentorChapters button:hover {
+.aiMentorChapterSelect:hover {
   border-color: var(--gold);
 }
 
 .aiMentorChoice:focus-visible,
 .aiMentorPurpose:focus-visible,
-.aiMentorChapters button:focus-visible,
+.aiMentorChapterSelect:focus-visible,
 .aiMentorPrompt__actions a:focus-visible,
 .aiMentorPrompt__actions button:focus-visible {
   outline: 3px solid var(--gold-bright);
@@ -3634,8 +3634,7 @@ main > article {
 }
 
 .aiMentorChoice[aria-pressed="true"],
-.aiMentorPurpose[aria-pressed="true"],
-.aiMentorChapters button[aria-pressed="true"] {
+.aiMentorPurpose[aria-pressed="true"] {
   border-color: var(--gold-deep);
   background: var(--night);
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 45%, transparent);
@@ -3653,21 +3652,31 @@ main > article {
   font-weight: 700;
 }
 
-.aiMentorChapters {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 0.55rem;
+.aiMentorChapterLabel {
+  display: block;
+  margin-top: 0.85rem;
+  color: var(--night);
+  font-weight: 700;
 }
 
-.aiMentorChapters button {
-  display: grid;
-  min-height: 2.9rem;
-  place-items: center;
-  padding: 0.45rem;
-  border-radius: 0.45rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-align: center;
+.aiMentorChapterSelect {
+  display: block;
+  width: 100%;
+  max-width: 42rem;
+  min-height: 3rem;
+  margin-top: 0.45rem;
+  padding: 0.65rem 2.5rem 0.65rem 0.8rem;
+  border-radius: 0.55rem;
+  color: var(--night);
+  font: inherit;
+  font-weight: 650;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.aiMentorChapterSelect:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 3px;
 }
 
 .aiMentorPurposeGrid {
@@ -3917,10 +3926,6 @@ main > article {
   .aiMentorBuilder {
     padding: 1rem;
     border-radius: 0.75rem;
-  }
-
-  .aiMentorChapters {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .aiMentorPrompt__actions > * {
