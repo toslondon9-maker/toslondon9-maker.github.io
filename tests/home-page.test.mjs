@@ -109,6 +109,8 @@ test("homepage retains existing testimonials and selected insights", () => {
   assert.match(testimonials, /Before I began working with Tariq, I had achieved a great deal professionally/);
   assert.match(testimonials, /What impressed me was Tariq’s thoughtful, chapter-by-chapter guidance/);
   assert.match(testimonials, /Over time, I became more aware of the thoughts I was repeating/);
+  assert.match(testimonials, /Before I started working with Tariq, I felt stuck/);
+  assert.match(testimonials, /I feel clearer about my next steps, and I have a routine I can continue/);
   assert.match(testimonials, /Affiliate relationship disclosed/);
   assert.match(testimonials, /class="homeTestimonials__disclosure"[^>]*>Affiliate relationship disclosed/);
   assert.equal((testimonials.match(/class="homeTestimonials__quoteParagraph"/g) ?? []).length, 9);
