@@ -100,6 +100,29 @@ test("homepage presents what students receive and why Tariq with approved links"
   assert.match(why, new RegExp(`href="${siteData.routes.aboutTariq.replaceAll("/", "\\/")}"`));
 });
 
+test("Why Tariq keeps its exact copy in readable accessible disclosure paragraphs", async () => {
+  const html = renderHome({ language: "en" });
+  const why = section(html, "why-tariq");
+  const paragraphKeys = [
+    "home.whyTariq.body.intro",
+    "home.whyTariq.body.context",
+    "home.whyTariq.body.framework",
+    "home.whyTariq.body.application",
+  ];
+  assert.equal(paragraphKeys.map((key) => t(key, "en")).join(" "), t("home.whyTariq.body", "en"));
+  assert.match(why, /<p class="homeWhyTariq__paragraph" data-i18n="home\.whyTariq\.body\.intro">/);
+  assert.match(why, /<details class="homeWhyTariq__details">/);
+  assert.match(why, /<summary><span[^>]*data-i18n="home\.whyTariq\.readMore">Read more<\/span>/);
+  assert.match(why, /<p class="homeWhyTariq__paragraph" data-i18n="home\.whyTariq\.body\.framework">The Master Key System offers a powerful framework/);
+  assert.match(why, /<span[^>]*data-i18n="home\.whyTariq\.readLess">Read less<\/span>/);
+  assert.doesNotMatch(why, /<details[^>]+open/);
+  assert.equal((why.match(/class="homeWhyTariq__paragraph"/g) ?? []).length, 4);
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(css, /\.homeWhyTariq__paragraph\s*\{[^}]*font-size:\s*clamp\(/);
+  assert.match(css, /\.homeWhyTariq__paragraph\s*\{[^}]*margin:/);
+  assert.match(css, /\.homeWhyTariq__details\s+summary[^}]*cursor:\s*pointer/);
+});
+
 test("homepage retains existing testimonials and selected insights", () => {
   const html = renderHome({ language: "en" });
   const testimonials = section(html, "testimonials");

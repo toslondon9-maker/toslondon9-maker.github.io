@@ -6297,6 +6297,15 @@ body {
 .homeWhyTariq{background:var(--paper)}
 .homeWhyTariq__inner{align-items:center}
 .homeWhyTariq__inner>div:last-child{padding-left:clamp(0rem,4vw,3rem);border-left:2px solid var(--gold)}
+.homeWhyTariq__copy{min-width:0}
+.homeWhyTariq__paragraph{margin:0 0 1rem;color:var(--muted);font-size:clamp(.98rem,1.35vw,1.08rem);line-height:1.7}
+.homeWhyTariq__paragraph:last-child{margin-bottom:0}
+.homeWhyTariq__details{margin:0 0 1.25rem}
+.homeWhyTariq__details summary{display:inline-flex;cursor:pointer;color:var(--gold-dark);font-weight:700;text-decoration:underline;text-underline-offset:.18em}
+.homeWhyTariq__details summary::-webkit-details-marker{color:var(--gold-dark)}
+.homeWhyTariq__readLess{display:none}
+.homeWhyTariq__details[open] .homeWhyTariq__readMore{display:none}
+.homeWhyTariq__details[open] .homeWhyTariq__readLess{display:inline}
 .homeOffers{background:var(--cream)}
 .homeOffers__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2rem}
 .homeOffers__card{display:flex;min-width:0;flex-direction:column;align-items:flex-start;padding:clamp(1.25rem,3vw,2rem);border:1px solid var(--border);background:var(--paper);box-shadow:var(--shadow-card)}

@@ -57,7 +57,12 @@ function renderReceive(language) {
 }
 
 function renderWhyTariq(language) {
-  return `<section class="homeSection homeWhyTariq" data-home-section="why-tariq"><div class="homeSection__inner homeWhyTariq__inner"><div>${copy("home.whyTariq.eyebrow", language, "p", "eyebrow")}${copy("home.whyTariq.title", language, "h2")}</div><div>${copy("home.whyTariq.body", language, "p", "homeSection__intro")}<a class="button--text" href="${siteData.routes.aboutTariq}" data-i18n="home.whyTariq.cta">${escapeHtml(t("home.whyTariq.cta", language))}</a></div></div></section>`;
+  const paragraph = (key) => t(key, language) ? copy(key, language, "p", "homeWhyTariq__paragraph") : "";
+  const visibleKeys = language === "en" ? ["home.whyTariq.body.intro", "home.whyTariq.body.context"] : ["home.whyTariq.body.intro"];
+  const hiddenKeys = language === "en" ? ["home.whyTariq.body.framework", "home.whyTariq.body.application"] : ["home.whyTariq.body.framework"];
+  const visible = visibleKeys.map(paragraph).join("");
+  const hidden = hiddenKeys.map(paragraph).join("");
+  return `<section class="homeSection homeWhyTariq" data-home-section="why-tariq"><div class="homeSection__inner homeWhyTariq__inner"><div>${copy("home.whyTariq.eyebrow", language, "p", "eyebrow")}${copy("home.whyTariq.title", language, "h2")}</div><div class="homeWhyTariq__copy">${visible}<details class="homeWhyTariq__details"><summary><span class="homeWhyTariq__readMore" data-i18n="home.whyTariq.readMore">${escapeHtml(t("home.whyTariq.readMore", language))}</span><span class="homeWhyTariq__readLess" data-i18n="home.whyTariq.readLess">${escapeHtml(t("home.whyTariq.readLess", language))}</span></summary>${hidden}</details><a class="button--text" href="${siteData.routes.aboutTariq}" data-i18n="home.whyTariq.cta">${escapeHtml(t("home.whyTariq.cta", language))}</a></div></div></section>`;
 }
 
 function renderTestimonials() {
