@@ -16,7 +16,7 @@ export const pricing = deepFreeze({
   balance: { gbp: "£900", en: "£900 / €1,053", es: "£900 / €1,053" },
   masteryCircle: { gbp: "£3,000–£5,000", en: "£3,000–£5,000 / €3,510–€5,850", es: "£3,000–£5,000 / €3,510–€5,850" },
   privateMentoring: { gbp: "£7,500–£15,000", en: "£7,500–£15,000 / €8,776–€17,551", es: "£7,500–£15,000 / €8,776–€17,551" },
-  alumni: { gbp: "£29–£79/month", en: "£29–£79/month / €34–€92/month", es: "£29–£79/month / €34–€92/month" },
+  alumni: { gbp: "£49/month", en: "£49/month / €57/month", es: "£49/month / €57/month" },
   corporate: { gbp: "From £5,000", en: "From £5,000 / from €5,850", es: "Desde £5,000 / desde €5,850" },
 });
 

@@ -23,7 +23,7 @@ const approved = {
   balance: ["£900", "€1,053"],
   masteryCircle: ["£3,000–£5,000", "€3,510–€5,850"],
   privateMentoring: ["£7,500–£15,000", "€8,776–€17,551"],
-  alumni: ["£29–£79/month", "€34–€92/month"],
+  alumni: ["£49/month", "€57/month"],
   corporate: ["From £5,000", "from €5,850"],
 };
 
@@ -47,9 +47,14 @@ test("canonical pricing catalogue contains every approved GBP/EUR pair", () => {
 test("public paid routes render every approved price in both languages and keep GBP official", () => {
   const english = coachingPage(siteData, "en").body;
   const spanish = coachingPage(siteData, "es").body;
-  for (const value of Object.values(pricing)) {
+  for (const key of ["foundation", "visualisation", "concentration", "mastery", "complete", "balance", "alumni"]) {
+    const value = pricing[key];
     assert.match(english, new RegExp(escapeRegExp(value.en)));
     assert.match(spanish, new RegExp(escapeRegExp(value.es)));
+  }
+  for (const hidden of ["masteryCircle", "privateMentoring", "corporate", "separate", "foundingSaving"]) {
+    assert.doesNotMatch(english, new RegExp(escapeRegExp(pricing[hidden].en)));
+    assert.doesNotMatch(spanish, new RegExp(escapeRegExp(pricing[hidden].es)));
   }
   assert.match(english, /GBP is the payment currency/);
   assert.match(spanish, /El pago se realiza en GBP/);
