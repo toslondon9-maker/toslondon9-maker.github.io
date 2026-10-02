@@ -89,6 +89,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "insights/how-to-study-the-master-key-system/index.html",
       "insights/energy-goes-where-attention-flows/index.html",
       "insights/how-i-rebuilt-my-life-from-the-inside-out/index.html",
+      "insights/when-life-feels-like-it-has-fallen-apart/index.html",
       "insights/index.html",
       "insights/eight-principles-master-key-system/index.html",
       "insights/introduction-charles-haanel-master-key-system/index.html",
@@ -129,7 +130,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 45);
+    assert.equal(pageFiles.length, 46);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -222,6 +223,13 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         assert.match(page, /data-i18n="insights\.lifeRebuilt\.metaDescription"/);
         assert.match(page, /"datePublished":"2026-09-30"/);
         assert.match(page, /href="\/start-free\/"/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "insights/when-life-feels-like-it-has-fallen-apart/index.html") {
+        assert.match(page, /data-i18n="insights\.foundationRestart\.metaDescription"/);
+        assert.match(page, /"datePublished":"2026-10-02"/);
+        assert.match(page, /href="https:\/\/unleashyourpowerwithtariq\.com\/foundation\//);
         continue;
       }
 

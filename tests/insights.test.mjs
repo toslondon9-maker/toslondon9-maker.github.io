@@ -9,7 +9,7 @@ import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs
 import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
 import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage } from "../src/pages/insights-source-article.mjs";
 import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage } from "../src/pages/insights-source-article.mjs";
-import { insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage } from "../src/pages/insights-source-article.mjs";
+import { insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage, insightsFoundationRestartPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 
 test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
@@ -19,9 +19,9 @@ test("homepage presents the Insights & Guides collection above the final convers
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
   assert.equal((body.match(/class="insightsPreview__card[^\"]*/g) ?? []).length, 3);
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsHowToStudy}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsFoundationRestart}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsLifeRebuilt}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsHaanelBiography}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
   assert.doesNotMatch(body, /insightsPreview__category|insightsPreview__meta|insightsPreview__date|\/downloads\//);
   assert.match(body, new RegExp(`data-i18n="insights\.preview\.[^"]+\.action"`));
@@ -67,7 +67,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 16);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 17);
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLifeRebuilt}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
@@ -131,6 +131,20 @@ test("the life-rebuilt article preserves its supplied source, SEO metadata and f
   const source = readFileSync("content/insights-article-how-i-rebuilt-my-life-from-the-inside-out.md", "utf8");
   assert.equal((source.match(/\S+/g) ?? []).length, 1603);
   assert.match(source, /## Suggested SEO details/);
+});
+
+test("the Foundation restart article is registered in the Insights collection", () => {
+  assert.equal(siteData.routes.insightsFoundationRestart, "/insights/when-life-feels-like-it-has-fallen-apart/");
+  const page = insightsIndexPage();
+  assert.match(page.body, new RegExp(`href="${siteData.routes.insightsFoundationRestart}"`));
+  const article = insightsFoundationRestartPage();
+  assert.equal(article.title, "When Life Feels Like It Has Fallen Apart | The Foundation");
+  assert.equal(article.route, siteData.routes.insightsFoundationRestart);
+  assert.match(article.body, /What’s included in The Foundation/);
+  assert.equal((article.body.match(/<ul>/g) ?? []).length, 2);
+  assert.equal((article.body.match(/<li>/g) ?? []).length, 10);
+  assert.match(article.body, /href="https:\/\/unleashyourpowerwithtariq\.com\/foundation\/"/);
+  assert.equal(article.structuredData[0].datePublished, "2026-10-02");
 });
 
 test("the energy-attention PDF is a non-empty PDF generated from the article source", () => {
