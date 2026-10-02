@@ -64,10 +64,13 @@ test("About Tariq presents the supplied portrait and approved write-up", () => {
   assert.match(page.body, /class="aboutTariqHero__logos"[\s\S]*class="aboutTariqHero__portrait"/);
   assert.match(page.body, /src="\/images\/tariq-saddique-about\.jpeg"[^>]+width="720"[^>]+height="1600"/);
   assert.match(page.body, /alt="Tariq Saddique, creator of Unleash Your Power\."/);
-  assert.match(page.body, /I believe a person’s circumstances can change without taking away their ability to choose what happens next\./);
-  assert.match(page.body, /My life has taken me from London to Barcelona/);
-  assert.match(page.body, /international career in partner sales/);
-  assert.match(page.body, /I created <strong>Unleash Your Power<\/strong>/);
+  assert.match(page.body, /I know what it feels like when life changes before you feel ready\./);
+  assert.match(page.body, /My journey has taken me from London to Barcelona/);
+  assert.match(page.body, /customers across the globe/);
+  assert.match(page.body, /<strong>Master Key System \(MKS\)<\/strong> and <em>The Power<\/em>/);
+  assert.match(page.body, /<strong>Before,<\/strong>/);
+  assert.match(page.body, /<strong>Now,<\/strong>/);
+  assert.match(page.body, /I created <strong>Unleash Your Power<\/strong> to share that practical process/);
   assert.match(page.body, /Your next chapter doesn’t have to begin with everything figured out\./);
   assert.match(page.body, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}">Start with the free 7-Day journey<`));
 });
