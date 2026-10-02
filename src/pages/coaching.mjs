@@ -31,7 +31,7 @@ function pricing(language, data) {
 }
 
 function professionalServices(language, data) {
-  const premium = ["alumni"].map((id) => `<article class="coachingProfessionalService card"><h3>${copy(`coaching.rate.${id}.title`, language)}</h3><p class="coachingRateCard__price">${copy(`coaching.rate.${id}.price`, language)}</p><p class="coachingRateCard__status">${copy(`coaching.rate.${id}.status`, language)}</p><p>${copy(`coaching.rate.${id}.description`, language)}</p><a class="button--text" href="${data.routes.contact}" data-i18n="coaching.rate.${id}.action">${escapeHtml(t(`coaching.rate.${id}.action`, language))}</a></article>`).join("");
+  const premium = ["mastery", "alumni"].map((id) => `<article class="coachingProfessionalService card"><h3>${copy(`coaching.rate.${id}.title`, language)}</h3><p class="coachingRateCard__price">${copy(`coaching.rate.${id}.price`, language)}</p><p class="coachingRateCard__status">${copy(`coaching.rate.${id}.status`, language)}</p><p>${copy(`coaching.rate.${id}.description`, language)}</p><a class="button--text" href="${data.routes.contact}" data-i18n="coaching.rate.${id}.action">${escapeHtml(t(`coaching.rate.${id}.action`, language))}</a></article>`).join("");
   return `<section class="coachingProfessionalServices section" data-coaching-section="professional-services"><div class="coachingProfessionalServices__intro"><p class="eyebrow">${copy("phase2.coaching.secondaryEyebrow", language)}</p><h2>${copy("phase2.coaching.secondaryTitle", language)}</h2><p>${copy("phase2.coaching.secondaryBody", language)}</p></div><div class="coachingProfessionalServices__group"><h3>${copy("coaching.services.specialistTitle", language)}</h3><div class="coachingProfessionalServices__grid">${premium}</div></div></section>`;
 }
 

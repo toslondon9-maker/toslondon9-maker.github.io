@@ -37,7 +37,9 @@ test("canonical coaching page owns every locked commercial fact", () => {
     "£97 / €114", "£197 / €231", "£397 / €465", "£497 / €582",
     "£997 / €1,167", "£900 / €1,053", "£49/month / €57/month", "GBP is the payment currency",
   ]) assert.ok(coaching.includes(value), value);
-  assert.doesNotMatch(coaching, /£1,188|£191|£29–£79|€34–€92|£3,000–£5,000|£7,500–£15,000|From £5,000/);
+  assert.match(coaching, /Mastery Circle[\s\S]*£3,000–£5,000 \/ €3,510–€5,850[\s\S]*Application only/);
+  assert.doesNotMatch(coaching, /£1,188|£191|£29–£79|€34–€92|£7,500–£15,000|From £5,000/);
+  assert.doesNotMatch(coaching, /Private Mentoring|Corporate Programmes/);
   assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
   const offers = home.match(/<section[^>]+data-home-section="offers"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.match(offers, /Free 7-Day Experience/);

@@ -21,7 +21,7 @@ test("coaching follows the concise Start Free to pricing journey", () => {
   assert.match(html.slice(programme, pricing), /data-i18n="phase2\.coaching\.benefit1Title"/);
   assert.match(html.slice(build, pricing), /WHAT YOU CAN BUILD/);
   assert.match(html.slice(pricing, services), /£97[\s\S]*£197[\s\S]*£397[\s\S]*£497/);
-  assert.match(html.slice(pricing, services), /£997[\s\S]*PURCHASE COMPLETE JOURNEY/);
+  assert.match(html.slice(pricing, services), /£997[\s\S]*PAY NOW/);
   assert.match(html.slice(pricing, services), /£900/);
   assert.doesNotMatch(html.slice(pricing, services), /£1,188|£191|saving|ahorra/);
   assert.equal((html.match(/data-coaching-section="pricing"/g) ?? []).length, 1);
@@ -30,8 +30,9 @@ test("coaching follows the concise Start Free to pricing journey", () => {
   assert.equal((html.match(/class="coachingExperience section--night"/g) ?? []).length, 0);
   assert.equal((html.match(/class="conversionJourney"/g) ?? []).length, 0);
   assert.match(html.slice(services, faq), /Alumni Practice Membership/);
-  assert.doesNotMatch(html.slice(services, faq), /Mastery Circle|Private Mentoring|Corporate Programmes/);
-  assert.equal((html.match(/class="coachingProfessionalService card/g) ?? []).length, 1);
+  assert.match(html.slice(services, faq), /Mastery Circle/);
+  assert.doesNotMatch(html.slice(services, faq), /Private Mentoring|Corporate Programmes/);
+  assert.equal((html.match(/class="coachingProfessionalService card/g) ?? []).length, 2);
   assert.equal((html.match(/coachingProfessionalService--secondary/g) ?? []).length, 0);
   assert.doesNotMatch(html, /Distinct secondary services|Sales &amp; Partnership Growth|Leadership Workshops|AI-Enabled Performance/);
   assert.match(html.slice(faq, finalStep), /data-i18n="coaching\.faq\.title"/);
@@ -62,7 +63,7 @@ test("coaching keeps bilingual stage, FAQ and professional-service hooks", () =>
       assert.match(html, new RegExp(`data-i18n="coaching\\.faq\\.${item}\\.question"`));
       assert.match(html, new RegExp(`data-i18n="coaching\\.faq\\.${item}\\.answer"`));
     }
-    for (const offer of ["alumni"]) {
+    for (const offer of ["mastery", "alumni"]) {
       assert.match(html, new RegExp(`data-i18n="coaching\\.rate\\.${offer}\\.description"`));
       assert.match(html, new RegExp(`data-i18n="coaching\\.rate\\.${offer}\\.action"`));
     }
@@ -76,7 +77,7 @@ test("coaching keeps the complete purchase clear and the Foundation balance seco
   const english = renderCoaching({ language: "en", siteData });
   const spanish = renderCoaching({ language: "es", siteData });
   for (const html of [english, spanish]) {
-    assert.match(html, /PURCHASE COMPLETE JOURNEY — £997 \/ €1,167|COMPRAR EL RECORRIDO COMPLETO — £997 \/ €1,167/);
+    assert.match(html, /class="coachingPricing__price"><strong><span data-i18n="pricing\.complete">£997 \/ €1,167<\/span><\/strong><\/p><a class="button--primary"[^>]*>\s*<span data-i18n="coaching\.pricing\.completePurchase">(?:PAY NOW|PAGAR AHORA)<\/span>/);
     assert.match(html, /data-i18n="coaching\.pricing\.completePurchase"/);
     assert.doesNotMatch(html, /£191 \/ €223|saving £191|ahorro £191/);
     assert.doesNotMatch(html, /£1,188 \/ €1,390|£1\.188 \/ €1\.390/);
@@ -86,6 +87,7 @@ test("coaching keeps the complete purchase clear and the Foundation balance seco
   }
   assert.match(english, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/JW7JRY5GTRTA6"/);
   assert.match(english, /data-i18n="coaching\.pricing\.completePurchase"/);
+  assert.match(english, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/JW7JRY5GTRTA6"[^>]*>\s*<span data-i18n="coaching\.pricing\.completePurchase">PAY NOW/);
 });
 
 test("professional services use a two-column desktop grid and one-column mobile grid", () => {

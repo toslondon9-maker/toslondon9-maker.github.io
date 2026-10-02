@@ -1096,7 +1096,7 @@ const translations = deepFreeze({
   "coaching.pricing.title": { en: "Buy a stage, or take the complete 24-week journey", es: "Compra una etapa o elige el recorrido completo de 24 semanas" },
   "coaching.pricing.body": { en: "Start with the free seven-day experience, then choose the stage that fits your next step. The complete journey keeps all four stages together at the best value.", es: "Empieza con la experiencia gratuita de siete días y después elige la etapa que encaje con tu siguiente paso. El recorrido completo mantiene las cuatro etapas juntas con el mejor valor." },
   "coaching.pricing.foundationAction": { en: `Explore Foundation — ${pricing.foundation.en}`, es: `Explora Fundamentos — ${pricing.foundation.es}` },
-  "coaching.pricing.completePurchase": { en: `PURCHASE COMPLETE JOURNEY — ${pricing.complete.en}`, es: `COMPRAR EL RECORRIDO COMPLETO — ${pricing.complete.es}` },
+  "coaching.pricing.completePurchase": { en: "PAY NOW", es: "PAGAR AHORA" },
   "coaching.pricing.balance": { en: `Already paid ${pricing.foundation.en} for Foundation? Continue through the remaining 20 weeks with a ${pricing.balance.en} balance. Your total for the complete journey remains ${pricing.complete.en}.`, es: `¿Ya has pagado ${pricing.foundation.es} por Fundamentos? Continúa durante las 20 semanas restantes con un saldo de ${pricing.balance.es}. El total del recorrido completo sigue siendo ${pricing.complete.es}.` },
   "coaching.services.specialistTitle": { en: "Higher-touch and specialist offers", es: "Ofertas especializadas y de mayor acompañamiento" },
   "coaching.faq.eyebrow": { en: "A FEW PRACTICAL ANSWERS", es: "ALGUNAS RESPUESTAS PRÁCTICAS" },

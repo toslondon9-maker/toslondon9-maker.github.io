@@ -47,12 +47,12 @@ test("canonical pricing catalogue contains every approved GBP/EUR pair", () => {
 test("public paid routes render every approved price in both languages and keep GBP official", () => {
   const english = coachingPage(siteData, "en").body;
   const spanish = coachingPage(siteData, "es").body;
-  for (const key of ["foundation", "visualisation", "concentration", "mastery", "complete", "balance", "alumni"]) {
+  for (const key of ["foundation", "visualisation", "concentration", "mastery", "complete", "balance", "masteryCircle", "alumni"]) {
     const value = pricing[key];
     assert.match(english, new RegExp(escapeRegExp(value.en)));
     assert.match(spanish, new RegExp(escapeRegExp(value.es)));
   }
-  for (const hidden of ["masteryCircle", "privateMentoring", "corporate", "separate", "foundingSaving"]) {
+  for (const hidden of ["privateMentoring", "corporate", "separate", "foundingSaving"]) {
     assert.doesNotMatch(english, new RegExp(escapeRegExp(pricing[hidden].en)));
     assert.doesNotMatch(spanish, new RegExp(escapeRegExp(pricing[hidden].es)));
   }
