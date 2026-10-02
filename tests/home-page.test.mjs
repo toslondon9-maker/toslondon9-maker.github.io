@@ -113,6 +113,7 @@ test("homepage retains existing testimonials and selected insights", () => {
   assert.match(testimonials, /I feel clearer about my next steps, and I have a routine I can continue/);
   assert.match(testimonials, /Affiliate relationship disclosed/);
   assert.match(testimonials, /class="homeTestimonials__disclosure"[^>]*>Affiliate relationship disclosed/);
+  assert.doesNotMatch(testimonials, /[“”]/);
   assert.equal((testimonials.match(/class="homeTestimonials__quoteParagraph"/g) ?? []).length, 9);
   assert.equal((testimonials.match(/class="homeTestimonials__card"/g) ?? []).length, 3);
   assert.ok((insights.match(/class="insightCard|class="insightsPreview__card/g) ?? []).length <= 3);
