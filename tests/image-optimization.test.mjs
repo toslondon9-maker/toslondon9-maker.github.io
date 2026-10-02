@@ -10,6 +10,19 @@ const root = process.cwd();
 const heroDisplay = "/images/tariq-happiness-harmony-720.webp";
 const certificateDisplay = "/images/tariq-master-key-certificate-display.webp";
 const certificateOriginal = "/images/tariq-master-key-certificate-restored.png";
+const secretLogo = "/images/the-secret-logo.png";
+const secretInspiration = "/images/the-secret-inspiration.png";
+
+test("approved Secret logo assets are used on the homepage and About Tariq page", () => {
+  const home = renderHome({ language: "en" });
+  const about = routeRenderers[siteData.routes.aboutTariq](siteData).body;
+
+  for (const asset of [secretLogo, secretInspiration]) {
+    assert.equal(existsSync(path.join(root, asset)), true, asset);
+    assert.match(home, new RegExp(`src="${asset.replaceAll("/", "\\/")}"`));
+    assert.match(about, new RegExp(`src="${asset.replaceAll("/", "\\/")}"`));
+  }
+});
 
 test("homepage uses an optimised eager hero image with stable dimensions", () => {
   const html = renderHome({ language: "en" });
