@@ -16,6 +16,11 @@ const stages = Object.freeze([
   { id: "integration-mastery", title: "Integration & Mastery", weeks: "Chapters 19–24", start: 18, end: 24, image: "contemplation-mastery-chapters-19-24.png" },
 ]);
 
+const chapterVideos = Object.freeze({
+  3: "https://photos.google.com/search/CgZWaWRlb3MiCBIGCgQqAggBKLbc%2FfWPNA%3D%3D/photo/AF1QipN0t6Aoci1rOGfEm1SPcRENKbtqiHzr1TXTVwOq",
+  4: "https://photos.google.com/search/CgZWaWRlb3MiCBIGCgQqAggBKLbc%2FfWPNA%3D%3D/photo/AF1QipMEAHCw-7xIqNsdkLlaDCWNWW3CZZ1UFZLcMT_P",
+});
+
 const roomCopy = Object.freeze({
   en: {
     eyebrow: "MKS STUDY ROOM", intro: "A calm place to study one chapter, practise one exercise and carry one principle into the week.", choose: "Choose a week", navigation: "Course navigation", current: "Current week", purpose: "Weekly purpose", rhythm: "Weekly rhythm", rhythmText: "Study → Practise → Reflect → Apply", progress: "Week 1 of 24", previous: "Previous Week", complete: "Complete Week", completed: "Completed", next: "Next Week", week: "Week",
@@ -39,6 +44,10 @@ function transformQuestions(chapter) {
     .replace(questionPair, '<details class="mksStudyRoom__qa"><summary>$1</summary><div>$2</div></details>');
 }
 
+function chapterVideoCard(number, url) {
+  return `<a class="weekVideo" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Watch the Week ${number} Master Key lesson video in a new tab"><span class="weekVideoPlay" aria-hidden="true">▶</span><span><small>WEEK ${number} VIDEO</small><strong>Watch the guided lesson</strong><em>Opens the public video in Google Photos</em></span><b aria-hidden="true">↗</b></a>`;
+}
+
 function renderChapters(language) {
   if (chapterGridStart < 0 || chapterGridEnd < 0) throw new Error("Master Key curriculum chapters could not be located.");
   const source = curriculum.slice(chapterGridStart + chapterGridOpening.length, chapterGridEnd);
@@ -54,6 +63,7 @@ function renderChapters(language) {
       .replace("Paste this into ChatGPT. Your AI coach will test, challenge and guide you one step at a time—without giving away the answers too early.", "Copy this guided prompt into ChatGPT to explore this week's Master Key lesson more deeply.")
       .replaceAll("<h3>Exercise</h3>", "<h3>About the exercise</h3>");
     chapter = transformQuestions(chapter);
+    if (chapterVideos[index + 1]) chapter = chapter.replace("<h3>Introduction</h3>", `<h3>Introduction</h3>${chapterVideoCard(index + 1, chapterVideos[index + 1])}`);
     chapter = chapter.replace("</div></details>", `${chapterNavigation(index, copy)}</div></details>`);
     return { index, title: chapter.match(/<summary>[\s\S]*?<strong>([\s\S]*?)<\/strong>/)?.[1] ?? `${copy.week} ${index + 1}`, html: chapter };
   });
