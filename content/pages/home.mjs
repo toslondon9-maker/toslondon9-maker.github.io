@@ -11,11 +11,6 @@ export const homeContent = Object.freeze({
   mentorIds: Object.freeze(["haanel", "helmar", "tariq"]),
   testimonials: Object.freeze([
     Object.freeze({
-      name: "Mark Smith",
-      location: "UK",
-      quote: "When I discovered that Tariq was offering a course on The Master Key System, I was immediately interested. He is the only person I have heard describe it correctly—as a course of study, rather than simply a self-help book.",
-    }),
-    Object.freeze({
       name: "Paul Best",
       location: "UK",
       quoteParagraphs: Object.freeze([
@@ -26,14 +21,22 @@ export const homeContent = Object.freeze({
       disclosure: "Affiliate relationship disclosed: Paul’s recommendation includes purchases made through his affiliate link.",
     }),
     Object.freeze({
-      name: "Andy White",
-      location: "United Kingdom",
-      quote: "The Master Key System is one of the most powerful journeys you will ever experience, and Tariq’s coaching complements it beautifully. His notes provide invaluable support throughout the journey. Tariq is also a genuinely great person with incredible energy and a deep passion to help others excel. I can see the future being very bright for him.",
+      name: "Sandra Mildebrath",
+      location: "Germany",
+      quoteParagraphs: Object.freeze([
+        "Before I began working with Tariq, I had achieved a great deal professionally, yet I often found my mind returning to the same worries and unhelpful patterns. I wanted greater clarity and a more considered way of approaching the next stage of my life.",
+        "What impressed me was Tariq’s thoughtful, chapter-by-chapter guidance through the Master Key System. He brought insight and genuine care to our discussions, helping me look beyond the words on the page and consider how each principle applied to my own choices. The exercises, reflection and meditation gave me practical ways to revisit the ideas between sessions.",
+        "Over time, I became more aware of the thoughts I was repeating and more deliberate about where I placed my attention. Tariq encouraged me to keep practising, so the lessons became part of my daily routine rather than simply interesting ideas. The combination of serious study, personal guidance and practical application made the experience particularly valuable.",
+      ]),
     }),
     Object.freeze({
-      name: "David White",
-      location: "UK",
-      quote: "I’ve been following the study guide for ten weeks, and it is helping me tremendously. I had read The Master Key System before, but with Tariq’s guidance, I am staying committed and consistently practising the exercises. I’m already noticing positive changes.",
+      name: "Carmen Amaya",
+      location: "Spain",
+      quoteParagraphs: Object.freeze([
+        "Before I began working with Tariq, I had achieved a great deal professionally, yet I often found my mind returning to the same worries and unhelpful patterns. I wanted greater clarity and a more considered way of approaching the next stage of my life.",
+        "What impressed me was Tariq’s thoughtful, chapter-by-chapter guidance through the Master Key System. He brought insight and genuine care to our discussions, helping me look beyond the words on the page and consider how each principle applied to my own choices. The exercises, reflection and meditation gave me practical ways to revisit the ideas between sessions.",
+        "Over time, I became more aware of the thoughts I was repeating and more deliberate about where I placed my attention. Tariq encouraged me to keep practising, so the lessons became part of my daily routine rather than simply interesting ideas. The combination of serious study, personal guidance and practical application made the experience particularly valuable.",
+      ]),
     }),
   ]),
   originsImage: "/images/haanel-tariq-portraits.jpeg",
