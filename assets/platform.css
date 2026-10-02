@@ -6230,21 +6230,20 @@ body {
 .homeVideo__fallback{grid-column:1 / -1;margin:0;font-size:.95rem}
 
 /* Secret image placement: scoped to the welcome and About Tariq visuals. */
-.homeWelcome__visual { display: grid; gap: 1rem; align-content: start; min-width: 0; }
-.homeWelcome__logos,
+.homeWelcome { grid-template-columns: minmax(0, 1fr); align-items: start; }
+.homeWelcome__copy { max-width: 42rem; min-width: 0; }
+.homeWelcome__visual { display: grid; gap: 1.25rem; align-content: start; width: min(100%, 42rem); margin-inline: auto; min-width: 0; }
+.homeWelcome__logos { display: flex; align-items: center; justify-content: center; min-width: 0; }
+.homeWelcome__logos img { display: block; width: min(100%, 16rem); height: auto; aspect-ratio: 239 / 147; object-fit: contain; }
+.homeWelcome__copy--support { width: 100%; }
 .aboutTariqHero__logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem; min-width: 0; }
-.homeWelcome__logos img,
 .aboutTariqHero__logos img { display: block; width: auto; height: auto; max-width: calc(50% - .375rem); max-height: 8rem; object-fit: contain; }
-.homeWelcome__logos img:first-child,
-.aboutTariqHero__logos img:first-child { aspect-ratio: 239 / 147; }
-.homeWelcome__logos img:last-child,
-.aboutTariqHero__logos img:last-child { aspect-ratio: 587 / 585; }
 .aboutTariqHero__visual { display: grid; justify-items: center; gap: 1rem; min-width: 0; }
 .aboutTariqHero__visual > .aboutTariqHero__portrait { width: min(100%, 12rem); margin-inline: auto; }
 .aboutTariqHero__visual > .aboutTariqHero__portrait img { display: block; width: 100%; height: auto; aspect-ratio: 720 / 1600; object-fit: contain; }
 
 @media (max-width: 480px) {
-  .homeWelcome__logos img,
+  .homeWelcome__logos img { width: min(100%, 14rem); }
   .aboutTariqHero__logos img { max-height: 6rem; max-width: calc(50% - .375rem); }
   .aboutTariqHero__visual > .aboutTariqHero__portrait { width: min(100%, 11rem); }
 }

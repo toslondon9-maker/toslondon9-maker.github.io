@@ -32,11 +32,17 @@ test("homepage does not render the previous expanded sections", () => {
 
 test("homepage keeps an intentional personal welcome without fake video", () => {
   const welcome = section(renderHome({ language: "en" }), "welcome");
+  const messageIndex = welcome.indexOf("A personal welcome from Tariq");
+  const logoIndex = welcome.indexOf('src="/images/the-secret-logo.png"');
+  const portraitIndex = welcome.indexOf('src="/images/tariq-welcome-portrait.png"');
+  assert.ok(messageIndex >= 0);
+  assert.ok(logoIndex > messageIndex);
+  assert.ok(portraitIndex > logoIndex);
   assert.match(welcome, /A personal welcome from Tariq/);
   assert.match(welcome, /class="homeWelcome__visual"/);
   assert.match(welcome, /class="homeWelcome__logos"/);
   assert.match(welcome, /src="\/images\/the-secret-logo\.png"[^>]+alt="The Secret logo"/);
-  assert.match(welcome, /src="\/images\/the-secret-inspiration\.png"[^>]+alt="The Secret book by Rhonda Byrne on a desk"/);
+  assert.doesNotMatch(welcome, /the-secret-inspiration\.png/);
   assert.match(welcome, /tariq-welcome-portrait\.png/);
   assert.match(welcome, /homeWelcome__panel/);
   assert.match(welcome, /data-i18n="home\.video\.panelBody"/);

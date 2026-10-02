@@ -19,9 +19,10 @@ test("approved Secret logo assets are used on the homepage and About Tariq page"
 
   for (const asset of [secretLogo, secretInspiration]) {
     assert.equal(existsSync(path.join(root, asset)), true, asset);
-    assert.match(home, new RegExp(`src="${asset.replaceAll("/", "\\/")}"`));
     assert.match(about, new RegExp(`src="${asset.replaceAll("/", "\\/")}"`));
   }
+  assert.match(home, new RegExp(`src="${secretLogo.replaceAll("/", "\\/")}"`));
+  assert.doesNotMatch(home, new RegExp(`src="${secretInspiration.replaceAll("/", "\\/")}"`));
 });
 
 test("homepage uses an optimised eager hero image with stable dimensions", () => {
