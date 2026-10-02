@@ -162,23 +162,25 @@ test("homepage reader connection moves from challenge to a clear next step in bo
   assert.match(spanish, /Fundamentos/);
 });
 
-test("homepage Foundation offer keeps the essentials visible and details expandable", () => {
+test("homepage Foundation offer uses the shared concise summary", () => {
   const english = section(renderHome({ language: "en" }), "offers");
   const spanish = section(renderHome({ language: "es" }), "offers");
   for (const html of [english, spanish]) {
     assert.match(html, /class="homeOffers__card homeOffers__card--foundation"/);
-    assert.match(html, /<details class="compactFoundationOffer__details">/);
-    assert.doesNotMatch(html, /<details[^>]+open/);
-    assert.match(html, /data-i18n="foundation\.compact\.seeIncluded"/);
-    assert.match(html, /data-i18n="foundation\.compact\.totalCalls"/);
-    assert.match(html, /data-i18n="foundation\.compact\.commitment"/);
+    assert.doesNotMatch(html, /compactFoundationOffer__details|foundation\.compact\.(seeIncluded|chapterDay|meditationDay|chapterTotal|meditationTotal|commitment)/);
+    for (const key of ["weeks", "lessons", "calls", "totalCalls", "access", "support"]) {
+      assert.match(html, new RegExp(`data-i18n="foundation\\.compact\\.${key}"`));
+    }
     assert.match(html, /href="\/foundation\/"/);
   }
   assert.match(english, /Four weeks/);
   assert.match(english, /Four progressive lessons/);
   assert.match(english, /Two 45-minute Zoom coaching calls each week/);
-  assert.match(english, /Workbook and WhatsApp support/);
+  assert.match(english, /Eight calls total/);
+  assert.match(english, /Workbook and online lesson access/);
+  assert.match(english, /WhatsApp support/);
+  assert.match(english, /WhatsApp support/);
   assert.match(english, /EXPLORE FOUNDATION — £97/);
   assert.match(spanish, /Cuatro semanas/);
-  assert.match(spanish, /Ver todo lo que incluye/);
+  assert.match(spanish, /Ocho llamadas en total/);
 });

@@ -25,9 +25,12 @@ const copy = (key, language, tag = "span") => `<${tag} data-i18n="${key}">${loca
 export function renderCompactFoundationOffer({ language = "en", data = canonicalSiteData, ctaKey = "foundation.compact.cta", ctaVariant = "secondary", includeCta = true } = {}) {
   const foundation = data.stages?.find((stage) => stage.id === "foundation");
   if (!foundation) throw new Error("Foundation stage is required");
-  const visible = ["weeks", "lessons", "calls", "support"].map((key) => `<li>${copy(`foundation.compact.${key}`, language)}</li>`).join("");
-  const included = ["totalCalls", "zoomHours", "chapterDay", "meditationDay", "chapterTotal", "meditationTotal", "commitment"].map((key) => `<li>${copy(`foundation.compact.${key}`, language)}</li>`).join("");
-  return `<div class="compactFoundationOffer"><h3>${copy("foundation.compact.title", language)}</h3><strong class="compactFoundationOffer__price">${priceCopy("foundation", language)}</strong><ul class="compactFoundationOffer__summary">${visible}</ul><details class="compactFoundationOffer__details"><summary>${copy("foundation.compact.seeIncluded", language)}</summary><ul>${included}</ul></details>${includeCta ? `<a class="button--${ctaVariant}" href="${escapeHtml(data.routes.foundation)}" data-i18n="${ctaKey}">${localized(ctaKey, language)}</a>` : ""}</div>`;
+  return `<div class="compactFoundationOffer"><h3>${copy("foundation.compact.title", language)}</h3><strong class="compactFoundationOffer__price">${priceCopy("foundation", language)}</strong>${renderFoundationSummary({ language })}${includeCta ? `<a class="button--${ctaVariant}" href="${escapeHtml(data.routes.foundation)}" data-i18n="${ctaKey}">${localized(ctaKey, language)}</a>` : ""}</div>`;
+}
+
+export function renderFoundationSummary({ language = "en" } = {}) {
+  const facts = ["weeks", "lessons", "calls", "totalCalls", "access", "support"];
+  return `<ul class="compactFoundationOffer__summary">${facts.map((key) => `<li>${copy(`foundation.compact.${key}`, language)}</li>`).join("")}</ul>`;
 }
 
 export function renderWhatHappensNext({

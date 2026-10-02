@@ -3,6 +3,7 @@ import { siteData as canonicalSiteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
 import { bookingCallHref } from "../whatsapp.mjs";
 import { priceCopy, pricingNoteCopy } from "../pricing.mjs";
+import { renderFoundationSummary } from "../conversion-components.mjs";
 
 const escapeHtml = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 const copy = (key, language) => `<span data-i18n="${key}">${escapeHtml(t(key, language))}</span>`;
@@ -25,7 +26,8 @@ function coachingOutcome(language) {
 function pricing(language, data) {
   const stageOffers = data.stages.map((stage) => {
     const action = stage.id === "foundation" ? `<a class="button--secondary" href="${data.routes.foundation}" data-i18n="coaching.pricing.foundationAction">${escapeHtml(t("coaching.pricing.foundationAction", language))}</a>` : paymentLink(stage.paymentUrl, "button--secondary", copy("coaching.payNow", language));
-    return `<article class="coachingPricing__stage card"><p class="coachingStage__weeks">${copy(`coaching.stage.${stage.id}.weeks`, language)}</p><h3>${copy(`coaching.stage.${stage.id}.name`, language)}</h3><p class="coachingPricing__price"><strong>${priceCopy(stage.id, language)}</strong></p>${action}</article>`;
+    const summary = stage.id === "foundation" ? renderFoundationSummary({ language }) : "";
+    return `<article class="coachingPricing__stage card"><p class="coachingStage__weeks">${copy(`coaching.stage.${stage.id}.weeks`, language)}</p><h3>${copy(`coaching.stage.${stage.id}.name`, language)}</h3><p class="coachingPricing__price"><strong>${priceCopy(stage.id, language)}</strong></p>${summary}${action}</article>`;
   }).join("");
   return `<section class="coachingPricing section" data-coaching-section="pricing"><div class="coachingPricing__intro"><p class="eyebrow">${copy("coaching.pricing.eyebrow", language)}</p><h2>${copy("coaching.pricing.title", language)}</h2><p>${copy("coaching.pricing.body", language)}</p></div><div class="coachingPricing__grid">${stageOffers}<article class="coachingPricing__complete card"><p class="eyebrow">${copy("coaching.bestValue", language)}</p><h3>${copy("coaching.full.title", language)}</h3><p>${copy("coaching.full.body", language)}</p><p class="coachingPricing__price"><strong>${priceCopy("complete", language)}</strong></p>${paymentLink(data.offer.paymentUrl, "button--primary", copy("coaching.pricing.completePurchase", language))}<div class="coachingPricing__balanceCallout"><p>${copy("coaching.pricing.balance", language)}</p><p>${pricingNoteCopy(language)}</p></div></article></div></section>`;
 }

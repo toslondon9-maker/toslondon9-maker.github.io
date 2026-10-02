@@ -21,6 +21,9 @@ test("coaching follows the concise Start Free to pricing journey", () => {
   assert.match(html.slice(programme, pricing), /data-i18n="phase2\.coaching\.benefit1Title"/);
   assert.match(html.slice(build, pricing), /WHAT YOU CAN BUILD/);
   assert.match(html.slice(pricing, services), /£97[\s\S]*£197[\s\S]*£397[\s\S]*£497/);
+  assert.match(html.slice(pricing, services), /foundation\.compact\.(weeks|lessons|calls|totalCalls|access|support)/);
+  assert.match(html.slice(pricing, services), /href="\/foundation\/"/);
+  assert.doesNotMatch(html.slice(pricing, services), /paypal\.com\/ncp\/payment\/V5QYXZZS6KQE2/);
   assert.match(html.slice(pricing, services), /£997[\s\S]*PAY NOW/);
   assert.match(html.slice(pricing, services), /£900/);
   assert.doesNotMatch(html.slice(pricing, services), /£1,188|£191|saving|ahorra/);
