@@ -1,6 +1,7 @@
 import { siteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
 import { aiMentorChapters } from "./ai-mentors.mjs";
+import { renderHaanelQuoteExperience } from "../resources-quotes.mjs";
 
 const esc = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 const allLessonNumbers = Object.freeze(Array.from({ length: 24 }, (_, index) => index + 1));
@@ -30,5 +31,5 @@ export function resourcesPage(data = siteData, language = "en") {
     ["EXPLORE", "Supporting external resources.", `<a href="${data.routes.aiMentors}">Open the free AI Mentor prompt builder</a>`],
   ];
   const cards = groups.map(([title, intro, links, className = ""]) => `<section class="resourcesPage__group${className ? ` ${className}` : ""}"><h2>${title}</h2><p>${intro}</p><div class="resourcesPage__links">${links}</div></section>`).join("");
-  return { route: data.routes.resources, language, title: t("route.resources.metaTitle", language), description: t("route.resources.metaDescription", language), titleKey: "route.resources.metaTitle", descriptionKey: "route.resources.metaDescription", body: `<main><article class="resourcesPage"><p class="eyebrow">UNLEASH YOUR POWER</p><h1>${esc(t("route.resources.heading", language))}</h1><p class="routeShell__purpose">${esc(t("route.resources.purpose", language))}</p><div class="resourcesPage__grid">${cards}</div><details class="resourcesPage__optional"><summary>Optional: 3-Day Word Audit</summary><p>This optional resource is currently being prepared. 7 Days to Change the Way You Use Your Mind remains available above.</p></details></article></main>`, scripts: [] };
+  return { route: data.routes.resources, language, title: t("route.resources.metaTitle", language), description: t("route.resources.metaDescription", language), titleKey: "route.resources.metaTitle", descriptionKey: "route.resources.metaDescription", body: `<main><article class="resourcesPage"><p class="eyebrow">UNLEASH YOUR POWER</p><h1>${esc(t("route.resources.heading", language))}</h1><p class="routeShell__purpose">${esc(t("route.resources.purpose", language))}</p>${renderHaanelQuoteExperience(data, language)}<div class="resourcesPage__grid">${cards}</div><details class="resourcesPage__optional"><summary>Optional: 3-Day Word Audit</summary><p>This optional resource is currently being prepared. 7 Days to Change the Way You Use Your Mind remains available above.</p></details></article></main>`, scripts: ["/assets/resources-quotes.mjs"] };
 }

@@ -27,6 +27,7 @@ const runtimeFiles = Object.freeze([
   "assets/site-analytics.mjs",
   "assets/site-navigation.mjs",
   "assets/tabs.mjs",
+  "assets/resources-quotes.mjs",
   "content/pricing.mjs",
   "content/translations.mjs",
   "content/seven-day-canonical.json",

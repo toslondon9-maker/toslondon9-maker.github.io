@@ -598,6 +598,34 @@ main > article {
 .resourcesPage__links a { color: var(--navy, #10243b); text-decoration: underline; text-underline-offset: .2em; }
 .resourcesPage__optional { margin-top: 1.5rem; border-top: 1px solid rgba(190,148,73,.45); padding-top: 1rem; }
 .resourcesPage__optional summary { cursor: pointer; font-weight: 600; color: var(--navy, #10243b); }
+.resourcesQuoteExperience { margin: 2.5rem 0 3rem; }
+.resourcesQuotes__feature { padding: clamp(1.75rem, 5vw, 3.25rem); border-radius: 22px; background: var(--navy, #10243b); color: #fff; box-shadow: 0 16px 38px rgba(16,36,59,.12); }
+.resourcesQuotes__feature h2, .resourcesQuotes__feature .eyebrow { color: #fff; }
+.resourcesQuotes__feature blockquote { max-width: 52rem; margin: 1.5rem 0 1rem; font-family: Georgia, serif; font-size: clamp(1.35rem, 2.8vw, 2.05rem); line-height: 1.45; }
+.resourcesQuotes__feature .resourcesQuotes__source { color: rgba(255,255,255,.78); }
+.resourcesQuotes__feature .button { margin-top: 1rem; }
+.resourcesQuotes__originalNote { margin: 1rem 0 0; color: var(--muted, #59616d); font-size: .9rem; }
+.resourcesQuotes__random { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; margin: 2rem 0; padding: 1.5rem; border: 1px solid rgba(190,148,73,.55); border-radius: 18px; background: rgba(255,255,255,.7); }
+.resourcesQuotes__randomQuote { margin: .5rem 0; font-family: Georgia, serif; font-size: 1.25rem; line-height: 1.5; color: var(--navy, #10243b); }
+.resourcesQuotes__reflection { color: var(--muted, #59616d); font-size: .92rem; }
+.resourcesQuotes__randomActions { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: flex-end; align-items: center; }
+.resourcesQuotes__randomActions .button { white-space: nowrap; }
+.resourcesQuotes__wallHeader { display: flex; justify-content: space-between; gap: 1rem; align-items: end; margin-bottom: 1.25rem; }
+.resourcesQuotes__wallHeader h3 { margin: 0; color: var(--navy, #10243b); font-size: 1.55rem; }
+.resourcesQuotes__filters { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .45rem; }
+.resourcesQuotes__filter { border: 1px solid rgba(16,36,59,.35); border-radius: 999px; background: transparent; color: var(--navy, #10243b); padding: .45rem .75rem; cursor: pointer; }
+.resourcesQuotes__filter[aria-pressed="true"], .resourcesQuotes__filter:hover { background: var(--navy, #10243b); color: #fff; }
+.resourcesQuotes__filter:focus-visible, .resourcesQuotes__randomActions .button:focus-visible { outline: 3px solid var(--gold, #be9449); outline-offset: 3px; }
+.resourcesQuotes__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.resourcesQuotes__card { min-width: 0; padding: 1.25rem; border: 1px solid rgba(190,148,73,.4); border-radius: 16px; background: rgba(255,255,255,.58); }
+.resourcesQuotes__card blockquote { margin: 0 0 1rem; color: var(--navy, #10243b); line-height: 1.55; }
+.resourcesQuotes__card .resourcesQuotes__reflection { margin: 0 0 .8rem; }
+.resourcesQuotes__source { margin: 0; font-size: .86rem; color: var(--muted, #59616d); }
+.resourcesQuotes__cardMeta { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; justify-content: space-between; margin-top: 1rem; font-size: .8rem; }
+.resourcesQuotes__cardMeta a { color: var(--navy, #10243b); }
+.resourcesQuotes__tag { display: inline-block; margin: .15rem .2rem .15rem 0; color: #85611f; font-weight: 700; }
+@media (max-width: 900px) { .resourcesQuotes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .resourcesQuotes__wallHeader { display: block; } .resourcesQuotes__filters { justify-content: flex-start; margin-top: 1rem; } }
+@media (max-width: 640px) { .resourcesQuotes__random { grid-template-columns: 1fr; } .resourcesQuotes__randomActions { justify-content: flex-start; } .resourcesQuotes__grid { grid-template-columns: 1fr; } .resourcesQuotes__feature blockquote { font-size: 1.25rem; } }
 .resourcesPage__audio { margin-top: 2.5rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid rgba(190,148,73,.55); border-radius: 20px; background: var(--cream, #f7f0e2); }
 .resourcesPage__audio h2, .resourcesPage__affirmations h2 { color: var(--navy, #10243b); margin-top: 0; }
 .resourcesPage__audioIntro { max-width: 46rem; }
