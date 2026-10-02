@@ -61,7 +61,13 @@ function renderWhyTariq(language) {
 }
 
 function renderTestimonials() {
-  const cards = homeContent.testimonials.map((testimonial) => `<figure class="homeTestimonials__card"><blockquote>“${escapeHtml(testimonial.quote)}”</blockquote><figcaption><strong>${escapeHtml(testimonial.name)}</strong><span>${escapeHtml(testimonial.location)}</span></figcaption></figure>`).join("");
+  const cards = homeContent.testimonials.map((testimonial) => {
+    const quote = testimonial.quoteParagraphs
+      ? testimonial.quoteParagraphs.map((paragraph) => `<p class="homeTestimonials__quoteParagraph">${escapeHtml(paragraph)}</p>`).join("")
+      : `<p class="homeTestimonials__quoteParagraph">${escapeHtml(testimonial.quote)}</p>`;
+    const disclosure = testimonial.disclosure ? `<p class="homeTestimonials__disclosure">${escapeHtml(testimonial.disclosure)}</p>` : "";
+    return `<figure class="homeTestimonials__card"><blockquote>“${quote}”</blockquote>${disclosure}<figcaption><strong>${escapeHtml(testimonial.name)}</strong><span>${escapeHtml(testimonial.location)}</span></figcaption></figure>`;
+  }).join("");
   return `<section class="homeSection homeTestimonials" data-home-section="testimonials"><div class="homeSection__inner"><p class="eyebrow">GENUINE STUDENT EXPERIENCES</p><h2>What students say about the journey</h2><div class="homeTestimonials__grid">${cards}</div></div></section>`;
 }
 

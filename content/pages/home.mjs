@@ -11,9 +11,14 @@ export const homeContent = Object.freeze({
   mentorIds: Object.freeze(["haanel", "helmar", "tariq"]),
   testimonials: Object.freeze([
     Object.freeze({
-      name: "Mark Smith",
+      name: "Paul Best",
       location: "UK",
-      quote: "When I discovered that Tariq was offering a course on The Master Key System, I was immediately interested. He is the only person I have heard describe it correctly—as a course of study, rather than simply a self-help book.",
+      quoteParagraphs: Object.freeze([
+        "I’ve tried several forms of personal development, but studying the Master Key System with Tariq is the best personal-development study I’ve come across. What makes it stand out is the way he guides you through the chapters, shares his insight into the ideas and helps you put them into practice.",
+        "Tariq brings real passion to helping people understand the material. He connects each chapter to everyday situations and encourages you to keep working with the exercises, reflection and meditation. That regular practice helped me become more aware of my habits and more consistent in applying what I was learning.",
+        "I valued the experience enough to recommend Tariq’s Mastery Circle to four friends, who purchased through my affiliate link. I’m pleased to have shared something I believe can help others, and I’m happy for the affiliate relationship to be disclosed.",
+      ]),
+      disclosure: "Affiliate relationship disclosed: Paul’s recommendation includes purchases made through his affiliate link.",
     }),
     Object.freeze({
       name: "Andy White",

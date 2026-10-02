@@ -2069,6 +2069,24 @@ main > article {
   line-height: 1.55;
 }
 
+.homeTestimonials__quoteParagraph {
+  margin: 0;
+}
+
+.homeTestimonials__quoteParagraph + .homeTestimonials__quoteParagraph {
+  margin-top: 1rem;
+}
+
+.homeTestimonials__disclosure {
+  margin: 1.25rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
 .homeTestimonials__card figcaption {
   display: grid;
   gap: 0.2rem;

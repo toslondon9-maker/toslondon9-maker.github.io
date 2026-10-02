@@ -103,7 +103,13 @@ test("homepage retains existing testimonials and selected insights", () => {
   const html = renderHome({ language: "en" });
   const testimonials = section(html, "testimonials");
   const insights = section(html, "insights");
-  for (const name of ["Mark Smith", "Andy White", "David White"]) assert.match(testimonials, new RegExp(name));
+  for (const name of ["Paul Best", "Andy White", "David White"]) assert.match(testimonials, new RegExp(name));
+  assert.doesNotMatch(testimonials, /Mark Smith/);
+  assert.match(testimonials, /I’ve tried several forms of personal development/);
+  assert.match(testimonials, /Tariq brings real passion to helping people understand the material/);
+  assert.match(testimonials, /I valued the experience enough to recommend Tariq’s Mastery Circle to four friends/);
+  assert.match(testimonials, /class="homeTestimonials__disclosure"[^>]*>Affiliate relationship disclosed/);
+  assert.equal((testimonials.match(/class="homeTestimonials__quoteParagraph"/g) ?? []).length, 5);
   assert.ok((insights.match(/class="insightCard|class="insightsPreview__card/g) ?? []).length <= 3);
   assert.doesNotMatch(insights, /insightsPreview__meta|insightsPreview__date|\/downloads\/|download/);
   assert.match(insights, /VIEW ALL INSIGHTS|VIEW ALL INSIGHTS &amp; GUIDES/);
