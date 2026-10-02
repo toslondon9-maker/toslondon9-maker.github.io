@@ -86,7 +86,15 @@ test("homepage presents what students receive and why Tariq with approved links"
   const receive = section(html, "receive");
   const why = section(html, "why-tariq");
   for (const value of ["Weekly focus", "Practical exercises", "Reflection", "Personal guidance", "Accountability", "AI learning support"]) assert.match(receive, new RegExp(value, "i"));
-  for (const value of ["Why Tariq", "created", "Master Key System", "guide", "coach"]) assert.match(why, new RegExp(value, "i"));
+  for (const value of [
+    "WHY TARIQ",
+    "Find your focus in a world competing for your attention.",
+    "Social media can keep us scrolling.",
+    "I’m Tariq.",
+    "The Master Key System offers a powerful framework",
+    "My aim is to help you step back from the noise",
+  ]) assert.match(why, new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"));
+  assert.match(why, /href="\/about-tariq\/"[^>]*>Meet Tariq</i);
   assert.match(why, new RegExp(`href="${siteData.routes.aboutTariq.replaceAll("/", "\\/")}"`));
 });
 
