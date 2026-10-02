@@ -12,6 +12,7 @@ const certificateDisplay = "/images/tariq-master-key-certificate-display.webp";
 const certificateOriginal = "/images/tariq-master-key-certificate-restored.png";
 const secretLogo = "/images/the-secret-logo.png";
 const secretInspiration = "/images/the-secret-inspiration.png";
+const aboutSecretLogo = "/images/secret-mark-transparent.png";
 
 test("approved Secret logo assets are used on the homepage and About Tariq page", () => {
   const home = renderHome({ language: "en" });
@@ -19,8 +20,9 @@ test("approved Secret logo assets are used on the homepage and About Tariq page"
 
   assert.equal(existsSync(path.join(root, secretLogo)), true, secretLogo);
   assert.equal(existsSync(path.join(root, secretInspiration)), true, secretInspiration);
-  assert.match(about, new RegExp(`src="${secretLogo.replaceAll("/", "\\/")}"`));
+  assert.equal(existsSync(path.join(root, aboutSecretLogo)), true, aboutSecretLogo);
   assert.doesNotMatch(about, new RegExp(`src="${secretInspiration.replaceAll("/", "\\/")}"`));
+  assert.match(about, new RegExp(`src="${aboutSecretLogo.replaceAll("/", "\\/")}"`));
   assert.match(home, new RegExp(`src="${secretLogo.replaceAll("/", "\\/")}"`));
   assert.doesNotMatch(home, new RegExp(`src="${secretInspiration.replaceAll("/", "\\/")}"`));
 });

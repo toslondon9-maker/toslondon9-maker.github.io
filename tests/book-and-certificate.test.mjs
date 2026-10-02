@@ -58,7 +58,8 @@ test("About Tariq presents the supplied portrait and approved write-up", () => {
 
   assert.equal(existsSync(path.join(process.cwd(), "images", "tariq-saddique-about.jpeg")), true);
   assert.match(page.body, /class="aboutTariqHero__visual"[\s\S]*class="aboutTariqHero__logos"/);
-  assert.match(page.body, /src="\/images\/the-secret-logo\.png"[^>]+alt="The Secret logo"/);
+  assert.match(page.body, /src="\/images\/secret-mark-transparent\.png"[^>]+width="122"[^>]+height="139"[^>]+alt="The Secret logo"/);
+  assert.doesNotMatch(page.body, /src="\/images\/the-secret-logo\.png"/);
   assert.doesNotMatch(page.body, /the-secret-inspiration\.png/);
   assert.match(page.body, /class="aboutTariqHero__logos"[\s\S]*class="aboutTariqHero__portrait"/);
   assert.match(page.body, /src="\/images\/tariq-saddique-about\.jpeg"[^>]+width="720"[^>]+height="1600"/);
