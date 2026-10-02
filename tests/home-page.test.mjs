@@ -40,9 +40,10 @@ test("homepage keeps an intentional personal welcome without fake video", () => 
   assert.ok(portraitIndex > logoIndex);
   assert.match(welcome, /A personal welcome from Tariq/);
   assert.match(welcome, /class="homeWelcome__visual"/);
-  assert.match(welcome, /class="homeWelcome__logos"/);
+  assert.match(welcome, /class="homeWelcome__imagePair"/);
   assert.match(welcome, /src="\/images\/secret-mark-transparent\.png"[^>]+alt="The Secret logo"/);
-  assert.match(welcome, /src="\/images\/the-secret-inspiration\.png"[^>]+alt="The Secret book by Rhonda Byrne on a desk"/);
+  assert.doesNotMatch(welcome, /the-secret-inspiration\.png/);
+  assert.match(welcome, /homeWelcome__imagePair">[\s\S]*secret-mark-transparent\.png[\s\S]*tariq-welcome-portrait\.png/);
   assert.match(welcome, /tariq-welcome-portrait\.png/);
   assert.match(welcome, /class="homeWelcome__panel"/);
   assert.match(welcome, /data-i18n="home\.video\.body"/);
