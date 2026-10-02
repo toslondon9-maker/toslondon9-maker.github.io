@@ -11,6 +11,11 @@ export const homeContent = Object.freeze({
   mentorIds: Object.freeze(["haanel", "helmar", "tariq"]),
   testimonials: Object.freeze([
     Object.freeze({
+      name: "Mark Smith",
+      location: "UK",
+      quote: "When I discovered that Tariq was offering a course on The Master Key System, I was immediately interested. He is the only person I have heard describe it correctly—as a course of study, rather than simply a self-help book.",
+    }),
+    Object.freeze({
       name: "Paul Best",
       location: "UK",
       quoteParagraphs: Object.freeze([
