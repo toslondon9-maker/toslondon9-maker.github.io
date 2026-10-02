@@ -36,13 +36,17 @@ test("the MKS Study Room preserves the complete 24-week curriculum", () => {
   assert.equal((navigation.match(/href="\/master-key-system\/"[^>]*>Master Key System<\/a>/g) ?? []).length, 2);
 });
 
-test("the MKS Study Room links the supplied Google Photos videos to Chapters 3 and 4", () => {
+test("the MKS Study Room links the supplied Google Photos videos to Chapters 2, 3 and 4", () => {
   const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+  const chapter2 = "https://photos.google.com/search/CgZWaWRlb3MiCBIGCgQqAggBKN+0mvePNA%3D%3D/photo/AF1QipO7x3Zc8oNkYOlb3Ef0Lnnk_N7TQCWu2gsrwHFD";
   const chapter3 = "https://photos.google.com/search/CgZWaWRlb3MiCBIGCgQqAggBKLbc%2FfWPNA%3D%3D/photo/AF1QipN0t6Aoci1rOGfEm1SPcRENKbtqiHzr1TXTVwOq";
   const chapter4 = "https://photos.google.com/search/CgZWaWRlb3MiCBIGCgQqAggBKLbc%2FfWPNA%3D%3D/photo/AF1QipMEAHCw-7xIqNsdkLlaDCWNWW3CZZ1UFZLcMT_P";
+  const chapter2Start = html.indexOf('data-week="2"');
+  const chapter3Start = html.indexOf('data-week="3"');
+  assert.ok(chapter2Start >= 0 && html.indexOf(chapter2, chapter2Start) < chapter3Start);
   assert.match(html, new RegExp(`data-week="3"[\\s\\S]*?href="${chapter3}"[\\s\\S]*?data-week="4"`));
   assert.match(html, new RegExp(`data-week="4"[\\s\\S]*?href="${chapter4}"`));
-  assert.equal((html.match(/class="weekVideo"/g) ?? []).length, 3);
+  assert.equal((html.match(/class="weekVideo"/g) ?? []).length, 4);
 });
 
 test("the MKS Study Room removes promotional preview language and keeps study controls collapsed", () => {

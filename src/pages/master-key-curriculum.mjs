@@ -17,6 +17,7 @@ const stages = Object.freeze([
 ]);
 
 const chapterVideos = Object.freeze({
+  2: "https://photos.google.com/search/CgZWaWRlb3MiCBIGCgQqAggBKN+0mvePNA%3D%3D/photo/AF1QipO7x3Zc8oNkYOlb3Ef0Lnnk_N7TQCWu2gsrwHFD",
   3: "https://photos.google.com/search/CgZWaWRlb3MiCBIGCgQqAggBKLbc%2FfWPNA%3D%3D/photo/AF1QipN0t6Aoci1rOGfEm1SPcRENKbtqiHzr1TXTVwOq",
   4: "https://photos.google.com/search/CgZWaWRlb3MiCBIGCgQqAggBKLbc%2FfWPNA%3D%3D/photo/AF1QipMEAHCw-7xIqNsdkLlaDCWNWW3CZZ1UFZLcMT_P",
 });
