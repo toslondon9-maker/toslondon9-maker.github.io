@@ -6,10 +6,14 @@ import { renderHaanelQuoteExperience } from "../resources-quotes.mjs";
 const esc = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 const allLessonNumbers = Object.freeze(Array.from({ length: 24 }, (_, index) => index + 1));
 const affirmationsFile = "The Master Key System Affirmations For Success And Prosperity.mp3";
-const scrollFieldPhrases = ["Thought", "Purpose", "Concentration", "Action", "Inner Power", "Habit"];
+const scrollFieldPhrases = [
+  "Thought", "Purpose", "Concentration", "Action", "Inner Power", "Habit",
+  "Stillness", "Attention", "Vision", "Practice", "Discipline", "Clarity",
+  "Create", "Persist", "Awareness", "Direction", "Power within", "Choose",
+];
 
 function renderScrollField() {
-  return `<div class="resourcesScrollField" aria-hidden="true">${scrollFieldPhrases.map((phrase) => `<span>${phrase}</span>`).join("")}</div>`;
+  return `<div class="resourcesScrollField" aria-hidden="true">${scrollFieldPhrases.map((phrase, index) => `<span class="resourcesScrollField__phrase resourcesScrollField__phrase--${index + 1}">${phrase}</span>`).join("")}</div><div class="resourcesPortrait" aria-hidden="true"><img src="/images/resources-tariq-light-points.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async"></div>`;
 }
 
 function audioCard(number, language) {
