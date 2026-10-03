@@ -2,7 +2,7 @@ import { renderFooter, renderHeader } from "./shared-chrome.mjs";
 import { renderStructuredData } from "./structured-data.mjs";
 
 const releaseAssetVersion = "20260909-day7-choices";
-const platformStyleVersion = "20261002-haanel-quote-wall-1";
+const platformStyleVersion = "20261003-commercial-improvements-1";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
@@ -19,7 +19,7 @@ function versionReleaseScript(script) {
   if (script === languageScript) return `${script}?v=${releaseAssetVersion}`;
   if (script === analyticsScript) return `${script}?v=20260908-analytics`;
   if (script === aiMentorScript) return `${script}?v=20261002-chapter-select-1`;
-  if (script === "/assets/resources-quotes.mjs") return `${script}?v=20261002-haanel-quote-wall-1`;
+  if (script === "/assets/resources-quotes.mjs") return `${script}?v=20261003-commercial-improvements-1`;
   return script;
 }
 
