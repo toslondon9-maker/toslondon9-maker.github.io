@@ -88,10 +88,8 @@ test("the Start Free page requires registration before its main dashboard while 
   assert.match(html, /name="surname"[^>]+required/);
   assert.match(html, /name="whatsapp"[^>]+required/);
   assert.match(html, /name="consent"[^>]+required/);
-  assert.doesNotMatch(html, /name="goal"[^>]+required/);
-  assert.doesNotMatch(html, /name="difficulty"[^>]+required/);
-  assert.match(html, /What would you most like to change or improve right now\? \(optional\)/);
-  assert.match(html, /What is currently holding you back most\? \(optional\)/);
+  assert.doesNotMatch(html, /name="goal"/);
+  assert.doesNotMatch(html, /name="difficulty"/);
   assert.match(html, /name="emailMarketing"/);
   assert.match(html, /<input type="checkbox" name="emailMarketing">/);
   assert.match(html, /data-lead-heading/);
@@ -139,13 +137,11 @@ test("the Foundation handoff is hidden until Day 7 progress is complete", () => 
   assert.match(html, /href="\/foundation\/"/);
 });
 
-test("the Start Free qualifying-question labels are optional in both languages", () => {
+test("the Start Free registration defers optional long-answer questions in both languages", () => {
   const spanish = renderStartFree({ language: "es" });
 
-  assert.match(spanish, /¿Qué te gustaría cambiar o mejorar ahora mismo\? \(opcional\)/);
-  assert.match(spanish, /¿Qué te está frenando más\? \(opcional\)/);
-  assert.doesNotMatch(spanish, /<textarea name="goal"[^>]+required/);
-  assert.doesNotMatch(spanish, /<textarea name="difficulty"[^>]+required/);
+  assert.doesNotMatch(spanish, /name="goal"/);
+  assert.doesNotMatch(spanish, /name="difficulty"/);
 });
 
 test("the registration honeypot is hidden without changing the status message element", () => {

@@ -54,6 +54,22 @@ test("Foundation page leads with a compact canonical facts summary", () => {
   for (const text of ["Four weeks", "Four progressive lessons", "Two 45-minute Zoom calls each week", "Eight calls total", "Six hours of live Zoom coaching", "Workbook and online lessons", "WhatsApp support", "21 hours", "14 hours", "41 hours total", "£97"]) assert.ok(summary.includes(text), text);
 });
 
+test("Foundation purchase page leads with three values, five benefits and closed detail accordions", () => {
+  const page = routeRenderers[siteData.routes.foundation](siteData);
+  const body = page.body;
+  const benefits = body.match(/<ul class="foundationPage__tickList">[\s\S]*?<\/ul>/)?.[0] ?? "";
+  const testimonial = body.indexOf('class="foundationPage__testimonial"');
+  const weeks = body.indexOf('id="foundation-weeks-heading"');
+  assert.match(body, /class="foundationPage__valueSummary"/);
+  assert.equal((body.match(/class="foundationPage__valueSummary"/g) ?? []).length, 1);
+  assert.equal((benefits.match(/<li/g) ?? []).length, 5);
+  assert.ok(testimonial > body.indexOf('id="foundation-receive"'));
+  assert.ok(testimonial < weeks);
+  for (const key of ["foundation.afterPaymentHeading", "foundation.timeHeading", "foundation.fitHeading", "foundation.week1Heading", "foundation.questionsHeading"]) assert.match(body, new RegExp(`data-i18n="${key}"`));
+  assert.equal((body.match(/<details class="foundationPage__accordion"/g) ?? []).length, 5);
+  assert.doesNotMatch(body, /<details class="foundationPage__accordion"[^>]+open/);
+});
+
 test("Foundation page keeps the approved structure available in Spanish", () => {
   const page = routeRenderers[siteData.routes.foundation](siteData, "es");
   for (const key of [

@@ -54,6 +54,12 @@ test("AI Mentor page renders an accessible on-page conversation shell with the p
   assert.match(html, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
 });
 
+test("AI Mentor page offers the free journey and canonical Foundation next steps", () => {
+  const html = mentorPage();
+  assert.match(html, /href="\/start-free\/"[^>]*data-i18n="aiMentor\.cta\.start"/);
+  assert.match(html, /href="\/foundation\/"[^>]*data-i18n="aiMentor\.cta\.foundation"/);
+});
+
 test("AI Mentor chat shell supplies complete English and Spanish UI translations", () => {
   const keys = [
     "aiMentor.hero.title",

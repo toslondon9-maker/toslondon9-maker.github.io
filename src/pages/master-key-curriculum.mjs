@@ -24,10 +24,10 @@ const chapterVideos = Object.freeze({
 
 const roomCopy = Object.freeze({
   en: {
-    eyebrow: "MKS STUDY ROOM", intro: "A calm place to study one chapter, practise one exercise and carry one principle into the week.", choose: "Choose a week", navigation: "Course navigation", current: "Current week", purpose: "Weekly purpose", rhythm: "Weekly rhythm", rhythmText: "Study → Practise → Reflect → Apply", progress: "Week 1 of 24", previous: "Previous Week", complete: "Complete Week", completed: "Completed", next: "Next Week", week: "Week",
+    eyebrow: "MKS STUDY ROOM", intro: "A calm place to study one chapter, practise one exercise and carry one principle into the week.", choose: "Choose a week", navigation: "Course navigation", current: "Current week", purpose: "Weekly purpose", rhythm: "Weekly rhythm", rhythmText: "Study → Practise → Reflect → Apply", progress: "Week 1 of 24", previous: "Previous Week", complete: "Complete Week", completed: "Completed", next: "Next Week", week: "Week", start: "Start the free 7-Day Experience", foundation: "Explore Foundation",
   },
   es: {
-    eyebrow: "SALA DE ESTUDIO MKS", intro: "Un espacio tranquilo para estudiar un capítulo, practicar un ejercicio y llevar un principio a tu semana.", choose: "Elige una semana", navigation: "Navegación del curso", current: "Semana actual", purpose: "Propósito de la semana", rhythm: "Ritmo semanal", rhythmText: "Estudia → Practica → Reflexiona → Aplica", progress: "Semana 1 de 24", previous: "Semana anterior", complete: "Completar semana", completed: "Completada", next: "Siguiente semana", week: "Semana",
+    eyebrow: "SALA DE ESTUDIO MKS", intro: "Un espacio tranquilo para estudiar un capítulo, practicar un ejercicio y llevar un principio a tu semana.", choose: "Elige una semana", navigation: "Navegación del curso", current: "Semana actual", purpose: "Propósito de la semana", rhythm: "Ritmo semanal", rhythmText: "Estudia → Practica → Reflexiona → Aplica", progress: "Semana 1 de 24", previous: "Semana anterior", complete: "Completar semana", completed: "Completada", next: "Siguiente semana", week: "Semana", start: "Empieza la experiencia gratuita de 7 días", foundation: "Explora Foundation",
   },
 });
 
@@ -72,7 +72,7 @@ function renderChapters(language) {
 
 function renderCourseNavigation(chapters, copy) {
   const stagesMarkup = stages.map((stage) => `<section class="mksStudyRoom__stage" data-stage="${stage.id}"><header><p>${stage.weeks}</p><h2>${stage.title}</h2></header><ol>${chapters.slice(stage.start, stage.end).map((chapter) => `<li><a href="#week-${chapter.index + 1}"><span>${copy.week} ${chapter.index + 1}</span><strong>${chapter.title}</strong></a></li>`).join("")}</ol></section>`).join("");
-  return `<nav class="mksStudyRoom__courseNav" aria-label="${copy.navigation}">${stagesMarkup}</nav>`;
+  return `<nav class="mksStudyRoom__courseNav" aria-label="${copy.navigation}">${stagesMarkup}<p class="mksStudyRoom__conversion"><a href="/start-free/">${copy.start}</a> · <a href="/foundation/">${copy.foundation}</a></p></nav>`;
 }
 
 function renderStageVisualNavigation(copy) {

@@ -40,6 +40,14 @@ test("canonical coaching page owns every locked commercial fact", () => {
   assert.match(coaching, /Mastery Circle[\s\S]*£3,000–£5,000 \/ €3,510–€5,850[\s\S]*Application only/);
   assert.doesNotMatch(coaching, /£1,188|£191|£29–£79|€34–€92|£7,500–£15,000|From £5,000/);
   assert.doesNotMatch(coaching, /Private Mentoring|Corporate Programmes/);
+  assert.match(coaching, /coachingPricing__completeIncludes/);
+  assert.match(coaching, /24 weeks across four progressive stages/);
+  assert.match(coaching, /Weekly study and practice/);
+  assert.match(coaching, /Personal coaching and accountability/);
+  assert.match(coaching, /Workbook and online lessons/);
+  assert.match(coaching, /Existing AI support/);
+  const completeCard = coaching.match(/<article class="coachingPricing__complete card">[\s\S]*?<\/article>/)?.[0] ?? "";
+  assert.doesNotMatch(completeCard, /\b(?:six|eight|6|8)\s+(?:private\s+)?(?:45-minute\s+)?(?:Zoom\s+)?calls?\b/i);
   assert.doesNotMatch(coaching, /6\s*[×x]\s*£169|£1,014/);
   const offers = home.match(/<section[^>]+data-home-section="offers"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.match(offers, /Free 7-Day Experience/);

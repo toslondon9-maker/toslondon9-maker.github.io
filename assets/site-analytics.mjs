@@ -17,6 +17,12 @@ const allowedEventNames = new Set([
   "start_free_cta_click",
   "registration_start",
   "day_complete",
+  "homepage_cta_click",
+  "foundation_page_view",
+  "foundation_paypal_click",
+  "complete_journey_paypal_click",
+  "coaching_enquiry_click",
+  "mastery_circle_application_click",
 ]);
 const foundationPaymentUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
 const completeJourneyPaymentUrl = "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6";
@@ -83,6 +89,7 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
 
   const emitRouteEvents = () => {
     const pathname = documentRef?.location?.pathname ?? "";
+    if (pathname === "/foundation/") emit("foundation_page_view");
     if (pathname === "/start-free/") emit("start_free_view");
     if (pathname.startsWith("/start-free/day-1-")) emit("day_1_open");
   };
@@ -160,6 +167,11 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
     }
     if (link?.dataset?.socialPlatform) emit("social_click", { platform: link.dataset.socialPlatform, destination_url: href, page_path: documentRef?.location?.pathname || "/" });
     if (link?.dataset?.startFreeCta) emit("start_free_cta_click");
+    if (documentRef?.location?.pathname === "/" && href.includes("/start-free/")) emit("homepage_cta_click");
+    if (href.includes(foundationPaymentUrl)) emit("foundation_paypal_click");
+    if (href.includes(completeJourneyPaymentUrl)) emit("complete_journey_paypal_click");
+    if (documentRef?.location?.pathname === "/coaching/" && href.startsWith("mailto:")) emit("coaching_enquiry_click");
+    if (documentRef?.location?.pathname === "/coaching/" && href === "/contact/") emit("mastery_circle_application_click");
   });
 
   updateBanner();

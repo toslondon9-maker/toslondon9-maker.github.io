@@ -1590,6 +1590,25 @@ main > article {
 
 .foundationPage__facts h2 { margin-top: 0; }
 
+.foundationPage__valueSummary {
+  margin: 1.5rem clamp(1rem, 4vw, 3rem) 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(184,140,59,.4);
+  background: var(--cream-deep);
+}
+
+.foundationPage__valueSummary ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.foundationPage__valueSummary li { min-width: 0; padding: .5rem; color: var(--navy); font-size: .82rem; letter-spacing: .04em; line-height: 1.35; }
+
 .foundationPage__facts ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -6824,12 +6843,14 @@ body {
 .foundationPage__testimonial blockquote{max-width:45rem;margin:1rem auto 0}
 .foundationPage__testimonial blockquote p{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.6}
 .foundationPage__testimonial cite{display:block;margin-top:1rem;color:var(--gold-bright);font-style:normal;font-weight:700}
-.foundationPage__questions details{padding:1rem 0;border-bottom:1px solid rgba(184,140,59,.3)}
-.foundationPage__questions summary{cursor:pointer;color:var(--navy);font-weight:700}
-.foundationPage__questions details p{max-width:50rem;margin:1rem 0 0;color:var(--muted);line-height:1.6}
+.foundationPage__accordionGroup{margin-top:clamp(2.5rem,6vw,4.5rem);padding-top:clamp(1.5rem,3vw,2.5rem);border-top:1px solid rgba(184,140,59,.35)}
+.foundationPage__accordion{padding:1rem 0;border-bottom:1px solid rgba(184,140,59,.3)}
+.foundationPage__accordion summary{cursor:pointer;color:var(--navy);font-weight:700}
+.foundationPage__accordion p,.foundationPage__accordion ol{max-width:50rem;margin:1rem 0 0;color:var(--muted);line-height:1.6}
+.foundationPage__accordion .foundationPage__accordion{margin-top:.75rem;padding-inline:1rem;border:1px solid rgba(184,140,59,.22)}
 .foundationPage__footerCta{margin-top:clamp(2.5rem,6vw,4.5rem);padding-top:2rem;border-top:1px solid rgba(184,140,59,.35);text-align:center}
 .foundationPage__note{max-width:48rem;margin:1.5rem auto 0;color:var(--muted);font-size:.92rem}
-@media (max-width:640px){.foundationPage__actions>*{width:100%;text-align:center}.foundationPage__price{max-width:none}.foundationPage__section{margin-top:2.5rem}}
+@media (max-width:640px){.foundationPage__actions>*{width:100%;text-align:center}.foundationPage__price{max-width:none}.foundationPage__section{margin-top:2.5rem}.foundationPage__valueSummary ul{grid-template-columns:minmax(0,1fr);text-align:left}}
 @media(max-width:900px){.affiliateReward__benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.affiliateReward__examples,.affiliateReward__summary ul{grid-template-columns:1fr}}
 @media(max-width:600px){.affiliateReward__benefits{grid-template-columns:1fr}.affiliateReward__examples article{padding:1.1rem}.affiliateReward__tagline{letter-spacing:.02em}}
 .homeTradition{background:var(--paper)}.homeTradition__ideas{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-top:clamp(1.5rem,3vw,2.5rem);padding-top:1.25rem;border-top:1px solid var(--border)}.homeTradition__ideas h3{margin:0;color:var(--night);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.3rem,2.3vw,1.8rem)}.homeTradition__ideas p{max-width:42rem;margin:0;color:var(--muted);line-height:1.6}.homeTradition__links{margin-top:1.5rem;line-height:1.8}.homeTradition__links a{color:var(--night);font-weight:700;text-decoration:underline;text-underline-offset:.2em}.insightsPreview__card--compact{padding:clamp(1.1rem,2.5vw,1.6rem)}.insightsPreview__card--compact p{margin-bottom:1rem}.insightsPreview__card--compact .button--text{margin-top:auto}
@@ -7618,6 +7639,13 @@ html {
 .coachingPricing__balanceCallout { margin-top: 1rem; padding: 1rem 1.1rem; border-radius: .35rem; background: var(--cream); color: var(--night); font-size: .86rem; line-height: 1.5; }
 .coachingPricing__balanceCallout p { margin: 0; color: var(--night) !important; }
 .coachingPricing__balanceCallout p + p { margin-top: .65rem; font-weight: 500; }
+.coachingPricing__completeIncludes { margin: 1.25rem 0; padding: 1rem 1.1rem; border: 1px solid rgb(255 255 255 / 22%); border-radius: .35rem; background: rgb(255 255 255 / 8%); }
+.coachingPricing__completeIncludes h4 { margin: 0 0 .65rem; color: var(--gold); font-size: .95rem; }
+.coachingPricing__completeIncludes ul { margin: 0; padding-left: 1.1rem; color: var(--cream); }
+.coachingPricing__completeIncludes li { margin: .35rem 0; }
+.resourcesPage__earlyCta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 1.5rem 0 2rem; padding: 1rem 1.25rem; border: 1px solid var(--gold); background: var(--cream); color: var(--night); }
+.resourcesPage__earlyCta p { margin: 0; font-weight: 700; }
+@media (max-width: 640px) { .resourcesPage__earlyCta { align-items: flex-start; flex-direction: column; } }
 .coachingProfessionalServices { display: block; }
 .coachingProfessionalServices__group > h3 { margin-bottom: 1rem; }
 .coachingProfessionalServices__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

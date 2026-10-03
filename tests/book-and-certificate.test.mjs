@@ -72,5 +72,5 @@ test("About Tariq presents the supplied portrait and approved write-up", () => {
   assert.match(page.body, /<strong>Now,<\/strong>/);
   assert.match(page.body, /I created <strong>Unleash Your Power<\/strong> to share that practical process/);
   assert.match(page.body, /Your next chapter doesn’t have to begin with everything figured out\./);
-  assert.match(page.body, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}">Start with the free 7-Day journey<`));
+  assert.match(page.body, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"[^>]*>Start with the free 7-Day journey<`));
 });

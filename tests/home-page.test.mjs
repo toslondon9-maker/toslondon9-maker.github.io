@@ -154,6 +154,17 @@ test("offers use the exact canonical commercial destinations", () => {
   assert.match(offers, new RegExp(`href="${siteData.routes.coaching.replaceAll("/", "\\/")}"`));
 });
 
+test("homepage offer note reflects only the current public offer structure", () => {
+  const english = section(renderHome({ language: "en" }), "offers");
+  const spanish = section(renderHome({ language: "es" }), "offers");
+  assert.match(english, /Mastery Circle/);
+  assert.match(english, /Alumni Practice Membership/);
+  assert.doesNotMatch(english, /Private Mentoring|Corporate Programmes/);
+  assert.match(spanish, /Círculo de dominio/);
+  assert.match(spanish, /membresía de práctica para antiguos alumnos/i);
+  assert.doesNotMatch(spanish, /Mentoría privada|Programas corporativos/);
+});
+
 test("final CTA keeps Free primary, WhatsApp secondary and full journey available", () => {
   const finalCta = section(renderHome({ language: "en" }), "final-cta");
   const expectedWhatsApp = encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
