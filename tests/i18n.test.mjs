@@ -23,6 +23,13 @@ test("core conversion copy has natural Spanish", () => {
   );
 });
 
+test("testimonial expansion labels have English and Spanish translations", () => {
+  assert.equal(t("home.testimonials.readMore", "en"), "READ MORE");
+  assert.equal(t("home.testimonials.readLess", "en"), "READ LESS");
+  assert.equal(t("home.testimonials.readMore", "es"), "LEER MÁS");
+  assert.equal(t("home.testimonials.readLess", "es"), "LEER MENOS");
+});
+
 test("language storage defaults safely and accepts only supported languages", () => {
   assert.equal(getLanguage(), "en");
   assert.equal(getLanguage({ getItem: () => "es" }), "es");

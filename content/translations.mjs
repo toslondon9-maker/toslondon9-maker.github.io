@@ -245,6 +245,8 @@ const translations = deepFreeze({
   "home.whyTariq.readMore": { en: "Read more", es: "Leer más" },
   "home.whyTariq.readLess": { en: "Read less", es: "Leer menos" },
   "home.whyTariq.cta": { en: "Meet Tariq", es: "Conoce a Tariq" },
+  "home.testimonials.readMore": { en: "READ MORE", es: "LEER MÁS" },
+  "home.testimonials.readLess": { en: "READ LESS", es: "LEER MENOS" },
   "home.offers.eyebrow": { en: "CHOOSE YOUR STARTING POINT", es: "ELIGE TU PUNTO DE PARTIDA" },
   "home.offers.title": { en: "Begin with experience, then go deeper when ready.", es: "Empieza con la experiencia y profundiza cuando estés preparado." },
   "home.offers.intro": { en: "Choose the level of support that fits where you are today: begin freely, build a foundation with guidance or take the complete journey.", es: "Elige el nivel de apoyo que encaja contigo hoy: empieza gratis, construye una base con guía o recorre el programa completo." },

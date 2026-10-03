@@ -70,13 +70,16 @@ function renderWhyTariq(language) {
   return `<section class="homeSection homeWhyTariq" data-home-section="why-tariq"><div class="homeSection__inner homeWhyTariq__inner"><div>${copy("home.whyTariq.eyebrow", language, "p", "eyebrow")}${copy("home.whyTariq.title", language, "h2")}</div><div class="homeWhyTariq__copy">${visible}<details class="homeWhyTariq__details"><summary><span class="homeWhyTariq__readMore" data-i18n="home.whyTariq.readMore">${escapeHtml(t("home.whyTariq.readMore", language))}</span><span class="homeWhyTariq__readLess" data-i18n="home.whyTariq.readLess">${escapeHtml(t("home.whyTariq.readLess", language))}</span></summary>${hidden}</details><a class="button--text" href="${siteData.routes.aboutTariq}" data-i18n="home.whyTariq.cta">${escapeHtml(t("home.whyTariq.cta", language))}</a></div></div></section>`;
 }
 
-function renderTestimonials() {
-  const cards = homeContent.testimonials.map((testimonial) => {
-    const quote = testimonial.quoteParagraphs
-      ? testimonial.quoteParagraphs.map((paragraph) => `<p class="homeTestimonials__quoteParagraph">${escapeHtml(paragraph)}</p>`).join("")
-      : `<p class="homeTestimonials__quoteParagraph">${escapeHtml(testimonial.quote)}</p>`;
+function renderTestimonials(language) {
+  const cards = homeContent.testimonials.map((testimonial, index) => {
+    const paragraphs = testimonial.quoteParagraphs ?? [testimonial.quote];
+    const firstParagraph = `<p class="homeTestimonials__quoteParagraph">${escapeHtml(paragraphs[0])}</p>`;
+    const remainingParagraphs = paragraphs.slice(1).map((paragraph) => `<p class="homeTestimonials__quoteParagraph">${escapeHtml(paragraph)}</p>`).join("");
+    const detailsId = `home-testimonial-${index + 1}-more`;
+    const contentId = `home-testimonial-${index + 1}-content`;
+    const more = `<details class="homeTestimonials__more" id="${detailsId}"><summary aria-controls="${contentId}" aria-expanded="false"><span class="homeTestimonials__readMore" data-i18n="home.testimonials.readMore">${escapeHtml(t("home.testimonials.readMore", language))}</span><span class="homeTestimonials__readLess" data-i18n="home.testimonials.readLess">${escapeHtml(t("home.testimonials.readLess", language))}</span></summary><div id="${contentId}" class="homeTestimonials__moreContent">${remainingParagraphs}</div></details>`;
     const disclosure = testimonial.disclosure ? `<p class="homeTestimonials__disclosure">${escapeHtml(testimonial.disclosure)}</p>` : "";
-    return `<figure class="homeTestimonials__card"><blockquote>${quote}</blockquote>${disclosure}<figcaption><strong>${escapeHtml(testimonial.name)}</strong><span>${escapeHtml(testimonial.location)}</span></figcaption></figure>`;
+    return `<figure class="homeTestimonials__card"><blockquote>${firstParagraph}${more}</blockquote>${disclosure}<figcaption><strong>${escapeHtml(testimonial.name)}</strong><span>${escapeHtml(testimonial.location)}</span></figcaption></figure>`;
   }).join("");
   return `<section class="homeSection homeTestimonials" data-home-section="testimonials"><div class="homeSection__inner"><p class="eyebrow">GENUINE STUDENT EXPERIENCES</p><h2>What students say about the journey</h2><div class="homeTestimonials__grid">${cards}</div></div></section>`;
 }
@@ -91,7 +94,7 @@ function renderFinalCta(language) {
 }
 
 function renderHomeBody({ language = "en" } = {}) {
-  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderSoundtrack(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials()}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
+  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderSoundtrack(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {
@@ -107,6 +110,6 @@ export function homePage(data = siteData, language = "en") {
     titleKey: "route.home.metaTitle",
     descriptionKey: "route.home.metaDescription",
     body: renderHome({ language }),
-    scripts: ["/assets/home-soundtrack.mjs"],
+    scripts: ["/assets/home-soundtrack.mjs", "/assets/home-testimonials.mjs"],
   };
 }

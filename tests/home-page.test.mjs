@@ -67,7 +67,7 @@ test("homepage exposes a deliberately loaded, accessible licensed soundtrack", a
   assert.match(soundtrack, /Content ID Registered/);
   assert.match(soundtrack, /BackgroundMusicLab/);
   assert.match(html, /href="https:\/\/pixabay\.com\/music\/main-title-inspirational-cinematic-173147\//);
-  assert.deepEqual(homePage(siteData, "en").scripts, ["/assets/home-soundtrack.mjs"]);
+  assert.deepEqual(homePage(siteData, "en").scripts, ["/assets/home-soundtrack.mjs", "/assets/home-testimonials.mjs"]);
   assert.doesNotMatch(runtime, /autoplay/);
   assert.match(runtime, /audio\.src\s*=\s*source/);
   assert.match(build, /collectFiles\(path\.join\(repositoryRoot, "audio"\), "audio"\)/);
@@ -163,6 +163,45 @@ test("homepage retains existing testimonials and selected insights", () => {
   assert.ok((insights.match(/class="insightCard|class="insightsPreview__card/g) ?? []).length <= 3);
   assert.doesNotMatch(insights, /insightsPreview__meta|insightsPreview__date|\/downloads\/|download/);
   assert.match(insights, /VIEW ALL INSIGHTS|VIEW ALL INSIGHTS &amp; GUIDES/);
+});
+
+test("homepage testimonials disclose remaining paragraphs accessibly", () => {
+  const english = section(renderHome({ language: "en" }), "testimonials");
+  const spanish = section(renderHome({ language: "es" }), "testimonials");
+  assert.equal((english.match(/<details class="homeTestimonials__more"/g) ?? []).length, 3);
+  assert.equal((english.match(/data-i18n="home\.testimonials\.readMore"/g) ?? []).length, 3);
+  assert.equal((english.match(/data-i18n="home\.testimonials\.readLess"/g) ?? []).length, 3);
+  assert.equal((english.match(/aria-controls="home-testimonial-[^"]+"/g) ?? []).length, 3);
+  assert.equal((english.match(/id="home-testimonial-[^"]+-content"/g) ?? []).length, 3);
+  assert.doesNotMatch(english, /<details class="homeTestimonials__more"[^>]*open/);
+  assert.match(english, /READ MORE/);
+  assert.match(english, /READ LESS/);
+  assert.match(spanish, /LEER MÁS/);
+  assert.match(spanish, /LEER MENOS/);
+  for (const paragraph of [
+    "I’ve tried several forms of personal development",
+    "Tariq brings real passion to helping people understand the material",
+    "I valued the experience enough to recommend Tariq’s Mastery Circle",
+    "Before I started working with Tariq, I felt stuck",
+    "Tariq helped me understand the Master Key System one chapter at a time",
+    "I started to notice my thoughts and habits more",
+    "Before I began working with Tariq, I had achieved a great deal professionally",
+    "What impressed me was Tariq’s thoughtful, chapter-by-chapter guidance",
+    "Over time, I became more aware of the thoughts I was repeating",
+  ]) assert.match(english, new RegExp(paragraph.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+});
+
+test("testimonial disclosure runtime and styling preserve keyboard and responsive access", async () => {
+  const runtime = await readFile("assets/home-testimonials.mjs", "utf8");
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(runtime, /addEventListener\("toggle"/);
+  assert.match(runtime, /setAttribute\("aria-expanded", String\(disclosure\.open\)\)/);
+  assert.match(css, /\.homeTestimonials__more summary[\s\S]*?background: var\(--night\)/);
+  assert.match(css, /\.homeTestimonials__more summary:focus-visible[\s\S]*?outline:/);
+  assert.match(css, /\.homeTestimonials__more\[open\] \.homeTestimonials__readLess/);
+  assert.match(css, /\.homeTestimonials__more\[open\] \.homeTestimonials__readMore/);
+  assert.match(css, /\.homeTestimonials__card\s*\{[\s\S]*?min-width:\s*0/);
+  assert.match(css, /\.homeTestimonials__more summary\s*\{[\s\S]*?max-width:\s*100%/);
 });
 
 test("offers use the exact canonical commercial destinations", () => {
