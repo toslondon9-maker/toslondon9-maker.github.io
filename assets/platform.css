@@ -627,6 +627,18 @@ main > article {
 @media (max-width: 900px) { .resourcesQuotes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .resourcesQuotes__wallHeader { display: block; } .resourcesQuotes__filters { justify-content: flex-start; margin-top: 1rem; } }
 @media (max-width: 640px) { .resourcesQuotes__random { grid-template-columns: 1fr; } .resourcesQuotes__randomActions { justify-content: flex-start; } .resourcesQuotes__grid { grid-template-columns: 1fr; } .resourcesQuotes__feature blockquote { font-size: 1.25rem; } }
 .resourcesPage__audio { margin-top: 2.5rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid rgba(190,148,73,.55); border-radius: 20px; background: var(--cream, #f7f0e2); }
+.homeSoundtrack { width: min(100% - (2 * var(--space-gutter)), var(--content-max)); margin: var(--space-section) auto; padding: clamp(1.25rem, 3vw, 2rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .85fr); gap: clamp(1.25rem, 4vw, 3rem); align-items: center; border: 1px solid var(--gold); border-radius: var(--radius-card); background: var(--paper); box-shadow: var(--shadow-card); }
+.homeSoundtrack__copy, .homeSoundtrack__player { min-width: 0; }
+.homeSoundtrack__copy h2 { margin-top: 0; color: var(--night); }
+.homeSoundtrack__copy > p:not(.eyebrow), .homeSoundtrack__credit, .homeSoundtrack__status { color: var(--muted); line-height: 1.6; }
+.homeSoundtrack__credit { margin: 1rem 0 0; font-size: .82rem; }
+.homeSoundtrack__credit a { color: var(--navy); text-underline-offset: .2em; }
+.homeSoundtrack__credit span { color: var(--gold-dark, #85611f); font-weight: 700; }
+.homeSoundtrack__player audio { display: block; width: 100%; max-width: 100%; }
+.homeSoundtrack__controls { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: .85rem; }
+.homeSoundtrack__controls button { min-width: 5rem; }
+.homeSoundtrack__status { min-height: 1.5em; margin: .7rem 0 0; font-size: .88rem; }
+@media (max-width: 760px) { .homeSoundtrack { grid-template-columns: 1fr; width: min(100% - 1.25rem, var(--content-max)); } }
 .resourcesPage__audio h2, .resourcesPage__affirmations h2 { color: var(--navy, #10243b); margin-top: 0; }
 .resourcesPage__audioIntro { max-width: 46rem; }
 .resourcesPage__audioGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.75rem; }

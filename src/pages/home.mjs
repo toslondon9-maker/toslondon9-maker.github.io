@@ -32,6 +32,11 @@ function renderWelcome(language) {
   return `<section class="homeVideo homeWelcome" data-home-section="welcome" aria-labelledby="home-video-title"><div class="homeVideo__copy">${copy("home.video.eyebrow", language, "p", "eyebrow")}${copy("home.video.title", language, "h2")}${copy("home.video.body", language, "p", "homeVideo__body")}</div><div class="homeWelcome__visual"><div class="homeWelcome__imagePair"><img class="homeWelcome__secretLogo" src="/images/secret-mark-transparent.png" width="122" height="139" loading="lazy" decoding="async" alt="The Secret logo"><div class="homeVideo__portrait homeWelcome__portrait"><img src="${homeContent.welcomeImage}" width="358" height="418" loading="lazy" decoding="async" alt="${escapeHtml(t("home.origins.alt", language))}" data-i18n-alt="home.origins.alt"></div></div><div class="homeWelcome__panel"><strong data-i18n="home.video.panelLabel">A welcome from Tariq</strong>${copy("home.video.panelBody", language, "p")}</div></div></section>`;
 }
 
+function renderSoundtrack(language) {
+  const label = (key) => escapeHtml(t(`home.soundtrack.${key}`, language));
+  return `<section class="homeSoundtrack" aria-labelledby="home-soundtrack-title"><div class="homeSoundtrack__copy"><p class="eyebrow" data-i18n="home.soundtrack.eyebrow">${label("eyebrow")}</p><h2 id="home-soundtrack-title" data-i18n="home.soundtrack.title">${label("title")}</h2><p data-i18n="home.soundtrack.body">${label("body")}</p><p class="homeSoundtrack__credit">Music by <strong>BackgroundMusicLab</strong> · Pixabay · <span>Content ID Registered</span>. <a href="https://pixabay.com/music/main-title-inspirational-cinematic-173147/" target="_blank" rel="noopener noreferrer">Source and licence</a></p></div><div class="homeSoundtrack__player"><audio id="home-soundtrack-audio" controls preload="none" data-audio-src="/audio/home/inspirational-cinematic.mp3" aria-label="${label("title")}">${label("error")}</audio><div class="homeSoundtrack__controls" role="group" aria-label="${label("title")}"><button class="button--primary" type="button" data-home-audio-play data-label-play="${label("play")}" data-label-pause="${label("pause")}" data-status-ready="${label("ready")}" data-status-playing="${label("playing")}" data-status-paused="${label("paused")}" data-status-stopped="${label("stopped")}" data-status-error="${label("error")}" aria-controls="home-soundtrack-audio" aria-label="${label("play")}">${label("play")}</button><button class="button--secondary" type="button" data-home-audio-stop aria-controls="home-soundtrack-audio" aria-label="${label("stop")}">${label("stop")}</button><button class="button--secondary" type="button" data-home-audio-mute data-label-mute="${label("mute")}" data-label-unmute="${label("unmute")}" aria-controls="home-soundtrack-audio" aria-pressed="false" aria-label="${label("mute")}">${label("mute")}</button></div><p class="homeSoundtrack__status" data-home-audio-status role="status" aria-live="polite">${label("ready")}</p></div></section>`;
+}
+
 function renderFreeExperience(language) {
   const days = homeContent.tasterDays.map((day) => `<li><span aria-hidden="true">${String(day).padStart(2, "0")}</span><span data-i18n="home.taster.day${day}">${escapeHtml(t(`home.taster.day${day}`, language))}</span></li>`).join("");
   const facts = ["time", "workbook", "online", "ai", "noPurchase"].map((key) => `<li data-i18n="home.free.${key}">${escapeHtml(t(`home.free.${key}`, language))}</li>`).join("");
@@ -86,7 +91,7 @@ function renderFinalCta(language) {
 }
 
 function renderHomeBody({ language = "en" } = {}) {
-  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials()}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
+  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderSoundtrack(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials()}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {
@@ -102,6 +107,6 @@ export function homePage(data = siteData, language = "en") {
     titleKey: "route.home.metaTitle",
     descriptionKey: "route.home.metaDescription",
     body: renderHome({ language }),
-    scripts: [],
+    scripts: ["/assets/home-soundtrack.mjs"],
   };
 }

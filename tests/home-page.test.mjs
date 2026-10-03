@@ -53,6 +53,27 @@ test("homepage keeps an intentional personal welcome without fake video", () => 
   assert.doesNotMatch(welcome, /affiliated|endorsed|partnership/i);
 });
 
+test("homepage exposes a deliberately loaded, accessible licensed soundtrack", async () => {
+  const html = renderHome({ language: "en" });
+  const soundtrack = html.match(/<section class="homeSoundtrack"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const runtime = await readFile("assets/home-soundtrack.mjs", "utf8").catch(() => "");
+  const build = await readFile("tools/build-site.mjs", "utf8");
+  const track = await readFile("audio/home/inspirational-cinematic.mp3");
+  assert.match(soundtrack, /class="homeSoundtrack"/);
+  assert.match(soundtrack, /data-home-audio-play/);
+  assert.match(soundtrack, /data-home-audio-stop/);
+  assert.match(soundtrack, /data-home-audio-mute/);
+  assert.match(soundtrack, /data-audio-src="\/audio\/home\/inspirational-cinematic\.mp3"/);
+  assert.match(soundtrack, /Content ID Registered/);
+  assert.match(soundtrack, /BackgroundMusicLab/);
+  assert.match(html, /href="https:\/\/pixabay\.com\/music\/main-title-inspirational-cinematic-173147\//);
+  assert.deepEqual(homePage(siteData, "en").scripts, ["/assets/home-soundtrack.mjs"]);
+  assert.doesNotMatch(runtime, /autoplay/);
+  assert.match(runtime, /audio\.src\s*=\s*source/);
+  assert.match(build, /collectFiles\(path\.join\(repositoryRoot, "audio"\), "audio"\)/);
+  assert.ok(track.length > 100000);
+});
+
 test("homepage hero keeps the primary seven-day CTA before secondary actions", () => {
   const hero = section(renderHome({ language: "en" }), "hero");
   assert.match(hero, /class="button--primary[^>]*href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
