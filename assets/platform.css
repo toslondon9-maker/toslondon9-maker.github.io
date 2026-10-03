@@ -588,6 +588,16 @@ main > article {
 }
 
 .resourcesPage { max-width: 1080px; margin: 0 auto; padding: 4rem 1.25rem 5rem; }
+.resourcesPage--scrollField { position: relative; isolation: isolate; overflow: hidden; }
+.resourcesPage--scrollField > :not(.resourcesScrollField) { position: relative; z-index: 1; }
+.resourcesScrollField { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.resourcesScrollField span { position: absolute; color: var(--gold, #be9449); font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.2rem, 3.5vw, 3rem); font-style: italic; font-weight: 700; letter-spacing: .04em; opacity: .075; transform: translate3d(0, 0, 0); will-change: transform; white-space: nowrap; }
+.resourcesScrollField span:nth-child(1) { top: 8%; left: 2%; }
+.resourcesScrollField span:nth-child(2) { top: 25%; right: 1%; }
+.resourcesScrollField span:nth-child(3) { top: 43%; left: 5%; }
+.resourcesScrollField span:nth-child(4) { top: 61%; right: 7%; }
+.resourcesScrollField span:nth-child(5) { top: 78%; left: 1%; }
+.resourcesScrollField span:nth-child(6) { top: 91%; right: 4%; }
 .resourcesPage__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
 .resourcesPage__group { border: 1px solid rgba(190,148,73,.45); border-radius: 16px; padding: 1.5rem; background: rgba(255,255,255,.55); }
 .resourcesPage__group h2 { color: var(--navy, #10243b); letter-spacing: .12em; font-size: 1rem; margin: 0 0 .5rem; }
@@ -655,6 +665,8 @@ main > article {
 .resourcesPage__affirmations h2 { color: var(--cream, #f7f0e2); }
 .resourcesPage__affirmations p { color: rgba(247,240,226,.82); margin-bottom: 1rem; }
 @media (max-width: 700px) { .resourcesPage { padding: 3rem 1rem 4rem; } .resourcesPage__grid { grid-template-columns: 1fr; } .resourcesPage__links { flex-direction: column; } }
+@media (max-width: 700px) { .resourcesScrollField span { font-size: 1.05rem; opacity: .06; } .resourcesScrollField span:nth-child(even) { right: -1.5rem; } .resourcesScrollField span:nth-child(odd) { left: -1rem; } }
+@media (prefers-reduced-motion: reduce) { .resourcesScrollField span { transform: none !important; transition: none !important; } }
 @media (max-width: 700px) { .resourcesPage__audioGrid { grid-template-columns: 1fr; } .resourcesPage__audio { padding: 1.2rem; } }
 @media (max-width: 700px) { .resourcesPage__audioCard--external { align-items: flex-start; flex-direction: column; } .resourcesPage__audioCard--external .button--secondary { width: 100%; text-align: center; } }
 .insightArticle__links a.button--primary { color: var(--night); }

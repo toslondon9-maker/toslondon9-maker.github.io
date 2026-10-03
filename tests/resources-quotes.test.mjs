@@ -30,7 +30,7 @@ test("Resources renders the accessible Haanel quote experience without removing 
   assert.match(page.body, /Explore the 24-week Master Key curriculum/);
   assert.match(page.body, /href="\/resources\/audio\/"/);
   assert.equal((page.body.match(/data-haanel-quote=/g) ?? []).length, haanelQuotes.length);
-  assert.deepEqual(page.scripts, ["/assets/resources-quotes.mjs"]);
+  assert.deepEqual(page.scripts, ["/assets/resources-quotes.mjs", "/assets/resources-scroll-field.mjs"]);
 });
 
 test("Spanish Resources keeps controls translated and identifies original quote wording", () => {
@@ -38,4 +38,15 @@ test("Spanish Resources keeps controls translated and identifies original quote 
   assert.match(page.body, /Dame un pensamiento/);
   assert.match(page.body, /redacción original en inglés/);
   assert.match(page.body, /Reflexión:/);
+});
+
+test("Resources adds a scoped, reduced-motion-aware reactive quote field", async () => {
+  const page = resourcesPage(siteData, "en");
+  const runtime = await import("node:fs/promises").then(({ readFile }) => readFile("assets/resources-scroll-field.mjs", "utf8")).catch(() => "");
+  assert.match(page.body, /resourcesScrollField/);
+  for (const phrase of ["Thought", "Purpose", "Concentration", "Action", "Inner Power", "Habit"]) assert.match(page.body, new RegExp(phrase));
+  assert.equal(page.scripts.includes("/assets/resources-scroll-field.mjs"), true);
+  assert.match(runtime, /prefers-reduced-motion/);
+  assert.match(runtime, /requestAnimationFrame/);
+  assert.match(runtime, /resourcesScrollField/);
 });

@@ -6,6 +6,11 @@ import { renderHaanelQuoteExperience } from "../resources-quotes.mjs";
 const esc = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 const allLessonNumbers = Object.freeze(Array.from({ length: 24 }, (_, index) => index + 1));
 const affirmationsFile = "The Master Key System Affirmations For Success And Prosperity.mp3";
+const scrollFieldPhrases = ["Thought", "Purpose", "Concentration", "Action", "Inner Power", "Habit"];
+
+function renderScrollField() {
+  return `<div class="resourcesScrollField" aria-hidden="true">${scrollFieldPhrases.map((phrase) => `<span>${phrase}</span>`).join("")}</div>`;
+}
 
 function audioCard(number, language) {
   const chapter = aiMentorChapters[number - 1];
@@ -32,5 +37,5 @@ export function resourcesPage(data = siteData, language = "en") {
   ];
   const cards = groups.map(([title, intro, links, className = ""]) => `<section class="resourcesPage__group${className ? ` ${className}` : ""}"><h2>${title}</h2><p>${intro}</p><div class="resourcesPage__links">${links}</div></section>`).join("");
   const earlyCta = `<aside class="resourcesPage__earlyCta" aria-label="${esc(t("resources.startPrompt", language))}"><p data-i18n="resources.startPrompt">${esc(t("resources.startPrompt", language))}</p><a class="button--primary" href="${data.routes.startFree}" data-i18n="resources.startCta">${esc(t("resources.startCta", language))}</a></aside>`;
-  return { route: data.routes.resources, language, title: t("route.resources.metaTitle", language), description: t("route.resources.metaDescription", language), titleKey: "route.resources.metaTitle", descriptionKey: "route.resources.metaDescription", body: `<main><article class="resourcesPage"><p class="eyebrow">UNLEASH YOUR POWER</p><h1>${esc(t("route.resources.heading", language))}</h1><p class="routeShell__purpose">${esc(t("route.resources.purpose", language))}</p>${earlyCta}${renderHaanelQuoteExperience(data, language)}<div class="resourcesPage__grid">${cards}</div><details class="resourcesPage__optional"><summary>Optional: 3-Day Word Audit</summary><p>This optional resource is currently being prepared. 7 Days to Change the Way You Use Your Mind remains available above.</p></details></article></main>`, scripts: ["/assets/resources-quotes.mjs"] };
+  return { route: data.routes.resources, language, title: t("route.resources.metaTitle", language), description: t("route.resources.metaDescription", language), titleKey: "route.resources.metaTitle", descriptionKey: "route.resources.metaDescription", body: `<main><article class="resourcesPage resourcesPage--scrollField">${renderScrollField()}<p class="eyebrow">UNLEASH YOUR POWER</p><h1>${esc(t("route.resources.heading", language))}</h1><p class="routeShell__purpose">${esc(t("route.resources.purpose", language))}</p>${earlyCta}${renderHaanelQuoteExperience(data, language)}<div class="resourcesPage__grid">${cards}</div><details class="resourcesPage__optional"><summary>Optional: 3-Day Word Audit</summary><p>This optional resource is currently being prepared. 7 Days to Change the Way You Use Your Mind remains available above.</p></details></article></main>`, scripts: ["/assets/resources-quotes.mjs", "/assets/resources-scroll-field.mjs"] };
 }
