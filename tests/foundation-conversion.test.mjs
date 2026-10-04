@@ -10,13 +10,13 @@ const translationExpectations = {
   "conversion.next.step1Title": ["START FREE", "EMPIEZA GRATIS"],
   "conversion.next.step1Body": ["Experience 7 Days to Change the Way You Use Your Mind through guided Master Key System study, reflection and practical exercises.", "Vive 7 días para cambiar la forma en que usas tu mente mediante el estudio guiado del Sistema de la Llave Maestra, la reflexión y ejercicios prácticos."],
   "conversion.next.step2Title": ["BUILD YOUR FOUNDATION", "CONSTRUYE TUS FUNDAMENTOS"],
-  "conversion.next.step2Body": ["If the journey feels right for you, continue with Foundation for £97 / €114: four progressive lessons across four weeks, two 45-minute Zoom coaching calls each week, eight calls total, workbook and online lesson access, and WhatsApp support.", "Si sientes que este camino es adecuado para ti, continúa con Fundamentos por £97 / €114: cuatro lecciones progresivas durante cuatro semanas, dos llamadas de coaching por Zoom de 45 minutos cada semana, ocho llamadas en total, acceso al cuaderno y a las lecciones online, y apoyo por WhatsApp."],
+  "conversion.next.step2Body": ["If the journey feels right for you, continue with Foundation for £97 / €114: four progressive lessons across four weeks, two private 45-minute Zoom calls each week, eight calls total, workbook and online lessons, and WhatsApp support.", "Si sientes que este camino es adecuado para ti, continúa con Fundamentos por £97 / €114: cuatro lecciones progresivas durante cuatro semanas, dos llamadas privadas de Zoom de 45 minutos cada semana, ocho llamadas en total, cuaderno y lecciones online, y apoyo por WhatsApp."],
   "conversion.next.step3Title": ["GO DEEPER, AT YOUR PACE", "PROFUNDIZA, A TU RITMO"],
   "conversion.next.step3Body": ["Continue through Visualisation, Concentration and Integration & Mastery—or join the complete 24-week journey.", "Continúa con Visualización, Concentración e Integración y dominio, o únete al recorrido completo de 24 semanas."],
   "conversion.next.cta": ["START YOUR 7 DAYS", "EMPIEZA TUS 7 DÍAS"],
   "conversion.foundation.eyebrow": ["YOUR NEXT STEP", "TU SIGUIENTE PASO"],
   "conversion.foundation.heading": ["You completed 7 Days to Change the Way You Use Your Mind.", "Has completado 7 días para cambiar la forma en que usas tu mente."],
-  "conversion.foundation.body": ["If the journey feels right, continue with Foundation for £97 / €114: four progressive lessons across four weeks, two 45-minute Zoom coaching calls each week, eight calls total, workbook and online lesson access, and WhatsApp support.", "Si el recorrido encaja contigo, continúa con Fundamentos por £97 / €114: cuatro lecciones progresivas durante cuatro semanas, dos llamadas de coaching por Zoom de 45 minutos cada semana, ocho llamadas en total, acceso al cuaderno y a las lecciones online, y apoyo por WhatsApp."],
+  "conversion.foundation.body": ["If the journey feels right, continue with Foundation for £97 / €114: four progressive lessons across four weeks, two private 45-minute Zoom calls each week, eight calls total, workbook and online lessons, and WhatsApp support.", "Si el recorrido encaja contigo, continúa con Fundamentos por £97 / €114: cuatro lecciones progresivas durante cuatro semanas, dos llamadas privadas de Zoom de 45 minutos cada semana, ocho llamadas en total, cuaderno y lecciones online, y apoyo por WhatsApp."],
   "conversion.foundation.qualification": ["Individual outcomes depend on your circumstances, participation and consistent practice.", "Los resultados individuales dependen de tus circunstancias, participación y práctica constante."],
   "conversion.foundation.cta": ["CONTINUE TO FOUNDATION — £97 / €114", "CONTINÚA CON FUNDAMENTOS — £97 / €114"],
   "conversion.foundation.secondary": ["KEEP EXPLORING", "SEGUIR EXPLORANDO"],
@@ -31,10 +31,10 @@ test("Foundation summaries keep the approved short offer facts", () => {
   ];
   for (const title of expected) assert.equal(t(`foundation.week${expected.indexOf(title) + 1}`, "en").includes(title), true);
   for (const key of ["home.offers.foundationBody", "coaching.foundation.summary", "conversion.next.step2Body", "conversion.foundation.body"]) {
-    assert.match(t(key, "en"), /(?:four weeks, four progressive lessons|four progressive lessons across four weeks)/i);
-    assert.match(t(key, "en"), /two 45-minute Zoom coaching calls each week/i);
+    assert.match(t(key, "en"), /(?:four weeks of guided study|four weeks, four progressive lessons|four progressive lessons across four weeks)/i);
+    assert.match(t(key, "en"), /two private 45-minute Zoom calls(?: each week)?/i);
     assert.match(t(key, "en"), /eight calls total/i);
-    assert.match(t(key, "en"), /workbook and online lesson access/i);
+    assert.match(t(key, "en"), /workbook and online lessons/i);
     assert.match(t(key, "en"), /WhatsApp support/i);
     assert.doesNotMatch(t(key, "en"), /approximately 45 minutes|approximately 21 hours|approximately 41 hours/i);
   }

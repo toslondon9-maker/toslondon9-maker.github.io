@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { routeRenderers } from "../src/routes.mjs";
+import { t } from "../content/translations.mjs";
 
 test("Foundation route renders the bilingual £97 PayPal offer", () => {
   const page = routeRenderers[siteData.routes.foundation](siteData);
@@ -20,10 +21,10 @@ test("Foundation page presents the confirmed four-week decision path", () => {
   const page = routeRenderers[siteData.routes.foundation](siteData);
   for (const text of [
     "Four weeks to build your practice",
-    "Two 45-minute Zoom coaching calls each week throughout the four-week Foundation stage",
-    "Eight calls total — six hours of live Zoom coaching",
+    "Two private 45-minute Zoom calls each week",
+    "Eight calls total",
     "WhatsApp support between calls",
-    "Workbook and online lesson access",
+    "Workbook and online lessons",
     "Week 1 — One Consciousness – One Power",
     "Week 2 — One Method of Finding the Truth",
     "Week 3 — Thoughts Become Things",
@@ -51,7 +52,19 @@ test("Foundation page leads with a compact canonical facts summary", () => {
   const page = routeRenderers[siteData.routes.foundation](siteData);
   const summary = page.body.match(/<section class="foundationPage__facts"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.ok(summary, "facts summary should be present");
-  for (const text of ["Four weeks", "Four progressive lessons", "Two 45-minute Zoom calls each week", "Eight calls total", "Six hours of live Zoom coaching", "Workbook and online lessons", "WhatsApp support", "21 hours", "14 hours", "41 hours total", "£97"]) assert.ok(summary.includes(text), text);
+  for (const text of ["Four weeks", "Four progressive lessons", "Two private 45-minute Zoom calls each week", "Eight calls total", "Workbook and online lessons", "WhatsApp support", "£97"]) assert.ok(summary.includes(text), text);
+  assert.doesNotMatch(summary, /21 hours|14 hours|41 hours total commitment/);
+});
+
+test("Foundation short commercial copy is approachable and omits the detailed time commitment", () => {
+  for (const key of ["home.offers.foundationBody", "coaching.foundation.summary", "conversion.foundation.body"]) {
+    for (const language of ["en", "es"]) {
+      const value = t(key, language);
+      assert.match(value, /four weeks|Cuatro semanas/i, key);
+      assert.match(value, /45-minute|45 minutos/i, key);
+      assert.doesNotMatch(value, /41 hours|41 horas|41-hour|41 horas de dedicación/i, key);
+    }
+  }
 });
 
 test("Foundation purchase page leads with three values, five benefits and closed detail accordions", () => {

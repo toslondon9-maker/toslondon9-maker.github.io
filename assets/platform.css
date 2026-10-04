@@ -605,6 +605,12 @@ main > article {
 .resourcesQuotes__feature blockquote { max-width: 52rem; margin: 1.5rem 0 1rem; font-family: Georgia, serif; font-size: clamp(1.35rem, 2.8vw, 2.05rem); line-height: 1.45; }
 .resourcesQuotes__feature .resourcesQuotes__source { color: rgba(255,255,255,.78); }
 .resourcesQuotes__feature .button { margin-top: 1rem; }
+.resourcesQuotes__featureActions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.resourcesQuotes__sourceFile,
+.resourcesQuotes__sourceFile:visited,
+.resourcesQuotes__sourceFile:hover,
+.resourcesQuotes__sourceFile:focus,
+.resourcesQuotes__sourceFile:active { color: #fff; -webkit-text-fill-color: #fff; opacity: 1; }
 .resourcesQuotes__originalNote { margin: 1rem 0 0; color: var(--muted, #59616d); font-size: .9rem; }
 .resourcesQuotes__random { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; margin: 2rem 0; padding: 1.5rem; border: 1px solid rgba(190,148,73,.55); border-radius: 18px; background: rgba(255,255,255,.7); }
 .resourcesQuotes__randomQuote { margin: .5rem 0; font-family: Georgia, serif; font-size: 1.25rem; line-height: 1.5; color: var(--navy, #10243b); }

@@ -78,7 +78,7 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const pagePlatformStyleVersion = route === "/referral/"
     ? "20260928-referral-contrast-1"
     : route === "/resources/"
-      ? "20261004-resources-static-1"
+      ? "20261004-resources-source-file-1"
       : platformStyleVersion;
   const renderedBody = addCalendlyCta(route, language, body);
   return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/power-key-mark.png" as="image" type="image/png">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;

@@ -300,9 +300,9 @@ test("homepage Foundation offer uses the shared concise summary", () => {
   }
   assert.match(english, /Four weeks/);
   assert.match(english, /Four progressive lessons/);
-  assert.match(english, /Two 45-minute Zoom coaching calls each week/);
+  assert.match(english, /Two private 45-minute Zoom calls each week/);
   assert.match(english, /Eight calls total/);
-  assert.match(english, /Workbook and online lesson access/);
+  assert.match(english, /Workbook and online lessons/);
   assert.match(english, /WhatsApp support/);
   assert.match(english, /WhatsApp support/);
   assert.match(english, /EXPLORE FOUNDATION — £97/);

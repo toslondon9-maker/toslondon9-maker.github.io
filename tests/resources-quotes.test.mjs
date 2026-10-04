@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resourcesPage } from "../src/pages/resources.mjs";
 import { haanelQuotes, haanelTopics } from "../content/haanel-quotes.mjs";
@@ -73,4 +74,18 @@ test("Resources keeps the source-backed quote wall and controls without decorati
   assert.match(page.body, /data-quote-copy/);
   assert.match(page.body, /data-quote-share/);
   assert.ok((page.body.match(/data-haanel-quote=/g) ?? []).length >= 12);
+});
+
+test("Resources exposes the approved canonical source file with a scoped white button", async () => {
+  const expectedHash = "60d4ac3a56eac45a01e4879c18e67a59bd4b94ac36fda631c32429a3b4f86a43";
+  const pdf = await readFile("downloads/2026-master-key-system.pdf");
+  assert.equal(createHash("sha256").update(pdf).digest("hex"), expectedHash);
+  const css = await readFile("assets/platform.css", "utf8");
+  for (const language of ["en", "es"]) {
+    const page = resourcesPage(siteData, language);
+    assert.match(page.body, /class="resourcesQuotes__sourceFile button button--secondary" href="\/downloads\/2026-master-key-system\.pdf"/);
+    assert.match(page.body, /data-i18n="resources\.quotes\.sourceFile"/);
+  }
+  assert.match(css, /\.resourcesQuotes__sourceFile(?:,|\s)/);
+  assert.match(css, /\.resourcesQuotes__sourceFile[^}]*color:\s*#fff/);
 });
