@@ -7183,6 +7183,18 @@ body {
 .foundationPage__price small{color:var(--muted)}
 .foundationPage__actions{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:2rem}
 .foundationPage__transition{margin:1rem auto 0;color:var(--muted);font-size:.95rem}
+.foundationPage__lifePower{max-width:48rem;margin:1.75rem auto 0;border:1px solid #8f6726;border-radius:.8rem;background:linear-gradient(135deg,#9b7129 0%,#d4aa57 48%,#a4772c 100%);color:var(--paper);box-shadow:inset 0 1px 0 rgb(255 255 255 / 35%),inset 0 -4px 0 rgb(57 35 8 / 28%),0 12px 26px rgb(7 24 40 / 14%);text-align:left}
+.foundationPage__lifePowerDetails{margin:0}
+.foundationPage__lifePowerDetails summary{display:grid;gap:.55rem;padding:1.15rem 1.35rem;cursor:pointer;color:#fffdf8;font-weight:700;list-style-position:inside}
+.foundationPage__lifePowerDetails summary::marker{color:#fffdf8}
+.foundationPage__lifePowerDetails summary:focus-visible{outline:3px solid #fffdf8;outline-offset:-5px;border-radius:.55rem}
+.foundationPage__lifePowerHeading{display:block;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.3rem,2.6vw,1.9rem);line-height:1.2}
+.foundationPage__lifePowerTeaser{display:block;font-size:.98rem;font-weight:500;line-height:1.55}
+.foundationPage__lifePowerToggle{display:block;margin-top:.15rem;color:#fffdf8;font-size:.78rem;letter-spacing:.12em}
+.foundationPage__lifePowerArticle{margin:0 1.35rem 1.35rem;padding:1.1rem 1.15rem;border:1px solid rgb(255 255 255 / 42%);border-radius:.55rem;background:rgb(7 24 40 / 82%);color:#fffdf8;box-shadow:inset 0 1px 0 rgb(255 255 255 / 12%)}
+.foundationPage__lifePowerArticle h3{margin:0;color:#fffdf8;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.1rem,2vw,1.45rem);line-height:1.3}
+.foundationPage__lifePowerArticle p{margin:1rem 0 0;color:#fffdf8;line-height:1.65}
+.foundationPage__lifePowerArticle p:first-of-type{margin-top:1.1rem}
 .foundationPage__section{margin-top:clamp(2.5rem,6vw,4.5rem);padding-top:clamp(1.5rem,3vw,2.5rem);border-top:1px solid rgba(184,140,59,.35)}
 .foundationPage__section h2{margin-bottom:1.1rem;color:var(--navy);font-size:clamp(1.35rem,2.5vw,1.9rem)}
 .foundationPage__tickList,.foundationPage__weeksList,.foundationPage__afterPaymentSteps{display:grid;gap:.7rem;margin:0;padding:0;list-style:none}
@@ -7208,7 +7220,7 @@ body {
 .foundationPage__accordion .foundationPage__accordion{margin-top:.75rem;padding-inline:1rem;border:1px solid rgba(184,140,59,.22)}
 .foundationPage__footerCta{margin-top:clamp(2.5rem,6vw,4.5rem);padding-top:2rem;border-top:1px solid rgba(184,140,59,.35);text-align:center}
 .foundationPage__note{max-width:48rem;margin:1.5rem auto 0;color:var(--muted);font-size:.92rem}
-@media (max-width:640px){.foundationPage__actions>*{width:100%;text-align:center}.foundationPage__price{max-width:none}.foundationPage__section{margin-top:2.5rem}.foundationPage__valueSummary ul{grid-template-columns:minmax(0,1fr);text-align:left}}
+@media (max-width:640px){.foundationPage__actions>*{width:100%;text-align:center}.foundationPage__price{max-width:none}.foundationPage__section{margin-top:2.5rem}.foundationPage__valueSummary ul{grid-template-columns:minmax(0,1fr);text-align:left}.foundationPage__lifePowerDetails summary{padding-inline:1rem}.foundationPage__lifePowerArticle{margin-inline:1rem;padding-inline:.9rem}}
 @media(max-width:900px){.affiliateReward__benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.affiliateReward__examples,.affiliateReward__summary ul{grid-template-columns:1fr}}
 @media(max-width:600px){.affiliateReward__benefits{grid-template-columns:1fr}.affiliateReward__examples article{padding:1.1rem}.affiliateReward__tagline{letter-spacing:.02em}}
 .homeTradition{background:var(--paper)}.homeTradition__ideas{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-top:clamp(1.5rem,3vw,2.5rem);padding-top:1.25rem;border-top:1px solid var(--border)}.homeTradition__ideas h3{margin:0;color:var(--night);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.3rem,2.3vw,1.8rem)}.homeTradition__ideas p{max-width:42rem;margin:0;color:var(--muted);line-height:1.6}.homeTradition__links{margin-top:1.5rem;line-height:1.8}.homeTradition__links a{color:var(--night);font-weight:700;text-decoration:underline;text-underline-offset:.2em}.insightsPreview__card--compact{padding:clamp(1.1rem,2.5vw,1.6rem)}.insightsPreview__card--compact p{margin-bottom:1rem}.insightsPreview__card--compact .button--text{margin-top:auto}

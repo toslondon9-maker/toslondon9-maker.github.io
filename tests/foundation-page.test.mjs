@@ -17,6 +17,25 @@ test("Foundation route renders the bilingual £97 PayPal offer", () => {
   assert.match(spanish.body, /data-i18n="foundation\.cta"/);
 });
 
+test("Foundation purchase page places the closed life-changing power accordion before price and CTA", () => {
+  const page = routeRenderers[siteData.routes.foundation](siteData);
+  const body = page.body;
+  const message = body.match(/<section class="foundationPage__lifePower"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.ok(message, "life-changing power message should be present");
+  assert.equal((message.match(/<details class="foundationPage__lifePowerDetails"/g) ?? []).length, 1);
+  assert.doesNotMatch(message, /<details[^>]+open/);
+  for (const key of [
+    "foundation.lifePower.heading", "foundation.lifePower.teaser", "foundation.lifePower.toggle",
+    "foundation.lifePower.articleTitle", "foundation.lifePower.paragraph1", "foundation.lifePower.paragraph2",
+    "foundation.lifePower.paragraph3", "foundation.lifePower.paragraph4", "foundation.lifePower.paragraph5",
+  ]) assert.match(message, new RegExp(`data-i18n="${key}"`));
+  assert.match(message, /The Life-Changing Power of the Master Key System/);
+  assert.match(message, /Unlock a Richer Life: The Transformative Power of the Master Key System/);
+  assert.ok(body.indexOf('class="foundationPage__lifePower"') < body.indexOf('class="foundationPage__price"'));
+  assert.ok(body.indexOf('class="foundationPage__lifePower"') < body.indexOf('class="foundationPage__actions"'));
+  assert.match(body, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/V5QYXZZS6KQE2"/);
+});
+
 test("Foundation page presents the confirmed four-week decision path", () => {
   const page = routeRenderers[siteData.routes.foundation](siteData);
   for (const text of [
@@ -92,5 +111,7 @@ test("Foundation page keeps the approved structure available in Spanish", () => 
   ]) assert.match(page.body, new RegExp(`data-i18n="${key}"`));
   assert.match(page.body, /Fundamentos/);
   assert.match(page.body, /href="\/refund-policy\/"/);
+  for (const key of ["foundation.lifePower.heading", "foundation.lifePower.teaser", "foundation.lifePower.toggle", "foundation.lifePower.articleTitle", "foundation.lifePower.paragraph1", "foundation.lifePower.paragraph5"]) assert.match(page.body, new RegExp(`data-i18n="${key}"`));
+  assert.match(page.body, /El poder transformador del Master Key System/);
 });
 
