@@ -3,7 +3,7 @@ import { renderStructuredData } from "./structured-data.mjs";
 import { renderCalendlyCta } from "./conversion-components.mjs";
 
 const releaseAssetVersion = "20260909-day7-choices";
-const platformStyleVersion = "20261004-calendly-cta-1";
+const platformStyleVersion = "20261004-helmar-rudolph-page-1";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";

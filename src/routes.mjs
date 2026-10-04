@@ -16,6 +16,7 @@ import { contactPage } from "./pages/contact.mjs";
 import { sessionHubPage } from "./pages/session-hub.mjs";
 import { legalPage } from "./pages/legal.mjs";
 import { mksLineagePage } from "./pages/mks-lineage.mjs";
+import { helmarRudolphOverviewPage, helmarRudolphApproachPage, helmarRudolphVideosPage } from "./pages/helmar-rudolph.mjs";
 import { referralPage } from "./pages/referral.mjs";
 import { faqPage } from "./pages/faq.mjs";
 import { masterKeySystemOnlineCoursePage } from "./pages/master-key-system-online-course.mjs";
@@ -82,6 +83,9 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.coaching]: (data) => coachingPage(data),
   [siteData.routes.masterKeySystem]: (data) => masterKeyCurriculumPage(data),
   [siteData.routes.mksLineage]: (data) => mksLineagePage(data),
+  [siteData.routes.helmarRudolph]: (data, language = "en") => helmarRudolphOverviewPage(data, language),
+  [siteData.routes.helmarRudolphMasterKeySystem]: (data, language = "en") => helmarRudolphApproachPage(data, language),
+  [siteData.routes.helmarRudolphStudyVideos]: (data, language = "en") => helmarRudolphVideosPage(data, language),
   [siteData.routes.resources]: (data) => resourcesPage(data),
   [siteData.routes.resourcesAudio]: (data) => resourcesAudioPage(data),
   [siteData.routes.insightsCourse]: (data) => insightsCoursePage(data),

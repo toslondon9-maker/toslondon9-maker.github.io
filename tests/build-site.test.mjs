@@ -37,7 +37,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
-  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20261004-calendly-cta-1">/);
+  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20261004-helmar-rudolph-page-1">/);
   assert.match(html, /<link rel="preload" href="\/images\/power-key-mark\.png" as="image" type="image\/png">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
@@ -69,6 +69,9 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "master-key-system/index.html",
       "master-key-system-online-course/index.html",
       "mks-lineage/index.html",
+      "helmar-rudolph/index.html",
+      "helmar-rudolph/master-key-system/index.html",
+      "helmar-rudolph/study-videos/index.html",
       "start-free/index.html",
       "foundation/index.html",
       "coaching/index.html",
@@ -130,7 +133,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 46);
+    assert.equal(pageFiles.length, 49);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -271,6 +274,13 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         assert.match(page, /class="foundationPage"/);
         assert.match(page, /data-i18n="foundation\.heading"/);
         assert.match(page, /data-i18n="foundation\.cta"/);
+        continue;
+      }
+
+      if (globalPageFiles[index].startsWith("helmar-rudolph/")) {
+        assert.match(page, /class="mksLineagePage helmarRudolphPage"/);
+        assert.match(page, /data-i18n="route\.helmarRudolph\./);
+        assert.match(page, /href="\/master-key-system\/"/);
         continue;
       }
 

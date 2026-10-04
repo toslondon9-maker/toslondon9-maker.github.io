@@ -988,6 +988,11 @@ main > article {
 .mksLineage__cta h2{margin:.5rem 0 1rem;max-width:none}
 .mksLineage__actions{align-items:center;display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
 .mksLineage__actions a{white-space:nowrap}
+.helmarRudolphPage__links{align-items:center;border-bottom:1px solid rgba(15,35,54,.2);display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;margin:0 0 clamp(2rem,5vw,4rem);padding:0 0 1.25rem}
+.helmarRudolphPage__links a{color:#765214;font-weight:800;line-height:1.4;text-decoration-thickness:1px;text-underline-offset:.25em}
+.helmarRudolphPage__resource{margin-top:1.5rem}
+.helmarRudolphPage__disclaimer{border-top:1px solid rgba(15,35,54,.2);color:var(--muted);font-size:.95rem;line-height:1.65;margin:clamp(2rem,5vw,4rem) 0 0;padding-top:1.25rem}
+.helmarRudolphPage__actions{margin-top:2rem}
 .curriculumLineageLink{align-items:center;border-top:1px solid rgba(15,35,54,.2);display:flex;gap:1rem;justify-content:space-between;margin:3rem auto 0;max-width:70rem;padding-top:1.5rem}
 .curriculumLineageLink span{color:var(--navy);font-size:1rem}
 @media (max-width:700px){
@@ -1000,6 +1005,8 @@ main > article {
   .mksLineageResource a{white-space:normal}
   .mksLineage__actions{align-items:stretch;flex-direction:column}
   .mksLineage__actions a{justify-content:center;text-align:center;width:100%}
+  .helmarRudolphPage__links{align-items:stretch;flex-direction:column}
+  .helmarRudolphPage__links a{display:block}
   .curriculumLineageLink{align-items:flex-start;flex-direction:column}
 }
 
