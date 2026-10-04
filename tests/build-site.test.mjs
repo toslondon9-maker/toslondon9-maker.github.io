@@ -159,7 +159,8 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
 
       if (globalPageFiles[index] === "ai-mentors/index.html") {
         assert.match(page, /data-ai-mentor-prompt/);
-        assert.match(page, /src="\/assets\/ai-mentors\.mjs\?v=20261002-chapter-select-1"/);
+        assert.match(page, /src="\/assets\/ai-mentors\.mjs\?v=20261004-ai-study-companion-1"/);
+        assert.match(page, /platform\.css\?v=20261004-ai-study-companion-1/);
         continue;
       }
 
@@ -374,7 +375,8 @@ test("the committed AI mentor page contains the current client and safe fallback
   assert.match(html, /data-ai-mentor-new-conversation/);
   assert.match(html, /data-ai-mentor-prompt/);
   assert.match(html, /href="https:\/\/chatgpt\.com\/" target="_blank" rel="noopener noreferrer"/);
-  assert.match(html, /src="\/assets\/ai-mentors\.mjs\?v=20261002-chapter-select-1"/);
+  assert.match(html, /src="\/assets\/ai-mentors\.mjs\?v=20261004-ai-study-companion-1"/);
+  assert.match(html, /platform\.css\?v=20261004-ai-study-companion-1/);
 });
 
 test("the public AI mentor build uses the deployed non-secret Worker endpoint", async () => {

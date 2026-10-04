@@ -60,10 +60,38 @@ test("AI Mentor page offers the free journey and canonical Foundation next steps
   assert.match(html, /href="\/foundation\/"[^>]*data-i18n="aiMentor\.cta\.foundation"/);
 });
 
+test("AI Mentor page presents the approved companion journey without changing the study shell", () => {
+  const html = mentorPage();
+
+  assert.match(html, /Understand the Master Key System, one part at a time\./);
+  assert.match(html, /Ask questions in plain English, explore all 24 parts and turn difficult ideas into practical study, reflection and action\./);
+  assert.match(html, /Be among the first to study the complete Master Key System with a dedicated AI companion built for this journey\./);
+  assert.match(html, /href="#ai-mentor-builder"[^>]*data-i18n="aiMentor\.cta\.companion"/);
+  assert.match(html, /id="ai-mentor-builder"/);
+  assert.match(html, /NOT ANOTHER GENERIC CHATBOT/);
+  assert.match(html, /Built to help you understand, practise and keep going\./);
+  for (const label of ["MAKE IT SIMPLE", "MAKE IT PERSONAL", "MAKE IT PRACTICAL"]) assert.match(html, new RegExp(label));
+  assert.match(html, /Be early to this way of studying\./);
+  assert.doesNotMatch(html, /ONE COMPANION ACROSS ALL 24 PARTS\./);
+  assert.doesNotMatch(html, /data-ai-mentor-map-week=/);
+  assert.match(html, /data-ai-mentor-selected-chapter[^>]*role="status"[^>]*aria-live="polite"/);
+});
+
 test("AI Mentor chat shell supplies complete English and Spanish UI translations", () => {
   const keys = [
     "aiMentor.hero.title",
     "aiMentor.hero.intro",
+    "aiMentor.hero.earlyAdopter",
+    "aiMentor.cta.companion",
+    "aiMentor.value.eyebrow",
+    "aiMentor.value.title",
+    "aiMentor.value.intro",
+    "aiMentor.value.simple",
+    "aiMentor.value.personal",
+    "aiMentor.value.practical",
+    "aiMentor.closing.title",
+    "aiMentor.closing.intro",
+    "aiMentor.closing.explore",
     "aiMentor.chat.eyebrow",
     "aiMentor.chat.title",
     "aiMentor.perspective.heading",
@@ -183,6 +211,9 @@ test("AI Mentor presentation uses accessible contrast and responsive chapter gri
   assert.match(css, /\.aiMentorPrompt pre\s*\{[^}]*color:\s*var\(--cream\)/s);
   assert.match(css, /\.aiMentorChapterSelect\s*\{/);
   assert.match(css, /\.aiMentorChapterSelect:focus-visible\s*\{/);
+  assert.match(css, /\.aiMentorHero__layout\s*\{/);
+  assert.doesNotMatch(css, /\.aiMentorChapterMap\s*\{/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.aiMentorPage/s);
 });
 
 test("Resources and the Master Key page link directly to the AI Mentor experience", () => {

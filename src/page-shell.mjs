@@ -19,7 +19,7 @@ function versionReleaseScript(script) {
   if (script === navigationScript) return `${script}?v=20260930-nav-mks-sync-1`;
   if (script === languageScript) return `${script}?v=${releaseAssetVersion}`;
   if (script === analyticsScript) return `${script}?v=20260908-analytics`;
-  if (script === aiMentorScript) return `${script}?v=20261002-chapter-select-1`;
+  if (script === aiMentorScript) return `${script}?v=20261004-ai-study-companion-1`;
   if (script === "/assets/resources-quotes.mjs") return `${script}?v=20261003-commercial-improvements-1`;
   if (script === "/assets/home-testimonials.mjs") return `${script}?v=20261003-testimonial-read-more-1`;
   return script;
@@ -75,8 +75,10 @@ export function renderPage({ route, language, title, description, titleKey, desc
     : `<meta name="robots" content="noindex, nofollow">`;
 
   const structuredDataTag = publicMetadata ? renderStructuredData({ route, title, structuredData }) : "";
-  const pagePlatformStyleVersion = route === "/referral/"
-    ? "20260928-referral-contrast-1"
+  const pagePlatformStyleVersion = route === aiMentorRoute
+    ? "20261004-ai-study-companion-1"
+    : route === "/referral/"
+      ? "20260928-referral-contrast-1"
     : route === "/resources/"
       ? "20261004-resources-source-file-1"
       : platformStyleVersion;
