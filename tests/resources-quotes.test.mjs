@@ -31,7 +31,7 @@ test("Resources renders the accessible Haanel quote experience without removing 
   assert.match(page.body, /Explore the 24-week Master Key curriculum/);
   assert.match(page.body, /href="\/resources\/audio\/"/);
   assert.equal((page.body.match(/data-haanel-quote=/g) ?? []).length, haanelQuotes.length);
-  assert.deepEqual(page.scripts, ["/assets/resources-quotes.mjs", "/assets/resources-scroll-field.mjs"]);
+  assert.deepEqual(page.scripts, ["/assets/resources-quotes.mjs"]);
 });
 
 test("Spanish Resources keeps controls translated and identifies original quote wording", () => {
@@ -41,69 +41,21 @@ test("Spanish Resources keeps controls translated and identifies original quote 
   assert.match(page.body, /Reflexión:/);
 });
 
-test("Resources adds a scoped, reduced-motion-aware reactive quote field", async () => {
+test("Resources is a clean static experience without decorative effect markup or runtime", async () => {
   const page = resourcesPage(siteData, "en");
-  const runtime = await import("node:fs/promises").then(({ readFile }) => readFile("assets/resources-scroll-field.mjs", "utf8")).catch(() => "");
-  assert.match(page.body, /resourcesScrollField/);
-  for (const phrase of ["Thought", "Purpose", "Concentration", "Action", "Inner Power", "Habit"]) assert.match(page.body, new RegExp(phrase));
-  assert.equal(page.scripts.includes("/assets/resources-scroll-field.mjs"), true);
-  assert.match(runtime, /prefers-reduced-motion/);
-  assert.match(runtime, /requestAnimationFrame/);
-  assert.match(runtime, /resourcesScrollField/);
-});
-
-test("Resources adds a noticeable scoped word field and derived light-point portrait", async () => {
-  const page = resourcesPage(siteData, "en");
-  const runtime = await readFile("assets/resources-scroll-field.mjs", "utf8");
   const css = await readFile("assets/platform.css", "utf8");
-  assert.match(page.body, /class="resourcesPortrait"/);
-  assert.match(page.body, /class="resourcesPortrait"[^>]*aria-hidden="true"/);
-  assert.match(page.body, /resources-tariq-light-points\.webp" alt=""/);
-  assert.match(page.body, /class="resourcesScrollField__phrase/);
-  assert.ok((page.body.match(/class="resourcesScrollField__phrase/g) ?? []).length >= 12);
-  assert.match(page.scripts.join(" "), /resources-scroll-field\.mjs/);
-  assert.match(runtime, /pointermove/);
-  assert.match(runtime, /touchmove/);
-  assert.match(runtime, /prefers-reduced-motion/);
-  assert.match(runtime, /requestAnimationFrame/);
-  assert.match(css, /\.resourcesPage--scrollField::before/);
-  assert.match(css, /\.resourcesPortrait\s*\{/);
-  assert.match(css, /\.resourcesScrollField__phrase\s*\{/);
-  assert.match(css, /prefers-reduced-motion/);
-});
-
-test("Resources adds the complete visual effects layer without changing resource destinations", async () => {
-  const page = resourcesPage(siteData, "en");
-  const runtime = await readFile("assets/resources-scroll-field.mjs", "utf8");
-  const css = await readFile("assets/platform.css", "utf8");
-  assert.match(page.body, /resourcesPage--visualEffects/);
-  assert.match(page.body, /resourcesParticleField/);
-  assert.match(page.body, /<canvas[^>]+aria-hidden="true"/);
-  assert.match(page.body, /resourcesLoop/);
-  assert.match(page.body, /AND AGAIN HERE/);
-  assert.match(page.body, /resourcesKeyCta/);
-  assert.match(page.body, /href="\/master-key-system\/"/);
-  assert.match(runtime, /IntersectionObserver/);
-  assert.match(runtime, /scroll-headline/);
-  assert.match(runtime, /canvas\.getContext\("2d"\)/);
-  assert.match(runtime, /Array\.from\(\{ length: 128/);
-  assert.match(runtime, /pointermove/);
-  assert.match(runtime, /touchmove/);
-  assert.match(runtime, /prefers-reduced-motion/);
-  assert.match(runtime, /requestAnimationFrame/);
-  assert.match(css, /resourcesPage--visualEffects/);
-  assert.match(css, /resourcesParticleField/);
-  assert.match(css, /resourcesLoop/);
-  assert.match(css, /resourcesKeyCta/);
-  assert.match(css, /resourcesAtmosphere/);
-  assert.match(css, /resourcesLoopDrift/);
-  assert.match(css, /prefers-reduced-motion/);
-  assert.match(css, /\.resourcesPortraitStage\s*\{/);
-  assert.match(css, /\.resourcesPortrait\s*\{[^}]*z-index:\s*1/);
-  assert.match(css, /\.resourcesPortraitStage\s*\{[^}]*min-height:/);
+  const runtime = await readFile("assets/resources-scroll-field.mjs", "utf8").catch(() => "");
+  assert.doesNotMatch(page.body, /resources(?:ScrollField|ParticleField|Portrait|Loop|KeyCta|visualEffects)/);
+  assert.doesNotMatch(page.body, /resources-tariq-light-points\.webp/);
+  assert.deepEqual(page.scripts, ["/assets/resources-quotes.mjs"]);
+  assert.equal(runtime, "");
+  for (const effectSelector of ["resourcesPage--scrollField", "resourcesPage--visualEffects", "resourcesScrollField", "resourcesParticleField", "resourcesPortrait", "resourcesLoop", "resourcesKeyCta", "resourcesAtmosphere", "resourcesLoopDrift"]) {
+    assert.doesNotMatch(css, new RegExp(`\\.${effectSelector}|${effectSelector}`));
+  }
   assert.doesNotMatch(page.body, /href="undefined"/);
   assert.match(page.body, /href="\/resources\/audio\//);
   assert.match(page.body, /data-quote-filter="thought"/);
+  assert.match(page.body, /Not sure where to start\? Begin with the free 7-Day Experience\./);
 });
 
 test("Resources keeps playback out of the main visual experience", () => {
@@ -113,8 +65,12 @@ test("Resources keeps playback out of the main visual experience", () => {
   assert.equal(page.scripts.some((script) => /audio|soundtrack/i.test(script)), false);
 });
 
-test("Resources reserves a visible portrait stage above the content panels", () => {
+test("Resources keeps the source-backed quote wall and controls without decorative layers", () => {
   const page = resourcesPage(siteData, "en");
-  assert.match(page.body, /class="resourcesPortraitStage"[^>]*>[\s\S]*class="resourcesPortrait"/);
-  assert.match(page.body, /resourcesPortraitStage[\s\S]*resourcesQuotes__feature/);
+  assert.match(page.body, /The Wisdom of Charles F\. Haanel/);
+  assert.match(page.body, /data-quote-filter="all"/);
+  assert.match(page.body, /data-quote-random-button/);
+  assert.match(page.body, /data-quote-copy/);
+  assert.match(page.body, /data-quote-share/);
+  assert.ok((page.body.match(/data-haanel-quote=/g) ?? []).length >= 12);
 });
