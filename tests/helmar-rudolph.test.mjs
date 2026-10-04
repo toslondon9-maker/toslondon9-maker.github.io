@@ -50,9 +50,9 @@ test("the homepage Helmar card points to the canonical overview", () => {
   const html = routeRenderers[siteData.routes.home](siteData).body;
   assert.match(html, /data-i18n="home\.lineage\.helmar\.name"/);
   assert.match(html, /<details class="homeLineage__links"><summary data-i18n="home\.lineage\.helmar\.linksTrigger"[^>]*>WHO IS HELMAR RUDOLPH\?/i);
-  assert.match(html, /href="\/helmar-rudolph\/"[^>]*data-i18n="home\.lineage\.helmar\.linkWho"/);
-  assert.match(html, /href="\/helmar-rudolph\/master-key-system\/"[^>]*data-i18n="home\.lineage\.helmar\.linkApproach"/);
-  assert.match(html, /href="\/helmar-rudolph\/study-videos\/"[^>]*data-i18n="home\.lineage\.helmar\.linkVideos"/);
+  assert.match(html, /href="https:\/\/en\.mrmasterkey\.com\/helmar-rudolph\/"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*data-i18n="home\.lineage\.helmar\.linkWho"/);
+  assert.match(html, /href="https:\/\/en\.mrmasterkey\.com\/master-key-system\/"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*data-i18n="home\.lineage\.helmar\.linkApproach"/);
+  assert.match(html, /href="https:\/\/www\.amazon\.es\/Master-Key-System-Centenary-Higher\/dp\/1456336045"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*data-i18n="home\.lineage\.helmar\.linkBook"/);
   assert.match(html, /href="\/master-key-system\/"[^>]*data-i18n="home\.lineage\.helmar\.linkReturn"/);
   assert.doesNotMatch(html, /details class="homeLineage__links"[^>]*open/);
 });

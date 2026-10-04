@@ -293,7 +293,7 @@ const translations = deepFreeze({
   "home.lineage.helmar.linksTrigger": { en: "WHO IS HELMAR RUDOLPH?", es: "¿QUIÉN ES HELMAR RUDOLPH?" },
   "home.lineage.helmar.linkWho": { en: "WHO IS HELMAR RUDOLPH?", es: "¿QUIÉN ES HELMAR RUDOLPH?" },
   "home.lineage.helmar.linkApproach": { en: "HIS APPROACH TO THE MASTER KEY SYSTEM", es: "SU ENFOQUE DEL MASTER KEY SYSTEM" },
-  "home.lineage.helmar.linkVideos": { en: "HELMAR RUDOLPH STUDY VIDEOS", es: "VÍDEOS DE ESTUDIO DE HELMAR RUDOLPH" },
+  "home.lineage.helmar.linkBook": { en: "HELMAR RUDOLPH BOOK", es: "LIBRO DE HELMAR RUDOLPH" },
   "home.lineage.helmar.linkReturn": { en: "RETURN TO THE MASTER KEY SYSTEM", es: "VOLVER AL MASTER KEY SYSTEM" },
   "home.lineage.tariq.name": { en: "Tariq Saddique", es: "Tariq Saddique" },
   "home.lineage.tariq.role": { en: "Your Guide & Coach", es: "Guía y coaching" },
