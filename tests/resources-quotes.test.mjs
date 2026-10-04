@@ -86,7 +86,7 @@ test("Resources adds the complete visual effects layer without changing resource
   assert.match(runtime, /IntersectionObserver/);
   assert.match(runtime, /scroll-headline/);
   assert.match(runtime, /canvas\.getContext\("2d"\)/);
-  assert.match(runtime, /Array\.from\(\{ length: 72/);
+  assert.match(runtime, /Array\.from\(\{ length: 128/);
   assert.match(runtime, /pointermove/);
   assert.match(runtime, /touchmove/);
   assert.match(runtime, /prefers-reduced-motion/);
@@ -98,7 +98,23 @@ test("Resources adds the complete visual effects layer without changing resource
   assert.match(css, /resourcesAtmosphere/);
   assert.match(css, /resourcesLoopDrift/);
   assert.match(css, /prefers-reduced-motion/);
+  assert.match(css, /\.resourcesPortraitStage\s*\{/);
+  assert.match(css, /\.resourcesPortrait\s*\{[^}]*z-index:\s*1/);
+  assert.match(css, /\.resourcesPortraitStage\s*\{[^}]*min-height:/);
   assert.doesNotMatch(page.body, /href="undefined"/);
   assert.match(page.body, /href="\/resources\/audio\//);
   assert.match(page.body, /data-quote-filter="thought"/);
+});
+
+test("Resources keeps playback out of the main visual experience", () => {
+  const page = resourcesPage(siteData, "en");
+  assert.doesNotMatch(page.body, /<audio\b|<video\b|data-(?:audio|sound|playback)/i);
+  assert.doesNotMatch(page.body, /home-soundtrack|inspirational-cinematic/i);
+  assert.equal(page.scripts.some((script) => /audio|soundtrack/i.test(script)), false);
+});
+
+test("Resources reserves a visible portrait stage above the content panels", () => {
+  const page = resourcesPage(siteData, "en");
+  assert.match(page.body, /class="resourcesPortraitStage"[^>]*>[\s\S]*class="resourcesPortrait"/);
+  assert.match(page.body, /resourcesPortraitStage[\s\S]*resourcesQuotes__feature/);
 });

@@ -31,12 +31,12 @@ if (page && field && phrases.length) {
   let width = 1;
   let height = 1;
   const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-  const particles = Array.from({ length: 72 }, (_, index) => ({
+  const particles = Array.from({ length: 128 }, (_, index) => ({
     x: (index * 47) % 101 / 100,
     y: (index * 83) % 101 / 100,
-    size: 0.8 + (index % 4) * 0.55,
+    size: 0.9 + (index % 5) * 0.62,
     phase: index * 0.71,
-    alpha: 0.12 + (index % 5) * 0.025,
+    alpha: 0.18 + (index % 5) * 0.035,
   }));
 
   const resize = () => {
@@ -59,12 +59,12 @@ if (page && field && phrases.length) {
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
     context.clearRect(0, 0, width, height);
     particles.forEach((particle) => {
-      const drift = reducedMotion?.matches ? 0 : Math.sin(time * 0.00028 + particle.phase) * 3 * (0.3 + currentEnergy);
+      const drift = reducedMotion?.matches ? 0 : Math.sin(time * 0.00028 + particle.phase) * 5 * (0.35 + currentEnergy);
       const x = particle.x * width + currentX * (0.2 + particle.size / 4);
       const y = particle.y * height + currentY * (0.2 + particle.size / 4) + drift;
-      context.fillStyle = `rgba(190, 148, 73, ${particle.alpha + currentEnergy * 0.08})`;
+      context.fillStyle = `rgba(190, 148, 73, ${Math.min(0.72, particle.alpha + currentEnergy * 0.16)})`;
       context.beginPath();
-      context.arc(x, y, particle.size + currentEnergy * 0.5, 0, Math.PI * 2);
+      context.arc(x, y, particle.size + currentEnergy * 0.9, 0, Math.PI * 2);
       context.fill();
     });
   };
@@ -86,8 +86,8 @@ if (page && field && phrases.length) {
     }
     phrases.forEach((phrase, index) => {
       const depth = 0.45 + (index % 5) * 0.12;
-      const driftX = currentX * depth + Math.sin(index * 1.7 + currentEnergy * 4) * currentEnergy * 9;
-      const driftY = currentY * depth + Math.cos(index * 1.2 + currentEnergy * 3) * currentEnergy * 12;
+      const driftX = currentX * depth + Math.sin(index * 1.7 + currentEnergy * 4) * currentEnergy * 16;
+      const driftY = currentY * depth + Math.cos(index * 1.2 + currentEnergy * 3) * currentEnergy * 18;
       phrase.style.transform = `translate3d(${driftX.toFixed(2)}px, ${driftY.toFixed(2)}px, 0)`;
     });
     drawParticles(time);
@@ -95,8 +95,8 @@ if (page && field && phrases.length) {
   };
 
   const activity = (x, y, strength = 0.65) => {
-    targetX = Math.max(-22, Math.min(22, (x / window.innerWidth - 0.5) * 36));
-    targetY = Math.max(-18, Math.min(18, (y / window.innerHeight - 0.5) * 28));
+    targetX = Math.max(-34, Math.min(34, (x / window.innerWidth - 0.5) * 52));
+    targetY = Math.max(-28, Math.min(28, (y / window.innerHeight - 0.5) * 40));
     energy = Math.min(1, Math.max(energy, strength));
   };
 
@@ -109,8 +109,8 @@ if (page && field && phrases.length) {
     window.addEventListener("scroll", () => {
       const delta = window.scrollY - previousY;
       previousY = window.scrollY;
-      targetY = Math.max(-18, Math.min(18, targetY + delta * 0.04));
-      energy = Math.min(1, Math.max(energy, Math.min(1, 0.35 + Math.abs(delta) * 0.012)));
+      targetY = Math.max(-28, Math.min(28, targetY + delta * 0.09));
+      energy = Math.min(1, Math.max(energy, Math.min(1, 0.5 + Math.abs(delta) * 0.018)));
     }, { passive: true });
     window.addEventListener("pointerleave", () => { energy = 0; targetX = 0; targetY = 0; }, { passive: true });
     frame = requestAnimationFrame(render);
