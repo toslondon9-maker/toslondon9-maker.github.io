@@ -16,6 +16,7 @@ export const homeContent = Object.freeze({
       quoteParagraphs: Object.freeze([
         "I’ve tried several forms of personal development, but studying the Master Key System with Tariq is the best personal-development study I’ve come across. What makes it stand out is the way he guides you through the chapters, shares his insight into the ideas and helps you put them into practice.",
         "Tariq brings real passion to helping people understand the material. He connects each chapter to everyday situations and encourages you to keep working with the exercises, reflection and meditation. That regular practice helped me become more aware of my habits and more consistent in applying what I was learning.",
+        "I began by meditating for 15 minutes each day, then slowly increased this to one hour daily over six months while completing the full 24-week programme. Now my mind feels calm and focused, and I visualise a clear goal each morning.",
         "I valued the experience enough to recommend Tariq’s Mastery Circle to four friends, who purchased through my affiliate link. I’m pleased to have shared something I believe can help others, and I’m happy for the affiliate relationship to be disclosed.",
       ]),
       disclosure: "Affiliate relationship disclosed: Paul’s recommendation includes purchases made through his affiliate link.",

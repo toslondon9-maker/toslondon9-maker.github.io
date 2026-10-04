@@ -53,25 +53,12 @@ test("homepage keeps an intentional personal welcome without fake video", () => 
   assert.doesNotMatch(welcome, /affiliated|endorsed|partnership/i);
 });
 
-test("homepage exposes a deliberately loaded, accessible licensed soundtrack", async () => {
+test("homepage does not expose the removed soundtrack or its runtime", async () => {
   const html = renderHome({ language: "en" });
-  const soundtrack = html.match(/<section class="homeSoundtrack"[\s\S]*?<\/section>/)?.[0] ?? "";
-  const runtime = await readFile("assets/home-soundtrack.mjs", "utf8").catch(() => "");
-  const build = await readFile("tools/build-site.mjs", "utf8");
-  const track = await readFile("audio/home/inspirational-cinematic.mp3");
-  assert.match(soundtrack, /class="homeSoundtrack"/);
-  assert.match(soundtrack, /data-home-audio-play/);
-  assert.match(soundtrack, /data-home-audio-stop/);
-  assert.match(soundtrack, /data-home-audio-mute/);
-  assert.match(soundtrack, /data-audio-src="\/audio\/home\/inspirational-cinematic\.mp3"/);
-  assert.match(soundtrack, /Content ID Registered/);
-  assert.match(soundtrack, /BackgroundMusicLab/);
-  assert.match(html, /href="https:\/\/pixabay\.com\/music\/main-title-inspirational-cinematic-173147\//);
-  assert.deepEqual(homePage(siteData, "en").scripts, ["/assets/home-soundtrack.mjs", "/assets/home-testimonials.mjs"]);
-  assert.doesNotMatch(runtime, /autoplay/);
-  assert.match(runtime, /audio\.src\s*=\s*source/);
-  assert.match(build, /collectFiles\(path\.join\(repositoryRoot, "audio"\), "audio"\)/);
-  assert.ok(track.length > 100000);
+  const runtime = await readFile("assets/home-soundtrack.mjs", "utf8").catch(() => null);
+  assert.doesNotMatch(html, /homeSoundtrack|home-soundtrack|data-home-audio|pixabay\.com\/music\/main-title-inspirational-cinematic/);
+  assert.deepEqual(homePage(siteData, "en").scripts, ["/assets/home-testimonials.mjs"]);
+  assert.equal(runtime, null);
 });
 
 test("homepage hero keeps the primary seven-day CTA before secondary actions", () => {
@@ -158,11 +145,23 @@ test("homepage retains existing testimonials and selected insights", () => {
   assert.match(testimonials, /Affiliate relationship disclosed/);
   assert.match(testimonials, /class="homeTestimonials__disclosure"[^>]*>Affiliate relationship disclosed/);
   assert.doesNotMatch(testimonials, /[“”]/);
-  assert.equal((testimonials.match(/class="homeTestimonials__quoteParagraph"/g) ?? []).length, 9);
+  assert.equal((testimonials.match(/class="homeTestimonials__quoteParagraph"/g) ?? []).length, 10);
   assert.equal((testimonials.match(/class="homeTestimonials__card"/g) ?? []).length, 3);
   assert.ok((insights.match(/class="insightCard|class="insightsPreview__card/g) ?? []).length <= 3);
   assert.doesNotMatch(insights, /insightsPreview__meta|insightsPreview__date|\/downloads\/|download/);
   assert.match(insights, /VIEW ALL INSIGHTS|VIEW ALL INSIGHTS &amp; GUIDES/);
+});
+
+test("Paul Best testimonial preserves the exact approved experience and disclosure", () => {
+  const testimonials = section(renderHome({ language: "en" }), "testimonials");
+  for (const paragraph of [
+    "I’ve tried several forms of personal development, but studying the Master Key System with Tariq is the best personal-development study I’ve come across. What makes it stand out is the way he guides you through the chapters, shares his insight into the ideas and helps you put them into practice.",
+    "Tariq brings real passion to helping people understand the material. He connects each chapter to everyday situations and encourages you to keep working with the exercises, reflection and meditation. That regular practice helped me become more aware of my habits and more consistent in applying what I was learning.",
+    "I began by meditating for 15 minutes each day, then slowly increased this to one hour daily over six months while completing the full 24-week programme. Now my mind feels calm and focused, and I visualise a clear goal each morning.",
+    "I valued the experience enough to recommend Tariq’s Mastery Circle to four friends, who purchased through my affiliate link. I’m pleased to have shared something I believe can help others, and I’m happy for the affiliate relationship to be disclosed.",
+  ]) assert.match(testimonials, new RegExp(paragraph.replace(/[.*+?^${}()|[\\]\\]/g, "\\\\$&")));
+  assert.match(testimonials, /Affiliate relationship disclosed: Paul’s recommendation includes purchases made through his affiliate link\./);
+  assert.match(testimonials, /<strong>Paul Best<\/strong><span>UK<\/span>/);
 });
 
 test("homepage testimonials disclose remaining paragraphs accessibly", () => {
