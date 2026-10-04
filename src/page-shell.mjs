@@ -77,6 +77,8 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const structuredDataTag = publicMetadata ? renderStructuredData({ route, title, structuredData }) : "";
   const pagePlatformStyleVersion = route === aiMentorRoute
     ? "20261004-ai-study-companion-1"
+    : route === "/coaching/"
+      ? "20261004-coaching-stage-compact-1"
     : route === "/referral/"
       ? "20260928-referral-contrast-1"
     : route === "/resources/"

@@ -93,6 +93,52 @@ test("coaching keeps the complete purchase clear and the Foundation balance seco
   assert.match(english, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/JW7JRY5GTRTA6"[^>]*>\s*<span data-i18n="coaching\.pricing\.completePurchase">PAY NOW/);
 });
 
+test("coaching stage cards keep their facts compact and expose closed accessible details", () => {
+  const english = renderCoaching({ language: "en", siteData });
+  const spanish = renderCoaching({ language: "es", siteData });
+
+  assert.equal((english.match(/class="coachingPricing__stage card"/g) ?? []).length, 4);
+  const expectedFirstLessonHooks = [
+    "foundation.compact.lessons",
+    "coaching.stage.visualisation.inclusion1",
+    "coaching.stage.concentration.inclusion1",
+    "coaching.stage.mastery.inclusion1",
+  ];
+  for (const [html, learnMoreLabel] of [[english, "LEARN MORE"], [spanish, "MÁS INFORMACIÓN"]]) {
+    const cards = [...html.matchAll(/<article class="coachingPricing__stage card">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
+    assert.equal(cards.length, 4);
+    for (const [index, card] of cards.entries()) {
+      assert.equal((card.match(/<details class="coachingStage__details"/g) ?? []).length, 1);
+      assert.equal((card.match(/<details[^>]+open/g) ?? []).length, 0);
+      assert.match(card, new RegExp(`data-i18n="${expectedFirstLessonHooks[index]}"`));
+      assert.ok(card.indexOf(`data-i18n="${expectedFirstLessonHooks[index]}"`) < card.indexOf('<details class="coachingStage__details"'));
+      assert.doesNotMatch(card.slice(0, card.indexOf('<details class="coachingStage__details"')), /<ul/);
+    }
+    assert.match(html, new RegExp(`<summary[^>]*data-i18n="coaching\\.stage\\.foundation\\.learnMore">${learnMoreLabel}<\\/summary>`));
+    assert.match(html, /data-i18n="coaching\.foundation\.format"/);
+    assert.match(html, /data-i18n="coaching\.foundation\.call"/);
+    assert.match(html, /data-i18n="coaching\.foundation\.whatsapp"/);
+    assert.match(html, /data-i18n="coaching\.foundation\.access"/);
+    assert.match(html, /data-i18n="coaching\.stage\.visualisation\.inclusion2"/);
+    assert.match(html, /data-i18n="coaching\.stage\.concentration\.inclusion2"/);
+    assert.match(html, /data-i18n="coaching\.stage\.mastery\.inclusion2"/);
+  }
+  assert.match(english, /data-i18n="coaching\.stage\.visualisation\.learnMore"/);
+  assert.match(english, /data-i18n="coaching\.stage\.concentration\.learnMore"/);
+  assert.match(english, /data-i18n="coaching\.stage\.mastery\.learnMore"/);
+});
+
+test("coaching call links use the scoped compact bevelled treatment without changing their destination", () => {
+  const html = renderCoaching({ language: "en", siteData });
+  assert.equal((html.match(/coaching-call-button--compact/g) ?? []).length, 1);
+  assert.match(html, /<a class="button--secondary coaching-call-button--compact" href="https:\/\/wa\.me\/34611223345\?text=/);
+  assert.doesNotMatch(html, /<a class="button--primary coaching-call-button--compact"/);
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.coaching-call-button--compact\s*\{[^}]*background:\s*var\(--night\)[^}]*color:\s*#fff/s);
+  assert.match(css, /\.coaching-call-button--compact:hover\s*\{[^}]*transform:\s*translateY\(-2px\)/s);
+  assert.match(css, /\.coaching-call-button--compact:focus-visible\s*\{[^}]*outline:/s);
+});
+
 test("professional services use a two-column desktop grid and one-column mobile grid", () => {
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
   assert.match(css, /\.coachingProfessionalServices__grid\s*\{\s*display:\s*grid;\s*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
