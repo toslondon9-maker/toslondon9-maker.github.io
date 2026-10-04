@@ -82,6 +82,7 @@ const translations = deepFreeze({
   "cta.exploreJourney": { en: "Explore the 24-week journey", es: "Descubre el recorrido de 24 semanas" },
   "cta.bookSession": { en: "Book a session", es: "Reserva una sesión" },
   "cta.bookCall": { en: "BOOK A FREE 15-MINUTE CALL", es: "RESERVAR UNA LLAMADA GRATUITA DE 15 MINUTOS" },
+  "cta.calendlyCall": { en: "BOOK A FREE 15-MINUTE CALL", es: "RESERVAR UNA LLAMADA GRATUITA DE 15 MINUTOS" },
   "cta.foundation": { en: "Explore Foundation", es: "Explora Foundation" },
   "home.cta.whatsappQuestion": { en: "Questions? WhatsApp Tariq", es: "¿Tienes preguntas? Escribe a Tariq por WhatsApp" },
   "foundation.metaTitle": { en: "Foundation — 4-Week Master Key Coaching | Unleash Your Power", es: "Fundamentos — Coaching Master Key de 4 semanas | Unleash Your Power" },

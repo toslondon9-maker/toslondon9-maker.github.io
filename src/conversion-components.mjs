@@ -22,6 +22,13 @@ function localized(key, language) {
 
 const copy = (key, language, tag = "span") => `<${tag} data-i18n="${key}">${localized(key, language)}</${tag}>`;
 
+export const calendlyUrl = "https://calendly.com/tariq-unleashyourpowerwithtariq";
+
+export function renderCalendlyCta({ language = "en", variant = "secondary", className = "" } = {}) {
+  const classes = [`button--${variant}`, "calendlyCta", className].filter(Boolean).join(" ");
+  return `<a class="${classes}" href="${calendlyUrl}" target="_blank" rel="noopener noreferrer" data-i18n="cta.calendlyCall">${localized("cta.calendlyCall", language)}</a>`;
+}
+
 export function renderCompactFoundationOffer({ language = "en", data = canonicalSiteData, ctaKey = "foundation.compact.cta", ctaVariant = "secondary", includeCta = true } = {}) {
   const foundation = data.stages?.find((stage) => stage.id === "foundation");
   if (!foundation) throw new Error("Foundation stage is required");

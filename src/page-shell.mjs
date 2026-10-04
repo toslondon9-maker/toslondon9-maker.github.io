@@ -1,8 +1,9 @@
 import { renderFooter, renderHeader } from "./shared-chrome.mjs";
 import { renderStructuredData } from "./structured-data.mjs";
+import { renderCalendlyCta } from "./conversion-components.mjs";
 
 const releaseAssetVersion = "20260909-day7-choices";
-const platformStyleVersion = "20261003-testimonial-read-more-1";
+const platformStyleVersion = "20261004-calendly-cta-1";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
@@ -31,6 +32,21 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function addCalendlyCta(route, language, body) {
+  if (typeof route !== "string") return body;
+  const cta = `<div class="calendlyCtaSection" data-calendly-cta>${renderCalendlyCta({ language })}</div>`;
+  const insertBefore = (marker) => body.includes(marker) ? body.replace(marker, `${cta}${marker}`) : body;
+  if (route === "/") return insertBefore('<section class="homeSection homeOffers"');
+  if (route === "/foundation/") return insertBefore('<div class="foundationPage__footerCta"');
+  if (route === "/coaching/") return insertBefore('<article class="coachingPricing__complete');
+  if (route === "/about-tariq/") return insertBefore('<section class="certificateSection"');
+  if (route === "/ai-mentors/") return insertBefore('<section class="aiMentorBuilder"');
+  if (route === "/start-free/") return insertBefore('<div data-lead-capture-dashboard');
+  if (route === "/insights/") return insertBefore('<p class="insightsHub__bridge"');
+  if (route.startsWith("/insights/")) return insertBefore('<section class="insightArticle__start"');
+  return body;
 }
 
 export function renderPage({ route, language, title, description, titleKey, descriptionKey, body, styles = [], scripts = [], socialImage, socialImageAlt, structuredData = [] }) {
@@ -64,5 +80,6 @@ export function renderPage({ route, language, title, description, titleKey, desc
     : route === "/resources/"
       ? "20261003-resources-visual-effects-1"
       : platformStyleVersion;
-  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/power-key-mark.png" as="image" type="image/png">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${body}${renderFooter({ route, language })}${scriptTags}</body></html>`;
+  const renderedBody = addCalendlyCta(route, language, body);
+  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/power-key-mark.png" as="image" type="image/png">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;
 }
