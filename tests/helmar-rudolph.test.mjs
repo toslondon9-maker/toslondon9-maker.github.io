@@ -49,5 +49,10 @@ test("Helmar subpages are available in English and Spanish", () => {
 test("the homepage Helmar card points to the canonical overview", () => {
   const html = routeRenderers[siteData.routes.home](siteData).body;
   assert.match(html, /data-i18n="home\.lineage\.helmar\.name"/);
-  assert.match(html, /href="\/helmar-rudolph\/"[^>]*data-i18n="home\.lineage\.helmar\.link"/);
+  assert.match(html, /<details class="homeLineage__links"><summary data-i18n="home\.lineage\.helmar\.linksTrigger"[^>]*>WHO IS HELMAR RUDOLPH\?/i);
+  assert.match(html, /href="\/helmar-rudolph\/"[^>]*data-i18n="home\.lineage\.helmar\.linkWho"/);
+  assert.match(html, /href="\/helmar-rudolph\/master-key-system\/"[^>]*data-i18n="home\.lineage\.helmar\.linkApproach"/);
+  assert.match(html, /href="\/helmar-rudolph\/study-videos\/"[^>]*data-i18n="home\.lineage\.helmar\.linkVideos"/);
+  assert.match(html, /href="\/master-key-system\/"[^>]*data-i18n="home\.lineage\.helmar\.linkReturn"/);
+  assert.doesNotMatch(html, /details class="homeLineage__links"[^>]*open/);
 });
