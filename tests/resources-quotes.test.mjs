@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { resourcesPage } from "../src/pages/resources.mjs";
 import { haanelQuotes, haanelTopics } from "../content/haanel-quotes.mjs";
 import { siteData } from "../content/site-data.mjs";
@@ -49,4 +50,55 @@ test("Resources adds a scoped, reduced-motion-aware reactive quote field", async
   assert.match(runtime, /prefers-reduced-motion/);
   assert.match(runtime, /requestAnimationFrame/);
   assert.match(runtime, /resourcesScrollField/);
+});
+
+test("Resources adds a noticeable scoped word field and derived light-point portrait", async () => {
+  const page = resourcesPage(siteData, "en");
+  const runtime = await readFile("assets/resources-scroll-field.mjs", "utf8");
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(page.body, /class="resourcesPortrait"/);
+  assert.match(page.body, /class="resourcesPortrait"[^>]*aria-hidden="true"/);
+  assert.match(page.body, /resources-tariq-light-points\.webp" alt=""/);
+  assert.match(page.body, /class="resourcesScrollField__phrase/);
+  assert.ok((page.body.match(/class="resourcesScrollField__phrase/g) ?? []).length >= 12);
+  assert.match(page.scripts.join(" "), /resources-scroll-field\.mjs/);
+  assert.match(runtime, /pointermove/);
+  assert.match(runtime, /touchmove/);
+  assert.match(runtime, /prefers-reduced-motion/);
+  assert.match(runtime, /requestAnimationFrame/);
+  assert.match(css, /\.resourcesPage--scrollField::before/);
+  assert.match(css, /\.resourcesPortrait\s*\{/);
+  assert.match(css, /\.resourcesScrollField__phrase\s*\{/);
+  assert.match(css, /prefers-reduced-motion/);
+});
+
+test("Resources adds the complete visual effects layer without changing resource destinations", async () => {
+  const page = resourcesPage(siteData, "en");
+  const runtime = await readFile("assets/resources-scroll-field.mjs", "utf8");
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(page.body, /resourcesPage--visualEffects/);
+  assert.match(page.body, /resourcesParticleField/);
+  assert.match(page.body, /<canvas[^>]+aria-hidden="true"/);
+  assert.match(page.body, /resourcesLoop/);
+  assert.match(page.body, /AND AGAIN HERE/);
+  assert.match(page.body, /resourcesKeyCta/);
+  assert.match(page.body, /href="\/master-key-system\/"/);
+  assert.match(runtime, /IntersectionObserver/);
+  assert.match(runtime, /scroll-headline/);
+  assert.match(runtime, /canvas\.getContext\("2d"\)/);
+  assert.match(runtime, /Array\.from\(\{ length: 72/);
+  assert.match(runtime, /pointermove/);
+  assert.match(runtime, /touchmove/);
+  assert.match(runtime, /prefers-reduced-motion/);
+  assert.match(runtime, /requestAnimationFrame/);
+  assert.match(css, /resourcesPage--visualEffects/);
+  assert.match(css, /resourcesParticleField/);
+  assert.match(css, /resourcesLoop/);
+  assert.match(css, /resourcesKeyCta/);
+  assert.match(css, /resourcesAtmosphere/);
+  assert.match(css, /resourcesLoopDrift/);
+  assert.match(css, /prefers-reduced-motion/);
+  assert.doesNotMatch(page.body, /href="undefined"/);
+  assert.match(page.body, /href="\/resources\/audio\//);
+  assert.match(page.body, /data-quote-filter="thought"/);
 });
