@@ -23,6 +23,7 @@ test("Foundation purchase page places the closed life-changing power accordion b
   const message = body.match(/<section class="foundationPage__lifePower"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.ok(message, "life-changing power message should be present");
   assert.equal((message.match(/<details class="foundationPage__lifePowerDetails"/g) ?? []).length, 1);
+  assert.match(message, /<summary id="foundation-life-power-heading" aria-controls="foundation-life-power-article" aria-expanded="false">/);
   assert.doesNotMatch(message, /<details[^>]+open/);
   for (const key of [
     "foundation.lifePower.heading", "foundation.lifePower.teaser", "foundation.lifePower.toggle",
@@ -34,6 +35,7 @@ test("Foundation purchase page places the closed life-changing power accordion b
   assert.ok(body.indexOf('class="foundationPage__lifePower"') < body.indexOf('class="foundationPage__price"'));
   assert.ok(body.indexOf('class="foundationPage__lifePower"') < body.indexOf('class="foundationPage__actions"'));
   assert.match(body, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/V5QYXZZS6KQE2"/);
+  assert.match(page.scripts.join(" "), /life-power-accordion\.mjs/);
 });
 
 test("Foundation page presents the confirmed four-week decision path", () => {

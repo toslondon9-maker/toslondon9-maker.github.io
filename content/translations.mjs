@@ -220,6 +220,7 @@ const translations = deepFreeze({
   "home.tradition.title": { en: "Where the method comes from—and how it is made practical.", es: "De dónde viene el método y cómo se hace práctico." },
   "home.tradition.intro": { en: "You do not have to take a promise on trust. See where the method comes from, what the wider tradition contributes and how Tariq helps you test the work through your own practice.", es: "No tienes que aceptar ninguna promesa sin comprobarla. Descubre de dónde viene el método, qué aporta la tradición más amplia y cómo Tariq te ayuda a probarlo mediante tu propia práctica." },
   "home.tradition.lineageLink": { en: "Explore the MKS Lineage", es: "Explora el linaje del MKS" },
+  "home.tradition.foundationLink": { en: "Explore Foundation", es: "Explora Foundation" },
   "home.tradition.booksLink": { en: "Explore the MKS books", es: "Explora los libros del MKS" },
   "home.tradition.resourcesLink": { en: "Use the study resources", es: "Usa los recursos de estudio" },
   "home.tradition.methodLink": { en: "Explore the method", es: "Explora el método" },

@@ -57,7 +57,7 @@ test("homepage does not expose the removed soundtrack or its runtime", async () 
   const html = renderHome({ language: "en" });
   const runtime = await readFile("assets/home-soundtrack.mjs", "utf8").catch(() => null);
   assert.doesNotMatch(html, /homeSoundtrack|home-soundtrack|data-home-audio|pixabay\.com\/music\/main-title-inspirational-cinematic/);
-  assert.deepEqual(homePage(siteData, "en").scripts, ["/assets/home-testimonials.mjs"]);
+  assert.deepEqual(homePage(siteData, "en").scripts, ["/assets/home-testimonials.mjs", "/assets/life-power-accordion.mjs"]);
   assert.equal(runtime, null);
 });
 
@@ -82,6 +82,27 @@ test("tradition section combines lineage, context and dedicated links", () => {
   const tradition = section(html, "tradition");
   for (const value of ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique", "The Master Key System", "The Secret", "Think and Grow Rich", "wider personal-development tradition", "not affiliated with or endorsed by", "not a claim of endorsement"]) assert.match(tradition, new RegExp(value, "i"));
   for (const href of [siteData.routes.mksLineage, siteData.routes.getTheBook, siteData.routes.resources, siteData.routes.masterKeySystem]) assert.match(tradition, new RegExp(`href="${href.replaceAll("/", "\\/")}"`));
+});
+
+test("homepage Master Key introduction includes the closed life-power accordion before Foundation link", () => {
+  const html = renderHome({ language: "en" });
+  const tradition = section(html, "tradition");
+  assert.equal((tradition.match(/class="homeTradition__lifePowerDetails"/g) ?? []).length, 1);
+  assert.match(tradition, /<details class="homeTradition__lifePowerDetails">/);
+  assert.match(tradition, /<summary id="home-life-power-heading" aria-controls="home-life-power-article" aria-expanded="false">/);
+  assert.doesNotMatch(tradition, /<details[^>]+open/);
+  assert.match(tradition, /data-i18n="foundation\.lifePower\.heading">The Life-Changing Power of the Master Key System/);
+  assert.match(tradition, /data-i18n="foundation\.lifePower\.teaser">Discover how applying/);
+  assert.match(tradition, /data-i18n="foundation\.lifePower\.articleTitle">Unlock a Richer Life/);
+  for (let index = 1; index <= 5; index += 1) assert.match(tradition, new RegExp(`data-i18n="foundation\\.lifePower\\.paragraph${index}"`));
+  const accordionIndex = tradition.indexOf('class="homeTradition__lifePower"');
+  const foundationIndex = tradition.indexOf(`href="${siteData.routes.foundation}"`);
+  assert.ok(accordionIndex >= 0 && foundationIndex > accordionIndex);
+  const spanish = renderHome({ language: "es" });
+  assert.match(spanish, /data-i18n="home\.tradition\.foundationLink">Explora Foundation/);
+  assert.match(spanish, /data-i18n="foundation\.lifePower\.heading">El poder transformador del Master Key System/);
+  assert.match(spanish, /data-i18n="foundation\.lifePower\.toggle">LEER MÁS/);
+  assert.match(homePage(siteData, "en").scripts.join(" "), /life-power-accordion\.mjs/);
 });
 
 test("24-week journey shows exact stages and the study-practise-apply model", () => {
