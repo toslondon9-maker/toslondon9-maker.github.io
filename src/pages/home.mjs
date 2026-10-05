@@ -1,7 +1,7 @@
 import { homeContent } from "../../content/pages/home.mjs";
 import { siteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
-import { bookingCallHref } from "../whatsapp.mjs";
+import { whatsappQuestionHref } from "../whatsapp.mjs";
 import { renderInsightsPreview } from "../insights.mjs";
 import { renderCompactFoundationOffer } from "../conversion-components.mjs";
 import { priceCopy, pricingNoteCopy } from "../pricing.mjs";
@@ -21,7 +21,7 @@ function cta(route, key, language, variant = "primary", extraClass = "") {
 }
 
 function bookingCta(language) {
-  return `<a class="button--secondary" href="${bookingCallHref(siteData.contact.whatsapp)}" target="_blank" rel="noopener noreferrer" data-i18n="home.cta.whatsappQuestion">${escapeHtml(t("home.cta.whatsappQuestion", language))}</a>`;
+  return `<a class="button--secondary" href="${whatsappQuestionHref(siteData.contact.whatsapp)}" target="_blank" rel="noopener noreferrer" data-i18n="home.cta.whatsappQuestion">${escapeHtml(t("home.cta.whatsappQuestion", language))}</a>`;
 }
 
 function renderLifePowerAccordion(language) {

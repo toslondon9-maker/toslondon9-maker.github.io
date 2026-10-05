@@ -131,7 +131,7 @@ test("coaching stage cards keep their facts compact and expose closed accessible
 test("coaching call links use the scoped compact bevelled treatment without changing their destination", () => {
   const html = renderCoaching({ language: "en", siteData });
   assert.equal((html.match(/coaching-call-button--compact/g) ?? []).length, 1);
-  assert.match(html, /<a class="button--secondary coaching-call-button--compact" href="https:\/\/wa\.me\/34611223345\?text=/);
+  assert.match(html, /<a class="button--secondary coaching-call-button--compact" href="https:\/\/calendly\.com\/tariq-unleashyourpowerwithtariq"/);
   assert.doesNotMatch(html, /<a class="button--primary coaching-call-button--compact"/);
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
   assert.match(css, /\.coaching-call-button--compact\s*\{[^}]*background:\s*var\(--night\)[^}]*color:\s*#fff/s);
