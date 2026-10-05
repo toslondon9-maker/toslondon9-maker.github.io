@@ -41,6 +41,10 @@ const translations = deepFreeze({
   "nav.aboutTariq": { en: "About Tariq", es: "Quién soy" },
   "nav.faq": { en: "FAQ", es: "Preguntas frecuentes" },
   "nav.contact": { en: "Contact / Book", es: "Contacto / Reserva" },
+  "book.helmar.editionTitle": { en: "HELMAR RUDOLPH'S CENTENARY EDITION", es: "EDICIÓN CENTENARIA DE HELMAR RUDOLPH" },
+  "book.helmar.productTitle": { en: "The Master Key System — Centenary Edition: Live Your Life on Higher Planes", es: "The Master Key System — Edición Centenaria: Vive tu vida en planos superiores" },
+  "book.helmar.disclosure": { en: "A separate Helmar Rudolph edition with additional study support. Charles F. Haanel is the original author of the Master Key System.", es: "Una edición separada de Helmar Rudolph con apoyo adicional para el estudio. Charles F. Haanel es el autor original del Master Key System." },
+  "book.helmar.amazonCta": { en: "VIEW HELMAR RUDOLPH’S CENTENARY EDITION ON AMAZON", es: "VER LA EDICIÓN CENTENARIA DE HELMAR RUDOLPH EN AMAZON" },
   "footer.mission": {
     en: "An independent coaching experience inspired by the Master Key System.",
     es: "Una experiencia de coaching independiente inspirada en el Master Key System.",

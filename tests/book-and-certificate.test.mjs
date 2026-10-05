@@ -4,6 +4,7 @@ import path from "node:path";
 import test from "node:test";
 import { siteData } from "../content/site-data.mjs";
 import { routeRenderers } from "../src/routes.mjs";
+import { getTheBookPage } from "../src/pages/get-the-book.mjs";
 import { renderFooter, renderHeader } from "../src/shared-chrome.mjs";
 
 test("book route exposes only verified direct purchase destinations safely", () => {
@@ -16,6 +17,13 @@ test("book route exposes only verified direct purchase destinations safely", () 
   assert.match(page.body, /href="https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Complete-Chemistry\/dp\/1250874483" target="_blank" rel="noopener noreferrer">AMAZON UK<\/a>/);
   assert.match(page.body, /href="https:\/\/www\.amazon\.es\/-\/en\/Master-Key-System-Complete-Original\/dp\/1250874483" target="_blank" rel="noopener noreferrer">AMAZON SPAIN<\/a>/);
   assert.match(page.body, /href="https:\/\/www\.amazon\.es\/Master-Key-System-Centenary-Higher\/dp\/1456336045" target="_blank" rel="noopener noreferrer">AMAZON SPAIN<\/a>/);
+  assert.match(page.body, /data-i18n="book\.helmar\.editionTitle">HELMAR RUDOLPH'S CENTENARY EDITION<\/h2>/);
+  assert.match(page.body, /data-i18n="book\.helmar\.productTitle">The Master Key System — Centenary Edition: Live Your Life on Higher Planes<\/p>/);
+  assert.match(page.body, /href="https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Centenary-Higher\/dp\/1456336045\/" target="_blank" rel="noopener noreferrer" data-i18n="book\.helmar\.amazonCta">VIEW HELMAR RUDOLPH’S CENTENARY EDITION ON AMAZON<\/a>/);
+  assert.match(page.body, /Charles F\. Haanel is the original author of the Master Key System/);
+  const spanishPage = getTheBookPage(siteData, "es");
+  assert.match(spanishPage.body, /data-i18n="book\.helmar\.editionTitle">EDICIÓN CENTENARIA DE HELMAR RUDOLPH<\/h2>/);
+  assert.match(spanishPage.body, /data-i18n="book\.helmar\.amazonCta">VER LA EDICIÓN CENTENARIA DE HELMAR RUDOLPH EN AMAZON<\/a>/);
   assert.doesNotMatch(page.body, /bookOption__pending|Availability being confirmed|href="(?:#|\s*)"/i);
   assert.match(page.body, /WHICH ONE SHOULD I CHOOSE\?/);
   assert.match(page.body, /A MESSAGE FROM TARIQ/);
