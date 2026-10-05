@@ -3,7 +3,7 @@ import { siteData } from "../../content/site-data.mjs";
 import { t } from "../../content/translations.mjs";
 import { whatsappQuestionHref } from "../whatsapp.mjs";
 import { renderInsightsPreview } from "../insights.mjs";
-import { renderCompactFoundationOffer } from "../conversion-components.mjs";
+import { calendlyUrl, renderCompactFoundationOffer } from "../conversion-components.mjs";
 import { priceCopy, pricingNoteCopy } from "../pricing.mjs";
 
 function escapeHtml(value) {
@@ -94,8 +94,17 @@ function renderFinalCta(language) {
   return `<section class="homeSection homeFinalCta section--night" data-home-section="final-cta"><div class="homeSection__inner homeFinalCta__inner">${copy("home.final.eyebrow", language, "p", "eyebrow")}${copy("home.final.title", language, "h2")}${copy("home.final.body", language, "p", "homeSection__intro")}<div class="homeActions">${cta(siteData.routes.startFree, "home.final.start", language)}${bookingCta(language)}${cta(siteData.routes.masterKeySystem, "home.final.method", language, "secondary")}</div></div></section>`;
 }
 
+function renderNextStep(language) {
+  const choices = [
+    ["home.next.tryPrompt", "home.next.tryCta", siteData.routes.startFree, "primary"],
+    ["home.next.guidancePrompt", "home.next.guidanceCta", calendlyUrl, "secondary"],
+    ["home.next.structuredPrompt", "home.next.structuredCta", siteData.routes.foundation, "secondary"],
+  ].map(([promptKey, ctaKey, href, variant]) => `<article class="homeNext__choice"><h3 data-i18n="${promptKey}">${escapeHtml(t(promptKey, language))}</h3><a class="button--${variant}" href="${escapeHtml(href)}"${href === calendlyUrl ? ' target="_blank" rel="noopener noreferrer"' : ""} data-i18n="${ctaKey}">${escapeHtml(t(ctaKey, language))}</a></article>`).join("");
+  return `<section class="homeSection homeNext section--night" data-home-section="next-step"><div class="homeSection__inner"><div class="homeNext__intro">${copy("home.next.eyebrow", language, "p", "eyebrow")}${copy("home.next.title", language, "h2")}${copy("home.next.body", language, "p", "homeSection__intro")}</div><div class="homeNext__choices">${choices}</div></div></section>`;
+}
+
 function renderHomeBody({ language = "en" } = {}) {
-  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
+  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderTestimonials(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}${renderNextStep(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {

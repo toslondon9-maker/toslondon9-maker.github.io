@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "welcome", "free-experience", "tradition", "journey", "offers", "receive", "why-tariq", "testimonials", "insights", "final-cta"];
+const approvedSections = ["hero", "welcome", "free-experience", "tradition", "journey", "offers", "receive", "why-tariq", "testimonials", "insights", "final-cta", "next-step"];
 const legacySections = ["lineage-expanded", "origins", "books", "ideal", "outcome", "coaching"];
 
 function section(html, id) {
@@ -329,4 +329,25 @@ test("homepage Foundation offer uses the shared concise summary", () => {
   assert.match(english, /EXPLORE FOUNDATION — £97/);
   assert.match(spanish, /Cuatro semanas/);
   assert.match(spanish, /Ocho llamadas en total/);
+});
+
+test("homepage next-step choices preserve canonical destinations and translated CTAs", async () => {
+  const english = section(renderHome({ language: "en" }), "next-step");
+  const spanish = section(renderHome({ language: "es" }), "next-step");
+  assert.match(english, /I want to try this first/);
+  assert.match(english, /href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
+  assert.match(english, /I want personal guidance/);
+  assert.match(english, /href="https:\/\/calendly\.com\/tariq-unleashyourpowerwithtariq"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>BOOK A FREE CALL<\/a>/);
+  assert.match(english, /I am ready for structured support/);
+  assert.match(english, /href="\/foundation\/"[^>]*>EXPLORE FOUNDATION<\/a>/);
+  assert.match(spanish, /Quiero probar esto primero/);
+  assert.match(spanish, /EMPIEZA TUS 7 DÍAS/);
+  assert.match(spanish, /Quiero orientación personal/);
+  assert.match(spanish, /RESERVAR UNA LLAMADA GRATUITA/);
+  assert.match(spanish, /Estoy preparado para un apoyo estructurado/);
+  assert.match(spanish, /EXPLORA FOUNDATION/);
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(css, /\.homeNext__choices\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
+  assert.match(css, /\.homeNext__choices\{[^}]*grid-template-columns:minmax\(0,1fr\)\}/);
+  assert.match(css, /\.homeNext__choice \.button--secondary,[^\n]+:visited,[^\n]+:hover,[^\n]+:focus,[^\n]+:active\{color:var\(--cream\)\}/);
 });
