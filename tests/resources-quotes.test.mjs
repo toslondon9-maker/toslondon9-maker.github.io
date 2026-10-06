@@ -101,3 +101,25 @@ test("Resources featured journey CTA keeps white text in every interaction state
     assert.match(css, new RegExp(`\\.resourcesQuotes__featureActions\\s*>\\s*a:first-child:${state}[^\\{]*\\{[^}]*color:\\s*#ffffff\\s*!important;[^}]*-webkit-text-fill-color:\\s*#ffffff\\s*!important;`, "s"));
   }
 });
+
+test("Resources random reflection card uses the scoped antique-gold treatment and preserves all controls", async () => {
+  const css = await readFile("assets/platform.css", "utf8");
+  const page = resourcesPage(siteData, "en");
+  const random = page.body.match(/<div class="resourcesQuotes__random">[\s\S]*?<\/div><div class="resourcesQuotes__wall"/)?.[0] ?? "";
+
+  assert.match(css, /\.resourcesQuotes__random\s*\{[^}]*background:\s*linear-gradient\(145deg,\s*#b88935\s*0%,\s*#d3aa58\s*52%,\s*#a87828\s*100%\)/s);
+  assert.match(css, /\.resourcesQuotes__random\s*\{[^}]*border:\s*1px solid #8d641f[^}]*box-shadow:\s*inset 0 1px 0 rgba\(255,255,255,\.28\), 0 5px 0 #8a611e, 0 14px 28px rgba\(7,24,40,\.16\)/s);
+  assert.match(css, /\.resourcesQuotes__random \.eyebrow\s*\{[^}]*color:\s*#fffdf6/s);
+  assert.match(css, /\.resourcesQuotes__randomQuote\s*\{[^}]*color:\s*#fffdf6/s);
+  assert.match(css, /\.resourcesQuotes__reflection\s*\{[^}]*color:\s*#fff8e8/s);
+  assert.match(css, /\.resourcesQuotes__random \.resourcesQuotes__source\s*\{[^}]*color:\s*#fff8e8/s);
+  assert.match(random, /A MOMENT TO REFLECT|data-i18n="resources\.quotes\.randomEyebrow"/);
+  assert.match(random, /class="resourcesQuotes__randomQuote"/);
+  assert.match(random, /class="resourcesQuotes__reflection"/);
+  assert.match(random, /class="resourcesQuotes__source"/);
+  assert.match(random, /data-quote-random-button/);
+  assert.match(random, /data-quote-copy/);
+  assert.match(random, /data-quote-share/);
+  assert.match(css, /@media \(max-width: 640px\)\s*\{[\s\S]*?\.resourcesQuotes__random\s*\{\s*grid-template-columns: 1fr;\s*\}/s);
+  assert.match(css, /\.resourcesQuotes__randomActions \.button\s*\{[^}]*white-space:\s*normal[^}]*overflow-wrap:\s*anywhere/s);
+});
