@@ -82,7 +82,7 @@ function renderTestimonials(language) {
     const disclosure = testimonial.disclosure ? `<p class="homeTestimonials__disclosure">${escapeHtml(testimonial.disclosure)}</p>` : "";
     return `<figure class="homeTestimonials__card"><blockquote>${firstParagraph}${more}</blockquote>${disclosure}<figcaption><strong>${escapeHtml(testimonial.name)}</strong><span>${escapeHtml(testimonial.location)}</span></figcaption></figure>`;
   }).join("");
-  return `<section class="homeSection homeTestimonials" data-home-section="testimonials"><div class="homeSection__inner"><p class="eyebrow">GENUINE STUDENT EXPERIENCES</p><h2>What students say about the journey</h2><div class="homeTestimonials__grid">${cards}</div></div></section>`;
+  return `<section class="homeSection homeTestimonials" data-home-section="testimonials"><div class="homeSection__inner">${copy("home.testimonials.eyebrow", language, "p", "eyebrow")}${copy("home.testimonials.title", language, "h2")}<div class="homeTestimonials__grid">${cards}</div></div></section>`;
 }
 
 function renderOffers(language) {

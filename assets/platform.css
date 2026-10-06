@@ -7539,6 +7539,31 @@ body {
   padding-left: .85rem;
 }
 
+.mksStudyRoom__foundationCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-control);
+  background: var(--paper);
+}
+
+.mksStudyRoom__foundationCta p {
+  margin: 0;
+  color: var(--night);
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .mksStudyRoom__foundationCta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 .mksStudyRoom__stage header {
   margin-bottom: .45rem;
 }

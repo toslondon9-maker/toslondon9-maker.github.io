@@ -5,6 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { renderHome } from "../src/pages/home.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 import { renderHeader } from "../src/shared-chrome.mjs";
+import { masterKeyCurriculumPage } from "../src/pages/master-key-curriculum.mjs";
 
 test("the MKS Study Room preserves the complete 24-week curriculum", () => {
   const page = routeRenderers[siteData.routes.masterKeySystem](siteData);
@@ -72,6 +73,19 @@ test("the MKS Study Room keeps the free experience route separate", () => {
   const startFree = routeRenderers[siteData.routes.startFree](siteData).body;
   assert.doesNotMatch(mks, /sevenDayDashboard/);
   assert.match(startFree, /sevenDayDashboard/);
+});
+
+test("the Foundation chapters are followed by one bilingual Foundation conversion block", () => {
+  const english = routeRenderers[siteData.routes.masterKeySystem](siteData, "en").body;
+  const spanish = masterKeyCurriculumPage(siteData, "es").body;
+  const foundationEnd = english.indexOf('</div></section><aside class="mksStudyRoom__foundationCta"');
+  const visualisation = english.indexOf('id="stage-visualisation"');
+  assert.ok(foundationEnd >= 0 && foundationEnd < visualisation);
+  assert.match(english, /data-i18n="mks\.foundationCta\.heading">Ready to study Foundation with personal guidance\?</);
+  assert.match(english, /href="\/foundation\/"[^>]*data-i18n="mks\.foundationCta\.action">EXPLORE FOUNDATION — £97 \/ €114/);
+  assert.match(spanish, /data-i18n="mks\.foundationCta\.heading">¿Listo para estudiar Foundation con orientación personal\?</);
+  assert.match(spanish, /data-i18n="mks\.foundationCta\.action">EXPLORA FOUNDATION — £97 \/ €114/);
+  assert.equal((english.match(/mksStudyRoom__foundationCta/g) ?? []).length, 1);
 });
 
 test("the MKS Study Room restores four non-promotional stage illustrations", () => {

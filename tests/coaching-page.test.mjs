@@ -128,6 +128,16 @@ test("coaching stage cards keep their facts compact and expose closed accessible
   assert.match(english, /data-i18n="coaching\.stage\.mastery\.learnMore"/);
 });
 
+test("coaching uses measured study-and-practice wording and keeps specialist offers clear", () => {
+  const english = renderCoaching({ language: "en", siteData });
+  const spanish = renderCoaching({ language: "es", siteData });
+  assert.match(english, /One complete study and practice journey/);
+  assert.doesNotMatch(english, /ONE COMPLETE TRANSFORMATION JOURNEY|The greatest transformation/);
+  assert.match(english, /The daily exercise supports the change/);
+  assert.match(english, /Mastery Circle and Alumni Practice Membership are the specialist options/);
+  assert.match(spanish, /recorrido completo de estudio y práctica/);
+});
+
 test("coaching makes Foundation and the Complete Journey the first paid choices", () => {
   const english = renderCoaching({ language: "en" });
   assert.match(english, /Foundation/);

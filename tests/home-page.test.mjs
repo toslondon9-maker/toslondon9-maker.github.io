@@ -337,13 +337,13 @@ test("homepage next-step choices preserve canonical destinations and translated 
   assert.match(english, /I want to try this first/);
   assert.match(english, /href="\/start-free\/"[^>]*>START YOUR 7 DAYS<\/a>/);
   assert.match(english, /I want personal guidance/);
-  assert.match(english, /href="https:\/\/calendly\.com\/tariq-unleashyourpowerwithtariq"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>BOOK A FREE CALL<\/a>/);
+  assert.match(english, /href="https:\/\/calendly\.com\/tariq-unleashyourpowerwithtariq"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>BOOK A FREE 15-MINUTE CALL<\/a>/);
   assert.match(english, /I am ready for structured support/);
   assert.match(english, /href="\/foundation\/"[^>]*>EXPLORE FOUNDATION<\/a>/);
   assert.match(spanish, /Quiero probar esto primero/);
   assert.match(spanish, /EMPIEZA TUS 7 DÍAS/);
   assert.match(spanish, /Quiero orientación personal/);
-  assert.match(spanish, /RESERVAR UNA LLAMADA GRATUITA/);
+  assert.match(spanish, /RESERVAR UNA LLAMADA GRATUITA DE 15 MINUTOS/);
   assert.match(spanish, /Estoy preparado para un apoyo estructurado/);
   assert.match(spanish, /EXPLORA FOUNDATION/);
   const css = await readFile("assets/platform.css", "utf8");
@@ -363,6 +363,18 @@ test("homepage presents one consolidated next-step section without the duplicate
 
 test("homepage labels the testimonial section as genuine student experiences", () => {
   const body = renderHome({ language: "en" });
-  assert.match(body, /GENUINE STUDENT EXPERIENCES/);
-  assert.ok(body.indexOf("GENUINE STUDENT EXPERIENCES") < body.indexOf("homeOffers"));
+  const spanish = renderHome({ language: "es" });
+  assert.match(body, /data-i18n="home\.testimonials\.eyebrow">GENUINE STUDENT EXPERIENCES/);
+  assert.match(body, /data-i18n="home\.testimonials\.title">What students say about the journey/);
+  assert.match(spanish, /data-i18n="home\.testimonials\.eyebrow">EXPERIENCIAS REALES DE ESTUDIANTES/);
+  assert.match(spanish, /data-i18n="home\.testimonials\.title">Lo que dicen los estudiantes sobre el recorrido/);
+  assert.doesNotMatch(spanish, />GENUINE STUDENT EXPERIENCES</);
+  assert.doesNotMatch(spanish, />What students say about the journey</);
+});
+
+test("homepage keeps one conversion choice panel while public offers remain separate", () => {
+  const body = renderHome({ language: "en" });
+  assert.equal((body.match(/data-home-section="next-step"/g) ?? []).length, 1);
+  assert.doesNotMatch(body, /CHOOSE YOUR STARTING POINT/);
+  assert.equal((body.match(/class="homeNext__choice"/g) ?? []).length, 3);
 });

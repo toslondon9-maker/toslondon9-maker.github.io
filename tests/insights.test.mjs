@@ -163,17 +163,21 @@ test("the how-to-study PDF is a non-empty A4 PDF generated from the article sour
   assert.match(pdf.toString("latin1"), /Begin 7 Days to Change the Way You Use Your Mind/);
 });
 
-test("the Insights hub gives bilingual readers a free-study or optional WhatsApp choice", () => {
+test("the Insights hub gives bilingual readers a contextual free-study CTA and existing booking choice", () => {
   const english = insightsIndexPage(undefined, "en").body;
   const spanish = insightsIndexPage(undefined, "es").body;
   const bookingMessage = encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
 
   assert.match(english, /Start 7 Days to Change the Way You Use Your Mind, or book a free 15-minute WhatsApp call to ask a question before you begin\./);
   assert.match(english, /BOOK A FREE 15-MINUTE CALL/);
-  assert.match(english, new RegExp(`href="https://wa\\.me/34611223345\\?text=${bookingMessage}"`));
+  assert.match(english, new RegExp(`href="https://calendly\\.com/tariq-unleashyourpowerwithtariq"`));
+  assert.match(english, /data-i18n="insights\.cta\.hubContextual">Not sure where to begin\? Start with the free 7-Day Experience\./);
+  assert.ok(english.indexOf("Not sure where to begin?") > english.indexOf("Energy Goes Where Attention Flows"));
+  assert.ok(english.indexOf("Not sure where to begin?") < english.indexOf("How to Study the Master Key System"));
   assert.match(english, /target="_blank" rel="noopener noreferrer"/);
   assert.match(spanish, /Empieza 7 días para cambiar la forma en que usas tu mente o reserva una llamada gratuita de 15 minutos por WhatsApp para hacer una pregunta antes de empezar\./);
   assert.match(spanish, /RESERVAR UNA LLAMADA GRATUITA DE 15 MINUTOS/);
+  assert.match(spanish, /data-i18n="insights\.cta\.hubContextual">¿No sabes por dónde empezar\? Empieza con la experiencia gratuita de 7 días\./);
 });
 
 test("the principles article contains all eight principles, careful Tact guidance and the PDF CTA", () => {
@@ -251,7 +255,7 @@ test("the three Foundation articles are published as separate dated source artic
     assert.match(page.body, /Published 11 September 2026/);
     assert.match(page.body, /START YOUR 7 DAYS/);
     assert.match(page.body, /BOOK YOUR CALL/);
-    assert.match(page.body, /wa\.me\/34611223345/);
+    assert.match(page.body, /calendly\.com\/tariq-unleashyourpowerwithtariq/);
     assert.equal(page.structuredData[0].datePublished, "2026-09-11");
   }
   const qa = pages[2].body;

@@ -41,7 +41,18 @@ test("Start Free explains the free value and previews all seven days before regi
   const registrationIndex = html.indexOf('id="start-free-registration"');
   assert.ok(valueIndex >= 0 && previewIndex > valueIndex && registrationIndex > previewIndex);
   assert.equal((html.match(/class="sevenDayPreview__day"/g) ?? []).length, 7);
-  assert.match(html, /Total commitment: approximately 75–90 minutes across the entire week\./);
+  assert.match(html, /Approximately 75–90 minutes across the entire week\./);
+});
+
+test("Start Free uses the canonical total-week commitment and translated Day 6 and Day 7 preview hooks", () => {
+  const english = renderStartFree({ language: "en" });
+  const spanish = renderStartFree({ language: "es" });
+  assert.match(english, /Approximately 75–90 minutes across the entire week\./);
+  assert.doesNotMatch(english, /Approximately 90 minutes in total/);
+  assert.match(spanish, /Aproximadamente 75–90 minutos durante toda la semana\./);
+  assert.match(spanish, /data-i18n="sevenDay\.preview\.title6">Refuerza el nuevo patrón/);
+  assert.match(spanish, /data-i18n="sevenDay\.preview\.title7">Elige qué viene después/);
+  assert.match(spanish, /data-i18n="sevenDay\.preview\.time6">Aproximadamente 10 minutos/);
 });
 
 test("Start Free copy recognises the visitor's challenge and makes the next step concrete", () => {
