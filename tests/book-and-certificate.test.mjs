@@ -14,12 +14,12 @@ test("book route exposes only verified direct purchase destinations safely", () 
   assert.match(page.body, /THE COMPLETE ORIGINAL EDITION/);
   assert.match(page.body, /TARIQ'S RECOMMENDED EDITION/);
   assert.match(page.body, /HELMAR RUDOLPH'S CENTENARY EDITION/);
-  assert.match(page.body, /href="https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Complete-Chemistry\/dp\/1250874483" target="_blank" rel="noopener noreferrer">AMAZON UK<\/a>/);
-  assert.match(page.body, /href="https:\/\/www\.amazon\.es\/-\/en\/Master-Key-System-Complete-Original\/dp\/1250874483" target="_blank" rel="noopener noreferrer">AMAZON SPAIN<\/a>/);
-  assert.match(page.body, /href="https:\/\/www\.amazon\.es\/Master-Key-System-Centenary-Higher\/dp\/1456336045" target="_blank" rel="noopener noreferrer">AMAZON SPAIN<\/a>/);
+  assert.match(page.body, /class="button--primary bookAmazonButton" href="https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Complete-Chemistry\/dp\/1250874483" target="_blank" rel="noopener noreferrer">AMAZON UK<\/a>/);
+  assert.match(page.body, /class="button--primary bookAmazonButton" href="https:\/\/www\.amazon\.es\/-\/en\/Master-Key-System-Complete-Original\/dp\/1250874483" target="_blank" rel="noopener noreferrer">AMAZON SPAIN<\/a>/);
+  assert.match(page.body, /class="button--primary bookAmazonButton" href="https:\/\/www\.amazon\.es\/Master-Key-System-Centenary-Higher\/dp\/1456336045" target="_blank" rel="noopener noreferrer">AMAZON SPAIN<\/a>/);
   assert.match(page.body, /data-i18n="book\.helmar\.editionTitle">HELMAR RUDOLPH'S CENTENARY EDITION<\/h2>/);
   assert.match(page.body, /data-i18n="book\.helmar\.productTitle">The Master Key System — Centenary Edition: Live Your Life on Higher Planes<\/p>/);
-  assert.match(page.body, /href="https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Centenary-Higher\/dp\/1456336045\/" target="_blank" rel="noopener noreferrer" data-i18n="book\.helmar\.amazonCta">VIEW HELMAR RUDOLPH’S CENTENARY EDITION ON AMAZON<\/a>/);
+  assert.match(page.body, /class="button--primary bookAmazonButton" href="https:\/\/www\.amazon\.co\.uk\/Master-Key-System-Centenary-Higher\/dp\/1456336045\/" target="_blank" rel="noopener noreferrer" data-i18n="book\.helmar\.amazonCta">VIEW HELMAR RUDOLPH’S CENTENARY EDITION ON AMAZON<\/a>/);
   assert.match(page.body, /Charles F\. Haanel is the original author of the Master Key System/);
   const spanishPage = getTheBookPage(siteData, "es");
   assert.match(spanishPage.body, /data-i18n="book\.helmar\.editionTitle">EDICIÓN CENTENARIA DE HELMAR RUDOLPH<\/h2>/);
@@ -81,6 +81,21 @@ test("About Tariq presents the supplied portrait and approved write-up", () => {
   assert.match(page.body, /I created <strong>Unleash Your Power<\/strong> to share that practical process/);
   assert.match(page.body, /Your next chapter doesn’t have to begin with everything figured out\./);
   assert.match(page.body, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"[^>]*>Start with the free 7-Day journey<`));
+});
+
+test("book page gives all Amazon purchase links one responsive equal-button treatment", () => {
+  const page = routeRenderers[siteData.routes.getTheBook](siteData);
+  const css = readFileSync(path.join(process.cwd(), "assets", "platform.css"), "utf8");
+  const buttons = page.body.match(/<a class="button--primary bookAmazonButton"[\s\S]*?<\/a>/g) ?? [];
+
+  assert.equal(buttons.length, 4);
+  assert.equal((page.body.match(/class="bookOption__amazonActions"/g) ?? []).length, 2);
+  assert.match(css, /\.bookOption__amazonActions\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(css, /\.bookAmazonButton\s*\{[^}]*width:\s*100%[^}]*min-height:\s*3\.25rem[^}]*padding:\s*\.75rem 1rem[^}]*border-radius:\s*\.7rem[^}]*background:\s*linear-gradient\(145deg, #b88935 0%, #d3aa58 52%, #a87828 100%\)/s);
+  assert.match(css, /\.bookAmazonButton\s*\{[^}]*font-size:\s*\.78rem[^}]*line-height:\s*1\.2[^}]*text-align:\s*center/);
+  assert.match(css, /\.bookAmazonButton:focus-visible\s*\{[^}]*outline:/s);
+  assert.match(css, /@media \(max-width: 520px\)[\s\S]*?\.bookOption__content, \.bookChoose__grid, \.bookOption__amazonActions\s*\{\s*grid-template-columns:\s*1fr/s);
+  assert.match(buttons[2], /data-i18n="book\.helmar\.amazonCta">VIEW HELMAR RUDOLPH’S CENTENARY EDITION ON AMAZON<\/a>/);
 });
 
 test("About Tariq offers Foundation after the personal story while keeping the free route", () => {

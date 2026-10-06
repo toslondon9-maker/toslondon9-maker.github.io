@@ -5670,6 +5670,10 @@ body {
 .bookOption li { margin: .45rem 0; }
 .bookOption li::marker { color: var(--gold); }
 .bookOption__isbn, .bookOption__pending { display: block; border: 1px solid var(--border); border-radius: .5rem; padding: .9rem; margin: 1rem 0; }
+.bookOption__amazonActions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-top: 1rem; }
+.bookAmazonButton { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 3.25rem; box-sizing: border-box; padding: .75rem 1rem; border: 1px solid #8d641f; border-radius: .7rem; background: linear-gradient(145deg, #b88935 0%, #d3aa58 52%, #a87828 100%); color: var(--night); font-size: .78rem; font-weight: 800; line-height: 1.2; text-align: center; text-decoration: none; overflow-wrap: anywhere; box-shadow: inset 0 1px 0 rgb(255 255 255 / 28%), 0 4px 0 #8a611e, 0 10px 18px rgb(7 24 40 / 14%); transition: background 160ms ease, translate 160ms ease, box-shadow 160ms ease; }
+.bookAmazonButton:hover { background: linear-gradient(145deg, #a87828 0%, #c0933d 52%, #8f641e 100%); color: var(--night); translate: 0 -2px; box-shadow: inset 0 1px 0 rgb(255 255 255 / 22%), 0 5px 0 #7a5419, 0 13px 22px rgb(7 24 40 / 18%); }
+.bookAmazonButton:focus-visible { outline: 3px solid var(--gold-bright, #d2a64b); outline-offset: 3px; }
 .bookOption__pending { color: var(--muted); font-weight: 600; }
 .bookChoose { display: grid; grid-template-columns: 1.5fr .75fr; gap: 1.5rem; padding: 2rem 0; }
 .bookChoose > div, .bookChoose aside, .bookMessage { border-radius: var(--radius-card); padding: 1.75rem; border: 1px solid var(--border); }
@@ -5691,7 +5695,7 @@ body {
 .coachingHero__preparation { margin: 1.25rem auto 0; max-width: 42rem; }
 .coachingHero__preparation a { color: inherit; font-weight: 800; }
 @media (max-width: 800px) { .bookHero__inner, .bookOptions, .bookChoose, .certificateSection { grid-template-columns: 1fr; } .bookHero__inner { padding: 3rem 0; } .bookHero__cover { width: 11rem; } .bookOption__content { grid-template-columns: 8rem 1fr; } .certificateSection { padding-bottom: 4rem; } }
-@media (max-width: 520px) { .bookHero__inner, .bookOptions, .bookChoose, .bookMessage, .certificateSection, .aboutTariqIntro { width: min(100% - 1.25rem, 1120px); } .bookOption { padding: 1.25rem; } .bookOption__recommended { position: static; margin: 0 0 1rem; } .bookOption__content, .bookChoose__grid { grid-template-columns: 1fr; } .bookOption__content .bookCover { width: 9rem; } }
+@media (max-width: 520px) { .bookHero__inner, .bookOptions, .bookChoose, .bookMessage, .certificateSection, .aboutTariqIntro { width: min(100% - 1.25rem, 1120px); } .bookOption { padding: 1.25rem; } .bookOption__recommended { position: static; margin: 0 0 1rem; } .bookOption__content, .bookChoose__grid, .bookOption__amazonActions { grid-template-columns: 1fr; } .bookOption__content .bookCover { width: 9rem; } }
 
 .sevenDayLesson {
   background: var(--cream);
