@@ -315,7 +315,7 @@ test("shared header reserves branding space and switches to the hamburger before
   assert.match(css, /@media \(min-width: 1361px\)[\s\S]*?\.siteHeader__actions[^}]*min-width:\s*0[\s\S]*?\.siteHeader \.siteNav[^}]*display:\s*flex/s);
   assert.match(css, /@media \(max-width: 1439px\)[\s\S]*?\.siteHeader__actions > \.siteNav[\s\S]*?display:\s*none\s*!important[\s\S]*?\.siteHeader \.mobileNav[\s\S]*?display:\s*block\s*!important/s);
   assert.match(css, /@media \(max-width: 1439px\)[\s\S]*?\.siteHeader \.mobileNav__panel\[hidden\][^}]*display:\s*none\s*!important[\s\S]*?\.siteHeader \.mobileNav__panel:not\(\[hidden\]\)[^}]*display:\s*block\s*!important/s);
-  assert.match(css, /@media \(max-width: 1439px\)[\s\S]*?overflow-x:\s*clip/s);
+  assert.doesNotMatch(css.slice(css.lastIndexOf("@media (max-width: 1439px)")), /overflow-x:\s*clip/);
   assert.match(navigation, /matchMedia\?\.\("\(min-width: 1440px\)"\)/);
 });
 
@@ -325,7 +325,22 @@ test("shared header keeps the enlarged brand within a non-overlapping desktop ro
   assert.match(css, /\.siteHeader[^}]*min-width:\s*0/s);
   assert.match(css, /\.siteHeader__actions[^}]*min-width:\s*0/s);
   assert.match(css, /\.siteHeader \.brand__wordmark[^}]*min-width:\s*0/s);
-  assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.siteHeader[^}]*overflow-x:\s*clip/s);
+  assert.doesNotMatch(css.slice(css.lastIndexOf("@media (max-width: 768px)")), /\.siteHeader[^}]*overflow-x:\s*clip/);
+});
+
+test("large desktop header constrains branding and keeps full navigation in normal flex flow", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const css = await readFile("assets/platform.css", "utf8");
+  const largeDesktop = css.slice(css.lastIndexOf("@media (min-width: 1440px)"));
+  assert.match(largeDesktop, /\.siteHeader,\s*\.site-header\s*\{[^}]*display:\s*flex[^}]*align-items:\s*center[^}]*justify-content:\s*space-between[^}]*gap:/s);
+  assert.match(largeDesktop, /\.siteHeader\s*>\s*\.brand,\s*\.site-header\s*>\s*\.brand\s*\{[^}]*flex:\s*1\s+1\s+520px[^}]*min-width:\s*0[^}]*max-width:\s*520px/s);
+  assert.match(largeDesktop, /\.siteHeader__actions\s*\{[^}]*flex:\s*0\s+0\s+auto[^}]*margin-left:\s*auto/s);
+  assert.match(largeDesktop, /\.siteHeader__actions\s*>\s*\.siteNav\s*\{[^}]*flex:\s*0\s+0\s+auto/s);
+  assert.match(largeDesktop, /\.siteHeader\s+\.brand__wordmark,\s*\.site-header\s+\.brand__wordmark\s*\{[^}]*min-width:\s*0[^}]*max-width:\s*100%/s);
+  assert.match(largeDesktop, /@media \(max-width:\s*1439px\)[\s\S]*?\.siteHeader\s+\.brand__wordmark,\s*\.site-header\s+\.brand__wordmark\s*\{[^}]*min-width:\s*0[^}]*max-width:\s*100%/s);
+  assert.match(largeDesktop, /@media \(max-width:\s*1439px\)[\s\S]*?\.siteHeader,[\s\S]*?width:\s*100vw[^}]*max-width:\s*100vw/s);
+  assert.match(largeDesktop, /@media \(max-width:\s*1439px\)[\s\S]*?\.siteHeader__actions\s*\{[^}]*width:\s*48px/s);
+  assert.match(largeDesktop, /@media \(max-width:\s*1439px\)[\s\S]*?\.siteHeader \.mobileNav,[\s\S]*?width:\s*48px/s);
 });
 
 test("shared header stays sticky and protects anchored content from its height", async () => {
