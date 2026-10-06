@@ -4129,7 +4129,7 @@ main > article {
 .aiMentorHero__layout .aiMentorHero__quietCta:focus-visible,
 .aiMentorHero__layout .aiMentorHero__quietCta:focus-visible *,
 .aiMentorHero__layout .aiMentorHero__quietCta:active,
-.aiMentorHero__layout .aiMentorHero__quietCta:active * { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; opacity: 1; }
+.aiMentorHero__layout .aiMentorHero__quietCta:active * { color: #000000 !important; -webkit-text-fill-color: #000000 !important; opacity: 1; }
 
 .aiMentorHero__quietCta:focus-visible {
   outline: 3px solid var(--gold-bright);

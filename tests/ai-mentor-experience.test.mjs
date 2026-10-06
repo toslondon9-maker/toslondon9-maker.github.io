@@ -60,16 +60,19 @@ test("AI Mentor page offers the free journey and canonical Foundation next steps
   assert.match(html, /href="\/foundation\/"[^>]*data-i18n="aiMentor\.cta\.foundation"/);
 });
 
-test("AI Mentor Foundation CTA keeps white text in every interaction state", () => {
+test("AI Mentor hero Foundation CTA keeps black text while the closing CTA stays readable", () => {
   const html = mentorPage();
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
 
   assert.match(html, /<a class="aiMentorHero__quietCta"[^>]*data-i18n="aiMentor\.cta\.foundation">Explore Foundation<\/a>/);
   assert.match(css, /\.aiMentorHero__quietCta(?:,|\s)/);
-  assert.match(css, /\.aiMentorHero__quietCta[^{]*\{[^}]*color:\s*#ffffff\s*!important;[^}]*-webkit-text-fill-color:\s*#ffffff\s*!important;/s);
+  assert.match(css, /\.aiMentorHero__layout \.aiMentorHero__quietCta[^{]*\{[^}]*color:\s*#000000\s*!important;[^}]*-webkit-text-fill-color:\s*#000000\s*!important;/s);
   for (const state of ["visited", "hover", "focus", "focus-visible", "active"]) {
-    assert.match(css, new RegExp(`\\.aiMentorHero__quietCta:${state}[^\\{]*\\{[^}]*color:\\s*#ffffff\\s*!important;[^}]*-webkit-text-fill-color:\\s*#ffffff\\s*!important;`, "s"));
+    assert.match(css, new RegExp(`\\.aiMentorHero__layout \\.aiMentorHero__quietCta:${state}[^\\{]*\\{[^}]*color:\\s*#000000\\s*!important;[^}]*-webkit-text-fill-color:\\s*#000000\\s*!important;`, "s"));
   }
+  assert.match(css, /\.aiMentorHero__layout \.aiMentorHero__quietCta\s*,[\s\S]*?\.aiMentorHero__layout \.aiMentorHero__quietCta:active \*[^}]*color:\s*#000000\s*!important;/s);
+  assert.match(html, /<section class="aiMentorClosing"[\s\S]*?<a class="button--secondary" href="\/start-free\/"[^>]*data-i18n="aiMentor\.cta\.start">START THE FREE 7 DAYS<\/a>/);
+  assert.match(css, /\.aiMentorClosing a\.button--secondary[^{]*\{[^}]*color:\s*#ffffff\s*!important;[^}]*-webkit-text-fill-color:\s*#ffffff\s*!important;/s);
 });
 
 test("AI Mentor closing free-journey CTA keeps white text in every interaction state", () => {
