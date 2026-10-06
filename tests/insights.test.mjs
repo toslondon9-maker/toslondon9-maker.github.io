@@ -12,10 +12,10 @@ import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, ins
 import { insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage, insightsFoundationRestartPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 
-test("homepage presents the Insights & Guides collection above the final conversion panel", () => {
+test("homepage presents the Insights & Guides collection above the consolidated next-step panel", () => {
   const body = homePage().body;
   const insightsIndex = body.indexOf("Insights &amp; Guides");
-  const finalPanelIndex = body.indexOf('data-home-section="final-cta"');
+  const finalPanelIndex = body.indexOf('data-home-section="next-step"');
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
   assert.equal((body.match(/class="insightsPreview__card[^\"]*/g) ?? []).length, 3);

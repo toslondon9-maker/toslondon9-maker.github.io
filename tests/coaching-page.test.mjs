@@ -128,6 +128,19 @@ test("coaching stage cards keep their facts compact and expose closed accessible
   assert.match(english, /data-i18n="coaching\.stage\.mastery\.learnMore"/);
 });
 
+test("coaching makes Foundation and the Complete Journey the first paid choices", () => {
+  const english = renderCoaching({ language: "en" });
+  assert.match(english, /Foundation/);
+  assert.match(english, /Complete 24-Week Journey/);
+  assert.match(english, /£97/);
+  assert.match(english, /£997/);
+  assert.match(english, /CONTINUE AFTER FOUNDATION/);
+  assert.match(english, /details[^>]*class="coachingContinuation/);
+  assert.match(english, /href="\/foundation\/"/);
+  assert.match(english, /https:\/\/www\.paypal\.com\/ncp\/payment\/JW7JRY5GTRTA6/);
+  assert.doesNotMatch(english, /Private Mentoring|Corporate Programmes/);
+});
+
 test("coaching call links use the scoped compact bevelled treatment without changing their destination", () => {
   const html = renderCoaching({ language: "en", siteData });
   assert.equal((html.match(/coaching-call-button--compact/g) ?? []).length, 1);

@@ -5,7 +5,7 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "welcome", "free-experience", "tradition", "journey", "offers", "receive", "why-tariq", "testimonials", "insights", "final-cta", "next-step"];
+const approvedSections = ["hero", "welcome", "free-experience", "tradition", "journey", "testimonials", "offers", "receive", "why-tariq", "insights", "next-step"];
 const legacySections = ["lineage-expanded", "origins", "books", "ideal", "outcome", "coaching"];
 
 function section(html, id) {
@@ -16,7 +16,8 @@ test("homepage follows the approved concise 12-section sequence", () => {
   const html = renderHome({ language: "en" });
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(sections, approvedSections);
-  assert.equal(sections.indexOf("offers"), sections.indexOf("journey") + 1);
+  assert.ok(sections.indexOf("journey") < sections.indexOf("testimonials"));
+  assert.ok(sections.indexOf("testimonials") < sections.indexOf("offers"));
   assert.doesNotMatch(html, /conversionJourney/);
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
@@ -245,12 +246,11 @@ test("homepage offer note reflects only the current public offer structure", () 
   assert.doesNotMatch(spanish, /Mentoría privada|Programas corporativos/);
 });
 
-test("final CTA keeps Free primary, WhatsApp secondary and full journey available", () => {
-  const finalCta = section(renderHome({ language: "en" }), "final-cta");
-  const expectedWhatsApp = encodeURIComponent("Hi Tariq, I’d like to book a free 15-minute call to discuss Unleash Your Power.");
-  assert.match(finalCta, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"`));
-  assert.match(finalCta, new RegExp(`https://wa\\.me/34611223345\\?text=${expectedWhatsApp}`));
-  assert.match(finalCta, new RegExp(`href="${siteData.routes.masterKeySystem.replaceAll("/", "\\/")}"`));
+test("consolidated next-step CTA keeps the free route primary and preserves the canonical choices", () => {
+  const nextStep = section(renderHome({ language: "en" }), "next-step");
+  assert.match(nextStep, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"`));
+  assert.match(nextStep, new RegExp(`href="${siteData.routes.foundation.replaceAll("/", "\\/")}"`));
+  assert.match(nextStep, /calendly\.com\/tariq-unleashyourpowerwithtariq/);
 });
 
 test("homepage changed content remains bilingual and route-safe", async () => {
@@ -350,4 +350,19 @@ test("homepage next-step choices preserve canonical destinations and translated 
   assert.match(css, /\.homeNext__choices\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
   assert.match(css, /\.homeNext__choices\{[^}]*grid-template-columns:minmax\(0,1fr\)\}/);
   assert.match(css, /\.homeNext__choice \.button--secondary,[^\n]+:visited,[^\n]+:hover,[^\n]+:focus,[^\n]+:active\{color:var\(--cream\)\}/);
+});
+
+test("homepage presents one consolidated next-step section without the duplicate final next-step panel", () => {
+  const body = renderHome({ language: "en" });
+  assert.equal((body.match(/data-home-section="next-step"/g) ?? []).length, 1);
+  assert.doesNotMatch(body, /data-home-section="final-cta"/);
+  assert.equal((body.match(/data-i18n="home\.next\.tryCta"/g) ?? []).length, 1);
+  assert.equal((body.match(/data-i18n="home\.next\.guidanceCta"/g) ?? []).length, 1);
+  assert.equal((body.match(/data-i18n="home\.next\.structuredCta"/g) ?? []).length, 1);
+});
+
+test("homepage labels the testimonial section as genuine student experiences", () => {
+  const body = renderHome({ language: "en" });
+  assert.match(body, /GENUINE STUDENT EXPERIENCES/);
+  assert.ok(body.indexOf("GENUINE STUDENT EXPERIENCES") < body.indexOf("homeOffers"));
 });

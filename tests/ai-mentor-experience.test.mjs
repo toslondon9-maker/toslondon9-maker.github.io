@@ -60,6 +60,13 @@ test("AI Mentor page offers the free journey and canonical Foundation next steps
   assert.match(html, /href="\/foundation\/"[^>]*data-i18n="aiMentor\.cta\.foundation"/);
 });
 
+test("AI Mentor page does not use a self-referential Explore AI Learning CTA", () => {
+  const html = mentorPage();
+  assert.doesNotMatch(html, /data-i18n="aiMentor\.closing\.explore"/);
+  assert.match(html, /href="\/start-free\/"[^>]*data-i18n="aiMentor\.cta\.start"/);
+  assert.match(html, /href="\/foundation\/"[^>]*data-i18n="aiMentor\.cta\.foundation"/);
+});
+
 test("AI Mentor page presents the approved companion journey without changing the study shell", () => {
   const html = mentorPage();
 

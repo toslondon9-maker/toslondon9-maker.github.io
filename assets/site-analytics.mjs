@@ -23,6 +23,7 @@ const allowedEventNames = new Set([
   "complete_journey_paypal_click",
   "coaching_enquiry_click",
   "mastery_circle_application_click",
+  "calendly_click",
 ]);
 const foundationPaymentUrl = "https://www.paypal.com/ncp/payment/V5QYXZZS6KQE2";
 const completeJourneyPaymentUrl = "https://www.paypal.com/ncp/payment/JW7JRY5GTRTA6";
@@ -160,6 +161,7 @@ export function createAnalyticsController({ documentRef = globalThis.document, w
     const href = link?.href ?? "";
     if (link?.dataset?.i18n === "insights.cta.start") emit("article_cta_click");
     if (href.includes("wa.me/34611223345")) emit("whatsapp_call_click");
+    if (href.includes("calendly.com/tariq-unleashyourpowerwithtariq")) emit("calendly_click");
     if (href.includes("paypal.com/ncp/payment/")) {
       emit("begin_checkout", { currency: "GBP" });
       if (href.includes(foundationPaymentUrl)) emit("foundation_begin_checkout");

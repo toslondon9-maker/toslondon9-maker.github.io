@@ -8050,6 +8050,11 @@ html {
 .coachingBuild__quote { margin-top: 2rem; color: var(--gold-dark, #7f5c1c); font-family: Georgia, "Times New Roman", serif; }
 .coachingBuild__note { color: var(--muted); font-size: .9rem; }
 .coachingPricing__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 2rem; }
+.coachingContinuation { grid-column: span 3; min-width: 0; }
+.coachingContinuation > summary { cursor: pointer; padding: 1rem 1.1rem; border: 1px solid var(--gold); color: var(--night); font-weight: 800; }
+.coachingContinuation > summary:focus-visible { outline: 3px solid var(--gold-bright, #d2a64b); outline-offset: 3px; }
+.coachingContinuation__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+.coachingPricing__path { max-width: 52rem; color: var(--muted); }
 .coachingPricing__stage .button--secondary,
 .coachingPricing__complete .button--primary,
 .coachingProfessionalService .button--text { margin-top: auto; align-self: flex-start; }
@@ -8163,13 +8168,16 @@ html {
 
 @media (max-width: 1050px) {
   .coachingStageGrid,
-  .coachingPricing__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coachingPricing__grid,
+  .coachingContinuation__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 700px) {
   .coachingProgramme__fit,
   .coachingStageGrid,
   .coachingPricing__grid,
+  .coachingContinuation__grid,
   .coachingProfessionalServices__grid { grid-template-columns: minmax(0, 1fr); }
+  .coachingContinuation { grid-column: auto; }
   .coachingPricing__complete { grid-column: auto; }
   .coachingBuild__inner { text-align: left; }
   .coachingFinalStep { align-items: flex-start; flex-direction: column; }

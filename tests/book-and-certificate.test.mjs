@@ -82,3 +82,10 @@ test("About Tariq presents the supplied portrait and approved write-up", () => {
   assert.match(page.body, /Your next chapter doesn’t have to begin with everything figured out\./);
   assert.match(page.body, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"[^>]*>Start with the free 7-Day journey<`));
 });
+
+test("About Tariq offers Foundation after the personal story while keeping the free route", () => {
+  const page = routeRenderers[siteData.routes.aboutTariq](siteData);
+  assert.match(page.body, /class="aboutTariqStory"[\s\S]*href="\/start-free\/"/);
+  assert.match(page.body, /class="aboutTariqStory"[\s\S]*href="\/foundation\/"/);
+  assert.match(page.body, /data-i18n="aboutTariq\.foundation"/);
+});

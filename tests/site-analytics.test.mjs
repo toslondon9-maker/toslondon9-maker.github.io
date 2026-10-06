@@ -149,7 +149,7 @@ test("Phase 2 conversion events allow only named anonymous events", () => {
   controller.accept();
   const phaseTwoEvents = [
     "article_cta_click", "start_free_view", "start_free_registration_confirmed", "day_1_open",
-    "day_7_completion", "whatsapp_call_click", "foundation_begin_checkout", "complete_journey_begin_checkout", "start_free_cta_click", "registration_start", "day_complete", "homepage_cta_click", "foundation_page_view", "foundation_paypal_click", "complete_journey_paypal_click", "coaching_enquiry_click", "mastery_circle_application_click",
+    "day_7_completion", "whatsapp_call_click", "calendly_click", "foundation_begin_checkout", "complete_journey_begin_checkout", "start_free_cta_click", "registration_start", "day_complete", "homepage_cta_click", "foundation_page_view", "foundation_paypal_click", "complete_journey_paypal_click", "coaching_enquiry_click", "mastery_circle_application_click",
   ];
 
   for (const name of phaseTwoEvents) assert.equal(controller.trackEvent(name, { email: "visitor@example.test", firstName: "Visitor", whatsapp: "+34611223345" }), true);
