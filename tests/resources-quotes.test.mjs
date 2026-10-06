@@ -94,10 +94,10 @@ test("Resources featured journey CTA keeps white text in every interaction state
   const css = await readFile("assets/platform.css", "utf8");
   const page = resourcesPage(siteData, "en");
 
-  assert.match(page.body, /class="resourcesQuotes__featuredLink button button--secondary"[^>]*data-i18n="resources\.quotes\.featuredLink"/);
-  assert.match(css, /\.resourcesQuotes__featuredLink(?:,|\s)/);
-  assert.match(css, /\.resourcesQuotes__featuredLink[^{]*\{[^}]*color:\s*#ffffff\s*!important;[^}]*-webkit-text-fill-color:\s*#ffffff\s*!important;/s);
+  assert.match(page.body, /class="button button--secondary" href="\/master-key-system\/" data-i18n="resources\.quotes\.featuredLink"/);
+  assert.match(css, /\.resourcesQuotes__featureActions\s*>\s*a:first-child(?:,|\s)/);
+  assert.match(css, /\.resourcesQuotes__featureActions\s*>\s*a:first-child[^{]*\{[^}]*color:\s*#ffffff\s*!important;[^}]*-webkit-text-fill-color:\s*#ffffff\s*!important;/s);
   for (const state of ["visited", "hover", "focus", "focus-visible", "active"]) {
-    assert.match(css, new RegExp(`\\.resourcesQuotes__featuredLink:${state}[^\\{]*\\{[^}]*color:\\s*#ffffff\\s*!important;[^}]*-webkit-text-fill-color:\\s*#ffffff\\s*!important;`, "s"));
+    assert.match(css, new RegExp(`\\.resourcesQuotes__featureActions\\s*>\\s*a:first-child:${state}[^\\{]*\\{[^}]*color:\\s*#ffffff\\s*!important;[^}]*-webkit-text-fill-color:\\s*#ffffff\\s*!important;`, "s"));
   }
 });
