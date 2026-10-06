@@ -4320,6 +4320,19 @@ main > article {
 .aiMentorClosing > p { color: color-mix(in srgb, var(--cream) 84%, transparent); }
 .aiMentorClosing .aiMentorHero__quietCta { color: var(--cream); }
 
+.aiMentorClosing a.button--secondary,
+.aiMentorClosing a.button--secondary *,
+.aiMentorClosing a.button--secondary:visited,
+.aiMentorClosing a.button--secondary:visited *,
+.aiMentorClosing a.button--secondary:hover,
+.aiMentorClosing a.button--secondary:hover *,
+.aiMentorClosing a.button--secondary:focus,
+.aiMentorClosing a.button--secondary:focus *,
+.aiMentorClosing a.button--secondary:focus-visible,
+.aiMentorClosing a.button--secondary:focus-visible *,
+.aiMentorClosing a.button--secondary:active,
+.aiMentorClosing a.button--secondary:active * { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+
 @keyframes aiMentorOrbit { to { transform: rotate(336deg) scaleX(1.35); } }
 
 @media (prefers-reduced-motion: reduce) {

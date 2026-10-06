@@ -72,6 +72,19 @@ test("AI Mentor Foundation CTA keeps white text in every interaction state", () 
   }
 });
 
+test("AI Mentor closing free-journey CTA keeps white text in every interaction state", () => {
+  const html = mentorPage();
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+
+  assert.match(html, /<section class="aiMentorClosing"[\s\S]*?<a class="button--secondary" href="\/start-free\/"[^>]*data-i18n="aiMentor\.cta\.start">START THE FREE 7 DAYS<\/a>/);
+  assert.match(css, /\.aiMentorClosing a\.button--secondary(?:,|\s)/);
+  assert.match(css, /\.aiMentorClosing a\.button--secondary[^{]*\{[^}]*color:\s*#ffffff\s*!important;[^}]*-webkit-text-fill-color:\s*#ffffff\s*!important;/s);
+  for (const state of ["visited", "hover", "focus", "focus-visible", "active"]) {
+    assert.match(css, new RegExp(`\\.aiMentorClosing a\\.button--secondary:${state}[^\\{]*\\{[^}]*color:\\s*#ffffff\\s*!important;[^}]*-webkit-text-fill-color:\\s*#ffffff\\s*!important;`, "s"));
+  }
+  assert.match(css, /\.aiMentorClosing a\.button--secondary[^}]*\*[^}]*color:\s*#ffffff\s*!important;[^}]*-webkit-text-fill-color:\s*#ffffff\s*!important;/s);
+});
+
 test("AI Mentor page does not use a self-referential Explore AI Learning CTA", () => {
   const html = mentorPage();
   assert.doesNotMatch(html, /data-i18n="aiMentor\.closing\.explore"/);
