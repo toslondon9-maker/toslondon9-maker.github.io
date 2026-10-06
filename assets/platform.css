@@ -8127,16 +8127,16 @@ html {
 .coachingPricing__complete .button--primary,
 .coachingProfessionalService .button--text { margin-top: auto; align-self: flex-start; }
 .coachingPricing__price { margin: 0; font-size: 1.7rem; }
-.coachingPricing__complete { grid-column: span 2; border-color: var(--gold); background: var(--night); }
+.coachingPricing__complete { grid-column: span 2; gap: .55rem; padding: clamp(1.2rem, 2.5vw, 1.6rem); border-color: var(--gold); border-radius: 1.15rem; background: var(--night); box-shadow: 0 14px 30px rgb(7 21 37 / 18%); }
 .coachingPricing__complete h3,
 .coachingPricing__complete p,
 .coachingPricing__complete .coachingPricing__price { color: var(--cream); }
 .coachingPricing__saving,
 .coachingPricing__balance { color: var(--gold-dark, #7f5c1c) !important; font-weight: 800; }
-.coachingPricing__balanceCallout { margin-top: 1rem; padding: 1rem 1.1rem; border-radius: .35rem; background: var(--cream); color: var(--night); font-size: .86rem; line-height: 1.5; }
+.coachingPricing__balanceCallout { margin-top: .75rem; padding: 1rem 1.1rem; border-radius: .55rem; background: var(--cream); color: var(--night); font-size: .86rem; line-height: 1.5; }
 .coachingPricing__balanceCallout p { margin: 0; color: var(--night) !important; }
 .coachingPricing__balanceCallout p + p { margin-top: .65rem; font-weight: 500; }
-.coachingPricing__completeIncludes { margin: 1.25rem 0; padding: 1rem 1.1rem; border: 1px solid rgb(255 255 255 / 22%); border-radius: .35rem; background: rgb(255 255 255 / 8%); }
+.coachingPricing__completeIncludes { margin: .85rem 0; padding: 1rem 1.1rem; border: 1px solid rgb(255 255 255 / 22%); border-radius: .55rem; background: rgb(255 255 255 / 8%); }
 .coachingPricing__completeIncludes h4 { margin: 0 0 .65rem; color: var(--gold); font-size: .95rem; }
 .coachingPricing__completeIncludes ul { margin: 0; padding-left: 1.1rem; color: var(--cream); }
 .coachingPricing__completeIncludes li { margin: .35rem 0; }
@@ -8238,6 +8238,9 @@ html {
   .coachingStageGrid,
   .coachingPricing__grid,
   .coachingContinuation__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coachingContinuation { grid-column: 1 / -1; }
+  .calendlyCtaSection,
+  .coachingPricing__complete { grid-column: span 1; }
 }
 @media (max-width: 700px) {
   .coachingProgramme__fit,
@@ -8285,16 +8288,55 @@ html {
   .siteHeader .brand__wordmark { white-space: normal; }
 }
 .calendlyCta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: min(100%, 22rem);
+  min-width: 0;
+  box-sizing: border-box;
+  align-self: center;
+  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid #8d641f;
+  border-radius: 1.1rem;
+  background: linear-gradient(145deg, #b88935 0%, #d3aa58 52%, #a87828 100%);
+  color: #fffdf6 !important;
+  -webkit-text-fill-color: #fffdf6 !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 28%), 0 5px 0 #8a611e, 0 14px 28px rgb(7 24 40 / 18%);
+  transition: translate 160ms ease, box-shadow 160ms ease, background 160ms ease;
   text-align: center;
+}
+
+.calendlyCta:visited,
+.calendlyCta:hover,
+.calendlyCta:focus,
+.calendlyCta:active {
+  color: #fffdf6 !important;
+  -webkit-text-fill-color: #fffdf6 !important;
+}
+
+.calendlyCta:hover {
+  background: linear-gradient(145deg, #a87828 0%, #c0933d 52%, #8f641e 100%);
+  translate: 0 -2px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 22%), 0 6px 0 #7a5419, 0 18px 32px rgb(7 24 40 / 22%);
+}
+
+.calendlyCta:focus-visible {
+  outline: 3px solid var(--gold-bright, #d2a64b);
+  outline-offset: 4px;
+}
+
+.calendlyCta:active {
+  translate: 0 2px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 2px 0 #7a5419, 0 8px 18px rgb(7 24 40 / 18%);
 }
 
 .calendlyCtaSection {
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin: 1.25rem 0;
+  grid-column: span 2;
+  min-width: 0;
+  margin: 0;
 }
 
 @media (max-width: 700px) {

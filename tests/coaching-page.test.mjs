@@ -2,8 +2,10 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { renderCoaching } from "../src/pages/coaching.mjs";
+import { coachingPage } from "../src/pages/coaching.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { mountTabs } from "../assets/tabs.mjs";
+import { renderPage } from "../src/page-shell.mjs";
 
 test("coaching follows the concise Start Free to pricing journey", () => {
   const html = renderCoaching({ language: "en", siteData });
@@ -160,6 +162,25 @@ test("coaching call links use the scoped compact bevelled treatment without chan
   assert.match(css, /\.coaching-call-button--compact\s*\{[^}]*background:\s*var\(--night\)[^}]*color:\s*#fff/s);
   assert.match(css, /\.coaching-call-button--compact:hover\s*\{[^}]*transform:\s*translateY\(-2px\)/s);
   assert.match(css, /\.coaching-call-button--compact:focus-visible\s*\{[^}]*outline:/s);
+});
+
+test("coaching pricing cards keep the Calendly CTA compact and the complete journey balanced", () => {
+  const page = renderPage(coachingPage(siteData, "en"));
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  const calendly = page.match(/<div class="calendlyCtaSection"[\s\S]*?<\/div>/)?.[0] ?? "";
+  const complete = page.match(/<article class="coachingPricing__complete card">[\s\S]*?<\/article>/)?.[0] ?? "";
+
+  assert.match(calendly, /class="button--secondary calendlyCta" href="https:\/\/calendly\.com\/tariq-unleashyourpowerwithtariq" target="_blank" rel="noopener noreferrer"/);
+  assert.match(calendly, /data-i18n="cta\.calendlyCall">BOOK A FREE 15-MINUTE CALL<\/a>/);
+  assert.match(complete, /<h3><span data-i18n="coaching\.full\.title">Complete 24-Week Journey<\/span><\/h3>/);
+  assert.match(complete, /https:\/\/www\.paypal\.com\/ncp\/payment\/JW7JRY5GTRTA6/);
+  assert.match(css, /\.calendlyCta\s*\{[^}]*width:\s*min\(100%,\s*22rem\)[^}]*background:\s*linear-gradient\(145deg,\s*#b88935\s*0%,\s*#d3aa58\s*52%,\s*#a87828\s*100%\)[^}]*box-shadow:/s);
+  assert.match(css, /\.calendlyCta:hover\s*\{[^}]*translate:\s*0 -2px/s);
+  assert.match(css, /\.calendlyCta:focus-visible\s*\{[^}]*outline:/s);
+  assert.match(css, /\.calendlyCtaSection\s*\{[^}]*grid-column:\s*span 2/s);
+  assert.match(css, /\.coachingPricing__complete\s*\{[^}]*border-radius:\s*1\.15rem[^}]*box-shadow:/s);
+  assert.match(css, /@media \(max-width: 1050px\)[\s\S]*?\.calendlyCtaSection,[\s\S]*?\.coachingPricing__complete\s*\{\s*grid-column:\s*span 1/s);
+  assert.match(css, /@media \(max-width: 700px\)[\s\S]*?\.coachingPricing__complete\s*\{\s*grid-column:\s*auto/s);
 });
 
 test("professional services use a two-column desktop grid and one-column mobile grid", () => {
