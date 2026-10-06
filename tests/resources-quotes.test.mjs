@@ -89,3 +89,15 @@ test("Resources exposes the approved canonical source file with a scoped white b
   assert.match(css, /\.resourcesQuotes__sourceFile(?:,|\s)/);
   assert.match(css, /\.resourcesQuotes__sourceFile[^}]*color:\s*#fff/);
 });
+
+test("Resources featured journey CTA keeps white text in every interaction state", async () => {
+  const css = await readFile("assets/platform.css", "utf8");
+  const page = resourcesPage(siteData, "en");
+
+  assert.match(page.body, /class="resourcesQuotes__featuredLink button button--secondary"[^>]*data-i18n="resources\.quotes\.featuredLink"/);
+  assert.match(css, /\.resourcesQuotes__featuredLink(?:,|\s)/);
+  assert.match(css, /\.resourcesQuotes__featuredLink[^{]*\{[^}]*color:\s*#ffffff\s*!important;[^}]*-webkit-text-fill-color:\s*#ffffff\s*!important;/s);
+  for (const state of ["visited", "hover", "focus", "focus-visible", "active"]) {
+    assert.match(css, new RegExp(`\\.resourcesQuotes__featuredLink:${state}[^\\{]*\\{[^}]*color:\\s*#ffffff\\s*!important;[^}]*-webkit-text-fill-color:\\s*#ffffff\\s*!important;`, "s"));
+  }
+});

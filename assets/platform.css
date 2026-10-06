@@ -606,6 +606,18 @@ main > article {
 .resourcesQuotes__feature .resourcesQuotes__source { color: rgba(255,255,255,.78); }
 .resourcesQuotes__feature .button { margin-top: 1rem; }
 .resourcesQuotes__featureActions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.resourcesQuotes__featuredLink,
+.resourcesQuotes__featuredLink *,
+.resourcesQuotes__featuredLink:visited,
+.resourcesQuotes__featuredLink:visited *,
+.resourcesQuotes__featuredLink:hover,
+.resourcesQuotes__featuredLink:hover *,
+.resourcesQuotes__featuredLink:focus,
+.resourcesQuotes__featuredLink:focus *,
+.resourcesQuotes__featuredLink:focus-visible,
+.resourcesQuotes__featuredLink:focus-visible *,
+.resourcesQuotes__featuredLink:active,
+.resourcesQuotes__featuredLink:active * { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; opacity: 1; }
 .resourcesQuotes__sourceFile,
 .resourcesQuotes__sourceFile:visited,
 .resourcesQuotes__sourceFile:hover,
@@ -4100,6 +4112,19 @@ main > article {
   text-decoration-color: var(--gold);
   text-underline-offset: 0.2em;
 }
+
+.aiMentorHero__layout .aiMentorHero__quietCta,
+.aiMentorHero__layout .aiMentorHero__quietCta *,
+.aiMentorHero__layout .aiMentorHero__quietCta:visited,
+.aiMentorHero__layout .aiMentorHero__quietCta:visited *,
+.aiMentorHero__layout .aiMentorHero__quietCta:hover,
+.aiMentorHero__layout .aiMentorHero__quietCta:hover *,
+.aiMentorHero__layout .aiMentorHero__quietCta:focus,
+.aiMentorHero__layout .aiMentorHero__quietCta:focus *,
+.aiMentorHero__layout .aiMentorHero__quietCta:focus-visible,
+.aiMentorHero__layout .aiMentorHero__quietCta:focus-visible *,
+.aiMentorHero__layout .aiMentorHero__quietCta:active,
+.aiMentorHero__layout .aiMentorHero__quietCta:active * { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; opacity: 1; }
 
 .aiMentorHero__quietCta:focus-visible {
   outline: 3px solid var(--gold-bright);

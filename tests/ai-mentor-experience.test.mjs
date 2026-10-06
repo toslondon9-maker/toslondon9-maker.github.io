@@ -60,6 +60,18 @@ test("AI Mentor page offers the free journey and canonical Foundation next steps
   assert.match(html, /href="\/foundation\/"[^>]*data-i18n="aiMentor\.cta\.foundation"/);
 });
 
+test("AI Mentor Foundation CTA keeps white text in every interaction state", () => {
+  const html = mentorPage();
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+
+  assert.match(html, /<a class="aiMentorHero__quietCta"[^>]*data-i18n="aiMentor\.cta\.foundation">Explore Foundation<\/a>/);
+  assert.match(css, /\.aiMentorHero__quietCta(?:,|\s)/);
+  assert.match(css, /\.aiMentorHero__quietCta[^{]*\{[^}]*color:\s*#ffffff\s*!important;[^}]*-webkit-text-fill-color:\s*#ffffff\s*!important;/s);
+  for (const state of ["visited", "hover", "focus", "focus-visible", "active"]) {
+    assert.match(css, new RegExp(`\\.aiMentorHero__quietCta:${state}[^\\{]*\\{[^}]*color:\\s*#ffffff\\s*!important;[^}]*-webkit-text-fill-color:\\s*#ffffff\\s*!important;`, "s"));
+  }
+});
+
 test("AI Mentor page does not use a self-referential Explore AI Learning CTA", () => {
   const html = mentorPage();
   assert.doesNotMatch(html, /data-i18n="aiMentor\.closing\.explore"/);
