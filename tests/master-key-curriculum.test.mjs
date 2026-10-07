@@ -14,7 +14,7 @@ test("the MKS Study Room preserves the complete 24-week curriculum", () => {
   const weeks = [...curriculum.matchAll(/data-week="(\d+)"/g)].map((match) => Number(match[1]));
 
   assert.deepEqual(weeks, Array.from({ length: 24 }, (_, index) => index + 1));
-  assert.equal((curriculum.match(/<h3>Introduction<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<h3>Introduction<\/h3>/g) ?? []).length, 23);
   assert.equal((curriculum.match(/<h3>Content<\/h3>/g) ?? []).length, 24);
   assert.equal((curriculum.match(/<h3>About the exercise<\/h3>/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="weeklyQA(?:\s|\")/g) ?? []).length, 24);
@@ -35,6 +35,20 @@ test("the MKS Study Room preserves the complete 24-week curriculum", () => {
 
   const navigation = renderHeader({ route: "/", language: "en" });
   assert.equal((navigation.match(/href="\/master-key-system\/"[^>]*>Master Key System<\/a>/g) ?? []).length, 2);
+});
+
+test("Chapter 1 adds the rewritten study guidance without changing the original exercise", () => {
+  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+  const chapterOne = html.match(/<details id="week-1"[\s\S]*?<details id="week-2"/)?.[0] ?? "";
+  const chapterTwo = html.match(/<details id="week-2"[\s\S]*?<details id="week-3"/)?.[0] ?? "";
+
+  assert.match(chapterOne, /<h3>About this chapter<\/h3>[\s\S]*?One Consciousness, One Power/);
+  assert.match(chapterOne, /Consistency will matter\./);
+  assert.match(chapterOne, /<h3>About the exercise<\/h3><p>Sit upright and comfortably in a quiet room for 15–30 minutes\. Allow thoughts to roam, but keep the body perfectly still\. Practise daily until physical stillness becomes natural\.<\/p>/);
+  assert.match(chapterOne, /<details class="mksStudyRoom__chapterExerciseAbout"><summary>Read more to master this exercise<\/summary>[\s\S]*?This first exercise is your starting point/);
+  assert.doesNotMatch(chapterOne, /<details class="mksStudyRoom__chapterExerciseAbout"[^>]*\sopen(?:=|\s|>)/);
+  assert.ok(chapterOne.indexOf("<h3>About the exercise</h3>") < chapterOne.indexOf("Read more to master this exercise"));
+  assert.doesNotMatch(chapterTwo, /Read more to master this exercise|One Consciousness, One Power/);
 });
 
 test("the MKS Study Room links the supplied Google Photos videos to Chapters 2, 3 and 4", () => {
@@ -129,4 +143,11 @@ test("the MKS Study Room has bounded responsive layout and visible focus treatme
   assert.match(css, /\.mksStudyRoom__chapter summary:focus-visible[^{]*\{/s);
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__layout[\s\S]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__courseNav[\s\S]*display:\s*none/s);
+});
+
+test("the Chapter 1 exercise disclosure has accessible desktop and mobile styling", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.mksStudyRoom__chapterExerciseAbout\s*>\s*summary[^\{]*\{[\s\S]*cursor:\s*pointer/s);
+  assert.match(css, /\.mksStudyRoom__chapterExerciseAbout\s*>\s*summary:focus-visible[^\{]*\{[\s\S]*outline:/s);
+  assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__chapterExerciseAbout/s);
 });

@@ -7827,6 +7827,37 @@ body {
   margin-top: 0;
 }
 
+.mksStudyRoom__chapterExerciseAbout {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--cream);
+}
+
+.mksStudyRoom__chapterExerciseAbout > summary {
+  min-height: 44px;
+  padding: .75rem 0;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.mksStudyRoom__chapterExerciseAbout > summary:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.mksStudyRoom__chapterExerciseAbout > div {
+  display: grid;
+  gap: .75rem;
+  padding: 0 0 1rem;
+}
+
+.mksStudyRoom__chapterExerciseAbout p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .mksStudyRoom__chapter .chapterBody p,
 .mksStudyRoom__chapter .chapterBody li,
 .mksStudyRoom__chapter .chapterBody dd,
@@ -7900,6 +7931,10 @@ body {
 
   .mksStudyRoom__visualNav {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .mksStudyRoom__chapterExerciseAbout > summary {
+    padding-block: .8rem;
   }
 }
 
