@@ -7876,6 +7876,10 @@ body {
   padding: 0 0 1rem;
 }
 
+.mksStudyRoom__stageBlock[data-stage="foundation"] .mksStudyRoom__chapterExerciseAbout > div {
+  padding: 1rem clamp(1rem, 3vw, 1.5rem) 1.25rem;
+}
+
 .mksStudyRoom__chapterExerciseAbout p {
   margin: 0;
   color: var(--muted);

@@ -181,6 +181,7 @@ test("the Chapter 1 exercise disclosure has accessible desktop and mobile stylin
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
   assert.match(css, /\.mksStudyRoom__chapterGuidance\s*\{[\s\S]*border-bottom:\s*1px solid var\(--border\)/s);
   assert.match(css, /\.mksStudyRoom__chapterGuidance h4\s*\{[\s\S]*color:\s*var\(--night\)/s);
+  assert.match(css, /\.mksStudyRoom__stageBlock\[data-stage="foundation"\]\s+\.mksStudyRoom__chapterExerciseAbout\s*>\s*div\s*\{[\s\S]*padding:\s*1rem clamp\(1rem, 3vw, 1.5rem\) 1.25rem/s);
   assert.match(css, /\.mksStudyRoom__chapterExerciseAbout\s*>\s*summary[^\{]*\{[\s\S]*cursor:\s*pointer/s);
   assert.match(css, /\.mksStudyRoom__chapterExerciseAbout\s*>\s*summary:focus-visible[^\{]*\{[\s\S]*outline:/s);
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__chapterExerciseAbout/s);
