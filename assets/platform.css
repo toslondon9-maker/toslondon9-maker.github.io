@@ -7818,6 +7818,10 @@ body {
   border-top: 0;
 }
 
+.mksStudyRoom__stageBlock[data-stage="foundation"] .mksStudyRoom__chapter .chapterBody {
+  padding: 1.2rem clamp(1.35rem, 4vw, 2.75rem) 1.5rem;
+}
+
 .mksStudyRoom__chapter .chapterBody h3 {
   margin-top: 1.5rem;
   color: var(--night);

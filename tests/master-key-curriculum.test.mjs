@@ -171,6 +171,12 @@ test("the MKS Study Room has bounded responsive layout and visible focus treatme
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__courseNav[\s\S]*display:\s*none/s);
 });
 
+test("Foundation chapters use a scoped, comfortable inner text inset", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.mksStudyRoom__stageBlock\[data-stage="foundation"\]\s+\.mksStudyRoom__chapter\s+\.chapterBody\s*\{[\s\S]*padding:\s*1\.2rem clamp\(1\.35rem, 4vw, 2\.75rem\) 1\.5rem/s);
+  assert.doesNotMatch(css, /\.mksStudyRoom__stageBlock\[data-stage="(?:visualisation|concentration|integration-mastery)"\][\s\S]*padding:\s*1\.2rem clamp\(1\.35rem, 4vw, 2\.75rem\) 1\.5rem/s);
+});
+
 test("the Chapter 1 exercise disclosure has accessible desktop and mobile styling", () => {
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
   assert.match(css, /\.mksStudyRoom__chapterGuidance\s*\{[\s\S]*border-bottom:\s*1px solid var\(--border\)/s);
