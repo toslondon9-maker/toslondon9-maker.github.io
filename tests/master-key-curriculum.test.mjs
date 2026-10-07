@@ -133,6 +133,15 @@ test("the Foundation chapters are followed by one bilingual Foundation conversio
   assert.equal((english.match(/mksStudyRoom__foundationCta/g) ?? []).length, 1);
 });
 
+test("the Foundation callout stays a balanced gold card on mobile", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /@media \(max-width: 768px\)[\s\S]*\.mksStudyRoom__foundationCta\s*\{[\s\S]*background:\s*linear-gradient\(/s);
+  assert.match(css, /@media \(max-width: 768px\)[\s\S]*\.mksStudyRoom__foundationCta\s*\{[\s\S]*border-radius:\s*(?:1rem|16px)/s);
+  assert.match(css, /@media \(max-width: 768px\)[\s\S]*\.mksStudyRoom__foundationCta\s*\{[\s\S]*min-width:\s*0/s);
+  assert.match(css, /@media \(max-width: 768px\)[\s\S]*\.mksStudyRoom__foundationCta p\s*\{[\s\S]*overflow-wrap:\s*(?:anywhere|break-word)/s);
+  assert.match(css, /@media \(max-width: 768px\)[\s\S]*\.mksStudyRoom__foundationCta \.button--secondary\s*\{[\s\S]*width:\s*100%[\s\S]*box-sizing:\s*border-box[\s\S]*text-align:\s*center/s);
+});
+
 test("the MKS Study Room restores four non-promotional stage illustrations", () => {
   const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
   for (const [stage, image, week] of [

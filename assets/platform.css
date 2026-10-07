@@ -7575,10 +7575,36 @@ body {
   font-weight: 700;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .mksStudyRoom__foundationCta {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
+    min-width: 0;
+    padding: 1.25rem clamp(1rem, 6vw, 1.5rem);
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #c79738 0%, #e9c96f 52%, #b17b23 100%);
+    overflow: hidden;
+  }
+
+  .mksStudyRoom__foundationCta p {
+    width: 100%;
+    max-width: 28rem;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .mksStudyRoom__foundationCta .button--secondary {
+    width: 100%;
+    max-width: 22rem;
+    box-sizing: border-box;
+    border-color: var(--night);
+    background: var(--night);
+    color: var(--cream);
+    text-align: center;
+  }
+
+  .mksStudyRoom__foundationCta .button--secondary:hover {
+    background: var(--night-soft);
   }
 }
 
