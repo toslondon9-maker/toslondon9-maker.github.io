@@ -91,6 +91,8 @@ function renderChapters(language) {
       .replace("<details>", `<details id="week-${index + 1}" class="mksStudyRoom__chapter" data-week="${index + 1}">`)
       .replaceAll("AI MASTERY COACH", "AI MASTERY PROMPT")
       .replace("Paste this into ChatGPT. Your AI coach will test, challenge and guide you one step at a time—without giving away the answers too early.", "Copy this guided prompt into ChatGPT to explore this week's Master Key lesson more deeply.")
+      .replaceAll('class="promptPreview"', 'class="aiMasteryPrompt"')
+      .replaceAll('<summary>Preview the engineered prompt <b>＋</b></summary>', '<summary>Preview of the engineered prompt <b aria-hidden="true">+</b></summary>')
       .replaceAll("<h3>Exercise</h3>", "<h3>About the exercise</h3>");
     if (index === 0) {
       chapter = chapter.replace(/<h3>Introduction<\/h3>[\s\S]*?(?=<a class="weekVideo")/, chapterOneAbout);

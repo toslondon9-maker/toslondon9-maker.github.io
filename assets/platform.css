@@ -1393,8 +1393,17 @@ main > article {
   font: inherit;
   font-weight: 800;
 }
-.aiMasteryPrompt summary b { color: var(--gold-bright); font-size: 1.25rem; transition: transform 160ms ease; }
-.aiMasteryPrompt[open] summary b { transform: rotate(45deg); }
+.aiMasteryPrompt summary b {
+  color: var(--gold-bright);
+  font-size: 0;
+}
+.aiMasteryPrompt summary b::before {
+  content: "+";
+  display: inline-block;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.aiMasteryPrompt[open] summary b::before { content: "−"; }
 .aiMasteryPrompt__content { padding-top: 1rem; }
 .aiMasteryPrompt__label { margin: 0 0 .65rem; font-size: .74rem; letter-spacing: .1em; }
 .aiMasteryPrompt pre {

@@ -19,6 +19,8 @@ test("the MKS Study Room preserves the complete 24-week curriculum", () => {
   assert.equal((curriculum.match(/<h3>About the exercise<\/h3>/g) ?? []).length, 28);
   assert.equal((curriculum.match(/class="weeklyQA(?:\s|\")/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="aiMastery"/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/class="aiMasteryPrompt"/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/Preview of the engineered prompt/g) ?? []).length, 24);
   assert.equal((curriculum.match(/Copy prompt/g) ?? []).length, 24);
   for (const title of ["One Consciousness – One Power", "One Method of Finding the Truth", "Thoughts Become Things", "The True “Self”"]) assert.ok(curriculum.includes(title), title);
   assert.match(curriculum, /The Truth shall set you free/);
@@ -101,6 +103,9 @@ test("the MKS Study Room removes promotional preview language and keeps study co
   assert.match(html, /aria-label="Course navigation"/);
   assert.match(html, /Study → Practise → Reflect → Apply/);
   assert.equal((html.match(/<details[^>]*\sopen(?:=|\s|>)/g) ?? []).length, 0);
+  assert.match(html, /<details class="aiMasteryPrompt"><summary>Preview of the engineered prompt <b aria-hidden="true">\+<\/b><\/summary><pre>/);
+  assert.doesNotMatch(html, /<summary>Preview the engineered prompt/);
+  assert.doesNotMatch(html, /<(?:system|developer)>/i);
   assert.equal((html.match(/class="mksStudyRoom__qa"/g) ?? []).length, 240);
   assert.equal((html.match(/class="mksStudyRoom__chapter"/g) ?? []).length, 24);
   assert.equal((html.match(/data-complete-week="\d+"/g) ?? []).length, 24);
@@ -185,4 +190,11 @@ test("the Chapter 1 exercise disclosure has accessible desktop and mobile stylin
   assert.match(css, /\.mksStudyRoom__chapterExerciseAbout\s*>\s*summary[^\{]*\{[\s\S]*cursor:\s*pointer/s);
   assert.match(css, /\.mksStudyRoom__chapterExerciseAbout\s*>\s*summary:focus-visible[^\{]*\{[\s\S]*outline:/s);
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__chapterExerciseAbout/s);
+});
+
+test("AI prompt previews keep readable mobile styling and toggle their symbol", () => {
+  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.aiMasteryPrompt summary b::before\s*\{[\s\S]*content:\s*["']\+["']/s);
+  assert.match(css, /\.aiMasteryPrompt\[open\] summary b::before\s*\{[\s\S]*content:\s*["']−["']/s);
+  assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.aiMasteryPrompt pre\s*\{[\s\S]*white-space:\s*pre-wrap/s);
 });
