@@ -7827,6 +7827,25 @@ body {
   margin-top: 0;
 }
 
+.mksStudyRoom__chapterGuidance {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.mksStudyRoom__chapterGuidance h3 {
+  margin-top: 0 !important;
+}
+
+.mksStudyRoom__chapterGuidance h4 {
+  margin: 1rem 0 .75rem;
+  color: var(--night);
+}
+
+.mksStudyRoom__chapterGuidance p {
+  margin: 0 0 .9rem;
+}
+
 .mksStudyRoom__chapterExerciseAbout {
   margin-top: 1.25rem;
   border-top: 1px solid var(--border);

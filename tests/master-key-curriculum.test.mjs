@@ -16,7 +16,7 @@ test("the MKS Study Room preserves the complete 24-week curriculum", () => {
   assert.deepEqual(weeks, Array.from({ length: 24 }, (_, index) => index + 1));
   assert.equal((curriculum.match(/<h3>Introduction<\/h3>/g) ?? []).length, 23);
   assert.equal((curriculum.match(/<h3>Content<\/h3>/g) ?? []).length, 24);
-  assert.equal((curriculum.match(/<h3>About the exercise<\/h3>/g) ?? []).length, 24);
+  assert.equal((curriculum.match(/<h3>About the exercise<\/h3>/g) ?? []).length, 28);
   assert.equal((curriculum.match(/class="weeklyQA(?:\s|\")/g) ?? []).length, 24);
   assert.equal((curriculum.match(/class="aiMastery"/g) ?? []).length, 24);
   assert.equal((curriculum.match(/Copy prompt/g) ?? []).length, 24);
@@ -48,7 +48,33 @@ test("Chapter 1 adds the rewritten study guidance without changing the original 
   assert.match(chapterOne, /<details class="mksStudyRoom__chapterExerciseAbout"><summary>Read more to master this exercise<\/summary>[\s\S]*?This first exercise is your starting point/);
   assert.doesNotMatch(chapterOne, /<details class="mksStudyRoom__chapterExerciseAbout"[^>]*\sopen(?:=|\s|>)/);
   assert.ok(chapterOne.indexOf("<h3>About the exercise</h3>") < chapterOne.indexOf("Read more to master this exercise"));
-  assert.doesNotMatch(chapterTwo, /Read more to master this exercise|One Consciousness, One Power/);
+});
+
+test("Chapters 2 to 4 add only their supplied guidance and preserve their original exercises", () => {
+  const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
+  const chapters = [2, 3, 4].map((week) => html.match(new RegExp(`<details id="week-${week}"[\\s\\S]*?<details id="week-${week + 1}"`))?.[0] ?? "");
+  const expected = [
+    ["Welcome to the second part of your study.", "This week, your practice shifts from physical stillness to becoming more aware of your thoughts.", "try the word “freedom”"],
+    ["In the first two chapters, you began exploring the idea of one Consciousness", "This week, you’ll practise physical relaxation.", "The Power of Thought"],
+    ["This chapter invites you to explore the idea of your true “I”", "This week, you’ll practise relaxing your mind.", "Discovering the True Self"],
+  ];
+  const exercises = [
+    "Use the same place and posture as Week 1. Be perfectly still and gently inhibit thought. Each time care, worry or fear enters, release it and return to mental quiet.",
+    "Be perfectly still and inhibit thought as far as possible. Then relax completely: let every muscle and nerve return to its natural condition until you feel quiet, restful and at peace with yourself and the world.",
+    "Relax physically, then mentally let go of hatred, anger, worry, jealousy, envy, sorrow, disappointment and every adverse condition. Release them through deliberate intention and persistence.",
+  ];
+
+  chapters.forEach((chapter, index) => {
+    for (const marker of expected[index]) assert.match(chapter, new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.match(chapter, /<h3>About this chapter<\/h3>/);
+    assert.match(chapter, /<details class="mksStudyRoom__chapterExerciseAbout"><summary>Read more to master this exercise<\/summary>[\s\S]*?<h3>About the exercise<\/h3>/);
+    assert.doesNotMatch(chapter, /<details class="mksStudyRoom__chapterExerciseAbout"[^>]*\sopen(?:=|\s|>)/);
+    assert.match(chapter, new RegExp(exercises[index].replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  });
+
+  const laterChapters = html.match(/<details id="week-5"[\s\S]*<\/section><\/main>/)?.[0] ?? "";
+  assert.doesNotMatch(laterChapters, /About this chapter|Read more to master this exercise/);
+  assert.equal((html.match(/class="mksStudyRoom__chapterExerciseAbout"/g) ?? []).length, 4);
 });
 
 test("the MKS Study Room links the supplied Google Photos videos to Chapters 2, 3 and 4", () => {
@@ -147,6 +173,8 @@ test("the MKS Study Room has bounded responsive layout and visible focus treatme
 
 test("the Chapter 1 exercise disclosure has accessible desktop and mobile styling", () => {
   const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
+  assert.match(css, /\.mksStudyRoom__chapterGuidance\s*\{[\s\S]*border-bottom:\s*1px solid var\(--border\)/s);
+  assert.match(css, /\.mksStudyRoom__chapterGuidance h4\s*\{[\s\S]*color:\s*var\(--night\)/s);
   assert.match(css, /\.mksStudyRoom__chapterExerciseAbout\s*>\s*summary[^\{]*\{[\s\S]*cursor:\s*pointer/s);
   assert.match(css, /\.mksStudyRoom__chapterExerciseAbout\s*>\s*summary:focus-visible[^\{]*\{[\s\S]*outline:/s);
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__chapterExerciseAbout/s);
