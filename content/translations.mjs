@@ -501,7 +501,7 @@ const translations = deepFreeze({
     en: "Build greater focus, clarify what you want and develop the habits to follow through—with practical guidance, reflection and a clear next step.",
     es: "Desarrolla tu enfoque, aclara lo que quieres y crea hábitos para avanzar, con orientación práctica, reflexión y un siguiente paso claro.",
   },
-  "route.home.action": { en: "START YOUR 7 DAYS", es: "EMPIEZA TUS 7 DÍAS" },
+  "route.home.action": { en: "GET MY FREE 7-DAY INTRODUCTION", es: "EMPIEZA MI INTRODUCCIÓN GRATIS" },
   "route.masterKeySystem.metaTitle": { en: "Master Key System 24 Week Course | Unleash Your Power", es: "Curso de 24 semanas del Master Key System | Unleash Your Power" },
   "route.mksLineage.metaTitle": { en: "Charles Haanel Master Key System Lineage | Unleash Your Power", es: "Linaje del Master Key System de Charles Haanel | Unleash Your Power" },
   "route.mksLineage.metaDescription": { en: "Explore the independent study tradition connecting Charles F. Haanel's Master Key System with modern reflection and practical application.", es: "Explora la tradición de estudio independiente que conecta el Master Key System de Charles F. Haanel con la reflexión y la aplicación práctica actuales." },
