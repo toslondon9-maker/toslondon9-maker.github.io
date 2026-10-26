@@ -8768,3 +8768,9 @@ html {
     font-size: clamp(1.85rem, 7vw, 2.35rem);
   }
 }
+
+
+/* Homepage hero headline: allow roughly three words per line. */
+.homeHero h1 {
+  max-width: 18ch;
+}
