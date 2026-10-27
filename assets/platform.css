@@ -8774,3 +8774,72 @@ html {
 .homeHero h1 {
   max-width: 18ch;
 }
+
+
+/* Coaching page mobile layout repair.
+   Keep these overrides after all legacy coaching rules so late desktop
+   declarations cannot force four-column grids onto narrow screens. */
+@media (max-width: 700px) {
+  .coachingPage .coachingProgramme__fit,
+  .coachingPage .coachingStageGrid,
+  .coachingPage .coachingPricing__grid,
+  .coachingPage .coachingContinuation__grid,
+  .coachingPage .coachingProfessionalServices__grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .coachingPage .coachingPricing__grid > *,
+  .coachingPage .coachingContinuation,
+  .coachingPage .coachingContinuation__grid > *,
+  .coachingPage .coachingStage,
+  .coachingPage .coachingPricing__stage,
+  .coachingPage .coachingPricing__complete,
+  .coachingPage .coachingProfessionalService {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .coachingPage .coachingPricing__stage,
+  .coachingPage .coachingPricing__complete,
+  .coachingPage .coachingProfessionalService,
+  .coachingPage .coachingStage {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .coachingPage .coachingStage__weeks,
+  .coachingPage .coachingStage__price,
+  .coachingPage .coachingPricing__price,
+  .coachingPage .coachingStage h3,
+  .coachingPage .coachingPricing__stage h3 {
+    writing-mode: horizontal-tb;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .coachingPage .coachingContinuation > summary {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+  }
+
+  .coachingPage .coachingContinuation[open] .coachingContinuation__grid {
+    margin-top: 0.75rem;
+  }
+
+  .coachingPage .coachingHero,
+  .coachingPage .coachingProgramme,
+  .coachingPage .coachingPricing,
+  .coachingPage .coachingProfessionalServices,
+  .coachingPage .coachingFaqSection,
+  .coachingPage .coachingFinalStep {
+    min-width: 0;
+  }
+}
