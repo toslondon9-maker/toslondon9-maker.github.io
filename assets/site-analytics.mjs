@@ -58,7 +58,7 @@ function safeEventParameters(name, parameters = {}) {
   if (name === "generate_lead") return { method: "website" };
   if (name === "begin_checkout") return { currency: "GBP" };
   if (name === "social_click") return {
-    platform: ["linkedin", "instagram", "tiktok", "facebook", "youtube"].includes(parameters.platform) ? parameters.platform : "",
+    platform: ["linkedin", "instagram", "tiktok", "facebook", "youtube", "x"].includes(parameters.platform) ? parameters.platform : "",
     destination_url: typeof parameters.destination_url === "string" ? parameters.destination_url : "",
     page_path: typeof parameters.page_path === "string" && parameters.page_path.startsWith("/") ? parameters.page_path : "/",
   };
