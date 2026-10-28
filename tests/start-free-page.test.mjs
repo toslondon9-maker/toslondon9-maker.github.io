@@ -10,13 +10,13 @@ import { renderStartFree } from "../src/pages/start-free.mjs";
 
 const dashboard = () => routeRenderers[siteData.routes.startFree](siteData);
 
-test("Start Free places free value and preview immediately before the anchored registration gate", () => {
+test("Start Free places the registration gate immediately after the free-value pitch, with the seven-day preview available below", () => {
   const html = dashboard().body;
-  const journeyIndex = html.indexOf('class="sevenDayPreview"');
   const registrationIndex = html.indexOf('id="start-free-registration"');
+  const journeyIndex = html.indexOf('class="sevenDayPreview"');
 
   assert.equal((html.match(/class="sevenDayConversion"/g) ?? []).length, 1);
-  assert.ok(journeyIndex >= 0 && journeyIndex < registrationIndex);
+  assert.ok(registrationIndex >= 0 && registrationIndex < journeyIndex);
   assert.match(html.slice(0, registrationIndex), /sevenDayConversion/);
   assert.match(html, /<section class="sevenDayRegistration" id="start-free-registration">/);
 });
@@ -37,9 +37,9 @@ test("Start Free gives the primary conversion CTA a scoped line of space before 
 test("Start Free explains the free value and previews all seven days before registration", () => {
   const html = dashboard().body;
   const valueIndex = html.indexOf("7 Days to Change the Way You Use Your Mind");
-  const previewIndex = html.indexOf("sevenDayPreview");
   const registrationIndex = html.indexOf('id="start-free-registration"');
-  assert.ok(valueIndex >= 0 && previewIndex > valueIndex && registrationIndex > previewIndex);
+  const previewIndex = html.indexOf("sevenDayPreview");
+  assert.ok(valueIndex >= 0 && registrationIndex > valueIndex && previewIndex > registrationIndex);
   assert.equal((html.match(/class="sevenDayPreview__day"/g) ?? []).length, 7);
   assert.match(html, /Approximately 75–90 minutes across the entire week\./);
 });
