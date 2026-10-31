@@ -22,48 +22,12 @@
 .superpowersActions a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;padding:.85rem 1.2rem;font-weight:700}
 .superpowersActions .primary{background:#172a46;color:white}
 .superpowersActions .secondary{border:1px solid #b08d45;color:#172a46;background:transparent}
-/* The final practice-panel CTA is a single, high-contrast action. */
-.superpowersPractice .superpowersActions .primary{
-  background:#172a46 !important;
+/* Keep the secondary coaching link readable on the navy practice panel. */
+.superpowersPractice .superpowersActions .secondary,
+.superpowersPractice .superpowersActions .secondary:visited,
+.superpowersPractice .superpowersActions .secondary:hover,
+.superpowersPractice .superpowersActions .secondary:focus-visible{
   color:#fff !important;
-  border:2px solid #d6ad5e !important;
-  min-height:52px;
-  padding:.9rem 1.5rem;
-}
-.superpowersPractice .superpowersActions .primary:hover,
-.superpowersPractice .superpowersActions .primary:focus-visible{
-  background:#243b5b !important;
-  color:#fff !important;
-}
-.superpowersPractice .superpowersActions .secondary{display:none !important;}
-
-.superpowersIntro{max-width:780px;line-height:1.75}
-.superpowersStage{margin:3rem 0}
-.superpowersStage h2{font-size:clamp(1.5rem,3vw,2.2rem);margin:.35rem 0}
-.superpowersStage>p{line-height:1.7;max-width:780px;color:#536176}
-.superpowersGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.25rem}
-.superpowerCard{border:1px solid #e5ded2;border-radius:1rem;padding:1.25rem;background:#fff}
-.superpowerCard__number{display:inline-grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:#f4efe5;color:#8d6c2f;font-weight:800}
-.superpowerCard h3{margin:.8rem 0 .45rem;color:#172a46;font-size:1.12rem}
-.superpowerCard p{margin:0;color:#536176;line-height:1.65}
-.superpowersPractice{background:#172a46;color:#fff;border-radius:1.25rem;padding:clamp(1.5rem,4vw,2.5rem);margin:3rem 0}
-.superpowersPractice h2{color:#fff;margin-top:0}
-.superpowersPractice p,.superpowersPractice li{line-height:1.75;color:#f4efe5}
-.superpowersPractice strong{color:#e0c17a}
-.superpowersPractice .superpowersActions .primary{
-  background:#d6ad5e;
-  color:#172a46;
-  border:1px solid #e0c17a;
-  box-shadow:0 5px 14px rgba(0,0,0,.22);
-}
-.superpowersPractice .superpowersActions .primary:hover{
-  background:#edcf88;
-  color:#172a46;
-  transform:translateY(-1px);
-}
-.superpowersPractice .superpowersActions .primary:focus-visible{
-  outline:3px solid #fff;
-  outline-offset:4px;
 }
 .superpowersNote{font-size:.9rem;color:#667085;line-height:1.65;border-top:1px solid #e5ded2;padding-top:1rem;margin-top:2rem}
 @media(max-width:650px){.superpowersGrid{grid-template-columns:1fr}.superpowersHero{border-radius:1rem}}
