@@ -491,10 +491,10 @@ const translations = deepFreeze({
     en: "An independent coaching experience inspired by the Master Key System.",
     es: "Una experiencia de coaching independiente inspirada en el Master Key System.",
   },
-  "route.home.metaTitle": { en: "Free 7-Day Introduction | Focus & Personal Coaching | Tariq Saddique", es: "Introducción gratuita de 7 días | Enfoque y coaching personal | Tariq Saddique" },
+  "route.home.metaTitle": { en: "Personal Development Coaching for Focus & Goals | Tariq", es: "Coaching de desarrollo personal para enfoque y objetivos | Tariq" },
   "route.home.metaDescription": {
-    en: "Try a free seven-day introduction with Tariq Saddique. Explore practical lessons, a private workbook and optional AI learning support in just 10–15 minutes a day. No purchase required.",
-    es: "Prueba una introducción gratuita de siete días con Tariq Saddique. Descubre lecciones prácticas, un cuaderno privado y apoyo opcional con IA en solo 10–15 minutos al día. Sin necesidad de comprar.",
+    en: "Looking for better focus, self-discipline and direction? Explore personal development coaching with Tariq Saddique, plus a free seven-day introduction. No purchase required.",
+    es: "¿Buscas mejorar tu enfoque, autodisciplina y dirección? Descubre el coaching de desarrollo personal con Tariq Saddique y prueba una introducción gratuita de siete días.",
   },
   "route.home.heading": { en: "Stop going round in circles. Start moving towards what matters.", es: "Deja de dar vueltas. Empieza a avanzar hacia lo que importa." },
   "route.home.purpose": {
@@ -576,10 +576,10 @@ const translations = deepFreeze({
     es: "Practica un ejercicio de enfoque cada día y observa qué cambia cuando diriges tu atención con intención.",
   },
   "route.startFree.action": { en: "See the 24-week journey", es: "Descubre el recorrido de 24 semanas" },
-  "route.coaching.metaTitle": { en: "Master Key System Coaching | 24-Week Course | Unleash Your Power", es: "Coaching del Master Key System | Curso de 24 semanas | Unleash Your Power" },
+  "route.coaching.metaTitle": { en: "Personal Coaching for Focus & Concentration | 24 Weeks", es: "Coaching personal para enfoque y concentración | 24 semanas" },
   "route.coaching.metaDescription": {
-    en: "Explore Master Key System Coaching with Tariq Saddique through a complete 24-Week Course.",
-    es: "Descubre el programa completo de coaching de 24 semanas de Tariq Saddique inspirado en el Master Key System.",
+    en: "Build focus, concentration and consistent habits through a structured 24-week personal coaching journey inspired by the Master Key System.",
+    es: "Desarrolla el enfoque, la concentración y hábitos constantes con un recorrido estructurado de coaching personal de 24 semanas inspirado en el Master Key System.",
   },
   "route.coaching.heading": { en: "Personal Coaching with Tariq", es: "Coaching para un dominio interior práctico" },
   "route.coaching.purpose": {
