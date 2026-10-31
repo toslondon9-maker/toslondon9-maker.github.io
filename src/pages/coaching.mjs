@@ -13,6 +13,18 @@ function stageCard(stage, language) {
   return `<article class="coachingStage card"><p class="coachingStage__weeks">${copy(`coaching.stage.${stage.id}.weeks`, language)}</p><h3>${copy(`coaching.stage.${stage.id}.name`, language)}</h3><p>${copy(`coaching.stage.${stage.id}.outcome`, language)}</p><ul>${[1, 2, 3].map((index) => `<li>${copy(`coaching.stage.${stage.id}.inclusion${index}`, language)}</li>`).join("")}</ul></article>`;
 }
 
+function progressiveJourney(language, data) {
+  const stages = data.stages.map((stage, index) => {
+    const id = stage.id;
+    const number = String(index + 1).padStart(2, "0");
+    const foundationAction = id === "foundation"
+      ? `<a class="button--primary coachingProgression__start" href="${escapeHtml(data.routes.foundation)}" data-i18n="coaching.progression.startFoundation">${escapeHtml(t("coaching.progression.startFoundation", language))}</a>`
+      : "";
+    return `<li class="coachingProgression__stage${id === "foundation" ? " coachingProgression__stage--start" : ""}"><span class="coachingProgression__number" aria-hidden="true">${number}</span><div class="coachingProgression__stageCopy"><p class="coachingProgression__weeks">${copy(`coaching.stage.${id}.weeks`, language)}</p><h3>${copy(`coaching.stage.${id}.name`, language)}</h3><p>${copy(`coaching.stage.${id}.outcome`, language)}</p>${foundationAction}</div></li>`;
+  }).join("");
+  return `<section class="coachingProgression" aria-labelledby="coaching-progression-title"><div class="coachingProgression__heading"><p class="eyebrow">${copy("coaching.progression.eyebrow", language)}</p><h3 id="coaching-progression-title">${copy("coaching.progression.title", language)}</h3><p>${copy("coaching.progression.body", language)}</p></div><ol class="coachingProgression__list">${stages}</ol><p class="coachingProgression__note">${copy("coaching.progression.compound", language)}</p></section>`;
+}
+
 function stageDetails(stage, language) {
   const firstLesson = stage.id === "foundation"
     ? copy("foundation.compact.lessons", language)
@@ -30,7 +42,7 @@ function stageDetails(stage, language) {
 
 function programmeIntro(language, data) {
   const stages = data.stages.map((stage) => stageCard(stage, language)).join("");
-  return `<section class="coachingProgramme section" data-coaching-section="programme"><div class="coachingProgramme__intro"><p class="eyebrow">${copy("phase2.coaching.decisionEyebrow", language)}</p><h2>${copy("phase2.coaching.decisionTitle", language)}</h2><p>${copy("phase2.coaching.decisionBody", language)}</p></div><div class="coachingProgramme__fit"><article><h3>${copy("phase2.coaching.benefit1Title", language)}</h3><p>${copy("phase2.coaching.benefit1Body", language)}</p></article><article><h3>${copy("phase2.coaching.benefit2Title", language)}</h3><p>${copy("phase2.coaching.benefit2Body", language)}</p></article><article><h3>${copy("phase2.coaching.benefit3Title", language)}</h3><p>${copy("phase2.coaching.benefit3Body", language)}</p></article></div><div class="coachingProgramme__boundaries"><h3>${copy("phase2.coaching.notTitle", language)}</h3><ul><li>${copy("phase2.coaching.not1", language)}</li><li>${copy("phase2.coaching.not2", language)}</li><li>${copy("phase2.coaching.not3", language)}</li></ul></div><div class="coachingProgramme__stages"><p class="eyebrow">${copy("coaching.overview.title", language)}</p><p class="coachingProgramme__sequence">${copy("coaching.overview.body", language)}</p><div class="coachingStageGrid">${stages}</div></div></section>`;
+  return `<section class="coachingProgramme section" data-coaching-section="programme"><div class="coachingProgramme__intro"><p class="eyebrow">${copy("phase2.coaching.decisionEyebrow", language)}</p><h2>${copy("phase2.coaching.decisionTitle", language)}</h2><p>${copy("phase2.coaching.decisionBody", language)}</p></div><div class="coachingProgramme__fit"><article><h3>${copy("phase2.coaching.benefit1Title", language)}</h3><p>${copy("phase2.coaching.benefit1Body", language)}</p></article><article><h3>${copy("phase2.coaching.benefit2Title", language)}</h3><p>${copy("phase2.coaching.benefit2Body", language)}</p></article><article><h3>${copy("phase2.coaching.benefit3Title", language)}</h3><p>${copy("phase2.coaching.benefit3Body", language)}</p></article></div><div class="coachingProgramme__boundaries"><h3>${copy("phase2.coaching.notTitle", language)}</h3><ul><li>${copy("phase2.coaching.not1", language)}</li><li>${copy("phase2.coaching.not2", language)}</li><li>${copy("phase2.coaching.not3", language)}</li></ul></div><div class="coachingProgramme__stages"><p class="eyebrow">${copy("coaching.overview.title", language)}</p><p class="coachingProgramme__sequence">${copy("coaching.overview.body", language)}</p>${progressiveJourney(language, data)}<div class="coachingStageGrid">${stages}</div></div></section>`;
 }
 
 function coachingOutcome(language) {
