@@ -11,7 +11,7 @@
 <meta property="og:title" content="The 24 Mental Superpowers | Unleash Your Power">
 <meta property="og:description" content="A 24-week journey to practise stillness, focus, visualization, insight and purposeful action.">
 <meta property="og:url" content="https://unleashyourpowerwithtariq.com/resources/mental-superpowers/">
-<link rel="stylesheet" href="/assets/platform.css?v=20261031-mental-superpowers-cta-1">
+<link rel="stylesheet" href="/assets/platform.css?v=20261031-mental-superpowers-cta-2">
 <style>
 .superpowersPage{max-width:1100px;margin:0 auto;padding:clamp(1.25rem,4vw,3rem) 1.1rem 4rem;color:var(--ink,#172a46)}
 .superpowersHero{padding:clamp(2rem,6vw,4.5rem);background:#f4efe5;border:1px solid #e6dcc9;border-radius:1.5rem;margin:1rem 0 2.5rem}
@@ -22,6 +22,21 @@
 .superpowersActions a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;padding:.85rem 1.2rem;font-weight:700}
 .superpowersActions .primary{background:#172a46;color:white}
 .superpowersActions .secondary{border:1px solid #b08d45;color:#172a46;background:transparent}
+/* The final practice-panel CTA is a single, high-contrast action. */
+.superpowersPractice .superpowersActions .primary{
+  background:#172a46 !important;
+  color:#fff !important;
+  border:2px solid #d6ad5e !important;
+  min-height:52px;
+  padding:.9rem 1.5rem;
+}
+.superpowersPractice .superpowersActions .primary:hover,
+.superpowersPractice .superpowersActions .primary:focus-visible{
+  background:#243b5b !important;
+  color:#fff !important;
+}
+.superpowersPractice .superpowersActions .secondary{display:none !important;}
+
 .superpowersIntro{max-width:780px;line-height:1.75}
 .superpowersStage{margin:3rem 0}
 .superpowersStage h2{font-size:clamp(1.5rem,3vw,2.2rem);margin:.35rem 0}
