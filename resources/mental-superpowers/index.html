@@ -22,11 +22,16 @@
 .superpowersActions a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;padding:.85rem 1.2rem;font-weight:700}
 .superpowersActions .primary{background:#172a46;color:white}
 .superpowersActions .secondary{border:1px solid #b08d45;color:#172a46;background:transparent}
-/* Keep the secondary coaching link readable on the navy practice panel. */
+/* Keep the secondary coaching CTA blue with a clear white label. */
 .superpowersPractice .superpowersActions .secondary,
-.superpowersPractice .superpowersActions .secondary:visited,
+.superpowersPractice .superpowersActions .secondary:visited{
+  background:#172a46 !important;
+  color:#fff !important;
+  border:1px solid #b08d45;
+}
 .superpowersPractice .superpowersActions .secondary:hover,
 .superpowersPractice .superpowersActions .secondary:focus-visible{
+  background:#243b5b !important;
   color:#fff !important;
 }
 .superpowersNote{font-size:.9rem;color:#667085;line-height:1.65;border-top:1px solid #e5ded2;padding-top:1rem;margin-top:2rem}
