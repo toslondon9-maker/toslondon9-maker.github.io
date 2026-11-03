@@ -29,27 +29,27 @@ test("bottom referral CTA targets the personal invite section", () => {
   assert.doesNotMatch(page.body, /href="#personal-invite">I’M READY TO REFER &amp; EARN<\/a>/);
 });
 
-test("referral page explains the approved 5% reward across eligible product lines", () => {
+test("referral page explains the approved 25% reward across eligible product lines", () => {
   const page = referralPage(siteData);
   const reward = page.body.match(/<section[^>]+class="referralSection affiliateReward"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.match(reward, /Let your influence create a return/);
-  assert.match(reward, /5% commission across all eligible product lines/);
+  assert.match(reward, /25% commission across all eligible product lines/);
   assert.match(reward, /turn trust, relationships and genuine enthusiasm into something positive/);
   assert.match(reward, /Share what matters\. Spark possibility\. Earn as the journey grows\./);
   for (const text of [
-    "5% Commission",
+    "25% Commission",
     "All Eligible Product Lines",
     "Your Personal Affiliate Link",
     "Earn As You Inspire Others",
     "Foundation step",
     "£97 product",
-    "You earn £4.85",
+    "You earn £24.25",
     "Signature programme",
     "£997 product",
-    "You earn £49.85",
+    "You earn £249.25",
     "Growth example",
     "£5,000 in eligible referred sales",
-    "You earn £250",
+    "You earn £1,250",
     "A simple introduction can still create momentum.",
     "One meaningful referral can create real value for both of you.",
     "As your reach grows, your rewards can grow with it.",
@@ -59,7 +59,7 @@ test("referral page explains the approved 5% reward across eligible product line
   assert.match(reward, /Affiliate reward summary/);
   assert.match(reward, /£97 sale → £4\.85 commission/);
   assert.match(reward, /£997 sale → £49\.85 commission/);
-  assert.match(reward, /£5,000 in eligible referred sales → £250 commission/);
+  assert.match(reward, /£5,000 in eligible referred sales → £1,250 commission/);
   assert.match(reward, /eligible, completed, non-refunded purchases successfully attributed to your tracked affiliate link/i);
   assert.doesNotMatch(page.body, /Affiliate rewards and commission terms will be confirmed upon approval/);
 });
@@ -67,7 +67,7 @@ test("referral page explains the approved 5% reward across eligible product line
 test("referral page includes the concise affiliate terms summary", () => {
   const page = referralPage(siteData);
   for (const text of [
-    "5% of eligible completed full-course sales",
+    "25% of eligible completed full-course sales",
     "successfully attributed to the affiliate’s tracked link or code",
     "Refunded, cancelled, reversed or fraudulent transactions are not commissionable",
     "Self-referrals are not eligible unless explicitly approved",
