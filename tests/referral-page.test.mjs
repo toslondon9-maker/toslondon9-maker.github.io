@@ -8,12 +8,12 @@ test("referral page contains the approved share journey sections", () => {
   const page = referralPage(siteData);
   assert.match(page.body, /Help Someone You Care About[\s\S]*Begin Their Journey/);
   assert.match(page.body, /HOW IT WORKS/);
-  assert.match(page.body, /WHY REFER/);
+  assert.match(page.body, /Why become a UYP referral partner/);
   assert.match(page.body, /YOUR PERSONAL INVITE/);
   assert.match(page.body, /SHARE ON WHATSAPP/);
   assert.match(page.body, /COPY MESSAGE/);
   assert.match(page.body, /Ready to share the gift of growth\?/);
-  assert.match(page.body, /Become an Unleash Your Power Affiliate/);
+  assert.match(page.body, /PASS ON THE POWER. SHARE THE POSSIBILITY./);
   assert.match(page.body, /YOUR PERSONAL AFFILIATE LINK/);
   assert.match(page.body, /Affiliate Toolkit/);
   assert.match(page.body, /Website \/ Social Media \/ Community URL/);
@@ -31,9 +31,9 @@ test("bottom referral CTA targets the personal invite section", () => {
 test("referral page explains the approved 5% reward across eligible product lines", () => {
   const page = referralPage(siteData);
   const reward = page.body.match(/<section[^>]+class="referralSection affiliateReward"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.match(reward, /Earn 5% every time you help someone begin their journey/);
+  assert.match(reward, /Let your influence create a return/);
   assert.match(reward, /5% commission across all eligible product lines/);
-  assert.match(reward, /If you believe in Unleash Your Power/);
+  assert.match(reward, /turn trust, relationships and genuine enthusiasm into something positive/);
   assert.match(reward, /Inspire change\. Share the journey\. Earn as you grow the movement\./);
   for (const text of [
     "5% Commission",
