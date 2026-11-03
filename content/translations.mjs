@@ -1730,8 +1730,6 @@ const translations = deepFreeze({
   "insights.lawAttraction.metaDescription": { en: "A source-based study of the Law of Attraction in Week 18 and the meaning of completing The Master Key System.", es: "Un estudio basado en la fuente sobre la Ley de la Atracción en la Semana 18 y el sentido de completar The Master Key System." },
   "insights.lawAttraction.heading": { en: "The Law of Attraction: Week 18 and the Transformation of Completing the Master Key System", es: "La Ley de la Atracción: la Semana 18 y la transformación de completar el Master Key System" },
   ...canonicalLessonTranslations(),
-});
-
   "resources.studyQuestionsLink": { en: "Master Key System — Study Questions & Answers", es: "Master Key System — Preguntas y respuestas de estudio" },
   "studyQuestions.metaTitle": { en: "Master Key System Study Questions & Answers | Unleash Your Power", es: "Preguntas y respuestas del Master Key System | Unleash Your Power" },
   "studyQuestions.metaDescription": { en: "The original study questions and answers for all 24 parts of Charles F. Haanel’s Master Key System.", es: "Las preguntas y respuestas de estudio originales de las 24 partes del Master Key System de Charles F. Haanel." },
@@ -1742,6 +1740,8 @@ const translations = deepFreeze({
   "studyQuestions.contents": { en: "JUMP TO A LESSON", es: "IR A UNA LECCIÓN" },
   "studyQuestions.part": { en: "Part", es: "Parte" },
   "studyQuestions.sourceNote": { en: "These are Charles F. Haanel’s original study questions and answers. The original 1919 text is in the public domain. Wording and numbering are retained from the supplied study text; historical and philosophical statements are presented as the author wrote them.", es: "Estas son las preguntas y respuestas de estudio originales de Charles F. Haanel. El texto original de 1919 es de dominio público. Se conservan la redacción y la numeración del material de estudio proporcionado; las afirmaciones históricas y filosóficas se presentan tal como las escribió el autor." },
+});
+
 const warnedKeys = new Set();
 
 function isBrowser() {
