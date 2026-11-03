@@ -47,3 +47,24 @@
 .referralCta .button--primary{white-space:normal}
 @media(max-width:760px){.referralHero{padding-block:2.5rem}.referralHero__promise{gap:1rem}.affiliateLinkSection,.affiliateReward,.affiliateApplication{padding:1.35rem}.referralCards article:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.referralCards article{transition:none}}
+
+
+/* Accessibility: restore strong contrast for every supporting line in the navy earnings panel. */
+.affiliateReward .affiliateReward__intro,
+.affiliateReward .affiliateReward__motivation,
+.affiliateReward .affiliateReward__tagline,
+.affiliateReward__benefits article p,
+.affiliateReward__examples article p:not(.eyebrow),
+.affiliateReward__examples article small,
+.affiliateReward__summary p,
+.affiliateReward__summary li {
+  color: #e8edf2 !important;
+}
+.affiliateReward__examples article .affiliateReward__amount,
+.affiliateReward__summary h3 {
+  color: #f0c979 !important;
+}
+.affiliateReward__examples article .eyebrow,
+.affiliateReward .eyebrow {
+  color: #e7bf70 !important;
+}
