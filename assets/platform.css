@@ -9017,3 +9017,54 @@ html {
   margin-right: .38rem;
   font-size: .95em;
 }
+
+
+/* Give the small homepage Affiliate Programme link its own breathing room below the portrait. */
+.homeHero__visualWrap {
+  display: grid;
+  align-content: start;
+  gap: clamp(1.75rem, 3vw, 2.75rem);
+  min-width: 0;
+}
+.homeHero__affiliate {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 2.35rem;
+  margin: 0;
+  padding: .55rem 1.05rem;
+  border: 1px solid rgba(181, 138, 59, .68);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, .72);
+  color: #8b641f;
+  font-size: .78rem;
+  font-weight: 750;
+  letter-spacing: .025em;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 0 5px 16px rgba(7, 24, 40, .06);
+  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.homeHero__affiliate::before {
+  content: "•";
+  color: #b58a3b;
+  font-size: 1.15rem;
+  line-height: .7;
+}
+.homeHero__affiliate:hover {
+  background: #fffdf8;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(7, 24, 40, .1);
+}
+@media (max-width: 768px) {
+  .homeHero__visualWrap {
+    gap: 1.5rem;
+  }
+  .homeHero__affiliate {
+    min-height: 2.5rem;
+    padding: .6rem 1.15rem;
+    font-size: .8rem;
+  }
+}
