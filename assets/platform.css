@@ -8999,3 +8999,21 @@ html {
 .studyQuestionsPage__source{margin:2rem auto 0;padding:1.25rem;border-top:2px solid var(--gold);font-size:.92rem;color:var(--muted)}
 .studyQuestionsPage__source p:last-child{margin-bottom:0}
 @media(max-width:600px){.studyQuestionsPage__actions{display:grid}.studyQuestionsPage__actions>*{width:100%;text-align:center}.studyQuestionsPage__part summary{font-size:1.08rem}}
+
+
+/* Small gold affiliate link in the primary navigation. */
+.siteNav .navAffiliate a,
+.mobileNav__panel .navAffiliate a {
+  color: #d7b36b !important;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .015em;
+  white-space: nowrap;
+}
+.siteNav .navAffiliate a::before,
+.mobileNav__panel .navAffiliate a::before {
+  content: "•";
+  color: #d7b36b;
+  margin-right: .38rem;
+  font-size: .95em;
+}
