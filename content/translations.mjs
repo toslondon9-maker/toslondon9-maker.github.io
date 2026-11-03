@@ -37,7 +37,7 @@ const translations = deepFreeze({
   "nav.resources": { en: "Resources", es: "Recursos" },
   "nav.getTheBook": { en: "Buy the MKS Book", es: "Compra el libro MKS" },
   "nav.liveCoaching": { en: "Session Hub", es: "Centro de sesiones" },
-  "nav.referral": { en: "Refer & Earn", es: "Recomienda y gana" },
+  "nav.referral": { en: "Affiliate Programme", es: "Programa de afiliados" },
   "nav.aboutTariq": { en: "About Tariq", es: "Quién soy" },
   "nav.faq": { en: "FAQ", es: "Preguntas frecuentes" },
   "nav.contact": { en: "Contact / Book", es: "Contacto / Reserva" },
