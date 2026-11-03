@@ -912,8 +912,6 @@ const translations = deepFreeze({
     "resources.quotes.copy": { en: "Copy quote", es: "Copiar cita" },
     "resources.quotes.share": { en: "Share", es: "Compartir" },
     "resources.quotes.reflectionLabel": { en: "Reflection:", es: "Reflexión:" },
-    "resources.quotes.sourceLink": { en: "Check source", es: "Comprobar fuente" },
-    "resources.quotes.sourceFile": { en: "SOURCE FILE", es: "ARCHIVO FUENTE" },
     "resources.quotes.wallEyebrow": { en: "QUOTE WALL", es: "PARED DE CITAS" },
     "resources.quotes.wallTitle": { en: "Explore the ideas by theme", es: "Explora las ideas por tema" },
     "resources.quotes.filterLabel": { en: "Filter quotations by topic", es: "Filtrar citas por tema" },
