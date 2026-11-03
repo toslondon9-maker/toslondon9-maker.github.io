@@ -89,7 +89,7 @@ test("referral runtime provides stable personal and affiliate anchors with a bri
 });
 
 test("navigation labels identify the affiliate area", () => {
-  assert.equal(translations["nav.referral"].en, "Affiliate / Refer & Earn");
+  assert.equal(translations["nav.referral"].en, "Refer & Earn");
 });
 
 test("referral share script builds an encoded WhatsApp invitation without an affiliate code", async () => {
