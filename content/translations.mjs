@@ -266,7 +266,7 @@ const translations = deepFreeze({
   "foundation.compact.calls": { en: "One private 40-minute live Zoom coaching call each week", es: "Una llamada privada de coaching por Zoom en directo de 40 minutos cada semana" },
   "foundation.compact.access": { en: "Workbook and online lessons", es: "Cuaderno y lecciones online" },
   "foundation.compact.support": { en: "WhatsApp support", es: "Apoyo por WhatsApp" },
-  "foundation.compact.totalCalls": { en: "Four calls total", es: "Ocho llamadas en total" },
+  "foundation.compact.totalCalls": { en: "Four calls total", es: "Cuatro llamadas en total" },
   "foundation.compact.cta": { en: `EXPLORE FOUNDATION — ${pricing.foundation.en}`, es: `EXPLORA FUNDAMENTOS — ${pricing.foundation.es}` },
   "home.offers.completeTitle": { en: "Complete 24-Week Journey", es: "Recorrido completo de 24 semanas" },
   "home.offers.completeBody": { en: "The full four-stage programme with personal guidance and accountability.", es: "El programa completo de cuatro etapas con guía personal y acompañamiento." },
