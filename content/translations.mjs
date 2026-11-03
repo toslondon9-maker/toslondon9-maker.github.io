@@ -498,8 +498,8 @@ const translations = deepFreeze({
   },
   "route.home.heading": { en: "Stop going round in circles. Start moving towards what matters.", es: "Deja de dar vueltas. Empieza a avanzar hacia lo que importa." },
   "route.home.purpose": {
-    en: "Build greater focus, clarify what you want and develop the habits to follow through—with practical guidance, reflection and a clear next step.",
-    es: "Desarrolla tu enfoque, aclara lo que quieres y crea hábitos para avanzar, con orientación práctica, reflexión y un siguiente paso claro.",
+    en: "“If you do what you've always done, you'll get what you've always gotten.” — Tony Robbins",
+    es: "«Si haces lo mismo de siempre, obtendrás los mismos resultados». — Tony Robbins",
   },
   "route.home.action": { en: "GET MY FREE 7-DAY INTRODUCTION", es: "EMPIEZA MI INTRODUCCIÓN GRATIS" },
   "route.masterKeySystem.metaTitle": { en: "Master Key System 24 Week Course | Unleash Your Power", es: "Curso de 24 semanas del Master Key System | Unleash Your Power" },
