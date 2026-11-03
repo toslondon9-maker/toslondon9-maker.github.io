@@ -397,6 +397,7 @@ button,
 }
 
 .mobileNav__panel {
+  display: none;
   position: absolute;
   inset-block-start: calc(100% + 1px);
   inset-inline-end: var(--space-gutter);
@@ -8569,8 +8570,8 @@ html {
     display: none !important;
   }
 
-  .siteHeader .mobileNav__panel:not([hidden]),
-  .site-header .mobileNav__panel:not([hidden]) {
+  body.navigationOpen .siteHeader .mobileNav__panel:not([hidden]),
+  body.navigationOpen .site-header .mobileNav__panel:not([hidden]) {
     display: block !important;
   }
 
