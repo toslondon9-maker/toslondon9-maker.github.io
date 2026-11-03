@@ -6,35 +6,36 @@ import { translations } from "../content/translations.mjs";
 
 test("referral page contains the approved share journey sections", () => {
   const page = referralPage(siteData);
-  assert.match(page.body, /Help Someone You Care About[\s\S]*Begin Their Journey/);
+  assert.match(page.body, /What if your next introduction could[\s\S]*change someone’s direction/);
   assert.match(page.body, /HOW IT WORKS/);
-  assert.match(page.body, /WHY REFER/);
+  assert.match(page.body, /Why become a UYP referral partner/);
   assert.match(page.body, /YOUR PERSONAL INVITE/);
   assert.match(page.body, /SHARE ON WHATSAPP/);
   assert.match(page.body, /COPY MESSAGE/);
-  assert.match(page.body, /Ready to share the gift of growth\?/);
-  assert.match(page.body, /Become an Unleash Your Power Affiliate/);
+  assert.match(page.body, /Someone in your world is ready for their next chapter/);
+  assert.match(page.body, /PASS ON THE POWER. SHARE THE POSSIBILITY./);
   assert.match(page.body, /YOUR PERSONAL AFFILIATE LINK/);
   assert.match(page.body, /Affiliate Toolkit/);
   assert.match(page.body, /Website \/ Social Media \/ Community URL/);
   assert.match(page.body, /affiliate terms/);
   assert.match(page.body, /href="#personal-invite"|share-personally/);
   assert.deepEqual(page.scripts, ["/assets/referral.mjs"]);
+  assert.deepEqual(page.styles, ["/assets/referral-page.css?v=20261103-referral-impact-1"]);
 });
 
 test("bottom referral CTA targets the personal invite section", () => {
   const page = referralPage(siteData);
-  assert.match(page.body, /href="#share-personally">REFER A FRIEND TODAY<\/a>/);
-  assert.doesNotMatch(page.body, /href="#personal-invite">REFER A FRIEND TODAY<\/a>/);
+  assert.match(page.body, /href="#share-personally">I’M READY TO REFER &amp; EARN<\/a>/);
+  assert.doesNotMatch(page.body, /href="#personal-invite">I’M READY TO REFER &amp; EARN<\/a>/);
 });
 
 test("referral page explains the approved 5% reward across eligible product lines", () => {
   const page = referralPage(siteData);
   const reward = page.body.match(/<section[^>]+class="referralSection affiliateReward"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.match(reward, /Earn 5% every time you help someone begin their journey/);
+  assert.match(reward, /Let your influence create a return/);
   assert.match(reward, /5% commission across all eligible product lines/);
-  assert.match(reward, /If you believe in Unleash Your Power/);
-  assert.match(reward, /Inspire change\. Share the journey\. Earn as you grow the movement\./);
+  assert.match(reward, /turn trust, relationships and genuine enthusiasm into something positive/);
+  assert.match(reward, /Share what matters\. Spark possibility\. Earn as the journey grows\./);
   for (const text of [
     "5% Commission",
     "All Eligible Product Lines",
@@ -89,7 +90,7 @@ test("referral runtime provides stable personal and affiliate anchors with a bri
 });
 
 test("navigation labels identify the affiliate area", () => {
-  assert.equal(translations["nav.referral"].en, "Affiliate / Refer & Earn");
+  assert.equal(translations["nav.referral"].en, "Refer & Earn");
 });
 
 test("referral share script builds an encoded WhatsApp invitation without an affiliate code", async () => {

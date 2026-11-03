@@ -1,0 +1,49 @@
+/* Refer & Earn — elevated referral experience */
+.referralPage{background:linear-gradient(180deg,#fbf7ee 0%,var(--cream) 52%,#f3ead9 100%)}
+.referralHero{padding-block:clamp(3rem,7vw,6rem);gap:clamp(2rem,5vw,5rem)}
+.referralHero h1{max-width:13ch;font-size:clamp(2.8rem,5.4vw,5.25rem);letter-spacing:-.035em}
+.referralHero h1 em{color:#a87928}
+.referralHero__copy>.eyebrow{color:#8b641f}
+.referralHero__lead{font-family:Georgia,serif;font-size:clamp(1.25rem,2vw,1.75rem)!important;line-height:1.35!important;color:var(--night)!important}
+.referralHero__lead em{color:#a87928;font-style:normal}
+.referralHero__copy>p:not(.eyebrow):not(.referralHero__lead){font-size:1.08rem;line-height:1.75;color:#34475b}
+.referralHero__copy .button--primary{margin-top:.65rem;padding:1rem 1.5rem;letter-spacing:.04em}
+.referralHero__promise{display:flex;gap:clamp(.8rem,2vw,1.5rem);flex-wrap:wrap;margin-top:1.8rem;padding-top:1.2rem;border-top:1px solid rgba(181,138,59,.38)}
+.referralHero__promise span{display:grid;gap:.1rem}
+.referralHero__promise strong{font:700 clamp(1.25rem,2vw,1.7rem) Georgia,serif;color:#9b742e}
+.referralHero__promise small{font-size:.76rem;color:#526274}
+.referralHero__portrait{max-width:460px;border:5px solid rgba(255,253,248,.85);box-shadow:0 26px 70px rgba(6,23,41,.2),0 0 0 1px rgba(181,138,59,.65)}
+.referralSection__intro{max-width:760px;font-size:1.15rem;line-height:1.7;color:#405268}
+.referralSection h2,.referralInvite h2,.referralCta h2{letter-spacing:-.025em}
+.referralCards article{position:relative;overflow:hidden;background:linear-gradient(145deg,#fffdf8,#f7efdf);border-color:rgba(181,138,59,.55);box-shadow:0 15px 38px rgba(6,23,41,.075);transition:transform .2s ease,box-shadow .2s ease}
+.referralCards article:hover{transform:translateY(-4px);box-shadow:0 22px 42px rgba(6,23,41,.12)}
+.referralCards article>span{display:inline-grid;place-items:center;width:2.5rem;height:2.5rem;border:1px solid #c49a50;border-radius:50%;background:#f4e8cf;color:#8b641f}
+.affiliateLinkSection{padding:clamp(2.5rem,5vw,4rem);border:1px solid rgba(181,138,59,.55);border-radius:1.5rem;background:#fffdf8;box-shadow:0 18px 50px rgba(6,23,41,.07)}
+.affiliateLinkSection h2{max-width:17ch}
+.affiliateLinkBuilder{max-width:760px;padding:clamp(1.2rem,3vw,2rem);border:1px solid #c8a565;border-radius:1.15rem;background:linear-gradient(145deg,#f8f0df,#fffdf8)}
+.affiliateLinkBuilder>div:first-of-type{align-items:stretch}
+.affiliateLinkBuilder input{min-height:48px;flex:1}
+.affiliateLinkBuilder [data-affiliate-build]{background:var(--night);color:var(--cream);border-color:var(--night)}
+.affiliateLinkBuilder [data-affiliate-link]{display:inline-block;margin-top:.35rem;font-weight:700;color:#8b641f}
+.affiliateReward{position:relative;padding:clamp(2.5rem,5vw,4.5rem);border-radius:1.5rem;background:var(--night);color:var(--cream);overflow:hidden}
+.affiliateReward:before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,#8d641f,#e0bd77,#8d641f)}
+.affiliateReward h2{max-width:18ch;color:var(--cream)}
+.affiliateReward .eyebrow{color:#e0bd77}
+.affiliateReward__intro,.affiliateReward__motivation{max-width:850px;color:#e4e8ec;font-size:1.08rem;line-height:1.75}
+.affiliateReward__tagline{margin:1.5rem 0 2rem;color:#e5c17b;font:italic 1.25rem Georgia,serif}
+.affiliateReward__benefits article,.affiliateReward__examples article{border:1px solid rgba(224,189,119,.35);border-radius:1rem;background:rgba(255,255,255,.055);padding:1.25rem}
+.affiliateReward__benefits h3,.affiliateReward__examples h3{color:var(--cream)}
+.affiliateReward__benefits p,.affiliateReward__examples article>p:not(.eyebrow){color:#d6dfe7}
+.affiliateReward__amount{color:#e5c17b!important;font:700 1.65rem Georgia,serif}
+.affiliateReward__summary{margin-top:2rem;padding:1.25rem;border:1px solid rgba(224,189,119,.4);border-radius:1rem;background:rgba(255,255,255,.06);color:#e5eaf0}
+.affiliateReward__summary h3{color:#e5c17b}
+.referralWhy{padding-top:4rem}
+.referralReasons p{padding:1rem 1.1rem;border:1px solid rgba(181,138,59,.35);border-radius:.8rem;background:rgba(255,253,248,.62);font-weight:600}
+.referralInvite{margin-top:2rem;border:1px solid #c8a565;background:linear-gradient(145deg,#fffdf8,#f4ead7)}
+.affiliateApplication{padding:clamp(2.5rem,5vw,4rem);border-radius:1.5rem;background:#f3ead9}
+.affiliateApplication form{box-shadow:0 14px 35px rgba(6,23,41,.06)}
+.affiliateApplication form .button--primary{padding-inline:1.5rem}
+.referralCta{background:linear-gradient(120deg,#061729,#17334d);border:1px solid #b58a3b;box-shadow:0 20px 55px rgba(6,23,41,.18)}
+.referralCta .button--primary{white-space:normal}
+@media(max-width:760px){.referralHero{padding-block:2.5rem}.referralHero__promise{gap:1rem}.affiliateLinkSection,.affiliateReward,.affiliateApplication{padding:1.35rem}.referralCards article:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.referralCards article{transition:none}}

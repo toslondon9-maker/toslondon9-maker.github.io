@@ -9,6 +9,7 @@ const headerNavigationItems = Object.freeze([
   { route: siteData.routes.coaching, key: "nav.coaching" },
   { route: siteData.routes.aboutTariq, key: "nav.aboutTariq" },
   { route: siteData.routes.resources, key: "nav.resources" },
+  { route: siteData.routes.referral, key: "nav.referral", className: "navReferral" },
   { route: siteData.routes.getTheBook, key: "nav.getTheBook", className: "navBook" },
 ]);
 
@@ -34,7 +35,8 @@ function renderRouteLinks(items, route, language) {
   return items.map((item) => {
     const current = item.route === route ? ' aria-current="page"' : "";
     const className = item.className ? ` class="${item.className}"` : "";
-    return `<li><a${className} href="${escapeHtml(item.route)}"${current} data-i18n="${item.key}">${escapeHtml(t(item.key, language))}</a></li>`;
+    const inlineStyle = item.className === "navReferral" ? ` style="color:#9b742e;font-size:.78rem;font-weight:750;letter-spacing:.02em"` : "";
+    return `<li><a${className}${inlineStyle} href="${escapeHtml(item.route)}"${current} data-i18n="${item.key}">${escapeHtml(t(item.key, language))}</a></li>`;
   }).join("");
 }
 
