@@ -9001,19 +9001,27 @@ html {
 @media(max-width:600px){.studyQuestionsPage__actions{display:grid}.studyQuestionsPage__actions>*{width:100%;text-align:center}.studyQuestionsPage__part summary{font-size:1.08rem}}
 
 
-/* Small gold affiliate link in the primary navigation. */
-.siteNav .navAffiliate a,
-.mobileNav__panel .navAffiliate a {
-  color: #d7b36b !important;
-  font-size: .82rem;
-  font-weight: 700;
-  letter-spacing: .015em;
-  white-space: nowrap;
+/* Discreet gold affiliate link beneath the homepage hero portrait. */
+.homeHero__affiliate {
+  margin: 0;
+  padding: 0.15rem 1rem 0.85rem;
+  text-align: center;
+  font-size: 0.76rem;
+  line-height: 1.3;
 }
-.siteNav .navAffiliate a::before,
-.mobileNav__panel .navAffiliate a::before {
+.homeHero__affiliate a {
+  color: #b88c3b;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.015em;
+}
+.homeHero__affiliate a::before {
   content: "•";
-  color: #d7b36b;
-  margin-right: .38rem;
-  font-size: .95em;
+  color: #b88c3b;
+  margin-right: 0.35rem;
+}
+.homeHero__affiliate a:hover,
+.homeHero__affiliate a:focus-visible {
+  color: #8d6828;
+  text-decoration: underline;
 }
