@@ -8,6 +8,7 @@ import { startFreePage } from "./pages/start-free.mjs";
 import { foundationPage } from "./pages/foundation.mjs";
 import { sevenDayLessonPage } from "./pages/seven-day-lesson.mjs";
 import { resourcesPage } from "./pages/resources.mjs";
+import { resourcesStudyQuestionsPage } from "./pages/resources-study-questions.mjs";
 import { resourcesAudioPage } from "./pages/resources-audio.mjs";
 import { getTheBookPage } from "./pages/get-the-book.mjs";
 import { aboutTariqPage } from "./pages/about-tariq.mjs";
@@ -87,6 +88,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.helmarRudolphMasterKeySystem]: (data, language = "en") => helmarRudolphApproachPage(data, language),
   [siteData.routes.helmarRudolphStudyVideos]: (data, language = "en") => helmarRudolphVideosPage(data, language),
   [siteData.routes.resources]: (data) => resourcesPage(data),
+  [siteData.routes.resourcesStudyQuestions]: (data) => resourcesStudyQuestionsPage(data),
   [siteData.routes.resourcesAudio]: (data) => resourcesAudioPage(data),
   [siteData.routes.insightsCourse]: (data) => insightsCoursePage(data),
   [siteData.routes.insights]: (data) => insightsIndexPage(data),

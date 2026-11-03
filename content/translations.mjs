@@ -1732,6 +1732,16 @@ const translations = deepFreeze({
   ...canonicalLessonTranslations(),
 });
 
+  "resources.studyQuestionsLink": { en: "Master Key System — Study Questions & Answers", es: "Master Key System — Preguntas y respuestas de estudio" },
+  "studyQuestions.metaTitle": { en: "Master Key System Study Questions & Answers | Unleash Your Power", es: "Preguntas y respuestas del Master Key System | Unleash Your Power" },
+  "studyQuestions.metaDescription": { en: "The original study questions and answers for all 24 parts of Charles F. Haanel’s Master Key System.", es: "Las preguntas y respuestas de estudio originales de las 24 partes del Master Key System de Charles F. Haanel." },
+  "studyQuestions.heading": { en: "Master Key System — Study Questions & Answers", es: "Master Key System — Preguntas y respuestas de estudio" },
+  "studyQuestions.intro": { en: "Study the questions and answers for all 24 parts, in the original lesson order. You can also download the complete branded PDF.", es: "Consulta las preguntas y respuestas de las 24 partes, en el orden original de las lecciones. También puedes descargar el PDF completo con la marca UYP." },
+  "studyQuestions.download": { en: "Download the PDF", es: "Descargar el PDF" },
+  "studyQuestions.back": { en: "Back to Resources", es: "Volver a Recursos" },
+  "studyQuestions.contents": { en: "JUMP TO A LESSON", es: "IR A UNA LECCIÓN" },
+  "studyQuestions.part": { en: "Part", es: "Parte" },
+  "studyQuestions.sourceNote": { en: "These are Charles F. Haanel’s original study questions and answers. The original 1919 text is in the public domain. Wording and numbering are retained from the supplied study text; historical and philosophical statements are presented as the author wrote them.", es: "Estas son las preguntas y respuestas de estudio originales de Charles F. Haanel. El texto original de 1919 es de dominio público. Se conservan la redacción y la numeración del material de estudio proporcionado; las afirmaciones históricas y filosóficas se presentan tal como las escribió el autor." },
 const warnedKeys = new Set();
 
 function isBrowser() {

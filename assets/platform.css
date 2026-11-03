@@ -8976,3 +8976,25 @@ html {
 .coachingProfessionalService .coachingRateCard__status {
   white-space: normal;
 }
+
+/* UYP Master Key System study questions and answers */
+.studyQuestionsPage{background:var(--cream);color:var(--ink);padding:clamp(2rem,5vw,4rem) var(--space-gutter) 5rem}
+.studyQuestionsPage__hero,.studyQuestionsPage__index,.studyQuestionsPage__list,.studyQuestionsPage__source{width:min(980px,100%);margin-inline:auto}
+.studyQuestionsPage__hero{padding:clamp(1rem,3vw,2rem) 0 2rem}
+.studyQuestionsPage__hero h1{max-width:900px;font-size:clamp(2.2rem,5vw,4.2rem)}
+.studyQuestionsPage__hero .routeShell__purpose{max-width:760px}
+.studyQuestionsPage__actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.4rem}
+.studyQuestionsPage__index{margin:1rem auto 2rem;padding:1.2rem;border:1px solid var(--border);border-radius:var(--radius-card);background:var(--paper)}
+.studyQuestionsPage__index>div{display:flex;flex-wrap:wrap;gap:.55rem}
+.studyQuestionsPage__index a{display:inline-flex;padding:.35rem .7rem;border:1px solid var(--border);border-radius:999px;text-decoration:none;background:var(--cream);font-size:.9rem}
+.studyQuestionsPage__part{margin:0 0 1rem;border:1px solid var(--border);border-radius:var(--radius-card);background:var(--paper);box-shadow:var(--shadow-card);overflow:hidden}
+.studyQuestionsPage__part summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.25rem;cursor:pointer;background:var(--night);color:var(--cream);font-family:Georgia,serif;font-size:1.25rem}
+.studyQuestionsPage__part summary small{color:var(--gold-bright);font:600 .82rem system-ui,sans-serif;white-space:nowrap}
+.studyQuestionsPage__answers{padding:.35rem clamp(1rem,3vw,1.5rem) 1rem}
+.studyQuestionsPage__item{padding:1rem 0;border-bottom:1px solid rgba(181,138,59,.25)}
+.studyQuestionsPage__item:last-child{border-bottom:0}
+.studyQuestionsPage__item h3{font:700 1rem/1.5 system-ui,sans-serif;color:var(--night);margin:0 0 .35rem}
+.studyQuestionsPage__item p{margin:0;color:#394a5c;line-height:1.65}
+.studyQuestionsPage__source{margin:2rem auto 0;padding:1.25rem;border-top:2px solid var(--gold);font-size:.92rem;color:var(--muted)}
+.studyQuestionsPage__source p:last-child{margin-bottom:0}
+@media(max-width:600px){.studyQuestionsPage__actions{display:grid}.studyQuestionsPage__actions>*{width:100%;text-align:center}.studyQuestionsPage__part summary{font-size:1.08rem}}
