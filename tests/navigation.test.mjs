@@ -7,6 +7,7 @@ import { mountNavigation } from "../assets/site-navigation.mjs";
 
 const headerDestinations = [
   "/",
+  "/referral/",
   "/start-free/",
   "/master-key-system/",
   "/coaching/",
@@ -21,7 +22,7 @@ const footerDestinations = [
   "/contact/",
 ];
 
-test("header presents the simplified seven-destination conversion path", () => {
+test("header presents the simplified conversion path and Refer & Earn link", () => {
   const html = renderHeader({ route: "/", language: "en" });
   for (const href of headerDestinations) {
     assert.match(html, new RegExp(`href="${href}"`));
