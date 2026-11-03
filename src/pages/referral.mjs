@@ -24,7 +24,7 @@ export function referralPage(data) {
       <section class="referralSection affiliateToolkit" aria-labelledby="affiliate-toolkit-title"><p class="eyebrow">READY-TO-SHARE RESOURCES</p><h2 id="affiliate-toolkit-title">Affiliate Toolkit</h2><p>Use these approved resources when introducing someone to the programme:</p><ul><li>7 Days to Change the Way You Use Your Mind link</li><li>Personal invitation message</li><li>Master Key System study page</li></ul></section>
       <section class="referralCta"><div><p class="eyebrow">PASS IT ON</p><h2>Someone in your world is ready for their next chapter.</h2><p>You could be the person who introduces them to it — and be rewarded when your recommendation leads to an eligible purchase.</p></div><a class="button--primary" href="#personal-invite">JOIN THE AFFILIATE PROGRAMME</a></section>
     </main>`,
-    styles: ["/assets/referral-page.css?v=20261103-referral-impact-1"],
+    styles: ["/assets/referral-page.css?v=20261103-affiliate-contrast-2"],
     scripts: ["/assets/referral.mjs"],
   };
 }
