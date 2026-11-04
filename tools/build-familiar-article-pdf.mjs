@@ -1,7 +1,10 @@
 import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { writePdf } from "./pdf-layout.mjs";
 
-const markdown = fs.readFileSync("content/insights-article-does-any-of-this-feel-familiar.md", "utf8");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const markdown = fs.readFileSync(path.join(root, "content/insights-article-does-any-of-this-feel-familiar.md"), "utf8");
 const sections = [];
 let heading = "";
 let body = [];
@@ -26,4 +29,4 @@ for (const line of markdown.split(/\r?\n/)) {
   else body.push(line);
 }
 flush();
-writePdf("downloads/does-any-of-this-feel-familiar.pdf", "Does Any of This Feel Familiar? - Unleash Your Power", sections);
+writePdf(path.join(root, "downloads/does-any-of-this-feel-familiar.pdf"), "Does Any of This Feel Familiar? - Unleash Your Power", sections);
