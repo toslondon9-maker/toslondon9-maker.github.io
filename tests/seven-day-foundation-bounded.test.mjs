@@ -28,6 +28,6 @@ test("Foundation explains the confirmed four-week experience without changing th
   ]) assert.match(english, new RegExp(text.replace(/[£–]/g, "\\$&")), text);
   for (const text of [
     "Semanas 1–4", "£97 / €114", "Cuatro lecciones progresivas durante cuatro semanas", "Una llamada privada de coaching por Zoom en directo de 40 minutos cada semana",
-    "Ocho llamadas en total", "Apoyo por WhatsApp", "Cuaderno y lecciones online",
+    "Cuatro llamadas en total", "Apoyo por WhatsApp", "Cuaderno y lecciones online",
   ]) assert.match(spanish, new RegExp(text.replace(/[£–]/g, "\\$&")), text);
 });
