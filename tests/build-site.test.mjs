@@ -254,8 +254,8 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
       }
 
       if (globalPageFiles[index] === "master-key-system-online-course/index.html") {
-        assert.match(page, /class="onlineCoursePage__hero"/);
-        assert.match(page, /data-i18n="route\.masterKeySystemOnlineCourse\.heroStart"/);
+        assert.match(page, /http-equiv="refresh" content="0; url=\/complete-journey\//);
+        assert.match(page, /href="\/complete-journey\//);
         continue;
       }
 

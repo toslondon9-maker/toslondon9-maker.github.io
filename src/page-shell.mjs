@@ -50,7 +50,7 @@ function addCalendlyCta(route, language, body) {
   return body;
 }
 
-export function renderPage({ route, language, title, description, titleKey, descriptionKey, body, styles = [], scripts = [], socialImage, socialImageAlt, structuredData = [] }) {
+export function renderPage({ route, language, title, description, titleKey, descriptionKey, body, styles = [], scripts = [], socialImage, socialImageAlt, structuredData = [], canonicalUrl, redirectUrl }) {
   const safeTitle = escapeHtml(title);
   const safeDescription = escapeHtml(description);
   const safeLanguage = escapeHtml(language);
@@ -64,10 +64,11 @@ export function renderPage({ route, language, title, description, titleKey, desc
 
   const titleHook = titleKey ? ` data-i18n="${escapeHtml(titleKey)}"` : "";
   const descriptionHook = descriptionKey ? ` data-i18n="${escapeHtml(descriptionKey)}"` : "";
-  const absoluteUrl = `${siteUrl}${route}`;
+  const absoluteUrl = `${siteUrl}${canonicalUrl ?? route}`;
   const publicMetadata = !privateRoutes.has(route);
   const pageSocialImage = socialImage ? `${siteUrl}${socialImage}` : defaultSocialImage;
   const pageSocialImageAlt = escapeHtml(socialImageAlt ?? defaultSocialImageAlt);
+  const redirectTag = redirectUrl ? `<meta http-equiv="refresh" content="0; url=${escapeHtml(redirectUrl)}">` : "";
   const aiMentorEndpointTag = route === aiMentorRoute
     ? `<meta name="ai-mentor-endpoint" content="${aiMentorEndpoint}">`
     : "";
@@ -94,5 +95,5 @@ export function renderPage({ route, language, title, description, titleKey, desc
       ? "20261103-study-questions-1"
       : platformStyleVersion;
   const renderedBody = addCalendlyCta(route, language, body);
-  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/power-key-mark.png" as="image" type="image/png">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;
+  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${redirectTag}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/power-key-mark.png" as="image" type="image/png">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;
 }
