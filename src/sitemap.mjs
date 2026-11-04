@@ -9,7 +9,7 @@ function xmlEscape(value) {
 
 export function indexableRoutes(siteData) {
   const routes = [
-    ...Object.values(siteData.routes).filter((route) => route !== siteData.routes.liveCoaching),
+    ...Object.values(siteData.routes).filter((route) => route !== siteData.routes.liveCoaching && route !== siteData.routes.masterKeySystemOnlineCourse),
     ...siteData.experienceRoutes,
   ];
 

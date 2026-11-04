@@ -21,7 +21,6 @@ import { mksLineagePage } from "./pages/mks-lineage.mjs";
 import { helmarRudolphOverviewPage, helmarRudolphApproachPage, helmarRudolphVideosPage } from "./pages/helmar-rudolph.mjs";
 import { referralPage } from "./pages/referral.mjs";
 import { faqPage } from "./pages/faq.mjs";
-import { masterKeySystemOnlineCoursePage } from "./pages/master-key-system-online-course.mjs";
 import { insightsCoursePage } from "./pages/insights-course-works.mjs";
 import { insightsIndexPage } from "./pages/insights-index.mjs";
 import { insightsPrinciplesPage } from "./pages/insights-principles.mjs";
@@ -68,6 +67,21 @@ function renderRouteShell(routeId, definition, data) {
     titleKey: `${key}.metaTitle`,
     descriptionKey: `${key}.metaDescription`,
     body: `<main><article class="routeShell"><p class="eyebrow">UNLEASH YOUR POWER</p><h1 data-i18n="${key}.heading">${t(`${key}.heading`, "en")}</h1><p class="routeShell__purpose" data-i18n="${key}.purpose">${t(`${key}.purpose`, "en")}</p>${renderDetail(routeId, definition.detail, data)}${contactActions}</article></main>`,
+    scripts: [],
+  };
+}
+
+function masterKeySystemOnlineCourseRedirect(data) {
+  const route = data.routes.masterKeySystemOnlineCourse;
+  const destination = data.routes.completeJourney;
+  const key = "route.masterKeySystemOnlineCourse.redirect";
+  return {
+    route, language: "en",
+    title: t(`${key}.metaTitle`, "en"),
+    description: t(`${key}.metaDescription`, "en"),
+    titleKey: `${key}.metaTitle`, descriptionKey: `${key}.metaDescription`,
+    canonicalUrl: destination, redirectUrl: destination,
+    body: `<main id="main-content"><article class="routeShell"><p class="eyebrow">UNLEASH YOUR POWER</p><h1 data-i18n="${key}.heading">${t(`${key}.heading`, "en")}</h1><p class="routeShell__purpose" data-i18n="${key}.body">${t(`${key}.body`, "en")}</p><a class="button--primary routeShell__action" href="${destination}" data-i18n="${key}.action">${t(`${key}.action`, "en")}</a></article></main>`,
     scripts: [],
   };
 }
@@ -119,7 +133,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.liveCoaching]: (data) => sessionHubPage(data),
   [siteData.routes.referral]: (data) => referralPage(data),
   [siteData.routes.faq]: (data) => faqPage(data),
-  [siteData.routes.masterKeySystemOnlineCourse]: (data) => masterKeySystemOnlineCoursePage(data),
+  [siteData.routes.masterKeySystemOnlineCourse]: (data) => masterKeySystemOnlineCourseRedirect(data),
   [siteData.routes.privacy]: (data) => legalPage("privacy", data),
   [siteData.routes.terms]: (data) => legalPage("terms", data),
   [siteData.routes.refundPolicy]: (data) => legalPage("refundPolicy", data),

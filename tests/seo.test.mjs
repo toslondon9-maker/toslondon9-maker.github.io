@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { siteData } from "../content/site-data.mjs";
 import { routeRenderers } from "../src/routes.mjs";
-import { masterKeySystemOnlineCoursePage } from "../src/pages/master-key-system-online-course.mjs";
 import { renderPage } from "../src/page-shell.mjs";
 import { renderSitemap } from "../src/sitemap.mjs";
 
@@ -24,7 +23,6 @@ test("core public pages expose canonical metadata and requested search phrasing"
     [siteData.routes.mksLineage, "Charles Haanel Master Key System"],
     [siteData.routes.resources, "Master Key System Exercises", "Study Guide"],
     [siteData.routes.faq, "Master Key System Course FAQ"],
-    [siteData.routes.masterKeySystemOnlineCourse, "Master Key System online course"],
   ];
   for (const [route, ...phrases] of expectations) {
     const html = page(route);
@@ -51,44 +49,29 @@ test("sitewide and page-specific JSON-LD types match visible public pages", () =
   }
 });
 
-test("online course page links the requested next steps", () => {
+test("legacy online course URL redirects canonically to the Complete Journey", () => {
   const html = page(siteData.routes.masterKeySystemOnlineCourse);
-  for (const route of [siteData.routes.startFree, siteData.routes.coaching, siteData.routes.resources, siteData.routes.faq]) {
-    assert.match(html, new RegExp(`href="${route.replaceAll("/", "\\/" )}"`));
-  }
-  assert.match(html, /Master Key System online course/i);
-  assert.match(html, /24-week/i);
-  assert.match(html, /practical exercises/i);
+  assert.match(html, /http-equiv="refresh" content="0; url=\/complete-journey\//);
+  assert.match(html, /<link rel="canonical" href="https:\/\/unleashyourpowerwithtariq\.com\/complete-journey\//);
+  assert.match(html, /href="\/complete-journey\//);
+  assert.match(html, /The 24-week journey has a new home/);
 });
 
-test("online course page uses the premium journey layout with responsive bilingual hooks", () => {
-  const html = page(siteData.routes.masterKeySystemOnlineCourse);
-
-  assert.match(html, /class="onlineCoursePage__hero"/);
-  assert.match(html, /START YOUR 7 DAYS|route\.masterKeySystemOnlineCourse\.action/);
-  assert.match(html, /EXPLORE MASTER KEY COACHING|route\.masterKeySystemOnlineCourse\.coaching/);
-  assert.equal((html.match(/class="onlineCoursePage__stage"/g) ?? []).length, 4);
-  assert.equal((html.match(/class="onlineCoursePage__studyCard"/g) ?? []).length, 3);
-  assert.match(html, /class="onlineCoursePage__nextSteps"/);
-  assert.match(html, /data-i18n="route\.masterKeySystemOnlineCourse\.journeyHeading"/);
-  assert.match(html, /data-i18n="route\.masterKeySystemOnlineCourse\.stages\.foundation"/);
-
-  const css = readFileSync(new URL("../assets/platform.css", import.meta.url), "utf8");
-  assert.match(css, /\.onlineCoursePage__hero\s*\{/);
-  assert.match(css, /\.onlineCoursePage__grid\s*\{/);
-  assert.match(css, /@media \(max-width: 700px\)[\s\S]*?\.onlineCoursePage__hero/);
-  assert.match(css, /\.onlineCoursePage__links\s*>\s*\*\s*\{[^}]*width:\s*100%/);
-
-  const spanish = renderPage(masterKeySystemOnlineCoursePage(siteData, "es"));
-  assert.match(spanish, /Curso online del Master Key System/);
-  assert.match(spanish, /Fundamentos/);
-  assert.match(spanish, /data-i18n="route\.masterKeySystemOnlineCourse\.heroStart"/);
+test("Complete Journey contains the merged weekly study guidance in English and Spanish", () => {
+  const html = page(siteData.routes.completeJourney);
+  assert.match(html, /How the learning works each week/);
+  assert.match(html, /Study one chapter/);
+  assert.match(html, /Practise the weekly exercise/);
+  assert.match(html, /Reflect and apply/);
+  const spanish = renderPage(routeRenderers[siteData.routes.completeJourney](siteData, "es"));
+  assert.match(spanish, /Cómo funciona el aprendizaje cada semana/);
+  assert.match(spanish, /Estudia un capítulo/);
 });
 
-test("sitemap includes the online course route and preserves private-route exclusion", () => {
+test("sitemap excludes the legacy online course redirect URL", () => {
   const sitemap = renderSitemap(siteData);
-  assert.match(sitemap, /https:\/\/unleashyourpowerwithtariq\.com\/master-key-system-online-course\//);
-  assert.doesNotMatch(sitemap, /\/live-coaching\//);
+  assert.doesNotMatch(sitemap, /https:\/\/unleashyourpowerwithtariq\.com\/master-key-system-online-course\//);
+  assert.match(sitemap, /https:\/\/unleashyourpowerwithtariq\.com\/complete-journey\//);
 });
 
 test("insight CTAs keep readable navy text on gold and cream surfaces", () => {
