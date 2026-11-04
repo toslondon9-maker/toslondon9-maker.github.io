@@ -9,7 +9,7 @@ import { buildSite } from "../tools/build-site.mjs";
 
 const liveDomain = "https://unleashyourpowerwithtariq.com";
 const indexableRoutes = Object.freeze([
-  ...Object.values(siteData.routes).filter((route) => route !== siteData.routes.liveCoaching),
+  ...Object.values(siteData.routes).filter((route) => route !== siteData.routes.liveCoaching && route !== siteData.routes.masterKeySystemOnlineCourse),
   ...siteData.experienceRoutes,
 ]);
 
