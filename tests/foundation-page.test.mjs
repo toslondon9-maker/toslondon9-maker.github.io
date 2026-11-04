@@ -52,7 +52,7 @@ test("Foundation page presents the confirmed four-week decision path", () => {
     "Week 4 — The True “Self”",
     "Approximately 45 minutes to read the chapter",
     "30 minutes for the meditation exercise each day",
-    "approximately 21 hours of chapter reading", "approximately 14 hours of meditation practice", "2 hours 40 minutes of live Zoom coaching", "approximately 37 hours 40 minutes total commitment", "four 40-minute Zoom calls",
+    "approximately 21 hours of chapter reading", "approximately 14 hours of meditation practice", "2 hours 40 minutes of live Zoom coaching", "approximately 37 hours 40 minutes total commitment", "four 40-minute live Zoom calls",
     "What happens after payment",
     "What to expect in Week 1",
     "A word from a student",
