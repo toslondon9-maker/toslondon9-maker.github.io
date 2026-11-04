@@ -292,13 +292,16 @@ test("every published article has one free-experience hook, a 24-week journey ho
 test("the Does Any of This Feel Familiar article is registered with a branded downloadable PDF", () => {
   assert.equal(siteData.routes.insightsFamiliar, "/insights/does-any-of-this-feel-familiar/");
   const page = insightsIndexPage();
+  const home = homePage().body;
+  assert.match(home, /data-i18n="insights.preview.familiar.readingTime"/);
+  assert.match(home, /href="\/downloads\/does-any-of-this-feel-familiar\.pdf" download/);
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsFamiliar}"`));
-  assert.match(page.body, /does-any-of-this-feel-familiar\\.pdf/);
+  assert.match(page.body, /does-any-of-this-feel-familiar\.pdf/);
   const article = insightsFamiliarPage();
   assert.equal(article.route, siteData.routes.insightsFamiliar);
   assert.equal(article.structuredData[0].datePublished, "2026-11-04");
   for (const challenge of ["Overthinking", "Scattered Focus", "Procrastination", "Self-Doubt", "Emotional Reactivity", "Repeating Old Patterns", "Feeling Overwhelmed", "Lack of Direction", "Fear of Getting It Wrong", "Harsh Inner Dialogue", "Inconsistent Discipline", "Living for Approval", "Dwelling on the Past", "Constant Comparison", "A Loss of Purpose"]) assert.match(article.body, new RegExp(challenge));
-  assert.match(article.body, /href="\\/downloads\\/does-any-of-this-feel-familiar\\.pdf" download/);
-  assert.match(article.body, /href="\\/start-free\\/"/);
+  assert.match(article.body, /href="\/downloads\/does-any-of-this-feel-familiar\.pdf" download/);
+  assert.match(article.body, /href="\/start-free\/"/);
   assert.match(article.body, /not therapy, mental-health treatment or a promise of specific results/i);
 });
