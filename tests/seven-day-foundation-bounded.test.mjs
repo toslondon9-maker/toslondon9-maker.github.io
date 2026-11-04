@@ -24,7 +24,7 @@ test("Foundation explains the confirmed four-week experience without changing th
   const spanish = renderCoaching({ language: "es", siteData });
   for (const text of [
     "Weeks 1–4", "£97 / €114", "Four progressive lessons across four weeks", "One private 40-minute live Zoom coaching call each week",
-    "Eight calls total", "WhatsApp support", "Workbook and online lessons",
+    "Four calls total", "WhatsApp support", "Workbook and online lessons",
   ]) assert.match(english, new RegExp(text.replace(/[£–]/g, "\\$&")), text);
   for (const text of [
     "Semanas 1–4", "£97 / €114", "Cuatro lecciones progresivas durante cuatro semanas", "Una llamada privada de coaching por Zoom en directo de 40 minutos cada semana",
