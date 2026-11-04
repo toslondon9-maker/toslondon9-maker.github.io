@@ -6,6 +6,7 @@ import { coachingPage } from "./pages/coaching.mjs";
 import { masterKeyCurriculumPage } from "./pages/master-key-curriculum.mjs";
 import { startFreePage } from "./pages/start-free.mjs";
 import { foundationPage } from "./pages/foundation.mjs";
+import { completeJourneyPage } from "./pages/complete-journey.mjs";
 import { sevenDayLessonPage } from "./pages/seven-day-lesson.mjs";
 import { resourcesPage } from "./pages/resources.mjs";
 import { resourcesStudyQuestionsPage } from "./pages/resources-study-questions.mjs";
