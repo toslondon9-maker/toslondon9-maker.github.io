@@ -59,9 +59,9 @@ test("lessons provide working sequential navigation and reserve coaching for day
     }
 
     if (lesson.sequence === 7) {
-      assert.match(html, new RegExp(`href="${siteData.routes.coaching}"[^>]+data-i18n="cta.exploreJourney"`));
+      assert.match(html, new RegExp(`href="${siteData.routes.completeJourney}"[^>]+data-i18n="cta.exploreJourney"`));
     } else {
-      assert.doesNotMatch(html, new RegExp(`href="${siteData.routes.coaching}"`));
+      assert.doesNotMatch(html, new RegExp(`href="${siteData.routes.completeJourney}"`));
     }
   }
 });
