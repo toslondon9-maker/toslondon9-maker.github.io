@@ -186,7 +186,7 @@ After completing the Foundation Stage, students should have established a cleare
 * The role of concentration and visualisation.
 * The importance of daily practice and application.
 
-Across the four weeks, they will have completed approximately **21 hours of chapter reading** and **14 hours of meditation practice**, alongside eight 45-minute Zoom coaching calls — six hours of live Zoom coaching in total and approximately 41 hours of total commitment.
+Across the four weeks, they will have completed approximately **21 hours of chapter reading** and **14 hours of meditation practice**, alongside four 40-minute live Zoom coaching calls — 2 hours 40 minutes of live Zoom coaching in total and approximately 37 hours 40 minutes of total commitment.
 
 More importantly, they will have begun developing the mental habits required for the next stage of the journey.
 
