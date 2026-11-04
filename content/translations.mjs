@@ -1236,6 +1236,12 @@ const translations = deepFreeze({
   "route.completeJourney.cta": { en: "ENROL IN THE COMPLETE JOURNEY", es: "INSCRÍBETE EN EL RECORRIDO COMPLETO" },
   "route.completeJourney.freeCta": { en: "START WITH THE FREE 7-DAY EXPERIENCE", es: "EMPIEZA CON LA EXPERIENCIA GRATUITA DE 7 DÍAS" },
   "route.completeJourney.summary": { en: "What you receive for your investment", es: "Qué recibes por tu inversión" },
+  "route.completeJourney.summary1": { en: "24 weeks · Four progressive stages", es: "24 semanas · Cuatro etapas progresivas" },
+  "route.completeJourney.summary2": { en: "44 private live Zoom coaching sessions", es: "44 sesiones privadas de coaching en directo por Zoom" },
+  "route.completeJourney.summary3": { en: "22 hours 40 minutes of one-to-one coaching", es: "22 horas y 40 minutos de coaching individual" },
+  "route.completeJourney.summary4": { en: "WhatsApp support throughout the journey", es: "Apoyo por WhatsApp durante todo el recorrido" },
+  "route.completeJourney.summary5": { en: "Helmar Rudolph study videos and Tariq's best practices", es: "Vídeos de estudio de Helmar Rudolph y las mejores prácticas de Tariq" },
+
   "route.completeJourney.receiveHeading": { en: "Exactly what is included", es: "Todo lo que está incluido" },
   "route.completeJourney.coachingHeading": { en: "Your coaching schedule", es: "Tu calendario de coaching" },
   "route.completeJourney.foundationLabel": { en: "STAGE 1 · WEEKS 1–4", es: "ETAPA 1 · SEMANAS 1–4" },
