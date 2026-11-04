@@ -40,6 +40,7 @@ function addCalendlyCta(route, language, body) {
   const insertBefore = (marker) => body.includes(marker) ? body.replace(marker, `${cta}${marker}`) : body;
   if (route === "/") return insertBefore('<section class="homeSection homeOffers"');
   if (route === "/foundation/") return insertBefore('<div class="foundationPage__footerCta"');
+  if (route === "/complete-journey/") return insertBefore('<section class="completeJourney__final"');
   if (route === "/coaching/") return insertBefore('<article class="coachingPricing__complete');
   if (route === "/about-tariq/") return insertBefore('<section class="certificateSection"');
   if (route === "/ai-mentors/") return insertBefore('<section class="aiMentorBuilder"');
