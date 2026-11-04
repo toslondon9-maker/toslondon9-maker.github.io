@@ -128,7 +128,7 @@ const translations = deepFreeze({
   "foundation.factSupport": { en: "WhatsApp support", es: "Apoyo por WhatsApp" },
   "foundation.factReading": { en: "Approximately 21 hours of chapter reading", es: "Aproximadamente 21 horas de lectura de capítulos" },
   "foundation.factMeditation": { en: "Approximately 14 hours of meditation practice", es: "Aproximadamente 14 horas de práctica de meditación" },
-  "foundation.factTotal": { en: "Approximately 41 hours total commitment", es: "Aproximadamente 41 horas de dedicación total" },
+  "foundation.factTotal": { en: "Approximately 37 hours 40 minutes total commitment", es: "Aproximadamente 37 horas y 40 minutos de dedicación total" },
   "foundation.factPrice": { en: `${pricing.foundation.en} one-time payment`, es: `${pricing.foundation.es} en un solo pago` },
   "foundation.summaryWeeks": { en: "4 WEEKS", es: "4 SEMANAS" },
   "foundation.summaryCalls": { en: "4 PRIVATE 40-MINUTE LIVE ZOOM CALLS", es: "4 LLAMADAS PRIVADAS DE ZOOM EN DIRECTO DE 40 MINUTOS" },
