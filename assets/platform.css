@@ -9100,3 +9100,22 @@ html {
 .completeJourney__final h2{font:700 clamp(1.8rem,3vw,2.6rem)/1.2 Georgia,serif;color:var(--cream)}
 @media(max-width:800px){.completeJourney__hero{grid-template-columns:1fr}.completeJourney__grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:580px){.completeJourney__grid,.completeJourney__coaching,.completeJourney__stages{grid-template-columns:1fr}.completeJourney__actions>*{width:100%;text-align:center}}
+
+
+/* Homepage pain-point to practice section */
+.homePainPoints{background:linear-gradient(180deg,#f7f3eb 0%,#fffdf8 100%);padding:clamp(3rem,6vw,5rem) 0;border-top:1px solid #e7dece;border-bottom:1px solid #e7dece}
+.homePainPoints .homeSection__inner{max-width:1160px}
+.homePainPoints h2{max-width:850px;font:700 clamp(2rem,4vw,3.25rem)/1.12 Georgia,serif;color:var(--night);margin:.5rem 0 1rem}
+.homePainPoints .homeSection__intro{max-width:850px;line-height:1.75;color:#45566a;margin-bottom:1.75rem}
+.homePainPoints__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.homePainPoints__card{position:relative;padding:1.25rem;border:1px solid #e5dccd;border-radius:16px;background:#fff;box-shadow:0 8px 24px rgba(23,42,70,.055)}
+.homePainPoints__number{display:inline-grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:#f2eadb;color:#8b682c;font-size:.78rem;font-weight:800}
+.homePainPoints__card h3{font:700 1.12rem/1.3 Georgia,serif;color:var(--night);margin:.75rem 0 1rem}
+.homePainPoints__card p{display:grid;gap:.35rem;margin:.8rem 0 0;font-size:.93rem;line-height:1.6;color:#4a5869}
+.homePainPoints__card p strong{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#94702f}
+.homePainPoints__practice{padding-top:.8rem;border-top:1px solid #eee7dc}
+.homePainPoints__cta{margin:2rem 0 0;padding:1.6rem;border-radius:18px;background:#172a46;color:#fff;text-align:center}
+.homePainPoints__cta p{max-width:720px;margin:0 auto 1rem;font:700 clamp(1.2rem,2.5vw,1.65rem)/1.4 Georgia,serif}
+.homePainPoints__cta small{display:block;max-width:760px;margin:1rem auto 0;color:#e8e1d4;line-height:1.5}
+@media(max-width:900px){.homePainPoints__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.homePainPoints__grid{grid-template-columns:1fr}.homePainPoints__card{padding:1.1rem}}
