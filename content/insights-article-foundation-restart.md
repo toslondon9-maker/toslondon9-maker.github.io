@@ -59,7 +59,7 @@ If your life feels far from where you hoped it would be, that does not mean your
 
 - A four-week guided introduction to the Master Key System.
 - Four weekly lessons with a workbook and online learning materials.
-- Two 45-minute Zoom coaching calls each week—eight calls in total.
+- One private 40-minute live Zoom coaching call each week—four calls in total.
 - Personal coaching and my expertise in the inner work, helping you become the architect of your own mind.
 - WhatsApp support as you work through the programme.
 - A practical structure to help you study carefully, reflect and apply the ideas in your everyday life.

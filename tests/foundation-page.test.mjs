@@ -42,8 +42,8 @@ test("Foundation page presents the confirmed four-week decision path", () => {
   const page = routeRenderers[siteData.routes.foundation](siteData);
   for (const text of [
     "Four weeks to build your practice",
-    "Two private 45-minute Zoom calls each week",
-    "Eight calls total",
+    "One private 40-minute live Zoom coaching call each week",
+    "Four calls total",
     "WhatsApp support between calls",
     "Workbook and online lessons",
     "Week 1 — One Consciousness – One Power",
@@ -52,7 +52,7 @@ test("Foundation page presents the confirmed four-week decision path", () => {
     "Week 4 — The True “Self”",
     "Approximately 45 minutes to read the chapter",
     "30 minutes for the meditation exercise each day",
-    "approximately 21 hours of chapter reading", "approximately 14 hours of meditation practice", "six hours of live Zoom coaching", "approximately 41 hours total commitment", "eight 45-minute Zoom calls",
+    "approximately 21 hours of chapter reading", "approximately 14 hours of meditation practice", "2 hours 40 minutes of live Zoom coaching", "approximately 37 hours 40 minutes total commitment", "four 40-minute live Zoom calls",
     "What happens after payment",
     "What to expect in Week 1",
     "A word from a student",
@@ -73,7 +73,7 @@ test("Foundation page leads with a compact canonical facts summary", () => {
   const page = routeRenderers[siteData.routes.foundation](siteData);
   const summary = page.body.match(/<section class="foundationPage__facts"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.ok(summary, "facts summary should be present");
-  for (const text of ["Four weeks", "Four progressive lessons", "Two private 45-minute Zoom calls each week", "Eight calls total", "Workbook and online lessons", "WhatsApp support", "£97"]) assert.ok(summary.includes(text), text);
+  for (const text of ["Four weeks", "Four progressive lessons", "One private 40-minute live Zoom coaching call each week", "Four calls total", "Workbook and online lessons", "WhatsApp support", "£97"]) assert.ok(summary.includes(text), text);
   assert.doesNotMatch(summary, /21 hours|14 hours|41 hours total commitment/);
 });
 
@@ -82,7 +82,7 @@ test("Foundation short commercial copy is approachable and omits the detailed ti
     for (const language of ["en", "es"]) {
       const value = t(key, language);
       assert.match(value, /four weeks|Cuatro semanas/i, key);
-      assert.match(value, /45-minute|45 minutos/i, key);
+      assert.match(value, /40-minute|40 minutos/i, key);
       assert.doesNotMatch(value, /41 hours|41 horas|41-hour|41 horas de dedicación/i, key);
     }
   }

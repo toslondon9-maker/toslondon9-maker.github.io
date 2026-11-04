@@ -6,6 +6,7 @@ import { coachingPage } from "./pages/coaching.mjs";
 import { masterKeyCurriculumPage } from "./pages/master-key-curriculum.mjs";
 import { startFreePage } from "./pages/start-free.mjs";
 import { foundationPage } from "./pages/foundation.mjs";
+import { completeJourneyPage } from "./pages/complete-journey.mjs";
 import { sevenDayLessonPage } from "./pages/seven-day-lesson.mjs";
 import { resourcesPage } from "./pages/resources.mjs";
 import { resourcesStudyQuestionsPage } from "./pages/resources-study-questions.mjs";
@@ -81,6 +82,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.home]: (data) => homePage(data),
   [siteData.routes.startFree]: (data) => startFreePage(data),
   [siteData.routes.foundation]: (data, language = "en") => foundationPage(data, language),
+  [siteData.routes.completeJourney]: (data, language = "en") => completeJourneyPage(data, language),
   [siteData.routes.coaching]: (data) => coachingPage(data),
   [siteData.routes.masterKeySystem]: (data) => masterKeyCurriculumPage(data),
   [siteData.routes.mksLineage]: (data) => mksLineagePage(data),

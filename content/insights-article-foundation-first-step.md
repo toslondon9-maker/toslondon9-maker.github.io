@@ -308,7 +308,7 @@ You do not need to wait until you feel completely ready.
 
 You can begin with one lesson, one exercise and one 30-minute practice session.
 
-Over four weeks, you will spend approximately 21 hours reading the chapters and 14 hours on meditation practice, alongside two 45-minute Zoom coaching calls each week — eight calls and six hours of live Zoom coaching in total — for approximately 41 hours of total commitment, with personal coaching, encouragement and accountability from me.
+Over four weeks, you will spend approximately 21 hours reading the chapters and 14 hours on meditation practice, alongside one 40-minute Zoom coaching call each week — four calls and 2 hours 40 minutes of live Zoom coaching in total — for approximately 37 hours and 40 minutes of total commitment, with personal coaching, encouragement and accountability from me.
 
 If you are ready to understand your mind, develop greater self-control and begin studying the Master Key System in a structured way, take the first stage with me today.
 

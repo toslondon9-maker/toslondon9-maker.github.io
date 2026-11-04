@@ -23,11 +23,11 @@ test("Foundation explains the confirmed four-week experience without changing th
   const english = renderCoaching({ language: "en", siteData });
   const spanish = renderCoaching({ language: "es", siteData });
   for (const text of [
-    "Weeks 1–4", "£97 / €114", "Four progressive lessons across four weeks", "Two private 45-minute Zoom calls each week",
-    "Eight calls total", "WhatsApp support", "Workbook and online lessons",
+    "Weeks 1–4", "£97 / €114", "Four progressive lessons across four weeks", "One private 40-minute live Zoom coaching call each week",
+    "Four calls total", "WhatsApp support", "Workbook and online lessons",
   ]) assert.match(english, new RegExp(text.replace(/[£–]/g, "\\$&")), text);
   for (const text of [
-    "Semanas 1–4", "£97 / €114", "Cuatro lecciones progresivas durante cuatro semanas", "Dos llamadas privadas de Zoom de 45 minutos cada semana",
-    "Ocho llamadas en total", "Apoyo por WhatsApp", "Cuaderno y lecciones online",
+    "Semanas 1–4", "£97 / €114", "Cuatro lecciones progresivas durante cuatro semanas", "Una llamada privada de coaching por Zoom en directo de 40 minutos cada semana",
+    "Cuatro llamadas en total", "Apoyo por WhatsApp", "Cuaderno y lecciones online",
   ]) assert.match(spanish, new RegExp(text.replace(/[£–]/g, "\\$&")), text);
 });

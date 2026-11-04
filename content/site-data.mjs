@@ -60,6 +60,7 @@ export const siteData = deepFreeze({
     helmarRudolphStudyVideos: "/helmar-rudolph/study-videos/",
     startFree: "/start-free/",
     foundation: "/foundation/",
+    completeJourney: "/complete-journey/",
     coaching: "/coaching/",
     aboutTariq: "/about-tariq/",
     resources: "/resources/",
