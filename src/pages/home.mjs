@@ -104,7 +104,7 @@ function renderNextStep(language) {
 }
 
 function renderHomeBody({ language = "en" } = {}) {
-  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderTestimonials(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderNextStep(language)}</main>`;
+  return `<main class="home">${renderHero(language)}${renderFreeExperience(language)}${renderJourney(language)}${renderTestimonials(language)}${renderOffers(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {
