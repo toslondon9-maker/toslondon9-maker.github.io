@@ -23,6 +23,7 @@ export const siteData = deepFreeze({
       "/helmar-rudolph/master-key-system/": "2026-10-04",
       "/helmar-rudolph/study-videos/": "2026-10-04",
       "/coaching/": "2026-09-07",
+      "/complete-journey/": "2026-11-04",
       "/about-tariq/": "2026-09-07",
       "/resources/": "2026-09-07",
       "/resources/study-questions/": "2026-11-03",
