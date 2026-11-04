@@ -198,7 +198,7 @@ Over seven days, you will begin exploring:
 
 You don't need previous experience. You simply need curiosity and a willingness to practise.
 
-[START THE FREE 7-DAY EXPERIENCE](https://unleashyourpowerwithtariq.com/start-free/)
+**[START YOUR 7 DAYS]**
 
 *Unleash Your Power | Think Consciously. Live Deliberately. Discover Your Potential.*
 
