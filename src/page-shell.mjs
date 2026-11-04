@@ -82,6 +82,8 @@ export function renderPage({ route, language, title, description, titleKey, desc
       ? "20261005-home-life-power-1"
     : route === "/foundation/"
       ? "20261005-foundation-life-power-1"
+    : route === "/complete-journey/"
+      ? "20261104-complete-journey-1"
     : route === "/coaching/"
       ? "20261004-coaching-stage-compact-1"
     : route === "/referral/"
