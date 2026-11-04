@@ -13,6 +13,7 @@ const flush = () => {
   body = [];
 };
 for (const line of markdown.split(/\r?\n/)) {
+  if (line.trim() === "---") break;
   if (line.startsWith("# ")) {
     if (!heading) { heading = line.slice(2); continue; }
     flush();
