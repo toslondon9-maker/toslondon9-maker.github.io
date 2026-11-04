@@ -28,7 +28,6 @@ export const siteData = deepFreeze({
       "/resources/": "2026-09-07",
       "/resources/study-questions/": "2026-11-03",
       "/faq/": "2026-09-07",
-      "/master-key-system-online-course/": "2026-09-07",
       "/insights/": "2026-09-09",
       "/insights/how-the-24-week-master-key-system-course-works/": "2026-09-08",
       "/insights/master-key-system-24-week-journey/": "2026-09-10",
