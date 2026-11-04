@@ -8,6 +8,7 @@ import { renderPage } from "../src/page-shell.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 import { renderSitemap } from "../src/sitemap.mjs";
 import { unlistedSessionHubPage, unlistedSessionHubRoute } from "../src/pages/unlisted-session-hub.mjs";
+import "./build-familiar-article-pdf.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const previewRoot = path.join(repositoryRoot, ".build-preview");
