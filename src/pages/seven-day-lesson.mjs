@@ -46,7 +46,7 @@ function renderNavigation(lesson, lessonIndex, data, language) {
     ? `<a class="button--primary" href="${escapeHtml(next.route)}" data-i18n="${lesson.contentKeys.navigation}">${localized(lesson.contentKeys.navigation, language)}</a>`
     : `<a class="button--primary" href="${escapeHtml(data.routes.startFree)}" data-i18n="${lesson.contentKeys.navigation}">${localized(lesson.contentKeys.navigation, language)}</a>`;
   const coachingLink = lesson.sequence === 7
-    ? `<a class="sevenDayLesson__coaching" href="${escapeHtml(data.routes.coaching)}" data-i18n="cta.exploreJourney">${localized("cta.exploreJourney", language)}</a>`
+    ? `<a class="sevenDayLesson__coaching" href="${escapeHtml(data.routes.completeJourney)}" data-i18n="cta.exploreJourney">${localized("cta.exploreJourney", language)}</a>`
     : "";
 
   return `<nav class="sevenDayLesson__navigation" aria-label="${localized("sevenDay.navigation.dashboard", language)}" data-i18n-aria-label="sevenDay.navigation.dashboard"><a class="sevenDayLesson__dashboard" href="${escapeHtml(data.routes.startFree)}" data-i18n="${navigation.dashboard}">${localized(navigation.dashboard, language)}</a><div class="sevenDayLesson__navigationActions">${previousLink}${nextLink}</div>${coachingLink}</nav>`;
