@@ -19,7 +19,7 @@ export const insightsArticles = [
 export const articleReadingMinutes = Object.freeze({ familiar: 6, foundationRestart: 5, lifeRebuilt: 8, energyAttention: 6, howToStudy: 6, haanelBiography: 7, powerWithin: 7, personalCoaching: 6, imagineMeditation: 10, foundationDevelopment: 7, foundationFirstStep: 9, foundationQA: 4, people: 7, journey: 5, lawAttraction: 6, introduction: 4, principles: 5, worldWithin: 4 });
 export function articleReadingLabel(id, language = "en") {
   const minutes = articleReadingMinutes[id];
-  return language === "es" ? `${minutes} min de lectura` : `${minutes}-minute read`;
+  return t(`insights.preview.${id}.readingTime`, language);
 }
 const articleNumber = new Map(insightsArticles.map(([id], index) => [id, String(index + 1).padStart(2, "0")]));
 const articleDates = Object.fromEntries(insightsArticles);
