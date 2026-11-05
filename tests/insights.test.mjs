@@ -21,9 +21,13 @@ test("homepage presents the Insights & Guides collection above the consolidated 
   assert.equal((body.match(/class="insightsPreview__card[^\"]*/g) ?? []).length, 3);
   assert.match(body, new RegExp(`href="${siteData.routes.insightsFoundationRestart}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insightsLifeRebuilt}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
+  assert.match(body, new RegExp(`href="${siteData.routes.insightsFamiliar}"`));
+  assert.ok(body.indexOf(`href="${siteData.routes.insightsLifeRebuilt}"`) < body.indexOf(`href="${siteData.routes.insightsFoundationRestart}"`));
+  assert.ok(body.indexOf(`href="${siteData.routes.insightsFoundationRestart}"`) < body.indexOf(`href="${siteData.routes.insightsFamiliar}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
-  assert.doesNotMatch(body, /insightsPreview__category|insightsPreview__meta|insightsPreview__date|\/downloads\//);
+  assert.match(body, /insightsPreview__meta/);
+  assert.match(body, /href="\/downloads\/how-i-rebuilt-my-life-from-the-inside-out\.pdf" download/);
+  assert.match(body, /href="\/downloads\/when-life-feels-like-it-has-fallen-apart\.pdf" download/);
   assert.match(body, new RegExp(`data-i18n="insights\.preview\.[^"]+\.action"`));
   assert.doesNotMatch(body, /insightsIntroduction/);
 });
@@ -67,7 +71,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 17);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 18);
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLifeRebuilt}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
@@ -271,7 +275,7 @@ test("personal coaching article is visible and linked from the homepage/archive"
 });
 
 test("the two new article PDFs are valid downloadable files", () => {
-  for (const file of ["downloads/master-key-system-24-week-journey.pdf", "downloads/law-of-attraction-week-18.pdf", "downloads/10-people-connected-to-the-master-key-system.pdf"]) {
+  for (const file of ["downloads/master-key-system-24-week-journey.pdf", "downloads/law-of-attraction-week-18.pdf", "downloads/10-people-connected-to-the-master-key-system.pdf", "downloads/when-life-feels-like-it-has-fallen-apart.pdf", "downloads/how-i-rebuilt-my-life-from-the-inside-out.pdf"]) {
     assert.equal(readFileSync(new URL(`../${file}`, import.meta.url)).subarray(0, 5).toString(), "%PDF-");
   }
 });
