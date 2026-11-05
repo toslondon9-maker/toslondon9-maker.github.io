@@ -103,8 +103,32 @@ function renderNextStep(language) {
   return `<section class="homeSection homeNext section--night" data-home-section="next-step"><div class="homeSection__inner"><div class="homeNext__intro">${copy("home.next.eyebrow", language, "p", "eyebrow")}${copy("home.next.title", language, "h2")}${copy("home.next.body", language, "p", "homeSection__intro")}</div><div class="homeNext__choices">${choices}</div><p class="homeNext__question">${bookingCta(language)}</p></div></section>`;
 }
 
+
+function renderTransformationReveal(language) {
+  const spanish = language === "es";
+  const buttonLabel = spanish ? "Haz clic aquí" : "Click here";
+  const title = spanish ? "¿Y si el mayor poder que puedes desarrollar ya estuviera dentro de ti?" : "What if the greatest power you could develop was already within you?";
+  const paragraphs = spanish ? [
+    "Imagina dejar de permitir que tus pensamientos, hábitos, miedos y circunstancias decidan por ti, y empezar a dirigir conscientemente tu atención, tus pensamientos y tus acciones.",
+    "El Sistema de la Llave Maestra te invita a explorar el poder creativo del pensamiento, la concentración, la visualización, la quietud interior y la relación entre tu mundo interno y tu experiencia exterior.",
+    "Durante 24 semanas, cada lección prepara el terreno para la siguiente. Aprenderás a observar los patrones que antes pasaban inadvertidos, entrenar tu atención, formar una imagen mental clara de lo que deseas desarrollar y convertir tus intenciones en acciones deliberadas.",
+    "Y a medida que avances, las ideas empezarán a conectarse. Lo que al principio parecía abstracto puede adquirir un significado nuevo. Empezarás a reconocer posibilidades, responder con mayor conciencia y actuar con más claridad, confianza y propósito.",
+    "No se trata de magia instantánea ni de promesas fáciles. Se trata de descubrir, comprender y practicar principios que pueden cambiar profundamente tu relación contigo mismo y con tu potencial.",
+    "Tú aportas la voluntad de explorar y practicar. Yo aporto la estructura, la orientación semanal, los ejercicios y el acompañamiento para ayudarte a llevar estas enseñanzas a tu vida cotidiana."
+  ] : [
+    "Imagine no longer allowing your thoughts, habits, fears and circumstances to make every decision for you — and beginning to direct your attention, your thinking and your actions consciously.",
+    "The Master Key System invites you to explore the creative power of thought, concentration, visualisation, inner stillness and the relationship between your inner world and your outer experience.",
+    "Across 24 weeks, each lesson prepares the ground for the next. You will learn to notice patterns that once went unnoticed, train your attention, form a clear mental picture of what you want to develop and translate intention into deliberate action.",
+    "And as you progress, the ideas begin to connect. What once seemed abstract can take on new meaning. You may begin to recognise possibilities, respond with greater awareness and act with more clarity, confidence and purpose.",
+    "This is not instant magic or an easy promise. It is an invitation to discover, understand and practise principles that can profoundly change your relationship with yourself and your potential.",
+    "You bring the willingness to explore and practise. I bring the structure, weekly guidance, exercises and support to help you bring these teachings into your everyday life."
+  ];
+  const closing = spanish ? "24 semanas. 24 lecciones. La oportunidad de empezar a vivir con mayor conciencia, dirección y propósito." : "24 weeks. 24 lessons. An opportunity to begin living with greater awareness, direction and purpose.";
+  return \`<section class="homeTransformationReveal" data-home-section="transformation-reveal" aria-label="\${spanish ? "Descubre el viaje" : "Discover the journey"}"><button class="homeTransformationReveal__trigger" type="button" data-transformation-open aria-haspopup="dialog" aria-controls="home-transformation-dialog">\${buttonLabel}</button><dialog class="homeTransformationReveal__dialog" id="home-transformation-dialog" aria-labelledby="home-transformation-title"><div class="homeTransformationReveal__aura" aria-hidden="true"></div><button class="homeTransformationReveal__close" type="button" data-transformation-close aria-label="\${spanish ? "Cerrar" : "Close"}">×</button><div class="homeTransformationReveal__content"><p class="eyebrow">\${spanish ? "UN VIAJE HACIA TU INTERIOR" : "A JOURNEY INTO THE POWER WITHIN"}</p><h2 id="home-transformation-title">\${title}</h2>\${paragraphs.map((paragraph) => \`<p>\${escapeHtml(paragraph)}</p>\`).join("")}<p class="homeTransformationReveal__closing">\${escapeHtml(closing)}</p><a class="button--primary" href="\${escapeHtml(siteData.routes.startFree)}">\${spanish ? "Comienza con los 7 días gratuitos" : "Begin with the free 7 days"}</a></div></dialog></section>\`;
+}
+
 function renderHomeBody({ language = "en" } = {}) {
-  return `<main class="home">${renderHero(language)}${renderFreeExperience(language)}${renderJourney(language)}${renderTestimonials(language)}${renderOffers(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
+  return `<main class="home">${renderHero(language)}${renderFreeExperience(language)}${renderJourney(language)}${renderTransformationReveal(language)}${renderTestimonials(language)}${renderOffers(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {
@@ -120,6 +144,6 @@ export function homePage(data = siteData, language = "en") {
     titleKey: "route.home.metaTitle",
     descriptionKey: "route.home.metaDescription",
     body: renderHome({ language }),
-    scripts: ["/assets/home-testimonials.mjs", "/assets/life-power-accordion.mjs"],
+    scripts: ["/assets/home-testimonials.mjs", "/assets/life-power-accordion.mjs", "/assets/home-transformation-reveal.mjs"],
   };
 }
