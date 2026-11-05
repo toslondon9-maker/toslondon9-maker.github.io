@@ -9132,3 +9132,26 @@ html {
 .coachingStyle__card p,.coachingStyle__closing{color:var(--muted);line-height:1.75}
 .coachingStyle__closing{max-width:850px;margin:1.75rem auto 0;text-align:center;font-weight:600}
 @media(max-width:680px){.coachingStyle__grid{grid-template-columns:1fr}.coachingStyle__intro{text-align:left}}
+
+
+/* Homepage transformation reveal — a restrained gold, bevelled invitation */
+.homeTransformationReveal{width:min(1160px,calc(100% - 2rem));margin:clamp(-1.5rem,-2vw,-1rem) auto clamp(2.5rem,5vw,4.5rem);display:flex;justify-content:flex-end;position:relative;z-index:2}
+.homeTransformationReveal__trigger{position:relative;isolation:isolate;min-width:142px;min-height:52px;padding:.8rem 2rem;border:1px solid #f3d58d;border-radius:.35rem;background:linear-gradient(155deg,#f9e7b0 0%,#d8ad52 18%,#b9822c 48%,#e7c477 72%,#9b681e 100%);color:#14243a;font:700 1rem/1 Georgia,serif;letter-spacing:.04em;text-transform:lowercase;cursor:pointer;text-shadow:0 1px 0 rgba(255,255,255,.55);box-shadow:inset 0 2px 1px rgba(255,255,255,.85),inset 0 -3px 2px rgba(89,54,8,.45),0 3px 0 #76501c,0 8px 18px rgba(6,23,41,.2);transition:transform .22s ease,box-shadow .22s ease,filter .22s ease}
+.homeTransformationReveal__trigger::before{content:"";position:absolute;inset:4px;border:1px solid rgba(255,248,222,.65);border-radius:.18rem;pointer-events:none}
+.homeTransformationReveal__trigger:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:inset 0 2px 1px rgba(255,255,255,.9),inset 0 -3px 2px rgba(89,54,8,.4),0 5px 0 #76501c,0 13px 25px rgba(6,23,41,.25),0 0 24px rgba(212,170,87,.35)}
+.homeTransformationReveal__trigger:active{transform:translateY(2px);box-shadow:inset 0 3px 5px rgba(89,54,8,.4),0 1px 0 #76501c}
+.homeTransformationReveal__dialog{position:relative;width:min(860px,calc(100% - 2rem));max-width:none;max-height:min(86vh,900px);padding:0;border:1px solid #c79b4b;border-radius:1.1rem;background:#fbf6eb;color:#102237;box-shadow:0 30px 100px rgba(2,13,27,.48),inset 0 0 0 5px rgba(181,138,59,.12);overflow:auto}
+.homeTransformationReveal__dialog::backdrop{background:rgba(3,14,28,.78);backdrop-filter:blur(7px)}
+.homeTransformationReveal__dialog[open]{animation:homeRevealAppear .65s cubic-bezier(.2,.8,.2,1) both}
+.homeTransformationReveal__aura{position:absolute;inset:-25%;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(225,184,92,.27),transparent 55%);animation:homeRevealGlow 5s ease-in-out infinite alternate}
+.homeTransformationReveal__content{position:relative;padding:clamp(2rem,6vw,4.5rem);background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.8),transparent 65%)}
+.homeTransformationReveal__content>.eyebrow{text-align:center;color:#99702d}
+.homeTransformationReveal__content h2{max-width:700px;margin:0 auto 1.8rem;text-align:center;color:#102237;font:700 clamp(2rem,4.7vw,3.5rem)/1.1 Georgia,serif}
+.homeTransformationReveal__content>p:not(.eyebrow){max-width:690px;margin:0 auto 1rem;color:#34465a;font-size:1.04rem;line-height:1.8}
+.homeTransformationReveal__content .homeTransformationReveal__closing{margin-top:1.7rem;padding-top:1.4rem;border-top:1px solid rgba(181,138,59,.5);color:#806022;font:700 clamp(1.15rem,2.5vw,1.45rem)/1.55 Georgia,serif;text-align:center}
+.homeTransformationReveal__content>.button--primary{display:flex;width:max-content;max-width:100%;margin:1.8rem auto 0}
+.homeTransformationReveal__close{position:sticky;z-index:3;float:right;top:.8rem;margin:.8rem .8rem -3.5rem 0;width:42px;height:42px;border:1px solid rgba(181,138,59,.6);border-radius:50%;background:#fffaf0;color:#102237;font-size:1.8rem;line-height:1;cursor:pointer;box-shadow:0 3px 12px rgba(6,23,41,.12)}
+@keyframes homeRevealAppear{from{opacity:0;transform:translateY(24px) scale(.975);filter:blur(5px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes homeRevealGlow{from{opacity:.45;transform:scale(.96)}to{opacity:1;transform:scale(1.04)}}
+@media(max-width:600px){.homeTransformationReveal{margin-block:0 2.5rem}.homeTransformationReveal__trigger{width:100%}.homeTransformationReveal__dialog{width:calc(100% - 1rem);max-height:90vh}.homeTransformationReveal__content{padding:3.5rem 1.25rem 2rem}.homeTransformationReveal__content h2{font-size:clamp(1.85rem,8vw,2.6rem)}.homeTransformationReveal__content>p:not(.eyebrow){font-size:.98rem}}
+@media(prefers-reduced-motion:reduce){.homeTransformationReveal__dialog[open],.homeTransformationReveal__aura{animation:none}.homeTransformationReveal__trigger{transition:none}}
