@@ -1,4 +1,4 @@
-import { t } from "../content/translations.mjs?v=20260909-day7-choices";
+import { t } from "../content/translations.mjs?v=20261105-transformation-1";
 
 const courseFallbacks = Object.freeze({
   "route.masterKeySystemOnlineCourse.heroWeeks": { en: "24 WEEKS", es: "24 SEMANAS" },
