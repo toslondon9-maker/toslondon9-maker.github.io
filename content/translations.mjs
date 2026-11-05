@@ -16,6 +16,10 @@ function deepFreeze(value) {
 }
 
 const translations = deepFreeze({
+  "resources.transformationLink": { en: "Understand the 24-Week Transformation →", es: "Comprende la transformación de 24 semanas →" },
+  "route.transformation.metaTitle": { en: "The 24-Week Transformation: Energy, Mind & Inner Power | Unleash Your Power", es: "La transformación de 24 semanas: energía, mente y poder interior | Unleash Your Power" },
+  "route.transformation.metaDescription": { en: "Explore the inner, mental and practical transformation of the 24-week Master Key System journey.", es: "Explora la transformación interior, mental y práctica del recorrido de 24 semanas del Master Key System." },
+
   "home.pains.15.practice": { en: "Explore the system's ideas about purpose, connection and the inner life, then translate your reflections into practical choices.", es: "Explora las ideas del sistema sobre propósito, conexión y vida interior, y convierte tus reflexiones en decisiones prácticas." },
   "home.pains.15.impact": { en: "You feel disconnected from what matters and go through routines without a clear sense of direction.", es: "Te sientes desconectado de lo que importa y repites rutinas sin una dirección clara." },
   "home.pains.15.title": { en: "A loss of purpose", es: "Pérdida de propósito" },
