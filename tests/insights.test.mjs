@@ -11,6 +11,7 @@ import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage } fr
 import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage } from "../src/pages/insights-source-article.mjs";
 import { insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage, insightsFoundationRestartPage, insightsFamiliarPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
+import { articleReadingMinutes, insightsArticles, renderInsightCard } from "../src/insights.mjs";
 
 test("homepage presents the Insights & Guides collection above the consolidated next-step panel", () => {
   const body = homePage().body;
@@ -82,6 +83,18 @@ test("the Insights hub links the branded collection articles", () => {
   assert.ok(page.body.indexOf("What Students Develop During the Foundation Stage") < page.body.indexOf("10 People Connected to The Master Key System"));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsPersonalCoaching}"`));
   assert.doesNotMatch(page.body, /href="[^"]*undefined[^"]*"/);
+});
+
+test("all 18 Insights articles have sequential numbers, consistent reading times and PDF downloads", () => {
+  assert.equal(insightsArticles.length, 18);
+  insightsArticles.forEach(([id], index) => {
+    const minutes = articleReadingMinutes[id];
+    assert.ok(Number.isInteger(minutes) && minutes > 0, `${id} has a valid reading-time estimate`);
+    const card = renderInsightCard({ id, href: `/insights/${id}/` });
+    assert.match(card, new RegExp(`insightsPreview__number[^>]*>${String(index + 1).padStart(2, "0")}</span>`));
+    assert.match(card, new RegExp(`href="/downloads/[^"]+\\.pdf" download`));
+    assert.match(card, new RegExp(`${minutes}-minute read`));
+  });
 });
 
 test("the how-to-study preview resolves to its published article route", () => {
