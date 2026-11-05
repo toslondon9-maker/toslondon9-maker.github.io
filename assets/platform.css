@@ -9119,3 +9119,16 @@ html {
 .homePainPoints__cta small{display:block;max-width:760px;margin:1rem auto 0;color:#e8e1d4;line-height:1.5}
 @media(max-width:900px){.homePainPoints__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:580px){.homePainPoints__grid{grid-template-columns:1fr}.homePainPoints__card{padding:1.1rem}}
+
+/* Coaching communication style */
+.coachingStyle{width:min(1180px,calc(100% - 2rem));margin-inline:auto;padding-block:clamp(3.5rem,7vw,6rem)}
+.coachingStyle__intro{max-width:780px;margin:0 auto 2.25rem;text-align:center}
+.coachingStyle__intro h2{font-family:Georgia,serif;font-size:clamp(2rem,4vw,3.25rem);line-height:1.12;color:var(--ink);margin:.5rem 0 1rem}
+.coachingStyle__intro>p:last-child{color:var(--muted);font-size:1.08rem;line-height:1.75}
+.coachingStyle__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.coachingStyle__card{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius-card);padding:clamp(1.25rem,3vw,2rem);box-shadow:var(--shadow-card)}
+.coachingStyle__number{display:inline-block;color:var(--gold);font:700 .82rem/1.2 Arial,sans-serif;letter-spacing:.12em}
+.coachingStyle__card h3{color:var(--ink);font-family:Georgia,serif;font-size:1.35rem;margin:.7rem 0}
+.coachingStyle__card p,.coachingStyle__closing{color:var(--muted);line-height:1.75}
+.coachingStyle__closing{max-width:850px;margin:1.75rem auto 0;text-align:center;font-weight:600}
+@media(max-width:680px){.coachingStyle__grid{grid-template-columns:1fr}.coachingStyle__intro{text-align:left}}
