@@ -39,7 +39,7 @@ export function renderInsightCard({ id, href, language = "en", compact = false }
 export function renderInsightsPreview({ language = "en", data = siteData, compact = false } = {}) {
   const routeKeys = { nextLevel: "insightsNextLevel", familiar: "insightsFamiliar", foundationRestart: "insightsFoundationRestart", lifeRebuilt: "insightsLifeRebuilt", howToStudy: "insightsHowToStudy", haanelBiography: "insightsHaanelBiography", powerWithin: "insightsPowerWithin", personalCoaching: "insightsPersonalCoaching", imagineMeditation: "insightsImagineMeditation", foundationDevelopment: "insightsFoundationDevelopment", foundationFirstStep: "insightsFoundationFirstStep", foundationQA: "insightsFoundationQA", people: "insightsPeople", journey: "insightsJourney", lawAttraction: "insightsLawAttraction", introduction: "insightsIntroduction", principles: "insightsPrinciples", worldWithin: "insightsWorldWithin" };
   routeKeys.energyAttention = "insightsEnergyAttention";
-  const cards = (compact ? insightsArticles.slice(-3).reverse() : insightsArticles.slice(-4).reverse()).map(([id]) => {
+  const cards = (compact ? insightsArticles.slice(-3) : insightsArticles.slice(-4)).map(([id]) => {
     const routeKey = routeKeys[id];
     const href = data.routes[routeKey] ?? siteData.routes[routeKey];
     if (!href) throw new Error(`Missing Insights route for ${id}`);
