@@ -22,7 +22,7 @@ export function articleReadingLabel(id, language = "en") {
   const minutes = articleReadingMinutes[id];
   return t(`insights.preview.${id}.readingTime`, language);
 }
-const articleNumber = new Map(insightsArticles.map(([id], index) => [id, String(index + 1).padStart(2, "0")]));
+const articleNumber = new Map(insightsArticles.map(([id], index) => [id, String(insightsArticles.length - index).padStart(2, "0")]));
 const articleDates = Object.fromEntries(insightsArticles);
 
 export function renderInsightCard({ id, href, language = "en", compact = false }) {
