@@ -11,11 +11,11 @@
 <link rel="preload" href="/images/power-key-mark.png" as="image" type="image/png"><link rel="stylesheet" href="/assets/platform.css?v=20261105-24-week-transformation-1">
 <style>
 .transformationPage{max-width:1120px;margin:0 auto;padding:clamp(1.2rem,4vw,3rem) 1.1rem 4.5rem;color:#172a46}
-.transformationHero{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;background:#f4efe5;border:1px solid #e6dcc9;border-radius:1.5rem;padding:clamp(1.5rem,5vw,3.5rem);margin:1rem 0 2.5rem}
+.transformationHero{display:grid;grid-template-columns:1fr;gap:clamp(1.5rem,4vw,2.25rem);align-items:center;background:#f4efe5;border:1px solid #e6dcc9;border-radius:1.5rem;padding:clamp(1.5rem,5vw,3.5rem);margin:1rem 0 2.5rem}
 .transformationEyebrow{letter-spacing:.13em;text-transform:uppercase;color:#987632;font-size:.76rem;font-weight:800}
 .transformationHero h1{font-size:clamp(2.25rem,5.5vw,4.25rem);line-height:1.04;letter-spacing:-.035em;margin:.55rem 0 1rem}
 .transformationHero p{font-size:1.08rem;line-height:1.75;color:#40506a}
-.transformationHero img{display:block;width:100%;height:100%;max-height:440px;min-height:260px;object-fit:cover;border-radius:1.1rem;box-shadow:0 18px 45px #172a4620}
+.transformationHero img{display:block;width:min(100%,760px);height:auto;max-height:none;min-height:0;object-fit:contain;object-position:center;margin:0 auto;border-radius:1.1rem;box-shadow:0 18px 45px #172a4620}
 .transformationActions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}
 .transformationActions a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;padding:.85rem 1.2rem;font-weight:800}
 .transformationActions .primary{background:#172a46;color:#fff;border:1px solid #b08d45}.transformationActions .secondary{background:#d6ad5e;color:#172a46;border:1px solid #e0c17a}
@@ -30,7 +30,7 @@
 .transformationNote{border-left:4px solid #c49a45;padding:.85rem 1.1rem;background:#faf8f3;border-radius:0 .7rem .7rem 0;color:#526176;line-height:1.75}
 .transformationFinal{background:#172a46;color:#fff;text-align:center;border-radius:1.35rem;padding:clamp(1.8rem,5vw,3rem);margin:3.5rem 0 1rem}.transformationFinal h2{color:#fff}.transformationFinal p{color:#f4efe5;line-height:1.75;max-width:720px;margin:0 auto 1.25rem}.transformationFinal .primary{background:#d6ad5e;color:#172a46}
 .languagePanel[hidden]{display:none!important}
-@media(max-width:760px){.transformationHero{grid-template-columns:1fr}.transformationHero img{max-height:330px}.transformationTimeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.transformationHero{grid-template-columns:1fr}.transformationHero img{width:100%;height:auto;max-height:none}.transformationTimeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.transformationGrid,.transformationImagePair,.transformationTimeline{grid-template-columns:1fr}.transformationHero{border-radius:1rem}}
 </style><script>document.documentElement.classList.add("has-js")</script></head>
 <body>
