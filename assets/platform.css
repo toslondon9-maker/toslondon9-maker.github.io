@@ -9086,6 +9086,10 @@ html {
 .completeJourney__card,.completeJourney__stage{padding:1.4rem;border:1px solid var(--border);border-radius:var(--radius-card);background:var(--paper);box-shadow:var(--shadow-card)}
 .completeJourney__card h3,.completeJourney__coaching h3,.completeJourney__stage h3{font:700 1.2rem/1.3 Georgia,serif;margin:.5rem 0}
 .completeJourney__card p,.completeJourney__coaching p,.completeJourney__stage p{line-height:1.7;color:#394a5c}
+.completeJourney__sessionDetails{display:grid;gap:.45rem}
+.completeJourney__sessionDetails p{margin:0}
+.completeJourney__sessionDetails strong{color:var(--navy)}
+.completeJourney__sessionTotal{padding-top:.55rem;margin-top:.2rem!important;border-top:1px solid var(--border);font-weight:800}
 .completeJourney__coaching,.completeJourney__stages{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
 .completeJourney__coaching article{padding:1.5rem;border-left:3px solid var(--gold);background:var(--paper)}
 .completeJourney__coaching small{font-weight:800;color:#85611f;letter-spacing:.08em}
