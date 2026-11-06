@@ -15,14 +15,14 @@ export const insightsArticles = [
   ["personalCoaching", "2026-09-13"], ["imagineMeditation", "2026-09-13"],
   ["foundationDevelopment", "2026-09-11"], ["foundationFirstStep", "2026-09-11"], ["foundationQA", "2026-09-11"], ["people", "2026-09-11"],
   ["journey", "2026-09-10"], ["lawAttraction", "2026-09-10"], ["introduction", "2026-09-10"], ["principles", "2026-09-10"], ["worldWithin", "2026-09-10"],
-].sort((a, b) => b[1].localeCompare(a[1]) || a[0].localeCompare(b[0]));
+].sort((a, b) => a[1].localeCompare(b[1]) || a[0].localeCompare(b[0]));
 // Estimated from article body length at approximately 220 words per minute.
 export const articleReadingMinutes = Object.freeze({ nextLevel: 8, familiar: 6, foundationRestart: 5, lifeRebuilt: 8, energyAttention: 6, howToStudy: 6, haanelBiography: 7, powerWithin: 7, personalCoaching: 6, imagineMeditation: 10, foundationDevelopment: 7, foundationFirstStep: 9, foundationQA: 4, people: 7, journey: 5, lawAttraction: 6, introduction: 4, principles: 5, worldWithin: 4 });
 export function articleReadingLabel(id, language = "en") {
   const minutes = articleReadingMinutes[id];
   return t(`insights.preview.${id}.readingTime`, language);
 }
-const articleNumber = new Map(insightsArticles.map(([id], index) => [id, String(insightsArticles.length - index).padStart(2, "0")]));
+const articleNumber = new Map(insightsArticles.map(([id], index) => [id, String(index + 1).padStart(2, "0")]));
 const articleDates = Object.fromEntries(insightsArticles);
 
 export function renderInsightCard({ id, href, language = "en", compact = false }) {
@@ -39,7 +39,7 @@ export function renderInsightCard({ id, href, language = "en", compact = false }
 export function renderInsightsPreview({ language = "en", data = siteData, compact = false } = {}) {
   const routeKeys = { nextLevel: "insightsNextLevel", familiar: "insightsFamiliar", foundationRestart: "insightsFoundationRestart", lifeRebuilt: "insightsLifeRebuilt", howToStudy: "insightsHowToStudy", haanelBiography: "insightsHaanelBiography", powerWithin: "insightsPowerWithin", personalCoaching: "insightsPersonalCoaching", imagineMeditation: "insightsImagineMeditation", foundationDevelopment: "insightsFoundationDevelopment", foundationFirstStep: "insightsFoundationFirstStep", foundationQA: "insightsFoundationQA", people: "insightsPeople", journey: "insightsJourney", lawAttraction: "insightsLawAttraction", introduction: "insightsIntroduction", principles: "insightsPrinciples", worldWithin: "insightsWorldWithin" };
   routeKeys.energyAttention = "insightsEnergyAttention";
-  const cards = insightsArticles.slice(0, compact ? 3 : 4).reverse().map(([id]) => {
+  const cards = (compact ? insightsArticles.slice(-3).reverse() : insightsArticles.slice(-4).reverse()).map(([id]) => {
     const routeKey = routeKeys[id];
     const href = data.routes[routeKey] ?? siteData.routes[routeKey];
     if (!href) throw new Error(`Missing Insights route for ${id}`);
