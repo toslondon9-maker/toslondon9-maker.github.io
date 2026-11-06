@@ -86,7 +86,7 @@ export function sourceArticlePage({ data, language = "en", id, metaKey, pdf, inc
   return { route: data.routes[routeKey], language, title, description, titleKey: pageTitleKey, descriptionKey: `${metaKey}.metaDescription`, body, structuredData: [{ "@type": "Article", headline: heading, description, datePublished: publicationDate, author: { "@type": "Person", name: "Tariq Saddique" }, publisher: { "@type": "Organization", name: "Unleash Your Power" }, mainEntityOfPage: canonical }], scripts: [] };
 }
 
-export function insightsFamiliarPage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "familiar", metaKey: "insights.familiar", sourceMetadata: true }); }
+export function insightsFamiliarPage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "familiar", metaKey: "insights.familiar", pdf: "does-any-of-this-feel-familiar.pdf", sourceMetadata: true }); }
 export function insightsJourneyPage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "journey", metaKey: "insights.journey", pdf: "master-key-system-24-week-journey.pdf" }); }
 export function insightsLawAttractionPage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "lawAttraction", metaKey: "insights.lawAttraction", pdf: "law-of-attraction-week-18.pdf" }); }
 export function insightsPeoplePage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "people", metaKey: "insights.people", pdf: "10-people-connected-to-the-master-key-system.pdf" }); }
