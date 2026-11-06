@@ -640,8 +640,8 @@ const translations = deepFreeze({
   },
   "route.coaching.heading": { en: "Personal Coaching with Tariq", es: "Coaching para un dominio interior práctico" },
   "route.coaching.purpose": {
-    en: "For people who want personal guidance, accountability and practical support as they study and apply the Master Key System principles in real life.",
-    es: "Avanza por cuatro etapas estructuradas con una guía que convierte cada aprendizaje semanal en una práctica constante.",
+    en: "For people who want personal guidance, accountability and practical support as they study and apply the Master Key System principles in real life. This is for anyone who is hungry for more, anyone looking to grow, and anyone ready to reclaim who they really are.",
+    es: "Para quienes desean orientación personal, compromiso y apoyo práctico mientras estudian y aplican los principios del Master Key System en la vida real. Es para quienes tienen hambre de más, buscan crecer y están preparados para recuperar quiénes son realmente.",
   },
   "route.coaching.priceLead": { en: "Complete 24-Week Programme:", es: "Programa completo de 24 semanas:" },
   "route.coaching.action": { en: "Enquire About Coaching", es: "Habla con Tariq sobre tu inscripción" },
