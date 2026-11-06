@@ -30,6 +30,7 @@ const runtimeFiles = Object.freeze([
   "assets/tabs.mjs",
   "assets/resources-quotes.mjs",
   "assets/home-testimonials.mjs",
+  "assets/home-transformation-reveal.mjs",
   "content/pricing.mjs",
   "content/translations.mjs",
   "content/seven-day-canonical.json",
