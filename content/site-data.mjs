@@ -17,7 +17,7 @@ export const siteData = deepFreeze({
     lastModified: "2026-09-08",
     lastModifiedByRoute: {
       "/": "2026-11-07",
-      "/master-key-system/": "2026-09-07",
+      "/master-key-system/": "2026-11-07",
       "/mks-lineage/": "2026-09-07",
       "/helmar-rudolph/": "2026-10-04",
       "/helmar-rudolph/master-key-system/": "2026-10-04",
@@ -39,7 +39,7 @@ export const siteData = deepFreeze({
       "/insights/foundation-stage-questions-and-answers/": "2026-09-11",
       "/insights/advantages-personal-master-key-system-coaching/": "2026-09-13",
       "/insights/imagine-combining-deep-meditation-personal-development/": "2026-09-13",
-      "/insights/who-was-charles-f-haanel-life-and-legacy/": "2026-09-19",
+      "/insights/who-was-charles-f-haanel-life-and-legacy/": "2026-11-07",
       "/insights/the-power-within-charles-haanel-foreword/": "2026-09-19",
       "/insights/how-to-study-the-master-key-system/": "2026-09-25",
       "/insights/energy-goes-where-attention-flows/": "2026-09-26",
