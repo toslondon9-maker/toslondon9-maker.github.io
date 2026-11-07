@@ -559,6 +559,12 @@ const translations = deepFreeze({
     es: "«Si haces lo mismo de siempre, obtendrás los mismos resultados». — Tony Robbins",
   },
   "route.home.action": { en: "GET MY FREE 7-DAY INTRODUCTION", es: "EMPIEZA MI INTRODUCCIÓN GRATIS" },
+
+  "mks.studyRoom.eyebrow": { en: "MASTER KEY SYSTEM STUDY GUIDE", es: "GUÍA DE ESTUDIO DEL MASTER KEY SYSTEM" },
+  "mks.studyRoom.heading": { en: "Master Key System: 24-Week Study Guide and Course", es: "Master Key System: guía de estudio y curso de 24 semanas" },
+  "mks.studyRoom.intro": { en: "Explore all 24 chapters of Charles F. Haanel's Master Key System through a structured 24-week study journey. Choose a lesson, understand its central principle, practise the weekly exercise and apply what you learn.", es: "Explora los 24 capítulos del Master Key System de Charles F. Haanel mediante un recorrido de estudio estructurado de 24 semanas. Elige una lección, comprende su principio central, practica el ejercicio semanal y aplica lo aprendido." },
+  "mks.studyRoom.ai": { en: "Explore the AI Study Companion", es: "Explora el compañero de estudio con IA" },
+  "mks.studyRoom.coaching": { en: "Explore Master Key System coaching", es: "Explora el coaching del Master Key System" },
   "route.masterKeySystem.metaTitle": { en: "Master Key System 24 Week Course by Charles F. Haanel | UYP", es: "Curso Master Key System de 24 semanas por Charles F. Haanel | UYP" },
   "route.mksLineage.metaTitle": { en: "Charles Haanel Master Key System Lineage | Unleash Your Power", es: "Linaje del Master Key System de Charles Haanel | Unleash Your Power" },
   "route.mksLineage.metaDescription": { en: "Explore the independent study tradition connecting Charles F. Haanel's Master Key System with modern reflection and practical application.", es: "Explora la tradición de estudio independiente que conecta el Master Key System de Charles F. Haanel con la reflexión y la aplicación práctica actuales." },
