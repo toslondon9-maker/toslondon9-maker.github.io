@@ -24,6 +24,7 @@ test("core public pages expose canonical metadata and requested search phrasing"
     [siteData.routes.resources, "Master Key System Exercises", "Study Guide"],
     [siteData.routes.faq, "Master Key System Course FAQ"],
     [siteData.routes.aiMentors, "AI Master Key System Study Companion"],
+    [siteData.routes.insightsHaanelBiography, "Who Was Charles F. Haanel?"],
   ];
   for (const [route, ...phrases] of expectations) {
     const html = page(route);
