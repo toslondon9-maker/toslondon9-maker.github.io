@@ -36,7 +36,7 @@ jobs:
           node-version: 22
 
       - name: Run full automated test suite
-        run: node --test --test-isolation=none tests/*.test.mjs
+        run: node --test tests/*.test.mjs
 
       - name: Verify deterministic production build
         run: node tools/build-site.mjs --check
@@ -60,7 +60,7 @@ jobs:
           node-version: 22
 
       - name: Run full automated test suite
-        run: node --test --test-isolation=none tests/*.test.mjs
+        run: node --test tests/*.test.mjs
 
       - name: Verify deterministic production build
         run: node tools/build-site.mjs --check
