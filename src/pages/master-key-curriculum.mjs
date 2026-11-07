@@ -30,6 +30,12 @@ const chapterGuidance = Object.freeze({
   },
 });
 
+function renderLessonAudio(week, copy) {
+  const file = `Lesson_${week}.mp3`;
+  const label = `${copy.audioLabel} ${week}`;
+  return `<section class="mksStudyRoom__audio" aria-label="${label}" data-audio-week="${week}"><div><p class="eyebrow">${copy.audioEyebrow}</p><h3>${copy.audioHeading} ${week}</h3><p>${copy.audioDescription}</p></div><audio controls preload="none" aria-label="${label}"><source src="/audio/mks/${file}" type="audio/mpeg">Your browser does not support HTML audio.</audio></section>`;
+}
+
 function renderChapterGuidance(guidance) {
   return `<section class="mksStudyRoom__chapterGuidance"><h3>About this chapter</h3><h4>${guidance.title}</h4>${guidance.about}</section>`;
 }
@@ -53,10 +59,10 @@ const chapterVideos = Object.freeze({
 
 const roomCopy = Object.freeze({
   en: {
-    eyebrow: "MASTER KEY SYSTEM STUDY GUIDE", heading: "Master Key System: 24-Week Study Guide and Course", intro: "Explore all 24 chapters of Charles F. Haanel's Master Key System through a structured 24-week study journey. Choose a lesson, understand its central principle, practise the weekly exercise and apply what you learn.", choose: "Choose a week", navigation: "Course navigation", current: "Current week", purpose: "Weekly purpose", rhythm: "Weekly rhythm", rhythmText: "Study → Practise → Reflect → Apply", progress: "Week 1 of 24", previous: "Previous Week", complete: "Complete Week", completed: "Completed", next: "Next Week", week: "Week", start: "Start the free 7-Day Experience", foundation: "Explore Foundation", ai: "Explore the AI Study Companion", coaching: "Explore Master Key System coaching",
+    eyebrow: "MASTER KEY SYSTEM STUDY GUIDE", heading: "Master Key System: 24-Week Study Guide and Course", intro: "Explore all 24 chapters of Charles F. Haanel's Master Key System through a structured 24-week study journey. Choose a lesson, understand its central principle, practise the weekly exercise and apply what you learn.", choose: "Choose a week", navigation: "Course navigation", current: "Current week", purpose: "Weekly purpose", rhythm: "Weekly rhythm", rhythmText: "Study → Practise → Reflect → Apply", progress: "Week 1 of 24", previous: "Previous Week", complete: "Complete Week", completed: "Completed", next: "Next Week", week: "Week", start: "Start the free 7-Day Experience", foundation: "Explore Foundation", ai: "Explore the AI Study Companion", coaching: "Explore Master Key System coaching", audioEyebrow: "WEEKLY AUDIO", audioHeading: "Listen to Week", audioLabel: "Audio lesson for Week", audioDescription: "Listen to this week’s supplementary recording as part of your study.",
   },
   es: {
-    eyebrow: "GUÍA DE ESTUDIO DEL MASTER KEY SYSTEM", heading: "Master Key System: guía de estudio y curso de 24 semanas", intro: "Explora los 24 capítulos del Master Key System de Charles F. Haanel mediante un recorrido de estudio estructurado de 24 semanas. Elige una lección, comprende su principio central, practica el ejercicio semanal y aplica lo aprendido.", choose: "Elige una semana", navigation: "Navegación del curso", current: "Semana actual", purpose: "Propósito de la semana", rhythm: "Ritmo semanal", rhythmText: "Estudia → Practica → Reflexiona → Aplica", progress: "Semana 1 de 24", previous: "Semana anterior", complete: "Completar semana", completed: "Completada", next: "Siguiente semana", week: "Semana", start: "Empieza la experiencia gratuita de 7 días", foundation: "Explora Foundation", ai: "Explora el compañero de estudio con IA", coaching: "Explora el coaching del Master Key System",
+    eyebrow: "GUÍA DE ESTUDIO DEL MASTER KEY SYSTEM", heading: "Master Key System: guía de estudio y curso de 24 semanas", intro: "Explora los 24 capítulos del Master Key System de Charles F. Haanel mediante un recorrido de estudio estructurado de 24 semanas. Elige una lección, comprende su principio central, practica el ejercicio semanal y aplica lo aprendido.", choose: "Elige una semana", navigation: "Navegación del curso", current: "Semana actual", purpose: "Propósito de la semana", rhythm: "Ritmo semanal", rhythmText: "Estudia → Practica → Reflexiona → Aplica", progress: "Semana 1 de 24", previous: "Semana anterior", complete: "Completar semana", completed: "Completada", next: "Siguiente semana", week: "Semana", start: "Empieza la experiencia gratuita de 7 días", foundation: "Explora Foundation", ai: "Explora el compañero de estudio con IA", coaching: "Explora el coaching del Master Key System", audioEyebrow: "AUDIO SEMANAL", audioHeading: "Escucha la semana", audioLabel: "Audio de la lección de la semana", audioDescription: "Escucha esta grabación complementaria como parte de tu estudio semanal.",
   },
 });
 
@@ -102,6 +108,7 @@ function renderChapters(language) {
       chapter = chapter.replace(/(<h3>About the exercise<\/h3><p>[\s\S]*?<\/p>)(?=<div class="aiMastery">)/, `$1${renderExerciseDisclosure(chapterGuidance[index + 1].exercise)}`);
     }
     chapter = transformQuestions(chapter);
+    chapter = chapter.replace('<div class="aiMastery">', `${renderLessonAudio(index + 1, copy)}<div class="aiMastery">`);
     if (chapterVideos[index + 1]) chapter = chapter.replace("<h3>Introduction</h3>", `<h3>Introduction</h3>${chapterVideoCard(index + 1, chapterVideos[index + 1])}`);
     chapter = chapter.replace("</div></details>", `${chapterNavigation(index, copy)}</div></details>`);
     return { index, title: chapter.match(/<summary>[\s\S]*?<strong>([\s\S]*?)<\/strong>/)?.[1] ?? `${copy.week} ${index + 1}`, html: chapter };

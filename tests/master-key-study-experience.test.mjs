@@ -26,6 +26,18 @@ test("Master Key page provides the calm 24-chapter Study Room around the preserv
   }
 });
 
+test("each of the 24 weekly study chapters includes its matching local audio lesson", () => {
+  const html = curriculumPage();
+  assert.equal((html.match(/class="mksStudyRoom__audio"/g) ?? []).length, 24);
+  for (let week = 1; week <= 24; week += 1) {
+    assert.match(html, new RegExp(`data-audio-week="${week}"[\\s\\S]*?src="/audio/mks/Lesson_${week}\\.mp3"`));
+  }
+  const spanish = curriculumPage("es");
+  assert.match(spanish, /AUDIO SEMANAL/);
+  assert.match(spanish, /Escucha esta grabación complementaria/);
+  assert.equal((spanish.match(/class="mksStudyRoom__audio"/g) ?? []).length, 24);
+});
+
 test("MKS lesson and answer material is collapsed with keyboard-accessible controls", () => {
   const html = curriculumPage();
   assert.doesNotMatch(html, /<details[^>]+open/);
