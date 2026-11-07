@@ -114,7 +114,7 @@ test("uses trusted context, a fixed model, and Workers AI request shape", async 
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), { reply: "A reflective question." });
   assert.equal(calls.length, 1);
-  assert.equal(calls[0].model, "@cf/meta/llama-3.2-3b-instruct");
+  assert.equal(calls[0].model, "@cf/google/gemma-4-26b-a4b-it");
   const body = calls[0].input;
   assert.equal(body.max_tokens, 320);
   assert.equal(body.messages[0].role, "system");
