@@ -559,7 +559,7 @@ const translations = deepFreeze({
     es: "«Si haces lo mismo de siempre, obtendrás los mismos resultados». — Tony Robbins",
   },
   "route.home.action": { en: "GET MY FREE 7-DAY INTRODUCTION", es: "EMPIEZA MI INTRODUCCIÓN GRATIS" },
-  "route.masterKeySystem.metaTitle": { en: "Master Key System 24 Week Course | Unleash Your Power", es: "Curso de 24 semanas del Master Key System | Unleash Your Power" },
+  "route.masterKeySystem.metaTitle": { en: "Master Key System 24 Week Course by Charles F. Haanel | UYP", es: "Curso Master Key System de 24 semanas por Charles F. Haanel | UYP" },
   "route.mksLineage.metaTitle": { en: "Charles Haanel Master Key System Lineage | Unleash Your Power", es: "Linaje del Master Key System de Charles Haanel | Unleash Your Power" },
   "route.mksLineage.metaDescription": { en: "Explore the independent study tradition connecting Charles F. Haanel's Master Key System with modern reflection and practical application.", es: "Explora la tradición de estudio independiente que conecta el Master Key System de Charles F. Haanel con la reflexión y la aplicación práctica actuales." },
   "route.mksLineage.heading": { en: "From Original Wisdom to Practical Application", es: "De la sabiduría original a la aplicación práctica" },
@@ -593,8 +593,8 @@ const translations = deepFreeze({
   "route.helmarRudolph.links.return": { en: "RETURN TO THE MASTER KEY SYSTEM", es: "VOLVER AL MASTER KEY SYSTEM" },
   "route.helmarRudolph.disclaimer": { en: "Unleash Your Power is independent and is not affiliated with or endorsed by Charles F. Haanel, his estate or Helmar Rudolph.", es: "Unleash Your Power es independiente y no está afiliado ni respaldado por Charles F. Haanel, sus herederos ni Helmar Rudolph." },
   "route.masterKeySystem.metaDescription": {
-    en: "Explore the Master Key System 24 Week Course: a progressive 24-week practice journey through four phases.",
-    es: "Descubre la práctica progresiva de 24 semanas del Master Key System y sus cuatro fases.",
+    en: "Explore Charles F. Haanel's Master Key System: its 24 lessons, core principles and practical exercises, with a guided study and coaching pathway.",
+    es: "Explora el Master Key System de Charles F. Haanel: sus 24 lecciones, principios y ejercicios prácticos, con una ruta guiada de estudio y coaching.",
   },
   "route.masterKeySystem.heading": { en: "Charles F. Haanel's Master Key System", es: "El Master Key System de Charles F. Haanel" },
   "route.masterKeySystem.purpose": {
@@ -774,7 +774,7 @@ const translations = deepFreeze({
   "insights.personalCoaching.heading": { en: "The Advantages of Personal Master Key System Coaching", es: "Las ventajas del coaching personal del Master Key System" },
   "insights.imagineMeditation.heading": { en: "IMAGINE!!! Combining Deep Meditation with Profound Personal Development", es: "IMAGINA!!! Combinar la meditación profunda con un desarrollo personal profundo" },
   "insights.haanelBiography.heading": { en: "Who Was Charles F. Haanel? The Life and Legacy Behind The Master Key System", es: "¿Quién fue Charles F. Haanel? La vida y el legado detrás de The Master Key System" },
-  "insights.haanelBiography.metaDescription": { en: "Discover the life, work and legacy of Charles F. Haanel, the author behind The Master Key System.", es: "Descubre la vida, la obra y el legado de Charles F. Haanel, el autor de The Master Key System." },
+  "insights.haanelBiography.metaDescription": { en: "Discover Charles F. Haanel's life, work and legacy, and learn how his 1916 Master Key System introduced a structured 24-part study of thought and concentration.", es: "Descubre la vida y el legado de Charles F. Haanel y conoce su Master Key System de 1916, un estudio estructurado de 24 partes sobre el pensamiento y la concentración." },
   "insights.imagineMeditation.metaDescription": { en: "Combine deep meditation with a structured Master Key System personal-development practice.", es: "Combina la meditación profunda con una práctica estructurada de desarrollo personal del Master Key System." },
   "insights.preview.imagineMeditation.title": { en: "IMAGINE!!! Combining Deep Meditation with Profound Personal Development", es: "IMAGINA!!! Combinar la meditación profunda con un desarrollo personal profundo" },
   "insights.preview.imagineMeditation.body": { en: "A six-month practice structure connecting stillness, concentration, purpose and application.", es: "Una estructura de práctica de seis meses que conecta quietud, concentración, propósito y aplicación." },
