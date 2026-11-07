@@ -45,7 +45,7 @@ export const MAX_REQUEST_BYTES = 80 * 1024;
 export const AI_TIMEOUT_MS = 15000;
 export const CONCISE_RESPONSE_INSTRUCTION = "Respond in approximately 150–250 words. Use short paragraphs or concise bullets. Answer directly, avoid repetition and end with one practical reflection or action.";
 const MAX_MESSAGE_CHARACTERS = 1500;
-const FIXED_MODEL = "@cf/meta/llama-3.2-3b-instruct";
+const FIXED_MODEL = "@cf/google/gemma-4-26b-a4b-it";
 
 function allowedOrigins(value) {
   return new Set(String(value ?? "").split(",").map((origin) => origin.trim()).filter(Boolean));
