@@ -18,7 +18,7 @@ He began his business career in St. Louis, Missouri. Rather than remaining in hi
 
 This decision appears to have been an important part of his development. Haanel did not simply study success from a distance. He applied his thinking to business, organisation and practical achievement.
 
-The biography describes him as becoming involved in the development of the Commercial Continental Company, which grew into one of the largest business organisations of its time.
+A 1909 biographical entry in Walter B. Stevens's *St. Louis: History of the Fourth City* identifies Haanel as president of the Continental Commercial Company. A separate 1913 history describes his earlier involvement in a sugar-and-coffee plantation venture in Mexico and dates the organisation of the Continental Commercial Company to 1905.
 
 He also held interests in other companies before dedicating more of his attention to writing, publishing and the study of personal development.
 
@@ -38,7 +38,7 @@ The central message is not simply to wish for a better life. It is to examine th
 
 ## The books written by Charles Haanel
 
-The supplied biography explains that Haanel wrote several books during his lifetime.
+Historical catalogues and contemporary biographical accounts document Haanel's writing career. The sources below provide a starting point for checking dates, titles and business details rather than relying on repeated promotional biographies.
 
 His best-known work is **The Master Key System**, first published in 1916.
 
@@ -51,7 +51,7 @@ He also wrote:
 
 These works reflect Haanel’s wider interest in psychology, personal development, the mind and the relationship between thought and experience.
 
-The Master Key System became his most influential work because it presented its ideas as a structured course of study rather than simply a collection of inspirational statements.
+The Master Key System was also distributed as a structured correspondence course. The Carnegie Library for Local History holds a 1920 file containing brochures, 24 lessons and a student's completion certificate, providing evidence of the course format in use at that time.
 
 ## What is The Master Key System?
 
@@ -99,13 +99,7 @@ They can also begin replacing automatic reactions with more deliberate choices.
 
 ## Haanel’s wider interests and associations
 
-The biography records that Haanel belonged to several organisations, including the American Scientific League, the Author’s League of America, the American Society of Psychical Research, Pi Gamma Mu Fraternity, the St. Louis Humane Society and the St. Louis Chamber of Commerce.
-
-These associations suggest that his interests extended beyond business and personal development.
-
-He was connected with intellectual, social, charitable and research-oriented organisations, reflecting the broad range of subjects that influenced his work.
-
-The biography also records claims regarding academic and professional distinctions in electronics, psychology and medicine. These details should be understood as biographical claims from the supplied source rather than independently verified conclusions.
+Contemporary biographical sketches also list civic and fraternal affiliations. Such lists should be read in their historical context: early twentieth-century city biographies often used flattering language and were sometimes produced through subscription publishing. They are useful records, but promotional descriptions and honorary distinctions should not automatically be treated as independently verified facts.
 
 ## The legacy of Charles Haanel
 
@@ -176,4 +170,11 @@ If you would like to discuss your goals, book a free 15-minute call with Tariq.
 
 **[BOOK A FREE 15-MINUTE CALL]**
 
-*This article is based primarily on the supplied biographical pages and the principles presented in The Master Key System. Historical details and biographical claims are attributed to the supplied source. Individual experiences and results will vary. The Master Key System is presented as a programme of study and personal practice, not a guarantee of specific outcomes.*
+## Historical sources and further reading
+
+- [*St. Louis: History of the Fourth City* (1909), Walter B. Stevens](https://genealogy.smcox.com/common/images/e/ee/The_Book_of_St_Louisans.pdf) — a contemporary biographical entry covering Haanel's early career and business roles.
+- [*Centennial History of Missouri* (1913)](https://ldsgenealogy.com/books/centennialhistor01instev.pdf) — a further contemporary account of Haanel's business ventures and writing.
+- [Master Key System correspondence and certificate, 1920 — Carnegie Library for Local History](https://localhistory.boulderlibrary.org/islandora/object/islandora%3A1245) — an archival record describing a 24-lesson course and a student's completion certificate.
+- [*Master-Key system* (1919) — Open Library catalogue](https://openlibrary.org/books/OL25601790M/Master-Key_system) — bibliographic record for a St. Louis edition.
+
+These sources do not settle every detail of Haanel's life, and historical accounts sometimes differ. This article distinguishes documented biographical information from Haanel's philosophical teachings. Individual experiences and results vary; the Master Key System is presented as a programme of study and personal practice, not a guarantee of specific outcomes.

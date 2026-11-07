@@ -2,7 +2,7 @@ import { renderFooter, renderHeader } from "./shared-chrome.mjs";
 import { renderStructuredData } from "./structured-data.mjs";
 import { renderCalendlyCta } from "./conversion-components.mjs";
 
-const releaseAssetVersion = "20260909-day7-choices";
+const releaseAssetVersion = "20261107-study-room-seo-1";
 const platformStyleVersion = "20261004-helmar-rudolph-page-1";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
