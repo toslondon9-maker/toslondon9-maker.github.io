@@ -35,6 +35,7 @@ export function renderStructuredData({ route, title, structuredData = [] }) {
   const graph = [organizationSchema(), websiteSchema(), ...structuredData];
   if (route === "/about-tariq/") graph.push({ "@type": "Person", name: "Tariq Saddique", jobTitle: "Master Key System coach", url: `${siteUrl}/about-tariq/` });
   if (route === "/master-key-system/" || route === "/coaching/") graph.push({ "@type": "Course", name: "Master Key System 24 Week Course", description: "A progressive 24-week study journey with practical exercises and coaching support.", provider: { "@id": `${siteUrl}/#organization` } });
+  if (route === "/ai-mentors/") graph.push({ "@type": "SoftwareApplication", name: "AI Master Key System Study Companion", applicationCategory: "EducationalApplication", operatingSystem: "Web", url: `${siteUrl}/ai-mentors/`, description: "An educational AI study companion for exploring all 24 parts of the Master Key System through questions, reflection and practical exercises.", provider: { "@id": `${siteUrl}/#organization` } });
   if (route === "/faq/") {
     const questions = [
       ["How is the coaching delivered?", "The journey combines progressive weekly study, practical exercises, reflection and guidance from Tariq."],
