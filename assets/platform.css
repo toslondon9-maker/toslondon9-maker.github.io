@@ -7858,6 +7858,44 @@ body {
   padding: 1.2rem clamp(1.35rem, 4vw, 2.75rem) 1.5rem;
 }
 
+.mksStudyRoom__audio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .85rem;
+  margin: 1.5rem 0;
+  padding: 1rem clamp(1rem, 2.5vw, 1.4rem);
+  border: 1px solid rgba(190, 148, 73, .55);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius-card);
+  background: var(--cream);
+}
+.mksStudyRoom__audio .eyebrow {
+  margin: 0 0 .35rem;
+  color: #85611f;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+.mksStudyRoom__audio h3 {
+  margin: 0 0 .35rem !important;
+  color: var(--night);
+}
+.mksStudyRoom__audio p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+}
+.mksStudyRoom__audio audio {
+  display: block;
+  width: 100%;
+  max-width: 34rem;
+}
+@media (min-width: 640px) {
+  .mksStudyRoom__audio {
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, .9fr);
+    align-items: center;
+  }
+}
+
 .mksStudyRoom__chapter .chapterBody h3 {
   margin-top: 1.5rem;
   color: var(--night);
