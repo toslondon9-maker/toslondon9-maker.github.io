@@ -8,7 +8,7 @@ The AI Mentor page is static; this Cloudflare Worker is the optional server-side
 2. From `backend/`, update `wrangler.toml` with the exact public GitHub Pages origin in `ALLOWED_ORIGIN`. For a preview environment, use its own Worker and preview origin. Multiple origins may be comma-separated.
 3. Deploy with `npx wrangler deploy` from `backend/`. The `AI` binding in `wrangler.toml` connects the Worker to Workers AI. Set the public Worker URL as the non-secret `ai-mentor-endpoint` meta value emitted for `/ai-mentors/` during the static-site integration. The checked-in fallback is `/api/mentor`.
 
-The Worker uses the fixed `@cf/meta/llama-3.2-3b-instruct` model; a client cannot choose a model or submit a system prompt.
+The Worker uses the fixed `@cf/google/gemma-4-26b-a4b-it` model; a client cannot choose a model or submit a system prompt.
 
 ## Operational limits
 
