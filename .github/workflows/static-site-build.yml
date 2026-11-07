@@ -1,0 +1,81 @@
+name: Validate and publish static site
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.mjs"
+      - "content/**"
+      - "src/**"
+      - "tools/**"
+      - "tests/**"
+      - ".github/workflows/**"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uyp-static-site-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Build and test pull request
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run full automated test suite
+        run: node --test --test-isolation=none tests/*.test.mjs
+
+      - name: Verify deterministic production build
+        run: node tools/build-site.mjs --check
+
+      - name: Build static preview
+        run: node tools/build-site.mjs
+
+  publish:
+    name: Build and publish generated static files
+    if: github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run full automated test suite
+        run: node --test --test-isolation=none tests/*.test.mjs
+
+      - name: Verify deterministic production build
+        run: node tools/build-site.mjs --check
+
+      - name: Generate public static site
+        run: node tools/build-site.mjs --write-public
+
+      - name: Commit generated site when files changed
+        run: |
+          if git diff --quiet; then
+            echo "Generated public files are already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Build generated static site"
+          git push origin HEAD:main
