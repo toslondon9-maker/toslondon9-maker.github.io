@@ -548,12 +548,12 @@ const translations = deepFreeze({
     en: "An independent coaching experience inspired by the Master Key System.",
     es: "Una experiencia de coaching independiente inspirada en el Master Key System.",
   },
-  "route.home.metaTitle": { en: "Personal Development Coaching for Focus & Goals | Tariq", es: "Coaching de desarrollo personal para enfoque y objetivos | Tariq" },
+  "route.home.metaTitle": { en: "Master Key System Coaching | Personal Development with Tariq", es: "Coaching del Master Key System | Desarrollo personal con Tariq" },
   "route.home.metaDescription": {
-    en: "Looking for better focus, self-discipline and direction? Explore personal development coaching with Tariq Saddique, plus a free seven-day introduction. No purchase required.",
-    es: "¿Buscas mejorar tu enfoque, autodisciplina y dirección? Descubre el coaching de desarrollo personal con Tariq Saddique y prueba una introducción gratuita de siete días.",
+    en: "Study the Master Key System with Tariq Saddique. Explore practical coaching for focus and mental discipline, with a free 7-day introduction.",
+    es: "Estudia el Master Key System con Tariq Saddique. Explora ejercicios prácticos para mejorar el enfoque y la disciplina mental. Empieza con 7 días gratis.",
   },
-  "route.home.heading": { en: "Stop going round in circles. Start moving towards what matters.", es: "Deja de dar vueltas. Empieza a avanzar hacia lo que importa." },
+  "route.home.heading": { en: "Master Key System Coaching for Focus, Clarity and Personal Growth", es: "Coaching del Master Key System para mejorar el enfoque y la claridad" },
   "route.home.purpose": {
     en: "“If you do what you've always done, you'll get what you've always gotten.” — Tony Robbins",
     es: "«Si haces lo mismo de siempre, obtendrás los mismos resultados». — Tony Robbins",
@@ -633,9 +633,9 @@ const translations = deepFreeze({
     es: "Practica un ejercicio de enfoque cada día y observa qué cambia cuando diriges tu atención con intención.",
   },
   "route.startFree.action": { en: "See the 24-week journey", es: "Descubre el recorrido de 24 semanas" },
-  "route.coaching.metaTitle": { en: "Personal Coaching for Focus & Concentration | 24 Weeks", es: "Coaching personal para enfoque y concentración | 24 semanas" },
+  "route.coaching.metaTitle": { en: "Master Key System Coaching | 24-Week Personal Programme", es: "Coaching del Master Key System | Programa personal de 24 semanas" },
   "route.coaching.metaDescription": {
-    en: "Build focus, concentration and consistent habits through a structured 24-week personal coaching journey inspired by the Master Key System.",
+    en: "Study the Master Key System with personal guidance from Tariq. Build focus, concentration and consistent habits through a structured 24-week coaching programme.",
     es: "Desarrolla el enfoque, la concentración y hábitos constantes con un recorrido estructurado de coaching personal de 24 semanas inspirado en el Master Key System.",
   },
   "route.coaching.heading": { en: "Personal Coaching with Tariq", es: "Coaching para un dominio interior práctico" },
@@ -1053,10 +1053,10 @@ const translations = deepFreeze({
   "aiMentor.fallback.summary": { en: "Prefer to use your own ChatGPT account?", es: "¿Prefieres usar tu propia cuenta de ChatGPT?" },
   "aiMentor.fallback.purpose": { en: "Choose your purpose", es: "Elige tu objetivo" },
   "aiMentor.fallback.title": { en: "Ready for your ChatGPT study session", es: "Listo para tu sesión de estudio en ChatGPT" },
-  "route.aiMentors.metaTitle": { en: "AI Mentors | Unleash Your Power", es: "Mentores de IA | Unleash Your Power" },
+  "route.aiMentors.metaTitle": { en: "AI Master Key System Study Companion | Unleash Your Power", es: "Compañero de estudio IA del Master Key System | Unleash Your Power" },
   "route.aiMentors.metaDescription": {
-    en: "Use transparent educational simulations for guided Master Key reflection.",
-    es: "Utiliza simulaciones educativas transparentes para guiar tu reflexión sobre el Master Key System.",
+    en: "Study all 24 parts of the Master Key System with an AI companion. Ask questions, explore ideas and prepare for practical exercises alongside your learning.",
+    es: "Estudia las 24 partes del Master Key System con un compañero de IA. Haz preguntas, explora ideas y prepara ejercicios prácticos.",
   },
   "route.aiMentors.heading": { en: "AI-guided mentors for reflection", es: "Mentores guiados por IA para reflexionar" },
   "route.aiMentors.purpose": {
