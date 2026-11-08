@@ -7,14 +7,16 @@ function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").repla
 
 export function insightsIndexPage(data = siteData, language = "en") {
   const routeKeys = { nextLevel: "insightsNextLevel", familiar: "insightsFamiliar", foundationRestart: "insightsFoundationRestart", lifeRebuilt: "insightsLifeRebuilt", energyAttention: "insightsEnergyAttention", howToStudy: "insightsHowToStudy", haanelBiography: "insightsHaanelBiography", powerWithin: "insightsPowerWithin", personalCoaching: "insightsPersonalCoaching", imagineMeditation: "insightsImagineMeditation", foundationDevelopment: "insightsFoundationDevelopment", foundationFirstStep: "insightsFoundationFirstStep", foundationQA: "insightsFoundationQA", people: "insightsPeople", journey: "insightsJourney", lawAttraction: "insightsLawAttraction", introduction: "insightsIntroduction", principles: "insightsPrinciples", worldWithin: "insightsWorldWithin" };
-  const cards = insightsArticles.slice().reverse().map(([id]) => {
+  const orderedArticles = insightsArticles.slice().reverse();
+  const cards = orderedArticles.map(([id]) => {
     const routeKey = routeKeys[id];
     const href = data.routes[routeKey] ?? siteData.routes[routeKey];
     if (!href) throw new Error(`Missing Insights route for ${id}`);
     return renderInsightCard({ id, href, language });
   });
   const contextualCta = `<p class="insightsHub__contextualCta"><a class="button--text" href="${data.routes.startFree}" data-i18n="insights.cta.hubContextual">${escapeHtml(t("insights.cta.hubContextual", language))}</a></p>`;
-  const cardsWithCta = `${contextualCta}${cards.join("")}`;
+  const contextualCtaPosition = orderedArticles.findIndex(([id]) => id === "energyAttention") + 1;
+  const cardsWithCta = [...cards.slice(0, contextualCtaPosition), contextualCta, ...cards.slice(contextualCtaPosition)].join("");
   const body = `<main id="main-content"><section class="insightArticle insightsHub"><header class="insightArticle__header"><p class="eyebrow" data-i18n="insights.hub.eyebrow">${escapeHtml(t("insights.hub.eyebrow", language))}</p><h1 data-i18n="insights.hub.heading">${escapeHtml(t("insights.hub.heading", language))}</h1><p class="insightArticle__intro" data-i18n="insights.hub.intro">${escapeHtml(t("insights.hub.intro", language))}</p></header><div class="insightsPreview__grid">${cardsWithCta}</div><p class="insightsHub__bridge" data-i18n="insights.cta.hubBridge">${escapeHtml(t("insights.cta.hubBridge", language))}</p><p class="insightArticle__links"><a class="button--primary" href="${data.routes.startFree}" data-i18n="insights.cta.start">${escapeHtml(t("insights.cta.start", language))}</a> <a class="button--text" href="${data.routes.foundation}" data-i18n="insights.cta.foundation">${escapeHtml(t("insights.cta.foundation", language))}</a> <a class="button--text" href="${data.routes.masterKeySystem}" data-i18n="insights.cta.viewJourney">${escapeHtml(t("insights.cta.viewJourney", language))}</a> <a class="button--secondary" href="${bookingCallHref(data.contact.whatsapp)}" target="_blank" rel="noopener noreferrer" data-i18n="insights.cta.hubWhatsApp">${escapeHtml(t("insights.cta.hubWhatsApp", language))}</a> <a class="button--text" href="/" data-i18n="insights.hub.homeLink">${escapeHtml(t("insights.hub.homeLink", language))}</a></p></section></main>`;
   return { route: data.routes.insights, language, title: t("insights.hub.metaTitle", language), description: t("insights.hub.metaDescription", language), titleKey: "insights.hub.metaTitle", descriptionKey: "insights.hub.metaDescription", body, structuredData: [], scripts: [] };
 }
