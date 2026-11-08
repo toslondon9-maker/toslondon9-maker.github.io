@@ -9401,24 +9401,11 @@ html {
 }
 
 
-/* Mobile hero: use the seated coaching portrait panel, not the desktop programme poster. */
-@media(max-width:767px){
-  .homeHero__mobileIntro{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important}
-  .homeHero__mobilePortrait{position:relative;display:block;width:100%;height:260px;overflow:hidden;border-radius:15px 0 0 15px;mask-image:linear-gradient(to right,#000 82%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 82%,transparent 100%)}
-  .homeHero__mobilePortrait img{display:block!important;width:200%!important;max-width:none!important;height:100%!important;object-fit:cover!important;object-position:right center!important;transform:translateX(-50%);border:0!important;border-radius:0!important;box-shadow:none!important;mask-image:none!important;-webkit-mask-image:none!important}
-  .homeHero__artwork,.homeHero__copy,.homeHero__mobileArtworkAction{display:none!important}
-  .homeHero__mobile{display:block!important}
-}
-@media(max-width:380px){
-  .homeHero__mobilePortrait{height:235px}
-}
-
-
-/* Keep responsive homepage artwork at its selected image's natural aspect ratio. */
+/* Mobile and desktop use the same hero component with responsive artwork sources. */
 .homeHero__artwork picture{display:block;width:100%}
 .homeHero__artwork img{aspect-ratio:auto}
-@media(max-width:767px){.homeHero__artwork picture{width:100%}.homeHero__artwork img{width:100%;height:auto;object-fit:contain}}
-
-
-/* Mobile homepage: replace the legacy portrait panel with the programme artwork. */
-@media(max-width:767px){.homeHero__mobile{display:none!important}.homeHero__artwork{display:block!important;width:min(100% - 1.5rem,520px)!important;margin:0 auto!important}.homeHero__artwork img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important}.homeHero__mobileArtworkAction{display:block!important;width:min(100% - 2rem,480px)!important;margin:.85rem auto 0!important}}
+@media(max-width:767px){
+  .homeHero__artwork{display:block!important;width:min(100% - 1.5rem,520px)!important;margin:0 auto!important}
+  .homeHero__artwork img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important}
+  .homeHero__mobileArtworkAction{display:block!important;width:min(100% - 2rem,480px)!important;margin:.85rem auto 0!important}
+}
