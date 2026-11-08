@@ -301,8 +301,40 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
-      assert.equal((page.match(/class="routeShell__purpose"/g) ?? []).length, 1);
-      assert.equal((page.match(/class="button--primary routeShell__action"/g) ?? []).length, 1);
+      if (globalPageFiles[index] === "complete-journey/index.html") {
+        assert.match(page, /<main id="main-content" class="completeJourney">/);
+        assert.match(page, /<h1 data-i18n="route\\.completeJourney\\.heading">/);
+        assert.equal(page.split(`href="${siteData.offer.paymentUrl}"`).length - 1, 2);
+        assert.ok(page.includes(`href="${siteData.routes.startFree}"`));
+        continue;
+      }
+
+      if (globalPageFiles[index] === "resources/study-questions/index.html") {
+        assert.match(page, /class="studyQuestionsPage"/);
+        assert.match(page, /<h1 data-i18n="studyQuestions\\.heading">/);
+        assert.ok(page.includes('href="/downloads/master-key-study-questions.pdf"'));
+        assert.ok(page.includes('href="/resources/"'));
+        continue;
+      }
+
+      if (globalPageFiles[index] === "insights/does-any-of-this-feel-familiar/index.html") {
+        assert.match(page, /class="insightArticle sourceInsightArticle"/);
+        assert.match(page, /data-i18n="insights\\.familiar\\.metaDescription"/);
+        assert.match(page, /data-i18n="insights\\.familiar\\.heading"/);
+        assert.match(page, /class="insightArticle__contextualCta"[\\s\\S]*href="\\/start-free\\/"/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "insights/your-next-level-starts-with-a-decision/index.html") {
+        assert.match(page, /class="insightArticle sourceInsightArticle"/);
+        assert.match(page, /data-i18n="insights\\.nextLevel\\.metaDescription"/);
+        assert.match(page, /data-i18n="insights\\.nextLevel\\.heading"/);
+        assert.match(page, /class="insightArticle__contextualCta"[\\s\\S]*href="\\/start-free\\/"/);
+        continue;
+      }
+
+      assert.equal((page.match(/class="routeShell__purpose"/g) ?? []).length, 1, `${globalPageFiles[index]} must have exactly one route-shell purpose`);
+      assert.equal((page.match(/class="button--primary routeShell__action"/g) ?? []).length, 1, `${globalPageFiles[index]} must have exactly one primary route-shell action`);
       assert.match(page, /<h1 data-i18n="route\.[^"]+\.heading">/);
       assert.match(page, /class="routeShell__purpose" data-i18n="route\.[^"]+\.purpose">/);
       assert.match(page, /class="button--primary routeShell__action"[^>]+data-i18n="route\.[^"]+\.action">/);
