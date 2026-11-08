@@ -65,7 +65,7 @@ test("canonical route definitions are locked", () => {
     terms: "/terms/",
     refundPolicy: "/refund-policy/",
     liveCoaching: "/live-coaching/"
-  });;
+  });
 });
 
 test("every mapped section has one canonical destination", () => {
