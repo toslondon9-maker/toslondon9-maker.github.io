@@ -68,3 +68,20 @@
 .affiliateReward .eyebrow {
   color: #e7bf70 !important;
 }
+
+
+/* The earnings examples use light cards inside the navy reward panel.
+   Keep their text dark; the light-on-dark palette belongs only to the panel itself. */
+.affiliateReward__examples article p:not(.eyebrow):not(.affiliateReward__amount),
+.affiliateReward__examples article small {
+  color: #34475b !important;
+}
+.affiliateReward__examples article .affiliateReward__secondary {
+  color: #526274 !important;
+}
+.affiliateReward__examples article .affiliateReward__amount {
+  color: #805b18 !important;
+}
+.affiliateReward__examples article .eyebrow {
+  color: #805b18 !important;
+}
