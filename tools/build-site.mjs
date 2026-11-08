@@ -101,14 +101,20 @@ async function writeBuild(outputRoot) {
   const hash = createHash("sha256");
 
   for (const route of buildRoutes) {
-    const render = route === unlistedSessionHubRoute ? unlistedSessionHubPage : routeRenderers[route];
-    if (!render) throw new Error(`No renderer is registered for ${route}`);
-
     const relativeFile = outputPathForRoute(route);
     const outputFile = path.join(outputRoot, relativeFile);
-    const html = renderPage(render(siteData));
     await mkdir(path.dirname(outputFile), { recursive: true });
-    await writeFile(outputFile, html, "utf8");
+
+    if (route === siteData.routes.innerCircleEvent) {
+      // This page is intentionally a standalone HTML document with its own design and scripts.
+      // Copy it directly instead of wrapping it in the shared UYP page shell.
+      await copyFile(path.join(repositoryRoot, "inner-circle", "index.html"), outputFile);
+    } else {
+      const render = route === unlistedSessionHubRoute ? unlistedSessionHubPage : routeRenderers[route];
+      if (!render) throw new Error(`No renderer is registered for ${route}`);
+      const html = renderPage(render(siteData));
+      await writeFile(outputFile, html, "utf8");
+    }
     files.push(relativeFile);
   }
 
