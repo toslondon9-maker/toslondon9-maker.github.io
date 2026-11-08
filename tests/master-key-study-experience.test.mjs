@@ -31,7 +31,7 @@ test("each of the 24 weekly study chapters includes its matching local audio les
   const html = curriculumPage();
   assert.equal((html.match(/class="mksStudyRoom__audio"/g) ?? []).length, 24);
   for (let week = 1; week <= 24; week += 1) {
-    assert.match(html, new RegExp(`data-audio-week="${week}"[\s\S]*?src="/audio/mks/Lesson_${week}\\.mp3"`));
+    assert.match(html, new RegExp(String.raw`data-audio-week="${week}"[\s\S]*?src="/audio/mks/Lesson_${week}\.mp3"`));
   }
   const spanish = curriculumPage("es");
   assert.match(spanish, /AUDIO SEMANAL/);
