@@ -12,7 +12,7 @@ function section(html, id) {
   return html.match(new RegExp(`<section[^>]+data-home-section="${id}"[\\s\\S]*?</section>`))?.[0] ?? "";
 }
 
-test("homepage follows the approved concise 12-section sequence", () => {
+test("homepage follows the approved concise 11-section sequence", () => {
   const html = renderHome({ language: "en" });
   assert.match(html, /<h2[^>]*data-i18n="home\.mobileHero\.title">/);
   assert.match(html, /<h1[^>]*data-i18n="route\.home\.heading">/);
@@ -25,7 +25,7 @@ test("homepage follows the approved concise 12-section sequence", () => {
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
   assert.match(html, /class="homeHero__artwork"[\s\S]*src="\/uyp-home-hero\.jpg"/);
-  assert.match(html, /tariq-welcome-portrait\.png/);
+  assert.doesNotMatch(html, /tariq-welcome-portrait\\.png|homeWelcome|data-home-section="welcome"/);
 });
 
 test("homepage does not render the previous expanded sections", () => {
@@ -44,7 +44,8 @@ test("homepage restores all 15 pain points and removes the personal welcome pane
   assert.match(painPoints, /What it can cost you/);
   assert.match(painPoints, /How the MKS may help/);
   assert.match(painPoints, /TRY THE FREE 7-DAY EXPERIENCE/);
-  assert.ok(section(spanish, "pain-points").includes("15"));
+  const spanishPainPoints = section(spanish, "pain-points");
+  assert.equal((spanishPainPoints.match(/class="homePainPoints__card"/g) ?? []).length, 15);
   assert.doesNotMatch(html, /data-home-section="welcome"|homeWelcome|tariq-welcome-portrait\\.png|A personal welcome from Tariq/);
   assert.ok(html.indexOf('data-home-section="pain-points"') > html.indexOf('data-home-section="hero"'));
 });
