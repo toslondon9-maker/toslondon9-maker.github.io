@@ -395,7 +395,7 @@ const translations = deepFreeze({
   "home.taster.eyebrow": { en: "YOUR FREE START", es: "TU PRIMER PASO GRATUITO" },
   "home.taster.title": { en: "7 Days to Change the Way You Use Your Mind", es: "7 días para cambiar la forma en que usas tu mente" },
   "home.taster.intro": { en: "Before committing to a longer journey, spend seven days observing how you think, where your attention goes and how deliberately you respond.", es: "Siete sesiones breves. Un enfoque útil cada día." },
-  "home.taster.cta": { en: "GET MY FREE 7-DAY INTRODUCTION", es: "EMPIEZA MI INTRODUCCIÓN GRATIS" },
+  "home.taster.cta": { en: "START YOUR FREE 7-DAY EXPERIENCE", es: "COMIENZA TU EXPERIENCIA GRATUITA DE 7 DÍAS" },
   "home.taster.promiseTitle": { en: "Free registration required. No purchase required.", es: "Registro gratuito obligatorio. No es necesario comprar." },
   "home.taster.promiseBody": { en: "Use the seven days to decide whether this way of learning and practising is right for you.", es: "Utiliza los siete días para decidir si esta forma de aprender y practicar encaja contigo." },
   "home.taster.day1": { en: "See What’s Running Your Life", es: "Observa qué dirige tu vida" },
