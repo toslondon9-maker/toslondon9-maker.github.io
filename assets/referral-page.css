@@ -85,3 +85,14 @@
 .affiliateReward__examples article .eyebrow {
   color: #805b18 !important;
 }
+
+
+/* Final mobile contrast override: commission amounts must remain clearly readable
+   on the light referral example cards, regardless of inherited text effects. */
+.affiliateReward .affiliateReward__examples article > p.affiliateReward__amount {
+  color: #805b18 !important;
+  -webkit-text-fill-color: #805b18 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-shadow: none !important;
+}
