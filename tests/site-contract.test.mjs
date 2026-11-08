@@ -28,11 +28,13 @@ test("canonical route definitions are locked", () => {
     helmarRudolphStudyVideos: "/helmar-rudolph/study-videos/",
     startFree: "/start-free/",
     foundation: "/foundation/",
+    completeJourney: "/complete-journey/",
     coaching: "/coaching/",
     aboutTariq: "/about-tariq/",
+    innerCircleEvent: "/inner-circle/",
     resources: "/resources/",
+    resourcesStudyQuestions: "/resources/study-questions/",
     resourcesAudio: "/resources/audio/",
-    insights: "/insights/",
     insightsCourse: "/insights/how-the-24-week-master-key-system-course-works/",
     insightsJourney: "/insights/master-key-system-24-week-journey/",
     insightsLawAttraction: "/insights/law-of-attraction-week-18/",
@@ -43,9 +45,13 @@ test("canonical route definitions are locked", () => {
     insightsPersonalCoaching: "/insights/advantages-personal-master-key-system-coaching/",
     insightsImagineMeditation: "/insights/imagine-combining-deep-meditation-personal-development/",
     insightsHaanelBiography: "/insights/who-was-charles-f-haanel-life-and-legacy/",
+    insightsPowerWithin: "/insights/the-power-within-charles-haanel-foreword/",
     insightsHowToStudy: "/insights/how-to-study-the-master-key-system/",
     insightsEnergyAttention: "/insights/energy-goes-where-attention-flows/",
-    insightsPowerWithin: "/insights/the-power-within-charles-haanel-foreword/",
+    insightsLifeRebuilt: "/insights/how-i-rebuilt-my-life-from-the-inside-out/",
+    insightsFoundationRestart: "/insights/when-life-feels-like-it-has-fallen-apart/",
+    insightsFamiliar: "/insights/does-any-of-this-feel-familiar/",
+    insightsNextLevel: "/insights/your-next-level-starts-with-a-decision/",
     insights: "/insights/",
     insightsPrinciples: "/insights/eight-principles-master-key-system/",
     insightsIntroduction: "/insights/introduction-charles-haanel-master-key-system/",
@@ -59,7 +65,7 @@ test("canonical route definitions are locked", () => {
     terms: "/terms/",
     refundPolicy: "/refund-policy/",
     liveCoaching: "/live-coaching/"
-  });
+  });;
 });
 
 test("every mapped section has one canonical destination", () => {
