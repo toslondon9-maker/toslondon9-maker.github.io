@@ -9412,3 +9412,9 @@ html {
 @media(max-width:380px){
   .homeHero__mobilePortrait{height:235px}
 }
+
+
+/* Keep responsive homepage artwork at its selected image's natural aspect ratio. */
+.homeHero__artwork picture{display:block;width:100%}
+.homeHero__artwork img{aspect-ratio:auto}
+@media(max-width:767px){.homeHero__artwork picture{width:100%}.homeHero__artwork img{width:100%;height:auto;object-fit:contain}}
