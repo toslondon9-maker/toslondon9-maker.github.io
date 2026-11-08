@@ -49,5 +49,5 @@ export const homeContent = Object.freeze({
     Object.freeze({ titleKey: "home.books.book4.title", authorKey: "home.books.book4.author" }),
     Object.freeze({ titleKey: "home.books.book7.title", authorKey: "home.books.book7.author" }),
   ]),
-  heroImage: "/images/tariq-happiness-harmony.png",
+  heroImage: "/uyp-home-hero.jpg",
 });
