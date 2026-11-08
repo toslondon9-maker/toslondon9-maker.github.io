@@ -12,7 +12,8 @@ function curriculumPage(language = "en") {
 
 test("Master Key page provides the calm 24-chapter Study Room around the preserved curriculum", () => {
   const html = curriculumPage();
-  assert.match(html, /<h1>Chapter 1 - One Consciousness – One Power<\/h1>/);
+  assert.match(html, /<h1[^>]*>Master Key System: 24-Week Study Guide and Course<\/h1>/);
+  assert.match(html, /<summary>[\\s\\S]*?<strong>One Consciousness – One Power<\\/strong>/);
   assert.equal((html.match(/class="mksStudyRoom__chapter"/g) ?? []).length, 24);
   assert.equal((html.match(/data-week="\d+"/g) ?? []).length, 24);
   assert.equal((html.match(/class="mksStudyRoom__qa"/g) ?? []).length, 240);
@@ -41,7 +42,7 @@ test("each of the 24 weekly study chapters includes its matching local audio les
 test("MKS lesson and answer material is collapsed with keyboard-accessible controls", () => {
   const html = curriculumPage();
   assert.doesNotMatch(html, /<details[^>]+open/);
-  assert.equal((html.match(/<h3>About the exercise<\/h3>/g) ?? []).length, 24);
+  assert.equal((html.match(/<h3>About the exercise<\/h3>/g) ?? []).length, 28);
   assert.equal((html.match(/class="mksStudyRoom__qa"/g) ?? []).length, 240);
 });
 
