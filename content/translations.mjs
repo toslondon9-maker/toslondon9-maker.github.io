@@ -17,6 +17,7 @@ function deepFreeze(value) {
 
 const translations = deepFreeze({
   "resources.transformationLink": { en: "Understand the 24-Week Transformation →", es: "Comprende la transformación de 24 semanas →" },
+  "resources.weeklyExercisesLink": { en: "Explore the 24 Weekly Master Key Exercises →", es: "Explora los 24 ejercicios semanales del Master Key →" },
   "route.transformation.metaTitle": { en: "The 24-Week Transformation: Energy, Mind & Inner Power | Unleash Your Power", es: "La transformación de 24 semanas: energía, mente y poder interior | Unleash Your Power" },
   "route.transformation.metaDescription": { en: "Explore the inner, mental and practical transformation of the 24-week Master Key System journey.", es: "Explora la transformación interior, mental y práctica del recorrido de 24 semanas del Master Key System." },
 
