@@ -9214,7 +9214,7 @@ html {
   .homeHero__mobileIntro{display:grid;grid-template-columns:minmax(108px,.82fr) minmax(0,1.18fr);gap:1rem;align-items:center}
   .homeHero__mobileIntro img{display:block;width:100%;height:190px;object-fit:cover;object-position:center 25%;border-radius:14px;border:1px solid rgba(190,148,73,.55);box-shadow:0 8px 22px rgba(16,36,59,.12)}
   .homeHero__mobileIntro .eyebrow{margin:0 0 .4rem;color:#94702f;font-size:.66rem;line-height:1.4;letter-spacing:.1em}
-  .homeHero__mobileIntro h1{margin:0 0 .45rem;color:#102237;font:700 clamp(1.65rem,7vw,2.15rem)/1.04 Georgia,serif}
+  .homeHero__mobileIntro h2{margin:0 0 .45rem;color:#102237;font:700 clamp(1.65rem,7vw,2.15rem)/1.04 Georgia,serif}
   .homeHero__mobileIntro div>p:last-child{margin:0;color:#34465b;font-size:.88rem;line-height:1.45}
   .homeHero__mobilePoints{display:grid;gap:.65rem;margin:1rem 0 1.1rem;padding:0;list-style:none}
   .homeHero__mobilePoints li{display:grid;gap:.12rem;padding:.65rem .8rem;border-left:3px solid #b88c3b;background:rgba(255,255,255,.58);border-radius:0 9px 9px 0}
@@ -9236,7 +9236,7 @@ html {
   .homeHero__mobileIntro img{height:285px!important;object-fit:cover!important;object-position:center 24%!important;border:0!important;border-radius:0 18px 18px 0!important;box-shadow:none!important;mask-image:linear-gradient(to right,#000 72%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 72%,transparent 100%)}
   .homeHero__mobileIntro>div{position:relative;z-index:1;margin-left:-.45rem;padding:.35rem 0 .35rem .1rem}
   .homeHero__mobileIntro .eyebrow{font-size:.68rem!important;letter-spacing:.12em!important;line-height:1.45!important;color:#98702e!important}
-  .homeHero__mobileIntro h1{font-size:clamp(2rem,9vw,2.8rem)!important;line-height:.98!important;letter-spacing:-.035em;margin:.2rem 0 .75rem!important}
+  .homeHero__mobileIntro h2{font-size:clamp(2rem,9vw,2.8rem)!important;line-height:.98!important;letter-spacing:-.035em;margin:.2rem 0 .75rem!important}
   .homeHero__mobileIntro div>p:last-child{font-size:clamp(.9rem,3.9vw,1.08rem)!important;line-height:1.42!important;color:#102237!important}
   .homeHero__mobilePoints{gap:.75rem!important;margin:1.1rem 0 1.35rem!important}
   .homeHero__mobilePoints li{position:relative;grid-template-columns:2.6rem minmax(0,1fr);column-gap:.7rem;align-items:center;padding:.45rem .25rem!important;border:0!important;border-radius:0!important;background:transparent!important}
@@ -9248,7 +9248,7 @@ html {
   .homeHero__mobilePoints span{font-size:.9rem!important;line-height:1.4!important;color:#26394f!important}
   .homeHero__mobileAction .button--primary{display:block;width:100%;text-align:center;padding:1rem .8rem!important;border:3px solid #c79535!important;border-radius:999px!important;background:linear-gradient(110deg,#071a32,#102b4d)!important;color:#fff!important;box-shadow:0 8px 20px rgba(16,36,59,.16);font-size:clamp(.88rem,3.7vw,1.05rem)!important;font-weight:800;line-height:1.3}
 }
-@media(max-width:360px){.homeHero__mobileIntro{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important;min-height:250px}.homeHero__mobileIntro img{height:250px!important}.homeHero__mobileIntro h1{font-size:1.85rem!important}}
+@media(max-width:360px){.homeHero__mobileIntro{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important;min-height:250px}.homeHero__mobileIntro img{height:250px!important}.homeHero__mobileIntro h2{font-size:1.85rem!important}}
 
 
 /* Mobile homepage uses the supplied full hero artwork, not the legacy portrait layout. */
@@ -9380,7 +9380,7 @@ html {
   .homeHero__mobileIntro img{display:block!important;width:100%!important;height:260px!important;object-fit:cover!important;object-position:center 20%!important;border:0!important;border-radius:15px 0 0 15px!important;box-shadow:none!important;mask-image:linear-gradient(to right,#000 82%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 82%,transparent 100%)}
   .homeHero__mobileIntro>div{position:relative;z-index:1;min-width:0;margin-left:-.45rem;padding:.5rem 0 .5rem .1rem}
   .homeHero__mobileIntro .eyebrow{margin:0 0 .45rem!important;color:#94702f!important;font-size:.67rem!important;line-height:1.4!important;letter-spacing:.12em!important}
-  .homeHero__mobileIntro h1{margin:0 0 .65rem!important;color:#102237!important;font:700 clamp(2rem,8.8vw,2.65rem)/.98 Georgia,serif!important;letter-spacing:-.035em!important;overflow-wrap:normal!important}
+  .homeHero__mobileIntro h2{margin:0 0 .65rem!important;color:#102237!important;font:700 clamp(2rem,8.8vw,2.65rem)/.98 Georgia,serif!important;letter-spacing:-.035em!important;overflow-wrap:normal!important}
   .homeHero__mobileLead{margin:0!important;color:#102237!important;font-size:clamp(.9rem,3.8vw,1.05rem)!important;line-height:1.42!important;font-weight:500}
   .homeHero__mobilePoints{display:grid!important;gap:.8rem!important;margin:1.15rem 0 1.3rem!important;padding:0!important;list-style:none!important}
   .homeHero__mobilePoints li{position:relative;display:grid!important;grid-template-columns:2.7rem minmax(0,1fr)!important;column-gap:.75rem!important;align-items:center!important;padding:.3rem .1rem!important;border:0!important;background:transparent!important}
@@ -9395,7 +9395,7 @@ html {
 @media(max-width:380px){
  .homeHero__mobileIntro{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)!important;min-height:235px!important}
  .homeHero__mobileIntro img{height:235px!important}
- .homeHero__mobileIntro h1{font-size:1.9rem!important}
+ .homeHero__mobileIntro h2{font-size:1.9rem!important}
  .homeHero__mobilePoints strong{font-size:.92rem!important}
  .homeHero__mobilePoints span{font-size:.82rem!important}
 }

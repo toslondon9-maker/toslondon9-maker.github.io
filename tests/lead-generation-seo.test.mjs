@@ -9,11 +9,11 @@ test("SEO metadata connects problem-aware searches to the free lead magnet and c
   const coaching = coachingPage();
   const free = startFreePage();
 
-  assert.match(home.title, /Focus & Mindset Coaching/);
+  assert.match(home.title, /Unleash Your Power \| Master Key System Coaching with Tariq/);
   assert.match(home.description, /focus, concentration and mental discipline/i);
   assert.match(coaching.title, /Master Key System Coaching/);
-  assert.match(coaching.description, /24-week personal coaching/i);
-  assert.match(free.title, /Free 7-Day Focus & Mindset Experience/);
+  assert.match(coaching.description, /24-week Master Key System coaching course/i);
+  assert.match(free.title, /7 Days to Change the Way You Use Your Mind/);
   assert.match(free.description, /seven guided lessons/i);
 
   for (const page of [home, coaching, free]) {

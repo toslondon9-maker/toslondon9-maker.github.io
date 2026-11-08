@@ -16,11 +16,11 @@ test("referral page contains the approved share journey sections", () => {
   assert.match(page.body, /PASS ON THE POWER. SHARE THE POSSIBILITY./);
   assert.match(page.body, /YOUR PERSONAL AFFILIATE LINK/);
   assert.match(page.body, /Affiliate Toolkit/);
-  assert.match(page.body, /Website \/ Social Media \/ Community URL/);
+  assert.match(page.body, /Use this link on your website, social media, WhatsApp, email or community page\./);
   assert.match(page.body, /affiliate terms/);
   assert.match(page.body, /href="#personal-invite"|share-personally/);
   assert.deepEqual(page.scripts, ["/assets/referral.mjs"]);
-  assert.deepEqual(page.styles, ["/assets/referral-page.css?v=20261103-referral-impact-1"]);
+  assert.deepEqual(page.styles, ["/assets/referral-page.css?v=20261108-commission-contrast-2"]);
 });
 
 test("bottom referral CTA targets the personal invite section", () => {
@@ -57,8 +57,8 @@ test("referral page explains the approved 25% reward across eligible product lin
   assert.match(reward, /eligible referred sales[\s\S]*not a product price/i);
   assert.match(page.body, /Create your affiliate link and start sharing today\./);
   assert.match(reward, /Affiliate reward summary/);
-  assert.match(reward, /£97 sale → £4\.85 commission/);
-  assert.match(reward, /£997 sale → £49\.85 commission/);
+  assert.match(reward, /£97 sale → £24\.25 commission/);
+  assert.match(reward, /£997 sale → £249\.25 commission/);
   assert.match(reward, /£5,000 in eligible referred sales → £1,250 commission/);
   assert.match(reward, /eligible, completed, non-refunded purchases successfully attributed to your tracked affiliate link/i);
   assert.doesNotMatch(page.body, /Affiliate rewards and commission terms will be confirmed upon approval/);

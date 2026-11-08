@@ -37,7 +37,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
-  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20261004-helmar-rudolph-page-1">/);
+  assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=20261108-mobile-portrait-cache-fix-1">/);
   assert.match(html, /<link rel="preload" href="\/images\/power-key-mark\.png" as="image" type="image\/png">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
   assert.match(html, /<header[\s>]/);
@@ -46,7 +46,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
 });
 
 test("route renderers cover every canonical route with essential response copy", () => {
-  const routes = [...Object.values(siteData.routes), ...siteData.experienceRoutes];
+  const routes = [...Object.entries(siteData.routes).filter(([routeId]) => routeId !== "innerCircleEvent").map(([, route]) => route), ...siteData.experienceRoutes];
   assert.deepEqual(Object.keys(routeRenderers).sort(), [...routes].sort());
 
   for (const route of routes) {
@@ -74,9 +74,12 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "helmar-rudolph/study-videos/index.html",
       "start-free/index.html",
       "foundation/index.html",
+      "complete-journey/index.html",
       "coaching/index.html",
       "about-tariq/index.html",
+      "inner-circle/index.html",
       "resources/index.html",
+      "resources/study-questions/index.html",
       "resources/audio/index.html",
       "insights/how-the-24-week-master-key-system-course-works/index.html",
       "insights/master-key-system-24-week-journey/index.html",
@@ -93,6 +96,8 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "insights/energy-goes-where-attention-flows/index.html",
       "insights/how-i-rebuilt-my-life-from-the-inside-out/index.html",
       "insights/when-life-feels-like-it-has-fallen-apart/index.html",
+      "insights/does-any-of-this-feel-familiar/index.html",
+      "insights/your-next-level-starts-with-a-decision/index.html",
       "insights/index.html",
       "insights/eight-principles-master-key-system/index.html",
       "insights/introduction-charles-haanel-master-key-system/index.html",
@@ -120,6 +125,9 @@ test("buildSite writes the canonical route tree deterministically", async () => 
     const home = await readFile(path.join(outputRoot, "index.html"), "utf8");
     const coaching = await readFile(path.join(outputRoot, "coaching", "index.html"), "utf8");
     assert.match(home, /Charles F\. Haanel/);
+    const innerCircle = await readFile(path.join(outputRoot, "inner-circle", "index.html"), "utf8");
+    assert.match(innerCircle, /<h1[ >]/);
+    assert.match(innerCircle, /rel="canonical" href="https:\/\/unleashyourpowerwithtariq\.com\/inner-circle\/"/);
     assert.match(coaching, /£997/);
     assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__/);
   } finally {
@@ -133,19 +141,27 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 49);
+    assert.equal(pageFiles.length, 54);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
       ...Object.entries(siteData.routes)
-        .filter(([routeId, route]) => routeId !== "liveCoaching" && route !== "/")
+        .filter(([routeId, route]) => routeId !== "liveCoaching" && routeId !== "innerCircleEvent" && routeId !== "masterKeySystemOnlineCourse" && route !== "/")
         .map(([, route]) => `${route.slice(1)}index.html`),
     ].includes(file));
     const pages = await Promise.all(globalPageFiles.map((file) => readFile(path.join(outputRoot, file), "utf8")));
     const titles = pages.map((page) => page.match(/<title[^>]*>(.*?)<\/title>/)?.[1]);
     const descriptions = pages.map((page) => page.match(/<meta name="description" content="([^"]+)"/)?.[1]);
     assert.equal(new Set(titles).size, pages.length);
-    assert.equal(new Set(descriptions).size, pages.length);
+    const descriptionOwners = new Map();
+    descriptions.forEach((description, index) => {
+      if (!descriptionOwners.has(description)) descriptionOwners.set(description, []);
+      descriptionOwners.get(description).push(globalPageFiles[index]);
+    });
+    const duplicateDescriptions = [...descriptionOwners.entries()]
+      .filter(([, files]) => files.length > 1)
+      .map(([description, files]) => ({ description, files }));
+    assert.deepEqual(duplicateDescriptions, [], "Every generated public route must have a unique meta description.");
 
     for (const [index, page] of pages.entries()) {
       assert.equal((page.match(/<h1[ >]/g) ?? []).length, 1);

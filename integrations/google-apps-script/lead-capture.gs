@@ -158,3 +158,18 @@ function doPost(e) {
     return json({ ok: true, stored: true, notification: status === "Sent" ? "sent" : "pending" });
   } catch (_) { return json({ ok: false, code: "unavailable" }); } finally { lock.releaseLock(); }
 }
+
+/**
+ * Run once from the private Apps Script editor to schedule the opted-in
+ * Day 2–7 follow-up sequence. Re-running this installer will not create
+ * duplicate hourly triggers.
+ */
+function installLeadSequenceTrigger() {
+  const handler = "sendDueSequenceEmails";
+  const existing = ScriptApp.getProjectTriggers().some(function(trigger) {
+    return trigger.getHandlerFunction() === handler;
+  });
+  if (existing) return "already-installed";
+  ScriptApp.newTrigger(handler).timeBased().everyHours(1).create();
+  return "installed";
+}
