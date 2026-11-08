@@ -321,7 +321,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         assert.match(page, /class="insightArticle sourceInsightArticle"/);
         assert.match(page, /data-i18n="insights\.familiar\.metaDescription"/);
         assert.match(page, /data-i18n="insights\.familiar\.heading"/);
-        assert.match(page, /class="insightArticle__contextualCta"[\s\\S]*href="\/start-free\/"/);
+        assert.match(page, /class="insightArticle__contextualCta"[\s\S]*href="\/start-free\/"/);
         continue;
       }
 
@@ -329,7 +329,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         assert.match(page, /class="insightArticle sourceInsightArticle"/);
         assert.match(page, /data-i18n="insights\.nextLevel\.metaDescription"/);
         assert.match(page, /data-i18n="insights\.nextLevel\.heading"/);
-        assert.match(page, /class="insightArticle__contextualCta"[\s\\S]*href="\/start-free\/"/);
+        assert.match(page, /class="insightArticle__contextualCta"[\s\S]*href="\/start-free\/"/);
         continue;
       }
 
