@@ -7,7 +7,17 @@ function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").repla
 
 export function insightsIndexPage(data = siteData, language = "en") {
   const routeKeys = { nextLevel: "insightsNextLevel", familiar: "insightsFamiliar", foundationRestart: "insightsFoundationRestart", lifeRebuilt: "insightsLifeRebuilt", energyAttention: "insightsEnergyAttention", howToStudy: "insightsHowToStudy", haanelBiography: "insightsHaanelBiography", powerWithin: "insightsPowerWithin", personalCoaching: "insightsPersonalCoaching", imagineMeditation: "insightsImagineMeditation", foundationDevelopment: "insightsFoundationDevelopment", foundationFirstStep: "insightsFoundationFirstStep", foundationQA: "insightsFoundationQA", people: "insightsPeople", journey: "insightsJourney", lawAttraction: "insightsLawAttraction", introduction: "insightsIntroduction", principles: "insightsPrinciples", worldWithin: "insightsWorldWithin" };
-  const orderedArticles = insightsArticles.slice();
+  const insightsHubOrder = [
+    "nextLevel", "familiar", "foundationRestart", "lifeRebuilt", "energyAttention",
+    "personalCoaching", "foundationDevelopment", "people", "foundationFirstStep", "foundationQA",
+    "howToStudy", "haanelBiography", "powerWithin", "imagineMeditation", "journey",
+    "lawAttraction", "introduction", "principles", "worldWithin",
+  ];
+  const orderedArticles = insightsHubOrder.map((id) => {
+    const article = insightsArticles.find(([articleId]) => articleId === id);
+    if (!article) throw new Error(`Missing Insights article for ${id}`);
+    return article;
+  });
   const cards = orderedArticles.map(([id]) => {
     const routeKey = routeKeys[id];
     const href = data.routes[routeKey] ?? siteData.routes[routeKey];
