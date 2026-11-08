@@ -9412,3 +9412,13 @@ html {
 @media(max-width:380px){
   .homeHero__mobilePortrait{height:235px}
 }
+
+
+/* Keep responsive homepage artwork at its selected image's natural aspect ratio. */
+.homeHero__artwork picture{display:block;width:100%}
+.homeHero__artwork img{aspect-ratio:auto}
+@media(max-width:767px){.homeHero__artwork picture{width:100%}.homeHero__artwork img{width:100%;height:auto;object-fit:contain}}
+
+
+/* Mobile homepage: replace the legacy portrait panel with the programme artwork. */
+@media(max-width:767px){.homeHero__mobile{display:none!important}.homeHero__artwork{display:block!important;width:min(100% - 1.5rem,520px)!important;margin:0 auto!important}.homeHero__artwork img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important}.homeHero__mobileArtworkAction{display:block!important;width:min(100% - 2rem,480px)!important;margin:.85rem auto 0!important}}
