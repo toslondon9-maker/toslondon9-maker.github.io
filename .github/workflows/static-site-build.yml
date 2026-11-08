@@ -63,6 +63,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Generate static pages for validation
+        run: node tools/build-site.mjs --write-public
+
       - name: Run full automated test suite
         run: node --test tests/*.test.mjs
 
