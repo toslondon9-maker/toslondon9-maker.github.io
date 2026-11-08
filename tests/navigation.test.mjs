@@ -101,8 +101,8 @@ test("page shell cache-busts the release assets that control visible copy and la
   const languageModule = readFileSync(new URL("../assets/site-language.mjs", import.meta.url), "utf8");
 
   assert.match(html, /href="\/assets\/platform\.css\?v=20261005-home-life-power-1"/);
-  assert.match(html, /src="\/assets\/site-language\.mjs\?v=20260909-day7-choices"/);
-  assert.match(languageModule, /translations\.mjs\?v=20260909-day7-choices/);
+  assert.match(html, /src="\/assets\/site-language\.mjs\?v=20261107-study-room-seo-1"/);
+  assert.match(languageModule, /translations\.mjs\?v=20261107-study-room-seo-1/);
 });
 
 test("final header breakpoint guard prevents the desktop cascade from re-enabling overlap", () => {
