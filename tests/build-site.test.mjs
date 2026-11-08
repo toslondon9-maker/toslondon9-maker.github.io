@@ -164,7 +164,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
     assert.deepEqual(duplicateDescriptions, [], "Every generated public route must have a unique meta description.");
 
     for (const [index, page] of pages.entries()) {
-      assert.equal((page.match(/<h1[ >]/g) ?? []).length, 1);
+      assert.equal((page.match(/<h1[ >]/g) ?? []).length, 1, `${globalPageFiles[index]} must have exactly one page H1`);
 
       if (globalPageFiles[index] === "get-the-book/index.html") {
         assert.match(page, /<title>Get Your Master Key System Book \| Unleash Your Power<\/title>/);

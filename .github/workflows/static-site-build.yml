@@ -63,8 +63,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Run full automated test suite (report existing failures without blocking build verification)
-        continue-on-error: true
+      - name: Run full automated test suite
         run: node --test tests/*.test.mjs
 
       - name: Verify deterministic production build
