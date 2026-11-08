@@ -9348,3 +9348,23 @@ html {
   .home .homeHero__proof li { padding: .7rem .45rem; }
   .home .homeHero__proof span { font-size: .72rem; }
 }
+
+
+/* Give the existing programme artwork more prominence on desktop. */
+@media (min-width: 768px) {
+  .home .homeHero {
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr) !important;
+    gap: clamp(1.5rem, 3vw, 3rem) !important;
+  }
+  .home .homeHero__artwork {
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+  }
+  .home .homeHero__artwork img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+  }
+}
