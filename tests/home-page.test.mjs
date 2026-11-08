@@ -14,8 +14,9 @@ function section(html, id) {
 
 test("homepage follows the approved concise 12-section sequence", () => {
   const html = renderHome({ language: "en" });
-  assert.match(html, /<h2[^>]*data-i18n="home\.mobileHero\.title">/);
-  assert.match(html, /<h1[^>]*data-i18n="route\.home\.heading">/);
+  assert.match(html, /<source media="\\(max-width: 767px\\)" srcset="\\/images\\/unleash-your-power-programme\\.jpeg">/);
+  assert.doesNotMatch(html, /homeHero__mobile|homeHero__mobilePortrait|homeHero__mobilePoints/);
+  assert.match(html, /<h1[^>]*data-i18n="route\\.home\\.heading">/);
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(sections, approvedSections);
