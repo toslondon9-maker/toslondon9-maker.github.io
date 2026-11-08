@@ -253,8 +253,8 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         continue;
       }
 
-      assert.match(page, /<title data-i18n="(?:route|foundation|insights\.[^"]+)\.[^"]+">/);
-      assert.match(page, /<meta name="description"[^>]+data-i18n="(?:route|foundation|insights\.[^"]+)\.[^"]+">/);
+      assert.match(page, /<title data-i18n="(?:route|foundation|studyQuestions|insights\.[^"]+)\.[^"]+">/);
+      assert.match(page, /<meta name="description"[^>]+data-i18n="(?:route|foundation|studyQuestions|insights\.[^"]+)\.[^"]+">/);
 
       if (globalPageFiles[index] === "start-free/index.html") {
         assert.match(page, /<main class="sevenDayDashboard"/);
