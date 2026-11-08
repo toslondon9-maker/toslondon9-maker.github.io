@@ -153,7 +153,15 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
     const titles = pages.map((page) => page.match(/<title[^>]*>(.*?)<\/title>/)?.[1]);
     const descriptions = pages.map((page) => page.match(/<meta name="description" content="([^"]+)"/)?.[1]);
     assert.equal(new Set(titles).size, pages.length);
-    assert.equal(new Set(descriptions).size, pages.length);
+    const descriptionOwners = new Map();
+    descriptions.forEach((description, index) => {
+      if (!descriptionOwners.has(description)) descriptionOwners.set(description, []);
+      descriptionOwners.get(description).push(globalPageFiles[index]);
+    });
+    const duplicateDescriptions = [...descriptionOwners.entries()]
+      .filter(([, files]) => files.length > 1)
+      .map(([description, files]) => ({ description, files }));
+    assert.deepEqual(duplicateDescriptions, [], "Every generated public route must have a unique meta description.");
 
     for (const [index, page] of pages.entries()) {
       assert.equal((page.match(/<h1[ >]/g) ?? []).length, 1);
