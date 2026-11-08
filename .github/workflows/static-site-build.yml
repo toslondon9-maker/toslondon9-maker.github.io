@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "**/*.mjs"
+      - "**/*.html"
       - "content/**"
       - "src/**"
       - "tools/**"
