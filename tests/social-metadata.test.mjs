@@ -48,8 +48,8 @@ test("public generated HTML uses only the custom-domain SEO base", () => {
 test("the standalone Inner Circle page retains its own public social metadata", () => {
   const html = readFileSync(new URL("../inner-circle/index.html", import.meta.url), "utf8");
   const url = "https://unleashyourpowerwithtariq.com/inner-circle/";
-  assert.match(html, new RegExp(`<link rel="canonical" href="${url.replaceAll("/", "\\\\/")}">`));
-  assert.match(html, new RegExp(`<meta property="og:url" content="${url.replaceAll("/", "\\\\/")}">`));
+  assert.match(html, new RegExp(`<link rel="canonical" href="${url}">`));
+  assert.match(html, new RegExp(`<meta property="og:url" content="${url}">`));
   assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
 });
 
