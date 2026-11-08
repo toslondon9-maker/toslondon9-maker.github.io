@@ -573,12 +573,12 @@ const translations = deepFreeze({
     en: "Build focus, concentration and mental discipline through Master Key System coaching with Tariq Saddique. Try the free 7-day experience.",
     es: "Desarrolla el enfoque, la concentración y la disciplina mental mediante el coaching del Master Key System con Tariq Saddique. Prueba la experiencia gratuita de 7 días.",
   },
-  "route.home.heading": { en: "Master the world within.", es: "Domina tu mundo interior." },
+  "route.home.heading": { en: "Master Key System Coaching for Focus, Clarity and Personal Growth", es: "Coaching del Master Key System para mejorar el enfoque y la claridad" },
   "route.home.purpose": {
     en: "“If you do what you've always done, you'll get what you've always gotten.” — Tony Robbins",
     es: "«Si haces lo mismo de siempre, obtendrás los mismos resultados». — Tony Robbins",
   },
-  "route.home.action": { en: "START YOUR 7 DAYS", es: "EMPIEZA TUS 7 DÍAS" },
+  "route.home.action": { en: "GET MY FREE 7-DAY INTRODUCTION", es: "EMPIEZA MI INTRODUCCIÓN GRATIS" },
 
   "mks.studyRoom.eyebrow": { en: "MASTER KEY SYSTEM STUDY GUIDE", es: "GUÍA DE ESTUDIO DEL MASTER KEY SYSTEM" },
   "mks.studyRoom.heading": { en: "Master Key System: 24-Week Study Guide and Course", es: "Master Key System: guía de estudio y curso de 24 semanas" },
