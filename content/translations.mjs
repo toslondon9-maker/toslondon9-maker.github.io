@@ -1332,6 +1332,7 @@ const translations = deepFreeze({
   "coaching.pricing.continueAfterFoundation": { en: "CONTINUE AFTER FOUNDATION", es: "CONTINUAR DESPUÉS DE FUNDAMENTOS" },
   "coaching.pricing.foundationAction": { en: `Explore Foundation — ${pricing.foundation.en}`, es: `Explora Fundamentos — ${pricing.foundation.es}` },
   "coaching.pricing.completePurchase": { en: "PAY NOW", es: "PAGAR AHORA" },
+  "coaching.pricing.viewDetails": { en: "VIEW FULL JOURNEY DETAILS", es: "VER LOS DETALLES DEL RECORRIDO COMPLETO" },
   "coaching.pricing.balance": { en: `Already paid ${pricing.foundation.en} for Foundation? Continue through the remaining 20 weeks with a ${pricing.balance.en} balance. Your total for the complete journey remains ${pricing.complete.en}.`, es: `¿Ya has pagado ${pricing.foundation.es} por Fundamentos? Continúa durante las 20 semanas restantes con un saldo de ${pricing.balance.es}. El total del recorrido completo sigue siendo ${pricing.complete.es}.` },
   "coaching.services.specialistTitle": { en: "Higher-touch and specialist offers", es: "Ofertas especializadas y de mayor acompañamiento" },
   "coaching.faq.eyebrow": { en: "A FEW PRACTICAL ANSWERS", es: "ALGUNAS RESPUESTAS PRÁCTICAS" },
