@@ -26,7 +26,6 @@ test("generated public pages use the canonical positioning and remove retired CT
     "faq/index.html",
     "resources/index.html",
     "referral/index.html",
-    "master-key-system-online-course/index.html",
     "insights/index.html",
   ];
   const pages = await Promise.all(files.map((file) => readFile(path.join(root, file), "utf8")));

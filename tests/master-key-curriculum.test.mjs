@@ -25,7 +25,8 @@ test("the MKS Study Room preserves the complete 24-week curriculum", () => {
   for (const title of ["One Consciousness – One Power", "One Method of Finding the Truth", "Thoughts Become Things", "The True “Self”"]) assert.ok(curriculum.includes(title), title);
   assert.match(curriculum, /The Truth shall set you free/);
   assert.match(curriculum, /class="weekVideo"[^>]+href="https:\/\/photos\.google\.com\/share\//);
-  assert.match(curriculum, /Chapter 1 - One Consciousness – One Power/);
+  assert.match(curriculum, /<option value="week-1">Week 1 — One Consciousness – One Power<\/option>/);
+  assert.match(curriculum, /<summary>[\s\S]*?<strong>One Consciousness – One Power<\/strong>/);
   assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="foundation"/);
   assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="visualisation"/);
   assert.match(curriculum, /class="mksStudyRoom__stage"[^>]*data-stage="concentration"/);
@@ -54,7 +55,7 @@ test("Chapter 1 adds the rewritten study guidance without changing the original 
 
 test("Chapters 2 to 4 add only their supplied guidance and preserve their original exercises", () => {
   const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
-  const chapters = [2, 3, 4].map((week) => html.match(new RegExp(`<details id="week-${week}"[\\s\\S]*?<details id="week-${week + 1}"`))?.[0] ?? "");
+  const chapters = [2, 3, 4].map((week) => html.match(new RegExp(String.raw`<details id="week-${week}"[\s\S]*?<details id="week-${week + 1}"`))?.[0] ?? "");
   const expected = [
     ["Welcome to the second part of your study.", "This week, your practice shifts from physical stillness to becoming more aware of your thoughts.", "try the word “freedom”"],
     ["In the first two chapters, you began exploring the idea of one Consciousness", "This week, you’ll practise physical relaxation.", "The Power of Thought"],
@@ -87,8 +88,8 @@ test("the MKS Study Room links the supplied Google Photos videos to Chapters 2, 
   const chapter2Start = html.indexOf('data-week="2"');
   const chapter3Start = html.indexOf('data-week="3"');
   assert.ok(chapter2Start >= 0 && html.indexOf(chapter2, chapter2Start) < chapter3Start);
-  assert.match(html, new RegExp(`data-week="3"[\\s\\S]*?href="${chapter3}"[\\s\\S]*?data-week="4"`));
-  assert.match(html, new RegExp(`data-week="4"[\\s\\S]*?href="${chapter4}"`));
+  assert.match(html, new RegExp(String.raw`data-week="3"[\s\S]*?href="${chapter3}"[\s\S]*?data-week="4"`));
+  assert.match(html, new RegExp(String.raw`data-week="4"[\s\S]*?href="${chapter4}"`));
   assert.equal((html.match(/class="weekVideo"/g) ?? []).length, 4);
 });
 
@@ -110,7 +111,8 @@ test("the MKS Study Room removes promotional preview language and keeps study co
   assert.equal((html.match(/class="mksStudyRoom__chapter"/g) ?? []).length, 24);
   assert.equal((html.match(/data-complete-week="\d+"/g) ?? []).length, 24);
   assert.match(html, /Complete Week/);
-  assert.match(html, /<h1[^>]*>Chapter 1 - One Consciousness – One Power<\/h1>/);
+  assert.match(html, /<h1[^>]*>Master Key System: 24-Week Study Guide and Course<\/h1>/);
+  assert.match(html, /<summary>[\s\S]*?<strong>One Consciousness – One Power<\/strong>/);
 });
 
 test("the MKS Study Room keeps the free experience route separate", () => {
@@ -151,8 +153,8 @@ test("the MKS Study Room restores four non-promotional stage illustrations", () 
     ["integration-mastery", "contemplation-mastery-chapters-19-24.png", 19],
   ]) {
     assert.match(html, new RegExp(`id="stage-${stage}"`));
-    assert.match(html, new RegExp(`href="#stage-${stage}"[^>]*>[\\s\\S]*?${image}`));
-    assert.match(html, new RegExp(`href="#week-${week}"[^>]*>[\\s\\S]*?${image}`));
+    assert.match(html, new RegExp(String.raw`href="#stage-${stage}"[^>]*>[\s\S]*?${image}`));
+    assert.match(html, new RegExp(String.raw`href="#week-${week}"[^>]*>[\s\S]*?${image}`));
   }
   assert.equal((html.match(/class="mksStudyRoom__visualNavLink"/g) ?? []).length, 4);
   assert.equal((html.match(/class="mksStudyRoom__stageBanner"/g) ?? []).length, 4);
