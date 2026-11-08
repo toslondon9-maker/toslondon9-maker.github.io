@@ -1,1 +1,1 @@
-Deployment trigger for the merged UYP homepage hero update (PR #93).
+Deployment trigger for the approved UYP mobile homepage artwork cleanup (PR #130).
