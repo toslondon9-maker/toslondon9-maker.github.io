@@ -6,13 +6,14 @@ import { renderPage } from "../src/page-shell.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 
 const baseUrl = "https://unleashyourpowerwithtariq.com";
-const publicRoutes = [...Object.values(siteData.routes).filter((route) => route !== siteData.routes.liveCoaching), ...siteData.experienceRoutes];
+const allPublicRoutes = [...Object.values(siteData.routes).filter((route) => route !== siteData.routes.liveCoaching), ...siteData.experienceRoutes];
+const publicRoutes = allPublicRoutes.filter((route) => route !== siteData.routes.innerCircleEvent);
 
 test("every public page has canonical, Open Graph and Twitter metadata for its live route", () => {
   for (const route of publicRoutes) {
     const page = routeRenderers[route](siteData);
     const html = renderPage(page);
-    const url = `${baseUrl}${route}`;
+    const url = `${baseUrl}${page.canonicalUrl ?? route}`;
 
     assert.equal((html.match(/<link rel="canonical"/g) ?? []).length, 1, route);
     assert.match(html, new RegExp(`<link rel="canonical" href="${url}">`), route);
@@ -35,13 +36,21 @@ test("every public page has canonical, Open Graph and Twitter metadata for its l
 test("public generated HTML uses only the custom-domain SEO base", () => {
   const oldDomain = "toslondon9-maker.github.io";
   const oldDomainPattern = new RegExp(oldDomain.replaceAll(".", "\\."));
-  for (const route of publicRoutes) {
+  for (const route of allPublicRoutes) {
     const relativeFile = route === "/" ? "index.html" : `${route.slice(1)}index.html`;
     const publicHtml = readFileSync(new URL(`../${relativeFile}`, import.meta.url), "utf8");
     assert.doesNotMatch(publicHtml, oldDomainPattern, relativeFile);
   }
   const notFound = readFileSync(new URL("../404.html", import.meta.url), "utf8");
   assert.doesNotMatch(notFound, oldDomainPattern, "404.html");
+});
+
+test("the standalone Inner Circle page retains its own public social metadata", () => {
+  const html = readFileSync(new URL("../inner-circle/index.html", import.meta.url), "utf8");
+  const url = "https://unleashyourpowerwithtariq.com/inner-circle/";
+  assert.match(html, new RegExp(`<link rel="canonical" href="${url.replaceAll("/", "\\\\/")}">`));
+  assert.match(html, new RegExp(`<meta property="og:url" content="${url.replaceAll("/", "\\\\/")}">`));
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
 });
 
 test("Start Free generated SEO metadata uses the custom-domain route", () => {
@@ -57,7 +66,7 @@ test("key conversion pages use relevant social preview artwork", () => {
   const expected = new Map([
     [siteData.routes.startFree, "/images/free-7-day-taster.jpeg"],
     [siteData.routes.coaching, "/images/unleash-your-power-programme.jpeg"],
-    [siteData.routes.aboutTariq, "/images/tariq-happiness-harmony.png"],
+    [siteData.routes.aboutTariq, "/images/tariq-saddique-about.jpeg"],
   ]);
 
   for (const [route, image] of expected) {
