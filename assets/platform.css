@@ -9399,3 +9399,16 @@ html {
  .homeHero__mobilePoints strong{font-size:.92rem!important}
  .homeHero__mobilePoints span{font-size:.82rem!important}
 }
+
+
+/* Mobile hero: use the seated coaching portrait panel, not the desktop programme poster. */
+@media(max-width:767px){
+  .homeHero__mobileIntro{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important}
+  .homeHero__mobilePortrait{position:relative;display:block;width:100%;height:260px;overflow:hidden;border-radius:15px 0 0 15px;mask-image:linear-gradient(to right,#000 82%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 82%,transparent 100%)}
+  .homeHero__mobilePortrait img{display:block!important;width:200%!important;max-width:none!important;height:100%!important;object-fit:cover!important;object-position:right center!important;transform:translateX(-50%);border:0!important;border-radius:0!important;box-shadow:none!important;mask-image:none!important;-webkit-mask-image:none!important}
+  .homeHero__artwork,.homeHero__copy,.homeHero__mobileArtworkAction{display:none!important}
+  .homeHero__mobile{display:block!important}
+}
+@media(max-width:380px){
+  .homeHero__mobilePortrait{height:235px}
+}
