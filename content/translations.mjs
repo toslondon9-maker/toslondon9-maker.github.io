@@ -96,6 +96,7 @@ const translations = deepFreeze({
   "nav.liveCoaching": { en: "Session Hub", es: "Centro de sesiones" },
   "nav.referral": { en: "Affiliate Programme", es: "Programa de afiliados" },
   "nav.aboutTariq": { en: "About Tariq", es: "Quién soy" },
+  "nav.innerCircleEvent": { en: "The Inner Circle Event", es: "Evento The Inner Circle" },
   "nav.faq": { en: "FAQ", es: "Preguntas frecuentes" },
   "nav.contact": { en: "Contact / Book", es: "Contacto / Reserva" },
   "book.helmar.editionTitle": { en: "HELMAR RUDOLPH'S CENTENARY EDITION", es: "EDICIÓN CENTENARIA DE HELMAR RUDOLPH" },
