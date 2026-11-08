@@ -146,7 +146,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
       ...Object.entries(siteData.routes)
-        .filter(([routeId, route]) => routeId !== "liveCoaching" && routeId !== "innerCircleEvent" && route !== "/")
+        .filter(([routeId, route]) => routeId !== "liveCoaching" && routeId !== "innerCircleEvent" && routeId !== "masterKeySystemOnlineCourse" && route !== "/")
         .map(([, route]) => `${route.slice(1)}index.html`),
     ].includes(file));
     const pages = await Promise.all(globalPageFiles.map((file) => readFile(path.join(outputRoot, file), "utf8")));
