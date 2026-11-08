@@ -117,7 +117,7 @@ function renderChapters(language) {
 
 function renderCourseNavigation(chapters, copy) {
   const stagesMarkup = stages.map((stage) => `<section class="mksStudyRoom__stage" data-stage="${stage.id}"><header><p>${stage.weeks}</p><h2>${stage.title}</h2></header><ol>${chapters.slice(stage.start, stage.end).map((chapter) => `<li><a href="#week-${chapter.index + 1}"><span>${copy.week} ${chapter.index + 1}</span><strong>${chapter.title}</strong></a></li>`).join("")}</ol></section>`).join("");
-  return `<nav class="mksStudyRoom__courseNav" aria-label="${copy.navigation}">${stagesMarkup}<p class="mksStudyRoom__conversion"><a href="/start-free/">${copy.start}</a> · <a href="/foundation/">${copy.foundation}</a> · <a href="/coaching/" data-i18n="mks.studyRoom.coaching">${copy.coaching}</a></p></nav>`;
+  return `<nav class="mksStudyRoom__courseNav" aria-label="${copy.navigation}">${stagesMarkup}<p class="mksStudyRoom__conversion"><a href="/start-free/">${copy.start}</a> · <a href="/foundation/">${copy.foundation}</a> · <a href="/coaching/" data-i18n="mks.studyRoom.coaching">${copy.coaching}</a> · <a href="/get-the-book/" data-i18n="nav.getTheBook">${escapeHtml(t("nav.getTheBook", language))}</a></p></nav>`;
 }
 
 function renderStageVisualNavigation(copy) {
