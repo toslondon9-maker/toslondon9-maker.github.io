@@ -40,11 +40,11 @@ test("sitewide and page-specific JSON-LD types match visible public pages", () =
   assert.match(home, /application\/ld\+json/);
   assert.match(home, /"@type":"Organization"/);
   assert.match(home, /"@type":"WebSite"/);
-  const curriculum = page(siteData.routes.masterKeySystem);
-  assert.match(curriculum, /<h1[^>]*>Master Key System: 24-Week Study Guide and Course<\/h1>/);
-  assert.doesNotMatch(curriculum, /href="\/ai-mentors\/"/);
-  const resources = page(siteData.routes.resources);
-  assert.match(resources, /href="\/ai-mentors\/"/);
+  const curriculum = routeRenderers[siteData.routes.masterKeySystem](siteData);
+  assert.match(curriculum.body, /<h1[^>]*>Master Key System: 24-Week Study Guide and Course<\/h1>/);
+  assert.doesNotMatch(curriculum.body, /href="\/ai-mentors\/"/);
+  const resources = routeRenderers[siteData.routes.resources](siteData);
+  assert.match(resources.body, /href="\/ai-mentors\/"/);
   const curriculumSpanish = renderPage(routeRenderers[siteData.routes.masterKeySystem](siteData, "es"));
   assert.match(curriculumSpanish, /<h1>Master Key System: guía de estudio y curso de 24 semanas<\/h1>/);
   for (const [route, type] of [
