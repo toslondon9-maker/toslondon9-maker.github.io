@@ -21,7 +21,7 @@ test("homepage follows the approved concise 12-section sequence", () => {
   assert.doesNotMatch(html, /conversionJourney/);
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
-  assert.match(html, /tariq-happiness-harmony\.png/);
+  assert.match(html, /class="homeHero__artwork"[\s\S]*src="\/uyp-home-hero\.jpg"/);
   assert.match(html, /tariq-welcome-portrait\.png/);
 });
 

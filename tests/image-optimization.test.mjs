@@ -7,7 +7,6 @@ import { renderHome } from "../src/pages/home.mjs";
 import { routeRenderers } from "../src/routes.mjs";
 
 const root = process.cwd();
-const heroDisplay = "/images/tariq-happiness-harmony-720.webp";
 const certificateDisplay = "/images/tariq-master-key-certificate-display.webp";
 const certificateOriginal = "/images/tariq-master-key-certificate-restored.png";
 const secretLogo = "/images/secret-mark-transparent.png";
@@ -27,14 +26,16 @@ test("approved Secret logo assets are used on the homepage and About Tariq page"
   assert.doesNotMatch(home, new RegExp(`src="${secretInspiration.replaceAll("/", "\\/")}"`));
 });
 
-test("homepage uses an optimised eager hero image with stable dimensions", () => {
+test("homepage hero artwork uses the supplied image with stable dimensions and eager loading", () => {
   const html = renderHome({ language: "en" });
+  const heroImage = "/uyp-home-hero.jpg";
 
-  assert.equal(existsSync(path.join(root, heroDisplay)), true);
-  assert.match(html, new RegExp(`<source srcset="${heroDisplay.replaceAll("/", "\\/")}" type="image\\/webp">`));
-  assert.match(html, /<img[^>]+src="\/images\/tariq-happiness-harmony\.png"[^>]+width="1088"[^>]+height="1445"[^>]+fetchpriority="high"[^>]+decoding="async"[^>]*>/);
-  assert.doesNotMatch(html.match(/<div class="homeHero__visual">[\s\S]*?<\/div>/)?.[0] ?? "", /loading="lazy"/);
+  assert.equal(existsSync(path.join(root, heroImage)), true, heroImage);
+  assert.match(html, /<img[^>]+src="\/uyp-home-hero\.jpg"[^>]+width="1536"[^>]+height="1024"[^>]+fetchpriority="high"[^>]+decoding="async"[^>]*>/);
+  assert.doesNotMatch(html.match(/<div class="homeHero__artwork">[\s\S]*?<\/div>/)?.[0] ?? "", /loading="lazy"/);
+  assert.doesNotMatch(html, /tariq-happiness-harmony-720\.webp/);
 });
+
 test("About Tariq uses an optimised display certificate while retaining the original viewer", () => {
   const html = routeRenderers[siteData.routes.aboutTariq](siteData).body;
 

@@ -9197,3 +9197,10 @@ html {
 @keyframes homeRevealGlow{from{opacity:.45;transform:scale(.96)}to{opacity:1;transform:scale(1.04)}}
 @media(max-width:600px){.homeTransformationReveal{margin-block:0 2.5rem}.homeTransformationReveal__trigger{width:100%}.homeTransformationReveal__dialog{width:calc(100% - 1rem);max-height:90vh}.homeTransformationReveal__content{padding:3.5rem 1.25rem 2rem}.homeTransformationReveal__content h2{font-size:clamp(1.85rem,8vw,2.6rem)}.homeTransformationReveal__content>p:not(.eyebrow){font-size:.98rem}}
 @media(prefers-reduced-motion:reduce){.homeTransformationReveal__dialog[open],.homeTransformationReveal__aura{animation:none}.homeTransformationReveal__trigger{transition:none}}
+
+
+/* UYP landscape homepage artwork: full-width editorial banner above the hero copy. */
+.homeHero { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); }
+.homeHero__artwork { width: 100%; overflow: hidden; border: 1px solid rgba(190,148,73,.45); border-radius: 18px; background: #f5f0e7; box-shadow: 0 16px 38px rgba(16,36,59,.12); }
+.homeHero__artwork img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; }
+.homeHero__copy { width: min(100%, 64rem); margin-inline: auto; }
