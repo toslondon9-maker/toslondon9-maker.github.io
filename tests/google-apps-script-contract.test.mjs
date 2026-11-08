@@ -195,6 +195,32 @@ test("scheduler source contains no logging of lead data", () => {
   assert.doesNotMatch(source, /Logger\.|console\.(log|error)/);
 });
 
+test("sequence trigger installer creates one hourly trigger and is idempotent", () => {
+  const triggers = [];
+  const context = {
+    ScriptApp: {
+      getProjectTriggers: () => triggers,
+      newTrigger: (handler) => ({
+        timeBased: () => ({
+          everyHours: (hours) => ({
+            create: () => {
+              const trigger = { handler, hours, getHandlerFunction: () => handler };
+              triggers.push(trigger);
+              return trigger;
+            },
+          }),
+        }),
+      }),
+    },
+  };
+  vm.runInNewContext(source, context);
+  assert.equal(context.installLeadSequenceTrigger(), "installed");
+  assert.equal(context.installLeadSequenceTrigger(), "already-installed");
+  assert.equal(triggers.length, 1);
+  assert.equal(triggers[0].handler, "sendDueSequenceEmails");
+  assert.equal(triggers[0].hours, 1);
+});
+
 test("missing sequence mode is safely test-only", () => {
   const app = receiver({ sequenceTestEmail: "test-recipient@example.test" });
   app.submit(lead({ emailMarketing: true }));
