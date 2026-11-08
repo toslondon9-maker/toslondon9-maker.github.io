@@ -36,8 +36,10 @@ jobs:
         with:
           node-version: 22
 
-      - name: Run full automated test suite (report existing failures without blocking build verification)
-        continue-on-error: true
+      - name: Generate static pages for validation
+        run: node tools/build-site.mjs --write-public
+
+      - name: Run full automated test suite
         run: node --test tests/*.test.mjs
 
       - name: Verify deterministic production build
@@ -67,9 +69,6 @@ jobs:
 
       - name: Verify deterministic production build
         run: node tools/build-site.mjs --check
-
-      - name: Generate public static site
-        run: node tools/build-site.mjs --write-public
 
       - name: Commit generated site when files changed
         run: |
