@@ -158,3 +158,29 @@ function doPost(e) {
     return json({ ok: true, stored: true, notification: status === "Sent" ? "sent" : "pending" });
   } catch (_) { return json({ ok: false, code: "unavailable" }); } finally { lock.releaseLock(); }
 }
+
+// Install or replace the daily free 7-Day follow-up trigger.
+// Run this manually once from the Apps Script editor after reviewing the runbook.
+// This deliberately does not enable live sending; LEAD_SEQUENCE_MODE must be
+// explicitly set to "live" after a controlled test and consent review.
+function installDailySequenceTrigger() {
+  const handler = "sendDueSequenceEmails";
+  ScriptApp.getProjectTriggers().forEach(function(trigger) {
+    if (trigger.getHandlerFunction() === handler) ScriptApp.deleteTrigger(trigger);
+  });
+  ScriptApp.newTrigger(handler).timeBased().everyDays(1).atHour(9).create();
+  return "Daily sequence trigger installed for approximately 09:00 in the Apps Script project timezone.";
+}
+
+// Remove the daily sequence trigger without changing any lead data or script properties.
+function removeDailySequenceTriggers() {
+  const handler = "sendDueSequenceEmails";
+  let removed = 0;
+  ScriptApp.getProjectTriggers().forEach(function(trigger) {
+    if (trigger.getHandlerFunction() === handler) {
+      ScriptApp.deleteTrigger(trigger);
+      removed += 1;
+    }
+  });
+  return removed;
+}
