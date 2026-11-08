@@ -88,7 +88,7 @@ function renderTestimonials(language) {
 
 function renderOffers(language) {
   const card = (className, titleKey, bodyKey, ctaKey, href, price = "") => `<article class="homeOffers__card ${className}"><h3 data-i18n="${titleKey}">${escapeHtml(t(titleKey, language))}</h3>${price ? `<strong class="homeOffers__price">${price}</strong>` : ""}<p data-i18n="${bodyKey}">${escapeHtml(t(bodyKey, language))}</p><a class="button--${className === "homeOffers__card--free" ? "primary" : "secondary"}" href="${href}" data-i18n="${ctaKey}">${escapeHtml(t(ctaKey, language))}</a></article>`;
-  return `<section class="homeSection homeOffers" data-home-section="offers"><div class="homeSection__inner">${copy("home.offers.eyebrow", language, "p", "eyebrow")}${copy("home.offers.title", language, "h2")}${copy("home.offers.intro", language, "p", "homeSection__intro")}<div class="homeOffers__grid">${card("homeOffers__card--free", "home.offers.freeTitle", "home.offers.freeBody", "home.offers.freeCta", siteData.routes.startFree)}<article class="homeOffers__card homeOffers__card--foundation">${renderCompactFoundationOffer({ language, data: siteData, ctaKey: "home.offers.foundationCta" })}</article>${card("homeOffers__card--complete", "home.offers.completeTitle", "home.offers.completeBody", "home.offers.completeCta", siteData.routes.completeJourney, priceCopy("complete", language))}</div>${copy("home.offers.more", language, "p", "homeOffers__more")}${pricingNoteCopy(language)}</div></section>`;
+  return `<section class="homeSection homeOffers" data-home-section="offers"><div class="homeSection__inner">${copy("home.offers.eyebrow", language, "p", "eyebrow")}${copy("home.offers.title", language, "h2")}${copy("home.offers.intro", language, "p", "homeSection__intro")}<div class="homeOffers__grid">${card("homeOffers__card--free", "home.offers.freeTitle", "home.offers.freeBody", "home.offers.freeCta", siteData.routes.startFree)}<article class="homeOffers__card homeOffers__card--foundation">${renderCompactFoundationOffer({ language, data: siteData, ctaKey: "home.offers.foundationCta" })}</article>${card("homeOffers__card--complete", "home.offers.completeTitle", "home.offers.completeBody", "home.offers.completeCta", siteData.routes.coaching, priceCopy("complete", language))}</div>${copy("home.offers.more", language, "p", "homeOffers__more")}${pricingNoteCopy(language)}</div></section>`;
 }
 
 function renderFinalCta(language) {
@@ -129,7 +129,7 @@ function renderTransformationReveal(language) {
 }
 
 function renderHomeBody({ language = "en" } = {}) {
-  return `<main class="home">${renderHero(language)}${renderFreeExperience(language)}${renderJourney(language)}${renderTransformationReveal(language)}${renderTestimonials(language)}${renderOffers(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
+  return `<main class="home">${renderHero(language)}${renderWelcome(language)}${renderFreeExperience(language)}${renderTradition(language)}${renderJourney(language)}${renderTestimonials(language)}${renderOffers(language)}${renderReceive(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderNextStep(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {
@@ -145,6 +145,6 @@ export function homePage(data = siteData, language = "en") {
     titleKey: "route.home.metaTitle",
     descriptionKey: "route.home.metaDescription",
     body: renderHome({ language }),
-    scripts: ["/assets/home-testimonials.mjs", "/assets/life-power-accordion.mjs", "/assets/home-transformation-reveal.mjs"],
+    scripts: ["/assets/home-testimonials.mjs", "/assets/life-power-accordion.mjs"],
   };
 }
