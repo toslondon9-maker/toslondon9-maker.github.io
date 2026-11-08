@@ -8,7 +8,6 @@ const headerNavigationItems = Object.freeze([
   { route: siteData.routes.aiMentors, key: "nav.aiMentors" },
   { route: siteData.routes.coaching, key: "nav.coaching" },
   { route: siteData.routes.aboutTariq, key: "nav.aboutTariq" },
-  { route: siteData.routes.innerCircleEvent, key: "nav.innerCircleEvent" },
   { route: siteData.routes.resources, key: "nav.resources" },
   { route: siteData.routes.referral, key: "nav.referral", className: "navReferral" },
   { route: siteData.routes.getTheBook, key: "nav.getTheBook", className: "navBook" },
@@ -21,6 +20,7 @@ const footerNavigationItems = Object.freeze([
   { route: siteData.routes.liveCoaching, key: "nav.liveCoaching", className: "studentUtilityLink" },
   { route: siteData.routes.referral, key: "nav.referral", className: "studentUtilityLink" },
   { route: siteData.routes.refundPolicy, key: "footer.refundPolicy" },
+  { route: siteData.routes.innerCircleEvent, key: "nav.innerCircleEvent" },
 ]);
 
 function escapeHtml(value) {
