@@ -9368,3 +9368,34 @@ html {
     object-fit: contain;
   }
 }
+
+
+/* Mobile-only redesign matching the approved portrait-led coaching hero. Desktop hero remains unchanged. */
+@media(max-width:767px){
+  .homeHero{display:block!important;min-height:0!important;padding:0 0 1.5rem!important;background:#fbf6eb!important}
+  .homeHero__mobile{display:block!important;width:min(100% - 1.5rem,520px)!important;margin:0 auto!important}
+  .homeHero__mobileLanguage{display:flex;justify-content:flex-end;margin:.65rem 0 .35rem!important}
+  .homeHero__artwork,.homeHero__copy,.homeHero__mobileArtworkAction{display:none!important}
+  .homeHero__mobileIntro{display:grid!important;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important;gap:.35rem!important;align-items:center!important;min-height:260px!important}
+  .homeHero__mobileIntro img{display:block!important;width:100%!important;height:260px!important;object-fit:cover!important;object-position:center 20%!important;border:0!important;border-radius:15px 0 0 15px!important;box-shadow:none!important;mask-image:linear-gradient(to right,#000 82%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 82%,transparent 100%)}
+  .homeHero__mobileIntro>div{position:relative;z-index:1;min-width:0;margin-left:-.45rem;padding:.5rem 0 .5rem .1rem}
+  .homeHero__mobileIntro .eyebrow{margin:0 0 .45rem!important;color:#94702f!important;font-size:.67rem!important;line-height:1.4!important;letter-spacing:.12em!important}
+  .homeHero__mobileIntro h1{margin:0 0 .65rem!important;color:#102237!important;font:700 clamp(2rem,8.8vw,2.65rem)/.98 Georgia,serif!important;letter-spacing:-.035em!important;overflow-wrap:normal!important}
+  .homeHero__mobileLead{margin:0!important;color:#102237!important;font-size:clamp(.9rem,3.8vw,1.05rem)!important;line-height:1.42!important;font-weight:500}
+  .homeHero__mobilePoints{display:grid!important;gap:.8rem!important;margin:1.15rem 0 1.3rem!important;padding:0!important;list-style:none!important}
+  .homeHero__mobilePoints li{position:relative;display:grid!important;grid-template-columns:2.7rem minmax(0,1fr)!important;column-gap:.75rem!important;align-items:center!important;padding:.3rem .1rem!important;border:0!important;background:transparent!important}
+  .homeHero__mobilePoints li:before{grid-row:span 2;display:grid;place-items:center;width:2.45rem;height:2.45rem;border:2px solid #e8bf57;border-radius:50%;color:#94702f;font-size:1.25rem;font-weight:700;background:rgba(255,248,226,.8)}
+  .homeHero__mobilePoints li:nth-child(1):before{content:"▱"}
+  .homeHero__mobilePoints li:nth-child(2):before{content:"⚿"}
+  .homeHero__mobilePoints li:nth-child(3):before{content:"↗"}
+  .homeHero__mobilePoints strong{color:#102237!important;font-size:.98rem!important;line-height:1.3!important}
+  .homeHero__mobilePoints span{color:#34465b!important;font-size:.88rem!important;line-height:1.4!important}
+  .homeHero__mobileAction .button--primary{display:block!important;width:100%!important;box-sizing:border-box;text-align:center;padding:1rem .85rem!important;border:3px solid #c79535!important;border-radius:999px!important;background:linear-gradient(110deg,#071a32,#102b4d)!important;color:#fff!important;box-shadow:0 8px 20px rgba(16,36,59,.16);font-size:clamp(.86rem,3.7vw,1.02rem)!important;font-weight:800;line-height:1.3!important;white-space:normal!important}
+}
+@media(max-width:380px){
+ .homeHero__mobileIntro{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)!important;min-height:235px!important}
+ .homeHero__mobileIntro img{height:235px!important}
+ .homeHero__mobileIntro h1{font-size:1.9rem!important}
+ .homeHero__mobilePoints strong{font-size:.92rem!important}
+ .homeHero__mobilePoints span{font-size:.82rem!important}
+}
