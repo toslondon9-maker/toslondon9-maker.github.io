@@ -14,8 +14,8 @@ function section(html, id) {
 
 test("homepage follows the approved concise 12-section sequence", () => {
   const html = renderHome({ language: "en" });
-  assert.match(html, /<h2[^>]*data-i18n="home\\.mobileHero\\.title">/);
-  assert.match(html, /<h1[^>]*data-i18n="route\\.home\\.heading">/);
+  assert.match(html, /<h2[^>]*data-i18n="home\.mobileHero\.title">/);
+  assert.match(html, /<h1[^>]*data-i18n="route\.home\.heading">/);
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(sections, approvedSections);
