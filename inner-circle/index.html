@@ -54,9 +54,10 @@ function setLanguage(language){
  currentLanguage=language;
  document.documentElement.lang=language;
  document.querySelectorAll('[data-i18n]').forEach(element=>{
+  if(!element.dataset.originalText) element.dataset.originalText=element.textContent;
   const key=element.dataset.i18n;
-  const value=translations[language]&&translations[language][key];
-  if(value) element.textContent=value;
+  const value=language==='es'&&translations.es[key]?translations.es[key]:element.dataset.originalText;
+  element.textContent=value;
  });
  languageToggle.textContent=language==='en'?'ES':'EN';
  languageToggle.setAttribute('aria-label',language==='en'?'Cambiar a español':'Switch to English');
