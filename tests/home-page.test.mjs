@@ -328,7 +328,7 @@ test("homepage Foundation offer uses the shared concise summary", () => {
   assert.match(english, /WhatsApp support/);
   assert.match(english, /EXPLORE FOUNDATION — £97/);
   assert.match(spanish, /Cuatro semanas/);
-  assert.match(spanish, /Ocho llamadas en total/);
+  assert.match(spanish, /Cuatro llamadas en total/);
 });
 
 test("homepage next-step choices preserve canonical destinations and translated CTAs", async () => {
