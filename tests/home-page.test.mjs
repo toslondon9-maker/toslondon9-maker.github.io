@@ -5,16 +5,16 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "welcome", "free-experience", "tradition", "journey", "testimonials", "offers", "receive", "why-tariq", "insights", "next-step"];
+const approvedSections = ["hero", "pain-points", "free-experience", "tradition", "journey", "testimonials", "offers", "receive", "why-tariq", "insights", "next-step"];
 const legacySections = ["lineage-expanded", "origins", "books", "ideal", "outcome", "coaching"];
 
 function section(html, id) {
   return html.match(new RegExp(`<section[^>]+data-home-section="${id}"[\\s\\S]*?</section>`))?.[0] ?? "";
 }
 
-test("homepage follows the approved concise 12-section sequence", () => {
+test("homepage follows the approved concise 11-section sequence", () => {
   const html = renderHome({ language: "en" });
-  assert.match(html, /<h2[^>]*data-i18n="home\.mobileHero\.title">/);
+  assert.match(html, /<source media="\\(max-width: 767px\\)" srcset="\\/images\\/unleash-your-power-programme\\.jpeg"/);
   assert.match(html, /<h1[^>]*data-i18n="route\.home\.heading">/);
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
@@ -25,7 +25,7 @@ test("homepage follows the approved concise 12-section sequence", () => {
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
   assert.match(html, /class="homeHero__artwork"[\s\S]*src="\/uyp-home-hero\.jpg"/);
-  assert.match(html, /tariq-welcome-portrait\.png/);
+  assert.doesNotMatch(html, /tariq-welcome-portrait\\.png|homeWelcome|data-home-section="welcome"/);
 });
 
 test("homepage does not render the previous expanded sections", () => {
@@ -34,29 +34,21 @@ test("homepage does not render the previous expanded sections", () => {
   assert.doesNotMatch(html, /class="homeOrigins|class="homeBooks|class="homeIdeal|class="homeOutcome|class="homeCoaching/);
 });
 
-test("homepage keeps an intentional personal welcome without fake video", () => {
-  const welcome = section(renderHome({ language: "en" }), "welcome");
-  const messageIndex = welcome.indexOf("A personal welcome from Tariq");
-  const logoIndex = welcome.indexOf('src="/images/secret-mark-transparent.png"');
-  const portraitIndex = welcome.indexOf('src="/images/tariq-welcome-portrait.png"');
-  assert.ok(messageIndex >= 0);
-  assert.ok(logoIndex > messageIndex);
-  assert.ok(portraitIndex > logoIndex);
-  assert.match(welcome, /A personal welcome from Tariq/);
-  assert.match(welcome, /class="homeWelcome__visual"/);
-  assert.match(welcome, /class="homeWelcome__imagePair"/);
-  assert.match(welcome, /src="\/images\/secret-mark-transparent\.png"[^>]+alt="The Secret logo"/);
-  assert.doesNotMatch(welcome, /the-secret-inspiration\.png/);
-  assert.match(welcome, /homeWelcome__imagePair">[\s\S]*secret-mark-transparent\.png[\s\S]*tariq-welcome-portrait\.png/);
-  assert.match(welcome, /tariq-welcome-portrait\.png/);
-  assert.match(welcome, /class="homeWelcome__panel"/);
-  assert.match(welcome, /data-i18n="home\.video\.body"/);
-  assert.match(welcome, /data-i18n="home\.video\.panelBody"/);
-  assert.doesNotMatch(welcome, /Video coming soon/);
-  assert.doesNotMatch(welcome, /<video\b|\.mp4|\.webm/);
-  assert.doesNotMatch(welcome, /affiliated|endorsed|partnership/i);
+test("homepage restores all 15 pain points and removes the personal welcome panel", () => {
+  const html = renderHome({ language: "en" });
+  const spanish = renderHome({ language: "es" });
+  const painPoints = section(html, "pain-points");
+  assert.ok(painPoints.length > 0);
+  assert.equal((painPoints.match(/class="homePainPoints__card"/g) ?? []).length, 15);
+  for (const challenge of ["Overthinking", "Scattered focus", "Procrastination", "Self-doubt", "Emotional reactivity", "Repeating old patterns", "Feeling overwhelmed", "Lack of direction", "Fear of getting it wrong", "Harsh inner dialogue", "Inconsistent discipline", "Living for approval", "Dwelling on the past", "Constant comparison", "A loss of purpose"]) assert.ok(painPoints.includes(challenge), challenge);
+  assert.match(painPoints, /What it can cost you/);
+  assert.match(painPoints, /How the MKS may help/);
+  assert.match(painPoints, /TRY THE FREE 7-DAY EXPERIENCE/);
+  const spanishPainPoints = section(spanish, "pain-points");
+  assert.equal((spanishPainPoints.match(/class="homePainPoints__card"/g) ?? []).length, 15);
+  assert.doesNotMatch(html, /data-home-section="welcome"|homeWelcome|tariq-welcome-portrait\\.png|A personal welcome from Tariq/);
+  assert.ok(html.indexOf('data-home-section="pain-points"') > html.indexOf('data-home-section="hero"'));
 });
-
 test("homepage does not expose the removed soundtrack or its runtime", async () => {
   const html = renderHome({ language: "en" });
   const runtime = await readFile("assets/home-soundtrack.mjs", "utf8").catch(() => null);
