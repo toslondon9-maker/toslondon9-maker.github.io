@@ -9263,3 +9263,12 @@ html {
   .homeHero__mobileArtworkAction{display:block;width:min(100% - 2rem,480px);margin:.85rem auto 0}
   .homeHero__mobileArtworkAction .button--primary{display:block;width:100%;box-sizing:border-box;text-align:center;padding:1rem .8rem;border:2px solid #c79535;border-radius:999px;background:#10243d;color:#fff;font-weight:800}
 }
+
+
+/* Ensure responsive picture uses the selected image's own aspect ratio. */
+.homeHero__artwork picture{display:block;width:100%}
+.homeHero__artwork img{aspect-ratio:auto}
+@media(max-width:767px){
+  .homeHero__artwork picture{width:100%}
+  .homeHero__artwork img{width:100%;height:auto;object-fit:contain}
+}
