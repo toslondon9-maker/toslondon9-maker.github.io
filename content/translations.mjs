@@ -1011,6 +1011,7 @@ const translations = deepFreeze({
     "resources.quotes.eyebrow": { en: "THE WISDOM OF HAANEL", es: "LA SABIDURÍA DE HAANEL" },
     "resources.quotes.title": { en: "The Wisdom of Charles F. Haanel", es: "La sabiduría de Charles F. Haanel" },
     "resources.quotes.featuredLink": { en: "Study the 24-week journey", es: "Estudia el recorrido de 24 semanas" },
+    "resources.quotes.sourceFile": { en: "Download the original Master Key System PDF", es: "Descargar el PDF original del Master Key System" },
     "resources.quotes.originalNote": { en: "Quotations are shown in their original English wording; source details are provided for checking.", es: "Las citas se muestran en su redacción original en inglés; se proporcionan los datos de la fuente para su comprobación." },
     "resources.quotes.randomEyebrow": { en: "A MOMENT TO REFLECT", es: "UN MOMENTO PARA REFLEXIONAR" },
     "resources.quotes.randomButton": { en: "Give me a thought", es: "Dame un pensamiento" },
