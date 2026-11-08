@@ -7,7 +7,7 @@ function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").repla
 
 export function insightsIndexPage(data = siteData, language = "en") {
   const routeKeys = { nextLevel: "insightsNextLevel", familiar: "insightsFamiliar", foundationRestart: "insightsFoundationRestart", lifeRebuilt: "insightsLifeRebuilt", energyAttention: "insightsEnergyAttention", howToStudy: "insightsHowToStudy", haanelBiography: "insightsHaanelBiography", powerWithin: "insightsPowerWithin", personalCoaching: "insightsPersonalCoaching", imagineMeditation: "insightsImagineMeditation", foundationDevelopment: "insightsFoundationDevelopment", foundationFirstStep: "insightsFoundationFirstStep", foundationQA: "insightsFoundationQA", people: "insightsPeople", journey: "insightsJourney", lawAttraction: "insightsLawAttraction", introduction: "insightsIntroduction", principles: "insightsPrinciples", worldWithin: "insightsWorldWithin" };
-  const orderedArticles = insightsArticles.slice().reverse();
+  const orderedArticles = insightsArticles.slice();
   const cards = orderedArticles.map(([id]) => {
     const routeKey = routeKeys[id];
     const href = data.routes[routeKey] ?? siteData.routes[routeKey];
