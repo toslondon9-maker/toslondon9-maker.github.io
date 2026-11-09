@@ -45,8 +45,9 @@ test("free experience presents seven lessons, a workbook and no-purchase reassur
 
 test("the 24-week journey presents the four progressive study stages", () => {
   const html = section(renderHome({ language: "en" }), "journey");
+  const journeyText = html.replace(/<[^>]+>/g, "");
   for (const value of ["Foundation", "Weeks 1–4", "Visualisation", "Weeks 5–11", "Concentration", "Weeks 12–18", "Integration &amp; Mastery", "Weeks 19–24", "Study → Practise → Apply"]) {
-    assert.ok(html.includes(value), value);
+    assert.ok(journeyText.includes(value), value);
   }
   assert.match(html, new RegExp(`href="${siteData.routes.masterKeySystem.replaceAll("/", "\\/")}"`));
 });
