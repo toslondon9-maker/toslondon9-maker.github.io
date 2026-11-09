@@ -26,7 +26,9 @@ test("homepage presents the Insights & Guides collection above the consolidated 
   assert.ok(body.indexOf(`href="${siteData.routes.insightsLifeRebuilt}"`) < body.indexOf(`href="${siteData.routes.insightsFoundationRestart}"`));
   assert.ok(body.indexOf(`href="${siteData.routes.insightsFoundationRestart}"`) < body.indexOf(`href="${siteData.routes.insightsFamiliar}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
-  assert.doesNotMatch(body, /insightsPreview__meta|insightsPreview__date|\/downloads\/|download/i);
+  assert.match(body, /insightsPreview__meta/);
+  assert.match(body, /href="\/downloads\/how-i-rebuilt-my-life-from-the-inside-out\.pdf" download/);
+  assert.match(body, /href="\/downloads\/when-life-feels-like-it-has-fallen-apart\.pdf" download/);
   assert.match(body, new RegExp(`data-i18n="insights\.preview\.[^"]+\.action"`));
   assert.doesNotMatch(body, /insightsIntroduction/);
 });
@@ -70,7 +72,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 19);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 18);
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLifeRebuilt}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);
@@ -83,8 +85,8 @@ test("the Insights hub links the branded collection articles", () => {
   assert.doesNotMatch(page.body, /href="[^"]*undefined[^"]*"/);
 });
 
-test("all 19 Insights articles have sequential numbers, consistent reading times and PDF downloads", () => {
-  assert.equal(insightsArticles.length, 19);
+test("all 18 Insights articles have sequential numbers, consistent reading times and PDF downloads", () => {
+  assert.equal(insightsArticles.length, 18);
   insightsArticles.forEach(([id], index) => {
     const minutes = articleReadingMinutes[id];
     assert.ok(Number.isInteger(minutes) && minutes > 0, `${id} has a valid reading-time estimate`);
@@ -307,9 +309,11 @@ test("every published article has one free-experience hook, a 24-week journey ho
 test("the Does Any of This Feel Familiar article is registered with a branded downloadable PDF", () => {
   assert.equal(siteData.routes.insightsFamiliar, "/insights/does-any-of-this-feel-familiar/");
   const page = insightsIndexPage();
-  assert.match(page.body, /data-i18n="insights.preview.familiar.readingTime"/);
+  const home = homePage().body;
+  assert.match(home, /data-i18n="insights.preview.familiar.readingTime"/);
+  assert.match(home, /href="\/downloads\/does-any-of-this-feel-familiar\.pdf" download/);
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsFamiliar}"`));
-  assert.match(page.body, /href="\/downloads\/does-any-of-this-feel-familiar\.pdf" download/);
+  assert.match(page.body, /does-any-of-this-feel-familiar\.pdf/);
   const article = insightsFamiliarPage();
   assert.equal(article.route, siteData.routes.insightsFamiliar);
   assert.equal(article.structuredData[0].datePublished, "2026-11-04");
