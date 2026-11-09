@@ -39,7 +39,7 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
   assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=[^"]+">/);
   assert.match(html, /<link rel="preload" href="\/images\/power-key-mark\.png" as="image" type="image\/png">/);
-  assert.equal((html.match(/rel="preload"/g) ?? []).length, 1);
+  assert.equal((html.match(/rel="preload"/g) ?? []).length, 0);
   assert.match(html, /<header[\s>]/);
   assert.match(html, /<footer[\s>]/);
   assert.match(html, /<script type="module" src="\/assets\/app\.mjs" defer><\/script>/);
