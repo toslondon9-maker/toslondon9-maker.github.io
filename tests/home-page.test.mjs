@@ -110,7 +110,7 @@ test("homepage content remains bilingual and route-safe", () => {
   const english = renderHome({ language: "en" });
   const spanish = renderHome({ language: "es" });
   assert.match(spanish, /EMPIEZA|EXPERIENCIA|Master Key System/);
-  assert.doesNotMatch(spanish, /START YOUR 7 DAYS|EXPLORE THE METHOD/);
+  assert.doesNotMatch(spanish, /GET MY FREE 7-DAY INTRODUCTION|EXPLORE THE METHOD/);
   for (const html of [english, spanish]) {
     for (const href of [siteData.routes.startFree, siteData.routes.foundation, siteData.routes.completeJourney, siteData.routes.masterKeySystem, siteData.routes.aboutTariq, siteData.routes.insights]) {
       assert.match(html, new RegExp(`href="${href.replaceAll("/", "\\/")}"`));

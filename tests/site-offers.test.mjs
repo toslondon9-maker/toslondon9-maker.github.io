@@ -14,12 +14,12 @@ test("deployed homepage uses the current bilingual Master Key coaching experienc
   assert.match(home, /^<!doctype html>/i);
   assert.match(home, /<main class="home">/);
   assert.match(home, /Master Key System Coaching for Focus, Clarity and Personal Growth/);
-  assert.match(home, /START YOUR 7 DAYS/);
+  assert.match(home, /GET MY FREE 7-DAY INTRODUCTION/);
   assert.match(home, /EXPLORE THE METHOD/);
   assert.match(home, /data-home-section="free-experience"/);
   assert.match(home, /data-home-section="journey"/);
   assert.match(home, /data-home-section="offers"/);
-  assert.match(home, /data-home-section="final-cta"/);
+  assert.match(home, /data-home-section="next-step"/);
   assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__|data-rsc|_rsc=/);
 });
 
@@ -33,7 +33,7 @@ test("deployed homepage preserves the approved 24-week journey and three public 
   assert.match(offers, /Foundation[\s\S]*£97/);
   assert.match(offers, /Complete 24-Week Journey[\s\S]*£997/);
   assert.match(offers, new RegExp(`href="${escapeRegExp(siteData.routes.completeJourney)}"`));
-  assert.doesNotMatch(home, /data-home-section="tradition"/);
+  assert.match(home, /data-home-section="pain-points"/);
 });
 
 test("canonical coaching page owns every locked commercial fact", () => {
