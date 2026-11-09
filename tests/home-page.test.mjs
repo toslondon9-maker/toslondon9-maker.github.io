@@ -14,7 +14,7 @@ function section(html, id) {
 
 test("homepage follows the approved concise 11-section sequence", () => {
   const html = renderHome({ language: "en" });
-  assert.match(html, /<source media="\(max-width: 767px\)" srcset="\/images\/unleash-your-power-programme\.jpeg"/);
+  assert.match(html, /<source media="\(max-width: 767px\)" srcset="\/images\/uyp-mks-coaching-mobile\.avif"/);
   assert.match(html, /<h1[^>]*data-i18n="route\.home\.heading">/);
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
