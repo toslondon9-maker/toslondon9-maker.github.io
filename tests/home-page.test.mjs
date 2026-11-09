@@ -6,17 +6,17 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 
 function section(html, id) {
-  return html.match(new RegExp(`<section[^>]+data-home-section="${id}"[\\s\\S]*?<\\/section>`))?.[0] ?? "";
+  return html.match(new RegExp(`<section[^>]+data-home-section="${id}"[\s\S]*?<\/section>`))?.[0] ?? "";
 }
 
 test("homepage renders the current coaching headline, hero artwork and primary free CTA", () => {
   const html = renderHome({ language: "en" });
-  assert.match(html, /<h1[^>]*data-i18n="route\\.home\\.heading">Master Key System Coaching for Focus, Clarity and Personal Growth<\\/h1>/);
-  assert.match(html, /src="\\/uyp-home-hero\\.jpg"/);
-  assert.match(html, /href="\\/start-free\\/"[^>]*data-i18n="route\\.home\\.action"/);
-  assert.match(html, /<strong>7<\\/strong>/);
-  assert.match(html, /<strong>24<\\/strong>/);
-  assert.match(html, /<strong>3<\\/strong>/);
+  assert.match(html, /<h1[^>]*data-i18n="route\.home\.heading">Master Key System Coaching for Focus, Clarity and Personal Growth<\/h1>/);
+  assert.match(html, /src="\/uyp-home-hero\.jpg"/);
+  assert.match(html, /href="\/start-free\/"[^>]*data-i18n="route\.home\.action"/);
+  assert.match(html, /<strong>7<\/strong>/);
+  assert.match(html, /<strong>24<\/strong>/);
+  assert.match(html, /<strong>3<\/strong>/);
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
 });
 
@@ -33,8 +33,8 @@ test("free experience presents seven lessons, a workbook and no-purchase reassur
   assert.match(html, /Seven online lessons/);
   assert.match(html, /Workbook included/);
   assert.match(html, /No purchase required/);
-  const dayList = html.match(/<ol class="homeFreeExperience__days">([\\s\\S]*?)<\\/ol>/)?.[1] ?? "";\n  assert.equal((dayList.match(/<li>/g) ?? []).length, 7);
-  assert.match(html, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\\\/")}"`));
+  const dayList = html.match(/<ol class="homeFreeExperience__days">([\s\S]*?)<\/ol>/)?.[1] ?? "";\n  assert.equal((dayList.match(/<li>/g) ?? []).length, 7);
+  assert.match(html, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"`));
 });
 
 test("the 24-week journey presents the four progressive study stages", () => {
@@ -42,7 +42,7 @@ test("the 24-week journey presents the four progressive study stages", () => {
   for (const value of ["Foundation", "Weeks 1–4", "Visualisation", "Weeks 5–11", "Concentration", "Weeks 12–18", "Integration &amp; Mastery", "Weeks 19–24", "Study → Practise → Apply"]) {
     assert.ok(html.includes(value), value);
   }
-  assert.match(html, new RegExp(`href="${siteData.routes.masterKeySystem.replaceAll("/", "\\\\/")}"`));
+  assert.match(html, new RegExp(`href="${siteData.routes.masterKeySystem.replaceAll("/", "\\/")}"`));
 });
 
 test("the transformation reveal is accessible and avoids instant-result promises", () => {
@@ -69,21 +69,21 @@ test("homepage offers use the canonical free, Foundation and Complete Journey ro
   assert.match(offers, /Free 7-Day Experience/);
   assert.match(offers, /£97/);
   assert.match(offers, /£997/);
-  assert.match(offers, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\\\/")}"`));
-  assert.match(offers, new RegExp(`href="${siteData.routes.foundation.replaceAll("/", "\\\\/")}"`));
-  assert.match(offers, new RegExp(`href="${siteData.routes.completeJourney.replaceAll("/", "\\\\/")}"`));
-  assert.doesNotMatch(offers, /href="\\/coaching\\/"/);
+  assert.match(offers, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"`));
+  assert.match(offers, new RegExp(`href="${siteData.routes.foundation.replaceAll("/", "\\/")}"`));
+  assert.match(offers, new RegExp(`href="${siteData.routes.completeJourney.replaceAll("/", "\\/")}"`));
+  assert.doesNotMatch(offers, /href="\/coaching\/"/);
 });
 
 test("Why Tariq section uses the current bilingual story and canonical profile link", () => {
   const english = section(renderHome({ language: "en" }), "why-tariq");
   const spanish = section(renderHome({ language: "es" }), "why-tariq");
-  assert.match(english, /data-i18n="home\\.whyTariq\\.title"/);
-  assert.match(english, /data-i18n="home\\.whyTariq\\.body\\.intro"/);
-  assert.match(english, /data-i18n="home\\.whyTariq\\.readMore">Read more/);
-  assert.match(english, new RegExp(`href="${siteData.routes.aboutTariq.replaceAll("/", "\\\\/")}"`));
-  assert.match(spanish, /data-i18n="home\\.whyTariq\\.title"/);
-  assert.match(spanish, /data-i18n="home\\.whyTariq\\.body\\.intro"/);
+  assert.match(english, /data-i18n="home\.whyTariq\.title"/);
+  assert.match(english, /data-i18n="home\.whyTariq\.body\.intro"/);
+  assert.match(english, /data-i18n="home\.whyTariq\.readMore">Read more/);
+  assert.match(english, new RegExp(`href="${siteData.routes.aboutTariq.replaceAll("/", "\\/")}"`));
+  assert.match(spanish, /data-i18n="home\.whyTariq\.title"/);
+  assert.match(spanish, /data-i18n="home\.whyTariq\.body\.intro"/);
 });
 
 test("homepage insights preview and final call to action keep the free route prominent", () => {
@@ -93,9 +93,9 @@ test("homepage insights preview and final call to action keep the free route pro
   assert.ok(insights.length > 0);
   assert.ok(finalCta.length > 0);
   assert.match(insights, /VIEW ALL INSIGHTS|VIEW ALL INSIGHTS &amp; GUIDES/);
-  assert.match(finalCta, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\\\/")}"`));
-  assert.match(finalCta, /data-i18n="home\\.final\\.start"/);
-  assert.match(finalCta, /data-i18n="home\\.cta\\.whatsappQuestion"/);\n  assert.match(finalCta, /data-i18n="home\\.final\\.method"/);
+  assert.match(finalCta, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"`));
+  assert.match(finalCta, /data-i18n="home\.final\.start"/);
+  assert.match(finalCta, /data-i18n="home\.cta\.whatsappQuestion"/);\n  assert.match(finalCta, /data-i18n="home\.final\.method"/);
 });
 
 test("homepage content remains bilingual and route-safe", () => {
@@ -105,7 +105,7 @@ test("homepage content remains bilingual and route-safe", () => {
   assert.doesNotMatch(spanish, /START YOUR 7 DAYS|EXPLORE THE METHOD/);
   for (const html of [english, spanish]) {
     for (const href of [siteData.routes.startFree, siteData.routes.foundation, siteData.routes.completeJourney, siteData.routes.masterKeySystem, siteData.routes.aboutTariq, siteData.routes.insights]) {
-      assert.match(html, new RegExp(`href="${href.replaceAll("/", "\\\\/")}"`));
+      assert.match(html, new RegExp(`href="${href.replaceAll("/", "\\/")}"`));
     }
   }
 });
@@ -118,7 +118,7 @@ test("homepage SEO title is sourced from the bilingual translation registry", ()
 
 test("homepage layout styles retain responsive safeguards", async () => {
   const css = await readFile("assets/platform.css", "utf8");
-  assert.match(css, /\\.homeHero__proof/);
-  assert.match(css, /@media \\(max-width:/);
-  assert.match(css, /min-width:\\s*0/);
+  assert.match(css, /\.homeHero__proof/);
+  assert.match(css, /@media \(max-width:/);
+  assert.match(css, /min-width:\s*0/);
 });
