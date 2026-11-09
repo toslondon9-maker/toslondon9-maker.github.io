@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { copyFile, mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { access, copyFile, mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -61,7 +61,15 @@ async function copyBuildDependencies(outputRoot) {
     ...runtimeFiles,
     ...await collectFiles(path.join(repositoryRoot, "images"), "images"),
     ...await collectFiles(path.join(repositoryRoot, "downloads"), "downloads"),
-    ...await collectFiles(path.join(repositoryRoot, "audio"), "audio"),
+    ...await (async () => {
+      try {
+        await access(path.join(repositoryRoot, "audio"));
+        return collectFiles(path.join(repositoryRoot, "audio"), "audio");
+      } catch (error) {
+        if (error?.code === "ENOENT") return [];
+        throw error;
+      }
+    })(),
   ];
 
   for (const relativeFile of files) {

@@ -85,7 +85,7 @@ test("page shell mounts shared chrome and the navigation module once", () => {
 
   assert.match(html, /data-site-navigation/);
   assert.match(html, /href="\/faq\/" aria-current="page"/);
-  assert.equal((html.match(/src="\/assets\/site-navigation\.mjs\?v=20260930-nav-mks-sync-1"/g) ?? []).length, 1);
+  assert.equal((html.match(/src="\/assets\/site-navigation\.mjs\?v=20261109-mobile-nav-bounds-1"/g) ?? []).length, 1);
   assert.equal((html.match(/src="\/assets\/app\.mjs"/g) ?? []).length, 1);
 });
 
