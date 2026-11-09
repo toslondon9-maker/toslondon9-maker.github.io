@@ -23,15 +23,15 @@ test("the guided-practice destination contains all 24 local lessons in numerical
 
   for (const number of lessonNumbers) {
     await access(new URL(`Lesson_${number}.mp3`, audioRoot));
-    assert.match(page.body, new RegExp(`/audio/mks/Lesson_${number}\.mp3`));
-    assert.equal((page.body.match(new RegExp(`/audio/mks/Lesson_${number}\.mp3`, "g")) ?? []).length, 1);
+    assert.match(page.body, new RegExp(`https://media\\.unleashyourpowerwithtariq\\.com/Lesson_${number}\\.mp3`));
+    assert.equal((page.body.match(new RegExp(`https://media\\.unleashyourpowerwithtariq\\.com/Lesson_${number}\\.mp3`, "g")) ?? []).length, 1);
     assert.match(page.body, new RegExp(`>${String(number).padStart(2, "0")}<`));
   }
   assert.equal((page.body.match(/<audio controls/g) ?? []).length, 25);
   assert.doesNotMatch(page.body, /youtube\.com\/watch\?v=/);
   assert.doesNotMatch(page.body, /External recording/);
   assert.doesNotMatch(page.body, /These four lessons currently link to external recordings/);
-  const lessonPositions = lessonNumbers.map((number) => page.body.indexOf(`/audio/mks/Lesson_${number}.mp3`));
+  const lessonPositions = lessonNumbers.map((number) => page.body.indexOf(`https://media.unleashyourpowerwithtariq.com/Lesson_${number}.mp3`));
   assert.ok(lessonPositions.every((position) => position >= 0));
   assert.deepEqual([...lessonPositions].sort((a, b) => a - b), lessonPositions);
   assert.match(page.body, /MKS Affirmations for Success and Prosperity/);
@@ -44,7 +44,7 @@ test("Resources separates the supplied affirmations track and keeps labels bilin
   await access(new URL(file, audioRoot));
   assert.match(english, /MKS Affirmations for Success and Prosperity/);
   assert.equal((english.match(/Master Key System Audio Lessons/g) ?? []).length, 1);
-  assert.match(english, /audio\/mks\/The%20Master%20Key%20System%20Affirmations%20For%20Success%20And%20Prosperity\.mp3/);
+  assert.match(english, /https:\\/\\/media\\.unleashyourpowerwithtariq\\.com\\/affirmations\\/The%20Master%20Key%20System%20Affirmations%20For%20Success%20And%20Prosperity\\.mp3/);
   assert.match(spanish, /Afirmaciones del MKS para el éxito y la prosperidad/);
   assert.match(spanish, /Audio de la lección 1/);
   assert.match(english, /<audio controls[^>]+aria-label=/g);

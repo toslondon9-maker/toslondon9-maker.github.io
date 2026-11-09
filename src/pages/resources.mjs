@@ -11,14 +11,14 @@ function audioCard(number, language) {
   const file = `Lesson_${number}.mp3`;
   const label = t("resources.audio.lessonLabel", language).replace("{number}", String(number));
   const description = t("resources.audio.lessonDescription", language).replace("{number}", String(number));
-  return `<figure class="resourcesPage__audioCard"><figcaption><span class="resourcesPage__audioNumber">${String(number).padStart(2, "0")}</span><h3>${esc(chapter.title)}</h3><p>${esc(description)}</p></figcaption><audio controls preload="none" aria-label="${esc(`${label}: ${chapter.title}`)}"><source src="/audio/mks/${encodeURIComponent(file)}" type="audio/mpeg">${esc(t("resources.audio.playerFallback", language))}</audio></figure>`;
+  return `<figure class="resourcesPage__audioCard"><figcaption><span class="resourcesPage__audioNumber">${String(number).padStart(2, "0")}</span><h3>${esc(chapter.title)}</h3><p>${esc(description)}</p></figcaption><audio controls preload="none" aria-label="${esc(`${label}: ${chapter.title}`)}"><source src="https://media.unleashyourpowerwithtariq.com/${encodeURIComponent(file)}" type="audio/mpeg">${esc(t("resources.audio.playerFallback", language))}</audio></figure>`;
 }
 
 export function audioSection(language, { includeHeading = true } = {}) {
   const lessons = allLessonNumbers.map((number) => audioCard(number, language)).join("");
   const affirmationsLabel = t("resources.audio.affirmationsTitle", language);
   const heading = includeHeading ? `<p class="eyebrow" data-i18n="resources.audio.eyebrow">${esc(t("resources.audio.eyebrow", language))}</p><h2 id="resources-audio-title" data-i18n="resources.audio.title">${esc(t("resources.audio.title", language))}</h2><p class="resourcesPage__audioIntro" data-i18n="resources.audio.intro">${esc(t("resources.audio.intro", language))}</p>` : "";
-  return `<section class="resourcesPage__audio" aria-labelledby="resources-audio-title">${heading}<div class="resourcesPage__audioGrid">${lessons}</div><section class="resourcesPage__affirmations" aria-labelledby="resources-affirmations-title"><p class="eyebrow">MKS</p><h2 id="resources-affirmations-title">${esc(affirmationsLabel)}</h2><p>${esc(t("resources.audio.affirmationsDescription", language))}</p><audio controls preload="none" aria-label="${esc(affirmationsLabel)}"><source src="/audio/mks/${encodeURIComponent(affirmationsFile)}" type="audio/mpeg">${esc(t("resources.audio.playerFallback", language))}</audio></section></section>`;
+  return `<section class="resourcesPage__audio" aria-labelledby="resources-audio-title">${heading}<div class="resourcesPage__audioGrid">${lessons}</div><section class="resourcesPage__affirmations" aria-labelledby="resources-affirmations-title"><p class="eyebrow">MKS</p><h2 id="resources-affirmations-title">${esc(affirmationsLabel)}</h2><p>${esc(t("resources.audio.affirmationsDescription", language))}</p><audio controls preload="none" aria-label="${esc(affirmationsLabel)}"><source src="https://media.unleashyourpowerwithtariq.com/affirmations/${encodeURIComponent(affirmationsFile)}" type="audio/mpeg">${esc(t("resources.audio.playerFallback", language))}</audio></section></section>`;
 }
 
 export function resourcesPage(data = siteData, language = "en") {
