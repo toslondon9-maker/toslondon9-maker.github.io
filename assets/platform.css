@@ -9409,3 +9409,11 @@ html {
   .homeHero__artwork img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important}
   .homeHero__mobileArtworkAction{display:block!important;width:min(100% - 2rem,480px)!important;margin:.85rem auto 0!important}
 }
+
+@media (max-width: 767px) {
+  .home .homeHero__artwork {
+    display: none !important;
+  }
+}
+
+/* Stage 1: temporarily remove the homepage hero image on mobile. */
