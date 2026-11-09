@@ -398,12 +398,16 @@ button,
 
 .mobileNav__panel {
   display: none;
-  position: absolute;
-  inset-block-start: calc(100% + 1px);
-  inset-inline-end: var(--space-gutter);
+  position: fixed;
+  z-index: 1001;
+  inset-block-start: 5.5rem;
+  inset-inline-end: max(var(--space-gutter), env(safe-area-inset-right));
   width: min(24rem, calc(100vw - (2 * var(--space-gutter))));
+  max-width: calc(100vw - (2 * var(--space-gutter)));
+  box-sizing: border-box;
   max-height: calc(100vh - 6rem);
   padding: 1rem;
+  overflow-x: hidden;
   overflow-y: auto;
   border: 1px solid var(--border);
   border-radius: 0 0 var(--radius-card) var(--radius-card);
@@ -416,12 +420,15 @@ button,
 }
 
 .mobileNav__panel ul {
+  min-width: 0;
   align-items: stretch;
   flex-direction: column;
   gap: 0.15rem;
 }
 
 .mobileNav__panel a {
+  min-width: 0;
+  overflow-wrap: anywhere;
   display: flex;
   align-items: center;
   min-height: 44px;

@@ -3,7 +3,7 @@ import { renderStructuredData } from "./structured-data.mjs";
 import { renderCalendlyCta } from "./conversion-components.mjs";
 
 const releaseAssetVersion = "20261107-study-room-seo-1";
-const platformStyleVersion = "20261109-footer-navigation-fix-2";
+const platformStyleVersion = "20261109-mobile-performance-nav-fix-1";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
@@ -16,7 +16,7 @@ const aiMentorScript = "/assets/ai-mentors.mjs";
 const aiMentorEndpoint = "https://unleash-your-power-ai-mentor.toslondon9.workers.dev/mentor";
 
 function versionReleaseScript(script) {
-  if (script === navigationScript) return `${script}?v=20260930-nav-mks-sync-1`;
+  if (script === navigationScript) return `${script}?v=20261109-mobile-nav-bounds-1`;
   if (script === languageScript) return `${script}?v=${releaseAssetVersion}`;
   if (script === analyticsScript) return `${script}?v=20260908-analytics`;
   if (script === aiMentorScript) return `${script}?v=20261004-ai-study-companion-1`;
@@ -95,5 +95,5 @@ export function renderPage({ route, language, title, description, titleKey, desc
       ? "20261103-study-questions-1"
       : platformStyleVersion;
   const renderedBody = addCalendlyCta(route, language, body);
-  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${redirectTag}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script><link rel="preload" href="/images/power-key-mark.png" as="image" type="image/png">${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;
+  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${redirectTag}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script>${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;
 }
