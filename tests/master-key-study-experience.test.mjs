@@ -59,7 +59,7 @@ test("MKS source content and client controls remain available", () => {
 
 test("MKS Study Room uses the four approved visual stage banners without promotional overlays", () => {
   const html = curriculumPage();
-  for (const image of ["foundation-chapters-1-4.png", "visualisation-chapters-5-11.png", "concentration-chapters-12-18.png", "contemplation-mastery-chapters-19-24.png"]) {
+  for (const image of ["foundation-chapters-1-4.svg", "visualisation-chapters-5-11.svg", "concentration-chapters-12-18.svg", "contemplation-mastery-chapters-19-24.svg"]) {
     assert.match(html, new RegExp(image));
   }
   assert.equal((html.match(/class="mksStudyRoom__visualNavLink"/g) ?? []).length, 4);
