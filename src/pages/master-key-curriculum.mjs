@@ -33,7 +33,7 @@ const chapterGuidance = Object.freeze({
 function renderLessonAudio(week, copy) {
   const file = `Lesson_${week}.mp3`;
   const label = `${copy.audioLabel} ${week}`;
-  return `<section class="mksStudyRoom__audio" aria-label="${label}" data-audio-week="${week}"><div><p class="eyebrow">${copy.audioEyebrow}</p><h3>${copy.audioHeading} ${week}</h3><p>${copy.audioDescription}</p></div><audio controls preload="none" aria-label="${label}"><source src="/audio/mks/${file}" type="audio/mpeg">Your browser does not support HTML audio.</audio></section>`;
+  return `<section class="mksStudyRoom__audio" aria-label="${label}" data-audio-week="${week}"><div><p class="eyebrow">${copy.audioEyebrow}</p><h3>${copy.audioHeading} ${week}</h3><p>${copy.audioDescription}</p></div><audio controls preload="none" aria-label="${label}"><source src="https://media.unleashyourpowerwithtariq.com/${file}" type="audio/mpeg">Your browser does not support HTML audio.</audio></section>`;
 }
 
 function renderChapterGuidance(guidance) {
