@@ -34,7 +34,7 @@ function renderHero(language) {
 }
 
 function renderPainPoints(language) {
-  const cards = Array.from({ length: 15 }, (_, index) => {
+  const cards = Array.from({ length: 5 }, (_, index) => {
     const number = index + 1;
     const key = `home.pains.${number}`;
     const titleKey = `${key}.title`;
