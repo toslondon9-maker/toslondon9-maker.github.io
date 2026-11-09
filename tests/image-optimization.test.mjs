@@ -51,7 +51,7 @@ test("certificate display preserves its full aspect ratio without cropping", () 
 });
 
 
-test("Master Key Study Room uses complete PNG stage artwork with intrinsic proportions", () => {
+test("Master Key Study Room uses warm ivory SVG stage artwork with intrinsic proportions", () => {
   const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
   const files = [
     "foundation-chapters-1-4.svg",
