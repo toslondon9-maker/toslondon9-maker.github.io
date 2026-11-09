@@ -3,7 +3,7 @@ import { renderStructuredData } from "./structured-data.mjs";
 import { renderCalendlyCta } from "./conversion-components.mjs";
 
 const releaseAssetVersion = "20261107-study-room-seo-1";
-const platformStyleVersion = "20261004-helmar-rudolph-page-1";
+const platformStyleVersion = "20261109-footer-navigation-fix-2";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
@@ -80,7 +80,7 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const pagePlatformStyleVersion = route === aiMentorRoute
     ? "20261004-ai-study-companion-1"
     : route === "/"
-      ? "20261109-desktop-artwork-width-3"
+      ? "20261109-footer-navigation-fix-2"
     : route === "/foundation/"
       ? "20261005-foundation-life-power-1"
     : route === "/complete-journey/"
