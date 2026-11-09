@@ -9418,3 +9418,21 @@ html {
     text-wrap: balance;
   }
 }
+
+
+/* Keep the footer navigation orderly and reserve gold emphasis for the Inner Circle event. */
+.siteFooter__nav ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  align-items: start;
+  gap: .2rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.siteFooter__nav li { min-width: 0; }
+.siteFooter__nav a { display: inline-flex; align-items: center; }
+.siteFooter__nav .navInnerCircle { color: var(--gold-bright) !important; font-weight: 700; }
+.siteFooter__nav a:not(.navInnerCircle) { color: rgba(247, 241, 230, .82); }
+.siteNav .navReferral,
+.mobileNav__panel .navReferral { color: inherit !important; font-size: inherit; font-weight: inherit; letter-spacing: normal; }
