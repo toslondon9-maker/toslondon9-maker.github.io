@@ -9472,3 +9472,12 @@ html {
     word-break: normal;
   }
 }
+
+
+/* Give the homepage hero artwork a little more presence and balance on desktop. */
+@media (min-width: 768px) {
+  .home .homeHero__artwork {
+    transform: translate(1.5%, -1.5%) scale(1.05);
+    transform-origin: center center;
+  }
+}
