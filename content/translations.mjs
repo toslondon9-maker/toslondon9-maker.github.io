@@ -573,7 +573,7 @@ const translations = deepFreeze({
     en: "Build focus, concentration and mental discipline through Master Key System coaching with Tariq Saddique. Try the free 7-day experience.",
     es: "Desarrolla el enfoque, la concentración y la disciplina mental mediante el coaching del Master Key System con Tariq Saddique. Prueba la experiencia gratuita de 7 días.",
   },
-  "route.home.heading": { en: "Master the world within.", es: "Domina tu mundo interior." },
+  "route.home.heading": { en: "Master Key System Coaching for Focus, Clarity and Personal Growth", es: "Coaching del Master Key System para el enfoque, la claridad y el crecimiento personal" },
   "route.home.purpose": {
     en: "“If you do what you've always done, you'll get what you've always gotten.” — Tony Robbins",
     es: "«Si haces lo mismo de siempre, obtendrás los mismos resultados». — Tony Robbins",
