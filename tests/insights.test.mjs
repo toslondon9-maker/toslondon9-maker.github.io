@@ -13,22 +13,16 @@ import { insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuil
 import { siteData } from "../content/site-data.mjs";
 import { articleReadingMinutes, insightsArticles, renderInsightCard } from "../src/insights.mjs";
 
-test("homepage presents the Insights & Guides collection above the consolidated next-step panel", () => {
+test("homepage presents the Insights & Guides preview before its final call to action", () => {
   const body = homePage().body;
-  const insightsIndex = body.indexOf("Insights &amp; Guides");
-  const finalPanelIndex = body.indexOf('data-home-section="next-step"');
+  const insightsIndex = body.indexOf('data-home-section="insights"');
+  const finalPanelIndex = body.indexOf('data-home-section="final-cta"');
   assert.ok(insightsIndex >= 0);
   assert.ok(finalPanelIndex > insightsIndex);
   assert.equal((body.match(/class="insightsPreview__card[^\"]*/g) ?? []).length, 3);
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsFoundationRestart}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsLifeRebuilt}"`));
-  assert.match(body, new RegExp(`href="${siteData.routes.insightsFamiliar}"`));
-  assert.ok(body.indexOf(`href="${siteData.routes.insightsLifeRebuilt}"`) < body.indexOf(`href="${siteData.routes.insightsFoundationRestart}"`));
-  assert.ok(body.indexOf(`href="${siteData.routes.insightsFoundationRestart}"`) < body.indexOf(`href="${siteData.routes.insightsFamiliar}"`));
   assert.match(body, new RegExp(`href="${siteData.routes.insights}"`));
-  assert.doesNotMatch(body, /insightsPreview__meta|insightsPreview__date|\/downloads\/|download/i);
-  assert.match(body, new RegExp(`data-i18n="insights\.preview\.[^"]+\.action"`));
-  assert.doesNotMatch(body, /insightsIntroduction/);
+  assert.match(body, /data-i18n="home\.final\.start"/);
+  assert.doesNotMatch(body, /data-home-section="next-step"/);
 });
 
 test("the course article exposes bilingual content, internal links and CTA", () => {

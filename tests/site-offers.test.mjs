@@ -10,25 +10,30 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const home = await readFile(path.join(root, "index.html"), "utf8");
 const coaching = await readFile(path.join(root, "coaching", "index.html"), "utf8");
 
-test("deployed homepage uses the approved static Master Key experience", () => {
+test("deployed homepage uses the current bilingual Master Key coaching experience", () => {
   assert.match(home, /^<!doctype html>/i);
   assert.match(home, /<main class="home">/);
-  assert.match(home, /Master the world within\./);
+  assert.match(home, /Master Key System Coaching for Focus, Clarity and Personal Growth/);
   assert.match(home, /START YOUR 7 DAYS/);
   assert.match(home, /EXPLORE THE METHOD/);
+  assert.match(home, /data-home-section="free-experience"/);
+  assert.match(home, /data-home-section="journey"/);
+  assert.match(home, /data-home-section="offers"/);
+  assert.match(home, /data-home-section="final-cta"/);
   assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__|data-rsc|_rsc=/);
 });
 
-test("deployed homepage preserves the approved compact lineage section", () => {
-  const lineage = home.match(/<section[^>]+data-home-section="tradition"[\s\S]*?<\/section>/)?.[0] ?? "";
-  const names = [...lineage.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((match) => match[1]).slice(0, 3);
-  assert.deepEqual(names, ["Charles F. Haanel", "Helmar Rudolph", "Tariq Saddique"]);
-  assert.match(lineage, /Modern Study &amp; Application/);
-  assert.match(lineage, /Your Guide &amp; Coach/);
-  assert.match(lineage, /not affiliated with or endorsed by/i);
-  assert.match(lineage, new RegExp(`href="${escapeRegExp(siteData.routes.mksLineage)}"`));
-  assert.match(lineage, new RegExp(`href="${escapeRegExp(siteData.routes.resources)}"`));
-  assert.match(home, new RegExp(`href="${escapeRegExp(siteData.routes.aboutTariq)}"`));
+test("deployed homepage preserves the approved 24-week journey and three public offers", () => {
+  const journey = home.match(/<section[^>]+data-home-section="journey"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const offers = home.match(/<section[^>]+data-home-section="offers"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const journeyText = journey.replace(/<[^>]+>/g, "");
+  assert.match(journeyText, /Weeks 1–4[\s\S]*Weeks 5–11[\s\S]*Weeks 12–18[\s\S]*Weeks 19–24/);
+  assert.match(journey, /Foundation[\s\S]*Visualisation[\s\S]*Concentration[\s\S]*Integration/);
+  assert.match(offers, /Free 7-Day Experience/);
+  assert.match(offers, /Foundation[\s\S]*£97/);
+  assert.match(offers, /Complete 24-Week Journey[\s\S]*£997/);
+  assert.match(offers, new RegExp(`href="${escapeRegExp(siteData.routes.completeJourney)}"`));
+  assert.doesNotMatch(home, /data-home-section="tradition"/);
 });
 
 test("canonical coaching page owns every locked commercial fact", () => {
@@ -52,7 +57,7 @@ test("canonical coaching page owns every locked commercial fact", () => {
   const offers = home.match(/<section[^>]+data-home-section="offers"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.match(offers, /Free 7-Day Experience/);
   assert.match(offers, new RegExp(`Foundation[\\s\\S]*£97[\\s\\S]*href="${escapeRegExp(siteData.routes.foundation)}"`));
-  assert.match(offers, new RegExp(`Complete 24-Week Journey[\\s\\S]*£997[\\s\\S]*href="${escapeRegExp(siteData.routes.coaching)}"`));
+  assert.match(offers, new RegExp(`Complete 24-Week Journey[\\s\\S]*£997[\\s\\S]*href="${escapeRegExp(siteData.routes.completeJourney)}"`));
   assert.doesNotMatch(home, /£197|£397|£497|£1,188|£1,788/);
   assert.doesNotMatch(home, /class="foundationNextStep"|href="https:\/\/www\.paypal\.com\/ncp\/payment\//);
 });
