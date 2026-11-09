@@ -9590,3 +9590,26 @@ body:has(.resourcesPage) .resourcesPage__affirmations h2,
 body:has(.resourcesPage) .resourcesPage__affirmations p {
   color: #F5EBD7;
 }
+
+
+/* Keep the footer navigation in a horizontal, wrapping layout on every screen size. */
+.siteFooter__nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+}
+
+.siteFooter__nav li {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 768px) {
+  .siteFooter__nav ul {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
