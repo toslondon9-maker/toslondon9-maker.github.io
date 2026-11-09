@@ -1,3 +1,5 @@
 Deployment trigger for the approved UYP mobile homepage artwork cleanup (PR #130).
 
 Publish the current approved UYP static pages and refresh shared navigation styles (PR #160).
+
+Publish the warm ivory and antique-gold Master Key System stage banners from PR #161, including the SVG asset references and deployment test correction from PR #162.
