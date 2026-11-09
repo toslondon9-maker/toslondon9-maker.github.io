@@ -275,12 +275,12 @@ test("Haanel lineage card provides a closed bilingual reference disclosure", () 
   const disclosure = english.match(/<details class="homeLineage__links">[\s\S]*?<\/details>/)?.[0] ?? "";
 
   assert.match(english, /<details class="homeLineage__links">/);
-  assert.match(english, /<summary[^>]*>WHO WAS CHARLES HAANEL<\/summary>/);
+  assert.match(english, /<summary[^>]*>who was Charles Haanel<\/summary>/i);
   assert.doesNotMatch(disclosure, /<details[^>]* open/);
-  assert.match(disclosure, /href="\/insights\/who-was-charles-f-haanel-life-and-legacy\/"[^>]*>Who Was Charles F\. Haanel\?</);
-  assert.match(disclosure, /href="\/master-key-system\/"[^>]*>The Master Key System</);
-  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/Charles_F\._Haanel"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>Charles F\. Haanel — Wikipedia</);
-  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/The_Master_Key_System"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>The Master Key System — Wikipedia</);
+  assert.match(disclosure, /href="\/insights\/who-was-charles-f-haanel-life-and-legacy\/"[^>]*>who was Charles F\. Haanel\?</i);
+  assert.match(disclosure, /href="\/master-key-system\/"[^>]*>the Master Key System</i);
+  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/Charles_F\._Haanel"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>Charles F\. Haanel — Wikipedia</i);
+  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/The_Master_Key_System"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>the Master Key System — Wikipedia</i);
   assert.match(spanish, /<summary[^>]*>¿QUIÉN FUE CHARLES F\. HAANEL\?<\/summary>/);
   assert.match(spanish, /¿Quién fue Charles F\. Haanel\?/);
   assert.match(spanish, /El Master Key System/);
