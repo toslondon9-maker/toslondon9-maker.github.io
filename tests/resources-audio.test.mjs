@@ -44,7 +44,7 @@ test("Resources separates the supplied affirmations track and keeps labels bilin
   await access(new URL(file, audioRoot));
   assert.match(english, /MKS Affirmations for Success and Prosperity/);
   assert.equal((english.match(/Master Key System Audio Lessons/g) ?? []).length, 1);
-  assert.match(english, /audio\/mks\/The%20Master%20Key%20System%20Affirmations%20For%20Success%20And%20Prosperity\.mp3/);
+  assert.match(english, /https:\\/\\/media\\.unleashyourpowerwithtariq\\.com\\/affirmations\\/The%20Master%20Key%20System%20Affirmations%20For%20Success%20And%20Prosperity\\.mp3/);
   assert.match(spanish, /Afirmaciones del MKS para el éxito y la prosperidad/);
   assert.match(spanish, /Audio de la lección 1/);
   assert.match(english, /<audio controls[^>]+aria-label=/g);
