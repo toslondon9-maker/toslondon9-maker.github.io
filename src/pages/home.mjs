@@ -30,11 +30,11 @@ function renderLifePowerAccordion(language) {
 }
 
 function renderHero(language) {
-  return `<section class="homeHero" data-home-section="hero"><div class="homeHero__copy">${copy("home.hero.eyebrow", language, "p", "eyebrow")}${copy("route.home.heading", language, "h1")}${copy("route.home.purpose", language, "h2", "homeHero__subheading")}${copy("home.hero.change", language, "p", "homeHero__change")}<div class="homeActions homeHero__actions">${cta(siteData.routes.startFree, "route.home.action", language, "primary", "routeShell__action")}${cta(siteData.routes.masterKeySystem, "home.cta.exploreJourney", language, "secondary")}</div><ul class="homeHero__proof" aria-label="${escapeHtml(t("home.hero.proofLabel", language))}" data-i18n-aria-label="home.hero.proofLabel"><li><strong>7</strong>${copy("home.hero.proofFree", language, "span")}</li><li><strong>24</strong>${copy("home.hero.proofWeeks", language, "span")}</li><li><strong>3</strong>${copy("home.hero.proofPerspectives", language, "span")}</li></ul>${copy("home.hero.microcopy", language, "p", "homeHero__microcopy")}</div></section>`;
+  return `<section class="homeHero" data-home-section="hero"><div class="homeHero__artwork"><picture><source media="(max-width: 767px)" srcset="/images/unleash-your-power-programme.jpeg"><img src="/uyp-home-hero.jpg" width="1536" height="1024" fetchpriority="high" decoding="async" alt="Tariq Saddique presenting the 24-week Unleash Your Power Master Key System coaching journey" data-i18n-alt="home.hero.artworkAlt"></picture></div><div class="homeHero__copy">${copy("home.hero.eyebrow", language, "p", "eyebrow")}${copy("route.home.heading", language, "h1")}${copy("route.home.purpose", language, "h2", "homeHero__subheading")}${copy("home.hero.change", language, "p", "homeHero__change")}<div class="homeActions homeHero__actions">${cta(siteData.routes.startFree, "route.home.action", language, "primary", "routeShell__action")}${cta(siteData.routes.masterKeySystem, "home.cta.exploreJourney", language, "secondary")}</div><ul class="homeHero__proof" aria-label="${escapeHtml(t("home.hero.proofLabel", language))}" data-i18n-aria-label="home.hero.proofLabel"><li><strong>7</strong>${copy("home.hero.proofFree", language, "span")}</li><li><strong>24</strong>${copy("home.hero.proofWeeks", language, "span")}</li><li><strong>3</strong>${copy("home.hero.proofPerspectives", language, "span")}</li></ul>${copy("home.hero.microcopy", language, "p", "homeHero__microcopy")}</div></section>`;
 }
 
 function renderPainPoints(language) {
-  const cards = Array.from({ length: 15 }, (_, index) => {
+  const cards = Array.from({ length: 5 }, (_, index) => {
     const number = index + 1;
     const key = `home.pains.${number}`;
     const titleKey = `${key}.title`;

@@ -34,18 +34,18 @@ test("homepage does not render the previous expanded sections", () => {
   assert.doesNotMatch(html, /class="homeOrigins|class="homeBooks|class="homeIdeal|class="homeOutcome|class="homeCoaching/);
 });
 
-test("homepage restores all 15 pain points and removes the personal welcome panel", () => {
+test("homepage displays exactly five pain points and removes the personal welcome panel", () => {
   const html = renderHome({ language: "en" });
   const spanish = renderHome({ language: "es" });
   const painPoints = section(html, "pain-points");
   assert.ok(painPoints.length > 0);
-  assert.equal((painPoints.match(/class="homePainPoints__card"/g) ?? []).length, 15);
-  for (const challenge of ["Overthinking", "Scattered focus", "Procrastination", "Self-doubt", "Emotional reactivity", "Repeating old patterns", "Feeling overwhelmed", "Lack of direction", "Fear of getting it wrong", "Harsh inner dialogue", "Inconsistent discipline", "Living for approval", "Dwelling on the past", "Constant comparison", "A loss of purpose"]) assert.ok(painPoints.includes(challenge), challenge);
+  assert.equal((painPoints.match(/class="homePainPoints__card"/g) ?? []).length, 5);
+  for (const challenge of ["Overthinking", "Scattered focus", "Procrastination", "Self-doubt", "Emotional reactivity"]) assert.ok(painPoints.includes(challenge), challenge);
   assert.match(painPoints, /What it can cost you/);
   assert.match(painPoints, /How the MKS may help/);
   assert.match(painPoints, /TRY THE FREE 7-DAY EXPERIENCE/);
   const spanishPainPoints = section(spanish, "pain-points");
-  assert.equal((spanishPainPoints.match(/class="homePainPoints__card"/g) ?? []).length, 15);
+  assert.equal((spanishPainPoints.match(/class="homePainPoints__card"/g) ?? []).length, 5);
   assert.doesNotMatch(html, /data-home-section="welcome"|homeWelcome|tariq-welcome-portrait\\.png|A personal welcome from Tariq/);
   assert.ok(html.indexOf('data-home-section="pain-points"') > html.indexOf('data-home-section="hero"'));
 });
