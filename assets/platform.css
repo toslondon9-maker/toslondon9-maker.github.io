@@ -9394,3 +9394,27 @@ html {
     grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr) !important;
   }
 }
+
+/* Keep the longer homepage coaching headline balanced and readable at every viewport. */
+.home .homeHero__copy h1 {
+  text-wrap: balance;
+  overflow-wrap: normal;
+}
+
+@media (max-width: 767px) {
+  .home .homeHero__copy h1 {
+    max-width: 18ch;
+    font-size: clamp(1.9rem, 7vw, 2.5rem);
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .home .homeHero__copy h1 {
+    max-width: 15ch;
+    font-size: clamp(2.15rem, 4.2vw, 2.8rem);
+    line-height: 1.06;
+    text-wrap: balance;
+  }
+}
