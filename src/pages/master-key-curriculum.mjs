@@ -45,10 +45,10 @@ function renderExerciseDisclosure(content) {
 }
 
 const stages = Object.freeze([
-  { id: "foundation", title: "Foundation", weeks: "Chapters 1–4", start: 0, end: 4, image: "foundation-chapters-1-4.png" },
-  { id: "visualisation", title: "Visualisation", weeks: "Chapters 5–11", start: 4, end: 11, image: "visualisation-chapters-5-11.png" },
-  { id: "concentration", title: "Concentration", weeks: "Chapters 12–18", start: 11, end: 18, image: "concentration-chapters-12-18.png" },
-  { id: "integration-mastery", title: "Integration & Mastery", weeks: "Chapters 19–24", start: 18, end: 24, image: "contemplation-mastery-chapters-19-24.png" },
+  { id: "foundation", title: "Foundation", weeks: "Chapters 1–4", start: 0, end: 4, image: "foundation-chapters-1-4.svg" },
+  { id: "visualisation", title: "Visualisation", weeks: "Chapters 5–11", start: 4, end: 11, image: "visualisation-chapters-5-11.svg" },
+  { id: "concentration", title: "Concentration", weeks: "Chapters 12–18", start: 11, end: 18, image: "concentration-chapters-12-18.svg" },
+  { id: "integration-mastery", title: "Integration & Mastery", weeks: "Chapters 19–24", start: 18, end: 24, image: "contemplation-mastery-chapters-19-24.svg" },
 ]);
 
 const chapterVideos = Object.freeze({
