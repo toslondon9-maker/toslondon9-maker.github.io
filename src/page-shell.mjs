@@ -80,7 +80,7 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const pagePlatformStyleVersion = route === aiMentorRoute
     ? "20261004-ai-study-companion-1"
     : route === "/"
-      ? "20261109-mobile-artwork-width-2"
+      ? "20261109-desktop-artwork-width-3"
     : route === "/foundation/"
       ? "20261005-foundation-life-power-1"
     : route === "/complete-journey/"

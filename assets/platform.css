@@ -9386,3 +9386,11 @@ html {
     object-fit: contain !important;
   }
 }
+
+
+/* Increase the homepage programme artwork further on desktop only. */
+@media (min-width: 768px) {
+  .home .homeHero {
+    grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr) !important;
+  }
+}
