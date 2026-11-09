@@ -66,7 +66,7 @@ test("Master Key Study Room uses warm ivory SVG stage artwork with intrinsic pro
     assert.ok(readFileSync(absolute).byteLength > 1_000, file);
   }
 
-  assert.equal((html.match(/master-key-visuals\/[^"]+\.png/g) ?? []).length, 8);
+  assert.equal((html.match(/master-key-visuals\/[^"]+\.svg/g) ?? []).length, 8);
   assert.equal((html.match(/class="mksStudyRoom__stageBanner"/g) ?? []).length, 4);
 });
 
