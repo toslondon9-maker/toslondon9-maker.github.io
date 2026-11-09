@@ -45,7 +45,7 @@ test("homepage displays exactly five pain points and removes the personal welcom
   assert.match(painPoints, /How the MKS may help/);
   assert.match(painPoints, /TRY THE FREE 7-DAY EXPERIENCE/);
   const spanishPainPoints = section(spanish, "pain-points");
-  assert.equal((spanishPainPoints.match(/class="homePainPoints__card"/g) ?? []).length, 15);
+  assert.equal((spanishPainPoints.match(/class="homePainPoints__card"/g) ?? []).length, 5);
   assert.doesNotMatch(html, /data-home-section="welcome"|homeWelcome|tariq-welcome-portrait\\.png|A personal welcome from Tariq/);
   assert.ok(html.indexOf('data-home-section="pain-points"') > html.indexOf('data-home-section="hero"'));
 });
