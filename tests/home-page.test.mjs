@@ -6,7 +6,12 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 
 function section(html, id) {
-  return html.match(new RegExp(`<section[^>]+data-home-section="${id}"[\s\S]*?<\/section>`))?.[0] ?? "";
+  const marker = `data-home-section="${id}"`;
+  const markerIndex = html.indexOf(marker);
+  if (markerIndex < 0) return "";
+  const start = html.lastIndexOf("<section", markerIndex);
+  const end = html.indexOf("</section>", markerIndex);
+  return start >= 0 && end >= 0 ? html.slice(start, end + "</section>".length) : "";
 }
 
 test("homepage renders the current coaching headline, hero artwork and primary free CTA", () => {
