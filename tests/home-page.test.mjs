@@ -38,7 +38,8 @@ test("free experience presents seven lessons, a workbook and no-purchase reassur
   assert.match(html, /Seven online lessons/);
   assert.match(html, /Workbook included/);
   assert.match(html, /No purchase required/);
-  const dayList = html.match(/<ol class="homeFreeExperience__days">([\s\S]*?)<\/ol>/)?.[1] ?? "";\n  assert.equal((dayList.match(/<li>/g) ?? []).length, 7);
+  const dayList = html.match(/<ol class="homeFreeExperience__days">([\s\S]*?)<\/ol>/)?.[1] ?? "";
+  assert.equal((dayList.match(/<li>/g) ?? []).length, 7);
   assert.match(html, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"`));
 });
 
@@ -100,7 +101,8 @@ test("homepage insights preview and final call to action keep the free route pro
   assert.match(insights, /VIEW ALL INSIGHTS|VIEW ALL INSIGHTS &amp; GUIDES/);
   assert.match(finalCta, new RegExp(`href="${siteData.routes.startFree.replaceAll("/", "\\/")}"`));
   assert.match(finalCta, /data-i18n="home\.final\.start"/);
-  assert.match(finalCta, /data-i18n="home\.cta\.whatsappQuestion"/);\n  assert.match(finalCta, /data-i18n="home\.final\.method"/);
+  assert.match(finalCta, /data-i18n="home\.cta\.whatsappQuestion"/);
+  assert.match(finalCta, /data-i18n="home\.final\.method"/);
 });
 
 test("homepage content remains bilingual and route-safe", () => {
