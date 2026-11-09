@@ -9410,10 +9410,4 @@ html {
   .homeHero__mobileArtworkAction{display:block!important;width:min(100% - 2rem,480px)!important;margin:.85rem auto 0!important}
 }
 
-@media (max-width: 767px) {
-  .home .homeHero__artwork {
-    display: none !important;
-  }
-}
-
-/* Stage 1: temporarily remove the homepage hero image on mobile. */
+/* Keep the approved homepage programme artwork visible on mobile. */
