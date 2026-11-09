@@ -147,10 +147,10 @@ test("the Foundation callout stays a balanced gold card on mobile", () => {
 test("the MKS Study Room restores four non-promotional stage illustrations", () => {
   const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
   for (const [stage, image, week] of [
-    ["foundation", "foundation-chapters-1-4.png", 1],
-    ["visualisation", "visualisation-chapters-5-11.png", 5],
-    ["concentration", "concentration-chapters-12-18.png", 12],
-    ["integration-mastery", "contemplation-mastery-chapters-19-24.png", 19],
+    ["foundation", "foundation-chapters-1-4.svg", 1],
+    ["visualisation", "visualisation-chapters-5-11.svg", 5],
+    ["concentration", "concentration-chapters-12-18.svg", 12],
+    ["integration-mastery", "contemplation-mastery-chapters-19-24.svg", 19],
   ]) {
     assert.match(html, new RegExp(`id="stage-${stage}"`));
     assert.match(html, new RegExp(String.raw`href="#stage-${stage}"[^>]*>[\s\S]*?${image}`));
