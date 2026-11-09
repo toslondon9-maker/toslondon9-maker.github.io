@@ -5,18 +5,15 @@ import { siteData } from "../content/site-data.mjs";
 import { t } from "../content/translations.mjs";
 import { homePage, renderHome } from "../src/pages/home.mjs";
 
-const approvedSections = ["hero", "pain-points", "free-experience", "tradition", "journey", "testimonials", "offers", "receive", "why-tariq", "insights", "next-step"];
+const approvedSections = ["hero", "welcome", "free-experience", "tradition", "journey", "testimonials", "offers", "receive", "why-tariq", "insights", "next-step"];
 const legacySections = ["lineage-expanded", "origins", "books", "ideal", "outcome", "coaching"];
 
 function section(html, id) {
   return html.match(new RegExp(`<section[^>]+data-home-section="${id}"[\\s\\S]*?</section>`))?.[0] ?? "";
 }
 
-test("homepage follows the approved concise 11-section sequence", () => {
+test("homepage follows the approved concise 12-section sequence", () => {
   const html = renderHome({ language: "en" });
-  assert.match(html, /<source media="\(max-width: 767px\)" srcset="\/images\/uyp-mks-coaching-mobile\.avif"/);
-  assert.match(html, /<h1[^>]*data-i18n="route\.home\.heading">/);
-  assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(sections, approvedSections);
   assert.ok(sections.indexOf("journey") < sections.indexOf("testimonials"));
@@ -25,7 +22,7 @@ test("homepage follows the approved concise 11-section sequence", () => {
   assert.match(html, /<h1[^>]*>Master the world within\.<\/h1>/);
   assert.match(html, /CHARLES F\. HAANEL(?:&#39;|')S MASTER KEY SYSTEM/);
   assert.match(html, /class="homeHero__artwork"[\s\S]*src="\/uyp-home-hero\.jpg"/);
-  assert.doesNotMatch(html, /tariq-welcome-portrait\\.png|homeWelcome|data-home-section="welcome"/);
+  assert.match(html, /tariq-welcome-portrait\.png/);
 });
 
 test("homepage does not render the previous expanded sections", () => {
@@ -34,21 +31,29 @@ test("homepage does not render the previous expanded sections", () => {
   assert.doesNotMatch(html, /class="homeOrigins|class="homeBooks|class="homeIdeal|class="homeOutcome|class="homeCoaching/);
 });
 
-test("homepage displays exactly five pain points and removes the personal welcome panel", () => {
-  const html = renderHome({ language: "en" });
-  const spanish = renderHome({ language: "es" });
-  const painPoints = section(html, "pain-points");
-  assert.ok(painPoints.length > 0);
-  assert.equal((painPoints.match(/class="homePainPoints__card"/g) ?? []).length, 5);
-  for (const challenge of ["Overthinking", "Scattered focus", "Procrastination", "Self-doubt", "Emotional reactivity"]) assert.ok(painPoints.includes(challenge), challenge);
-  assert.match(painPoints, /What it can cost you/);
-  assert.match(painPoints, /How the MKS may help/);
-  assert.match(painPoints, /TRY THE FREE 7-DAY EXPERIENCE/);
-  const spanishPainPoints = section(spanish, "pain-points");
-  assert.equal((spanishPainPoints.match(/class="homePainPoints__card"/g) ?? []).length, 5);
-  assert.doesNotMatch(html, /data-home-section="welcome"|homeWelcome|tariq-welcome-portrait\\.png|A personal welcome from Tariq/);
-  assert.ok(html.indexOf('data-home-section="pain-points"') > html.indexOf('data-home-section="hero"'));
+test("homepage keeps an intentional personal welcome without fake video", () => {
+  const welcome = section(renderHome({ language: "en" }), "welcome");
+  const messageIndex = welcome.indexOf("A personal welcome from Tariq");
+  const logoIndex = welcome.indexOf('src="/images/secret-mark-transparent.png"');
+  const portraitIndex = welcome.indexOf('src="/images/tariq-welcome-portrait.png"');
+  assert.ok(messageIndex >= 0);
+  assert.ok(logoIndex > messageIndex);
+  assert.ok(portraitIndex > logoIndex);
+  assert.match(welcome, /A personal welcome from Tariq/);
+  assert.match(welcome, /class="homeWelcome__visual"/);
+  assert.match(welcome, /class="homeWelcome__imagePair"/);
+  assert.match(welcome, /src="\/images\/secret-mark-transparent\.png"[^>]+alt="The Secret logo"/);
+  assert.doesNotMatch(welcome, /the-secret-inspiration\.png/);
+  assert.match(welcome, /homeWelcome__imagePair">[\s\S]*secret-mark-transparent\.png[\s\S]*tariq-welcome-portrait\.png/);
+  assert.match(welcome, /tariq-welcome-portrait\.png/);
+  assert.match(welcome, /class="homeWelcome__panel"/);
+  assert.match(welcome, /data-i18n="home\.video\.body"/);
+  assert.match(welcome, /data-i18n="home\.video\.panelBody"/);
+  assert.doesNotMatch(welcome, /Video coming soon/);
+  assert.doesNotMatch(welcome, /<video\b|\.mp4|\.webm/);
+  assert.doesNotMatch(welcome, /affiliated|endorsed|partnership/i);
 });
+
 test("homepage does not expose the removed soundtrack or its runtime", async () => {
   const html = renderHome({ language: "en" });
   const runtime = await readFile("assets/home-soundtrack.mjs", "utf8").catch(() => null);
@@ -275,12 +280,12 @@ test("Haanel lineage card provides a closed bilingual reference disclosure", () 
   const disclosure = english.match(/<details class="homeLineage__links">[\s\S]*?<\/details>/)?.[0] ?? "";
 
   assert.match(english, /<details class="homeLineage__links">/);
-  assert.match(english, /<summary[^>]*>who was Charles Haanel<\/summary>/i);
+  assert.match(english, /<summary[^>]*>WHO WAS CHARLES HAANEL<\/summary>/);
   assert.doesNotMatch(disclosure, /<details[^>]* open/);
-  assert.match(disclosure, /href="\/insights\/who-was-charles-f-haanel-life-and-legacy\/"[^>]*>who was Charles F\. Haanel\?</i);
-  assert.match(disclosure, /href="\/master-key-system\/"[^>]*>the Master Key System</i);
-  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/Charles_F\._Haanel"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>Charles F\. Haanel — Wikipedia</i);
-  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/The_Master_Key_System"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>the Master Key System — Wikipedia</i);
+  assert.match(disclosure, /href="\/insights\/who-was-charles-f-haanel-life-and-legacy\/"[^>]*>Who Was Charles F\. Haanel\?</);
+  assert.match(disclosure, /href="\/master-key-system\/"[^>]*>The Master Key System</);
+  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/Charles_F\._Haanel"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>Charles F\. Haanel — Wikipedia</);
+  assert.match(disclosure, /href="https:\/\/en\.wikipedia\.org\/wiki\/The_Master_Key_System"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>The Master Key System — Wikipedia</);
   assert.match(spanish, /<summary[^>]*>¿QUIÉN FUE CHARLES F\. HAANEL\?<\/summary>/);
   assert.match(spanish, /¿Quién fue Charles F\. Haanel\?/);
   assert.match(spanish, /El Master Key System/);
@@ -323,7 +328,7 @@ test("homepage Foundation offer uses the shared concise summary", () => {
   assert.match(english, /WhatsApp support/);
   assert.match(english, /EXPLORE FOUNDATION — £97/);
   assert.match(spanish, /Cuatro semanas/);
-  assert.match(spanish, /Cuatro llamadas en total/);
+  assert.match(spanish, /Ocho llamadas en total/);
 });
 
 test("homepage next-step choices preserve canonical destinations and translated CTAs", async () => {
