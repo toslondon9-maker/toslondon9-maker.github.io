@@ -1,1 +1,3 @@
 Deployment trigger for the approved UYP mobile homepage artwork cleanup (PR #130).
+
+Footer navigation regeneration and stylesheet cache refresh (PR #157).
