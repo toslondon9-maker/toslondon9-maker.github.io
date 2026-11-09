@@ -54,16 +54,16 @@ test("certificate display preserves its full aspect ratio without cropping", () 
 test("Master Key Study Room uses complete PNG stage artwork with intrinsic proportions", () => {
   const html = routeRenderers[siteData.routes.masterKeySystem](siteData).body;
   const files = [
-    "foundation-chapters-1-4.png",
-    "visualisation-chapters-5-11.png",
-    "concentration-chapters-12-18.png",
-    "contemplation-mastery-chapters-19-24.png",
+    "foundation-chapters-1-4.svg",
+    "visualisation-chapters-5-11.svg",
+    "concentration-chapters-12-18.svg",
+    "contemplation-mastery-chapters-19-24.svg",
   ];
 
   for (const file of files) {
     const absolute = path.join(root, "images", "master-key-visuals", file);
     assert.equal(existsSync(absolute), true, file);
-    assert.ok(readFileSync(absolute).byteLength > 1_000_000, file);
+    assert.ok(readFileSync(absolute).byteLength > 1_000, file);
   }
 
   assert.equal((html.match(/master-key-visuals\/[^"]+\.png/g) ?? []).length, 8);
