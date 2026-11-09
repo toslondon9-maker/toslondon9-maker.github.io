@@ -13,7 +13,7 @@ const secretLogo = "/images/secret-mark-transparent.png";
 const secretInspiration = "/images/the-secret-inspiration.png";
 const aboutSecretLogo = "/images/secret-mark-transparent.png";
 
-test("approved Secret logo assets are used on the homepage and About Tariq page", () => {
+test("approved Secret logo assets remain on About Tariq without restoring the removed homepage welcome panel", () => {
   const home = renderHome({ language: "en" });
   const about = routeRenderers[siteData.routes.aboutTariq](siteData).body;
 
@@ -22,8 +22,7 @@ test("approved Secret logo assets are used on the homepage and About Tariq page"
   assert.equal(existsSync(path.join(root, aboutSecretLogo)), true, aboutSecretLogo);
   assert.doesNotMatch(about, new RegExp(`src="${secretInspiration.replaceAll("/", "\\/")}"`));
   assert.match(about, new RegExp(`src="${aboutSecretLogo.replaceAll("/", "\\/")}"`));
-  assert.match(home, new RegExp(`src="${secretLogo.replaceAll("/", "\\/")}"`));
-  assert.doesNotMatch(home, new RegExp(`src="${secretInspiration.replaceAll("/", "\\/")}"`));
+  assert.doesNotMatch(home, /homeWelcome|tariq-welcome-portrait/);
 });
 
 test("homepage hero artwork uses the supplied image with stable dimensions and eager loading", () => {
