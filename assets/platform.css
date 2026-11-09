@@ -9481,3 +9481,33 @@ html {
     transform-origin: center center;
   }
 }
+
+
+/* Resources page: use the supplied navy-and-gold framed artwork as the page backdrop. */
+body:has(.resourcesPage) {
+  background-color: #071827;
+  background-image:
+    linear-gradient(rgba(5, 16, 29, .28), rgba(5, 16, 29, .42)),
+    url("/resources-background.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.resourcesPage {
+  position: relative;
+  z-index: 0;
+}
+.resourcesPage__group {
+  background: rgba(248, 243, 232, .94);
+  backdrop-filter: blur(3px);
+}
+.resourcesPage__optional {
+  background: rgba(248, 243, 232, .9);
+}
+@media (max-width: 767px) {
+  body:has(.resourcesPage) {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+}
