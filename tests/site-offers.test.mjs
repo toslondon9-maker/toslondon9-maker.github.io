@@ -26,7 +26,8 @@ test("deployed homepage uses the current bilingual Master Key coaching experienc
 test("deployed homepage preserves the approved 24-week journey and three public offers", () => {
   const journey = home.match(/<section[^>]+data-home-section="journey"[\s\S]*?<\/section>/)?.[0] ?? "";
   const offers = home.match(/<section[^>]+data-home-section="offers"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.match(journey, /Weeks 1–4[\s\S]*Weeks 5–11[\s\S]*Weeks 12–18[\s\S]*Weeks 19–24/);
+  const journeyText = journey.replace(/<[^>]+>/g, "");
+  assert.match(journeyText, /Weeks 1–4[\s\S]*Weeks 5–11[\s\S]*Weeks 12–18[\s\S]*Weeks 19–24/);
   assert.match(journey, /Foundation[\s\S]*Visualisation[\s\S]*Concentration[\s\S]*Integration/);
   assert.match(offers, /Free 7-Day Experience/);
   assert.match(offers, /Foundation[\s\S]*£97/);
