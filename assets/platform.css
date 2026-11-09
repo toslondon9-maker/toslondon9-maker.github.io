@@ -9368,3 +9368,21 @@ html {
     object-fit: contain;
   }
 }
+
+
+/* Let the programme artwork use more of the available phone width. */
+@media (max-width: 767px) {
+  .home .homeHero__artwork {
+    width: calc(100vw - 1rem) !important;
+    max-width: none !important;
+    margin-inline: auto !important;
+  }
+  .home .homeHero__artwork img {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+  }
+}
