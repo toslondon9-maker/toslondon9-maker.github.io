@@ -9,7 +9,7 @@ const headerNavigationItems = Object.freeze([
   { route: siteData.routes.coaching, key: "nav.coaching" },
   { route: siteData.routes.aboutTariq, key: "nav.aboutTariq" },
   { route: siteData.routes.resources, key: "nav.resources" },
-  { route: siteData.routes.referral, key: "nav.referral", className: "navReferral" },
+  { route: siteData.routes.referral, key: "nav.referral" },
   { route: siteData.routes.getTheBook, key: "nav.getTheBook", className: "navBook" },
 ]);
 
@@ -18,9 +18,8 @@ const footerNavigationItems = Object.freeze([
   { route: siteData.routes.faq, key: "nav.faq" },
   { route: siteData.routes.contact, key: "nav.contact" },
   { route: siteData.routes.liveCoaching, key: "nav.liveCoaching", className: "studentUtilityLink" },
-  { route: siteData.routes.referral, key: "nav.referral", className: "studentUtilityLink" },
   { route: siteData.routes.refundPolicy, key: "footer.refundPolicy" },
-  { route: siteData.routes.innerCircleEvent, key: "nav.innerCircleEvent" },
+  { route: siteData.routes.innerCircleEvent, key: "nav.innerCircleEvent", className: "navInnerCircle" },
 ]);
 
 function escapeHtml(value) {
@@ -36,8 +35,8 @@ function renderRouteLinks(items, route, language) {
   return items.map((item) => {
     const current = item.route === route ? ' aria-current="page"' : "";
     const className = item.className ? ` class="${item.className}"` : "";
-    const inlineStyle = item.className === "navReferral" ? ` style="color:#9b742e;font-size:.78rem;font-weight:750;letter-spacing:.02em"` : "";
-    return `<li><a${className}${inlineStyle} href="${escapeHtml(item.route)}"${current} data-i18n="${item.key}">${escapeHtml(t(item.key, language))}</a></li>`;
+
+    return `<li><a${className} href="${escapeHtml(item.route)}"${current} data-i18n="${item.key}">${escapeHtml(t(item.key, language))}</a></li>`;
   }).join("");
 }
 
