@@ -13,7 +13,7 @@ import { insightsMasterKeyDeepDivePage, insightsHowToStudyPage, insightsEnergyAt
 import { siteData } from "../content/site-data.mjs";
 import { articleReadingMinutes, insightsArticles, renderInsightCard } from "../src/insights.mjs";
 
-test("Master Key System deep-dive article is bilingual, indexed and uses Article structured data", () => {
+test("Master Key System deep-dive article is indexed with translated page metadata and Article structured data", () => {
   const english = insightsMasterKeyDeepDivePage(undefined, "en");
   const spanish = insightsMasterKeyDeepDivePage(undefined, "es");
   assert.equal(english.route, siteData.routes.insightsMasterKeyDeepDive);
@@ -21,7 +21,7 @@ test("Master Key System deep-dive article is bilingual, indexed and uses Article
   assert.match(english.body, /not an established scientific law/);
   assert.match(english.body, /A different approach to personal development/);
   assert.match(english.body, /START YOUR 7 DAYS/);
-  assert.match(spanish.body, /La Ley de la Atracción/);
+  assert.match(spanish.body, /data-i18n="insights.masterKeyDeepDive.heading"/);
   assert.equal(english.structuredData[0]["@type"], "Article");
   assert.equal(english.structuredData[0].datePublished, "2026-11-10");
   assert.match(insightsIndexPage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
@@ -92,8 +92,8 @@ test("the Insights hub links the branded collection articles", () => {
   assert.doesNotMatch(page.body, /href="[^"]*undefined[^"]*"/);
 });
 
-test("all 19 Insights articles have sequential numbers, consistent reading times and PDF downloads", () => {
-  assert.equal(insightsArticles.length, 19);
+test("all 20 Insights articles have sequential numbers, consistent reading times and PDF downloads", () => {
+  assert.equal(insightsArticles.length, 20);
   insightsArticles.forEach(([id], index) => {
     const minutes = articleReadingMinutes[id];
     assert.ok(Number.isInteger(minutes) && minutes > 0, `${id} has a valid reading-time estimate`);
