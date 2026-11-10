@@ -116,25 +116,73 @@ function renderTransformationReveal(language) {
   const spanish = language === "es";
   const buttonLabel = spanish ? "HAZ CLIC AQUÍ PARA DESCUBRIR TU PROCESO DE CREACIÓN DE 24 SEMANAS" : "CLICK HERE TO DISCOVER YOUR 24-WEEK CREATION PROCESS";
   const title = spanish ? "¿Y si el mayor poder que puedes desarrollar ya estuviera dentro de ti?" : "What if the greatest power you could develop was already within you?";
-  const paragraphs = spanish ? [
-    "Imagina dejar de permitir que tus pensamientos, hábitos, miedos y circunstancias decidan por ti, y empezar a dirigir conscientemente tu atención, tus pensamientos y tus acciones.",
-    "El Sistema de la Llave Maestra te invita a explorar el poder creativo del pensamiento, la concentración, la visualización, la quietud interior y la relación entre tu mundo interno y tu experiencia exterior.",
-    "Durante 24 semanas, cada lección prepara el terreno para la siguiente. Aprenderás a observar los patrones que antes pasaban inadvertidos, entrenar tu atención, formar una imagen mental clara de lo que deseas desarrollar y convertir tus intenciones en acciones deliberadas.",
-    "Y a medida que avances, las ideas empezarán a conectarse. Lo que al principio parecía abstracto puede adquirir un significado nuevo. Empezarás a reconocer posibilidades, responder con mayor conciencia y actuar con más claridad, confianza y propósito.",
-    "No se trata de magia instantánea ni de promesas fáciles. Se trata de descubrir, comprender y practicar principios que pueden cambiar profundamente tu relación contigo mismo y con tu potencial.",
-    "Tú aportas la voluntad de explorar y practicar. Yo aporto la estructura, la orientación semanal, los ejercicios y el acompañamiento para ayudarte a llevar estas enseñanzas a tu vida cotidiana."
-  ] : [
-    "Imagine no longer allowing your thoughts, habits, fears and circumstances to make every decision for you — and beginning to direct your attention, your thinking and your actions consciously.",
-    "The Master Key System invites you to explore the creative power of thought, concentration, visualisation, inner stillness and the relationship between your inner world and your outer experience.",
-    "Across 24 weeks, each lesson prepares the ground for the next. You will learn to notice patterns that once went unnoticed, train your attention, form a clear mental picture of what you want to develop and translate intention into deliberate action.",
-    "And as you progress, the ideas begin to connect. What once seemed abstract can take on new meaning. You may begin to recognise possibilities, respond with greater awareness and act with more clarity, confidence and purpose.",
-    "This is not instant magic or an easy promise. It is an invitation to discover, understand and practise principles that can profoundly change your relationship with yourself and your potential.",
-    "You bring the willingness to explore and practise. I bring the structure, weekly guidance, exercises and support to help you bring these teachings into your everyday life."
-  ];
-  const closing = spanish ? "24 semanas. 24 lecciones. La oportunidad de empezar a vivir con mayor conciencia, dirección y propósito." : "24 weeks. 24 lessons. An opportunity to begin living with greater awareness, direction and purpose.";
-  return `<section class="homeTransformationReveal" data-home-section="transformation-reveal" aria-label="${spanish ? "Descubre el viaje" : "Discover the journey"}"><button class="homeTransformationReveal__trigger" type="button" data-transformation-open aria-haspopup="dialog" aria-controls="home-transformation-dialog">${buttonLabel}</button><dialog class="homeTransformationReveal__dialog" id="home-transformation-dialog" aria-labelledby="home-transformation-title"><div class="homeTransformationReveal__aura" aria-hidden="true"></div><button class="homeTransformationReveal__close" type="button" data-transformation-close aria-label="${spanish ? "Cerrar" : "Close"}">×</button><div class="homeTransformationReveal__content"><p class="eyebrow">${spanish ? "UN VIAJE HACIA TU INTERIOR" : "A JOURNEY INTO THE POWER WITHIN"}</p><h2 id="home-transformation-title">${title}</h2>${paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}<p class="homeTransformationReveal__closing">${escapeHtml(closing)}</p><p class="homeTransformationReveal__download"><a class="button--text" href="/downloads/a-journey-into-the-power-within.pdf" download>${spanish ? "Descargar el PDF" : "Download the PDF"}</a></p><a class="button--primary" href="${escapeHtml(siteData.routes.startFree)}">${spanish ? "Comienza con los 7 días gratuitos" : "Begin with the free 7 days"}</a></div></dialog></section>`;
-}
 
+  const introduction = spanish
+    ? [
+        "Imagina dejar de permitir que tus pensamientos, hábitos, miedos y circunstancias decidan por ti, y empezar a dirigir conscientemente tu atención, tus pensamientos y tus acciones.",
+        "El Master Key System, escrito por Charles F. Haanel (1866–1949), explora el poder creativo del pensamiento y la relación entre nuestro mundo interior y nuestra experiencia exterior.",
+        "La obra comenzó a circular alrededor de 1912 como un curso por correspondencia de 24 lecciones semanales. Más tarde se publicó en forma de libro, con las primeras ediciones fechadas generalmente entre 1916 y 1917."
+      ]
+    : [
+        "Imagine no longer allowing your thoughts, habits, fears and circumstances to make every decision for you — and beginning to direct your attention, your thinking and your actions consciously.",
+        "The Master Key System, written by Charles F. Haanel (1866–1949), explores the creative power of thought and the relationship between our inner world and our outer experience.",
+        "The work first circulated around 1912 as a correspondence course of 24 weekly lessons. It was later published in book form, with early editions generally dated 1916–1917."
+      ];
+
+  const principles = spanish
+    ? [
+        ["Concentración", "Entrenar tu capacidad para dirigir y mantener la atención."],
+        ["Visualización", "Crear una imagen mental más clara de lo que quieres desarrollar."],
+        ["Disciplina mental", "Reconocer patrones de pensamiento y hábitos que influyen en tus decisiones."],
+        ["Quietud interior", "Practicar la calma y la reflexión deliberada."],
+        ["Pensamiento creativo", "Explorar nuevas posibilidades y convertir las intenciones en acciones conscientes."]
+      ]
+    : [
+        ["Concentration", "Train your ability to direct and sustain your attention."],
+        ["Visualisation", "Create a clearer mental picture of what you want to develop."],
+        ["Mental discipline", "Recognise thought patterns and habits that influence your decisions."],
+        ["Inner stillness", "Practise calm and deliberate reflection."],
+        ["Creative thinking", "Explore new possibilities and translate intentions into conscious action."]
+      ];
+
+  const legacy = spanish
+    ? [
+        ["Napoleon Hill", "Una carta de 1919 publicada bajo su nombre atribuye parte de su éxito a los principios del Master Key System. La autenticidad independiente de esa atribución no está confirmada."],
+        ["Rhonda Byrne", "La creadora de The Secret incluyó una nota sobre el Master Key System y reconoció la importancia de sus ideas para la obra."],
+        ["Terry Crews", "El actor ha hablado públicamente de cómo el libro le ayudó a trabajar la visualización, la contemplación y la concentración."]
+      ]
+    : [
+        ["Napoleon Hill", "A 1919 letter published under his name credits principles from The Master Key System with contributing to his success. The attribution has not been independently authenticated."],
+        ["Rhonda Byrne", "The creator of The Secret included a note about The Master Key System and acknowledged the importance of its ideas to the work."],
+        ["Terry Crews", "The actor has spoken publicly about how the book helped him work on visualisation, contemplation and focus."]
+      ];
+
+  const coaching = spanish
+    ? [
+        "Mi enfoque de coaching es intencionadamente un poco poco convencional. No se trata simplemente de escuchar a alguien decirte cómo vivir, sino de descubrir lo que ya existe en ti, cuestionar formas habituales de pensar y aprender mediante la experiencia directa.",
+        "Combino los principios del Master Key System con ejercicios guiados, meditación, visualización, reflexión y acompañamiento personal. No nos limitamos a hablar de ideas: las ponemos en práctica.",
+        "Te invitaré a pensar de otra manera, explorar tu potencial y asumir una mayor responsabilidad sobre la dirección de tu vida. Tú aportas la voluntad de explorar y practicar; yo aporto estructura, orientación semanal y apoyo para aplicar las enseñanzas a tu vida cotidiana."
+      ]
+    : [
+        "My coaching approach is intentionally a little unorthodox. It is not simply about listening to someone tell you how to live. It is about discovering what is already within you, questioning familiar ways of thinking and learning through direct experience.",
+        "I combine the principles of the Master Key System with guided exercises, meditation, visualisation, reflection and personal mentoring. We don't just discuss ideas — we put them into practice.",
+        "I'll invite you to think differently, explore your potential and take greater responsibility for the direction of your life. You bring the willingness to explore and practise; I bring the structure, weekly guidance and support to help you apply the teachings in everyday life."
+      ];
+
+  const journey = spanish
+    ? "A lo largo de 24 semanas, cada lección prepara el terreno para la siguiente. Mediante estudio, ejercicios prácticos y aplicación constante, desarrollarás tu comprensión paso a paso. No es una promesa de resultados instantáneos: es una invitación a descubrir, practicar y reflexionar."
+    : "Across 24 weeks, each lesson prepares the ground for the next. Through study, practical exercises and consistent application, you will build your understanding step by step. This is not a promise of instant results; it is an invitation to discover, practise and reflect.";
+
+  const closing = spanish
+    ? "24 semanas. 24 lecciones. Una oportunidad para vivir con mayor conciencia, dirección y propósito."
+    : "24 weeks. 24 lessons. An opportunity to live with greater awareness, direction and purpose.";
+
+  const sectionTitle = (en, es) => spanish ? es : en;
+  const list = (items) => items.map(([heading, body]) => `<li><strong>${escapeHtml(heading)}</strong><span>${escapeHtml(body)}</span></li>`).join("");
+  const introHtml = introduction.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("");
+
+  return `<section class="homeTransformationReveal" data-home-section="transformation-reveal" aria-label="${spanish ? "Descubre el viaje" : "Discover the journey"}"><button class="homeTransformationReveal__trigger" type="button" data-transformation-open aria-haspopup="dialog" aria-controls="home-transformation-dialog">${buttonLabel}</button><dialog class="homeTransformationReveal__dialog" id="home-transformation-dialog" aria-labelledby="home-transformation-title"><div class="homeTransformationReveal__aura" aria-hidden="true"></div><button class="homeTransformationReveal__close" type="button" data-transformation-close aria-label="${spanish ? "Cerrar" : "Close"}">×</button><div class="homeTransformationReveal__content"><p class="eyebrow">${sectionTitle("A JOURNEY INTO THE POWER WITHIN", "UN VIAJE HACIA TU INTERIOR")}</p><h2 id="home-transformation-title">${title}</h2>${introHtml}<h3>${sectionTitle("What the 24 lessons explore", "Qué exploran las 24 lecciones")}</h3><ul class="homeTransformationReveal__list">${list(principles)}</ul><h3>${sectionTitle("A legacy that continues to inspire", "Un legado que sigue inspirando")}</h3><p>${sectionTitle("The ideas have travelled beyond the original course and have been discussed by well-known figures in personal development and popular culture:", "Las ideas han trascendido el curso original y han sido comentadas por figuras conocidas del desarrollo personal y la cultura popular:")}</p><ul class="homeTransformationReveal__list homeTransformationReveal__legacy">${list(legacy)}</ul><p class="homeTransformationReveal__note">${sectionTitle("These connections are not all the same: the Hill letter is attributed but unverified, while Byrne and Crews have publicly discussed the book or its ideas.", "Estas conexiones no son idénticas: la carta de Hill se le atribuye, pero no está verificada; Byrne y Crews sí han hablado públicamente del libro o de sus ideas.")}</p><h3>${sectionTitle("A different kind of coaching", "Una forma diferente de acompañamiento")}</h3>${coaching.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}<h3>${sectionTitle("A 24-week journey. One step at a time.", "Un recorrido de 24 semanas. Paso a paso.")}</h3><p>${escapeHtml(journey)}</p><p class="homeTransformationReveal__closing">${escapeHtml(closing)}</p><p class="homeTransformationReveal__download"><a class="button--text" href="/downloads/a-journey-into-the-power-within.pdf" download>${spanish ? "Descargar el PDF" : "Download the PDF"}</a></p><a class="button--primary" href="${escapeHtml(siteData.routes.startFree)}">${spanish ? "Comienza con los 7 días gratuitos" : "Begin with the free 7 days"}</a></div></dialog></section>`;
+}
 function renderHomeBody({ language = "en" } = {}) {
   return `<main class="home">${renderHero(language)}${renderPainPoints(language)}${renderFreeExperience(language)}${renderJourney(language)}${renderTransformationReveal(language)}${renderTestimonials(language)}${renderOffers(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
 }
