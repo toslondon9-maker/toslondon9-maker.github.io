@@ -9632,3 +9632,19 @@ body:has(.resourcesPage) .resourcesPage__affirmations p {
     object-fit: contain !important;
   }
 }
+
+/* Mobile homepage: scale the hero artwork down and centre it cleanly. */
+@media (max-width: 767px) {
+  .home .homeHero__artwork {
+    width: min(92%, 420px) !important;
+    margin-inline: auto !important;
+    border-radius: 14px;
+  }
+  .home .homeHero__artwork img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 2;
+    object-fit: contain !important;
+    object-position: center;
+  }
+}
