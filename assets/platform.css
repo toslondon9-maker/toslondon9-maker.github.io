@@ -9716,7 +9716,10 @@ body:has(.resourcesPage) .resourcesQuotes__filters .resourcesQuotes__filter {
   border-radius: 999px;
   background: #FFFDF7;
   color: #26364A !important;
-  font: 600 .92rem/1.2 inherit;
+  font-family: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  line-height: 1.2;
   white-space: nowrap;
   transition: background-color .18s ease, color .18s ease, border-color .18s ease;
 }
