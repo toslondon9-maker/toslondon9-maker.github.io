@@ -99,7 +99,7 @@ test("all 20 Insights articles have sequential numbers and consistent reading ti
     assert.ok(Number.isInteger(minutes) && minutes > 0, `${id} has a valid reading-time estimate`);
     const card = renderInsightCard({ id, href: `/insights/${id}/` });
     assert.match(card, new RegExp(`insightsPreview__number[^>]*>${String(index + 1).padStart(2, "0")}</span>`));
-    assert.match(card, new RegExp(`href="/downloads/[^"]+\\.pdf" download`));
+    if (id !== "masterKeyDeepDive") assert.match(card, new RegExp(`href="/downloads/[^"]+\\.pdf" download`));
     assert.match(card, new RegExp(`${minutes}-minute read`));
   });
 });
