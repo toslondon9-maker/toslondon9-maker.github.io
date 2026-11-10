@@ -1,4 +1,4 @@
-name: Validate and publish static site
+name: Build, test and deploy Unleash Your Power
 
 on:
   pull_request:
@@ -16,10 +16,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: uyp-static-site-${{ github.ref }}
+  group: github-pages
   cancel-in-progress: false
 
 jobs:
@@ -48,22 +48,27 @@ jobs:
       - name: Build static preview
         run: node tools/build-site.mjs
 
-  publish:
-    name: Build and publish generated static files
-    if: github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
+  deploy:
+    name: Build and deploy GitHub Pages artifact
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Generate static pages for validation
+      - name: Generate static pages
         run: node tools/build-site.mjs --write-public
 
       - name: Run full automated test suite
@@ -72,14 +77,20 @@ jobs:
       - name: Verify deterministic production build
         run: node tools/build-site.mjs --check
 
-      - name: Commit generated site when files changed
+      - name: Build clean production output
         run: |
-          if git diff --quiet; then
-            echo "Generated public files are already up to date."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Build generated static site"
-          git push origin HEAD:main
+          node tools/build-site.mjs
+          mkdir -p dist
+          cp -a .build-preview/. dist/
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload production artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
