@@ -114,7 +114,7 @@ function renderNextStep(language) {
 
 function renderTransformationReveal(language) {
   const spanish = language === "es";
-  const buttonLabel = spanish ? "HAZ CLIC AQUÍ PARA DESCUBRIR TU PROCESO DE CREACIÓN DE 24 SEMANAS" : "CLICK HERE TO DISCOVER YOUR 24-WEEK CREATION PROCESS";
+  const buttonLabel = spanish ? "DESCUBRE EL VIAJE DE 24 SEMANAS DEL SISTEMA DE LA LLAVE MAESTRA" : "EXPLORE THE 24-WEEK MASTER KEY JOURNEY";
   const title = spanish ? "¿Y si el mayor poder que puedes desarrollar ya estuviera dentro de ti?" : "What if the greatest power you could develop was already within you?";
   const paragraphs = spanish ? [
     "Imagina dejar de permitir que tus pensamientos, hábitos, miedos y circunstancias decidan por ti, y empezar a dirigir conscientemente tu atención, tus pensamientos y tus acciones.",
