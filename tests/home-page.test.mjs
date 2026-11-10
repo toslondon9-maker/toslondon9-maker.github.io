@@ -72,7 +72,7 @@ test("the transformation reveal is accessible and avoids instant-result promises
   assert.match(english, /<dialog[^>]+aria-labelledby="home-transformation-title"/);
   assert.match(english, /This is not instant magic or an easy promise/);
   assert.match(english, /24 weeks\. 24 lessons\./);
-  assert.match(spanish, /HAZ CLIC AQUÍ PARA DESCUBRIR TU PROCESO/);
+  assert.match(spanish, /DESCUBRE EL VIAJE DE 24 SEMANAS DEL SISTEMA DE LA LLAVE MAESTRA/);
   assert.match(spanish, /No se trata de magia instantánea/);
 });
 
