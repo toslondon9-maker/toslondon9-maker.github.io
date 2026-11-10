@@ -9,9 +9,24 @@ import { insightsIntroductionPage } from "../src/pages/insights-introduction.mjs
 import { insightsWorldWithinPage } from "../src/pages/insights-world-within.mjs";
 import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage } from "../src/pages/insights-source-article.mjs";
 import { insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage } from "../src/pages/insights-source-article.mjs";
-import { insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage, insightsFoundationRestartPage, insightsFamiliarPage } from "../src/pages/insights-source-article.mjs";
+import { insightsMasterKeyDeepDivePage, insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage, insightsFoundationRestartPage, insightsFamiliarPage } from "../src/pages/insights-source-article.mjs";
 import { siteData } from "../content/site-data.mjs";
 import { articleReadingMinutes, insightsArticles, renderInsightCard } from "../src/insights.mjs";
+
+test("Master Key System deep-dive article is bilingual, indexed and uses Article structured data", () => {
+  const english = insightsMasterKeyDeepDivePage(undefined, "en");
+  const spanish = insightsMasterKeyDeepDivePage(undefined, "es");
+  assert.equal(english.route, siteData.routes.insightsMasterKeyDeepDive);
+  assert.match(english.body, /The Master Key System: Understanding the Power of Thought/);
+  assert.match(english.body, /not an established scientific law/);
+  assert.match(english.body, /A different approach to personal development/);
+  assert.match(english.body, /START YOUR 7 DAYS/);
+  assert.match(spanish.body, /La Ley de la Atracción/);
+  assert.equal(english.structuredData[0]["@type"], "Article");
+  assert.equal(english.structuredData[0].datePublished, "2026-11-10");
+  assert.match(insightsIndexPage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
+  assert.match(homePage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
+});
 
 test("homepage presents the Insights & Guides preview before its final call to action", () => {
   const body = homePage().body;
@@ -64,7 +79,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLawAttraction}"`));
   assert.match(page.body, /data-i18n="insights\.hub\.heading"/);
   assert.match(page.body, /href="\/"[^>]*data-i18n="insights\.hub\.homeLink"/);
-  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 19);
+  assert.equal((page.body.match(/class="insightsPreview__card"/g) ?? []).length, 20);
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsLifeRebuilt}"`));
   assert.match(page.body, new RegExp(`href="${siteData.routes.insightsEnergyAttention}"`));
   assert.equal((page.body.match(/data-i18n="insights\.publicationDate"/g) ?? []).length, 5);

@@ -51,6 +51,7 @@ test("canonical route definitions are locked", () => {
     insightsLifeRebuilt: "/insights/how-i-rebuilt-my-life-from-the-inside-out/",
     insightsFoundationRestart: "/insights/when-life-feels-like-it-has-fallen-apart/",
     insightsFamiliar: "/insights/does-any-of-this-feel-familiar/",
+    insightsMasterKeyDeepDive: "/insights/the-master-key-system-thought-concentration-law-of-attraction/",
     insightsNextLevel: "/insights/your-next-level-starts-with-a-decision/",
     insights: "/insights/",
     insightsPrinciples: "/insights/eight-principles-master-key-system/",

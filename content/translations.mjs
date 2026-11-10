@@ -1940,6 +1940,16 @@ const translations = deepFreeze({
   "studyQuestions.contents": { en: "JUMP TO A LESSON", es: "IR A UNA LECCIÓN" },
   "studyQuestions.part": { en: "Part", es: "Parte" },
   "studyQuestions.sourceNote": { en: "These are Charles F. Haanel’s original study questions and answers. The original 1919 text is in the public domain. Wording and numbering are retained from the supplied study text; historical and philosophical statements are presented as the author wrote them.", es: "Estas son las preguntas y respuestas de estudio originales de Charles F. Haanel. El texto original de 1919 es de dominio público. Se conservan la redacción y la numeración del material de estudio proporcionado; las afirmaciones históricas y filosóficas se presentan tal como las escribió el autor." },
+
+  "insights.masterKeyDeepDive.heading": { en: "The Master Key System: Understanding the Power of Thought, the Law of Attraction and Your Untapped Potential", es: "The Master Key System: comprender el poder del pensamiento, la Ley de la Atracción y tu potencial" },
+  "insights.masterKeyDeepDive.metaTitle": { en: "The Master Key System: Thought, Concentration & the Law of Attraction | Unleash Your Power", es: "The Master Key System: pensamiento, concentración y la Ley de la Atracción | Unleash Your Power" },
+  "insights.masterKeyDeepDive.metaDescription": { en: "Explore Charles F. Haanel's Master Key System in depth: the Law of Attraction, concentration, visualisation, the subconscious mind and a practical 24-week approach to personal development.", es: "Explora en profundidad The Master Key System de Charles F. Haanel: la Ley de la Atracción, la concentración, la visualización, la mente subconsciente y un enfoque práctico de 24 semanas para el desarrollo personal." },
+  "insights.preview.masterKeyDeepDive.category": { en: "MASTER KEY SYSTEM · DEEP DIVE", es: "MASTER KEY SYSTEM · ANÁLISIS EN PROFUNDIDAD" },
+  "insights.preview.masterKeyDeepDive.title": { en: "The Master Key System: The Power of Thought, Concentration and the Law of Attraction", es: "The Master Key System: el poder del pensamiento, la concentración y la Ley de la Atracción" },
+  "insights.preview.masterKeyDeepDive.body": { en: "A deeper look at Haanel's 24 lessons, the philosophy behind the Law of Attraction and practical ways to apply concentration, visualisation and mental discipline.", es: "Un análisis de las 24 lecciones de Haanel, la filosofía detrás de la Ley de la Atracción y formas prácticas de aplicar la concentración, la visualización y la disciplina mental." },
+  "insights.preview.masterKeyDeepDive.action": { en: "READ THE DEEP DIVE", es: "LEER EL ANÁLISIS" },
+  "insights.preview.masterKeyDeepDive.readingTime": { en: "10-minute read", es: "10 minutos de lectura" },
+  "insights.publicationDateMasterKeyDeepDive": { en: "10 November 2026", es: "10 de noviembre de 2026" },
 });
 
 const warnedKeys = new Set();

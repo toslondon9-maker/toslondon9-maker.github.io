@@ -6,9 +6,9 @@ import { bookingCallHref } from "../whatsapp.mjs";
 function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;"); }
 
 export function insightsIndexPage(data = siteData, language = "en") {
-  const routeKeys = { nextLevel: "insightsNextLevel", familiar: "insightsFamiliar", foundationRestart: "insightsFoundationRestart", lifeRebuilt: "insightsLifeRebuilt", energyAttention: "insightsEnergyAttention", howToStudy: "insightsHowToStudy", haanelBiography: "insightsHaanelBiography", powerWithin: "insightsPowerWithin", personalCoaching: "insightsPersonalCoaching", imagineMeditation: "insightsImagineMeditation", foundationDevelopment: "insightsFoundationDevelopment", foundationFirstStep: "insightsFoundationFirstStep", foundationQA: "insightsFoundationQA", people: "insightsPeople", journey: "insightsJourney", lawAttraction: "insightsLawAttraction", introduction: "insightsIntroduction", principles: "insightsPrinciples", worldWithin: "insightsWorldWithin" };
+  const routeKeys = { masterKeyDeepDive: "insightsMasterKeyDeepDive", nextLevel: "insightsNextLevel", familiar: "insightsFamiliar", foundationRestart: "insightsFoundationRestart", lifeRebuilt: "insightsLifeRebuilt", energyAttention: "insightsEnergyAttention", howToStudy: "insightsHowToStudy", haanelBiography: "insightsHaanelBiography", powerWithin: "insightsPowerWithin", personalCoaching: "insightsPersonalCoaching", imagineMeditation: "insightsImagineMeditation", foundationDevelopment: "insightsFoundationDevelopment", foundationFirstStep: "insightsFoundationFirstStep", foundationQA: "insightsFoundationQA", people: "insightsPeople", journey: "insightsJourney", lawAttraction: "insightsLawAttraction", introduction: "insightsIntroduction", principles: "insightsPrinciples", worldWithin: "insightsWorldWithin" };
   const insightsHubOrder = [
-    "nextLevel", "familiar", "foundationRestart", "lifeRebuilt", "energyAttention",
+    "masterKeyDeepDive", "nextLevel", "familiar", "foundationRestart", "lifeRebuilt", "energyAttention",
     "personalCoaching", "foundationDevelopment", "people", "foundationFirstStep", "foundationQA",
     "howToStudy", "haanelBiography", "powerWithin", "imagineMeditation", "journey",
     "lawAttraction", "introduction", "principles", "worldWithin",

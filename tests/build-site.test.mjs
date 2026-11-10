@@ -97,6 +97,7 @@ test("buildSite writes the canonical route tree deterministically", async () => 
       "insights/how-i-rebuilt-my-life-from-the-inside-out/index.html",
       "insights/when-life-feels-like-it-has-fallen-apart/index.html",
       "insights/does-any-of-this-feel-familiar/index.html",
+      "insights/the-master-key-system-thought-concentration-law-of-attraction/index.html",
       "insights/your-next-level-starts-with-a-decision/index.html",
       "insights/index.html",
       "insights/eight-principles-master-key-system/index.html",
