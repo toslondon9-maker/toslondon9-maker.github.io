@@ -28,8 +28,21 @@ test("homepage renders the current coaching headline, hero artwork and primary f
 test("homepage follows the current concise section sequence", () => {
   const html = renderHome({ language: "en" });
   const sections = [...html.matchAll(/<section[^>]+data-home-section="([^"]+)"/g)].map((match) => match[1]);
-  assert.deepEqual(sections, ["hero", "free-experience", "journey", "transformation-reveal", "testimonials", "offers", "why-tariq", "insights", "final-cta"]);
+  assert.deepEqual(sections, ["hero", "pain-points", "free-experience", "journey", "transformation-reveal", "testimonials", "offers", "why-tariq", "insights", "final-cta"]);
   assert.ok(sections.indexOf("insights") < sections.indexOf("final-cta"));
+});
+
+test("homepage places five priority pain points between the hero and free experience", () => {
+  const html = renderHome({ language: "en" });
+  const pains = section(html, "pain-points");
+  assert.ok(pains.length > 0);
+  for (const phrase of ["Scattered focus", "Inconsistent discipline", "Overthinking", "Self-doubt", "Repeating old patterns"]) assert.ok(pains.includes(phrase), phrase);
+  assert.equal((pains.match(/class="homePainPoints__card"/g) ?? []).length, 5);
+  assert.ok(html.indexOf('data-home-section="pain-points"') < html.indexOf('data-home-section="free-experience"'));
+  assert.match(pains, /TRY THE FREE 7-DAY EXPERIENCE/);
+  const spanish = section(renderHome({ language: "es" }), "pain-points");
+  assert.match(spanish, /Falta de concentración/);
+  assert.match(spanish, /Falta de constancia/);
 });
 
 test("free experience presents seven lessons, a workbook and no-purchase reassurance", () => {
