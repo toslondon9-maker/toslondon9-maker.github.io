@@ -3,7 +3,7 @@ import { renderStructuredData } from "./structured-data.mjs";
 import { renderCalendlyCta } from "./conversion-components.mjs";
 
 const releaseAssetVersion = "20261107-study-room-seo-1";
-const platformStyleVersion = "20261109-mobile-performance-nav-fix-1";
+const platformStyleVersion = "20261110-quote-wall-light-ivory-1";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
