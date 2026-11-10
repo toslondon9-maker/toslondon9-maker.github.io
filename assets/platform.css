@@ -9613,3 +9613,22 @@ body:has(.resourcesPage) .resourcesPage__affirmations p {
     flex-wrap: wrap;
   }
 }
+
+
+/* Mobile homepage: keep the hero artwork smaller and precisely centred. */
+@media (max-width: 767px) {
+  .home .homeHero__artwork {
+    width: min(82vw, 400px) !important;
+    max-width: 400px !important;
+    margin-inline: auto !important;
+    justify-self: center !important;
+  }
+  .home .homeHero__artwork img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin-inline: auto !important;
+    object-fit: contain !important;
+  }
+}
