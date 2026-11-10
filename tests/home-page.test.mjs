@@ -70,10 +70,20 @@ test("the transformation reveal is accessible and avoids instant-result promises
   const spanish = section(renderHome({ language: "es" }), "transformation-reveal");
   assert.match(english, /data-transformation-open/);
   assert.match(english, /<dialog[^>]+aria-labelledby="home-transformation-title"/);
-  assert.match(english, /This is not instant magic or an easy promise/);
+  assert.match(english, /This is not a promise of instant results/);
+  assert.match(english, /A 24-week journey/);
+  assert.match(english, /My coaching approach is intentionally a little unorthodox/);
+  assert.match(english, /Napoleon Hill/);
+  assert.match(english, /Rhonda Byrne/);
+  assert.match(english, /Terry Crews/);
+  assert.match(english, /around 1912/);
   assert.match(english, /24 weeks\. 24 lessons\./);
   assert.match(spanish, /HAZ CLIC AQUÍ PARA DESCUBRIR TU PROCESO/);
-  assert.match(spanish, /No se trata de magia instantánea/);
+  assert.match(spanish, /Mi enfoque de coaching es intencionadamente un poco poco convencional/);
+  assert.match(spanish, /Napoleon Hill/);
+  assert.match(spanish, /Rhonda Byrne/);
+  assert.match(spanish, /Terry Crews/);
+  assert.match(spanish, /alrededor de 1912/);
 });
 
 test("homepage testimonials retain the three supplied student experiences and disclosure", () => {

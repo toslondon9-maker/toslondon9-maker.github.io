@@ -9613,3 +9613,43 @@ body:has(.resourcesPage) .resourcesPage__affirmations p {
     flex-wrap: wrap;
   }
 }
+
+
+/* Clear hierarchy for the expanded 24-week transformation reveal. */
+.homeTransformationReveal__content h3{
+  max-width:690px;
+  margin:2rem auto .8rem;
+  color:#102237;
+  font:700 clamp(1.25rem,2.8vw,1.65rem)/1.25 Georgia,serif;
+}
+.homeTransformationReveal__content .homeTransformationReveal__list{
+  display:grid;
+  gap:.75rem;
+  max-width:690px;
+  margin:0 auto 1.25rem;
+  padding:0;
+  list-style:none;
+}
+.homeTransformationReveal__content .homeTransformationReveal__list li{
+  display:grid;
+  gap:.2rem;
+  padding:.8rem 1rem;
+  border-left:3px solid #b88c3b;
+  border-radius:0 .5rem .5rem 0;
+  background:rgba(255,255,255,.58);
+  color:#34465a;
+  font-size:1rem;
+  line-height:1.6;
+}
+.homeTransformationReveal__content .homeTransformationReveal__list li strong{
+  color:#102237;
+  font-family:Georgia,serif;
+}
+.homeTransformationReveal__content .homeTransformationReveal__note{
+  font-size:.88rem!important;
+  font-style:italic;
+}
+@media(max-width:600px){
+  .homeTransformationReveal__content h3{margin-top:1.6rem;font-size:1.25rem}
+  .homeTransformationReveal__content .homeTransformationReveal__list li{padding:.7rem .8rem;font-size:.94rem}
+}
