@@ -19,7 +19,7 @@ test("deployed homepage uses the current bilingual Master Key coaching experienc
   assert.match(home, /data-home-section="free-experience"/);
   assert.match(home, /data-home-section="journey"/);
   assert.match(home, /data-home-section="offers"/);
-  assert.match(home, /data-home-section="next-step"/);
+  assert.match(home, /data-home-section="final-cta"/);
   assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__|data-rsc|_rsc=/);
 });
 
