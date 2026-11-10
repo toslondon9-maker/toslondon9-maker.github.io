@@ -26,7 +26,7 @@ import { insightsIndexPage } from "./pages/insights-index.mjs";
 import { insightsPrinciplesPage } from "./pages/insights-principles.mjs";
 import { insightsIntroductionPage } from "./pages/insights-introduction.mjs";
 import { insightsWorldWithinPage } from "./pages/insights-world-within.mjs";
-import { insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage, insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage, insightsImagineMeditationPage, insightsHaanelBiographyPage, insightsPowerWithinPage, insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage, insightsFoundationRestartPage, insightsFamiliarPage, insightsNextLevelPage } from "./pages/insights-source-article.mjs";
+import { insightsMasterKeyDeepDivePage, insightsJourneyPage, insightsLawAttractionPage, insightsPeoplePage, insightsFoundationDevelopmentPage, insightsFoundationFirstStepPage, insightsFoundationQAPage, insightsPersonalCoachingPage, insightsImagineMeditationPage, insightsHaanelBiographyPage, insightsPowerWithinPage, insightsHowToStudyPage, insightsEnergyAttentionPage, insightsLifeRebuiltPage, insightsFoundationRestartPage, insightsFamiliarPage, insightsNextLevelPage } from "./pages/insights-source-article.mjs";
 
 const routeShells = Object.freeze({
   home: { actionRoute: "startFree" },
@@ -127,6 +127,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.insightsLifeRebuilt]: (data, language = "en") => insightsLifeRebuiltPage(data, language),
   [siteData.routes.insightsFoundationRestart]: (data, language = "en") => insightsFoundationRestartPage(data, language),
   [siteData.routes.insightsFamiliar]: (data, language = "en") => insightsFamiliarPage(data, language),
+  [siteData.routes.insightsMasterKeyDeepDive]: (data, language = "en") => insightsMasterKeyDeepDivePage(data, language),
   [siteData.routes.insightsNextLevel]: (data, language = "en") => insightsNextLevelPage(data, language),
   [siteData.routes.aiMentors]: (data, language = "en") => aiMentorsPage(data, language),
   [siteData.routes.getTheBook]: (data, language = "en") => getTheBookPage(data, language),
