@@ -34,8 +34,8 @@ function renderHero(language) {
 }
 
 function renderPainPoints(language) {
-  const cards = Array.from({ length: 15 }, (_, index) => {
-    const number = index + 1;
+  const featuredPainPoints = [2, 11, 1, 4, 6];
+  const cards = featuredPainPoints.map((number) => {
     const key = `home.pains.${number}`;
     const titleKey = `${key}.title`;
     const impactKey = `${key}.impact`;
@@ -136,7 +136,7 @@ function renderTransformationReveal(language) {
 }
 
 function renderHomeBody({ language = "en" } = {}) {
-  return `<main class="home">${renderHero(language)}${renderFreeExperience(language)}${renderJourney(language)}${renderTransformationReveal(language)}${renderTestimonials(language)}${renderOffers(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
+  return `<main class="home">${renderHero(language)}${renderPainPoints(language)}${renderFreeExperience(language)}${renderJourney(language)}${renderTransformationReveal(language)}${renderTestimonials(language)}${renderOffers(language)}${renderWhyTariq(language)}${renderInsightsPreview({ language, data: siteData, compact: true })}${renderFinalCta(language)}</main>`;
 }
 
 export function renderHome({ language = "en" } = {}) {
