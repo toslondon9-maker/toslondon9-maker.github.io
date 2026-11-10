@@ -38,7 +38,6 @@ test("renderPage escapes metadata, uses the shared shell, and defers module scri
   assert.match(html, /<title>A &quot;title&quot; &amp; &lt;tag&gt;<\/title>/);
   assert.match(html, /<meta name="description" content="A &quot;description&quot; &amp; &lt;tag&gt;">/);
   assert.match(html, /<link rel="stylesheet" href="\/assets\/platform\.css\?v=[^"]+">/);
-  assert.match(html, /<link rel="preload" href="\/images\/power-key-mark\.png" as="image" type="image\/png">/);
   assert.equal((html.match(/rel="preload"/g) ?? []).length, 0);
   assert.match(html, /<header[\s>]/);
   assert.match(html, /<footer[\s>]/);
@@ -142,7 +141,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
   try {
     const result = await buildSite({ outputRoot });
     const pageFiles = result.files.filter((file) => file.endsWith("index.html"));
-    assert.equal(pageFiles.length, 54);
+    assert.equal(pageFiles.length, 55);
 
     const globalPageFiles = pageFiles.filter((file) => [
       "index.html",
@@ -205,6 +204,14 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
         assert.match(page, /data-i18n="insights\.haanelBiography\.metaDescription"/);
         assert.match(page, /"datePublished":"2026-09-19"/);
         assert.match(page, /DOWNLOAD THIS ARTICLE AS A PDF|Download PDF/);
+        continue;
+      }
+
+      if (globalPageFiles[index] === "insights/the-master-key-system-thought-concentration-law-of-attraction/index.html") {
+        assert.match(page, /data-i18n="insights\.masterKeyDeepDive\.metaDescription"/);
+        assert.match(page, /"datePublished":"2026-11-10"/);
+        assert.match(page, /href="\/start-free\/"/);
+        assert.match(page, /"@type":"Article"/);
         continue;
       }
 
