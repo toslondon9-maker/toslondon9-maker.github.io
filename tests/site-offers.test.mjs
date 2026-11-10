@@ -14,7 +14,7 @@ test("deployed homepage uses the current bilingual Master Key coaching experienc
   assert.match(home, /^<!doctype html>/i);
   assert.match(home, /<main class="home">/);
   assert.match(home, /Master Key System Coaching for Focus, Clarity and Personal Growth/);
-  assert.match(home, /GET MY FREE 7-DAY INTRODUCTION/);
+  assert.match(home, /START YOUR 7 DAYS/);
   assert.match(home, /EXPLORE THE METHOD/);
   assert.match(home, /data-home-section="free-experience"/);
   assert.match(home, /data-home-section="journey"/);
