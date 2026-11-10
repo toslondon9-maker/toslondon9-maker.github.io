@@ -9653,3 +9653,30 @@ body:has(.resourcesPage) .resourcesPage__affirmations p {
   .homeTransformationReveal__content h3{margin-top:1.6rem;font-size:1.25rem}
   .homeTransformationReveal__content .homeTransformationReveal__list li{padding:.7rem .8rem;font-size:.94rem}
 }
+
+
+/* Mobile hero artwork: use the supplied portrait programme image at its natural ratio. */
+@media (max-width: 767px) {
+  .home .homeHero__artwork {
+    width: min(100% - 2rem, 520px) !important;
+    margin-inline: auto !important;
+    overflow: hidden;
+  }
+  .home .homeHero__artwork picture,
+  .home .homeHero__artwork img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+  }
+  .home .homeHero__copy {
+    display: block !important;
+    width: min(100% - 2rem, 520px) !important;
+    margin-inline: auto !important;
+  }
+  .home .homeHero__mobileArtworkAction {
+    display: none !important;
+  }
+}
