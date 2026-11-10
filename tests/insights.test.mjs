@@ -92,7 +92,7 @@ test("the Insights hub links the branded collection articles", () => {
   assert.doesNotMatch(page.body, /href="[^"]*undefined[^"]*"/);
 });
 
-test("all 20 Insights articles have sequential numbers, consistent reading times and PDF downloads", () => {
+test("all 20 Insights articles have sequential numbers and consistent reading times, with PDFs where available", () => {
   assert.equal(insightsArticles.length, 20);
   insightsArticles.forEach(([id], index) => {
     const minutes = articleReadingMinutes[id];
