@@ -9761,3 +9761,16 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
     font-size: .86rem;
   }
 }
+
+
+/* Resources: make browser-selected text readable and consistent with the UYP palette. */
+body:has(.resourcesPage) ::selection {
+  background: #E7C979;
+  color: #172B40;
+  text-shadow: none;
+}
+body:has(.resourcesPage) ::-moz-selection {
+  background: #E7C979;
+  color: #172B40;
+  text-shadow: none;
+}
