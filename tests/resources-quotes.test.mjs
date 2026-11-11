@@ -20,6 +20,12 @@ test("Haanel quote catalogue contains source-backed, topic-tagged quotations", (
   }
 });
 
+test("Resources selected text uses readable antique-gold and navy selection colours", async () => {
+  const css = await readFile("assets/platform.css", "utf8");
+  assert.match(css, /body:has\\(\\.resourcesPage\\) ::selection\\s*\\{[^}]*background:\\s*#E7C979;[^}]*color:\\s*#172B40;/s);
+  assert.match(css, /body:has\\(\\.resourcesPage\\) ::-moz-selection\\s*\\{[^}]*background:\\s*#E7C979;[^}]*color:\\s*#172B40;/s);
+});
+
 test("Resources renders the accessible Haanel quote experience without removing existing resource groups", () => {
   const page = resourcesPage(siteData, "en");
   assert.match(page.body, /The Wisdom of Charles F\. Haanel/);
