@@ -509,7 +509,7 @@ test("the source-led Master Key PDF is generated with its illustrated study diag
   assert.ok(pdf.length > 5000);
   assert.equal(pdf.subarray(0, 8).toString(), "%PDF-1.4");
   assert.match(text, /A Source-Led 24-Week Study Companion/);
-  assert.match(text, /A familiar place/);
+  assert.match(text, /Visualising a familiar place/);
   assert.match(text, /Battleship/);
   assert.match(text, /Concentration without strain/);
 });
