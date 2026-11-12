@@ -88,7 +88,7 @@ export function sourceArticlePage({ data, language = "en", id, metaKey, pdf, inc
   return { route: data.routes[routeKey], language, title, description, titleKey: pageTitleKey, descriptionKey: `${metaKey}.metaDescription`, body, structuredData: [{ "@type": "Article", headline: heading, description, datePublished: publicationDate, author: { "@type": "Person", name: "Tariq Saddique" }, publisher: { "@type": "Organization", name: "Unleash Your Power" }, mainEntityOfPage: canonical }], scripts: [] };
 }
 
-export function insightsMasterKeyDeepDivePage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "masterKeyDeepDive", metaKey: "insights.masterKeyDeepDive", sourceMetadata: true }); }
+export function insightsMasterKeyDeepDivePage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "masterKeyDeepDive", metaKey: "insights.masterKeyDeepDive", pdf: "master-key-system-24-week-deep-dive.pdf", sourceMetadata: true }); }
 export function insightsNextLevelPage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "nextLevel", metaKey: "insights.nextLevel", pdf: "your-next-level-starts-with-a-decision.pdf", sourceMetadata: true }); }
 export function insightsFamiliarPage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "familiar", metaKey: "insights.familiar", pdf: "does-any-of-this-feel-familiar.pdf", sourceMetadata: true }); }
 export function insightsJourneyPage(data = siteData, language = "en") { return sourceArticlePage({ data, language, id: "journey", metaKey: "insights.journey", pdf: "master-key-system-24-week-journey.pdf" }); }
