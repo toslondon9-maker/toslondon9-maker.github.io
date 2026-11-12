@@ -14,7 +14,7 @@ The diagrams in this companion are modern UYP study aids. They are not original 
 
 Across the 24 parts, Haanel moves from physical stillness and mental control to relaxation, imagination, concentration, contemplation and the application of what has been studied. The sequence matters: the early exercises prepare the attention used in the later ones.
 
-![A four-stage overview of the 24-week Master Key System course: foundation, visualisation, concentration and contemplation](/images/mks-24-week-progression.svg )
+![A four-stage overview of the 24-week Master Key System course: foundation, visualisation, concentration and contemplation](/images/mks-24-week-progression.svg)
 
 ## Reading Haanel accurately
 
@@ -58,7 +58,7 @@ A modern reader can study the text respectfully without pretending that every cl
 
 **What to notice.** This is an exercise in deliberately withdrawing attention from destructive thought. It should not be read as a command to deny genuine feelings or avoid seeking help when it is needed.
 
-![The first four lessons move from physical stillness to inhibiting thought, relaxation and mental release](/images/mks-weeks-1-4-foundation.svg )
+![The first four lessons move from physical stillness to inhibiting thought, relaxation and mental release](/images/mks-weeks-1-4-foundation.svg)
 
 ### Week 5 — Part Five: Visualising a familiar place
 
@@ -108,7 +108,7 @@ A modern reader can study the text respectfully without pretending that every cl
 
 **What to notice.** Follow Haanel's exact sequence: line, square, circle, point, cone and colour changes. The task is to hold and alter a clear mental image deliberately.
 
-![The visualisation exercises in Parts Five to Ten: place, photograph, friend, battleship, flower and geometric form](/images/mks-weeks-5-10-visualisation.svg )
+![The visualisation exercises in Parts Five to Ten: place, photograph, friend, battleship, flower and geometric form](/images/mks-weeks-5-10-visualisation.svg)
 
 ### Week 11 — Part Eleven: Desire and faith
 
@@ -158,7 +158,7 @@ A modern reader can study the text respectfully without pretending that every cl
 
 **What to notice.** This is Haanel's philosophical position, not a reason to dismiss material needs or blame people for hardship. A careful modern reading can distinguish inner attitude from the real importance of resources, health, security and external circumstances.
 
-![The later lessons move from unity and harmony through insight, repose, concentration and contemplation](/images/mks-weeks-11-24-contemplation.svg )
+![The later lessons move from unity and harmony through insight, repose, concentration and contemplation](/images/mks-weeks-11-24-contemplation.svg)
 
 ### Week 17 — Part Seventeen: Concentration without strain
 
@@ -226,7 +226,7 @@ A modern reader can study the text respectfully without pretending that every cl
 
 ## The progression at a glance
 
-![The four phases of the 24-week study sequence, with the key exercise groups](/images/mks-24-week-progression.svg )
+![The four phases of the 24-week study sequence, with the key exercise groups](/images/mks-24-week-progression.svg)
 
 | Stage | Weeks | Development in the source |
 |---|---:|---|
