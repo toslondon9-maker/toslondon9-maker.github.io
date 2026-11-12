@@ -227,7 +227,7 @@ test("all four MKS stage banners share the approved ivory, ornate gold-key desig
     assert.ok(svg.includes(description));
     assert.match(svg, /linearGradient id="iv"/);
     assert.match(svg, /linearGradient id="au"/);
-    assert.match(svg, /translate\\(205 70\\)/);
+    assert.ok(svg.includes('transform="translate(205 70)"'));
     assert.match(svg, /class="site"/);
     assert.match(svg, /unleashyourpowerwithtariq\\.com/);
   }
