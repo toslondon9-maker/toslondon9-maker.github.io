@@ -18,7 +18,7 @@ test("Master Key System deep-dive article is indexed with translated page metada
   const spanish = insightsMasterKeyDeepDivePage(undefined, "es");
   assert.equal(english.route, siteData.routes.insightsMasterKeyDeepDive);
   assert.match(english.body, /The Master Key System: A Source-Led 24-Week Study Companion/);
-  assert.match(english.body, /no established evidence that affirmations emit special electromagnetic frequencies/);
+  assert.match(english.body, /That evidence does not establish Haanel's metaphysical Law of Attraction/);
   assert.match(english.body, /The 24 weeks, in the order Haanel gives them/);
   assert.match(english.body, /START YOUR 7 DAYS/);
   assert.match(english.body, /master-key-system-24-week-deep-dive\.pdf/);
