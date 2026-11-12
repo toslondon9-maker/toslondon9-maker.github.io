@@ -17,13 +17,13 @@ test("Master Key System deep-dive article is indexed with translated page metada
   const english = insightsMasterKeyDeepDivePage(undefined, "en");
   const spanish = insightsMasterKeyDeepDivePage(undefined, "es");
   assert.equal(english.route, siteData.routes.insightsMasterKeyDeepDive);
-  assert.match(english.body, /The Master Key System: Understanding the Power of Thought/);
-  assert.match(english.body, /not an established scientific law/);
-  assert.match(english.body, /A different approach to personal development/);
+  assert.match(english.body, /The Master Key System: The Real Work Behind 24 Weeks of Mental Transformation/);
+  assert.match(english.body, /no established evidence that an affirmation creates a special electromagnetic frequency/);
+  assert.match(english.body, /The 24-week course: what each part teaches and asks you to practise/);
   assert.match(english.body, /START YOUR 7 DAYS/);
   assert.match(spanish.body, /data-i18n="insights.masterKeyDeepDive.heading"/);
   assert.equal(english.structuredData[0]["@type"], "Article");
-  assert.equal(english.structuredData[0].datePublished, "2026-11-10");
+  assert.equal(english.structuredData[0].datePublished, "2026-11-12");
   assert.match(insightsIndexPage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
   assert.match(homePage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
 });
