@@ -49,7 +49,18 @@ function markdownToHtml(markdown, { skipCtas = false, richMarkdown = false, link
     if (line.trim() === "---") { flushBlocks(); break; }
     if (!line.trim()) { flushBlocks(); continue; }
     if (line.trim().replaceAll("*", "") === "[BOOK YOUR CALL]") { flushBlocks(); continue; }
-    if (/^!\[.*\]\([^\)]+\)$/.test(line.trim())) { flushBlocks(); const match = line.trim().match(/^!\[([^\]]+)\]\(([^\)]+)\)$/); out.push(`<figure class="insightArticle__heroImage"><img src="${escapeHtml(match[2])}" alt="${escapeHtml(match[1])}" width="1280" height="1280" loading="eager" decoding="async"></figure>`); continue; }
+    if (/^!\[.*\]\([^\)]+\)$/.test(line.trim())) {
+      flushBlocks();
+      const match = line.trim().match(/^!\[([^\]]+)\]\(([^\)]+)\)$/);
+      const diagram = match[2].includes("/mks-");
+      const dimensions = match[2].includes("weeks-1-4") ? 'width="1200" height="440"'
+        : match[2].includes("weeks-5-10") ? 'width="1200" height="560"'
+        : match[2].includes("weeks-11-24") ? 'width="1200" height="590"'
+        : 'width="1200" height="620"';
+      const figureClass = diagram ? "insightArticle__diagram" : "insightArticle__heroImage";
+      out.push(`<figure class="${figureClass}"><img src="${escapeHtml(match[2])}" alt="${escapeHtml(match[1])}" ${dimensions} loading="lazy" decoding="async"></figure>`);
+      continue;
+    }
     if (skipCtas && /^\**\[(START YOUR 7 DAYS|START THE FREE SEVEN-DAY EXPERIENCE|EXPLORE THE MASTER KEY SYSTEM|BOOK A FREE 15-MINUTE CALL)\]\**$/.test(line.trim())) { flushBlocks(); continue; }
     if (richMarkdown && /^\|.*\|$/.test(line.trim())) { flushBlocks(); table.push(line.trim().slice(1, -1).split("|").map((cell) => cell.trim())); continue; }
     if (richMarkdown && /^- /.test(line)) { flush(); flushTable(); list.push(line.slice(2).trim()); continue; }
