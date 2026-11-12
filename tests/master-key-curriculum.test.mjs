@@ -219,7 +219,7 @@ test("all four MKS stage banners share the approved ivory, ornate gold-key desig
     ["contemplation-mastery-chapters-19-24.svg", "INTEGRATION &amp; MASTERY", "Chapters 19–24", "Applying the principles for lasting results."],
   ];
   assert.match(fs, /FOUNDATION/);
-  assert.match(fs, /Awareness, truth, thought and the true self\\./);
+  assert.ok(fs.includes("Awareness, truth, thought and the true self."));
   for (const [file, title, chapters, description] of variants) {
     const svg = readFileSync(new URL(`../images/master-key-visuals/${file}`, import.meta.url), "utf8");
     assert.match(svg, new RegExp(title));
