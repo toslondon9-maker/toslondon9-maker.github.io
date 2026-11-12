@@ -221,6 +221,13 @@ That is a meaningful six-month commitment.
 
 The words matter when your actions begin to give them meaning.
 
+## Selected research and reading
+
+- Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W., and Wardle, J. (2010). *How are habits formed: Modelling habit formation in the real world.* European Journal of Social Psychology, 40(6), 998–1009. [https://doi.org/10.1002/ejsp.674](https://doi.org/10.1002/ejsp.674)
+- Zhang, Y., Chen, B., Hu, X., and Wang, M. (2025). *The impact of self-affirmation interventions on well-being: A meta-analysis.* American Psychologist. [https://doi.org/10.1037/amp0001591](https://doi.org/10.1037/amp0001591)
+
+The 2025 meta-analysis reported small positive effects across several wellbeing measures. The research examined varied self-affirmation interventions, often based on reflection on values and personal qualities. It is not direct proof that repeating Haanel’s exact phrases produces the same effects.
+
 ## Start your own seven-day experience
 
 If you would like to explore these principles through guided study, begin with **7 Days to Change the Way You Use Your Mind**.
