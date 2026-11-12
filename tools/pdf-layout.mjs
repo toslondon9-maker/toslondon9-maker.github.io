@@ -132,7 +132,6 @@ function streamForPage(page, pageNumber, total, { brand = false } = {}) {
       const navy = "0.09 0.16 0.24";
       const mid = "0.14 0.23 0.34";
       const gold = "0.71 0.54 0.26";
-      const cream = "0.969 0.953 0.918";
       const drawBox = (x, yy, w, h, fill, label, sub = "") => {
         commands.push(`${fill} rg ${x} ${yy} ${w} ${h} re f`);
         commands.push("BT /F1 8.5 Tf 0.98 0.97 0.93 rg");
