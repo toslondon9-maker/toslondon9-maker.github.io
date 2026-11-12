@@ -30,6 +30,6 @@ test("the 24-week Master Key deep-dive PDF is generated as a branded downloadabl
   assert.match(text, /The Master Key System: A 24-Week Deep Dive/);
   assert.match(text, /Unleash Your Power with Tariq/);
   assert.match(text, /0\.71 0\.54 0\.26 rg/);
-  assert.match(text, /0\\.969 0\\.953 0\\.918 rg/);
+  assert.match(text, /0\.969 0\.953 0\.918 rg/);
   assert.match(text, /neuroplasticity/i);
 });
