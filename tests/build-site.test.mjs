@@ -209,7 +209,7 @@ test("every public route builds with unique metadata, bilingual copy hooks, and 
 
       if (globalPageFiles[index] === "insights/the-master-key-system-thought-concentration-law-of-attraction/index.html") {
         assert.match(page, /data-i18n="insights\.masterKeyDeepDive\.metaDescription"/);
-        assert.match(page, /"datePublished":"2026-11-10"/);
+        assert.match(page, /"datePublished":"2026-11-12"/);
         assert.match(page, /href="\/start-free\/"/);
         assert.match(page, /"@type":"Article"/);
         continue;
