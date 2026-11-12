@@ -59,9 +59,14 @@ function makePages(title, sections) {
     const paragraphs = String(section.body).split(/\n\s*\n/);
     const headingLines = wrap(section.heading, Math.floor((PAGE_WIDTH - (MARGIN_X * 2)) / 7.5));
     const firstParagraphLines = wrap(paragraphs[0]).length;
-    ensure(HEADING_GAP + headingLines.length * HEADING_LEADING + 4 + (firstParagraphLines * BODY_LEADING) + 8);
+    const diagramHeight = section.diagram ? 150 : 0;
+    ensure(HEADING_GAP + headingLines.length * HEADING_LEADING + 4 + (firstParagraphLines * BODY_LEADING) + diagramHeight + 8);
     page.push({ kind: "heading", lines: headingLines });
     used += HEADING_GAP + headingLines.length * HEADING_LEADING + 4;
+    if (section.diagram) {
+      page.push({ kind: "diagram", variant: section.diagram });
+      used += diagramHeight;
+    }
     for (const paragraph of paragraphs) {
       const lines = wrap(paragraph);
       let remaining = lines;
@@ -118,6 +123,42 @@ function streamForPage(page, pageNumber, total, { brand = false } = {}) {
         y -= HEADING_LEADING;
       }
       y -= HEADING_GAP;
+      continue;
+    }
+    if (item.kind === "diagram") {
+      commands.push("ET");
+      const x0 = MARGIN_X;
+      const boxY = y - 102;
+      const navy = "0.09 0.16 0.24";
+      const mid = "0.14 0.23 0.34";
+      const gold = "0.71 0.54 0.26";
+      const drawBox = (x, yy, w, h, fill, label, sub = "") => {
+        commands.push(`${fill} rg ${x} ${yy} ${w} ${h} re f`);
+        commands.push("BT /F1 8.5 Tf 0.98 0.97 0.93 rg");
+        commands.push(`1 0 0 1 ${x + 7} ${yy + h - 17} Tm (${escapePdf(label)}) Tj`);
+        if (sub) {
+          commands.push("/F1 6.8 Tf");
+          commands.push(`1 0 0 1 ${x + 7} ${yy + 12} Tm (${escapePdf(sub)}) Tj`);
+        }
+        commands.push("ET");
+      };
+      if (item.variant === "visualisation") {
+        const labels = [["WEEK 5","Place"],["WEEK 6","Photograph"],["WEEK 7","Friend"],["WEEK 8","Battleship"],["WEEK 9","Flower"],["WEEK 10","Geometric form"]];
+        labels.forEach(([a,b], i) => drawBox(x0 + (i % 3) * 160, boxY - Math.floor(i / 3) * 60, 150, 48, i % 2 ? mid : navy, a, b));
+        y -= 128;
+      } else if (item.variant === "contemplation") {
+        drawBox(x0, boxY - 20, 225, 112, navy, "WEEKS 11-16", "Faith, unity, observation, harmony, insight");
+        drawBox(x0 + 245, boxY - 20, 234, 112, mid, "WEEKS 17-24", "Repose, creation, Silence, Truth, service");
+        y -= 128;
+      } else {
+        const labels = item.variant === "foundation"
+          ? [["01","Stillness"],["02","Inhibit thought"],["03","Relax"],["04","Mental release"]]
+          : [["1-4","Foundation"],["5-10","Visualisation"],["11-16","Application"],["17-24","Contemplation"]];
+        const w = 112;
+        labels.forEach(([a,b], i) => drawBox(x0 + i * 120, boxY, w, 72, i === 3 ? gold : i === 0 ? navy : mid, a, b));
+        y -= 92;
+      }
+      commands.push("BT");
       continue;
     }
     commands.push(brand ? "0.14 0.20 0.28 rg" : "0 0 0 rg");

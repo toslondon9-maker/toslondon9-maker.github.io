@@ -18,7 +18,7 @@ export const insightsArticles = [
   ["journey", "2026-09-10"], ["lawAttraction", "2026-09-10"], ["introduction", "2026-09-10"], ["principles", "2026-09-10"], ["worldWithin", "2026-09-10"],
 ].sort((a, b) => a[1].localeCompare(b[1]) || a[0].localeCompare(b[0]));
 // Estimated from article body length at approximately 220 words per minute.
-export const articleReadingMinutes = Object.freeze({ masterKeyDeepDive: 18, nextLevel: 8, familiar: 6, foundationRestart: 5, lifeRebuilt: 8, energyAttention: 6, howToStudy: 6, haanelBiography: 7, powerWithin: 7, personalCoaching: 6, imagineMeditation: 10, foundationDevelopment: 7, foundationFirstStep: 9, foundationQA: 4, people: 7, journey: 5, lawAttraction: 6, introduction: 4, principles: 5, worldWithin: 4 });
+export const articleReadingMinutes = Object.freeze({ masterKeyDeepDive: 22, nextLevel: 8, familiar: 6, foundationRestart: 5, lifeRebuilt: 8, energyAttention: 6, howToStudy: 6, haanelBiography: 7, powerWithin: 7, personalCoaching: 6, imagineMeditation: 10, foundationDevelopment: 7, foundationFirstStep: 9, foundationQA: 4, people: 7, journey: 5, lawAttraction: 6, introduction: 4, principles: 5, worldWithin: 4 });
 export function articleReadingLabel(id, language = "en") {
   const minutes = articleReadingMinutes[id];
   return t(`insights.preview.${id}.readingTime`, language);

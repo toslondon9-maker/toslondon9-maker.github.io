@@ -9761,3 +9761,9 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
     font-size: .86rem;
   }
 }
+
+
+/* Source-led Master Key study diagrams: preserve the full illustration on mobile and desktop. */
+.insightArticle__diagram{margin:2rem 0 2.5rem;border:1px solid rgba(184,140,59,.35);border-radius:1rem;overflow:hidden;background:#f7f3ea;box-shadow:0 12px 28px rgba(7,24,40,.08)}
+.insightArticle__diagram img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain}
+@media(max-width:640px){.insightArticle__diagram{margin:1.5rem -0.25rem 2rem;border-radius:.75rem}.insightArticle__diagram img{width:100%;height:auto}}
