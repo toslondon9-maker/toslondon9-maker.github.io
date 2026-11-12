@@ -130,6 +130,12 @@ test("buildSite writes the canonical route tree deterministically", async () => 
     assert.match(innerCircle, /rel="canonical" href="https:\/\/unleashyourpowerwithtariq\.com\/inner-circle\/"/);
     assert.match(coaching, /£997/);
     assert.doesNotMatch(home, /__VINEXT_RSC_CHUNKS__/);
+
+    const masterKeyArticle = await readFile(path.join(outputRoot, "insights", "the-master-key-system-thought-concentration-law-of-attraction", "index.html"), "utf8");
+    for (const diagram of ["mks-24-week-progression.svg", "mks-weeks-1-4-foundation.svg", "mks-weeks-5-10-visualisation.svg", "mks-weeks-11-24-contemplation.svg"]) {
+      assert.match(masterKeyArticle, new RegExp(escapeRegExp(diagram)), `Generated Master Key article must publish ${diagram}`);
+    }
+    assert.equal((masterKeyArticle.match(/class="insightArticle__diagram"/g) ?? []).length, 4);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
