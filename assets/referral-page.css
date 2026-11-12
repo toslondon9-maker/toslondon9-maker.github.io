@@ -99,8 +99,8 @@
 
 
 /* KISS partner page: concise, spacious and easy to scan. */
-.partnerPage .referralHero{padding-block:clamp(2.5rem,5vw,4rem)}
-.partnerPage .referralHero h1{max-width:12ch}
+.referralPage[data-partner-page] .referralHero{padding-block:clamp(2.5rem,5vw,4rem)}
+.referralPage[data-partner-page] .referralHero h1{max-width:12ch}
 .partnerKiss{max-width:900px;margin:0 auto;padding:2rem clamp(1.25rem,4vw,3rem);border-left:3px solid #b58a3b;background:rgba(255,253,248,.72)}
 .partnerKiss h2{margin-bottom:.6rem}
 .partnerKiss p,.partnerOffer li,.partnerNote{line-height:1.7;color:#405268}
@@ -112,8 +112,8 @@
 .partnerExample strong{font:700 clamp(1.3rem,3vw,2rem) Georgia,serif;color:#f0c979}
 .partnerExample span{color:#f0c979}
 .partnerReward .partnerNote{color:#e8edf2}
-.partnerPage .affiliateLinkBuilder{margin-top:1.25rem}
-.partnerPage .affiliateApplication{max-width:900px;margin-inline:auto}
-.partnerPage .affiliateApplication form{display:grid;gap:1rem}
-.partnerPage .affiliateApplication__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:640px){.partnerPage .affiliateApplication__grid{grid-template-columns:1fr}.partnerExample{gap:.6rem}}
+.referralPage[data-partner-page] .affiliateLinkBuilder{margin-top:1.25rem}
+.referralPage[data-partner-page] .affiliateApplication{max-width:900px;margin-inline:auto}
+.referralPage[data-partner-page] .affiliateApplication form{display:grid;gap:1rem}
+.referralPage[data-partner-page] .affiliateApplication__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:640px){.referralPage[data-partner-page] .affiliateApplication__grid{grid-template-columns:1fr}.partnerExample{gap:.6rem}}
