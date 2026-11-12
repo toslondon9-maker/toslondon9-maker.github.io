@@ -6,7 +6,7 @@ function escapeHtml(value) {
 }
 
 export const insightsArticles = [
-  ["masterKeyDeepDive", "2026-11-10"],
+  ["masterKeyDeepDive", "2026-11-12"],
   ["nextLevel", "2026-11-06"],
   ["familiar", "2026-11-04"],
   ["foundationRestart", "2026-10-02"],
