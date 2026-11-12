@@ -502,3 +502,14 @@ test("default preview builds remove stale output without cleaning custom destina
     await rm(customRoot, { recursive: true, force: true });
   }
 });
+
+test("the source-led Master Key PDF is generated with its illustrated study diagrams", async () => {
+  const pdf = await readFile(new URL("../downloads/master-key-system-24-week-deep-dive.pdf", import.meta.url));
+  const text = pdf.toString("latin1");
+  assert.ok(pdf.length > 5000);
+  assert.equal(pdf.subarray(0, 8).toString(), "%PDF-1.4");
+  assert.match(text, /A Source-Led 24-Week Study Companion/);
+  assert.match(text, /A familiar place/);
+  assert.match(text, /Battleship/);
+  assert.match(text, /Concentration without strain/);
+});
