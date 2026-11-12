@@ -36,7 +36,7 @@ for (const line of markdown.split(/\r?\n/)) {
   }
   if (line.startsWith("> ")) body.push(line.slice(2));
   else if (line.startsWith("![")) {
-    const match = line.match(/^!\\[([^\\]]+)\\]\\(\\s*(\\/images\\/mks-[^)]+)\\s*\\)$/);
+    const match = line.match(/^!\[([^\]]+)\]\(\s*(\/images\/mks-[^)]+)\s*\)$/);
     if (match) {
       flush();
       heading = "Illustrated study diagram";
