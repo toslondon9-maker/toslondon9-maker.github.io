@@ -31,6 +31,8 @@ test("Master Key System deep-dive article is indexed with translated page metada
   for (const diagram of ["mks-24-week-progression.svg", "mks-weeks-1-4-foundation.svg", "mks-weeks-5-10-visualisation.svg", "mks-weeks-11-24-contemplation.svg"]) assert.match(english.body, new RegExp(diagram));
   assert.match(english.body, /15 to 30 minutes/);
   assert.match(english.body, /line, square, circle, point, cone and colour changes/);
+  assert.match(english.body, /I am whole, perfect, strong, powerful, loving, harmonious and happy/);
+  assert.equal((english.body.match(/class="insightArticle__diagram"/g) ?? []).length, 4);
   assert.match(insightsIndexPage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
   assert.match(homePage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
 });
