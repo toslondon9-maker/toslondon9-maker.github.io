@@ -60,7 +60,7 @@ function initReferral() {
     const values = Object.fromEntries(new FormData(application));
     const recipient = application.dataset.affiliateApplicationEmail || "tariq@unleashyourpowerwithtariq.com";
     const subject = encodeURIComponent("Unleash Your Power affiliate application");
-    const body = encodeURIComponent(`First name: ${values.firstName || ""}\nSurname: ${values.surname || ""}\nEmail: ${values.email || ""}\nWhatsApp: ${values.whatsapp || ""}\nPlatform: ${values.platform || ""}\nOrganisation: ${values.organisation || ""}\nPlan: ${values.plan || ""}`);
+    const body = encodeURIComponent(`Name: ${values.firstName || ""}\\nEmail: ${values.email || ""}\\nPartner type: ${values.partnerType || ""}\\nWebsite / social / community: ${values.platform || ""}\\nIdea: ${values.plan || ""}`);
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
     const applicationStatus = application.querySelector("[data-affiliate-application-status]"); if (applicationStatus) applicationStatus.textContent = "Thank you — your application is ready to send.";
   });
