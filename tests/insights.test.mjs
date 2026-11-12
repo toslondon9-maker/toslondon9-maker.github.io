@@ -27,6 +27,10 @@ test("Master Key System deep-dive article is indexed with translated page metada
   assert.equal(english.structuredData[0].datePublished, "2026-11-12");
   assert.match(english.body, /data-i18n="insights.publicationDateMasterKeyDeepDive"/);
   assert.match(english.body, /The diagrams in this companion are modern UYP study aids/);
+  for (const exercise of ["A familiar place", "The photograph", "Visualising a friend", "Tracing the battleship to its origins", "Visualising a plant", "The geometric drawing", "Desire and faith", "Unity with the Universal", "The individual as part of the whole", "Harmony", "Insight", "Happiness and harmony as states of consciousness", "Concentration without strain", "The power to create", "Sustained concentration and appearances", "The Silence and spiritual unity", "Truth", "Spirit meeting spirit", "The spiritual “I” and service", "The Truth and continued discernment"]) assert.match(english.body, new RegExp(exercise));
+  for (const diagram of ["mks-24-week-progression.svg", "mks-weeks-1-4-foundation.svg", "mks-weeks-5-10-visualisation.svg", "mks-weeks-11-24-contemplation.svg"]) assert.match(english.body, new RegExp(diagram));
+  assert.match(english.body, /15 to 30 minutes/);
+  assert.match(english.body, /line, square, circle, point, cone and colour changes/);
   assert.match(insightsIndexPage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
   assert.match(homePage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
 });
