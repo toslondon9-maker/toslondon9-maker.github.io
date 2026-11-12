@@ -6,7 +6,7 @@
 
 Charles F. Haanel presents *The Master Key System* as a 24-part course, originally studied one part per week. The source edition supplied for this guide advises students not to read the work like a novel: study each part, reread it, reflect on it and practise before moving to the next.
 
-This companion follows that sequence. It is deliberately source-led. Each week separates Haanel's teaching from the exercise he gives and from a short modern reading note. Where the source does not prescribe a new, distinct exercise, that is stated plainly. No new activity is passed off as Haanel's instruction.
+This companion follows that sequence. It is deliberately source-led. Each week separates Haanel's teaching from the exercise he gives and from a short modern reading note. The exercise descriptions are paraphrases of the instructions in the source. No new activity is passed off as Haanel's instruction.
 
 The diagrams in this companion are modern UYP study aids. They are not original Haanel illustrations and do not add new doctrines to the text.
 
@@ -245,7 +245,7 @@ There is a real relationship between mental states and bodily processes. But the
 
 ## What modern research can responsibly add
 
-Modern research supports a limited set of connections: attention can be practised; repeated behaviour in a stable context can become more automatic; learning can change the functioning of neural networks; and self-reflection exercises can have modest effects in some settings.
+Modern research supports a limited set of connections: attention can be practised; repeated behaviour in a stable context can become more automatic; and learning can change the functioning of neural networks, a broad phenomenon often described as neuroplasticity. Some self-affirmation interventions can have modest effects in certain settings. None of this validates Haanel's metaphysical claims.
 
 That evidence does not establish Haanel's metaphysical Law of Attraction, the existence of a Universal Mind, or the claim that thought directly rearranges external events. Nor does it show that affirmations emit special electromagnetic frequencies that attract money, people or circumstances.
 
