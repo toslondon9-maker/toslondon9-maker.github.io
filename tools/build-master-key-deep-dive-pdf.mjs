@@ -44,4 +44,5 @@ writePdf(
   path.join(root, "downloads/master-key-system-24-week-deep-dive.pdf"),
   "The Master Key System: A 24-Week Deep Dive | Unleash Your Power",
   sections,
+  { brand: true },
 );
