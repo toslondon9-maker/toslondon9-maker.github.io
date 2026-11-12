@@ -226,7 +226,6 @@ A modern reader can study the text respectfully without pretending that every cl
 
 ## The progression at a glance
 
-![The four phases of the 24-week study sequence, with the key exercise groups](/images/mks-24-week-progression.svg)
 
 | Stage | Weeks | Development in the source |
 |---|---:|---|
