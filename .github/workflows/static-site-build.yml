@@ -56,7 +56,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
     steps:
@@ -70,6 +70,19 @@ jobs:
 
       - name: Generate static pages
         run: node tools/build-site.mjs --write-public
+
+      - name: Publish generated Master Key article PDF for connected static hosts
+        run: |
+          test -s downloads/master-key-system-24-week-deep-dive.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add downloads/master-key-system-24-week-deep-dive.pdf
+          if git diff --cached --quiet; then
+            echo "Master Key article PDF is already published."
+          else
+            git commit -m "Publish generated Master Key article PDF"
+            git push origin HEAD:main
+          fi
 
       - name: Export generated Master Key article HTML for static-host publishing
         run: |

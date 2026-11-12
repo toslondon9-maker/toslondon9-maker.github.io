@@ -1,4 +1,4 @@
-export const invitation = "I’ve been exploring a 24-week Master Key System programme called Unleash Your Power. There’s 7 Days to Change the Way You Use Your Mind if you want to try it for yourself. No pressure — I just thought you might find it interesting.";
+export const invitation = "I thought you might be interested in Unleash Your Power — a practical way to explore focus, thought and personal development through a free 7-Day Experience. No pressure — just take a look if it speaks to you.";
 export const startFreeUrl = "https://unleashyourpowerwithtariq.com/start-free/";
 export function sanitiseAffiliateCode(value) { return String(value ?? "").trim().replace(/\s+/g, "-").replace(/[^a-zA-Z0-9_-]/g, "").toLowerCase().slice(0, 40); }
 export function buildAffiliateLink(code) { const safe = sanitiseAffiliateCode(code); return safe ? `${startFreeUrl}?ref=${encodeURIComponent(safe)}` : startFreeUrl; }
@@ -60,7 +60,7 @@ function initReferral() {
     const values = Object.fromEntries(new FormData(application));
     const recipient = application.dataset.affiliateApplicationEmail || "tariq@unleashyourpowerwithtariq.com";
     const subject = encodeURIComponent("Unleash Your Power affiliate application");
-    const body = encodeURIComponent(`First name: ${values.firstName || ""}\nSurname: ${values.surname || ""}\nEmail: ${values.email || ""}\nWhatsApp: ${values.whatsapp || ""}\nPlatform: ${values.platform || ""}\nOrganisation: ${values.organisation || ""}\nPlan: ${values.plan || ""}`);
+    const body = encodeURIComponent(`Name: ${values.firstName || ""}\\nEmail: ${values.email || ""}\\nPartner type: ${values.partnerType || ""}\\nWebsite / social / community: ${values.platform || ""}\\nIdea: ${values.plan || ""}`);
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
     const applicationStatus = application.querySelector("[data-affiliate-application-status]"); if (applicationStatus) applicationStatus.textContent = "Thank you — your application is ready to send.";
   });
