@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: github-pages
@@ -71,15 +71,11 @@ jobs:
       - name: Generate static pages
         run: node tools/build-site.mjs --write-public
 
-      - name: Commit generated Master Key article HTML for the connected static host
+      - name: Export generated Master Key article HTML for static-host publishing
         run: |
-          git add -- insights/the-master-key-system-thought-concentration-law-of-attraction/index.html
-          if ! git diff --cached --quiet; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "chore: publish generated Master Key article HTML"
-            git push
-          fi
+          echo "UYP_MASTER_KEY_HTML_BEGIN"
+          cat insights/the-master-key-system-thought-concentration-law-of-attraction/index.html
+          echo "UYP_MASTER_KEY_HTML_END"
 
       - name: Run full automated test suite
         run: node --test tests/*.test.mjs
