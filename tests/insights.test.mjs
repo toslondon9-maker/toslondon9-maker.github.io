@@ -21,7 +21,7 @@ test("Master Key System deep-dive article is indexed with translated page metada
   assert.match(english.body, /no established evidence that an affirmation creates a special electromagnetic frequency/);
   assert.match(english.body, /The 24-week course: what each part teaches and asks you to practise/);
   assert.match(english.body, /START YOUR 7 DAYS/);
-  assert.match(english.body, /master-key-system-24-week-deep-dive\\.pdf/);
+  assert.match(english.body, /master-key-system-24-week-deep-dive\.pdf/);
   assert.match(spanish.body, /data-i18n="insights.masterKeyDeepDive.heading"/);
   assert.equal(english.structuredData[0]["@type"], "Article");
   assert.equal(english.structuredData[0].datePublished, "2026-11-12");
