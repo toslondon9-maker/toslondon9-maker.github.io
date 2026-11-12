@@ -94,7 +94,7 @@ A modern reader can study the text respectfully without pretending that every cl
 
 ### Week 9 — Part Nine: Visualising a plant
 
-**Haanel's teaching.** Part Nine continues the development of concentration through a detailed image. Haanel uses the growth of a plant to illustrate the process by which something develops from an unseen beginning into a visible form.
+**Haanel's teaching.** Part Nine continues the development of concentration through a detailed image. Haanel uses the growth of a plant to illustrate the process by which something develops from an unseen beginning into a visible form. In this part he also gives the affirmation “I am whole, perfect, strong, powerful, loving, harmonious and happy.” He presents it as an expression of spiritual Truth and claims it will bring harmonious conditions; that is Haanel's metaphysical claim, not a scientifically demonstrated effect of repeating the sentence.
 
 **The original exercise.** Choose a flower you admire. Visualise the seed being planted, watered and placed where it receives the morning sun. Follow the roots as they extend, the stem as it rises, the branches and leaves as they form, and the bud as it opens into the flower. Haanel even asks the student to become conscious of the imagined fragrance.
 
