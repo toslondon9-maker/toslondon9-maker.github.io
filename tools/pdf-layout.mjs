@@ -24,6 +24,7 @@ function ascii(value) {
     .replaceAll("—", "-")
     .replaceAll("…", "...")
     .replaceAll("•", "-")
+    .replaceAll("→", "->")
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "");
 }
