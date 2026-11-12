@@ -47,7 +47,7 @@ export const siteData = deepFreeze({
       "/insights/how-i-rebuilt-my-life-from-the-inside-out/": "2026-09-30",
       "/insights/when-life-feels-like-it-has-fallen-apart/": "2026-10-02",
       "/insights/does-any-of-this-feel-familiar/": "2026-11-04",
-      "/insights/the-master-key-system-thought-concentration-law-of-attraction/": "2026-11-10",
+      "/insights/the-master-key-system-thought-concentration-law-of-attraction/": "2026-11-12",
       "/insights/your-next-level-starts-with-a-decision/": "2026-11-06",
       "/foundation/": "2026-09-26",
       "/insights/eight-principles-master-key-system/": "2026-09-09",
