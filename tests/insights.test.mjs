@@ -25,6 +25,8 @@ test("Master Key System deep-dive article is indexed with translated page metada
   assert.match(spanish.body, /data-i18n="insights.masterKeyDeepDive.heading"/);
   assert.equal(english.structuredData[0]["@type"], "Article");
   assert.equal(english.structuredData[0].datePublished, "2026-11-12");
+  assert.match(english.body, /data-i18n="insights.publicationDateMasterKeyDeepDive"/);
+  assert.match(english.body, /supplied edition as its primary source/);
   assert.match(insightsIndexPage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
   assert.match(homePage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
 });
