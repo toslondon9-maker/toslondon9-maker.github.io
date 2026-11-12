@@ -9761,3 +9761,180 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
     font-size: .86rem;
   }
 }
+
+
+/* Resources: make browser-selected text readable and consistent with the UYP palette. */
+body:has(.resourcesPage) ::selection {
+  background: #E7C979;
+  color: #172B40;
+  text-shadow: none;
+}
+body:has(.resourcesPage) ::-moz-selection {
+  background: #E7C979;
+  color: #172B40;
+  text-shadow: none;
+}
+
+
+/* UYP Quote Wall: complete branded presentation, with clear hierarchy and contrast. */
+body:has(.resourcesPage) .resourcesQuotes__wall {
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(177, 133, 48, .45);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #F8F1E5 0%, #F1E5D0 100%);
+  color: #172B40 !important;
+  box-shadow: 0 16px 38px rgba(8, 24, 39, .2);
+}
+body:has(.resourcesPage) .resourcesQuotes__wallHeader {
+  display: grid;
+  grid-template-columns: minmax(220px, .9fr) minmax(0, 1.5fr);
+  align-items: center;
+  gap: 1.25rem 2rem;
+  margin-bottom: 1.4rem;
+}
+body:has(.resourcesPage) .resourcesQuotes__wallHeader .eyebrow {
+  margin: 0 0 .45rem;
+  color: #89621F !important;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-shadow: none !important;
+}
+body:has(.resourcesPage) .resourcesQuotes__wallHeader h3 {
+  margin: 0;
+  color: #172B40 !important;
+  font-size: clamp(1.45rem, 2.3vw, 2rem);
+  line-height: 1.18;
+  letter-spacing: -.025em;
+  text-shadow: none !important;
+}
+body:has(.resourcesPage) .resourcesQuotes__filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: .55rem;
+}
+body:has(.resourcesPage) .resourcesQuotes__filters .resourcesQuotes__filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.55rem;
+  padding: .55rem .95rem;
+  border: 1px solid #C69A45;
+  border-radius: 999px;
+  background: #FFFCF6;
+  color: #172B40 !important;
+  font-family: inherit;
+  font-size: .9rem;
+  font-weight: 650;
+  line-height: 1.15;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(23, 43, 64, .06);
+  transition: background-color .18s ease, color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+body:has(.resourcesPage) .resourcesQuotes__filters .resourcesQuotes__filter[aria-pressed="true"] {
+  border-color: #B88935;
+  background: #D8B363;
+  color: #172B40 !important;
+  box-shadow: 0 3px 9px rgba(23, 43, 64, .12);
+}
+body:has(.resourcesPage) .resourcesQuotes__filters .resourcesQuotes__filter:hover {
+  border-color: #B88935;
+  background: #E8D2A4;
+  color: #172B40 !important;
+  transform: translateY(-1px);
+}
+body:has(.resourcesPage) .resourcesQuotes__filters .resourcesQuotes__filter:focus-visible {
+  outline: 3px solid #80628B;
+  outline-offset: 3px;
+}
+body:has(.resourcesPage) .resourcesQuotes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+body:has(.resourcesPage) .resourcesQuotes__card {
+  min-width: 0;
+  padding: clamp(1.1rem, 1.8vw, 1.5rem);
+  border: 1px solid rgba(177, 133, 48, .28);
+  border-radius: 15px;
+  background: #FFFCF6;
+  color: #172B40 !important;
+  box-shadow: 0 5px 16px rgba(23, 43, 64, .07);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+body:has(.resourcesPage) .resourcesQuotes__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(23, 43, 64, .11);
+}
+body:has(.resourcesPage) .resourcesQuotes__card blockquote,
+body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__reflection,
+body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
+  color: #24364A !important;
+  text-shadow: none !important;
+}
+body:has(.resourcesPage) .resourcesQuotes__card blockquote {
+  margin: 0 0 1rem;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  font-weight: 500;
+}
+body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__reflection {
+  font-size: .92rem;
+  line-height: 1.5;
+}
+body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
+  font-size: .78rem;
+  line-height: 1.45;
+  opacity: .82;
+}
+body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__tag {
+  display: inline-block;
+  margin: .25rem .3rem 0 0;
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  background: #F1E5D0;
+  color: #76541E;
+  font-size: .72rem;
+  font-weight: 700;
+}
+body:has(.resourcesPage) .resourcesQuotes__wall ::selection {
+  background: #E7C979;
+  color: #172B40;
+  text-shadow: none;
+}
+@media (max-width: 900px) {
+  body:has(.resourcesPage) .resourcesQuotes__wallHeader {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  body:has(.resourcesPage) .resourcesQuotes__filters {
+    justify-content: flex-start;
+  }
+  body:has(.resourcesPage) .resourcesQuotes__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  body:has(.resourcesPage) .resourcesQuotes__wall {
+    padding: 1rem;
+    border-radius: 15px;
+  }
+  body:has(.resourcesPage) .resourcesQuotes__filters {
+    gap: .45rem;
+  }
+  body:has(.resourcesPage) .resourcesQuotes__filters .resourcesQuotes__filter {
+    min-height: 2.35rem;
+    padding: .45rem .75rem;
+    font-size: .84rem;
+  }
+  body:has(.resourcesPage) .resourcesQuotes__grid {
+    grid-template-columns: 1fr;
+    gap: .8rem;
+  }
+  body:has(.resourcesPage) .resourcesQuotes__card {
+    padding: 1.1rem;
+  }
+}
