@@ -35,7 +35,20 @@ for (const line of markdown.split(/\r?\n/)) {
     continue;
   }
   if (line.startsWith("> ")) body.push(line.slice(2));
-  else if (line.startsWith("![") || line.startsWith("**SEO title:**") || line.startsWith("**Meta description:**") || line.startsWith("**Suggested excerpt:**")) continue;
+  else if (line.startsWith("![")) {
+    const match = line.match(/^!\\[([^\\]]+)\\]\\(\\s*(\\/images\\/mks-[^)]+)\\s*\\)$/);
+    if (match) {
+      flush();
+      heading = "Illustrated study diagram";
+      const variant = match[2].includes("weeks-1-4") ? "foundation"
+        : match[2].includes("weeks-5-10") ? "visualisation"
+        : match[2].includes("weeks-11-24") ? "contemplation"
+        : "progression";
+      sections.push({ heading: match[1], body: "A visual summary of the source sequence.", diagram: variant });
+      heading = "";
+    }
+  }
+  else if (line.startsWith("**SEO title:**") || line.startsWith("**Meta description:**") || line.startsWith("**Suggested excerpt:**")) continue;
   else body.push(line);
 }
 flush();
