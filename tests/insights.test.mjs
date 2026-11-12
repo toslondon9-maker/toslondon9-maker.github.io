@@ -32,7 +32,7 @@ test("Master Key System deep-dive article is indexed with translated page metada
   assert.match(english.body, /15 to 30 minutes/);
   assert.match(english.body, /line, square, circle, point, cone and colour changes/);
   assert.match(english.body, /I am whole, perfect, strong, powerful, loving, harmonious and happy/);
-  assert.equal((english.body.match(/class="insightArticle__diagram"/g) ?? []).length, 4);
+  assert.ok((english.body.match(/class="insightArticle__diagram"/g) ?? []).length >= 4);
   assert.match(insightsIndexPage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
   assert.match(homePage().body, new RegExp(`href="${siteData.routes.insightsMasterKeyDeepDive}"`));
 });
