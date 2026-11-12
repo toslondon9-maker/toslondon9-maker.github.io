@@ -1948,6 +1948,7 @@ const translations = deepFreeze({
   "insights.preview.masterKeyDeepDive.title": { en: "The Master Key System: The Real Work Behind 24 Weeks of Mental Transformation", es: "The Master Key System: el verdadero trabajo detrás de 24 semanas de transformación mental" },
   "insights.preview.masterKeyDeepDive.body": { en: "A source-led guide to every lesson, its exercises, affirmation practice and what modern science can realistically say about mental change.", es: "Una guía basada en la fuente sobre cada lección, sus ejercicios, las afirmaciones y lo que la ciencia actual puede afirmar sobre el cambio mental." },
   "insights.preview.masterKeyDeepDive.action": { en: "READ THE DEEP DIVE", es: "LEER EL ANÁLISIS" },
+  "insights.preview.masterKeyDeepDive.pdfAction": { en: "Download PDF", es: "Descargar PDF" },
   "insights.preview.masterKeyDeepDive.readingTime": { en: "18-minute read", es: "18 minutos de lectura" },
   "insights.publicationDateMasterKeyDeepDive": { en: "12 November 2026", es: "12 de noviembre de 2026" },
 });
