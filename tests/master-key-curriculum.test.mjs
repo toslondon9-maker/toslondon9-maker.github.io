@@ -209,3 +209,26 @@ test("AI prompt previews keep readable mobile styling and toggle their symbol", 
   assert.match(css, /\.aiMasteryPrompt\[open\] summary b::before\s*\{[\s\S]*content:\s*["']−["']/s);
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.aiMasteryPrompt pre\s*\{[\s\S]*white-space:\s*pre-wrap/s);
 });
+
+
+test("all four MKS stage banners share the approved ivory, ornate gold-key design and stage-specific copy", () => {
+  const fs = readFileSync(new URL("../images/master-key-visuals/foundation-chapters-1-4.svg", import.meta.url), "utf8");
+  const variants = [
+    ["visualisation-chapters-5-11.svg", "VISUALISATION", "Chapters 5–11", "The creative power of imagination."],
+    ["concentration-chapters-12-18.svg", "CONCENTRATION", "Chapters 12–18", "Focus, control and the power of attention."],
+    ["contemplation-mastery-chapters-19-24.svg", "INTEGRATION &amp; MASTERY", "Chapters 19–24", "Applying the principles for lasting results."],
+  ];
+  assert.match(fs, /FOUNDATION/);
+  assert.ok(fs.includes("Awareness, truth, thought and the true self."));
+  for (const [file, title, chapters, description] of variants) {
+    const svg = readFileSync(new URL(`../images/master-key-visuals/${file}`, import.meta.url), "utf8");
+    assert.match(svg, new RegExp(title));
+    assert.ok(svg.includes(chapters));
+    assert.ok(svg.includes(description));
+    assert.match(svg, /linearGradient id="iv"/);
+    assert.match(svg, /linearGradient id="au"/);
+    assert.ok(svg.includes('transform="translate(205 70)"'));
+    assert.match(svg, /class="site"/);
+    assert.match(svg, /unleashyourpowerwithtariq\\.com/);
+  }
+});
