@@ -109,7 +109,7 @@ const translations = deepFreeze({
   "podcasts.firstLabel": { en: "THE INTEGRATED SUCCESS FORMULA SHOW", es: "THE INTEGRATED SUCCESS FORMULA SHOW" },
   "podcasts.firstTitle": { en: "Master Your Mind. Transform Your Life.", es: "Domina tu mente. Transforma tu vida." },
   "podcasts.firstDescription": { en: "Tariq joins host Muhammad Yousaf for a conversation about the power of the mind, the Master Key System, focus and mental discipline. This is the first podcast appearance featured by Unleash Your Power.", es: "Tariq conversa con el presentador Muhammad Yousaf sobre el poder de la mente, el Master Key System, la concentración y la disciplina mental. Esta es la primera aparición en podcast destacada por Unleash Your Power." },
-  "podcasts.host": { en: "Hosted by Muhammad Yousaf, who has conducted more than 200 podcast interviews.", es: "Presentado por Muhammad Yousaf, que ha realizado más de 200 entrevistas de podcast." },
+  "podcasts.host": { en: "Hosted by Muhammad Yousaf, who has conducted more than 200 podcast interviews, with previous guests including an attorney connected to Donald Trump’s X-related legal matters.", es: "Presentado por Muhammad Yousaf, que ha realizado más de 200 entrevistas de podcast y ha conversado con invitados como un abogado relacionado con asuntos legales de Donald Trump y X." },
   "podcasts.watchCta": { en: "Watch the interview on LinkedIn", es: "Ver la entrevista en LinkedIn" },
   "podcasts.topicsEyebrow": { en: "WHAT WE EXPLORE", es: "TEMAS QUE EXPLORAMOS" },
   "podcasts.topicsHeading": { en: "Ideas worth putting into practice", es: "Ideas que merece la pena poner en práctica" },
