@@ -115,3 +115,44 @@
 .referralPage[data-partner-page] .affiliateApplication form{display:grid;gap:1rem}
 .referralPage[data-partner-page] .affiliateApplication__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:640px){.referralPage[data-partner-page] .affiliateApplication__grid{grid-template-columns:1fr}.partnerExample{gap:.6rem}}
+
+
+/* Mobile partner enquiry: keep every control inside the form card. */
+.referralPage[data-partner-page] .affiliateApplication,
+.referralPage[data-partner-page] .affiliateApplication form,
+.referralPage[data-partner-page] .affiliateApplication__grid,
+.referralPage[data-partner-page] .affiliateApplication label {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+.referralPage[data-partner-page] .affiliateApplication form {
+  width: 100%;
+}
+.referralPage[data-partner-page] .affiliateApplication input,
+.referralPage[data-partner-page] .affiliateApplication select,
+.referralPage[data-partner-page] .affiliateApplication textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font: inherit;
+}
+.referralPage[data-partner-page] .affiliateApplication label {
+  overflow-wrap: anywhere;
+}
+.referralPage[data-partner-page] .affiliateApplication__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 640px) {
+  .referralPage[data-partner-page] .affiliateApplication {
+    padding: 1rem;
+  }
+  .referralPage[data-partner-page] .affiliateApplication form {
+    padding: 1rem;
+  }
+  .referralPage[data-partner-page] .affiliateApplication__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
