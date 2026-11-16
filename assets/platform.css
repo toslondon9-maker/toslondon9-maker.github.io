@@ -8273,7 +8273,7 @@ html {
 .coachingPricing__stage .button--secondary,
 .coachingPricing__complete .button--primary,
 .coachingProfessionalService .button--text { margin-top: auto; align-self: flex-start; }
-.coachingPricing__price { margin: 0; font-size: 1.15rem; }
+.coachingPricing__price { margin: 0; font-size: 1.05rem; }
 .coachingPricing__complete { grid-column: span 2; gap: .55rem; padding: clamp(1.2rem, 2.5vw, 1.6rem); border-color: var(--gold); border-radius: 1.15rem; background: var(--night); box-shadow: 0 14px 30px rgb(7 21 37 / 18%); }
 .coachingPricing__complete h3,
 .coachingPricing__complete p,
