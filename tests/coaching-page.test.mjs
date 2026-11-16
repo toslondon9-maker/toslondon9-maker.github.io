@@ -82,13 +82,13 @@ test("coaching keeps the complete purchase clear and the Foundation balance seco
   const english = renderCoaching({ language: "en", siteData });
   const spanish = renderCoaching({ language: "es", siteData });
   for (const html of [english, spanish]) {
-    assert.match(html, /class="coachingPricing__price"><strong><span data-i18n="pricing\.complete">£997 \/ €1,167<\/span><\/strong><\/p><a class="button--primary"[^>]*>\s*<span data-i18n="coaching\.pricing\.completePurchase">(?:PAY NOW|PAGAR AHORA)<\/span>/);
+    assert.match(html, /class="coachingPricing__price"><strong><span data-i18n="pricing\.complete">£997<\/span><\/strong><\/p><a class="button--primary"[^>]*>\s*<span data-i18n="coaching\.pricing\.completePurchase">(?:PAY NOW|PAGAR AHORA)<\/span>/);
     assert.match(html, /data-i18n="coaching\.pricing\.completePurchase"/);
-    assert.doesNotMatch(html, /£191 \/ €223|saving £191|ahorro £191/);
-    assert.doesNotMatch(html, /£1,188 \/ €1,390|£1\.188 \/ €1\.390/);
+    assert.doesNotMatch(html, /£191|saving £191|ahorro £191/);
+    assert.doesNotMatch(html, /£1,188|£1\.188 \/ €1\.390/);
     assert.match(html, /class="coachingPricing__balanceCallout"/);
-    assert.match(html, /£900 \/ €1,053/);
-    assert.match(html, /GBP is the payment currency|El pago se realiza en GBP/);
+    assert.match(html, /£900/);
+    assert.match(html, /All prices are shown in GBP|Todos los precios se muestran en GBP/);
   }
   assert.match(english, /href="https:\/\/www\.paypal\.com\/ncp\/payment\/JW7JRY5GTRTA6"/);
   assert.match(english, /data-i18n="coaching\.pricing\.completePurchase"/);
