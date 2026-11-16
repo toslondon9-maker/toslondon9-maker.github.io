@@ -43,6 +43,15 @@ test("the partner enquiry stays lightweight and supports all three partner types
   assert.match(page.body, /Bespoke campaigns, paid advertising or custom marketing work are discussed separately/);
 });
 
+
+test("the partner enquiry form controls stay within the card on narrow mobile screens", async () => {
+  const styles = await readFile(new URL("../assets/referral-page.css", import.meta.url), "utf8");
+  assert.match(styles, /\.referralPage\[data-partner-page\].*\.affiliateApplication input[\s\S]*?width:\s*100%/);
+  assert.match(styles, /\.referralPage\[data-partner-page\].*\.affiliateApplication select[\s\S]*?min-width:\s*0/);
+  assert.match(styles, /box-sizing:\s*border-box/);
+  assert.match(styles, /grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+});
+
 test("existing referral tracking keeps sanitised personal codes", async () => {
   const source = await import("../assets/referral.mjs");
   assert.equal(source.sanitiseAffiliateCode("John Smith"), "john-smith");
