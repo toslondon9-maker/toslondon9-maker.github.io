@@ -35,8 +35,6 @@
 .affiliateReward__benefits h3,.affiliateReward__examples h3{color:var(--cream)}
 .affiliateReward__benefits p,.affiliateReward__examples article>p:not(.eyebrow){color:#d6dfe7}
 .affiliateReward__amount{color:#e5c17b!important;font:700 1.65rem Georgia,serif}
-.affiliateReward__summary{margin-top:2rem;padding:1.25rem;border:1px solid rgba(224,189,119,.4);border-radius:1rem;background:rgba(255,255,255,.06);color:#e5eaf0}
-.affiliateReward__summary h3{color:#e5c17b}
 .referralWhy{padding-top:4rem}
 .referralReasons p{padding:1rem 1.1rem;border:1px solid rgba(181,138,59,.35);border-radius:.8rem;background:rgba(255,253,248,.62);font-weight:600}
 .referralInvite{margin-top:2rem;border:1px solid #c8a565;background:linear-gradient(145deg,#fffdf8,#f4ead7)}
