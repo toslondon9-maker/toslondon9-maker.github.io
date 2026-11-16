@@ -13,6 +13,7 @@ import { resourcesStudyQuestionsPage } from "./pages/resources-study-questions.m
 import { resourcesAudioPage } from "./pages/resources-audio.mjs";
 import { getTheBookPage } from "./pages/get-the-book.mjs";
 import { aboutTariqPage } from "./pages/about-tariq.mjs";
+import { podcastsPage } from "./pages/podcasts.mjs";
 import { aiMentorsPage } from "./pages/ai-mentors.mjs";
 import { contactPage } from "./pages/contact.mjs";
 import { sessionHubPage } from "./pages/session-hub.mjs";
@@ -132,6 +133,7 @@ export const routeRenderers = Object.freeze({
   [siteData.routes.aiMentors]: (data, language = "en") => aiMentorsPage(data, language),
   [siteData.routes.getTheBook]: (data, language = "en") => getTheBookPage(data, language),
   [siteData.routes.aboutTariq]: (data, language = "en") => aboutTariqPage(data, language),
+  [siteData.routes.podcasts]: (data, language = "en") => podcastsPage(data, language),
   [siteData.routes.contact]: (data, language = "en") => contactPage(data, language),
   [siteData.routes.liveCoaching]: (data, language = "en") => sessionHubPage(data, language),
   [siteData.routes.referral]: (data) => referralPage(data),

@@ -8,6 +8,7 @@ const headerNavigationItems = Object.freeze([
   { route: siteData.routes.aiMentors, key: "nav.aiMentors" },
   { route: siteData.routes.coaching, key: "nav.coaching" },
   { route: siteData.routes.aboutTariq, key: "nav.aboutTariq" },
+  { route: siteData.routes.podcasts, key: "nav.podcasts" },
   { route: siteData.routes.resources, key: "nav.resources" },
   { route: siteData.routes.referral, key: "nav.referral" },
   { route: siteData.routes.getTheBook, key: "nav.getTheBook", className: "navBook" },
