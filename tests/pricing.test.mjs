@@ -13,31 +13,31 @@ import { startFreePage } from "../src/pages/start-free.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const approved = {
-  foundation: ["£97", "€114"],
-  visualisation: ["£197", "€231"],
-  concentration: ["£397", "€465"],
-  mastery: ["£497", "€582"],
-  complete: ["£997", "€1,167"],
-  separate: ["£1,188", "€1,390"],
-  foundingSaving: ["£191", "€223"],
-  balance: ["£900", "€1,053"],
-  masteryCircle: ["£3,000–£5,000", "€3,510–€5,850"],
-  privateMentoring: ["£7,500–£15,000", "€8,776–€17,551"],
-  alumni: ["£49/month", "€57/month"],
-  corporate: ["From £5,000", "from €5,850"],
+  foundation: ["£97"],
+  visualisation: ["£197"],
+  concentration: ["£397"],
+  mastery: ["£497"],
+  complete: ["£997"],
+  separate: ["£1,188"],
+  foundingSaving: ["£191"],
+  balance: ["£900"],
+  masteryCircle: ["£3,000–£5,000"],
+  privateMentoring: ["£7,500–£15,000"],
+  alumni: ["£49/month"],
+  corporate: ["From £5,000"],
 };
 
 test("canonical pricing catalogue contains every approved GBP/EUR pair", () => {
   assert.deepEqual(Object.keys(pricing).sort(), Object.keys(approved).sort());
-  for (const [key, [gbp, eur]] of Object.entries(approved)) {
+  for (const [key, [gbp]] of Object.entries(approved)) {
     assert.equal(pricing[key].gbp, gbp);
-    assert.match(pricing[key].en, new RegExp(`${escapeRegExp(gbp)}.*${escapeRegExp(eur)}`));
-    assert.match(pricing[key].es, new RegExp(`${escapeRegExp(gbp.replace("From ", ""))}.*${escapeRegExp(eur.replace("from ", ""))}`));
+    assert.equal(pricing[key].en, gbp);
+    assert.equal(pricing[key].es, key === "corporate" ? "Desde £5,000" : gbp);
   }
-  assert.match(pricingNote.en, /GBP is the payment currency/);
-  assert.match(pricingNote.en, /EUR figures are indicative/);
-  assert.match(pricingNote.es, /El pago se realiza en GBP/);
-  assert.match(pricingNote.es, /cifras en EUR son orientativas/);
+  assert.match(pricingNote.en, /All prices are shown in GBP/);
+  
+  assert.match(pricingNote.es, /Todos los precios se muestran en GBP/);
+  
   for (const value of Object.values(pricing)) {
     assert.doesNotMatch(value.en, /approximately/);
     assert.doesNotMatch(value.es, /aproximadamente/);
@@ -56,8 +56,8 @@ test("public paid routes render every approved price in both languages and keep 
     assert.doesNotMatch(english, new RegExp(escapeRegExp(pricing[hidden].en)));
     assert.doesNotMatch(spanish, new RegExp(escapeRegExp(pricing[hidden].es)));
   }
-  assert.match(english, /GBP is the payment currency/);
-  assert.match(spanish, /El pago se realiza en GBP/);
+  assert.match(english, /All prices are shown in GBP/);
+  assert.match(spanish, /Todos los precios se muestran en GBP/);
   assert.doesNotMatch(english, /approximately €|aproximadamente €/);
   assert.doesNotMatch(spanish, /approximately €|aproximadamente €/);
   assert.match(english, /GBP is the payment currency/);
@@ -69,15 +69,15 @@ test("Foundation, homepage and FAQ use paired pricing while free and book pages 
   const faq = routeRenderers[siteData.routes.faq](siteData).body;
   const free = routeRenderers[siteData.routes.startFree](siteData).body;
   const book = routeRenderers[siteData.routes.getTheBook](siteData).body;
-  assert.match(foundation, /£97.*€114/);
-  assert.match(home, /£97.*€114/);
-  assert.match(home, /£997.*€1,167/);
-  assert.match(faq, /£97.*€114/);
-  assert.match(faq, /GBP is the payment currency/);
-  assert.match(faqPage(siteData, "es").body, /El pago se realiza en GBP/);
+  assert.match(foundation, /£97/);
+  assert.match(home, /£97/);
+  assert.match(home, /£997/);
+  assert.match(faq, /£97/);
+  assert.match(faq, /All prices are shown in GBP/);
+  assert.match(faqPage(siteData, "es").body, /Todos los precios se muestran en GBP/);
   assert.match(free, /Free registration required|No purchase required/);
-  assert.match(free, /GBP is the payment currency/);
-  assert.match(startFreePage(siteData, "es").body, /El pago se realiza en GBP/);
+  
+  
   assert.doesNotMatch(book, /€114|€1,167|approximately €|aproximadamente €/);
   const referral = await readFile(path.join(root, "referral", "index.html"), "utf8");
   assert.match(referral, /£97/);
