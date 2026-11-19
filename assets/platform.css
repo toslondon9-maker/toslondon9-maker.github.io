@@ -9843,3 +9843,40 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
 .mksStudyRoom .mksStudyRoom__stageHeader .eyebrow {
   color: #e5c98e;
 }
+
+
+/* Full contrast pass for the Study Room's dark navy navigation canvas.
+   Keep active selections pale with dark text; all inactive navigation text
+   must remain clearly legible against navy. */
+.mksStudyRoom .mksStudyRoom__visualNavLink {
+  color: #fffdf7 !important;
+}
+.mksStudyRoom .mksStudyRoom__visualNavLink:hover,
+.mksStudyRoom .mksStudyRoom__visualNavLink:focus-visible {
+  color: #f0d28f !important;
+}
+.mksStudyRoom .mksStudyRoom__stage header p,
+.mksStudyRoom .mksStudyRoom__stage a span {
+  color: #f0d28f !important;
+}
+.mksStudyRoom .mksStudyRoom__stage header h2,
+.mksStudyRoom .mksStudyRoom__stage a,
+.mksStudyRoom .mksStudyRoom__stage a strong {
+  color: #fffdf7 !important;
+}
+.mksStudyRoom .mksStudyRoom__stage a:hover,
+.mksStudyRoom .mksStudyRoom__stage a:focus-visible {
+  background: rgba(240, 210, 143, .16);
+  color: #fffdf7 !important;
+}
+.mksStudyRoom .mksStudyRoom__stage a[aria-current="location"] {
+  background: #f4ead5;
+  color: #102033 !important;
+}
+.mksStudyRoom .mksStudyRoom__stage a[aria-current="location"] span,
+.mksStudyRoom .mksStudyRoom__stage a[aria-current="location"] strong {
+  color: #102033 !important;
+}
+.mksStudyRoom .mksStudyRoom__stage[data-active="true"] header h2 {
+  color: #f0d28f !important;
+}
