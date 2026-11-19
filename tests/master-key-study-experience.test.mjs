@@ -90,4 +90,10 @@ test("Study Room responsive styles keep the content bounded and keyboard focus v
   assert.match(css, /\.mksStudyRoom__stageBanner img\s*\{[^}]*width:\s*100%[^}]*height:\s*auto/s);
   assert.match(css, /\.mksStudyRoom__stageBanner:focus-visible/);
   assert.match(css, /@media \(max-width:\s*768px\)[\s\S]*\.mksStudyRoom__layout[\s\S]*grid-template-columns:\s*minmax\(0, 1fr\)/s);
+  assert.match(css, /\.mksStudyRoom \.mksStudyRoom__stageHeader h2\s*\{[^}]*color:\s*#fffdf7\s*!important/s);
+  assert.match(css, /\.mksStudyRoom \.mksStudyRoom__stageHeader p\s*\{[^}]*color:\s*#e5c98e\s*!important/s);
+  assert.match(css, /\.mksStudyRoom \.mksStudyRoom__stage header h2[\s\S]*?color:\s*#fffdf7\s*!important/s);
+  assert.match(css, /\.mksStudyRoom \.mksStudyRoom__stage a,\s*\.mksStudyRoom \.mksStudyRoom__stage a strong[\s\S]*?color:\s*#fffdf7\s*!important/s);
+  assert.match(css, /\.mksStudyRoom \.mksStudyRoom__stage a span[\s\S]*?color:\s*#f0d28f\s*!important/s);
+  assert.match(css, /\.mksStudyRoom \.mksStudyRoom__visualNavLink[\s\S]*?color:\s*#fffdf7\s*!important/s);
 });
