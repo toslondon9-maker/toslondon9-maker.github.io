@@ -9822,3 +9822,24 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
 @media (max-width: 720px) {
   .mksStudyRoom { background-attachment: scroll; background-position: 58% top; }
 }
+
+
+/* Study room contrast repair: the study room uses a dark navy canvas, so its
+   stage headings and labels must use light, high-contrast text. Chapter cards
+   remain ivory with dark text for comfortable reading. */
+.mksStudyRoom .mksStudyRoom__stageHeader {
+  border-bottom-color: rgba(245, 235, 215, .42);
+}
+.mksStudyRoom .mksStudyRoom__stageHeader p {
+  color: #e5c98e !important;
+}
+.mksStudyRoom .mksStudyRoom__stageHeader h2 {
+  color: #fffdf7 !important;
+}
+.mksStudyRoom .mksStudyRoom__sidebar > label {
+  color: #fffdf7;
+}
+.mksStudyRoom .mksStudyRoom__stageHeader a,
+.mksStudyRoom .mksStudyRoom__stageHeader .eyebrow {
+  color: #e5c98e;
+}
