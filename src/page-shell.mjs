@@ -85,6 +85,8 @@ export function renderPage({ route, language, title, description, titleKey, desc
       ? "20261005-foundation-life-power-1"
     : route === "/complete-journey/"
       ? "20261104-complete-journey-1"
+    : route === "/master-key-system/"
+      ? "20261119-master-key-digital-wave-3"
     : route === "/podcasts/"
       ? "20261117-podcasts-live-route-1"
     : route === "/coaching/"
