@@ -9798,3 +9798,27 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
 .podcastsCta .eyebrow{color:var(--gold-bright)}
 .podcastsCta .button--primary{flex:0 0 auto}
 @media(max-width:760px){.podcastsHero{grid-template-columns:1fr;padding-block:3rem}.podcastsHero__portrait{justify-self:center;max-width:320px;order:2}.podcastCard{grid-template-columns:1fr}.podcastsTopics__grid{grid-template-columns:1fr}.podcastsCta{flex-direction:column;align-items:flex-start}.podcastsCta .button--primary{width:100%}}
+
+
+/* Master Key System page — Option 3 digital wave background */
+.mksStudyRoom {
+  background-color: #07182a;
+  background-image: linear-gradient(180deg, rgba(5, 17, 31, .34), rgba(5, 17, 31, .68)), url("/images/master-key-digital-wave.svg");
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.mksStudyRoom__intro {
+  max-width: 900px;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid rgba(220, 185, 115, .42);
+  border-radius: 1rem;
+  background: rgba(255, 252, 245, .96);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, .22);
+}
+.mksStudyRoom__shell { padding-block: clamp(2.5rem, 6vw, 5rem); }
+@media (max-width: 720px) {
+  .mksStudyRoom { background-attachment: scroll; background-position: 58% top; }
+}
