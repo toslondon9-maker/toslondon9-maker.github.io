@@ -97,6 +97,8 @@ export function renderPage({ route, language, title, description, titleKey, desc
       ? "20261004-resources-source-file-1"
     : route === "/resources/study-questions/"
       ? "20261103-study-questions-1"
+    : route === "/members-study-room-7f3k/"
+      ? "20261119-study-room-contrast-1"
       : platformStyleVersion;
   const renderedBody = addCalendlyCta(route, language, body);
   return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${redirectTag}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script>${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;
