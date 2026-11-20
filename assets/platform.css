@@ -9822,3 +9822,50 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
 @media (max-width: 720px) {
   .mksStudyRoom { background-attachment: scroll; background-position: 58% top; }
 }
+
+
+/* Master Key System sidebar: maintain readable contrast on the navy study-room background. */
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__visualNavLink,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__visualNavLink span {
+  color: var(--cream);
+}
+
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage header p,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a span {
+  color: var(--gold-bright);
+}
+
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage header h2,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a strong,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__conversion,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__conversion a {
+  color: var(--cream);
+}
+
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:hover,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:focus-visible,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a[aria-current="location"] {
+  background: rgba(247, 239, 220, .96);
+  color: var(--night);
+}
+
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:hover span,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:focus-visible span,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a[aria-current="location"] span,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:hover strong,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:focus-visible strong,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a[aria-current="location"] strong {
+  color: var(--night);
+}
+
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__conversion a {
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: .18em;
+}
+
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__conversion a:hover,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__conversion a:focus-visible {
+  color: var(--gold-bright);
+}
