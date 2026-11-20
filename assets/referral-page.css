@@ -156,3 +156,164 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+
+/* Premium partner application form — refined desktop and mobile experience. */
+.referralPage[data-partner-page] .affiliateApplication {
+  max-width: 980px;
+  margin: clamp(2.5rem, 6vw, 5rem) auto;
+  padding: clamp(1.5rem, 4.5vw, 3.5rem);
+  border: 1px solid rgba(181, 138, 59, .42);
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(224, 189, 119, .16), transparent 38%),
+    linear-gradient(145deg, #f8f1e4 0%, #f2e8d7 100%);
+  box-shadow: 0 24px 65px rgba(6, 23, 41, .09);
+}
+.referralPage[data-partner-page] .affiliateApplication > .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  color: #8b641f;
+  letter-spacing: .16em;
+  font-size: .72rem;
+  font-weight: 800;
+}
+.referralPage[data-partner-page] .affiliateApplication > .eyebrow::before {
+  content: "";
+  width: 1.8rem;
+  height: 1px;
+  background: #b58a3b;
+}
+.referralPage[data-partner-page] .affiliateApplication h2 {
+  max-width: 18ch;
+  margin: .35rem 0 .75rem;
+  color: #071b30;
+  font: 500 clamp(2rem, 4vw, 3.15rem)/1.08 Georgia, "Times New Roman", serif;
+  letter-spacing: -.035em;
+}
+.referralPage[data-partner-page] .affiliateApplication > p:not(.eyebrow) {
+  max-width: 650px;
+  margin-bottom: 1.8rem;
+  color: #47586a;
+  font-size: 1.03rem;
+  line-height: 1.7;
+}
+.referralPage[data-partner-page] .affiliateApplication form {
+  display: grid;
+  gap: 1.25rem;
+  width: 100%;
+  padding: clamp(1.15rem, 3vw, 2.15rem);
+  border: 1px solid rgba(181, 138, 59, .32);
+  border-radius: 1.2rem;
+  background: rgba(255, 253, 248, .96);
+  box-shadow: 0 14px 38px rgba(6, 23, 41, .075);
+}
+.referralPage[data-partner-page] .affiliateApplication__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem 1.25rem;
+}
+.referralPage[data-partner-page] .affiliateApplication label {
+  display: grid;
+  gap: .48rem;
+  min-width: 0;
+  color: #182c40;
+  font-size: .82rem;
+  font-weight: 750;
+  letter-spacing: .015em;
+}
+.referralPage[data-partner-page] .affiliateApplication input,
+.referralPage[data-partner-page] .affiliateApplication select,
+.referralPage[data-partner-page] .affiliateApplication textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d8cdb9;
+  border-radius: .65rem;
+  background: #fff;
+  color: #14283c;
+  padding: .9rem 1rem;
+  font: 400 .98rem/1.45 inherit;
+  letter-spacing: normal;
+  box-shadow: inset 0 1px 2px rgba(6, 23, 41, .025);
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.referralPage[data-partner-page] .affiliateApplication input,
+.referralPage[data-partner-page] .affiliateApplication select {
+  min-height: 3.15rem;
+}
+.referralPage[data-partner-page] .affiliateApplication textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+.referralPage[data-partner-page] .affiliateApplication input::placeholder,
+.referralPage[data-partner-page] .affiliateApplication textarea::placeholder {
+  color: #8994a0;
+}
+.referralPage[data-partner-page] .affiliateApplication input:focus,
+.referralPage[data-partner-page] .affiliateApplication select:focus,
+.referralPage[data-partner-page] .affiliateApplication textarea:focus {
+  outline: none;
+  border-color: #a87928;
+  background: #fffefa;
+  box-shadow: 0 0 0 3px rgba(181, 138, 59, .18);
+}
+.referralPage[data-partner-page] .affiliateApplication form > label {
+  margin-top: .1rem;
+}
+.referralPage[data-partner-page] .affiliateApplication form .button--primary {
+  justify-self: start;
+  min-height: 3.35rem;
+  padding: .95rem 1.6rem;
+  border: 1px solid #b58a3b;
+  border-radius: .55rem;
+  background: linear-gradient(135deg, #0a2036, #173b59);
+  color: #fffaf0;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  box-shadow: 0 8px 18px rgba(6, 23, 41, .16);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.referralPage[data-partner-page] .affiliateApplication form .button--primary:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #173b59, #214d70);
+  box-shadow: 0 12px 24px rgba(6, 23, 41, .2);
+}
+.referralPage[data-partner-page] .affiliateApplication form [data-affiliate-application-status] {
+  min-height: 1.2em;
+  margin: 0;
+  color: #526274;
+  font-size: .85rem;
+  line-height: 1.5;
+}
+@media (max-width: 640px) {
+  .referralPage[data-partner-page] .affiliateApplication {
+    margin: 2rem .85rem;
+    padding: 1.2rem;
+    border-radius: 1.1rem;
+  }
+  .referralPage[data-partner-page] .affiliateApplication form {
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: .9rem;
+  }
+  .referralPage[data-partner-page] .affiliateApplication__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .referralPage[data-partner-page] .affiliateApplication form .button--primary {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .referralPage[data-partner-page] .affiliateApplication input,
+  .referralPage[data-partner-page] .affiliateApplication select,
+  .referralPage[data-partner-page] .affiliateApplication textarea,
+  .referralPage[data-partner-page] .affiliateApplication form .button--primary {
+    transition: none;
+  }
+}

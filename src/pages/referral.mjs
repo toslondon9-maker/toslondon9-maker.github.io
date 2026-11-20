@@ -24,7 +24,7 @@ export function referralPage(data) {
       <section class="referralSection affiliateApplication" id="partner-link" aria-labelledby="partner-apply-title"><p class="eyebrow">TAKE THE NEXT STEP</p><h2 id="partner-apply-title">Interested? Let's talk.</h2><p>Tell us a little about your audience or idea. We’ll come back to you with the next step.</p><form data-affiliate-application><div class="affiliateApplication__grid"><label>Name<input name="firstName" required></label><label>Email<input type="email" name="email" required></label><label>Website / social / community<input name="platform"></label><label>How would you like to collaborate?<select name="partnerType"><option value="Affiliate">Affiliate</option><option value="Collaborator">Collaborator</option><option value="Community or strategic partner">Community or strategic partner</option></select></label></div><label>Your idea<textarea name="plan" rows="3" required></textarea></label><button class="button--primary" type="submit">SEND PARTNER ENQUIRY</button><p data-affiliate-application-status role="status" aria-live="polite"></p></form></section>
       <section class="referralCta"><div><p class="eyebrow">LESS NOISE. MORE IMPACT.</p><h2>One introduction can open a door.</h2><p>Keep it simple. Share the experience. Let curiosity do the rest.</p></div><a class="button--primary" href="#partner-link">LET'S TALK</a></section>
     </main>`,
-    styles: ["/assets/referral-page.css?v=20261116-mobile-form-fix"],
+    styles: ["/assets/referral-page.css?v=20261120-premium-application-form"],
     scripts: ["/assets/referral.mjs"],
   };
 }
