@@ -9897,3 +9897,36 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
   color: #071827 !important;
   font-weight: 700;
 }
+
+
+/* Master Key System: give every week a cream navigation card */
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a {
+  display: grid;
+  gap: .18rem;
+  margin: .28rem 0;
+  padding: .58rem .72rem;
+  border: 1px solid rgba(190, 148, 73, .55);
+  border-radius: 999px;
+  background: #F7EFDC;
+  color: #071827 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
+}
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a span {
+  color: #80602B !important;
+}
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a strong {
+  color: #071827 !important;
+  font-weight: 500;
+}
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:hover,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:focus-visible {
+  background: #FFF9EC;
+  border-color: #C99A35;
+  color: #071827 !important;
+}
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:hover span,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:focus-visible span,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:hover strong,
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:focus-visible strong {
+  color: #071827 !important;
+}
