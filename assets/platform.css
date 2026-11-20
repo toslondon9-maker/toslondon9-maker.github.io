@@ -9869,3 +9869,31 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
 .curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__conversion a:focus-visible {
   color: var(--gold-bright);
 }
+
+
+/* Master Key System: make every stage name unmistakable on the navy background. */
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage > header,
+.curriculumPage.mksStudyRoom .mksStudyRoom__stageHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .25rem .65rem;
+  padding: .65rem .8rem;
+  margin-bottom: .65rem;
+  border: 1px solid rgba(217, 165, 46, .72);
+  border-radius: .8rem;
+  background: #F7EFDC;
+  color: #071827;
+}
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage > header p,
+.curriculumPage.mksStudyRoom .mksStudyRoom__stageHeader p {
+  margin: 0;
+  color: #80602B !important;
+  font-weight: 800;
+}
+.curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage > header h2,
+.curriculumPage.mksStudyRoom .mksStudyRoom__stageHeader h2 {
+  margin: 0;
+  color: #071827 !important;
+  font-weight: 700;
+}
