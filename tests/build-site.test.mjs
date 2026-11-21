@@ -371,6 +371,7 @@ test("standalone previews include every local dependency referenced by route she
       "assets/site-language.mjs",
       "assets/site-analytics.mjs",
       "assets/site-navigation.mjs",
+      "assets/site-theme.mjs",
       "content/translations.mjs",
       "images/power-key-mark.png",
       "content/seven-day-canonical.json",
