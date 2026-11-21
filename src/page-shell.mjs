@@ -7,6 +7,7 @@ const platformStyleVersion = "20261112-master-key-diagrams-1";
 const navigationScript = "/assets/site-navigation.mjs";
 const languageScript = "/assets/site-language.mjs";
 const analyticsScript = "/assets/site-analytics.mjs";
+const themeScript = "/assets/site-theme.mjs";
 const siteUrl = "https://unleashyourpowerwithtariq.com";
 const defaultSocialImage = `${siteUrl}/images/haanel-tariq-portraits.jpeg`;
 const defaultSocialImageAlt = "Tariq Saddique and the Master Key System learning journey";
@@ -19,6 +20,7 @@ function versionReleaseScript(script) {
   if (script === navigationScript) return `${script}?v=20261109-mobile-nav-bounds-1`;
   if (script === languageScript) return `${script}?v=${releaseAssetVersion}`;
   if (script === analyticsScript) return `${script}?v=20260908-analytics`;
+  if (script === themeScript) return `${script}?v=20261121-global-theme-1`;
   if (script === aiMentorScript) return `${script}?v=20261004-ai-study-companion-1`;
   if (script === "/assets/resources-quotes.mjs") return `${script}?v=20261003-commercial-improvements-1`;
   if (script === "/assets/home-testimonials.mjs") return `${script}?v=20261003-testimonial-read-more-1`;
@@ -54,7 +56,7 @@ export function renderPage({ route, language, title, description, titleKey, desc
   const safeTitle = escapeHtml(title);
   const safeDescription = escapeHtml(description);
   const safeLanguage = escapeHtml(language);
-  const pageScripts = [...new Set([navigationScript, languageScript, analyticsScript, "/assets/affiliate-tracking.mjs", ...scripts].map(versionReleaseScript))];
+  const pageScripts = [...new Set([navigationScript, languageScript, analyticsScript, themeScript, "/assets/affiliate-tracking.mjs", ...scripts].map(versionReleaseScript))];
   const stylesheetTags = [...new Set(styles)].map((stylesheet) => (
     `<link rel="stylesheet" href="${escapeHtml(stylesheet)}">`
   )).join("");
@@ -99,5 +101,5 @@ export function renderPage({ route, language, title, description, titleKey, desc
       ? "20261103-study-questions-1"
       : platformStyleVersion;
   const renderedBody = addCalendlyCta(route, language, body);
-  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${redirectTag}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js")</script>${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;
+  return `<!doctype html><html lang="${safeLanguage}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title${titleHook}>${safeTitle}</title><meta name="description" content="${safeDescription}"${descriptionHook}>${sharingTags}${redirectTag}${aiMentorEndpointTag}${structuredDataTag}<script>document.documentElement.classList.add("has-js");try{const theme=localStorage.getItem("uyp.theme");if(theme==="dark"||theme==="light")document.documentElement.setAttribute("data-theme",theme)}catch{}</script>${stylesheetTags}<link rel="stylesheet" href="/assets/platform.css?v=${pagePlatformStyleVersion}"></head><body>${renderHeader({ route, language })}${renderedBody}${renderFooter({ route, language })}${scriptTags}</body></html>`;
 }
