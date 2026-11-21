@@ -9930,3 +9930,146 @@ body:has(.resourcesPage) .resourcesQuotes__card .resourcesQuotes__source {
 .curriculumPage.mksStudyRoom .mksStudyRoom__sidebar .mksStudyRoom__stage a:focus-visible strong {
   color: #071827 !important;
 }
+
+
+/* Global visitor-controlled colour theme. Light remains the default; dark is opt-in. */
+.themeSwitch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  min-height: 2.35rem;
+  padding: .42rem .7rem;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.themeSwitch:hover { background: var(--cream-deep); }
+.themeSwitch:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
+.themeSwitch__icon { color: var(--gold); font-size: 1rem; }
+.themeSwitch--mobile { margin-top: .65rem; }
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #F5F0E6;
+  --night: #061321;
+  --night-soft: #10283D;
+  --cream: #0B1B2B;
+  --cream-deep: #132A3E;
+  --paper: #142B40;
+  --white: #182F43;
+  --muted: #C1CBD4;
+  --border: rgba(212, 170, 87, .48);
+  --shadow-card: 0 16px 38px rgba(0, 0, 0, .24);
+  --shadow-raised: 0 8px 22px rgba(0, 0, 0, .3);
+}
+html[data-theme="dark"] body {
+  background: #0B1B2B;
+  color: #F5F0E6;
+}
+html[data-theme="dark"] .siteHeader,
+html[data-theme="dark"] .site-header {
+  background: rgba(6, 19, 33, .97);
+  border-color: rgba(212, 170, 87, .4);
+}
+html[data-theme="dark"] .brand,
+html[data-theme="dark"] .brand__wordmark,
+html[data-theme="dark"] .siteNav a,
+html[data-theme="dark"] .languageSwitch,
+html[data-theme="dark"] .languageSwitch button {
+  color: #F5F0E6;
+}
+html[data-theme="dark"] .siteNav a:hover,
+html[data-theme="dark"] .languageSwitch button[aria-pressed="true"] {
+  color: #E4BC6B;
+}
+html[data-theme="dark"] .themeSwitch {
+  background: #142B40;
+  border-color: #D4AA57;
+  color: #F5F0E6;
+}
+html[data-theme="dark"] .themeSwitch:hover { background: #203B52; }
+html[data-theme="dark"] .mobileNav__panel {
+  background: #0B1B2B;
+  border-color: rgba(212, 170, 87, .45);
+}
+html[data-theme="dark"] .mobileNav__panel a { color: #F5F0E6; }
+html[data-theme="dark"] main:not(.mksStudyRoom),
+html[data-theme="dark"] .home,
+html[data-theme="dark"] .coachingPage,
+html[data-theme="dark"] .aboutPage,
+html[data-theme="dark"] .resourcesPage,
+html[data-theme="dark"] .referralPage,
+html[data-theme="dark"] .podcastsPage,
+html[data-theme="dark"] .insightsPage,
+html[data-theme="dark"] .insightArticle,
+html[data-theme="dark"] .foundationPage,
+html[data-theme="dark"] .completeJourney,
+html[data-theme="dark"] .sevenDayDashboard,
+html[data-theme="dark"] .routeShell {
+  background-color: #0B1B2B;
+  color: #F5F0E6;
+}
+html[data-theme="dark"] main h1,
+html[data-theme="dark"] main h2,
+html[data-theme="dark"] main h3,
+html[data-theme="dark"] main p,
+html[data-theme="dark"] main li,
+html[data-theme="dark"] main label,
+html[data-theme="dark"] main summary {
+  color: inherit;
+}
+html[data-theme="dark"] main section,
+html[data-theme="dark"] main article,
+html[data-theme="dark"] main [class*="Card"],
+html[data-theme="dark"] main [class*="card"],
+html[data-theme="dark"] main [class*="Panel"],
+html[data-theme="dark"] main [class*="panel"],
+html[data-theme="dark"] main [class*="Block"],
+html[data-theme="dark"] main [class*="block"] {
+  border-color: rgba(212, 170, 87, .35);
+}
+html[data-theme="dark"] main [style*="background: #fff"],
+html[data-theme="dark"] main [style*="background:#fff"],
+html[data-theme="dark"] main [style*="background: white"],
+html[data-theme="dark"] main [style*="background-color: white"] {
+  background-color: #142B40 !important;
+  color: #F5F0E6 !important;
+}
+html[data-theme="dark"] main input,
+html[data-theme="dark"] main textarea,
+html[data-theme="dark"] main select {
+  background: #10283D;
+  border-color: #B58A3B;
+  color: #F5F0E6;
+}
+html[data-theme="dark"] main input::placeholder,
+html[data-theme="dark"] main textarea::placeholder { color: #B8C4CF; }
+html[data-theme="dark"] .siteFooter {
+  background: #061321;
+  color: #F5F0E6;
+}
+html[data-theme="dark"] .siteFooter a,
+html[data-theme="dark"] .siteFooter p { color: #E5EAF0; }
+html[data-theme="dark"] .analyticsConsent {
+  background: #142B40;
+  color: #F5F0E6;
+  border-color: rgba(212, 170, 87, .4);
+}
+html[data-theme="dark"] .analyticsConsent p,
+html[data-theme="dark"] .analyticsConsent a { color: #F5F0E6; }
+@media (max-width: 1439px) {
+  .themeSwitch--header { display: none; }
+}
+@media (min-width: 1440px) {
+  .themeSwitch--mobile { display: none; }
+}
+@media (max-width: 640px) {
+  .themeSwitch--mobile { width: 100%; }
+}
